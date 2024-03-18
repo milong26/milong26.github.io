@@ -20,29 +20,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="需求：个人blog生成日志，防备以后需要">
+    <meta name="description" content="注意力机制是transformer的核心，有三个关键的计算QKV">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo建站">
-<meta property="og:url" content="http://zhon.fun/2024/03/04/hexo%E5%BB%BA%E7%AB%99/index.html">
+<meta property="og:title" content="注意力机制">
+<meta property="og:url" content="http://zhon.fun/2024/03/05/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="RainBoarderSea">
-<meta property="og:description" content="需求：个人blog生成日志，防备以后需要">
+<meta property="og:description" content="注意力机制是transformer的核心，有三个关键的计算QKV">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-04T07:26:28.000Z">
-<meta property="article:modified_time" content="2024-03-18T06:42:58.519Z">
+<meta property="article:published_time" content="2024-03-05T08:49:09.000Z">
+<meta property="article:modified_time" content="2024-03-18T06:54:01.565Z">
 <meta property="article:author" content="milong26">
-<meta property="article:tag" content="hexo">
-<meta property="article:tag" content="blog">
+<meta property="article:tag" content="attention">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://zhon.fun/2024/03/04/hexo%E5%BB%BA%E7%AB%99/">
+<link rel="canonical" href="http://zhon.fun/2024/03/05/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2024/03/04/hexo%E5%BB%BA%E7%AB%99/","path":"2024/03/04/hexo建站/","title":"hexo建站"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2024/03/05/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/","path":"2024/03/05/注意力机制/","title":"注意力机制"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>hexo建站 | RainBoarderSea</title>
+<title>注意力机制 | RainBoarderSea</title>
   
 
 
@@ -115,7 +114,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#prework"><span class="nav-number">1.</span> <span class="nav-text">prework</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">主题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8next"><span class="nav-number">2.1.</span> <span class="nav-text">使用next</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA"><span class="nav-number">3.1.</span> <span class="nav-text">显示</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text">其它功能测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F"><span class="nav-number">4.1.</span> <span class="nav-text">数学公式</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="nav-number">1.</span> <span class="nav-text">自注意力</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E8%BF%87%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">计算过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#embedding%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.1.1.</span> <span class="nav-text">embedding转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%92%E4%B8%80%E5%8C%96"><span class="nav-number">1.1.2.</span> <span class="nav-text">归一化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%98%E4%BD%93"><span class="nav-number">2.</span> <span class="nav-text">变体</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E5%A4%B4%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="nav-number">2.1.</span> <span class="nav-text">多头注意力</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -166,7 +165,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2024/03/04/hexo%E5%BB%BA%E7%AB%99/">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2024/03/05/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -179,12 +178,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="hexo建站 | RainBoarderSea">
+      <meta itemprop="name" content="注意力机制 | RainBoarderSea">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          hexo建站
+          注意力机制
         </h1>
 
         <div class="post-meta-container">
@@ -195,14 +194,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2024-03-04 15:26:28" itemprop="dateCreated datePublished" datetime="2024-03-04T15:26:28+08:00">2024-03-04</time>
+      <time title="创建时间：2024-03-05 16:49:09" itemprop="dateCreated datePublished" datetime="2024-03-05T16:49:09+08:00">2024-03-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-18 14:42:58" itemprop="dateModified" datetime="2024-03-18T14:42:58+08:00">2024-03-18</time>
+      <time title="修改时间：2024-03-18 14:54:01" itemprop="dateModified" datetime="2024-03-18T14:54:01+08:00">2024-03-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -210,7 +209,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/it/" itemprop="url" rel="index"><span itemprop="name">it</span></a>
+          <a href="/categories/ai/" itemprop="url" rel="index"><span itemprop="name">ai</span></a>
         </span>
     </span>
 
@@ -223,51 +222,74 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>需求：个人blog生成日志，防备以后需要</p>
-<span id="more"></span>
-<h1 id="prework">prework</h1>
+    <div class="post-body" itemprop="articleBody"><p>注意力机制是transformer的核心，有三个关键的计算QKV <span id="more"></span>
+有几个问题： 1. 自注意力(self attention)和注意力(attention)是不是一个？
+2. QKV的计算过程 3. attention的输入输出和完整流程 4.
+多头注意力里的“多头”是什么概念 # 引入
+attention提出之前有CNN和RNN，还需要attention的原因：
+（1）计算能力的限制：当要记住很多“信息“，模型就要变得更复杂，然而目前计算能力依然是限制神经网络发展的瓶颈。</p>
+<p>（2）优化算法的限制：LSTM只能在一定程度上缓解RNN中的长距离依赖问题，且信息“记忆”能力并不高。
+# 基础 attention过程计算的三个阶段： 1. 根据Query和Key计算权重系数 1.
+根据Query和Key计算两者的相似性或者相关性； 2.
+对上一步的原始分值进行归一化处理 2. 根据权重系数对Value进行加权求和</p>
+<blockquote>
+<p>本来以为attention很麻烦的，结果看下来它的框架还是很简单的。</p>
+</blockquote>
+<h1 id="自注意力">自注意力</h1>
+<blockquote>
+<p>Q1解决了，自注意力和注意力不一样。之前一直分不清楚这俩</p>
+</blockquote>
+<p>自注意力(self-attention)是transformer里面的，它减少了对外部信息的依赖，更擅长捕捉数据或特征的内部相关性。</p>
+<h2 id="计算过程">计算过程</h2>
 <ol type="1">
-<li>nodejs安装以及相关安装配置</li>
-<li>git本地登录 # 安装hexo <code>npm i hexo-cli -g</code>
-将<code>node-global\node_modules\hexo-cli\bin加入Path变量</code>加入环境变量Path
-<code>hexo -v</code>验证 # 初始化
-新建文件夹，在这里<code>hexo init</code>，会生成若干文件夹。
-<code>hexo g</code>+<code>hexo s</code> 可以预览网页 # 托管到github
-新建一个名为<code>git用户名.github.io</code>的仓库
-修改<code>_config.yml</code>最后的deploy <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">git@github.com:用户名/用户名.github.io</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure> 安装git插件
-<code>npm install hexo-deployer-git --save</code>
-确认git账号登陆了，执行<code>hexo d</code> 正常的话就能搞上去 #
-域名配置（可选）
-不设置的话可以在<code>https://用户名.github.io/</code>看到整个网站
-仓库-settings-pages，Custom domain填入自己的域名 域名另外设置一下
-/public文件夹里要新建一个CNAME的文件，填上域名 # 文稿 ## 新建
-<code>hexo new draft xxx</code> 生成草稿
-修改后再<code>hexo p xxx</code>转换成post可见
-也可以直接<code>hexo n xxx</code> ## 模板
-对/scaffolds中的md文件修改</li>
+<li>将输入单词转化成嵌入向量；</li>
+<li>根据嵌入向量得到q，k，v三个向量；</li>
+<li>为每个向量计算一个score：score =q . k ；</li>
+<li>为了梯度的稳定，Transformer使用了score归一化，即除以<span
+class="math inline">\(\sqrt{d_k}\)</span>；</li>
+<li>对score施以softmax激活函数；</li>
+<li>softmax点乘Value值v，得到加权的每个输入向量的评分v；</li>
+<li>相加之后得到最终的输出结果z ：z=<span class="math inline">\(\sum
+v\)</span></li>
 </ol>
-<h1 id="主题">主题</h1>
-<p>默认的landscape</p>
-<h2 id="使用next">使用next</h2>
-<p><a target="_blank" rel="noopener" href="https://github.com/next-theme/hexo-theme-next">主题仓库</a>
-<a
-target="_blank" rel="noopener" href="https://theme-next.js.org/docs/getting-started/">主题配置文件</a>
-### 安装
-<code>git clone https://github.com/next-theme/hexo-theme-next themes/next</code>
-_config.yml文件中更改theme: <code>theme: next</code> ### 主题修改 1.
-目录显示层数太多</p>
-<h1 id="配置">配置</h1>
-<h2 id="显示">显示</h2>
-<ol type="1">
-<li>首页里面放的正文太多了
-使用<code>&lt;!--more--&gt;</code>，可以直接放在模板里面。</li>
-<li>修改_config.yml 修改author、语言、标题等</li>
-</ol>
-<h1 id="其它功能测试">其它功能测试</h1>
-<h2 id="数学公式">数学公式</h2>
-<p>测试 <span class="math display">\[
-e=mc^2
-\]</span> 你好<span class="math inline">\(\frac{a}{b}\)</span></p>
+<blockquote>
+<p>Q2和Q3来了</p>
+</blockquote>
+<h3 id="embedding转换">embedding转换</h3>
+<p>嵌入只发生在最底层的编码器中 ### qkv计算 随机初始化3个矩阵： <span
+class="math display">\[
+W^Q\in R^{d\times d_q}\\
+W^K\in R^{d\times d_k}\\
+W^V\in R^{d\times d_v}
+\]</span> d是embedding时候一个行向量的维度。
+W和它上标在一起是一个整体，命名成w1，w2，w3也行 <span
+class="math display">\[
+Q=X\cdot W^Q\\
+K=X\cdot W^K\\
+V=X\cdot W^V
+\]</span> X是经过embedding的，n行（单词个数）d列（维度） ### score
+用的是“点注意力”。另外还有很多算法，transformer用的也是点
+从推荐系统开始： 基本原理是：给定一个 query，计算query 与 key
+的相关性，然后根据query 与 key 的相关性去找到最合适的 value。
+球的score其实就是相关性</p>
+<h3 id="归一化">归一化</h3>
+<p>为什么要归一化？ 随着<span
+class="math inline">\(d_k\)</span>变大，<span
+class="math inline">\(q\cdot
+k\)</span>的结果也变大。这样会将softmax函数推入梯度非常小的区域，使得收敛困难(可能出现梯度消失的情况)</p>
+<p>假设q和k是均值0，方差1的独立随机变量，<span
+class="math inline">\(q\cdot
+k=\sum_{i=1}^{d_k}q_ik_i\)</span>均值为0，方差<span
+class="math inline">\(d_k\)</span>，为了抵消这种影响，需要缩放</p>
+<p>怎么抵消的看一看<a
+target="_blank" rel="noopener" href="http://t.csdnimg.cn/WqKbt">这篇包含概率期望方差计算的推导</a></p>
+<h1 id="变体">变体</h1>
+<h2 id="多头注意力">多头注意力</h2>
+<p><span class="math display">\[
+Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})\\
+MultiHead(Q,K,V)=concat(head_1...head_h)W^O\\
+where \space head_i=Attention(QW^Q_i,KW_i^K,VW_i^v)
+\]</span> &gt; 一下子看不懂，以后看transformer的时候再琢磨吧</p>
 
     </div>
 
@@ -277,18 +299,20 @@ e=mc^2
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/hexo/" rel="tag"># hexo</a>
-              <a href="/tags/blog/" rel="tag"># blog</a>
+              <a href="/tags/attention/" rel="tag"># attention</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2024/03/04/%E7%BC%96%E7%A0%81%E5%99%A8%E5%92%8C%E8%A7%A3%E7%A0%81%E5%99%A8/" rel="prev" title="编码器和解码器">
+                  <i class="fa fa-angle-left"></i> 编码器和解码器
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/03/04/%E7%BC%96%E7%A0%81%E5%99%A8%E5%92%8C%E8%A7%A3%E7%A0%81%E5%99%A8/" rel="next" title="编码器和解码器">
-                  编码器和解码器 <i class="fa fa-angle-right"></i>
+                <a href="/2024/03/05/transformer/" rel="next" title="transformer">
+                  transformer <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
