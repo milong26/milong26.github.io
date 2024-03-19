@@ -31,8 +31,9 @@
 <meta property="og:image" content="https://ooo.0x0.ooo/2024/03/12/Oy3Tds.png">
 <meta property="og:image" content="https://ooo.0x0.ooo/2024/03/12/OyCekb.png">
 <meta property="og:image" content="https://ooo.0x0.ooo/2024/03/18/OgbIXX.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/03/18/OgkBOv.png">
 <meta property="article:published_time" content="2024-03-18T08:16:31.000Z">
-<meta property="article:modified_time" content="2024-03-19T02:26:45.393Z">
+<meta property="article:modified_time" content="2024-03-19T02:40:40.923Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="paper">
 <meta property="article:tag" content="parameter efficient">
@@ -122,8 +123,7 @@
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E8%83%8C%E6%99%AF"><span class="nav-number">2.1.</span> <span class="nav-text">大背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E8%83%8C%E6%99%AF"><span class="nav-number">2.2.</span> <span class="nav-text">小背景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#adapter-tuning"><span class="nav-number">2.2.1.</span> <span class="nav-text">adapter tuning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prefix-tuning-%E5%92%8C-prompt-tuning"><span class="nav-number">2.2.2.</span> <span class="nav-text">prefix tuning 和 prompt
 tuning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#loralow-rank-matrices-to-approximate-parameter-updates"><span class="nav-number">2.2.3.</span> <span class="nav-text">LoRA（low-rank
-matrices to approximate parameter updates）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.2.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%BA%A7%E7%94%9F"><span class="nav-number">2.3.</span> <span class="nav-text">问题产生</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E7%BB%93%E6%9E%84"><span class="nav-number">2.4.</span> <span class="nav-text">文章结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86"><span class="nav-number">3.</span> <span class="nav-text">预备知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#transformer%E7%BB%93%E6%9E%84"><span class="nav-number">3.1.</span> <span class="nav-text">transformer结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%8B%E5%89%8D%E7%9A%84peft%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">之前的PEFT方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#adapters"><span class="nav-number">3.2.1.</span> <span class="nav-text">Adapters</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%8D%E5%8F%98%E4%BD%93"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">2种变体</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prefix-tuning"><span class="nav-number">3.2.2.</span> <span class="nav-text">Prefix tuning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lora"><span class="nav-number">3.2.3.</span> <span class="nav-text">LoRA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E6%96%B9%E6%A1%88"><span class="nav-number">3.2.4.</span> <span class="nav-text">其它方案</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%9F%E4%B8%80%E8%A7%86%E5%9B%BE"><span class="nav-number">4.</span> <span class="nav-text">统一视图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#prefix-tuning%E7%BB%86%E8%8A%82"><span class="nav-number">4.1.</span> <span class="nav-text">Prefix tuning细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vs-adapters%E8%81%94%E7%B3%BB"><span class="nav-number">4.1.1.</span> <span class="nav-text">vs Adapters联系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vs-adapters%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.1.2.</span> <span class="nav-text">vs adapters的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%9F%E4%B8%80%E6%A1%86%E6%9E%B6"><span class="nav-number">4.2.</span> <span class="nav-text">统一框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#functional-form"><span class="nav-number">4.2.1.</span> <span class="nav-text">Functional form</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#modified-representation"><span class="nav-number">4.2.2.</span> <span class="nav-text">Modified Representation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#insertion-form"><span class="nav-number">4.2.3.</span> <span class="nav-text">Insertion Form</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#composition-function"><span class="nav-number">4.2.4.</span> <span class="nav-text">Composition Function</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%81%E7%A7%BB%E8%AE%BE%E8%AE%A1%E5%85%83%E7%B4%A0"><span class="nav-number">4.3.</span> <span class="nav-text">迁移设计元素</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">5.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E8%AE%BE%E7%BD%AE"><span class="nav-number">5.1.</span> <span class="nav-text">通用设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">5.1.1.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE"><span class="nav-number">5.1.2.</span> <span class="nav-text">设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0"><span class="nav-number">5.1.3.</span> <span class="nav-text">评估</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%B0%83%E5%8F%82%E6%95%B0%E7%9A%84%E6%95%B0%E9%87%8F"><span class="nav-number">5.1.4.</span> <span class="nav-text">可调参数的数量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%B0%E6%9C%89%E6%96%B9%E6%B3%95%E7%9A%84%E7%BB%93%E6%9E%9C"><span class="nav-number">5.2.</span> <span class="nav-text">现有方法的结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%AA%E7%A7%8D%E6%8F%92%E5%85%A5%E5%BD%A2%E5%BC%8F---%E9%A1%BA%E5%BA%8F%E5%BC%8F%E6%88%96%E5%B9%B6%E5%88%97%E5%BC%8F"><span class="nav-number">5.3.</span> <span class="nav-text">哪种插入形式-
--顺序式或并列式?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%AA%E7%A7%8D%E4%BF%AE%E6%94%B9%E8%A1%A8%E7%A4%BA---%E6%B3%A8%E6%84%8F%E6%88%96ffn"><span class="nav-number">5.4.</span> <span class="nav-text">哪种修改表示- -注意或Ffn?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE-1"><span class="nav-number">5.4.1.</span> <span class="nav-text">设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C"><span class="nav-number">5.4.2.</span> <span class="nav-text">结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A80.1%E5%8F%82%E6%95%B0%E7%9A%84%E6%97%B6%E5%80%99%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C"><span class="nav-number">5.4.3.</span> <span class="nav-text">用0.1%参数的时候有什么不同</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%AA%E4%B8%AA%E6%88%90%E5%88%86%E8%B5%B7%E4%BD%9C%E7%94%A8"><span class="nav-number">5.5.</span> <span class="nav-text">哪个成分起作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E4%BC%A0%E9%80%92%E6%9C%89%E5%88%A9%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%85%83%E7%B4%A0%E8%BF%9B%E8%A1%8C%E6%9C%89%E6%95%88%E6%95%B4%E5%90%88"><span class="nav-number">5.6.</span> <span class="nav-text">通过传递有利的设计元素进行有效整合</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A8%E8%AE%BA"><span class="nav-number">6.</span> <span class="nav-text">讨论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93"><span class="nav-number">7.</span> <span class="nav-text">个人总结</span></a></li></ol></div>
+matrices to approximate parameter updates）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.2.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%BA%A7%E7%94%9F"><span class="nav-number">2.3.</span> <span class="nav-text">问题产生</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E7%BB%93%E6%9E%84"><span class="nav-number">2.4.</span> <span class="nav-text">文章结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86"><span class="nav-number">3.</span> <span class="nav-text">预备知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#transformer%E7%BB%93%E6%9E%84"><span class="nav-number">3.1.</span> <span class="nav-text">transformer结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%8B%E5%89%8D%E7%9A%84peft%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">之前的PEFT方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#adapters"><span class="nav-number">3.2.1.</span> <span class="nav-text">Adapters</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%8D%E5%8F%98%E4%BD%93"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">2种变体</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prefix-tuning"><span class="nav-number">3.2.2.</span> <span class="nav-text">Prefix tuning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lora"><span class="nav-number">3.2.3.</span> <span class="nav-text">LoRA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E6%96%B9%E6%A1%88"><span class="nav-number">3.2.4.</span> <span class="nav-text">其它方案</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%9F%E4%B8%80%E8%A7%86%E5%9B%BE"><span class="nav-number">4.</span> <span class="nav-text">统一视图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#prefix-tuning%E7%BB%86%E8%8A%82"><span class="nav-number">4.1.</span> <span class="nav-text">Prefix tuning细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vs-adapters%E8%81%94%E7%B3%BB"><span class="nav-number">4.1.1.</span> <span class="nav-text">vs Adapters联系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vs-adapters%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.1.2.</span> <span class="nav-text">vs adapters的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%9F%E4%B8%80%E6%A1%86%E6%9E%B6"><span class="nav-number">4.2.</span> <span class="nav-text">统一框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#functional-form"><span class="nav-number">4.2.1.</span> <span class="nav-text">Functional form</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#modified-representation"><span class="nav-number">4.2.2.</span> <span class="nav-text">Modified Representation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#insertion-form"><span class="nav-number">4.2.3.</span> <span class="nav-text">Insertion Form</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#composition-function"><span class="nav-number">4.2.4.</span> <span class="nav-text">Composition Function</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%81%E7%A7%BB%E8%AE%BE%E8%AE%A1%E5%85%83%E7%B4%A0"><span class="nav-number">4.3.</span> <span class="nav-text">迁移设计元素</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">5.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E8%AE%BE%E7%BD%AE"><span class="nav-number">5.1.</span> <span class="nav-text">通用设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">5.1.1.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE"><span class="nav-number">5.1.2.</span> <span class="nav-text">设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0"><span class="nav-number">5.1.3.</span> <span class="nav-text">评估</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%B0%83%E5%8F%82%E6%95%B0%E7%9A%84%E6%95%B0%E9%87%8F"><span class="nav-number">5.1.4.</span> <span class="nav-text">可调参数的数量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%B0%E6%9C%89%E6%96%B9%E6%B3%95%E7%9A%84%E7%BB%93%E6%9E%9C"><span class="nav-number">5.2.</span> <span class="nav-text">现有方法的结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E5%BD%A2%E5%BC%8F"><span class="nav-number">5.3.</span> <span class="nav-text">插入形式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%A1%A8%E7%A4%BA"><span class="nav-number">5.4.</span> <span class="nav-text">修改表示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE-1"><span class="nav-number">5.4.1.</span> <span class="nav-text">设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C"><span class="nav-number">5.4.2.</span> <span class="nav-text">结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A80.1%E5%8F%82%E6%95%B0%E7%9A%84%E6%97%B6%E5%80%99%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C"><span class="nav-number">5.4.3.</span> <span class="nav-text">用0.1%参数的时候有什么不同</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%B7%E4%BD%9C%E7%94%A8%E7%9A%84%E6%88%90%E5%88%86%E6%98%AF"><span class="nav-number">5.5.</span> <span class="nav-text">起作用的成分是</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E4%BC%A0%E9%80%92%E6%9C%89%E5%88%A9%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%85%83%E7%B4%A0%E8%BF%9B%E8%A1%8C%E6%9C%89%E6%95%88%E6%95%B4%E5%90%88"><span class="nav-number">5.6.</span> <span class="nav-text">通过传递有利的设计元素进行有效整合</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A8%E8%AE%BA"><span class="nav-number">6.</span> <span class="nav-text">讨论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93"><span class="nav-number">7.</span> <span class="nav-text">个人总结</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -210,7 +210,7 @@ matrices to approximate parameter updates）</span></a></li><li class="nav-item 
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-19 10:26:45" itemprop="dateModified" datetime="2024-03-19T10:26:45+08:00">2024-03-19</time>
+      <time title="修改时间：2024-03-19 10:40:40" itemprop="dateModified" datetime="2024-03-19T10:40:40+08:00">2024-03-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -476,13 +476,11 @@ nonlinear -&gt; proj_up</p>
 <p>指示哪些隐藏表示被直接修改</p>
 <h3 id="insertion-form">Insertion Form</h3>
 <p>表示添加的模块怎样插入到网络中的。</p>
-<p>传统上，apapters以顺序的方式插入再一个位置，其中输入和输出都是h，
-prefix
+<p>传统上，apapters以顺序的方式插入再一个位置，其中输入和输出都是h，prefix
 tuning和lora虽然最初不是以这种方式描述的，最终也相当于一个并行插入，其中x是输入。</p>
 <h3 id="composition-function">Composition Function</h3>
 <p>关于如何将修改后的向量<span class="math inline">\(\Delta
-h\)</span>与原始的隐藏表示h进行组合的，从而形成新的隐藏表示的。
-例如：</p>
+h\)</span>与原始的隐藏表示h进行组合的，从而形成新的隐藏表示的。例如：</p>
 <ul>
 <li>adapters执行简单的加法组合；</li>
 <li>prefix-tuning使用门控加法组合，也就是这个公式：<span
@@ -559,8 +557,7 @@ d的参数，与注意处的适配器相同。</li>
 <p>影响因素可能是复杂的，包括训练样本数量、任务复杂度或模型架构等。因此，我们提倡今后对这一领域的研究，以报告在更多样化的基准上的结果，以展示其性能概况的更完整的画面。</p>
 <p>下面，我们的分析将主要集中在<strong>XSum和en -
 ro</strong>数据集上，以更好地区分不同的设计选择。我们注意到这两个基准是使用编码器-解码器模型(BART)执行的较高资源，而我们将在§4.6中讨论仅使用编码器模型(RoBERTa)在MNLI和SST2上的结果。</p>
-<h2 id="哪种插入形式---顺序式或并列式">哪种插入形式-
--顺序式或并列式?</h2>
+<h2 id="插入形式">插入形式</h2>
 <p>我们首先研究了<strong>插入形式(Insertion
 Form)</strong>的设计维度，将提出的并行适配器(PA)变体与传统的顺序适配器(SA)在注意力(att)和FFN修改进行了比较。我们将prefix
 tuning作为参考点。</p>
@@ -574,7 +571,7 @@ adapters)。 此外，在所有情况下，并行适配器(parallel
 adapter)都能战胜顺序适配器(sequential
 adapters)，在XSum上PA(ffn)比SA(ffn)高出1.7个R-2点，在en-ro中则是0.8个BLEU点。
 考虑到并行适配器比顺序适配器具有更好的结果，我们在下面的部分中关注<strong>并行适配器</strong>的结果。</p>
-<h2 id="哪种修改表示---注意或ffn">哪种修改表示- -注意或Ffn?</h2>
+<h2 id="修改表示">修改表示</h2>
 <h3 id="设置-1">设置</h3>
 <p>我们现在研究修改不同表征的影响。我们主要对<strong>注意力和FFN</strong>修饰进行比较。
 为了便于分析，我们将修改注意力子层(例如,头部输出、查询等)中任何隐藏表示的<em>方法</em>归类为修改注意力模块。</p>
@@ -614,7 +611,7 @@ BLEU的损失，而PA ( attn )损失了1.9个点。</p>
 <p>前缀调优中的门控合成函数对结果略有帮助，提高了0.3个点。值得注意的是，MH并行适配器将单头版本提高了1.6个点，再次验证了多头方案的有效性。</p>
 <p>结合图5和表4中的结果，我们得出结论，<strong>当参数预算很小时，修改头注意力能给出最好的结果，而FFN可以在更大的容量下更好地利用修改</strong>。这表明，将更大的参数预算分配给FFN修改可能是有效的，而不是像Houlsby等(
 2019 )那样将注意力和FFN同等对待。</p>
-<h2 id="哪个成分起作用">哪个成分起作用</h2>
+<h2 id="起作用的成分是">起作用的成分是</h2>
 <p>之前3.2节提到了3种composition functions：simple addition (adapter),
 gated addition (prefix tuning) and scaled addition (LoRA).
 由于在不适用softmax函数形式的方法中加入精确的门控加法是不自然的，我们通过LoRA上进行的消融实验考察了另外两种方，并与提出的缩放并行适配器(
@@ -635,7 +632,29 @@ scaling composition function is better than the vanilla additive one
 while being easily applicable.)</p>
 <h2
 id="通过传递有利的设计元素进行有效整合">通过传递有利的设计元素进行有效整合</h2>
-<p>11111</p>
+<p>我们首先强调前文的三个发现：</p>
+<ol type="1">
+<li>缩放的并行适配器是修改FFN的最佳变体；</li>
+<li>FFN可以在更大的容量下更好地利用改性；</li>
+<li>修改头注意力，如前缀调优，只需要0.1
+%的参数就可以达到很强的性能。</li>
+</ol>
+<p>受他们的启发，我们混合匹配了这些发现背后的有利设计：具体来说，我们在注意力子层使用瓶颈维度较小的前缀调优(
+l = 30)，并分配更多的参数预算来修改FFN表示，使用缩放的并行适配器( r =
+512)。
+由于前缀调优在我们的统一框架中可以看作是适配器的一种形式，我们将这种变体命名为Mix
+- And - Match适配器( MAM Adapter )。</p>
+<figure>
+<img src="https://ooo.0x0.ooo/2024/03/18/OgkBOv.png" alt="table 6" />
+<figcaption aria-hidden="true">table 6</figcaption>
+</figure>
+<p>在表6中，我们比较了MAM适配器与各种参数有效的调优方法。为了完整起见，我们还在表6中给出了其他组合版本的结果：在注意力层和FFN层使用并行适配器，并将前缀调优(
+attn )与LoRA ( ffn )相结合-
+-这两个组合版本都可以在各自的原型上进行改进。然而，MAM
+Adapter在两个任务上都取得了最好的性能，并且只需更新6.7
+%的预训练参数就能匹配我们完全微调的结果。在表2中，我们还展示了MAM
+Adapter在MNLI和SST2上的结果，其中MAM Adapter通过只添加0.5
+%的预训练参数达到了与完全微调相当的结果。</p>
 <h1 id="讨论">讨论</h1>
 <p>我们为几种性能参数调优方法提供了一个统一的框架，使我们能够通过跨方法的迁移技术实例化出与完全调优方法性能相匹配的更有效的模型。我们希望我们的工作能够为以后的参数高效调节研究提供见解和指导。</p>
 <h1 id="个人总结">个人总结</h1>
@@ -729,6 +748,7 @@ d的参数，与注意处的适配器相同。
 </ol></li>
 <li>结果分析(4.2-6)
 <ol type="1">
+<li>刚刚提到了4个维度：functional form|modified represenation</li>
 <li>确认选择哪个任务：集中在<strong>XSum和en - ro</strong>数据集，
 因为如果在XSum和en - ro（图4）中增加5 %的参数，仍然存在很大的差距</li>
 <li>INsertion form：
