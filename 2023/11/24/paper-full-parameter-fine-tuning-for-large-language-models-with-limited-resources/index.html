@@ -28,11 +28,10 @@
 <meta property="og:description" content="百篇paper计划(1&#x2F;100)，推荐阅读的，没有选择趋向。内容是：用有限的资源（主要是内存）进行全参数大模型微调，研究重点集中在微调部分，做的是内存优化的工作。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-11-24T09:10:38.000Z">
-<meta property="article:modified_time" content="2024-03-27T03:17:39.221Z">
+<meta property="article:modified_time" content="2024-03-27T03:26:23.863Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="llm">
 <meta property="article:tag" content="fine tune">
-<meta property="article:tag" content="memory">
 <meta property="article:tag" content="full parameter">
 <meta name="twitter:card" content="summary">
 
@@ -117,7 +116,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E8%AF%81%E7%B2%BE%E5%BA%A6"><span class="nav-number">1.0.1.</span> <span class="nav-text">保证精度</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#experiment"><span class="nav-number">2.</span> <span class="nav-text">experiment</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8"><span class="nav-number">2.1.</span> <span class="nav-text">内存占用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8%E7%8A%B6%E6%80%81"><span class="nav-number">2.1.1.</span> <span class="nav-text">优化器状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6"><span class="nav-number">2.1.2.</span> <span class="nav-text">梯度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB"><span class="nav-number">2.1.3.</span> <span class="nav-text">激活</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%9E%E5%90%90%E9%87%8F"><span class="nav-number">2.2.</span> <span class="nav-text">吞吐量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E6%B8%B8%E8%A1%A8%E7%8E%B0"><span class="nav-number">2.3.</span> <span class="nav-text">下游表现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E7%BB%93%E6%9E%9C"><span class="nav-number">2.3.1.</span> <span class="nav-text">主要结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E8%BE%83lora"><span class="nav-number">2.3.2.</span> <span class="nav-text">比较lora</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%84"><span class="nav-number">4.</span> <span class="nav-text">附</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB"><span class="nav-number">4.1.</span> <span class="nav-text">代码解读</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#activation-checkpointing"><span class="nav-number">2.1.</span> <span class="nav-text">Activation Checkpointing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mixed-precision-training"><span class="nav-number">2.2.</span> <span class="nav-text">Mixed-Precision Training</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#heterogeneous-training-system"><span class="nav-number">2.3.</span> <span class="nav-text">Heterogeneous Training
+System</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#method"><span class="nav-number">3.</span> <span class="nav-text">method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8"><span class="nav-number">3.1.</span> <span class="nav-text">优化器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8sgd"><span class="nav-number">3.1.1.</span> <span class="nav-text">使用SGD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E5%B9%B3%E6%BB%91%E7%9A%84%E6%8D%9F%E5%A4%B1%E9%9D%A2"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">更平滑的损失面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E6%9C%80%E4%BC%98%E5%B0%B1%E5%A4%9F%E4%BA%86"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">局部最优就够了</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9E%8D%E7%82%B9%E5%BE%88%E9%81%A5%E8%BF%9C"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">鞍点很遥远</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lomo"><span class="nav-number">3.2.</span> <span class="nav-text">lomo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B%E7%9A%84%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="nav-number">3.3.</span> <span class="nav-text">训练过程的稳定性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E6%AD%A3%E5%88%99%E5%8C%96%E5%92%8C%E8%A3%81%E5%89%AA%E7%9A%84%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88"><span class="nav-number">3.3.1.</span> <span class="nav-text">梯度正则化和裁剪的替代方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E8%AF%81%E7%B2%BE%E5%BA%A6"><span class="nav-number">3.3.2.</span> <span class="nav-text">保证精度</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#experiment"><span class="nav-number">4.</span> <span class="nav-text">experiment</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8"><span class="nav-number">4.1.</span> <span class="nav-text">内存占用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8%E7%8A%B6%E6%80%81"><span class="nav-number">4.1.1.</span> <span class="nav-text">优化器状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6"><span class="nav-number">4.1.2.</span> <span class="nav-text">梯度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB"><span class="nav-number">4.1.3.</span> <span class="nav-text">激活</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%9E%E5%90%90%E9%87%8F"><span class="nav-number">4.2.</span> <span class="nav-text">吞吐量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E6%B8%B8%E8%A1%A8%E7%8E%B0"><span class="nav-number">4.3.</span> <span class="nav-text">下游表现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E7%BB%93%E6%9E%9C"><span class="nav-number">4.3.1.</span> <span class="nav-text">主要结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E8%BE%83lora"><span class="nav-number">4.3.2.</span> <span class="nav-text">比较lora</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%84"><span class="nav-number">6.</span> <span class="nav-text">附</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB"><span class="nav-number">6.1.</span> <span class="nav-text">代码解读</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -204,7 +204,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-27 11:17:39" itemprop="dateModified" datetime="2024-03-27T11:17:39+08:00">2024-03-27</time>
+      <time title="修改时间：2024-03-27 11:26:23" itemprop="dateModified" datetime="2024-03-27T11:26:23+08:00">2024-03-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -227,52 +227,87 @@
     
     <div class="post-body" itemprop="articleBody"><p>百篇paper计划(1/100)，推荐阅读的，没有选择趋向。内容是：用有限的资源（主要是内存）进行全参数大模型微调，研究重点集中在微调部分，做的是内存优化的工作。</p>
 <span id="more"></span>
-<p>论文标题：Full Parameter Fine-tuning for Large Language Models with
-Limited Resources arxiv地址：<a
-target="_blank" rel="noopener" href="https://arxiv.org/abs/2306.09782">链接</a> code：<a
-target="_blank" rel="noopener" href="https://github.com/OpenLMLab/LOMO">github</a> # abstract -
-背景：LLMs给NLP问题带来了革命性变化，but需要大量GPU资源 -
-已有：高效参数微调（PEFT），没有彻底解决 <a
-href="高效参数微调.md">PEFT参考文档</a> &gt; parameter-efficient
-fine-tuning vs full-parameter fine-tune</p>
 <ul>
-<li>创新：提出了新的优化器 LOw-Memory-Optimization
-内容：在一个步骤融合了梯度计算和参数更新 &gt; 怎么融合(fuse)？</li>
-<li>效果：和标准方法（DeepSpeed解决方案）相比，我们将内存使用量减少到10.8%。
+<li>论文标题：Full Parameter Fine-tuning for Large Language Models with
+Limited Resources</li>
+<li>arxiv地址：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2306.09782">链接</a></li>
+<li>code：<a target="_blank" rel="noopener" href="https://github.com/OpenLMLab/LOMO">github</a></li>
+</ul>
+<h1 id="abstract">abstract</h1>
+<ul>
+<li><p>背景：LLMs给NLP问题带来了革命性变化，but需要大量GPU资源</p></li>
+<li><p>已有：高效参数微调（PEFT），没有彻底解决 <a
+href="高效参数微调.md">PEFT参考文档</a> &gt; parameter-efficient
+fine-tuning vs full-parameter fine-tune</p></li>
+<li><p>创新：提出了新的优化器 LOw-Memory-Optimization
+内容：在一个步骤融合了梯度计算和参数更新 &gt; 怎么融合(fuse)？</p></li>
+<li><p>效果：和标准方法（DeepSpeed解决方案）相比，我们将内存使用量减少到10.8%。
 因此，我们的方法可以在一台拥有8×RTX
-3090的机器上对65B模型进行全参数微调，每台机器都有24GB内存</li>
+3090的机器上对65B模型进行全参数微调，每台机器都有24GB内存</p></li>
 </ul>
 <h1 id="introduction">introduction</h1>
 <blockquote>
-<p>感觉就是把摘要扩写了一遍 - 背景：LLMs 厉害，但是要钱。 -
-目前：有效参数微调方法 比如：LoRA,Prefix-tuning 但是：没有全参数的 -
-解决问题：我们要找个办法实现全参数微调 - 干了啥 -
-分析LLMs里面内存使用的四个主要方面： 激活，优化器状态，梯度张量和参数 -
-从三个方面优化了训练过程： -
-SGD-优化器：由于SGD不存储任何中间状态，可以删除整个优化器状态部分<a
-href="SGD.md">SGD是什么</a> - LOMO把梯度tensor的内存使用降到了O(1) -
-为了稳定使用混合精度训练：集成梯度归一化和损失缩放，并将某些计算过渡到全精度
-- 结果 内存使用量等于参数使用量加上激活量和最大梯度张量。 分析了： 1.
-内存和吞吐量 2. 下游表现 - 贡献 1. SGD 2. LOMO 3. 验证 # related work
-都是节省内存的技术 ## Activation Checkpointing
-计算图中策略性地选择的检查点节点的激活变量在正向阶段后保留在内存中，而其余节点的激活变量在梯度计算时最多重新计算一次。激活内存可以降低原始内存使用量的平方根，代价是需要多一次正向传递。
-在前向传播过程中，有选择性的丢弃一些产生的中间激活值，当反向传播需要使用这些激活值时，再依据上一个保存的激活值来计算出这些需要的激活值来帮助完成反向传播。这样一来，便可以大大减少训练过程中所需要的存储空间。
-## Mixed-Precision Training 混合精度，32位浮点数和16位浮点数混合使用 ##
-Heterogeneous Training System
-通过利用异构内存（如CPU和NVMe内存）来减少GPU内存消耗 但是怎么做？？ #
-method ## 优化器 adam和SGD比起来哪里不好了！
-参考https://blog.csdn.net/S20144144/article/details/103417502 ###
-使用SGD SGD遭人诟病的有三个： - 大曲率损失面（什么叫曲率？） - 局部最优
-- 鞍点 作者对LLMs问题上用SGD时这些可能的问题逐一分析 #### 更平滑的损失面
-验证了更大的模型有更加平滑的损失面 所以LLMs上面这一点可以忽略 ####
-局部最优就够了 微调的目标是让模型能够解决新任务，基础模型没变。
-而且有限的训练数据（和预训练时期相比）也不可能实现全局最优。 ####
-鞍点很遥远 对于传统的NLP任务，LLM
+<p>感觉就是把摘要扩写了一遍</p>
+</blockquote>
+<ul>
+<li><p>背景：LLMs 厉害，但是要钱。</p></li>
+<li><p>目前：有效参数微调方法 比如：LoRA,Prefix-tuning
+但是：没有全参数的</p></li>
+<li><p>解决问题：我们要找个办法实现全参数微调</p></li>
+<li><p>干了啥</p>
+<ul>
+<li>分析LLMs里面内存使用的四个主要方面：
+激活，优化器状态，梯度张量和参数</li>
+<li>从三个方面优化了训练过程：
+<ul>
+<li>SGD-优化器：由于SGD不存储任何中间状态，可以删除整个优化器状态部分<a
+href="SGD.md">SGD是什么</a></li>
+<li>LOMO把梯度tensor的内存使用降到了O(1)</li>
+<li>为了稳定使用混合精度训练：集成梯度归一化和损失缩放，并将某些计算过渡到全精度</li>
+</ul></li>
+</ul></li>
+<li><p>结果 内存使用量等于参数使用量加上激活量和最大梯度张量。</p>
+<p>分析了：</p>
+<ol type="1">
+<li>内存和吞吐量</li>
+<li>下游表现</li>
+</ol></li>
+<li><p>贡献</p>
+<ol type="1">
+<li>SGD</li>
+<li>LOMO</li>
+<li>验证 # related work 都是节省内存的技术</li>
+</ol></li>
+</ul>
+<h2 id="activation-checkpointing">Activation Checkpointing</h2>
+<p>计算图中策略性地选择的检查点节点的激活变量在正向阶段后保留在内存中，而其余节点的激活变量在梯度计算时最多重新计算一次。激活内存可以降低原始内存使用量的平方根，代价是需要多一次正向传递。
+在前向传播过程中，有选择性的丢弃一些产生的中间激活值，当反向传播需要使用这些激活值时，再依据上一个保存的激活值来计算出这些需要的激活值来帮助完成反向传播。这样一来，便可以大大减少训练过程中所需要的存储空间。</p>
+<h2 id="mixed-precision-training">Mixed-Precision Training</h2>
+<p>混合精度，32位浮点数和16位浮点数混合使用</p>
+<h2 id="heterogeneous-training-system">Heterogeneous Training
+System</h2>
+<p>通过利用异构内存（如CPU和NVMe内存）来减少GPU内存消耗</p>
+<blockquote>
+<p>但是怎么做？？</p>
+</blockquote>
+<h1 id="method">method</h1>
+<h2 id="优化器">优化器</h2>
+<p>adam和SGD比起来哪里不好了！
+参考https://blog.csdn.net/S20144144/article/details/103417502</p>
+<h3 id="使用sgd">使用SGD</h3>
+<p>SGD遭人诟病的有三个： - 大曲率损失面（什么叫曲率？） - 局部最优 -
+鞍点 作者对LLMs问题上用SGD时这些可能的问题逐一分析</p>
+<h4 id="更平滑的损失面">更平滑的损失面</h4>
+<p>验证了更大的模型有更加平滑的损失面 所以LLMs上面这一点可以忽略</p>
+<h4 id="局部最优就够了">局部最优就够了</h4>
+<p>微调的目标是让模型能够解决新任务，基础模型没变。
+而且有限的训练数据（和预训练时期相比）也不可能实现全局最优。</p>
+<h4 id="鞍点很遥远">鞍点很遥远</h4>
+<p>对于传统的NLP任务，LLM
 参数的初始点通常是在谷底，如果模型是通过指令微调，当出现新任务时，模型在某种程度上对这些任务都是似曾相识，那么saddle
 points通常出现在边缘且距离valley有一定距离，因此如果在改变参数值不大的情况下是也许不会碰到saddle
 points在finetune过程中。 关于散点详细介绍可以看<a
 href="局部最优和鞍点.md">局部最优和鞍点</a></p>
-</blockquote>
 <p>从结论上来看，SGD是可以胜任微调工作。 ### batch size
 在一个batch中含有2个样本的参数更新公式如下： <span
 class="math display">\[
@@ -306,17 +341,17 @@ f(d_j, \theta))
 \]</span> 按照假设loss
 surface足够平滑，等号后边的式子可以忽略不计。当使用SGD作为optimizer时，可以采用较大的batch
 size
-提高训练稳定性；这也从另外一个方面解释了SGD在小模型上效果不佳但在大模型上效果较好。
-## lomo 梯度张量的作用：计算优化器状态和梯度正则化
-因为用SGD，第一个可以省掉了，接下来的问题就是梯度正则化。
-LOMO：在一步内同时完成梯度计算和参数更新，以避免存储梯度张量。</p>
-<p>两步计算过程是先计算梯度，再更新参数：而所提出的方法是计算完梯度之后，直接对参数进行更新
-Pytorch中提供类似 injecting hook
-function但无法实现参数的即时更新；作者所采用方法是随着backward
-progagation的进行只存储一个参数的梯度，这种方案将之前存储所有参数的梯度，降低到只存储一个参数，从而减少了内存的占用
-## 训练过程的稳定性 ### 梯度正则化和裁剪的替代方案
-梯度正则化和裁剪用来干什么的：防止梯度爆炸和消失。提出了两个方法 - Clip
-gradient by values，而不是采用gradient norm。Clip gradient by
+提高训练稳定性；这也从另外一个方面解释了SGD在小模型上效果不佳但在大模型上效果较好。</p>
+<h2 id="lomo">lomo</h2>
+<p>梯度张量的作用：计算优化器状态和梯度正则化，因为用SGD，第一个可以省掉了，接下来的问题就是梯度正则化。</p>
+<p>LOMO：在一步内同时完成梯度计算和参数更新，以避免存储梯度张量。</p>
+<p>两步计算过程是先计算梯度，再更新参数：而所提出的方法是计算完梯度之后，直接对参数进行更新。</p>
+<p>Pytorch中提供类似 injecting hook
+function但无法实现参数的即时更新；作者所采用方法是随着backward，progagation的进行只存储一个参数的梯度，这种方案将之前存储所有参数的梯度，降低到只存储一个参数，从而减少了内存的占用</p>
+<h2 id="训练过程的稳定性">训练过程的稳定性</h2>
+<h3 id="梯度正则化和裁剪的替代方案">梯度正则化和裁剪的替代方案</h3>
+<p>梯度正则化和裁剪用来干什么的：防止梯度爆炸和消失。提出了两个方法 -
+Clip gradient by values，而不是采用gradient norm。Clip gradient by
 values是缓解梯度爆炸有效的方案，但这种方式唯一需要考虑的是，通过gradient
 value来进行裁剪会改变方向。采用这种方法时需要考虑学习率的设置，根据经验学习率应低于1e-3
 - 用额外的过程来计算gradient
@@ -348,8 +383,8 @@ factor加倍，反正则减半。这里出现个疑惑点即怎么去判断是�
 <li>为什么SGD还保存优化器状态，不是说不保存吗？</li>
 </ol>
 <h3 id="优化器状态">优化器状态</h3>
-<p>用AdamW,sgd和LOMO实验时优化器状态、梯度、参数和激活的内存使用占比。
-混合精度训练方法，在这种方法中，权重、动量和方差的全精度副本被保留在优化器状态中，用于权重更新。用
+<p>用AdamW,sgd和LOMO实验时优化器状态、梯度、参数和激活的内存使用占比。</p>
+<p>混合精度训练方法，在这种方法中，权重、动量和方差的全精度副本被保留在优化器状态中，用于权重更新。用
 SGD 优化器替换 AdamW
 优化器可以有效降低内存中优化器状态的百分比，从而减少 GPU
 内存使用量。这是因为 SGD 优化器不需要存储全精度动量和方差。对 LOMO
@@ -361,19 +396,22 @@ SGD 优化器替换 AdamW
 <p>LOMO 与激活检查点等减少激活内存的技术兼容。</p>
 <h2 id="吞吐量">吞吐量</h2>
 <p>吞吐量以每 GPU 每秒处理的令牌数（TGS）来衡量，参数分区使用 ZeRO-3
-实现。 - 对于 7B 模型，LOMO 的吞吐量非常可观，比 AdamW 和 SGD 高出约 11
+实现。</p>
+<ul>
+<li>对于 7B 模型，LOMO 的吞吐量非常可观，比 AdamW 和 SGD 高出约 11
 倍。因为LOMO可以仅在一个CPU上就能run 7B 模型，从而减少了 GPU
 之间的通信开销。与 AdamW 相比，SGD 的吞吐量略高，这是因为 SGD
-排除了动量和方差计算。 - 至于 13B 模型，由于内存限制，无法在现有的 8 个
-RTX 3090 GPU 上使用 AdamW 进行训练。在这种需要 LOMO
-进行模型并行化的情况下，LOMO 的吞吐量仍然优于 SGD。这一优势归功于 LOMO
-的内存效率特性，以及只需要两个 GPU
-就能在相同设置下训练模型，从而降低了通信成本，提高了吞吐量。 - 在训练
-30B 模型时，SGD 在使用 8 个 RTX 3090 GPU 时遇到了内存不足（OOM）问题，而
-LOMO 仅在使用 4 个 GPU 时表现良好。 - 最后，我们使用 8 个 RTX 3090 GPU
-成功训练了 65B 模型，吞吐量达到 4.93 TGS。利用这样的服务器配置和
-LOMO，对 1000 个样本（每个样本包含 512 个 token）的训练过程大约需要 3.6
-个小时。</p>
+排除了动量和方差计算。</li>
+<li>至于 13B 模型，由于内存限制，无法在现有的 8 个 RTX 3090 GPU 上使用
+AdamW 进行训练。在这种需要 LOMO 进行模型并行化的情况下，LOMO
+的吞吐量仍然优于 SGD。这一优势归功于 LOMO 的内存效率特性，以及只需要两个
+GPU 就能在相同设置下训练模型，从而降低了通信成本，提高了吞吐量。</li>
+<li>在训练 30B 模型时，SGD 在使用 8 个 RTX 3090 GPU
+时遇到了内存不足（OOM）问题，而 LOMO 仅在使用 4 个 GPU 时表现良好。</li>
+<li>最后，我们使用 8 个 RTX 3090 GPU 成功训练了 65B 模型，吞吐量达到
+4.93 TGS。利用这样的服务器配置和 LOMO，对 1000 个样本（每个样本包含 512
+个 token）的训练过程大约需要 3.6 个小时。</li>
+</ul>
 <h2 id="下游表现">下游表现</h2>
 <blockquote>
 <p>downstream performance是什么啊？就是真正要做的fine-tune任务</p>
@@ -431,7 +469,6 @@ type="checkbox" />代码以后再看，也不知道还要不要看了</label></l
           <div class="post-tags">
               <a href="/tags/llm/" rel="tag"># llm</a>
               <a href="/tags/fine-tune/" rel="tag"># fine tune</a>
-              <a href="/tags/memory/" rel="tag"># memory</a>
               <a href="/tags/full-parameter/" rel="tag"># full parameter</a>
           </div>
 
@@ -507,7 +544,7 @@ type="checkbox" />代码以后再看，也不知道还要不要看了</label></l
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 
