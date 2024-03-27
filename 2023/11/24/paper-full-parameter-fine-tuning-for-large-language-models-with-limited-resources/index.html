@@ -28,7 +28,7 @@
 <meta property="og:description" content="百篇paper计划(1&#x2F;100)，推荐阅读的，没有选择趋向。内容是：用有限的资源（主要是内存）进行全参数大模型微调，研究重点集中在微调部分，做的是内存优化的工作。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-11-24T09:10:38.000Z">
-<meta property="article:modified_time" content="2024-03-27T03:26:23.863Z">
+<meta property="article:modified_time" content="2024-03-27T03:27:13.224Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="llm">
 <meta property="article:tag" content="fine tune">
@@ -130,7 +130,7 @@ System</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-l
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -141,7 +141,7 @@ System</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-l
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -204,7 +204,7 @@ System</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-l
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-27 11:26:23" itemprop="dateModified" datetime="2024-03-27T11:26:23+08:00">2024-03-27</time>
+      <time title="修改时间：2024-03-27 11:27:13" itemprop="dateModified" datetime="2024-03-27T11:27:13+08:00">2024-03-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -350,21 +350,23 @@ size
 function但无法实现参数的即时更新；作者所采用方法是随着backward，progagation的进行只存储一个参数的梯度，这种方案将之前存储所有参数的梯度，降低到只存储一个参数，从而减少了内存的占用</p>
 <h2 id="训练过程的稳定性">训练过程的稳定性</h2>
 <h3 id="梯度正则化和裁剪的替代方案">梯度正则化和裁剪的替代方案</h3>
-<p>梯度正则化和裁剪用来干什么的：防止梯度爆炸和消失。提出了两个方法 -
-Clip gradient by values，而不是采用gradient norm。Clip gradient by
+<p>梯度正则化和裁剪用来干什么的：防止梯度爆炸和消失。提出了两个方法</p>
+<ul>
+<li>Clip gradient by values，而不是采用gradient norm。Clip gradient by
 values是缓解梯度爆炸有效的方案，但这种方式唯一需要考虑的是，通过gradient
-value来进行裁剪会改变方向。采用这种方法时需要考虑学习率的设置，根据经验学习率应低于1e-3
-- 用额外的过程来计算gradient
+value来进行裁剪会改变方向。采用这种方法时需要考虑学习率的设置，根据经验学习率应低于1e-3</li>
+<li>用额外的过程来计算gradient
 norm。计算梯度的norm，由于所提出的算法并不会记录所有参数值，作者提出了一个可以探索的方案就是计算相邻层参数的norm来替代全局；当然这种方法仍值得广泛讨论，因为对于不同的parameters采用了不同的update
-step size</p>
+step size</li>
+</ul>
 <p>矛盾点：目前的训练框架是根据所有参数来计算梯度准则的，因此需要两次后向传递（backward）。</p>
 <p>解决：一种解决方案是用一组参数（例如相邻层）来近似梯度张量的规范。然而，这种方法确实存在偏差，因为它会导致不同参数的更新步长不同。更新时，参数会根据梯度准则乘以一个比例系数。由于不同参数组的梯度准则不同，这种近似方法会导致比例系数的差异。尽管存在这种局限性，这种分组梯度削波方法仍可视为根据不同参数组的梯度准则对其采用动态学习率。</p>
 <p>真解决：动态learning rate</p>
 <h3 id="保证精度">保证精度</h3>
 <p>为了保证训练速度和精度，采用dynamic loss scaling
 和将确定的计算转化为全精度计算。作者提出将一个dynamic loss scaler
-和LOMO进行集成，它在整个训练过程中条件scaling
-factor。当特定数量的后向传播为发生溢出时，scale
+和LOMO进行集成，它在整个训练过程中条件scaling factor。</p>
+<p>当特定数量的后向传播为发生溢出时，scale
 factor加倍，反正则减半。这里出现个疑惑点即怎么去判断是否有溢出，实际过程中只有当后向传递结束时我们才能知道是否有溢出发生。为了解决这个问题，作者提出二次后传方案，即第一次后向传播时判断是否有溢出，如果没有溢出在第二次传递时更新参数。</p>
 <h1 id="experiment">experiment</h1>
 <p>评估标准：内存占用、吞吐率、下游任务表现 模型：LLaMA(7B-65B)
