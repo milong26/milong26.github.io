@@ -28,7 +28,7 @@
 <meta property="og:description" content="看标题看不出来是做啥的，忙猜一个减小运行消耗。百篇阅读计划(5&#x2F;100)">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-21T02:37:15.000Z">
-<meta property="article:modified_time" content="2024-05-21T08:03:58.902Z">
+<meta property="article:modified_time" content="2024-05-27T02:59:18.253Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="llm">
 <meta name="twitter:card" content="summary">
@@ -114,7 +114,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#related-works"><span class="nav-number">3.</span> <span class="nav-text">related works</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#backgroundllm-inference"><span class="nav-number">4.</span> <span class="nav-text">Background:LLM inference</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#offloading-strategy"><span class="nav-number">5.</span> <span class="nav-text">Offloading Strategy</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#approximate-methods"><span class="nav-number">6.</span> <span class="nav-text">Approximate Methods</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#evaluation"><span class="nav-number">7.</span> <span class="nav-text">Evaluation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusion"><span class="nav-number">8.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93"><span class="nav-number">9.</span> <span class="nav-text">个人总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#abstract-1"><span class="nav-number">9.1.</span> <span class="nav-text">abstract</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#related-works"><span class="nav-number">3.</span> <span class="nav-text">related works</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#backgroundllm-inference"><span class="nav-number">4.</span> <span class="nav-text">Background:LLM inference</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#offloading-strategy"><span class="nav-number">5.</span> <span class="nav-text">Offloading Strategy</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#approximate-methods"><span class="nav-number">6.</span> <span class="nav-text">Approximate Methods</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#evaluation"><span class="nav-number">7.</span> <span class="nav-text">Evaluation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusion"><span class="nav-number">8.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93"><span class="nav-number">9.</span> <span class="nav-text">个人总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#abstract-1"><span class="nav-number">9.1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction-1"><span class="nav-number">9.2.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%9D%E5%A4%96"><span class="nav-number">9.3.</span> <span class="nav-text">额外</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -193,9 +193,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-05-21 10:37:15 / 修改时间：16:03:58" itemprop="dateCreated datePublished" datetime="2024-05-21T10:37:15+08:00">2024-05-21</time>
+      <time title="创建时间：2024-05-21 10:37:15" itemprop="dateCreated datePublished" datetime="2024-05-21T10:37:15+08:00">2024-05-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-05-27 10:59:18" itemprop="dateModified" datetime="2024-05-27T10:59:18+08:00">2024-05-27</time>
     </span>
 
   
@@ -258,7 +264,26 @@ system有什么</label></li>
 O调度和张量放置效率低下，第三类现有的基于卸载的系统在单个GPU上无法达到可接受的吞吐量。例如，这些系统可能会被小批量的(例如,在某些情况下,
 OPT - 175B的批次大小只有一个或两个)难倒。</li>
 <li>设计重点：<strong>在单个商品GPU上设计高效的卸载策略</strong>来进行<strong>高通量的生成式推理</strong>。</li>
-<li>如何实现</li>
+<li>实现方法：为了在GPU内存有限的情况下运行LLM，我们可以将其卸载到二级存储，并通过部分加载来执行部分计算。</li>
+<li>依据原理：在一个典型的机器上，有3个层次的内存层次结构，就是GPU、CPU、Disk的结构。在面向吞吐量的场景中，我们可以通过使用大批量来牺牲延迟，并在一个大批量的输入中，在不同的内存层次结构之间摊销昂贵的I/O操作，与计算重叠。值得注意的是，在资源有限的情况下，延迟和吞吐量方面的性能明显劣于资源充足的情况。</li>
+<li>遇到挑战：offloading|compression
+<ul>
+<li>设计高效的卸载策略：在generative推理过程中有3中张量：weight,activation,key-value缓存。batch,token,layer之间的计算也构成复杂的计算图，现有的基于卸载的推理系统(2022年)继承了来自训练的策略，执行了过多的I/O，实现了远低于理论硬件限制的吞吐量。</li>
+<li>制定有效的压缩策略：prework已经证明了在压缩LLMs的权重和激活方面有很好的结果。然而，当结合压缩和卸载进行高通量推断时，权重和KV缓存的I
+/ O成本和内存减少变得更为重要，这激发了替代的压缩方案。</li>
+</ul></li>
+<li>总结一下：FlexGen，一个用于高通量LLM推理的卸载框架。FlexGen聚合来自GPU、CPU和磁盘的内存，高效地调度I/O操作，以及可能的压缩方法和分布式流水线并行。</li>
+<li>本文贡献：searching spacs|
+<ul>
+<li>定义可能的卸载策略的搜索空间，考虑计算调度、张量放置、计算委托（computation
+delegation）证明该搜索空间捕获了一个I / O复杂度在2
+×最优性以内的计算顺序。然后，开发了一个基于线性规划的搜索算法来优化搜索空间内的吞吐量。该算法可以针对不同的硬件规格进行配置，并且可以很容易地扩展到包含延迟和吞吐量约束，从而帮助平滑地导航权衡空间。该算法可以针对不同的硬件规格进行配置，并且可以很容易地扩展到包含延迟和吞吐量约束，从而帮助平滑地导航权衡空间。与现有的策略相比，我们的解决方案统一了权重、激活和KV缓存的放置，从而实现了更高的批大小上限，这是实现高吞吐量的关键。</li>
+<li>证明对于OPT -
+175B这样的LLMs，可以在几乎不损失精度的情况下，将权重和KV缓存压缩到4比特，而无需重新训练或校准。这是通过细粒度的分组量化来实现的，适用于减少卸载时的I
+/ O成本和内存使用。</li>
+</ul></li>
+<li><label><input type="checkbox" />Aminabadi et al., 2022; HuggingFace,
+2022的系统的基于卸载的推理系统是怎么实现的？论文里面只说它不好</label></li>
 </ul>
 <h1 id="related-works">related works</h1>
 <h1 id="backgroundllm-inference">Background:LLM inference</h1>
@@ -269,7 +294,12 @@ OPT - 175B的批次大小只有一个或两个)难倒。</li>
 <h1 id="个人总结">个人总结</h1>
 <h2 id="abstract-1">abstract</h2>
 <p>研究的东西：高通量(high throughput，说吞吐量也行？)LLM</p>
-<p>我怎么越看越觉得它是其它领域的东西。。偏底层一点的？</p>
+<p><em>我怎么越看越觉得它是其它领域的东西。。偏底层一点的？</em></p>
+<h2 id="introduction-1">introduction</h2>
+<h2 id="额外">额外</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />做推理的llm有哪些？</label></li>
+</ul>
 
     </div>
 
