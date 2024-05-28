@@ -28,7 +28,7 @@
 <meta property="og:description" content="看标题看不出来是做啥的，忙猜一个减小运行消耗。百篇阅读计划(5&#x2F;100)">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-21T02:37:15.000Z">
-<meta property="article:modified_time" content="2024-05-27T02:59:18.253Z">
+<meta property="article:modified_time" content="2024-05-28T02:34:35.397Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="llm">
 <meta name="twitter:card" content="summary">
@@ -201,7 +201,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-27 10:59:18" itemprop="dateModified" datetime="2024-05-27T10:59:18+08:00">2024-05-27</time>
+      <time title="修改时间：2024-05-28 10:34:35" itemprop="dateModified" datetime="2024-05-28T10:34:35+08:00">2024-05-28</time>
     </span>
 
   
@@ -249,31 +249,32 @@ system有什么</label></li>
 </ul>
 <h1 id="introduction">introduction</h1>
 <ul>
-<li>背景原因：还是因为做llm推理的计算和内存需求量大</li>
-<li>基础设定：throughputoriented generative inference
-面向吞吐量的生成式推理</li>
-<li>研究思路：一些后台人物需要在大量token上批量llm推理，并且对延迟不太敏感。so可以在这些工作负载中权衡延迟以获得更高的吞吐量，从而为减少资源需求提供机会。</li>
-<li>先前工作：3种方向
+<li><p>背景原因：还是因为做llm推理的计算和内存需求量大</p></li>
+<li><p>基础设定：throughputoriented generative inference
+面向吞吐量的生成式推理</p></li>
+<li><p>研究思路：一些后台人物需要在大量token上批量llm推理，并且对延迟不太敏感。so可以在这些工作负载中权衡延迟以获得更高的吞吐量，从而为减少资源需求提供机会。</p></li>
+<li><p>先前工作：3种方向</p>
 <ul>
 <li>模型压缩以减少总的内存占用</li>
 <li>协同推理，通过去中心化来分摊推理成本</li>
 <li>卸载，以从CPU和磁盘中使用内存</li>
 </ul></li>
-<li>先前工作的局限性：前两个方向的研究往往假设模型与GPU内存相契合，从而难以在单一商品GPU上运行175B规模的模型。另一方面，由于I
+<li><p>先前工作的局限性：前两个方向的研究往往假设模型与GPU内存相契合，从而难以在单一商品GPU上运行175B规模的模型。另一方面，由于I
 /
 O调度和张量放置效率低下，第三类现有的基于卸载的系统在单个GPU上无法达到可接受的吞吐量。例如，这些系统可能会被小批量的(例如,在某些情况下,
-OPT - 175B的批次大小只有一个或两个)难倒。</li>
-<li>设计重点：<strong>在单个商品GPU上设计高效的卸载策略</strong>来进行<strong>高通量的生成式推理</strong>。</li>
-<li>实现方法：为了在GPU内存有限的情况下运行LLM，我们可以将其卸载到二级存储，并通过部分加载来执行部分计算。</li>
-<li>依据原理：在一个典型的机器上，有3个层次的内存层次结构，就是GPU、CPU、Disk的结构。在面向吞吐量的场景中，我们可以通过使用大批量来牺牲延迟，并在一个大批量的输入中，在不同的内存层次结构之间摊销昂贵的I/O操作，与计算重叠。值得注意的是，在资源有限的情况下，延迟和吞吐量方面的性能明显劣于资源充足的情况。</li>
-<li>遇到挑战：offloading|compression
+OPT - 175B的批次大小只有一个或两个)难倒。</p></li>
+<li><p>设计重点：<strong>在单个商品GPU上设计高效的卸载策略</strong>来进行<strong>高通量的生成式推理</strong>。</p></li>
+<li><p>实现方法：为了在GPU内存有限的情况下运行LLM，我们可以将其卸载到二级存储，并通过部分加载来执行部分计算。</p></li>
+<li><p>依据原理：在一个典型的机器上，有3个层次的内存层次结构，就是GPU、CPU、Disk的结构。在面向吞吐量的场景中，我们可以通过使用大批量来牺牲延迟，并在一个大批量的输入中，在不同的内存层次结构之间摊销昂贵的I/O操作，与计算重叠。值得注意的是，在资源有限的情况下，延迟和吞吐量方面的性能明显劣于资源充足的情况。</p></li>
+<li><p>遇到挑战：offloading|compression</p>
 <ul>
 <li>设计高效的卸载策略：在generative推理过程中有3中张量：weight,activation,key-value缓存。batch,token,layer之间的计算也构成复杂的计算图，现有的基于卸载的推理系统(2022年)继承了来自训练的策略，执行了过多的I/O，实现了远低于理论硬件限制的吞吐量。</li>
 <li>制定有效的压缩策略：prework已经证明了在压缩LLMs的权重和激活方面有很好的结果。然而，当结合压缩和卸载进行高通量推断时，权重和KV缓存的I
 / O成本和内存减少变得更为重要，这激发了替代的压缩方案。</li>
 </ul></li>
-<li>总结一下：FlexGen，一个用于高通量LLM推理的卸载框架。FlexGen聚合来自GPU、CPU和磁盘的内存，高效地调度I/O操作，以及可能的压缩方法和分布式流水线并行。</li>
-<li>本文贡献：searching spacs|
+<li><p>总结一下：FlexGen，一个用于高通量LLM推理的卸载框架。FlexGen聚合来自GPU、CPU和磁盘的内存，高效地调度I/O操作，以及可能的压缩方法和分布式流水线并行。</p></li>
+<li><p>本文贡献：searching spacs|compress by fine-grained groupwise
+quantization|demonstrate</p>
 <ul>
 <li>定义可能的卸载策略的搜索空间，考虑计算调度、张量放置、计算委托（computation
 delegation）证明该搜索空间捕获了一个I / O复杂度在2
@@ -281,9 +282,29 @@ delegation）证明该搜索空间捕获了一个I / O复杂度在2
 <li>证明对于OPT -
 175B这样的LLMs，可以在几乎不损失精度的情况下，将权重和KV缓存压缩到4比特，而无需重新训练或校准。这是通过细粒度的分组量化来实现的，适用于减少卸载时的I
 / O成本和内存使用。</li>
+<li>我们通过在NVIDIA T4 ( 16GB ) GPU上运行OPT -
+175B来展示FlexGen的效率。相比于深度零推理(DeepSpeed
+Zero-Inference)和Hugging Face
+Accelerate这两个最先进的基于卸载的推理系统，FlexGen往往允许更大数量级的批处理大小。因此，FlexGen可以获得更高的吞吐量。在单个T4
+GPU上，CPU DRAM为208GB，SSD为1.5
+TB，输入序列长度为512，输出序列长度为32：
+<ul>
+<li>同样在5000秒的延迟下，FlexGen (有效批次大小为64
+,共2048个令牌)就可以实现比DeepSpeed Zero-Inference (批次大小为1
+,共32个令牌)高40倍以上的吞吐率，而Hugged Face
+Acceleration无法完成单个批次。</li>
+<li>通过允许更高的延迟12000秒，FlexGen实现了比基线高69倍的最大吞吐量，因为它可以将有效批处理大小扩大到256个(总共生成了8192个令牌)，而DeepSpeed
+Zero - Inference和Hugged Face
+Acceleration由于内存溢出问题无法使用大于2的批处理大小。</li>
+<li>如果允许4位压缩，FlexGen可以通过保持CPU中的所有权重和摆脱磁盘卸载，达到100
+×高的最大吞吐量，有效批处理大小144 (共生成4608个令牌)，延迟4000秒。</li>
 </ul></li>
-<li><label><input type="checkbox" />Aminabadi et al., 2022; HuggingFace,
-2022的系统的基于卸载的推理系统是怎么实现的？论文里面只说它不好</label></li>
+</ul></li>
+<li><p>额外验证：我们还比较了基于FlexGen和Petals
+两个代表性系统的卸载和分散集体推理。我们从分散式网络的时延和带宽以及输出序列长度等方面对两个系统进行了比较。结果表明，FlexGen在单GPU吞吐量方面优于分散的Petals集群，在某些情况下甚至可以实现更低的延迟。</p></li>
+<li><p><label><input type="checkbox" />Aminabadi et al., 2022;
+HuggingFace,
+2022的系统的基于卸载的推理系统是怎么实现的？论文里面只说它不好</label></p></li>
 </ul>
 <h1 id="related-works">related works</h1>
 <h1 id="backgroundllm-inference">Background:LLM inference</h1>
