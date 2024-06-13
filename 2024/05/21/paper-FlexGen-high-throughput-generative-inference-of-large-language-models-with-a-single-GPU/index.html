@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ooo.0x0.ooo/2024/06/12/OJX3Qs.png">
 <meta property="article:published_time" content="2024-05-21T02:37:15.000Z">
-<meta property="article:modified_time" content="2024-06-13T08:49:03.418Z">
+<meta property="article:modified_time" content="2024-06-13T09:27:15.279Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="llm">
 <meta name="twitter:card" content="summary">
@@ -203,7 +203,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-06-13 16:49:03" itemprop="dateModified" datetime="2024-06-13T16:49:03+08:00">2024-06-13</time>
+      <time title="修改时间：2024-06-13 17:27:15" itemprop="dateModified" datetime="2024-06-13T17:27:15+08:00">2024-06-13</time>
     </span>
 
   
@@ -396,6 +396,7 @@ O最优调度，但由于最优调度的实际实现难度较大，我们只实�
 <h3 id="公式1">公式1</h3>
 <p>Z形块调度(zig-zag block schedule)的I / O复杂度在最优解的2 ×以内。</p>
 <p>另一种典型的优化是重叠overlap。我们可以重叠下一层的权重负载，下一批次的缓存/激活负载，上一批次的缓存/激活存储，以及当前批次的计算。在块调度中添加重叠导致了算法1。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Algorithm 1 Block Schedule with Overlapping </span><br><span class="line">for i = 1 to generation length do </span><br><span class="line">  for j = 1 to num layers do </span><br><span class="line">  // Compute a block with multiple GPU batches </span><br><span class="line">    for k = 1 to num GP U batches do </span><br><span class="line">    // Load the weight of the next layer </span><br><span class="line">    load weight(i, j + 1, k) </span><br><span class="line">    // Store the cache and activation of the prev batch </span><br><span class="line">    store activation(i, j, k − 1) </span><br><span class="line">    store cache(i, j, k − 1) </span><br><span class="line">    // Load the cache and activation of the next batch </span><br><span class="line">    load cache(i, j, k + 1) </span><br><span class="line">    load activation(i, j, k + 1) </span><br><span class="line">    // Compute this batch </span><br><span class="line">    compute(i, j, k) </span><br><span class="line">    // Synchronize all devices synchronize() </span><br><span class="line">    end for </span><br><span class="line">  end for</span><br><span class="line">end for</span><br></pre></td></tr></table></figure>
 <h2 id="成本模型与策略搜索">成本模型与策略搜索</h2>
 <h2 id="拓展到多个gpu上">拓展到多个GPU上</h2>
 <h1 id="approximate-methods">Approximate Methods</h1>
