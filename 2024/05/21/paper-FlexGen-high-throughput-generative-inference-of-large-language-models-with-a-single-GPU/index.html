@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://ooo.0x0.ooo/2024/06/12/OJX3Qs.png">
 <meta property="og:image" content="https://ooo.0x0.ooo/2024/06/17/OPqU5S.png">
 <meta property="article:published_time" content="2024-05-21T02:37:15.000Z">
-<meta property="article:modified_time" content="2024-06-17T14:03:52.074Z">
+<meta property="article:modified_time" content="2024-06-17T14:07:49.200Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="llm">
 <meta name="twitter:card" content="summary">
@@ -204,7 +204,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-06-17 22:03:52" itemprop="dateModified" datetime="2024-06-17T22:03:52+08:00">2024-06-17</time>
+      <time title="修改时间：2024-06-17 22:07:49" itemprop="dateModified" datetime="2024-06-17T22:07:49+08:00">2024-06-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -481,22 +481,25 @@ hd)就变成了一个线性规划问题，如上式所示。( 1 )
 </figure>
 <p>为了使用成本模型，我们在硬件上运行仿形来采样一些数据点，并拟合硬件参数。然后我们调用优化器得到卸载策略。由于我们的松弛和准确建模峰值内存使用量(例如,碎片化)的困难，有时来自策略搜索的策略可能耗尽内存。在这种情况下，我们对政策进行了手工微调。成本模型通常可以返回一个好的策略，但通常可以通过手动调优来获得更好的策略。</p>
 <h2 id="拓展到多个gpu上">拓展到多个GPU上</h2>
+<p>我又忘了这几个参数是表示什么的了： - n：输出序列的长度 -
+l：transformer层的总数 - m：</p>
 <ul>
 <li>问题：当FlexGen中存在多个GPU时，如何对卸载策略进行扩展</li>
 <li>为什么要考虑这个问题：虽然可以为一个GPU找到一个接近最优的策略，但该策略仍然严重受限于<strong>I
 / O</strong>，并且GPU利用率较低。</li>
 <li>一种思路：可以利用<strong>模型并行</strong>来减少每个GPU的内存压力，这可能会导致解码中的超线性缩放super-linear
 scaling in decoding。</li>
-<li>问题来到模型并行了：两种并行：张量并行和管道/pipeline，流水线？并行
+<li>问题来到模型并行了：两种并行：张量并行和流水线(pipeline)并行
 <ul>
-<li>张量并行可以降低单次查询延迟，而流水线并行由于其较低的通信成本可以实现吞吐量的良好扩展。</li>
+<li>张量并行可以降低单次查询延迟，而流水线并行由于其<strong>较低的通信成本</strong>可以实现吞吐量的良好扩展。</li>
 <li>由于以吞吐量为目标，FlexGen实现了流水线并行。</li>
 </ul></li>
 <li>问题来到流水线并行：
 <ul>
 <li>实现：我们通过在m个GPU上等分l层LLM来使用流水线并行，然后所有GPU的执行遵循相同的模式。</li>
-<li>问题归结为在一个GPU上运行一个n /
-m层的transformer。我们可以直接重用为一个GPU开发的策略搜索policy
+<li>具体：问题归结为在一个GPU上运行一个n /
+m层的transformer。n/m怎么来的：</li>
+<li>我们可以直接重用为一个GPU开发的策略搜索policy
 search。为了实现微批流水线，在算法1中增加了一个新的for -
 loop，将迭代级流水线并行执行调度与我们的单设备卸载运行时间相结合。</li>
 </ul></li>
