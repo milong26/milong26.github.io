@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://ooo.0x0.ooo/2024/06/21/OPkaOI.png">
 <meta property="og:image" content="https://ooo.0x0.ooo/2024/06/21/OPkoND.png">
 <meta property="article:published_time" content="2024-05-21T02:37:15.000Z">
-<meta property="article:modified_time" content="2024-06-24T09:22:08.437Z">
+<meta property="article:modified_time" content="2024-06-28T03:10:18.945Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="llm">
 <meta name="twitter:card" content="summary">
@@ -121,7 +121,7 @@
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#related-works"><span class="nav-number">3.</span> <span class="nav-text">related works</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#backgroundllm-inference"><span class="nav-number">4.</span> <span class="nav-text">Background:LLM inference</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%BC%8F%E6%8E%A8%E7%90%86"><span class="nav-number">4.1.</span> <span class="nav-text">生成式推理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%88%86%E6%9E%90"><span class="nav-number">4.2.</span> <span class="nav-text">内存分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%9E%E5%90%90%E9%87%8F%E4%B8%8E%E5%BB%B6%E8%BF%9F"><span class="nav-number">4.3.</span> <span class="nav-text">吞吐量与延迟</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#offloading-strategy"><span class="nav-number">5.</span> <span class="nav-text">Offloading Strategy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%85%AC%E5%BC%8F%E5%8C%96"><span class="nav-number">5.1.</span> <span class="nav-text">问题公式化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E7%A9%BA%E9%97%B4"><span class="nav-number">5.2.</span> <span class="nav-text">搜索空间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97schedule"><span class="nav-number">5.2.1.</span> <span class="nav-text">计算schedule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F1"><span class="nav-number">5.2.2.</span> <span class="nav-text">公式1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%A0%E9%87%8F%E6%94%BE%E7%BD%AE"><span class="nav-number">5.2.3.</span> <span class="nav-text">张量放置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%A7%94%E6%89%98"><span class="nav-number">5.2.4.</span> <span class="nav-text">计算委托</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%90%E6%9C%AC%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%AD%96%E7%95%A5%E6%90%9C%E7%B4%A2"><span class="nav-number">5.3.</span> <span class="nav-text">成本模型与策略搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%90%E6%9C%AC%E6%A8%A1%E5%9E%8B"><span class="nav-number">5.3.1.</span> <span class="nav-text">成本模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%96%E7%95%A5%E6%90%9C%E7%B4%A2"><span class="nav-number">5.3.2.</span> <span class="nav-text">策略搜索</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E5%B1%95%E5%88%B0%E5%A4%9A%E4%B8%AAgpu%E4%B8%8A"><span class="nav-number">5.4.</span> <span class="nav-text">拓展到多个GPU上</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#approximate-methods"><span class="nav-number">6.</span> <span class="nav-text">Approximate Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E9%87%8F%E5%8C%96-group-wise-quantization"><span class="nav-number">6.1.</span> <span class="nav-text">分组量化 Group-wise
 Quantization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%80%E7%96%8F%E6%B3%A8%E6%84%8F%E5%8A%9B-sparse-attention"><span class="nav-number">6.2.</span> <span class="nav-text">稀疏注意力 Sparse Attention</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#evaluation"><span class="nav-number">7.</span> <span class="nav-text">Evaluation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#offloading"><span class="nav-number">7.1.</span> <span class="nav-text">offloading</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E5%90%9E%E5%90%90%E9%87%8F%E5%9F%BA%E5%87%86"><span class="nav-number">7.1.1.</span> <span class="nav-text">最大吞吐量基准</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E4%B8%8D%E5%90%8Cmodel-size%E4%B8%8B3%E7%A7%8D%E7%AE%97%E6%B3%95"><span class="nav-number">7.1.1.1.</span> <span class="nav-text">在不同model size下3种算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%B6%E8%BF%9F-%E9%80%9A%E9%87%8F%E6%9D%83%E8%A1%A1"><span class="nav-number">7.1.2.</span> <span class="nav-text">延迟-通量权衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%85%E9%9A%9C"><span class="nav-number">7.1.3.</span> <span class="nav-text">运行时故障</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E8%9E%8D%E5%AD%A6%E4%B9%A0"><span class="nav-number">7.1.4.</span> <span class="nav-text">消融学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#helm%E5%92%8C%E6%95%B0%E6%8D%AE%E4%BA%89%E8%AE%AE"><span class="nav-number">7.1.5.</span> <span class="nav-text">HELM和数据争议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#approximations"><span class="nav-number">7.2.</span> <span class="nav-text">Approximations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#offloading-vs.-collaborative-inference"><span class="nav-number">7.3.</span> <span class="nav-text">Offloading vs.
-Collaborative Inference</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusion"><span class="nav-number">8.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93"><span class="nav-number">9.</span> <span class="nav-text">个人总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#abstract-1"><span class="nav-number">9.1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction-1"><span class="nav-number">9.2.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%9D%E5%A4%96"><span class="nav-number">9.3.</span> <span class="nav-text">额外</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%85%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">9.4.</span> <span class="nav-text">待解决的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%91%E5%AD%90%E8%BD%AC%E4%B8%8D%E8%BF%87%E6%9D%A5"><span class="nav-number">9.5.</span> <span class="nav-text">脑子转不过来</span></a></li></ol></li></ol></div>
+Collaborative Inference</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusion"><span class="nav-number">8.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93"><span class="nav-number">9.</span> <span class="nav-text">个人总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#abstract-1"><span class="nav-number">9.1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction-1"><span class="nav-number">9.2.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%85%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">9.3.</span> <span class="nav-text">待解决的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%91%E5%AD%90%E8%BD%AC%E4%B8%8D%E8%BF%87%E6%9D%A5"><span class="nav-number">9.4.</span> <span class="nav-text">脑子转不过来</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -208,7 +208,7 @@ Collaborative Inference</span></a></li></ol></li><li class="nav-item nav-level-1
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-06-24 17:22:08" itemprop="dateModified" datetime="2024-06-24T17:22:08+08:00">2024-06-24</time>
+      <time title="修改时间：2024-06-28 11:10:18" itemprop="dateModified" datetime="2024-06-28T11:10:18+08:00">2024-06-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -671,19 +671,6 @@ GPU，在不同的网络条件下对FlexGen和Petals进行了比较。我们使�
 <p>研究的东西：高通量(high throughput，说吞吐量也行？)LLM</p>
 <p><em>我怎么越看越觉得它是其它领域的东西。。偏底层一点的？</em></p>
 <h2 id="introduction-1">introduction</h2>
-<h2 id="额外">额外</h2>
-<ol type="1">
-<li>做推理的llm有哪些？
-<ol type="1">
-<li>FasterTransformer (NVIDIA, 2022),</li>
-<li>Orca (Yu et al., 2022),</li>
-<li>LightSeq (Wang et al., 2021),</li>
-<li>PaLM inference (Pope et al., 2022),</li>
-<li>TurboTransformers (Fang et al., 2021),</li>
-<li>DeepSpeed Inference (Aminabadi et al., 2022),</li>
-<li>Hugging Face Accelerate (HuggingFace, 2022)D</li>
-</ol></li>
-</ol>
 <h2 id="待解决的问题">待解决的问题</h2>
 <ol type="1">
 <li>flexgen是什么，算法？
@@ -691,7 +678,23 @@ GPU，在不同的网络条件下对FlexGen和Petals进行了比较。我们使�
 <li>introduction里面说的：本文介绍了FlexGen，这是一个用于在GPU内存有限的情况下运行LLM的高通量生成引擎。
 engine，加速引擎？</li>
 </ol></li>
-<li><h2 id="脑子转不过来">脑子转不过来</h2></li>
+<li>怎么想到要做这个的？
+<ol type="1">
+<li>做推理的llm有哪些？（论文2. related work上看的）
+<ol type="1">
+<li>FasterTransformer (NVIDIA, 2022),</li>
+<li>Orca (Yu et al., 2022),</li>
+<li>LightSeq (Wang et al., 2021),</li>
+<li>PaLM inference (Pope et al., 2022),</li>
+<li>TurboTransformers (Fang et al., 2021),</li>
+<li>DeepSpeed Inference (Aminabadi et al., 2022),</li>
+<li>Hugging Face Accelerate (HuggingFace, 2022)</li>
+</ol></li>
+<li>这些做推理的LLM有什么不足？</li>
+</ol></li>
+</ol>
+<h2 id="脑子转不过来">脑子转不过来</h2>
+<ol type="1">
 <li>6/24终于看完第一遍了，只记得flexgen，提高吞吐量的，不知道怎么做的，实验结果也没看懂，再啃吧！</li>
 <li>先把第一遍看的时候留下来的几个问题搞明白</li>
 </ol>
