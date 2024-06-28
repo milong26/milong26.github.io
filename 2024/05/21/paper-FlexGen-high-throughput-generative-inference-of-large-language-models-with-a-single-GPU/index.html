@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://ooo.0x0.ooo/2024/06/21/OPkaOI.png">
 <meta property="og:image" content="https://ooo.0x0.ooo/2024/06/21/OPkoND.png">
 <meta property="article:published_time" content="2024-05-21T02:37:15.000Z">
-<meta property="article:modified_time" content="2024-06-28T08:03:04.148Z">
+<meta property="article:modified_time" content="2024-06-28T13:21:09.491Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="llm">
 <meta name="twitter:card" content="summary">
@@ -119,9 +119,10 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E9%9D%A2%E7%9A%84%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.1.</span> <span class="nav-text">前面的工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E7%9A%84%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.2.</span> <span class="nav-text">本文的工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E8%B4%A1%E7%8C%AE"><span class="nav-number">2.3.</span> <span class="nav-text">本文贡献</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#related-works"><span class="nav-number">3.</span> <span class="nav-text">related works</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#backgroundllm-inference"><span class="nav-number">4.</span> <span class="nav-text">Background:LLM inference</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%BC%8F%E6%8E%A8%E7%90%86"><span class="nav-number">4.1.</span> <span class="nav-text">生成式推理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%88%86%E6%9E%90"><span class="nav-number">4.2.</span> <span class="nav-text">内存分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%9E%E5%90%90%E9%87%8F%E4%B8%8E%E5%BB%B6%E8%BF%9F"><span class="nav-number">4.3.</span> <span class="nav-text">吞吐量与延迟</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#offloading-strategy"><span class="nav-number">5.</span> <span class="nav-text">Offloading Strategy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%85%AC%E5%BC%8F%E5%8C%96"><span class="nav-number">5.1.</span> <span class="nav-text">问题公式化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E7%A9%BA%E9%97%B4"><span class="nav-number">5.2.</span> <span class="nav-text">搜索空间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97schedule"><span class="nav-number">5.2.1.</span> <span class="nav-text">计算schedule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F1"><span class="nav-number">5.2.2.</span> <span class="nav-text">公式1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%A0%E9%87%8F%E6%94%BE%E7%BD%AE"><span class="nav-number">5.2.3.</span> <span class="nav-text">张量放置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%A7%94%E6%89%98"><span class="nav-number">5.2.4.</span> <span class="nav-text">计算委托</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%90%E6%9C%AC%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%AD%96%E7%95%A5%E6%90%9C%E7%B4%A2"><span class="nav-number">5.3.</span> <span class="nav-text">成本模型与策略搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%90%E6%9C%AC%E6%A8%A1%E5%9E%8B"><span class="nav-number">5.3.1.</span> <span class="nav-text">成本模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%96%E7%95%A5%E6%90%9C%E7%B4%A2"><span class="nav-number">5.3.2.</span> <span class="nav-text">策略搜索</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E5%B1%95%E5%88%B0%E5%A4%9A%E4%B8%AAgpu%E4%B8%8A"><span class="nav-number">5.4.</span> <span class="nav-text">拓展到多个GPU上</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#approximate-methods"><span class="nav-number">6.</span> <span class="nav-text">Approximate Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E9%87%8F%E5%8C%96-group-wise-quantization"><span class="nav-number">6.1.</span> <span class="nav-text">分组量化 Group-wise
-Quantization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%80%E7%96%8F%E6%B3%A8%E6%84%8F%E5%8A%9B-sparse-attention"><span class="nav-number">6.2.</span> <span class="nav-text">稀疏注意力 Sparse Attention</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#evaluation"><span class="nav-number">7.</span> <span class="nav-text">Evaluation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#offloading"><span class="nav-number">7.1.</span> <span class="nav-text">offloading</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E5%90%9E%E5%90%90%E9%87%8F%E5%9F%BA%E5%87%86"><span class="nav-number">7.1.1.</span> <span class="nav-text">最大吞吐量基准</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E4%B8%8D%E5%90%8Cmodel-size%E4%B8%8B3%E7%A7%8D%E7%AE%97%E6%B3%95"><span class="nav-number">7.1.1.1.</span> <span class="nav-text">在不同model size下3种算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%B6%E8%BF%9F-%E9%80%9A%E9%87%8F%E6%9D%83%E8%A1%A1"><span class="nav-number">7.1.2.</span> <span class="nav-text">延迟-通量权衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%85%E9%9A%9C"><span class="nav-number">7.1.3.</span> <span class="nav-text">运行时故障</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E8%9E%8D%E5%AD%A6%E4%B9%A0"><span class="nav-number">7.1.4.</span> <span class="nav-text">消融学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#helm%E5%92%8C%E6%95%B0%E6%8D%AE%E4%BA%89%E8%AE%AE"><span class="nav-number">7.1.5.</span> <span class="nav-text">HELM和数据争议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#approximations"><span class="nav-number">7.2.</span> <span class="nav-text">Approximations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#offloading-vs.-collaborative-inference"><span class="nav-number">7.3.</span> <span class="nav-text">Offloading vs.
-Collaborative Inference</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusion"><span class="nav-number">8.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93"><span class="nav-number">9.</span> <span class="nav-text">个人总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#abstract-1"><span class="nav-number">9.1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction-1"><span class="nav-number">9.2.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">9.3.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%85%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">9.4.</span> <span class="nav-text">待解决的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%91%E5%AD%90%E8%BD%AC%E4%B8%8D%E8%BF%87%E6%9D%A5"><span class="nav-number">9.5.</span> <span class="nav-text">脑子转不过来</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E9%9D%A2%E7%9A%84%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.1.</span> <span class="nav-text">前面的工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E7%9A%84%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.2.</span> <span class="nav-text">本文的工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E8%B4%A1%E7%8C%AE"><span class="nav-number">2.3.</span> <span class="nav-text">本文贡献</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#searching-spacs"><span class="nav-number">2.3.1.</span> <span class="nav-text">searching spacs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#compress-by-fine-grained-groupwise-quantization"><span class="nav-number">2.3.2.</span> <span class="nav-text">compress by
+fine-grained groupwise quantization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#demonstrate"><span class="nav-number">2.3.3.</span> <span class="nav-text">demonstrate</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#backgroundllm-inference"><span class="nav-number">3.</span> <span class="nav-text">Background:LLM inference</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%BC%8F%E6%8E%A8%E7%90%86"><span class="nav-number">3.1.</span> <span class="nav-text">生成式推理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%88%86%E6%9E%90"><span class="nav-number">3.2.</span> <span class="nav-text">内存分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%9E%E5%90%90%E9%87%8F%E4%B8%8E%E5%BB%B6%E8%BF%9F"><span class="nav-number">3.3.</span> <span class="nav-text">吞吐量与延迟</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#offloading-strategy"><span class="nav-number">4.</span> <span class="nav-text">Offloading Strategy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%85%AC%E5%BC%8F%E5%8C%96"><span class="nav-number">4.1.</span> <span class="nav-text">问题公式化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E7%A9%BA%E9%97%B4"><span class="nav-number">4.2.</span> <span class="nav-text">搜索空间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97schedule"><span class="nav-number">4.2.1.</span> <span class="nav-text">计算schedule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F1"><span class="nav-number">4.2.2.</span> <span class="nav-text">公式1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%A0%E9%87%8F%E6%94%BE%E7%BD%AE"><span class="nav-number">4.2.3.</span> <span class="nav-text">张量放置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%A7%94%E6%89%98"><span class="nav-number">4.2.4.</span> <span class="nav-text">计算委托</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%90%E6%9C%AC%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%AD%96%E7%95%A5%E6%90%9C%E7%B4%A2"><span class="nav-number">4.3.</span> <span class="nav-text">成本模型与策略搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%90%E6%9C%AC%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.3.1.</span> <span class="nav-text">成本模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%96%E7%95%A5%E6%90%9C%E7%B4%A2"><span class="nav-number">4.3.2.</span> <span class="nav-text">策略搜索</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E5%B1%95%E5%88%B0%E5%A4%9A%E4%B8%AAgpu%E4%B8%8A"><span class="nav-number">4.4.</span> <span class="nav-text">拓展到多个GPU上</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#approximate-methods"><span class="nav-number">5.</span> <span class="nav-text">Approximate Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E9%87%8F%E5%8C%96-group-wise-quantization"><span class="nav-number">5.1.</span> <span class="nav-text">分组量化 Group-wise
+Quantization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%80%E7%96%8F%E6%B3%A8%E6%84%8F%E5%8A%9B-sparse-attention"><span class="nav-number">5.2.</span> <span class="nav-text">稀疏注意力 Sparse Attention</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#evaluation"><span class="nav-number">6.</span> <span class="nav-text">Evaluation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#offloading"><span class="nav-number">6.1.</span> <span class="nav-text">offloading</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E5%90%9E%E5%90%90%E9%87%8F%E5%9F%BA%E5%87%86"><span class="nav-number">6.1.1.</span> <span class="nav-text">最大吞吐量基准</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E4%B8%8D%E5%90%8Cmodel-size%E4%B8%8B3%E7%A7%8D%E7%AE%97%E6%B3%95"><span class="nav-number">6.1.1.1.</span> <span class="nav-text">在不同model size下3种算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%B6%E8%BF%9F-%E9%80%9A%E9%87%8F%E6%9D%83%E8%A1%A1"><span class="nav-number">6.1.2.</span> <span class="nav-text">延迟-通量权衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%85%E9%9A%9C"><span class="nav-number">6.1.3.</span> <span class="nav-text">运行时故障</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E8%9E%8D%E5%AD%A6%E4%B9%A0"><span class="nav-number">6.1.4.</span> <span class="nav-text">消融学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#helm%E5%92%8C%E6%95%B0%E6%8D%AE%E4%BA%89%E8%AE%AE"><span class="nav-number">6.1.5.</span> <span class="nav-text">HELM和数据争议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#approximations"><span class="nav-number">6.2.</span> <span class="nav-text">Approximations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#offloading-vs.-collaborative-inference"><span class="nav-number">6.3.</span> <span class="nav-text">Offloading vs.
+Collaborative Inference</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusion"><span class="nav-number">7.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93"><span class="nav-number">8.</span> <span class="nav-text">个人总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#abstract-1"><span class="nav-number">8.1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction-1"><span class="nav-number">8.2.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">8.3.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%85%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">8.4.</span> <span class="nav-text">待解决的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%91%E5%AD%90%E8%BD%AC%E4%B8%8D%E8%BF%87%E6%9D%A5"><span class="nav-number">8.5.</span> <span class="nav-text">脑子转不过来</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -208,7 +209,7 @@ Collaborative Inference</span></a></li></ol></li><li class="nav-item nav-level-1
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-06-28 16:03:04" itemprop="dateModified" datetime="2024-06-28T16:03:04+08:00">2024-06-28</time>
+      <time title="修改时间：2024-06-28 21:21:09" itemprop="dateModified" datetime="2024-06-28T21:21:09+08:00">2024-06-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -253,21 +254,40 @@ GPU上运行OPT-175B时，FlexGen获得了显著高于当前最先进的装载�
 token /
 s的生成吞吐量，有效批处理大小为144。在HELM基准上，FlexGen可以在21小时内用16GB的GPU在7个具有代表性的子场景上对30B模型进行基准测试。</li>
 </ol>
-<p>遗留问题： 1. 批处理对延迟不敏感任务 latency-insensitive tasks with
-batched processing 1. 应该是指一些不需要快速响应的任务 2.
-batched-processing在这里的作用是？因为批处理可以大量工作吗？ 2. 高通量
-high-throughput 1. 也可以理解成吞吐量 2.
-这样任务就可以理解成高吞吐量+高延迟 3. 商品级的GPU a single commodity
-GPU 1. 用这个做关键词搜了一下都是论文标题，不知道有哪些GPU 2.
-这篇论文的实验的硬件条件： 1. 24GB RTX 3090 with 125GB CPU Memory and
-1TB SSD 2. 16GB T4 with 208GB CPU Memory and 1.5TB SSD 4.
-怎样实现的灵活配置？（应该在后面章节中体现） 5. offloading
-system有哪些？（就是同行，我也没找到，过会儿去实验那一章找找） 6. HELM
-benchmark 1. HELM：Holistic Evaluation of Language Models 2.
-benchmark：N-COUNT A benchmark is something whose quality or quantity is
-known and which can therefore be used as a standard with which other
-things can be compared. 3.
-一个算法之所以被称为benchmark，是因为它的性能已经被广泛研究，人们对它性能的表现形式、测量方法都非常熟悉，因此可以作为标准方法来衡量其他方法的好坏。</p>
+<p>遗留问题：</p>
+<ol type="1">
+<li>批处理对延迟不敏感任务 latency-insensitive tasks with batched
+processing
+<ol type="1">
+<li>应该是指一些不需要快速响应的任务</li>
+<li>batched-processing在这里的作用是？因为批处理可以大量工作吗？</li>
+</ol></li>
+<li>高通量 high-throughput
+<ol type="1">
+<li>也可以理解成吞吐量</li>
+<li>这样任务就可以理解成高吞吐量+高延迟</li>
+</ol></li>
+<li>商品级的GPU a single commodity GPU
+<ol type="1">
+<li>用这个做关键词搜了一下都是论文标题，不知道有哪些GPU</li>
+<li>这篇论文的实验的硬件条件：
+<ol type="1">
+<li>24GB RTX 3090 with 125GB CPU Memory and 1TB SSD</li>
+<li>16GB T4 with 208GB CPU Memory and 1.5TB SSD</li>
+</ol></li>
+</ol></li>
+<li>怎样实现的灵活配置？（应该在后面章节中体现）</li>
+<li>offloading
+system有哪些？（就是同行，我也没找到，过会儿去实验那一章找找）</li>
+<li>HELM benchmark
+<ol type="1">
+<li>HELM：Holistic Evaluation of Language Models</li>
+<li>benchmark：N-COUNT A benchmark is something whose quality or
+quantity is known and which can therefore be used as a standard with
+which other things can be compared.</li>
+<li>一个算法之所以被称为benchmark，是因为它的性能已经被广泛研究，人们对它性能的表现形式、测量方法都非常熟悉，因此可以作为标准方法来衡量其他方法的好坏。</li>
+</ol></li>
+</ol>
 <h1 id="introduction">introduction</h1>
 <h2 id="前面的工作">前面的工作</h2>
 <ul>
@@ -296,32 +316,54 @@ OPT - 175B的批次大小只有一个或两个)难倒。</li>
 strategy)</li>
 <li>实现方法：为了在GPU内存有限的情况下运行LLM，我们可以将其卸载到二级存储，并通过部分加载来执行部分计算。</li>
 <li>依据原理：在一个典型的机器上，有3个层次的内存层次结构，就是GPU、CPU、Disk的结构。在面向吞吐量的场景中，我们可以通过使用大批量来牺牲延迟，并在一个大批量的输入中，在不同的内存层次结构之间摊销昂贵的I/O操作，与计算重叠。值得注意的是，在资源有限的情况下，延迟和吞吐量方面的性能明显劣于资源充足的情况。</li>
-<li>遇到挑战：offloading|compression
+<li>遇到挑战：offloading+compression
 <ul>
-<li>设计高效的卸载策略：在generative推理过程中有3中张量：weight,activation,key-value缓存。batch,token,layer之间的计算也构成复杂的计算图，现有的基于卸载的推理系统(2022年)继承了来自训练的策略，执行了过多的I/O，实现了远低于理论硬件限制的吞吐量。</li>
-<li>制定有效的压缩策略：prework已经证明了在压缩LLMs的权重和激活方面有很好的结果。然而，当结合压缩和卸载进行高通量推断时，权重和KV缓存的I
+<li>卸载策略：在generative推理过程中有3种张量：weight,activation,key-value缓存。batch,token,layer之间的计算也构成复杂的计算图，现有的基于卸载的推理系统(2022年)继承了来自训练的策略，执行了过多的I/O，实现了远低于理论硬件限制的吞吐量。</li>
+<li>压缩策略：prework已经证明了在压缩LLMs的权重和激活方面有很好的结果。然而，当结合压缩和卸载进行高通量推断时，权重和KV缓存的I
 / O成本和内存减少变得更为重要，这激发了替代的压缩方案。</li>
 </ul></li>
-<li>总结一下：FlexGen，一个用于高通量LLM推理的卸载框架。FlexGen聚合来自GPU、CPU和磁盘的内存，高效地调度I/O操作，以及可能的压缩方法和分布式流水线并行。</li>
+<li>总结一下：FlexGen，一个用于高通量LLM推理的卸载框架。FlexGen聚合来自GPU、CPU和磁盘的内存，高效地调度I/O操作，以及可能的压缩方法和分布式流水线并行。
+<ul>
+<li>问题变成设计offloading和compression策略，offloading需要考虑I/O，compression需要考虑权重、KV缓存的I/O
+cost和内存减少</li>
+</ul></li>
 </ul>
 <h2 id="本文贡献">本文贡献</h2>
 <ul>
-<li><p>本文贡献：searching spacs|compress by fine-grained groupwise
-quantization|demonstrate</p>
+<li>本文贡献：searching spacs|compress by fine-grained groupwise
+quantization|demonstrate</li>
+</ul>
+<h3 id="searching-spacs">searching spacs</h3>
 <ul>
 <li>定义可能的卸载策略的搜索空间，考虑计算调度、张量放置、计算委托（computation
 delegation）证明该搜索空间捕获了一个I / O复杂度在2
-×最优性以内的计算顺序。然后，开发了一个基于线性规划的搜索算法来优化搜索空间内的吞吐量。该算法可以针对不同的硬件规格进行配置，并且可以很容易地扩展到包含延迟和吞吐量约束，从而帮助平滑地导航权衡空间。该算法可以针对不同的硬件规格进行配置，并且可以很容易地扩展到包含延迟和吞吐量约束，从而帮助平滑地导航权衡空间。与现有的策略相比，我们的解决方案统一了权重、激活和KV缓存的放置，从而实现了更高的批大小上限，这是实现高吞吐量的关键。</li>
+×最优性以内的计算顺序。</li>
+<li>然后，开发了一个基于线性规划的搜索算法来优化搜索空间内的吞吐量。该算法可以针对不同的硬件规格进行配置，并且可以很容易地扩展到包含延迟和吞吐量约束，从而帮助平滑地导航权衡空间。</li>
+<li>该算法可以针对不同的硬件规格进行配置，并且可以很容易地扩展到包含延迟和吞吐量约束，从而帮助平滑地导航权衡空间。</li>
+<li>与现有的策略相比，我们的解决方案统一了权重、激活和KV缓存的放置，从而实现了更高的批大小上限，这是实现高吞吐量的关键。</li>
+</ul>
+<h3 id="compress-by-fine-grained-groupwise-quantization">compress by
+fine-grained groupwise quantization</h3>
+<ul>
 <li>证明对于OPT -
-175B这样的LLMs，可以在几乎不损失精度的情况下，将权重和KV缓存压缩到4比特，而无需重新训练或校准。这是通过细粒度的分组量化来实现的，适用于减少卸载时的I
-/ O成本和内存使用。</li>
+175B这样的LLMs，可以在几乎不损失精度的情况下，将权重和KV缓存压缩到4比特，而无需重新训练或校准。</li>
+<li>这是通过细粒度的分组量化来实现的，适用于减少卸载时的I /
+O成本和内存使用。</li>
+</ul>
+<p>问题：</p>
+<ol type="1">
+<li>fine-grained groupwise
+quantization细粒度的分组量化是什么？是另一篇论文(2020年的)，针对基于注意力的模型提出组量化机制。将多头自注意力（MHSA）的密集矩阵中每个注意力头的矩阵
+W 看作一个组 https://cloud.tencent.com/developer/article/1583313</li>
+</ol>
+<h3 id="demonstrate">demonstrate</h3>
+<ul>
 <li>我们通过在NVIDIA T4 ( 16GB ) GPU上运行OPT -
 175B来展示FlexGen的效率。相比于深度零推理(DeepSpeed
 Zero-Inference)和Hugging Face
 Accelerate这两个最先进的基于卸载的推理系统，FlexGen往往允许更大数量级的批处理大小。因此，FlexGen可以获得更高的吞吐量。在单个T4
 GPU上，CPU DRAM为208GB，SSD为1.5
-TB，输入序列长度为512，输出序列长度为32：
-<ul>
+TB，输入序列长度为512，输出序列长度为32：</li>
 <li>同样在5000秒的延迟下，FlexGen (有效批次大小为64
 ,共2048个令牌)就可以实现比DeepSpeed Zero-Inference (批次大小为1
 ,共32个令牌)高40倍以上的吞吐率，而Hugged Face
@@ -331,19 +373,16 @@ Zero - Inference和Hugged Face
 Acceleration由于内存溢出问题无法使用大于2的批处理大小。</li>
 <li>如果允许4位压缩，FlexGen可以通过保持CPU中的所有权重和摆脱磁盘卸载，达到100
 ×高的最大吞吐量，有效批处理大小144 (共生成4608个令牌)，延迟4000秒。</li>
-</ul></li>
-</ul></li>
-<li><p>额外验证：我们还比较了基于FlexGen和Petals
-两个代表性系统的卸载和分散集体推理。我们从分散式网络的时延和带宽以及输出序列长度等方面对两个系统进行了比较。结果表明，FlexGen在单GPU吞吐量方面优于分散的Petals集群，在某些情况下甚至可以实现更低的延迟。</p></li>
-<li><p><label><input type="checkbox" />Aminabadi et al., 2022;
-HuggingFace,
-2022的系统的基于卸载的推理系统是怎么实现的？论文里面只说它不好</label></p></li>
-<li><p><label><input
-type="checkbox" />看得有点懵，东西太多了。想整理一遍又无从下手</label></p></li>
+<li>额外验证：我们还比较了基于FlexGen和Petals
+两个代表性系统的卸载和分散集体推理。我们从分散式网络的时延和带宽以及输出序列长度等方面对两个系统进行了比较。结果表明，FlexGen在单GPU吞吐量方面优于分散的Petals集群，在某些情况下甚至可以实现更低的延迟。</li>
 </ul>
-<h1 id="related-works">related works</h1>
-<p>LLMs推理有两种方向：系统端和算法端。本文重点是<strong>系统端system
-side</strong>。</p>
+<p>额外问题：</p>
+<ol type="1">
+<li>这个搜索空间长什么样子？里面有什么？（应该是后面章节的内容） #
+related works
+LLMs推理有两种方向：系统端和算法端。本文重点是<strong>系统端system
+side</strong>。</li>
+</ol>
 <p>目前大部分推理系统专注于具有<strong>高端加速器</strong>的<strong>面向延迟</strong>的场景，所以作者要做在<strong>易于访问的硬件上</strong>部署以<strong>吞吐量为导向</strong>的推理。</p>
 <p>为了要在商品级的硬件上实现llm推理，需要好的offloading，但是现在专注这个的只有DeepSpeed
 Zero-Inference 和 Hugging Face
@@ -685,15 +724,15 @@ GPU，在不同的网络条件下对FlexGen和Petals进行了比较。我们使�
 <p>我们介绍了一个用于LLM推理的高通量生成引擎FlexGen，它专注于资源受限场景下对延迟不敏感的批处理任务。</p>
 <h1 id="个人总结">个人总结</h1>
 <h2 id="abstract-1">abstract</h2>
-<p>研究的东西：高通量(high throughput，说吞吐量也行？)LLM</p>
-<p><em>我怎么越看越觉得它是其它领域的东西。。偏底层一点的？</em></p>
+<p>研究的东西：高吞吐量(high throughput)LLM</p>
 <h2 id="introduction-1">introduction</h2>
 <h2 id="问题">问题</h2>
 <ol type="1">
-<li>introduction遗留：flexgen的特点：通过聚合来自GPU、CPU和磁盘的内存和计算，FlexGen可以在各种硬件资源约束下灵活配置。灵活配置怎么配置的</li>
+<li>abstract遗留：flexgen的特点：通过聚合来自GPU、CPU和磁盘的内存和计算，FlexGen可以在各种硬件资源约束下灵活配置。灵活配置怎么配置的</li>
 <li>先进的offloading
 system有哪些？（就是同行，我也没找到，过会儿去实验那一章找找），flexgen和别的offloading
 system对比</li>
+<li>introduction遗留：搜索空间是什么</li>
 </ol>
 <h2 id="待解决的问题">待解决的问题</h2>
 <ol type="1">
