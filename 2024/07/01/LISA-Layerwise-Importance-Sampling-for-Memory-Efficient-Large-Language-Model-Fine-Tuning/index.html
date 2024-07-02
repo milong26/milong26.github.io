@@ -28,7 +28,7 @@
 <meta property="og:description" content="百篇paper计划(6&#x2F;100)，好像是LoRA的改进，我随便找的，而且这篇还没投会议呢 参考阅读https:&#x2F;&#x2F;www.jiqizhixin.com&#x2F;articles&#x2F;2024-04-01-13">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-01T03:45:24.000Z">
-<meta property="article:modified_time" content="2024-07-02T07:40:43.707Z">
+<meta property="article:modified_time" content="2024-07-02T08:12:18.832Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="llm">
 <meta property="article:tag" content="LoRA">
@@ -117,7 +117,8 @@
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#related-work"><span class="nav-number">3.</span> <span class="nav-text">Related Work</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#llm"><span class="nav-number">3.1.</span> <span class="nav-text">LLM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#peft"><span class="nav-number">3.2.</span> <span class="nav-text">PEFT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lora"><span class="nav-number">3.3.</span> <span class="nav-text">LoRA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#large-scale-optimization-algorithms"><span class="nav-number">3.4.</span> <span class="nav-text">Large-scale Optimization
-Algorithms</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#method"><span class="nav-number">4.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#motivation"><span class="nav-number">4.1.</span> <span class="nav-text">Motivation</span></a></li></ol></li></ol></div>
+Algorithms</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#method"><span class="nav-number">4.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#motivation"><span class="nav-number">4.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#layerwise-importance-sampled-adamw-lisa"><span class="nav-number">4.2.</span> <span class="nav-text">Layerwise Importance
+Sampled AdamW (LISA)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#experimental-results"><span class="nav-number">5.</span> <span class="nav-text">Experimental Results</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#memory-efficiency"><span class="nav-number">5.1.</span> <span class="nav-text">Memory Efficiency</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -204,7 +205,7 @@ Algorithms</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="n
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-07-02 15:40:43" itemprop="dateModified" datetime="2024-07-02T15:40:43+08:00">2024-07-02</time>
+      <time title="修改时间：2024-07-02 16:12:18" itemprop="dateModified" datetime="2024-07-02T16:12:18+08:00">2024-07-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -342,10 +343,62 @@ Bench中比LoRA提高了10 % ~ 35
 <li>然而，这些层冻结策略由于其固有的复杂性或与现代记忆还原技术的不兼容性，都没有在大语言模型的背景下被广泛采用</li>
 </ol>
 <h2 id="lora">LoRA</h2>
+<ol type="1">
+<li>相比之下，低秩自适应( Low-Rank Adaptation，LoRA
+)技术在普通的LLM训练中更为普遍。</li>
+<li>技术原理：LoRA通过使用低秩矩阵来减少可训练参数的数量，从而减少计算负担和内存成本。</li>
+<li>优点
+<ol type="1">
+<li>一个关键优势是它与具有线性层的模型的兼容性，其中分解后的低秩矩阵可以合并回原始模型。这样可以在不改变模型架构的情况下进行高效的部署。</li>
+<li>因此，LoRA可以与其他技术无缝结合，如量化quantization或混合专家(MoE)。</li>
+</ol></li>
+<li>缺点
+<ol type="1">
+<li>LoRA的性能与全参数微调并不具有普遍可比性。已有任务LoRA的表现比全参数训练差很多。</li>
+<li>这种现象在大规模的预训练环境中尤为明显，据我们所知，成功的开源LLMs只采用了全参数训练。</li>
+</ol></li>
+</ol>
 <h2 id="large-scale-optimization-algorithms">Large-scale Optimization
 Algorithms</h2>
+<ul>
+<li>除了改变模型结构的方法外，也有提高LLMs优化算法效率的努力。</li>
+<li>其中一种方法是逐层优化
+<ul>
+<li>在大批量训练的背景下，开发了LARS和LAMB，以提高泛化能力并减轻与大批量训练相关的性能下降。</li>
+<li>尽管有这些创新，Adam 和Adam W
+仍然是大多数LLM设置中使用的主要优化方法。</li>
+</ul></li>
+<li>最近，还进行了其他降低LLMs训练成本的尝试。
+<ul>
+<li>零阶优化MeZO，在训练过程中带来了显著的内存节省。然而，它在多个基准测试中也引起了相当大的性能下降，特别是在复杂的微调场景中。</li>
+<li>在加速方面，Sophia将裁剪后的二阶信息融入到优化中，在LLM训练上获得了非平凡的加速比。显著的缺点是其Hessian估计的内在复杂性和在大尺寸模型(例如,≥65B)中未被验证的经验性能。</li>
+</ul></li>
+<li>与我们的工作平行，提出了GaLore，一种存储高效训练策略，通过将梯度投影到低秩紧凑空间来降低内存开销。
+<ul>
+<li>然而，在微调设置中的性能仍然没有超过全参数训练。综上所述，LoRA-variant
+methods和Adam
+W仍然是大尺度LLM微调的主导范式，其性能仍需进一步改进。</li>
+</ul></li>
+</ul>
+<p>Q:</p>
+<ol type="1">
+<li>LARS和LAMB是优化算法还是啥？</li>
+<li>这一段是对大规模优化算法的总结，所以提到的应该都是优化算法？</li>
+<li>所以这一段最后想说什么？</li>
+</ol>
 <h1 id="method">Method</h1>
 <h2 id="motivation">Motivation</h2>
+<ol type="1">
+<li>为了了解LoRA如何仅用几个参数实现有效的训练，我们对多个模型进行了实证研究，特别是观察了不同层之间的权重规范。</li>
+<li>数据集：在Alpaca - GPT4数据集上进行微调。</li>
+<li>在训练过程中，我们细致地记录了更新后每一步t的每一层l的平均权重范数，即。
+<span
+class="math inline">\(\mathbf{w}^{(\ell)}\triangleq\text{mean-weight-norm}(\ell)=\frac1T\sum_{t=1}^T\|\theta_t^{(\ell)}\|_2\)</span></li>
+</ol>
+<h2 id="layerwise-importance-sampled-adamw-lisa">Layerwise Importance
+Sampled AdamW (LISA)</h2>
+<h1 id="experimental-results">Experimental Results</h1>
+<h2 id="memory-efficiency">Memory Efficiency</h2>
 
     </div>
 
