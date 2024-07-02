@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="百篇paper计划(6&#x2F;100)，好像是LoRA的改进 参考阅读https:&#x2F;&#x2F;www.jiqizhixin.com&#x2F;articles&#x2F;2024-04-01-13">
+    <meta name="description" content="百篇paper计划(6&#x2F;100)，好像是LoRA的改进，我随便找的，而且这篇还没投会议呢 参考阅读https:&#x2F;&#x2F;www.jiqizhixin.com&#x2F;articles&#x2F;2024-04-01-13">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LISA: Layerwise Importance Sampling for Memory-Efficient Large Language Model Fine-Tuning">
 <meta property="og:url" content="http://zhon.fun/2024/07/01/LISA-Layerwise-Importance-Sampling-for-Memory-Efficient-Large-Language-Model-Fine-Tuning/index.html">
 <meta property="og:site_name" content="RainBoarderSea">
-<meta property="og:description" content="百篇paper计划(6&#x2F;100)，好像是LoRA的改进 参考阅读https:&#x2F;&#x2F;www.jiqizhixin.com&#x2F;articles&#x2F;2024-04-01-13">
+<meta property="og:description" content="百篇paper计划(6&#x2F;100)，好像是LoRA的改进，我随便找的，而且这篇还没投会议呢 参考阅读https:&#x2F;&#x2F;www.jiqizhixin.com&#x2F;articles&#x2F;2024-04-01-13">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-01T03:45:24.000Z">
-<meta property="article:modified_time" content="2024-07-01T08:14:49.446Z">
+<meta property="article:modified_time" content="2024-07-02T03:14:33.296Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="llm">
 <meta property="article:tag" content="LoRA">
@@ -116,7 +116,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#related-work"><span class="nav-number">3.</span> <span class="nav-text">Related Work</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#method"><span class="nav-number">4.</span> <span class="nav-text">Method</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#related-work"><span class="nav-number">3.</span> <span class="nav-text">Related Work</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#llm"><span class="nav-number">3.1.</span> <span class="nav-text">LLM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#peft"><span class="nav-number">3.2.</span> <span class="nav-text">PEFT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lora"><span class="nav-number">3.3.</span> <span class="nav-text">LoRA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#large-scale-optimization-algorithms"><span class="nav-number">3.4.</span> <span class="nav-text">Large-scale Optimization
+Algorithms</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#method"><span class="nav-number">4.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#motivation"><span class="nav-number">4.1.</span> <span class="nav-text">Motivation</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -195,9 +196,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-07-01 11:45:24 / 修改时间：16:14:49" itemprop="dateCreated datePublished" datetime="2024-07-01T11:45:24+08:00">2024-07-01</time>
+      <time title="创建时间：2024-07-01 11:45:24" itemprop="dateCreated datePublished" datetime="2024-07-01T11:45:24+08:00">2024-07-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-07-02 11:14:33" itemprop="dateModified" datetime="2024-07-02T11:14:33+08:00">2024-07-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -218,7 +225,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>百篇paper计划(6/100)，好像是LoRA的改进
+    <div class="post-body" itemprop="articleBody"><p>百篇paper计划(6/100)，好像是LoRA的改进，我随便找的，而且这篇还没投会议呢
 参考阅读https://www.jiqizhixin.com/articles/2024-04-01-13 <span id="more"></span> -
 论文标题：LISA: Layerwise Importance Sampling for Memory-Efficient Large
 Language Model Fine-Tuning - code：<a href="">github</a> - rank: -
@@ -244,12 +251,77 @@ Language Model Fine-Tuning - code：<a href="">github</a> - rank: -
 </ol></li>
 <li>应用理论研究提出的训练策略
 <ol type="1">
-<li></li>
+<li>我们发现了一个令人惊讶的简单训练策略，它在广泛的设置中优于LoRA和全参数训练，并且内存成本与LoRA一样低。</li>
+<li>我们将其命名为逐层法Importance Sampled AdamW ( LISA
+)，这是LoRA的一个很有前途的替代方案</li>
+<li>它将重要性采样(importance
+sampling)的思想应用于LLMs中的不同层，并在优化过程中随机冻结(freeze)大多数中间层。</li>
+</ol></li>
+<li>实验结果
+<ol type="1">
+<li>在GPU内存消耗相近或更少的情况下，LISA在下游微调任务中优于LoRA甚至全参数调优，其中在MT
+- Bench评分方面LISA始终优于LoRA超过10 % - 35
+%，同时在MMLU、AGIEval和WinoGrande中达到了相当或更好的性能。</li>
+<li>在大型模型上，特别是LLaMA - 2 - 70B，LISA在MT -
+Bench、GSM8K和PubMedQA上都超过了LoRA，证明了其在不同领域的有效性。</li>
 </ol></li>
 </ol>
+<p>question:</p>
+<ol type="1">
+<li>重要性采样(importance sampling)</li>
+<li>AdamW在哪里</li>
+<li>怎么冻结的</li>
+</ol>
 <h1 id="introduction">Introduction</h1>
+<ol type="1">
+<li>研究方向是对LLM微调</li>
+<li>同行：PEFT的高效参数微调
+<ol type="1">
+<li>adapter weights</li>
+<li>prompt weights</li>
+<li>LoRA(因其独特的将适配器合并回基模型参数的能力而脱颖而出，成为应用最广泛的方法之一，显著提高了效率。)</li>
+</ol></li>
+<li>LoRA的问题：
+<ol type="1">
+<li>LoRA
+在微调任务中的性能尚未达到在所有设置中普遍超越全参数微调的程度。</li>
+<li>特别地，在不断预训练的过程中，观察到LoRA在大规模数据集上往往会表现得步履蹒跚，这使得人们对LoRA在这种情况下的有效性产生了怀疑。</li>
+<li>我们将这归因于LoRA的可训练参数比基模型少得多，这限制了LoRA训练的表示能力。</li>
+</ol></li>
+<li>研究LoRA
+<ol type="1">
+<li>深入研究了LoRA在每一层的训练统计量，致力于弥合LoRA和全参数微调之间的差异。</li>
+<li>令人惊讶的是，我们发现LoRA的逐层权重规范(layerwise weight
+norms)具有不寻常的偏态分布(skewed
+distribution)，其中底层和/或顶层在更新期间占据了大部分权重。</li>
+<li>相比之下，其他的自注意力层只占少量，这意味着不同的层在更新时具有不同的重要性。</li>
+<li>这个关键的观察启发我们根据不同层的重要性来"采样"，这与重要性采样的思想相吻合。</li>
+</ol></li>
+<li>提出
+<ol type="1">
+<li>逐层法Importance Sampled Adam ( LISA )算法</li>
+<li>通过选择性地更新仅重要的LLM层而不接触其他层，LISA能够以较少或类似于LoRA的内存消耗来训练大规模语言模型(≥65B参数)。</li>
+<li>此外，在下游任务上进行微调后，LISA的性能大大优于LoRA和传统的全参数微调方法，这表明LISA作为LoRA的一种有前途的替代方法具有很大的潜力。</li>
+</ol></li>
+<li>贡献
+<ol type="1">
+<li>我们在LoRA中发现了跨层的权重范数分布倾斜的现象，这意味着不同层在大规模LLM训练中的重要性不同</li>
+<li>我们提出了逐层法Importance Sampled Adam W ( LISA
+)，这是一种简单的优化方法，能够以更少或类似于LoRA的内存成本扩展多达70B个LLM</li>
+<li>我们展示了LISA在现代LLM微调任务中的有效性，在MT -
+Bench中比LoRA提高了10 % ~ 35
+%，并在多个基准测试中取得了更好的性能.此外，LISA表现出比LoRA更好的收敛行为。在某些设定下，LISA甚至优于全参数训练。在不同规模的模型(
+7B ~ 70B )和任务（包括指令跟随、医疗问答和数学问题）</li>
+</ol></li>
+</ol>
 <h1 id="related-work">Related Work</h1>
+<h2 id="llm">LLM</h2>
+<h2 id="peft">PEFT</h2>
+<h2 id="lora">LoRA</h2>
+<h2 id="large-scale-optimization-algorithms">Large-scale Optimization
+Algorithms</h2>
 <h1 id="method">Method</h1>
+<h2 id="motivation">Motivation</h2>
 
     </div>
 
