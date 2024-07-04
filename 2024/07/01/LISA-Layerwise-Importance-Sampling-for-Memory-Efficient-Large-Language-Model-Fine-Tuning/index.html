@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ooo.0x0.ooo/2024/07/02/OPguti.png">
 <meta property="article:published_time" content="2024-07-01T03:45:24.000Z">
-<meta property="article:modified_time" content="2024-07-02T09:07:48.139Z">
+<meta property="article:modified_time" content="2024-07-04T08:21:10.997Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="llm">
 <meta property="article:tag" content="LoRA">
@@ -120,7 +120,8 @@
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#related-work"><span class="nav-number">3.</span> <span class="nav-text">Related Work</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#llm"><span class="nav-number">3.1.</span> <span class="nav-text">LLM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#peft"><span class="nav-number">3.2.</span> <span class="nav-text">PEFT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lora"><span class="nav-number">3.3.</span> <span class="nav-text">LoRA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#large-scale-optimization-algorithms"><span class="nav-number">3.4.</span> <span class="nav-text">Large-scale Optimization
 Algorithms</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#method"><span class="nav-number">4.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#motivation"><span class="nav-number">4.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#layerwise-importance-sampled-adamw-lisa"><span class="nav-number">4.2.</span> <span class="nav-text">Layerwise Importance
-Sampled AdamW (LISA)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#experimental-results"><span class="nav-number">5.</span> <span class="nav-text">Experimental Results</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#memory-efficiency"><span class="nav-number">5.1.</span> <span class="nav-text">Memory Efficiency</span></a></li></ol></li></ol></div>
+Sampled AdamW (LISA)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#experimental-results"><span class="nav-number">5.</span> <span class="nav-text">Experimental Results</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#memory-efficiency"><span class="nav-number">5.1.</span> <span class="nav-text">Memory Efficiency</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE"><span class="nav-number">5.1.1.</span> <span class="nav-text">实验设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C"><span class="nav-number">5.1.2.</span> <span class="nav-text">结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#moderate-scale-fine-tuning"><span class="nav-number">5.2.</span> <span class="nav-text">Moderate Scale Fine-Tuning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE-1"><span class="nav-number">5.2.1.</span> <span class="nav-text">实验设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C-1"><span class="nav-number">5.2.2.</span> <span class="nav-text">结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#moderate-scale-continual-pre-training"><span class="nav-number">5.3.</span> <span class="nav-text">Moderate Scale Continual
+Pre-training</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE-2"><span class="nav-number">5.3.1.</span> <span class="nav-text">实验设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C-2"><span class="nav-number">5.3.2.</span> <span class="nav-text">结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#large-scale-fine-tuning"><span class="nav-number">5.4.</span> <span class="nav-text">Large Scale Fine-Tuning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE-3"><span class="nav-number">5.4.1.</span> <span class="nav-text">实验设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C-3"><span class="nav-number">5.4.2.</span> <span class="nav-text">结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ablation-studiess"><span class="nav-number">5.5.</span> <span class="nav-text">Ablation Studiess</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lisa%E7%9A%84%E8%B6%85%E5%8F%82%E6%95%B0"><span class="nav-number">5.5.1.</span> <span class="nav-text">LISA的超参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lisa%E7%9A%84%E6%95%8F%E6%84%9F%E6%80%A7"><span class="nav-number">5.5.2.</span> <span class="nav-text">LISA的敏感性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#discussion"><span class="nav-number">6.</span> <span class="nav-text">Discussion</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -207,7 +208,7 @@ Sampled AdamW (LISA)</span></a></li></ol></li><li class="nav-item nav-level-1"><
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-07-02 17:07:48" itemprop="dateModified" datetime="2024-07-02T17:07:48+08:00">2024-07-02</time>
+      <time title="修改时间：2024-07-04 16:21:10" itemprop="dateModified" datetime="2024-07-04T16:21:10+08:00">2024-07-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -399,9 +400,11 @@ class="math display">\[\mathbf{w}^{(\ell)}\triangleq\text{mean-weight-norm}(\ell
 \]</span></li>
 <li>实验结果如下
 <ol type="1">
-<li>图2展示了这些发现，x轴代表层id，从嵌入权重到最后一层，y轴量化权重范数。可视化揭示了一个关键的趋势：</li>
-<li>在LoRA中，嵌入层或语言模型( language modeling，LM
-)头层表现出明显大于中介层的权重规范，通常为数百倍。然而，这种现象在全参数训练设置下并不显著。</li>
+<li>图2展示了这些发现，x轴代表层id，从嵌入权重(embedding
+weights)到最后一层，y轴量化权重范数。可视化揭示了一个关键的趋势：</li>
+<li>在LoRA中，嵌入层或语言模型头层(head
+layer)表现出明显大于中介层(intermediary layers)的权重规范(weight
+norm)，通常为数百倍。然而，这种现象在全参数训练设置下并不显著。</li>
 <li><figure>
 <img src="https://ooo.0x0.ooo/2024/07/02/OPguti.png" alt="图2" />
 <figcaption aria-hidden="true">图2</figcaption>
@@ -412,40 +415,134 @@ class="math display">\[\mathbf{w}^{(\ell)}\triangleq\text{mean-weight-norm}(\ell
 <li>LoRA和全参数训练的更新侧重点存在显著差异，这可归因于两者学习到的知识不同。</li>
 <li>例如，在嵌入层中，具有相似意义的标记，即同义词，可以被投影到相同的嵌入空间中，并转换为相似的嵌入。</li>
 <li>LoRA可以捕获语言中的这种相似性，并在低维空间中对其进行"分组"，从而使语言意义的频繁特征能够被及时识别和优化。</li>
-<li>代价是LoRA受限于其内在低秩空间的表征能力有限，从与LISA在图像生成任务中的对比(附录A.1
-)中可以看出，LoRA记忆和学习细节的速度远慢于LISA。其他可能的解释也可以</li>
+<li>代价是LoRA受限于其内在低秩空间的表征能力有限</li>
+<li>从与LISA在图像生成任务中的对比(附录A.1
+)中可以看出，LoRA记忆和学习细节的速度远慢于LISA。</li>
+<li>其他可能的解释也可以为这一现象提供佐证。尽管对这一观察结果有各种不同的解释，但有一个事实仍然是明确的：LoRA对分层重要性的评价不同于完全的参数调整。</li>
 </ol></li>
+</ol>
+<p>Q:</p>
+<ol type="1">
+<li>第三点的公式里面theta是什么？</li>
+<li>weight norm是什么</li>
 </ol>
 <h2 id="layerwise-importance-sampled-adamw-lisa">Layerwise Importance
 Sampled AdamW (LISA)</h2>
 <ul>
 <li>为了利用上面的发现，我们希望通过采样不同的层来模拟LoRA的更新模式。这样，我们可以避免LoRA固有的低秩表示能力有限的缺陷，并模拟其快速学习过程。</li>
-<li>直觉上，给定相同的跨层全局学习率，LoRA中权重范数较小的层也应具有较小的采样概率以在全参数设置中解冻，从而使跨迭代的期望学习率保持一致。</li>
-<li>这就是重要性采样的思想，在这里，而不是在全参数设置中应用逐层不同的学习率{
-ηt }来模拟LoRA的更新{ ηt
-}，我们应用采样，而不是得到相同的期望参数更新</li>
+<li>直觉上，给定相同的跨层全局学习率(global learning rates across
+layers)，LoRA中权重范数较小的层也应具有较小的采样概率以在全参数设置中解冻，从而使跨迭代的期望学习率保持一致。</li>
+<li>这就是<strong>重要性采样(importance
+sampling)</strong>的思想，不是在全参数设置中应用逐层不同的学习率{ ηt
+}来模拟LoRA的更新{ ηt }，我们应用采样，而不是得到相同的期望参数更新</li>
 <li><span
 class="math display">\[\eta_t^{(\ell)}=\tilde{\eta}_t^{(\ell)}\cdot\frac{\tilde{\mathbf{w}}^{(\ell)}}{\mathbf{w}^{(\ell)}}\quad\Rightarrow\quad\eta_t^{(\ell)}=\eta^{(\ell)},p^{(\ell)}=\frac{\tilde{\mathbf{w}}^{(\ell)}}{\mathbf{w}^{(\ell)}}\]</span></li>
-<li>这就产生了我们的分层重要性采样AdamW方法，如算法1所示。在实际应用中，由于LoRA中除底层和顶层外的所有层都具有较小的权重范数，我们在实际中采用<span
-class="math inline">\({ pl } ^{N_L} _{\ell = 1} = { 1.0，\gamma /
-NL，\gamma / NL，..，\gamma / N_L，1.0 }\)</span>，其中<span
+<li>这就产生了我们的分层重要性采样AdamW方法，如算法1所示。</li>
+<li>在实际应用中，由于LoRA中除底层和顶层外的所有层都具有较小的权重范数，我们在实际中采用<span
+class="math inline">\(\{ p_\ell\} ^{N_L} _{\ell = 1} = \{ 1.0，\gamma /
+NL，\gamma / NL，..，\gamma / N_L，1.0 \}\)</span>，其中<span
 class="math inline">\(\gamma\)</span>控制优化过程中期望的解冻层数。</li>
 <li>直观上，<span
-class="math inline">\(\gamma\)</span>作为一个补偿因子来弥合LoRA和全参数调优之间的差异，让LISA模拟与LoRA类似的逐层更新模式。为了进一步控制实际设置中的内存消耗，我们每次随机采样γ层，以在训练期间上限未冻结层的最大数量。</li>
+class="math inline">\(\gamma\)</span>作为一个补偿因子来弥合LoRA和全参数调优之间的差异，让LISA模拟与LoRA类似的逐层更新模式。</li>
+<li>为了进一步控制实际设置中的内存消耗，我们每次随机采样<span
+class="math inline">\(\gamma\)</span>层，以在训练期间上限未冻结层的最大数量。</li>
 </ul>
-<p><span class="math display">\[\begin{aligned}&amp;\text{Algorithm I
-Layerwise Importance Sampling AdamW
-(I.ISA)}\\&amp;\overline{\textbf{Requitre: mumer of layes
-}N_Z,\text{number of therations }T,\text{sampling period }K,\text{number
-of sampled layers }\gamma,\text{initial}}\\&amp;\text{learming rale
-}\eta_0\\&amp;1:\mathrm{~for~}i\leftarrow0\mathrm{~to~}T/K-1\mathrm{~do}\\&amp;2:\quad\text{Freceze
-lallayes secep the embedding ald langage modeling head
-layer}\\&amp;3:\quad\text{Ratomily sumple }\gamma\text{ intermaticie
-layes to unfreza}\\&amp;4:\quad\text{Aun AdamW tor }K\text{ tierations
-with }\{\eta_i\}_{i=k-1}^{k+k-1}\\&amp;\text{s end
-for}\end{aligned}\]</span></p>
+<p><span class="math display">\[\begin{aligned}&amp;
+\textbf{Algorithm 1 Layerwise Importance Sampling AdamW
+(LISA)}\\&amp;\overline{
+   \textbf{Requitre: }
+   \text{number of layers }N_L,\text{number of iterations
+}T,\text{sampling period }K,\text{number of sampled layers
+}\gamma,\text{initial earning rate }\eta_0}\\
+   &amp;1:\mathrm{~for~}i\leftarrow0\mathrm{~to~}T/K-1\mathrm{~do}\\
+   &amp;2:\quad\text{Freeze all layers except the embedding and language
+modeling head layer}\\
+   &amp;3:\quad\text{Randomly sample }\gamma\text{ intermediate layers
+to unfreeze}\\
+   &amp;4:\quad\text{Run AdamW for }K\text{ iterations with
+}\{\eta_t\}_{t=ik}^{ik+k-1}\\
+   &amp;5:\textbf{end for}\end{aligned}\]</span></p>
+<p>Q:</p>
+<ol type="1">
+<li>这里参数更新的公式没看懂，前一句话这就是<strong>重要性采样(importance
+sampling)</strong>的思想，不是在全参数设置中应用逐层不同的学习率{ ηt
+}来模拟LoRA的更新{ ηt
+}，我们应用采样，而不是得到相同的期望参数更新也看不懂</li>
+<li>参数里面的“采样”是什么概念</li>
+<li>为什么要进行T/K-1次循环</li>
+<li>layer层的顶部和底部是什么</li>
+</ol>
 <h1 id="experimental-results">Experimental Results</h1>
 <h2 id="memory-efficiency">Memory Efficiency</h2>
+<p>我们进行了<strong>峰值GPU内存实验</strong>（peak GPU memory
+experiments），以展示LISA的内存效率，并展示其与LoRA相当或更低的内存成本。</p>
+<h3 id="实验设置">实验设置</h3>
+<ul>
+<li>从Alpaca数据集中随机采样prompts，并将最大输出令牌长度限制为1024。</li>
+<li>我们关注两个关键的超参数：LoRA的秩rank和LISA的激活层数。</li>
+<li>对于其他超参数，从120M到70B参数的5个LLMs始终使用1的小批量大小</li>
+<li>故意排除其他节省GPU内存的技术，如梯度检查点radient
+checkpointing、卸载offloading和闪存注意力flash attention。</li>
+<li>所有的内存效率实验都是在内存为80G的4 × NVIDIA Ampere Architecture
+GPU上进行的。</li>
+</ul>
+<h3 id="结果">结果</h3>
+<h2 id="moderate-scale-fine-tuning">Moderate Scale Fine-Tuning</h2>
+<p>LISA可以实现这种显著的内存节省，同时在微调设置下仍然获得有竞争力的性能。</p>
+<h3 id="实验设置-1">实验设置</h3>
+<p>为了证明LISA比LoRA的优越性，我们在Alpaca GPT - 4数据集( Taori et al ,
+2023) (由GPT - 4 ( OpenAI et al ,
+2023)生成的52k个会话对组成)的指令跟随微调任务上进行了评估。微调的有效性在多个基准上进行了评估：MT-Bench
+( Zheng et al . ,
+2023)包含80个高质量的多轮问题，旨在从多个方面评估LLMs；MMLU ( Hendrycks
+et al ,
+2020)共包括57个任务，14，079个问题，涵盖了广泛的世界知识；AGIEval
+(钟甫宁等,
+2023)是一个以人为中心的通用能力基准，包含9316个实例；WinoGrande (坂口等,
+2021)是一个用于常识推理的大规模数据集，包含44，000个实例</p>
+<p>在我们的实验中，我们评估了3个基线模型：TinyLlama ( Zhang et al ,
+2024)、米斯特拉尔- 7B ( Jiang et al . , 2023)和LLaMA - 2 - 7B (图夫龙等,
+2023b)。这些模型的大小从1B到7B不等，提供了仅解码器模型的多样化表示。对于超参数，本节采用LoRA的秩为128，LISA的秩为E
++ H + 2L，详见附录B。</p>
+<h3 id="结果-1">结果</h3>
+<h2 id="moderate-scale-continual-pre-training">Moderate Scale Continual
+Pre-training</h2>
+<p>持续的预训练对于使模型能够适应新的数据和领域至关重要。为了评估LISA在连续预训练场景下的有效性，我们在数学领域进行了实验，并与全参数训练进行了比较。</p>
+<h3 id="实验设置-2">实验设置</h3>
+<p>Ettings我们采用数学语料库Open WebMath ( Paster et al ,
+2023)构建连续的预训练数据集。具体来说，我们从中提取了一个包含15亿个令牌的高质量子集。详细内容见附录B.2。在连续的预训练之后，我们在GSM8K
+( Cobbe et al ,
+2021)训练集上应用同样的微调过程，该训练集包含7473个实例。</p>
+<h3 id="结果-2">结果</h3>
+<h2 id="large-scale-fine-tuning">Large Scale Fine-Tuning</h2>
+<p>为了进一步说明LISA在大尺寸LLM上的可扩展性，我们在LLaMA - 2 - 70B
+上进行了额外的微调实验。</p>
+<h3 id="实验设置-3">实验设置</h3>
+<p>除了4.2节中提到的指令跟踪任务，我们在数学和医学QA基准题上使用了额外的特定领域的微调任务。数学领域使用GSM8K数据集(
+Cobbe et al ,
+2021)，包含7473个训练实例和1319个测试实例。对于医疗领域，我们选取了PubMedQA数据集(
+Jin et al , 2019)，该数据集包括211.3
+K人工生成的问答训练实例和1K测试实例。</p>
+<p>在PubMedQA数据集( Jin et al , 2019)上的评估是在5 -
+shot提示的设置下进行的，而GSM8K数据集( Cobbe et al ,
+2021)的评估是在最近的研究( Wei et al . , 2022 ; Shum et al , 2023 ; Diao
+et al , 2023b)之后使用思维链( CoT
+)提示进行的。关于超参数，如4.1节所述，我们使用LoRA的秩256和LISA的配置E +
+H + 4L。详细信息见附录B。</p>
+<h3 id="结果-3">结果</h3>
+<h2 id="ablation-studiess">Ablation Studiess</h2>
+<h3 id="lisa的超参数">LISA的超参数</h3>
+<p>LISA的超参数LISA的两个关键超参数是采样层数γ和采样周期K。为了获得这些超参数选择的直观和经验指导，我们利用Alpaca
+- GPT4数据集，使用TinyLlama ( Zhang et al , 2024)和LLaMA - 2 - 7B
+(图夫龙等, 2023b)模型进行消融研究。γ的构型为E + H + 2L，E + H +
+8L，分别记为γ = 2和γ = 8。对于采样周期K = T / n，T =
+122代表我们实验框架中的最大训练步长。如表6所示，结果表明γ和K都显著影响LISA算法的性能。具体来说，较高的γ值增加了可训练参数的数量，尽管内存成本较高。另一方面，一个最优的K值有利于更频繁的层切换，从而将性能提高到一定的阈值，超过这个阈值，性能可能会变差。一般来说，经验法则是：更多的采样层数和更高的采样周期会带来更好的性能。对于损失曲线和MT
+- Bench结果的详细考察，参见附录A。4</p>
+<h3 id="lisa的敏感性">LISA的敏感性</h3>
+<p>由于LISA在算法上依赖于层的采样顺序，因此有趣的是，在随机性的影响下，LISA的性能是如何稳定的。为了达到这个目的，我们进一步研究了LISA在三个不同的运行中的性能差异，每个运行都有一个不同的随机种子用于层选择。在这里，我们采用TinyLlama，LLaMA2
+- 7B和米斯特拉尔- 7B模型，使用Alpaca -
+GPT4数据集，同时保持所有其他超参数与第4.2节实验中使用的指令保持一致。如表7所示，LISA对不同的随机种子具有很好的适应性，三次运行之间的性能差距在0.13以内，与基线方法相比，性能增益很小。对于更多关于LISA超参数的消融实验，请参阅App</p>
+<h1 id="discussion">Discussion</h1>
 
     </div>
 
