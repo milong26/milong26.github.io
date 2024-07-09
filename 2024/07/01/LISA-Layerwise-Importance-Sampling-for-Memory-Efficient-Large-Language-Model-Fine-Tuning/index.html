@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ooo.0x0.ooo/2024/07/02/OPguti.png">
 <meta property="article:published_time" content="2024-07-01T03:45:24.000Z">
-<meta property="article:modified_time" content="2024-07-05T02:34:31.630Z">
+<meta property="article:modified_time" content="2024-07-09T02:02:38.710Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="llm">
 <meta property="article:tag" content="LoRA">
@@ -134,7 +134,7 @@ Pre-training</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -145,7 +145,7 @@ Pre-training</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -208,7 +208,7 @@ Pre-training</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-07-05 10:34:31" itemprop="dateModified" datetime="2024-07-05T10:34:31+08:00">2024-07-05</time>
+      <time title="修改时间：2024-07-09 10:02:38" itemprop="dateModified" datetime="2024-07-09T10:02:38+08:00">2024-07-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -487,6 +487,8 @@ checkpointing、卸载offloading和闪存注意力flash attention。</li>
 GPU上进行的。</li>
 </ul>
 <h3 id="结果">结果</h3>
+<ol type="1">
+<li>table 1
 <ul>
 <li>图表上的表示
 <ul>
@@ -498,36 +500,93 @@ GPU上进行的。</li>
 <ul>
 <li>LISA配置，特别是当嵌入层( E )和两个附加层( E + H + 2L
 )同时增强时，与LoRA方法相比，在微调LLaMA - 2 -
-70B模型时显示出相当大的GPU内存占用减少。</li>
+70B模型时显示出相当大的GPU内存占用减少。具体来说，LISA E + H +
+2L配置显示峰值GPU内存从LoRA Rank 128配置所需的79G减少到75G。</li>
+<li>这种效率增益并不是一个孤立的事件；在不同的模型结构中观察到了系统性的内存使用减少，这表明LISA的激活层方法本质上具有更高的内存效率。</li>
 </ul></li>
-</ul>
+</ul></li>
+<li>figure 3
+<ul>
+<li>结果
+<ul>
+<li>值得注意的是，LISA中的内存减少使得LLaMA - 2 - 7B可以在单个RTX4090 (
+24GB ) GPU上进行训练</li>
+<li>特别地，由于LISA没有引入适配器带来的额外参数，因此它比LoRA需要更少的激活内存消耗。</li>
+<li>LISA的激活记忆甚至略低于全参数训练，因为带有deepspeed的pytorch
+允许在反向传播之前删除冗余激活。</li>
+</ul></li>
+</ul></li>
+<li>figure 4
+<ul>
+<li>结果
+<ul>
+<li>LISA内存占用的减少也会导致速度的加快。</li>
+<li>与全参数训练相比，LISA提供了近2.9倍的加速比，与LoRA相比，LISA提供了近1.5倍的加速比。部分归因于adapters结构的去除。</li>
+<li>LoRA和LISA中memory足迹的减少都导致了前向传播的显著加速，强调了存储高效训练的重要性。</li>
+</ul></li>
+</ul></li>
+</ol>
+<p>Q:</p>
+<ol type="1">
+<li>batch size设置成1感觉好奇怪啊</li>
+<li>为什么LoRA的activation memory比baseline多一点</li>
+<li>为什么lisa的gradient memory和optimizer memory比lora多一点</li>
+<li>weight|activation|gradient|optimizer memory都是什么</li>
+<li>adapters结构会拖慢训练速度？</li>
+</ol>
 <h2 id="moderate-scale-fine-tuning">Moderate Scale Fine-Tuning</h2>
-<p>LISA可以实现这种显著的内存节省，同时在微调设置下仍然获得有竞争力的性能。</p>
+<p>LISA可以实现这种显著的内存节省，同时在<strong>微调</strong>设置下仍然获得有竞争力的性能。</p>
 <h3 id="实验设置-1">实验设置</h3>
-<p>为了证明LISA比LoRA的优越性，我们在Alpaca GPT - 4数据集( Taori et al ,
-2023) (由GPT - 4 ( OpenAI et al ,
-2023)生成的52k个会话对组成)的指令跟随微调任务上进行了评估。微调的有效性在多个基准上进行了评估：MT-Bench
-( Zheng et al . ,
-2023)包含80个高质量的多轮问题，旨在从多个方面评估LLMs；MMLU ( Hendrycks
-et al ,
-2020)共包括57个任务，14，079个问题，涵盖了广泛的世界知识；AGIEval
-(钟甫宁等,
-2023)是一个以人为中心的通用能力基准，包含9316个实例；WinoGrande (坂口等,
-2021)是一个用于常识推理的大规模数据集，包含44，000个实例</p>
-<p>在我们的实验中，我们评估了3个基线模型：TinyLlama ( Zhang et al ,
-2024)、米斯特拉尔- 7B ( Jiang et al . , 2023)和LLaMA - 2 - 7B (图夫龙等,
-2023b)。这些模型的大小从1B到7B不等，提供了仅解码器模型的多样化表示。对于超参数，本节采用LoRA的秩为128，LISA的秩为E
-+ H + 2L，详见附录B。</p>
+<ul>
+<li>为了证明LISA比LoRA的优越性</li>
+<li>在Alpaca GPT - 4数据集
+(由GPT-4生成的52k个会话对组成)的指令跟随微调任务上进行了评估。</li>
+<li>微调的有效性在多个基准上进行了评估：MT-Bench包含80个高质量的多轮问题，旨在从多个方面评估LLMs</li>
+<li>MMLU 共包括57个任务，14，079个问题，涵盖了广泛的世界知识；</li>
+<li>AGIEval 是一个以人为中心的通用能力基准，包含9316个实例；</li>
+<li>WinoGrande 是一个用于常识推理的大规模数据集，包含44，000个实例</li>
+</ul>
+<p>在我们的实验中，我们评估了3个基线模型：TinyLlama、Mistral-7B 和LLaMA
+- 2 - 7B
+。这些模型的大小从1B到7B不等，提供了仅解码器模型的多样化表示。对于超参数，本节采用LoRA的秩为128，LISA的秩为E
++ H + 2L。</p>
 <h3 id="结果-1">结果</h3>
+<ol type="1">
+<li>表2
+<ol type="1">
+<li>基线包括全参数训练( FT )、低秩适应( LoRA ) 和梯度低秩投影(
+GaLore,Gradient Low-Rank Projection)</li>
+<li>实验结果表明，LISA在大多数评估轨迹中始终优于其他微调方法，表明了其在不同任务和模型架构下的鲁棒性和有效性。</li>
+<li>LISA在指令跟随任务（instruction following
+tasks）中特别有效，与其他基线方法相比存在较大差距。</li>
+<li>LISA甚至优于全参数Training，这表明当未冻层的数量受到限制时，存在类似于dropout
+的隐式正则化效应。</li>
+</ol></li>
+<li>表3
+<ol type="1">
+<li>根据在稳定扩散和详细MT -
+Bench分数中的更多结果，我们发现LISA在记忆任务中的表现优于LoRA，例如在图像生成中描绘高分辨率图像细节，或在指令跟踪中的书写或人文任务。</li>
+<li>这意味着LISA的性能提升可能主要来自于记忆长尾模式的能力，而LoRA更擅长知识有限的多跳推理。</li>
+</ol></li>
+</ol>
+<p>Q:</p>
+<ol type="1">
+<li>table 2里面的几shot是什么意思</li>
+<li>这几个数据集、测试集、bench是什么，有点混乱</li>
+</ol>
 <h2 id="moderate-scale-continual-pre-training">Moderate Scale Continual
 Pre-training</h2>
-<p>持续的预训练对于使模型能够适应新的数据和领域至关重要。为了评估LISA在连续预训练场景下的有效性，我们在数学领域进行了实验，并与全参数训练进行了比较。</p>
+<p>持续的预训练对于使模型能够适应新的数据和领域至关重要。为了评估LISA在<strong>连续预训练</strong>场景下的有效性，我们在数学领域进行了实验，并与全参数训练进行了比较。</p>
 <h3 id="实验设置-2">实验设置</h3>
-<p>Ettings我们采用数学语料库Open WebMath ( Paster et al ,
-2023)构建连续的预训练数据集。具体来说，我们从中提取了一个包含15亿个令牌的高质量子集。详细内容见附录B.2。在连续的预训练之后，我们在GSM8K
-( Cobbe et al ,
-2021)训练集上应用同样的微调过程，该训练集包含7473个实例。</p>
+<p>Ettings我们采用数学语料库Open
+WebMath构建连续的预训练数据集。具体来说，我们从中提取了一个包含15亿个令牌的高质量子集。在连续的预训练之后，我们在GSM8K训练集上应用同样的微调过程，该训练集包含7473个实例。</p>
 <h3 id="结果-2">结果</h3>
+<ol type="1">
+<li>table 4
+表明LISA能够以更少的内存消耗获得比全参数训练更接近甚至更好的性能。</li>
+<li>具体来说，与全参数训练相比，LISA只需要一半的内存成本。这表明LISA在计算效率和模型性能之间取得了较好的平衡。</li>
+<li>根据我们的经验，将未冻结层的数量减少到原始尺寸的一半，在持续的预训练过程中不会导致更差甚至更好的性能，同时需要更少的内存消耗。</li>
+</ol>
 <h2 id="large-scale-fine-tuning">Large Scale Fine-Tuning</h2>
 <p>为了进一步说明LISA在大尺寸LLM上的可扩展性，我们在LLaMA - 2 - 70B
 上进行了额外的微调实验。</p>
@@ -580,6 +639,9 @@ GPT4数据集，同时保持所有其他超参数与第4.2节实验中使用的�
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2024/07/09/latex%E5%AE%89%E8%A3%85/" rel="next" title="latex安装">
+                  latex安装 <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>
