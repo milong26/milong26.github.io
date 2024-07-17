@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ooo.0x0.ooo/2024/07/02/OPguti.png">
 <meta property="article:published_time" content="2024-07-01T03:45:24.000Z">
-<meta property="article:modified_time" content="2024-07-09T02:02:38.710Z">
+<meta property="article:modified_time" content="2024-07-15T09:19:57.333Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="llm">
 <meta property="article:tag" content="LoRA">
@@ -121,7 +121,8 @@
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#related-work"><span class="nav-number">3.</span> <span class="nav-text">Related Work</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#llm"><span class="nav-number">3.1.</span> <span class="nav-text">LLM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#peft"><span class="nav-number">3.2.</span> <span class="nav-text">PEFT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lora"><span class="nav-number">3.3.</span> <span class="nav-text">LoRA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#large-scale-optimization-algorithms"><span class="nav-number">3.4.</span> <span class="nav-text">Large-scale Optimization
 Algorithms</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#method"><span class="nav-number">4.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#motivation"><span class="nav-number">4.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#layerwise-importance-sampled-adamw-lisa"><span class="nav-number">4.2.</span> <span class="nav-text">Layerwise Importance
 Sampled AdamW (LISA)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#experimental-results"><span class="nav-number">5.</span> <span class="nav-text">Experimental Results</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#memory-efficiency"><span class="nav-number">5.1.</span> <span class="nav-text">Memory Efficiency</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE"><span class="nav-number">5.1.1.</span> <span class="nav-text">实验设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C"><span class="nav-number">5.1.2.</span> <span class="nav-text">结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#moderate-scale-fine-tuning"><span class="nav-number">5.2.</span> <span class="nav-text">Moderate Scale Fine-Tuning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE-1"><span class="nav-number">5.2.1.</span> <span class="nav-text">实验设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C-1"><span class="nav-number">5.2.2.</span> <span class="nav-text">结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#moderate-scale-continual-pre-training"><span class="nav-number">5.3.</span> <span class="nav-text">Moderate Scale Continual
-Pre-training</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE-2"><span class="nav-number">5.3.1.</span> <span class="nav-text">实验设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C-2"><span class="nav-number">5.3.2.</span> <span class="nav-text">结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#large-scale-fine-tuning"><span class="nav-number">5.4.</span> <span class="nav-text">Large Scale Fine-Tuning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE-3"><span class="nav-number">5.4.1.</span> <span class="nav-text">实验设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C-3"><span class="nav-number">5.4.2.</span> <span class="nav-text">结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ablation-studiess"><span class="nav-number">5.5.</span> <span class="nav-text">Ablation Studiess</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lisa%E7%9A%84%E8%B6%85%E5%8F%82%E6%95%B0"><span class="nav-number">5.5.1.</span> <span class="nav-text">LISA的超参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lisa%E7%9A%84%E6%95%8F%E6%84%9F%E6%80%A7"><span class="nav-number">5.5.2.</span> <span class="nav-text">LISA的敏感性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#discussion"><span class="nav-number">6.</span> <span class="nav-text">Discussion</span></a></li></ol></div>
+Pre-training</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE-2"><span class="nav-number">5.3.1.</span> <span class="nav-text">实验设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C-2"><span class="nav-number">5.3.2.</span> <span class="nav-text">结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#large-scale-fine-tuning"><span class="nav-number">5.4.</span> <span class="nav-text">Large Scale Fine-Tuning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE-3"><span class="nav-number">5.4.1.</span> <span class="nav-text">实验设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C-3"><span class="nav-number">5.4.2.</span> <span class="nav-text">结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ablation-studiess"><span class="nav-number">5.5.</span> <span class="nav-text">Ablation Studiess</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lisa%E7%9A%84%E8%B6%85%E5%8F%82%E6%95%B0"><span class="nav-number">5.5.1.</span> <span class="nav-text">LISA的超参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lisa%E7%9A%84%E6%95%8F%E6%84%9F%E6%80%A7"><span class="nav-number">5.5.2.</span> <span class="nav-text">LISA的敏感性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#discussion"><span class="nav-number">6.</span> <span class="nav-text">Discussion</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#theoretical-properties-of-lisa"><span class="nav-number">6.1.</span> <span class="nav-text">Theoretical Properties of
+LISA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#theorem-1"><span class="nav-number">6.2.</span> <span class="nav-text">Theorem 1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#memorization-and-reasoning"><span class="nav-number">6.3.</span> <span class="nav-text">Memorization and Reasoning</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusion"><span class="nav-number">7.</span> <span class="nav-text">conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#limitations"><span class="nav-number">8.</span> <span class="nav-text">Limitations</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -208,7 +209,7 @@ Pre-training</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-07-09 10:02:38" itemprop="dateModified" datetime="2024-07-09T10:02:38+08:00">2024-07-09</time>
+      <time title="修改时间：2024-07-15 17:19:57" itemprop="dateModified" datetime="2024-07-15T17:19:57+08:00">2024-07-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -593,10 +594,9 @@ WebMath构建连续的预训练数据集。具体来说，我们从中提取了�
 <h3 id="实验设置-3">实验设置</h3>
 <p>除了4.2节中提到的指令跟踪任务，我们在数学和医学QA基准题上使用了额外的特定领域的微调任务。数学领域使用GSM8K数据集(
 Cobbe et al ,
-2021)，包含7473个训练实例和1319个测试实例。对于医疗领域，我们选取了PubMedQA数据集(
-Jin et al , 2019)，该数据集包括211.3
+2021)，包含7473个训练实例和1319个测试实例。对于医疗领域，我们选取了PubMedQA数据集，该数据集包括211.3
 K人工生成的问答训练实例和1K测试实例。</p>
-<p>在PubMedQA数据集( Jin et al , 2019)上的评估是在5 -
+<p>在PubMedQA数据集上的评估是在5 -
 shot提示的设置下进行的，而GSM8K数据集( Cobbe et al ,
 2021)的评估是在最近的研究( Wei et al . , 2022 ; Shum et al , 2023 ; Diao
 et al , 2023b)之后使用思维链( CoT
@@ -605,17 +605,69 @@ H + 4L。详细信息见附录B。</p>
 <h3 id="结果-3">结果</h3>
 <h2 id="ablation-studiess">Ablation Studiess</h2>
 <h3 id="lisa的超参数">LISA的超参数</h3>
-<p>LISA的超参数LISA的两个关键超参数是采样层数γ和采样周期K。为了获得这些超参数选择的直观和经验指导，我们利用Alpaca
-- GPT4数据集，使用TinyLlama ( Zhang et al , 2024)和LLaMA - 2 - 7B
-(图夫龙等, 2023b)模型进行消融研究。γ的构型为E + H + 2L，E + H +
-8L，分别记为γ = 2和γ = 8。对于采样周期K = T / n，T =
-122代表我们实验框架中的最大训练步长。如表6所示，结果表明γ和K都显著影响LISA算法的性能。具体来说，较高的γ值增加了可训练参数的数量，尽管内存成本较高。另一方面，一个最优的K值有利于更频繁的层切换，从而将性能提高到一定的阈值，超过这个阈值，性能可能会变差。一般来说，经验法则是：更多的采样层数和更高的采样周期会带来更好的性能。对于损失曲线和MT
-- Bench结果的详细考察，参见附录A。4</p>
+<ul>
+<li>LISA的超参数LISA的两个关键超参数是<strong>采样层数γ</strong>和<strong>采样周期K</strong>。</li>
+<li>为了获得这些超参数选择的直观和经验指导，我们利用Alpaca -
+GPT4数据集，使用TinyLlama和LLaMA - 2 - 7B 模型进行消融研究。</li>
+<li>γ的配置，比如E + H + 2L，E + H + 8L，分别记为γ = 2和γ = 8。</li>
+<li>对于采样周期K = T / n，T =
+122代表我们实验框架中的最大训练步长。</li>
+<li>如表6所示，结果表明γ和K都显著影响LISA算法的性能。具体来说，较高的γ值增加了可训练参数的数量，尽管内存成本较高。</li>
+<li>另一方面，一个最优的K值有利于更频繁的层切换，从而将性能提高到一定的阈值，超过这个阈值，性能可能会变差。</li>
+<li>一般来说，经验法则是：更多的采样层数和更高的采样周期会带来更好的性能。对于损失曲线和MT
+- Bench结果的详细考察，参见附录A。4</li>
+</ul>
+<p>Q:</p>
+<ol type="1">
+<li>为什么LISA都跟采样sample有关系，它的基础算法是采样？</li>
+</ol>
 <h3 id="lisa的敏感性">LISA的敏感性</h3>
-<p>由于LISA在算法上依赖于层的采样顺序，因此有趣的是，在随机性的影响下，LISA的性能是如何稳定的。为了达到这个目的，我们进一步研究了LISA在三个不同的运行中的性能差异，每个运行都有一个不同的随机种子用于层选择。在这里，我们采用TinyLlama，LLaMA2
-- 7B和米斯特拉尔- 7B模型，使用Alpaca -
-GPT4数据集，同时保持所有其他超参数与第4.2节实验中使用的指令保持一致。如表7所示，LISA对不同的随机种子具有很好的适应性，三次运行之间的性能差距在0.13以内，与基线方法相比，性能增益很小。对于更多关于LISA超参数的消融实验，请参阅App</p>
+<ul>
+<li>由于LISA在算法上依赖于层的采样顺序，因此有趣的是，在随机性的影响下，LISA的性能是如何稳定的。</li>
+<li>为了达到这个目的，我们进一步研究了LISA在三个不同的运行中的性能差异，每个运行都有一个不同的随机种子用于层选择。</li>
+<li>在这里，我们采用TinyLlama，LLaMA2 - 7B和Mistral-7B模型，使用Alpaca -
+GPT4数据集，同时保持所有其他超参数与第4.2节实验中使用的指令保持一致。</li>
+<li>如表7所示，LISA对不同的随机种子具有很好的适应性，三次运行之间的性能差距在0.13以内，与基线方法相比，性能增益很小。对于更多关于LISA超参数的消融实验，</li>
+</ul>
 <h1 id="discussion">Discussion</h1>
+<h2 id="theoretical-properties-of-lisa">Theoretical Properties of
+LISA</h2>
+<ul>
+<li>与引入额外参数并导致损失目标变化的LoRA相比，分层重要性采样方法在原始损失中具有良好的收敛性保证。</li>
+<li>对于逐层重要性采样SGD，类似于梯度稀疏化(gradient
+sparsification)，当方差增大时，梯度的无偏估计仍能保证收敛。</li>
+<li>通过适当定义重要性采样策略减小方差，可以进一步改善收敛行为。</li>
+<li>对于逐层重要性采样Adam中的理论结果证明了其在凸目标中的收敛性。</li>
+<li>如果我们将f表示为损失函数，并且假设随机梯度是有界的，那么基于(洛什奇洛夫和哈特,
+2017)，我们知道AdamW优化f与带有比例正则项的Adam优化f是一致的，可以写成</li>
+<li><span class="math display">\[f^{\mathrm{reg}}(\mathbf{w})\triangleq
+f(\mathbf{w})+\frac12\mathbf{w}^\top\mathbf{S}\mathbf{w},\]</span></li>
+<li>式中：S为有限半正定对角矩阵。沿用RBCAdam
+（Corollary1）已有的收敛结果，我们有Theorem 1.中LISA的收敛性保证。</li>
+</ul>
+<h2 id="theorem-1">Theorem 1</h2>
+<p>设损失函数f是凸且光滑的.如果算法运行在一个有界凸集上，且随机梯度是有界的，则由LISA生成的序列<span
+class="math inline">\({ w_t } ^T_{t=1}\)</span>有如下的收敛速度：</p>
+<p><span
+class="math display">\[\frac1T\sum_{t=1}^Tf^{\mathrm{reg}}(\mathbf{w}_t)-f_*^{\mathrm{reg}}\leq
+O\left(\frac1{\sqrt{T}}\right),\]</span></p>
+<p>式中：<span class="math inline">\(f ^{reg}_ *\)</span>表示f
+^reg的最优值。</p>
+<h2 id="memorization-and-reasoning">Memorization and Reasoning</h2>
+<p>在附录A.1和A.2的教学实验中，我们观察到LISA在以记忆为中心的任务(如书写或描绘图像细节)上明显优于LoRA，而在以推理为中心的任务(如代码或数学)上，这种差距要小得多。这是一个有趣的观察，因为LISA更注重层宽，限制了学习参数的深度，而LoRA更注重深度，限制了每层的表示空间。这可能表明宽度对于记忆是至关重要的，而深度对于推理是重要的，类似的现象与(
+Cheng et al . ,
+2016)的直觉相呼应。基于同样的直觉，或许可以将两者的优点结合起来，提出更好的PEFT方法。</p>
+<h1 id="conclusion">conclusion</h1>
+<p>在本文中，我们提出了逐层法Importance Sampled AdamW ( LISA
+)，一种基于给定概率随机冻结LLM层的优化算法。受LoRA的偏态权重范数分布的启发，提出了一种简单的存储高效冻结范式用于LLM训练。该范式在包括LLaMA
+- 2 -
+70B在内的多种模型的下游微调任务上取得了比LoRA显著的性能提升。针对特定领域训练的进一步实验也证明了其有效性，显示了LISA作为LLM训练的LoRA的有前途的替代方法的巨大潜力。</p>
+<h1 id="limitations">Limitations</h1>
+<p>LISA的主要瓶颈与LoRA相同，在优化过程中，前向传递仍然需要将模型呈现在内存中，导致显著的内存消耗。这种限制将通过类似于QLoRA
+(德特默斯等,
+2023)的方法来弥补，我们打算进行进一步的实验来验证其性能。此外，根据理论直觉，4.2节中的E
++ H + 2L和4.4节中的E + H +
+4L策略可能不是最优的重要性采样策略，因为它仍然以均匀随机的方式对中间层进行采样。我们预计，在重要性采样过程中，当考虑数据源和模型结构时，优化器的效率将进一步提高。</p>
 
     </div>
 
