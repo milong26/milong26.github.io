@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ooo.0x0.ooo/2024/07/02/OPguti.png">
 <meta property="article:published_time" content="2024-07-01T03:45:24.000Z">
-<meta property="article:modified_time" content="2024-07-22T03:18:30.024Z">
+<meta property="article:modified_time" content="2024-07-23T03:33:00.323Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="llm">
 <meta property="article:tag" content="LoRA">
@@ -123,7 +123,9 @@
 Algorithms</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#method"><span class="nav-number">4.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#motivation"><span class="nav-number">4.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#layerwise-importance-sampled-adamw-lisa"><span class="nav-number">4.2.</span> <span class="nav-text">Layerwise Importance
 Sampled AdamW (LISA)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#experimental-results"><span class="nav-number">5.</span> <span class="nav-text">Experimental Results</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#memory-efficiency"><span class="nav-number">5.1.</span> <span class="nav-text">Memory Efficiency</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE"><span class="nav-number">5.1.1.</span> <span class="nav-text">实验设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C"><span class="nav-number">5.1.2.</span> <span class="nav-text">结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#moderate-scale-fine-tuning"><span class="nav-number">5.2.</span> <span class="nav-text">Moderate Scale Fine-Tuning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE-1"><span class="nav-number">5.2.1.</span> <span class="nav-text">实验设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C-1"><span class="nav-number">5.2.2.</span> <span class="nav-text">结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#moderate-scale-continual-pre-training"><span class="nav-number">5.3.</span> <span class="nav-text">Moderate Scale Continual
 Pre-training</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE-2"><span class="nav-number">5.3.1.</span> <span class="nav-text">实验设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C-2"><span class="nav-number">5.3.2.</span> <span class="nav-text">结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#large-scale-fine-tuning"><span class="nav-number">5.4.</span> <span class="nav-text">Large Scale Fine-Tuning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE-3"><span class="nav-number">5.4.1.</span> <span class="nav-text">实验设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C-3"><span class="nav-number">5.4.2.</span> <span class="nav-text">结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ablation-studiess"><span class="nav-number">5.5.</span> <span class="nav-text">Ablation Studiess</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lisa%E7%9A%84%E8%B6%85%E5%8F%82%E6%95%B0"><span class="nav-number">5.5.1.</span> <span class="nav-text">LISA的超参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lisa%E7%9A%84%E6%95%8F%E6%84%9F%E6%80%A7"><span class="nav-number">5.5.2.</span> <span class="nav-text">LISA的敏感性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#discussion"><span class="nav-number">6.</span> <span class="nav-text">Discussion</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#theoretical-properties-of-lisa"><span class="nav-number">6.1.</span> <span class="nav-text">Theoretical Properties of
-LISA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#theorem-1"><span class="nav-number">6.2.</span> <span class="nav-text">Theorem 1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#memorization-and-reasoning"><span class="nav-number">6.3.</span> <span class="nav-text">Memorization and Reasoning</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusion"><span class="nav-number">7.</span> <span class="nav-text">conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#limitations"><span class="nav-number">8.</span> <span class="nav-text">Limitations</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93"><span class="nav-number">9.</span> <span class="nav-text">个人总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%8F%E7%AB%A0%E9%87%8D%E7%82%B9"><span class="nav-number">9.1.</span> <span class="nav-text">每章重点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#abstract-1"><span class="nav-number">9.1.1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction-1"><span class="nav-number">9.1.2.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#section"><span class="nav-number">9.1.3.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">9.2.</span> <span class="nav-text">问题</span></a></li></ol></li></ol></div>
+LISA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#theorem-1"><span class="nav-number">6.2.</span> <span class="nav-text">Theorem 1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#memorization-and-reasoning"><span class="nav-number">6.3.</span> <span class="nav-text">Memorization and Reasoning</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusion"><span class="nav-number">7.</span> <span class="nav-text">conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#limitations"><span class="nav-number">8.</span> <span class="nav-text">Limitations</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93"><span class="nav-number">9.</span> <span class="nav-text">个人总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%8F%E7%AB%A0%E9%87%8D%E7%82%B9"><span class="nav-number">9.1.</span> <span class="nav-text">每章重点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#abstract-1"><span class="nav-number">9.1.1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction-1"><span class="nav-number">9.1.2.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#related-works"><span class="nav-number">9.1.3.</span> <span class="nav-text">related works</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#parameter-efficient-fine-tuning"><span class="nav-number">9.1.3.1.</span> <span class="nav-text">parameter-efficient
+fine-tuning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#low-rank-adaptation"><span class="nav-number">9.1.3.2.</span> <span class="nav-text">low-rank adaptation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#large-scale-optimization-algorithms-1"><span class="nav-number">9.1.3.3.</span> <span class="nav-text">large-scale optimization
+algorithms</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#methods"><span class="nav-number">9.1.4.</span> <span class="nav-text">methods</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">9.2.</span> <span class="nav-text">问题</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -210,7 +212,7 @@ LISA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-07-22 11:18:30" itemprop="dateModified" datetime="2024-07-22T11:18:30+08:00">2024-07-22</time>
+      <time title="修改时间：2024-07-23 11:33:00" itemprop="dateModified" datetime="2024-07-23T11:33:00+08:00">2024-07-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -319,7 +321,7 @@ Bench中比LoRA提高了10 % ~ 35
 <h1 id="related-work">Related Work</h1>
 <h2 id="llm">LLM</h2>
 <p>模型中不断增长的参数数量导致了巨大的GPU内存消耗，使得在低资源场景下对大规模模型(≥65B
-)进行微调变得不可行。这促使LLMs的训练向更高效的方向转变。</p>
+)进行微调变得不可行。</p>
 <h2 id="peft">PEFT</h2>
 <p>参数有效微调( PEFT
 )方法通过仅对参数子集进行微调来适应预训练模型。一般而言，PEFT方法可以分为3类：</p>
@@ -331,7 +333,7 @@ Bench中比LoRA提高了10 % ~ 35
 <li>Selective methods
 与它们相比，选择性方法与LISA的关系更为密切，LISA侧重于在不增加额外模块的情况下优化模型参数的一部分。</li>
 </ol>
-<p>该领域的最新进展通过地层冻结引入了几个值得注意的技术：</p>
+<p>该领域的最新进展通过冻结layer引入了几个技术：</p>
 <ol type="1">
 <li>AutoFreeze 提供了一种自适应机制来自动识别冻结层，并加速训练过程</li>
 <li>FreezeOut逐步冻结中间层，在不显著影响准确率的情况下显著减少训练时间</li>
@@ -357,19 +359,28 @@ Bench中比LoRA提高了10 % ~ 35
 <h2 id="large-scale-optimization-algorithms">Large-scale Optimization
 Algorithms</h2>
 <ul>
-<li>除了改变模型结构的方法外，也有提高LLMs优化算法效率的努力。</li>
-<li>其中一种方法是逐层优化
+<li><p>除了改变模型结构的方法外，也有提高LLMs优化算法效率的努力。</p></li>
+<li><p>其中一种方法是逐层优化 layerwise optimization</p>
 <ul>
-<li>在大批量训练的背景下，开发了LARS和LAMB，以提高泛化能力并减轻与大批量训练相关的性能下降。</li>
-<li>尽管有这些创新，Adam 和Adam W
-仍然是大多数LLM设置中使用的主要优化方法。</li>
+<li>之前的逐层优化：证明逐层优化好
+<ul>
+<li>深度信念网络( Deep Belief Networks，DBN
+)引入了一种有效的逐层预训练方法，证明了顺序层优化的好处。</li>
+<li>这一想法被扩展后，他们说明了一种贪婪的、无监督的方法来预训练每一层深度网络的优势。</li>
 </ul></li>
-<li>最近，还进行了其他降低LLMs训练成本的尝试。
+</ul></li>
+<li><p>在大批量训练的背景下</p>
+<ul>
+<li>开发了LARS和LAMB(这两个都是优化算法)，以提高泛化能力并减轻与大批量训练相关的性能下降。</li>
+</ul></li>
+<li><p>尽管有这些创新，Adam 和Adam W
+仍然是大多数LLM设置中使用的主要优化方法。</p></li>
+<li><p>最近，还进行了其他降低LLMs训练成本的尝试。</p>
 <ul>
 <li>零阶优化MeZO，在训练过程中带来了显著的内存节省。然而，它在多个基准测试中也引起了相当大的性能下降，特别是在复杂的微调场景中。</li>
 <li>在加速方面，Sophia将裁剪后的二阶信息融入到优化中，在LLM训练上获得了非平凡的加速比。显著的缺点是其Hessian估计的内在复杂性和在大尺寸模型(例如,≥65B)中未被验证的经验性能。</li>
 </ul></li>
-<li>与我们的工作平行，提出了GaLore，一种存储高效训练策略，通过将梯度投影到低秩紧凑空间来降低内存开销。
+<li><p>与我们的工作平行，提出了GaLore，一种存储高效训练策略，通过将梯度投影到低秩紧凑空间来降低内存开销。</p>
 <ul>
 <li>然而，在微调设置中的性能仍然没有超过全参数训练。综上所述，LoRA-variant
 methods和Adam
@@ -378,19 +389,18 @@ W仍然是大尺度LLM微调的主导范式，其性能仍需进一步改进。<
 </ul>
 <p>Q:</p>
 <ol type="1">
-<li>LARS和LAMB是优化算法还是啥？</li>
-<li>这一段是对大规模优化算法的总结，所以提到的应该都是优化算法？</li>
-<li>所以这一段最后想说什么？</li>
+<li>改变模型结构的方法就是PEFT的吗？还是冻结？</li>
 </ol>
 <h1 id="method">Method</h1>
 <h2 id="motivation">Motivation</h2>
 <ol type="1">
-<li>为了了解LoRA如何仅用几个参数实现有效的训练，我们对多个模型进行了实证研究，特别是观察了不同层之间的权重规范。</li>
+<li>为了了解LoRA如何仅用几个参数实现有效的训练，对多个模型进行了实证研究，特别是观察了不同层之间的<strong>权重规范</strong>weight
+norms across various layers。</li>
 <li>数据集：在Alpaca - GPT4数据集上进行微调。</li>
 <li>在训练过程中，我们细致地记录了更新后每一步t的每一层l的平均权重范数，即:
 <span
 class="math display">\[\mathbf{w}^{(\ell)}\triangleq\text{mean-weight-norm}(\ell)=\frac1T\sum_{t=1}^T\|\theta_t^{(\ell)}\|_2
-\]</span></li>
+\]</span> 其中l是层数，t是step步数，theta是模型更新后的权重(?存疑)</li>
 <li>实验结果如下
 <ol type="1">
 <li>图2展示了这些发现，x轴代表层id，从嵌入权重(embedding
@@ -416,8 +426,8 @@ norm)，通常为数百倍。然而，这种现象在全参数训练设置下并
 </ol>
 <p>Q:</p>
 <ol type="1">
-<li>第三点的公式里面theta是什么？</li>
 <li>weight norm是什么</li>
+<li>图2右边的图为什么在LLaMA-2-7B上面没有出现跟左图一样的两层高，中间低的结果</li>
 </ol>
 <h2 id="layerwise-importance-sampled-adamw-lisa">Layerwise Importance
 Sampled AdamW (LISA)</h2>
@@ -667,7 +677,18 @@ Cheng et al . ,
 <p>lisa=逐层 重要性采样 用adamw</p>
 <h3 id="introduction-1">introduction</h3>
 <p>研究lora，发现逐层权重规范这个点，然后提出lisa</p>
-<h3 id="section"></h3>
+<h3 id="related-works">related works</h3>
+<p>这章是讲相关工作的，以此包括：LLM(研究领域)，PEFT方法(但是它不是只改了lora吗)，lora(依葫芦画瓢的葫芦)，大规模优化算法(搞优化的，反正最后作者还是用adamw了)
+#### Large language mnodels large scale：大于等于65B参数</p>
+<h4 id="parameter-efficient-fine-tuning">parameter-efficient
+fine-tuning</h4>
+<p>seletive methods和lisa关系最密切 还有一些freeze的技术</p>
+<h4 id="low-rank-adaptation">low-rank adaptation</h4>
+<p>lora：低秩矩阵，兼容性，可以不改变模型架构，但是比不上全参数微调</p>
+<h4 id="large-scale-optimization-algorithms-1">large-scale optimization
+algorithms</h4>
+<p>列举了一堆优化方法，一个都没印象orz</p>
+<h3 id="methods">methods</h3>
 <h2 id="问题">问题</h2>
 <ol type="1">
 <li>重要性采样值得看吗？</li>
