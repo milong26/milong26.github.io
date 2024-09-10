@@ -28,7 +28,7 @@
 <meta property="og:description" content="个人blog生成日志，防备以后需要">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-04T07:26:28.000Z">
-<meta property="article:modified_time" content="2024-05-28T02:53:48.885Z">
+<meta property="article:modified_time" content="2024-09-10T09:15:19.828Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="blog">
@@ -202,7 +202,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-28 10:53:48" itemprop="dateModified" datetime="2024-05-28T10:53:48+08:00">2024-05-28</time>
+      <time title="修改时间：2024-09-10 17:15:19" itemprop="dateModified" datetime="2024-09-10T17:15:19+08:00">2024-09-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -269,10 +269,10 @@ target="_blank" rel="noopener" href="https://theme-next.js.org/docs/getting-star
 <h1 id="配置">配置</h1>
 <h2 id="显示">显示</h2>
 <ol type="1">
-<li><p>首页里面放的正文太多了</p>
-<p>使用<code>&lt;!--more--&gt;</code>，可以直接放在模板里面。</p></li>
-<li><p>修改_config.yml</p>
-<p>修改author、语言、标题等</p></li>
+<li>首页里面放的正文太多了：使用<code>&lt;!--more--&gt;</code>，可以直接放在模板里面。</li>
+<li>修改_config.yml：修改author、语言、标题等</li>
+<li>按更新顺序排：修改源目录下，_modules-generator-index.js，改成
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&#x27;use strict&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> pagination = <span class="built_in">require</span>(<span class="string">&#x27;hexo-pagination&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="keyword">function</span>(<span class="params">locals</span>)&#123;</span><br><span class="line"><span class="keyword">var</span> config = <span class="variable language_">this</span>.<span class="property">config</span>;</span><br><span class="line"><span class="keyword">var</span> posts = locals.<span class="property">posts</span>.<span class="title function_">sort</span>(<span class="string">&#x27;-updated&#x27;</span>); <span class="comment">//修改这里！ 原代码为var posts = locals.posts.sort(&#x27;-date&#x27;);</span></span><br><span class="line"><span class="keyword">var</span> paginationDir = config.<span class="property">pagination_dir</span> || <span class="string">&#x27;page&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="title function_">pagination</span>(<span class="string">&#x27;&#x27;</span>, posts, &#123;</span><br><span class="line">   <span class="attr">perPage</span>: config.<span class="property">index_generator</span>.<span class="property">per_page</span>,</span><br><span class="line">   <span class="attr">layout</span>: [<span class="string">&#x27;index&#x27;</span>, <span class="string">&#x27;archive&#x27;</span>],</span><br><span class="line">   <span class="attr">format</span>: paginationDir + <span class="string">&#x27;/%d/&#x27;</span>,</span><br><span class="line">   <span class="attr">data</span>: &#123;</span><br><span class="line">      <span class="attr">__index</span>: <span class="literal">true</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 </ol>
 <h1 id="其它功能测试">其它功能测试</h1>
 <h2 id="数学公式">数学公式</h2>
