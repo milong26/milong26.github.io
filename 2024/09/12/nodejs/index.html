@@ -20,27 +20,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+    <meta name="description" content="安装、配置、更新nodejs的流程 但是我现在更新不了……重新配置一遍算了">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://zhon.fun/2024/03/17/hello-world/index.html">
+<meta property="og:title" content="nodejs">
+<meta property="og:url" content="http://zhon.fun/2024/09/12/nodejs/index.html">
 <meta property="og:site_name" content="RainBoarderSea">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta property="og:description" content="安装、配置、更新nodejs的流程 但是我现在更新不了……重新配置一遍算了">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-17T12:14:52.275Z">
-<meta property="article:modified_time" content="2024-05-21T02:24:46.299Z">
+<meta property="article:published_time" content="2024-09-12T03:34:24.000Z">
+<meta property="article:modified_time" content="2024-09-12T03:34:24.928Z">
 <meta property="article:author" content="milong26">
+<meta property="article:tag" content="conf">
+<meta property="article:tag" content="nodejs">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://zhon.fun/2024/03/17/hello-world/">
+<link rel="canonical" href="http://zhon.fun/2024/09/12/nodejs/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2024/03/17/hello-world/","path":"2024/03/17/hello-world/","title":"Hello World"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2024/09/12/nodejs/","path":"2024/09/12/nodejs/","title":"nodejs"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Hello World | RainBoarderSea</title>
+<title>nodejs | RainBoarderSea</title>
   
 
 
@@ -113,7 +115,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#create-a-new-post"><span class="nav-number">1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#run-server"><span class="nav-number">2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#generate-static-files"><span class="nav-number">3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deploy-to-remote-sites"><span class="nav-number">4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E4%BE%B5%E5%85%A5%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">非侵入式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0"><span class="nav-number">2.</span> <span class="nav-text">更新</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8n%E5%8D%87%E7%BA%A7"><span class="nav-number">2.1.</span> <span class="nav-text">用n升级</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E6%8A%A5%E9%94%99"><span class="nav-number">3.</span> <span class="nav-text">常见报错</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%B8%E8%BD%BDnodejs"><span class="nav-number">4.</span> <span class="nav-text">卸载nodejs</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -164,7 +166,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2024/03/17/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2024/09/12/nodejs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -177,12 +179,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Hello World | RainBoarderSea">
+      <meta itemprop="name" content="nodejs | RainBoarderSea">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          nodejs
         </h1>
 
         <div class="post-meta-container">
@@ -193,14 +195,16 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2024-03-17 20:14:52" itemprop="dateCreated datePublished" datetime="2024-03-17T20:14:52+08:00">2024-03-17</time>
+      <time title="创建时间：2024-09-12 11:34:24" itemprop="dateCreated datePublished" datetime="2024-09-12T11:34:24+08:00">2024-09-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
+        <i class="far fa-folder"></i>
       </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-21 10:24:46" itemprop="dateModified" datetime="2024-05-21T10:24:46+08:00">2024-05-21</time>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/it/" itemprop="url" rel="index"><span itemprop="name">it</span></a>
+        </span>
     </span>
 
   
@@ -212,29 +216,47 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very
-first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for
-more info. If you get any problems when using Hexo, you can find the
-answer in <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or
-you can ask me on <a
-target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>. <span id="more"></span> ##
-Quick Start</p>
-<h3 id="create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <div class="post-body" itemprop="articleBody"><p>安装、配置、更新nodejs的流程</p>
+<p>但是我现在更新不了……重新配置一遍算了</p>
+<span id="more"></span>
+<h1 id="安装">安装</h1>
+<h2 id="非侵入式">非侵入式</h2>
+<ul>
+<li>下载压缩包http://nodejs.cn/download/ 二进制文件</li>
+<li>解压后在解压出来的文件夹里面新建两个目录：
+<ul>
+<li>node-global :npm全局安装位置</li>
+<li>node-cache：npm 缓存路径</li>
+</ul></li>
+<li>配置环境变量Path D:-v14.16.0-win-x64</li>
+<li>cmd 中node -v有输出，🆗</li>
+<li>cmd进入node-v14.16.0-win-x64文件夹 npm下载慢：更换源
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm config set prefix &quot;D:\conf\nodejs\node-v20.17.0-win-x64\node-global&quot;</span><br><span class="line">npm config set cache &quot;D:\conf\nodejs\node-v20.17.0-win-x64\node-cache&quot;</span><br><span class="line">npm config set registry https://registry.npm.taobao.org</span><br><span class="line">npm install webpack -g </span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="更新">更新</h1>
+<h2 id="用n升级">用n升级</h2>
+<ul>
+<li><code>node -v</code> 查看当前版本</li>
+</ul>
+<h1 id="常见报错">常见报错</h1>
+<h1 id="卸载nodejs">卸载nodejs</h1>
+<p>1、输入命令：npm cache clean --force  </p>
+<p>2、从程序中卸载&amp;使用卸载程序的特性（如：控制面板中卸载删除）</p>
+<p>3、重新启动（或者您可以从任务管理器中删除所有与节点相关的进程）</p>
+<p>4、查找这些文件夹并删除它们（及其内容）（如果还存在）。根据您安装的版本、UAC设置和CPU体系结构，这些设置可能存在，也可能不存在：</p>
+<ol type="1">
+<li><p>C:Files (x86)</p></li>
+<li><p>C:Files</p></li>
+</ol>
+<p>(3) C:{User}（或%appdata%）</p>
+<ol start="4" type="1">
+<li><p>C:{User}-cache（或%appdata%-cache）</p></li>
+<li><p>C:{User}-*</p></li>
+</ol>
+<p>5、检查您的%PATH%环境变量以确保没有引用Nodejs或npm存在。</p>
+<p>6、如果是仍然未卸载，键入where
+node在命令提示符下，您将看到它所在的位置-也删除它(可能还有父目录)。</p>
+<p>7、重新启动，很好的措施。</p>
 
     </div>
 
@@ -243,19 +265,20 @@ target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/conf/" rel="tag"># conf</a>
+              <a href="/tags/nodejs/" rel="tag"># nodejs</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2024/03/06/softmax/" rel="prev" title="softmax">
-                  <i class="fa fa-angle-left"></i> softmax
+                <a href="/2024/08/31/%E6%AD%8C%E5%8D%95/" rel="prev" title="歌单">
+                  <i class="fa fa-angle-left"></i> 歌单
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/03/18/paper-Towards-A-Unified-View-Of-Parameter-Efficient-Transfer-Learning/" rel="next" title="paper|Towards A Unified View Of Parameter-Efficient Transfer Learning">
-                  paper|Towards A Unified View Of Parameter-Efficient Transfer Learning <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
