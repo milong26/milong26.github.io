@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="百篇paper计划(7&#x2F;100)，很短，才2页，重点在code和其project，理解transformer。论文是没啥创新点了，写得也比较拉，看看项目吧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TRANSFORMER EXPLAINER: Interactive Learning of Text-Generative Models">
+<meta property="og:url" content="http://zhon.fun/2024/09/13/TRANSFORMER-EXPLAINER-Interactive-Learning-of-Text-Generative-Models/index.html">
+<meta property="og:site_name" content="RainBoarderSea">
+<meta property="og:description" content="百篇paper计划(7&#x2F;100)，很短，才2页，重点在code和其project，理解transformer。论文是没啥创新点了，写得也比较拉，看看项目吧。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-13T02:12:29.000Z">
+<meta property="article:modified_time" content="2024-09-13T02:12:29.941Z">
+<meta property="article:author" content="milong26">
+<meta property="article:tag" content="transformer">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhon.fun/2024/09/13/TRANSFORMER-EXPLAINER-Interactive-Learning-of-Text-Generative-Models/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2024/09/13/TRANSFORMER-EXPLAINER-Interactive-Learning-of-Text-Generative-Models/","path":"2024/09/13/TRANSFORMER-EXPLAINER-Interactive-Learning-of-Text-Generative-Models/","title":"TRANSFORMER EXPLAINER: Interactive Learning of Text-Generative Models"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>TRANSFORMER EXPLAINER: Interactive Learning of Text-Generative Models | RainBoarderSea</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">RainBoarderSea</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">何几久其世一生人</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E6%BA%90%E7%9A%84%E5%9F%BA%E4%BA%8Eweb%E7%9A%84%E9%9D%A2%E5%90%91%E9%9D%9E%E4%B8%93%E4%B8%9A%E4%BA%BA%E5%A3%AB%E7%9A%84%E4%BA%A4%E4%BA%92%E5%BC%8F%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B7%A5%E5%85%B7"><span class="nav-number">2.1.</span> <span class="nav-text">开源的、基于Web的、面向非专业人士的交互式可视化工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E6%BA%90%E7%9A%84%E5%9F%BA%E4%BA%8Eweb%E7%9A%84%E5%AE%9E%E6%97%B6%E6%8E%A8%E7%90%86%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.2.</span> <span class="nav-text">开源的、基于Web的实时推理的实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">系统设计与实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%A4%9A%E5%B1%82%E6%AC%A1%E6%8A%BD%E8%B1%A1%E9%99%8D%E4%BD%8E%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">3.1.</span> <span class="nav-text">通过多层次抽象降低复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E4%BA%92%E5%8A%A8%E5%A2%9E%E8%BF%9B%E7%90%86%E8%A7%A3%E5%92%8C%E5%8F%82%E4%B8%8E%E5%BA%A6"><span class="nav-number">3.2.</span> <span class="nav-text">通过互动增进理解和参与度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A3%E5%9C%A8%E8%BF%9B%E8%A1%8C%E7%9A%84%E5%B7%A5%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">正在进行的工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#code"><span class="nav-number">5.</span> <span class="nav-text">code</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#model.py"><span class="nav-number">5.1.</span> <span class="nav-text">model.py</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#layernorm"><span class="nav-number">5.1.1.</span> <span class="nav-text">layernorm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#causalselfattention"><span class="nav-number">5.1.2.</span> <span class="nav-text">CausalSelfAttention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mlp"><span class="nav-number">5.1.3.</span> <span class="nav-text">MLP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transformer-blcok"><span class="nav-number">5.1.4.</span> <span class="nav-text">transformer blcok</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gptconfig"><span class="nav-number">5.1.5.</span> <span class="nav-text">GPTConfig</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gpt"><span class="nav-number">5.1.6.</span> <span class="nav-text">GPT</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">milong26</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2024/09/13/TRANSFORMER-EXPLAINER-Interactive-Learning-of-Text-Generative-Models/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="milong26">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RainBoarderSea">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="TRANSFORMER EXPLAINER: Interactive Learning of Text-Generative Models | RainBoarderSea">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          TRANSFORMER EXPLAINER: Interactive Learning of Text-Generative Models
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-09-13 10:12:29" itemprop="dateCreated datePublished" datetime="2024-09-13T10:12:29+08:00">2024-09-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>百篇paper计划(7/100)，很短，才2页，重点在code和其project，理解transformer。论文是没啥创新点了，写得也比较拉，看看项目吧。
+<span id="more"></span></p>
+<ul>
+<li>论文标题：TRANSFORMER EXPLAINER: Interactive Learning of
+Text-Generative Models</li>
+<li>code：<a
+target="_blank" rel="noopener" href="https://github.com/poloclub/transformer-explainer">github</a></li>
+<li>rank: none</li>
+<li>打标签：transformer可视化</li>
+<li>时间：2024年8月8日</li>
+</ul>
+<h1 id="abstract">abstract</h1>
+<p>TRANSFORMER
+EXPLAINER是交互式可视化工具，通过GPT-2模型让普通人看懂transformer怎么运行的。</p>
+<blockquote>
+<p>很适合用来科普呢……</p>
+</blockquote>
+<h1 id="introduction">introduction</h1>
+<p>要可视化，作者提了3个贡献</p>
+<h2
+id="开源的基于web的面向非专业人士的交互式可视化工具">开源的、基于Web的、面向非专业人士的交互式可视化工具</h2>
+<ul>
+<li>学习transformer的高层模型结构和低层数学运算</li>
+<li>Sankey diagram 可视化设计，强调输入数据如何通过模型的组件"流动"</li>
+</ul>
+<h2
+id="开源的基于web的实时推理的实现">开源的、基于Web的实时推理的实现</h2>
+<p>GPT-2和GPT-3/4有相似的结构</p>
+<h1 id="系统设计与实现">系统设计与实现</h1>
+<p>前端使用Svelte和D3进行交互可视化，后端使用ONNX
+runtime和HuggedFace的Transformers库在浏览器中运行GPT - 2模型。</p>
+<p>难点在于管理底层架构的复杂性，不能显示太多细节。</p>
+<h2 id="通过多层次抽象降低复杂度">通过多层次抽象降低复杂度</h2>
+<p>为了展现不同的抽象层次，将工具结构化。</p>
+<ul>
+<li>工具的完整pipeline：从将用户提供的文本作为输入，将其嵌入，通过多个Transformer块进行处理，到使用转换后的数据对最可能的下一个标记预测进行排序。</li>
+<li>中间操作，如注意力矩阵的计算(图1C
+)，默认为折叠，以可视化计算结果的显著性，并可扩展到通过动画序列检查其推导。</li>
+<li>我们使用了一致的可视化语言，例如堆叠注意力头(stacking Attention
+Heads)和折叠重复的Transformer
+Block，帮助用户识别架构中的重复模式，同时保持数据的端到端流动。</li>
+</ul>
+<h2 id="通过互动增进理解和参与度">通过互动增进理解和参与度</h2>
+<p>温度(temperature)参数在控制transformer输出概率分布方面至关重要，影响下一阶段的预测是更确定的(在低温下)还是随机的(高温)。也就是控制the
+prediction determinism</p>
+<h1 id="正在进行的工作">正在进行的工作</h1>
+<p>我们正在增强该工具的交互式解释（例如，图层标准化），以改善学习体验。我们还使用
+WebGPU
+提高推理速度，并通过压缩技术（例如量化quantization、淡化palettization）减小模型大小。</p>
+<h1 id="code">code</h1>
+<p>需要Node.js v20 or higher+NPM v10 or
+higher的环境，可惜代码我跑不起来，提交issue了，不知道能不能解决</p>
+<p>代码主要看-explainer</p>
+<h2 id="model.py">model.py</h2>
+<p>一共包含6个class</p>
+<h3 id="layernorm">layernorm</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">LayerNorm</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, ndim, bias</span>):</span><br><span class="line">        <span class="comment"># 初始化，weight都是1，bias都是0/None</span></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.weight = nn.Parameter(torch.ones(ndim))</span><br><span class="line">        self.bias = nn.Parameter(torch.zeros(ndim)) <span class="keyword">if</span> bias <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line">        self.epsilon = <span class="number">1e-5</span></span><br><span class="line">        <span class="comment"># self.dict = &#123;&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, <span class="built_in">input</span></span>):</span><br><span class="line">        layer_norm = F.layer_norm(<span class="built_in">input</span>, self.weight.shape, self.weight, self.bias, self.epsilon)</span><br><span class="line">    </span><br><span class="line">        <span class="comment"># Compute mean and variance</span></span><br><span class="line">        <span class="comment"># dim=-1表示按行求，keepdim</span></span><br><span class="line">        <span class="comment"># keepdim（bool）– 保持输出的维度</span></span><br><span class="line">        <span class="comment"># 当keepdim=False时，输出比输入少一个维度（就是指定的dim求范数的维度）</span></span><br><span class="line">        <span class="comment"># keepdim=True时，输出与输入维度相同，仅仅是输出在求范数的维度上元素个数变为1。</span></span><br><span class="line">        input_mean = <span class="built_in">input</span>.mean(dim=-<span class="number">1</span>, keepdim=<span class="literal">True</span>)</span><br><span class="line">        <span class="comment"># torch.std默认设置了unbiased=True。此时计算标准差的公式则使用贝塞尔校正 的方法</span></span><br><span class="line">        <span class="comment"># 贝塞尔校正就是前面会除以(n-1)</span></span><br><span class="line">        input_var = <span class="built_in">input</span>.var(dim=-<span class="number">1</span>, unbiased=<span class="literal">False</span>, keepdim=<span class="literal">True</span>)</span><br><span class="line">        input_normalized = (<span class="built_in">input</span> - input_mean) / torch.sqrt(input_var + self.epsilon)</span><br><span class="line">        <span class="comment"># Store values</span></span><br><span class="line">        <span class="comment"># self.dict.update(&#123;</span></span><br><span class="line">        <span class="comment">#     &#x27;input_mean&#x27;: input_mean,</span></span><br><span class="line">        <span class="comment">#     &#x27;input_var&#x27;: input_var,</span></span><br><span class="line">        <span class="comment">#     &#x27;input_normalized&#x27;: input_normalized,</span></span><br><span class="line">        <span class="comment">#     &#x27;weight&#x27;: self.weight,</span></span><br><span class="line">        <span class="comment">#     &#x27;bias&#x27;: self.bias,</span></span><br><span class="line">        <span class="comment">#     &#x27;output&#x27;: layer_norm</span></span><br><span class="line">        <span class="comment"># &#125;)</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> layer_norm</span><br></pre></td></tr></table></figure>
+<h3 id="causalselfattention">CausalSelfAttention</h3>
+<h3 id="mlp">MLP</h3>
+<h3 id="transformer-blcok">transformer blcok</h3>
+<h3 id="gptconfig">GPTConfig</h3>
+<h3 id="gpt">GPT</h3>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/transformer/" rel="tag"># transformer</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/12/nodejs/" rel="prev" title="nodejs">
+                  <i class="fa fa-angle-left"></i> nodejs
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">milong26</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
