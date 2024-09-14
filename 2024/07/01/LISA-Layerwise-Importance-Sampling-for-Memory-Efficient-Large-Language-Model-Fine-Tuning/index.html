@@ -20,16 +20,16 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="百篇paper计划(6&#x2F;100)，好像是LoRA的改进，我随便找的，而且这篇还没投会议呢 参考阅读https:&#x2F;&#x2F;www.jiqizhixin.com&#x2F;articles&#x2F;2024-04-01-13 这一篇也是微调，改lora">
+    <meta name="description" content="百篇paper计划(6&#x2F;100)，好像是LoRA的改进，随便找的，而且这篇还没投会议呢。 参考阅读https:&#x2F;&#x2F;www.jiqizhixin.com&#x2F;articles&#x2F;2024-04-01-13 这一篇也是微调，改lora">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LISA: Layerwise Importance Sampling for Memory-Efficient Large Language Model Fine-Tuning">
 <meta property="og:url" content="http://zhon.fun/2024/07/01/LISA-Layerwise-Importance-Sampling-for-Memory-Efficient-Large-Language-Model-Fine-Tuning/index.html">
 <meta property="og:site_name" content="RainBoarderSea">
-<meta property="og:description" content="百篇paper计划(6&#x2F;100)，好像是LoRA的改进，我随便找的，而且这篇还没投会议呢 参考阅读https:&#x2F;&#x2F;www.jiqizhixin.com&#x2F;articles&#x2F;2024-04-01-13 这一篇也是微调，改lora">
+<meta property="og:description" content="百篇paper计划(6&#x2F;100)，好像是LoRA的改进，随便找的，而且这篇还没投会议呢。 参考阅读https:&#x2F;&#x2F;www.jiqizhixin.com&#x2F;articles&#x2F;2024-04-01-13 这一篇也是微调，改lora">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ooo.0x0.ooo/2024/07/02/OPguti.png">
 <meta property="article:published_time" content="2024-07-01T03:45:24.000Z">
-<meta property="article:modified_time" content="2024-09-14T02:33:58.711Z">
+<meta property="article:modified_time" content="2024-09-14T03:03:57.895Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="llm">
 <meta property="article:tag" content="LoRA">
@@ -212,7 +212,7 @@ algorithms</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="n
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-09-14 10:33:58" itemprop="dateModified" datetime="2024-09-14T10:33:58+08:00">2024-09-14</time>
+      <time title="修改时间：2024-09-14 11:03:57" itemprop="dateModified" datetime="2024-09-14T11:03:57+08:00">2024-09-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -233,7 +233,7 @@ algorithms</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="n
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>百篇paper计划(6/100)，好像是LoRA的改进，我随便找的，而且这篇还没投会议呢
+    <div class="post-body" itemprop="articleBody"><p>百篇paper计划(6/100)，好像是LoRA的改进，随便找的，而且这篇还没投会议呢。
 参考阅读https://www.jiqizhixin.com/articles/2024-04-01-13</p>
 <p>这一篇也是微调，改lora</p>
 <span id="more"></span>
@@ -241,39 +241,26 @@ algorithms</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="n
 <li>论文标题：LISA: Layerwise Importance Sampling for Memory-Efficient
 Large Language Model Fine-Tuning</li>
 <li>code：<a target="_blank" rel="noopener" href="https://github.com/osehmathias/lisa">github</a></li>
-<li>rank:</li>
 <li>打标签：微调</li>
 <li>时间：2024年5月28日</li>
 </ul>
+<p>因为重点是论文的idea和实现过程，实验结果不包括分析的话就删节掉了。</p>
 <h1 id="abstract">abstract</h1>
 <ol type="1">
-<li>问题：LLM消耗大量存储</li>
-<li>同行
-<ol type="1">
-<li>低秩自适应( Low-Rank Adapting，LoRA )等参数高效微调技术</li>
-<li>问题：不够完全参数训练，因为peft将参数搜索限制在低秩子空间中。</li>
-</ol></li>
+<li>同行：低秩自适应( Low-Rank Adapting，LoRA
+)，不够完全参数训练，因为lora将参数搜索限制在低秩子空间中。</li>
 <li>理论研究
 <ol type="1">
-<li>研究LoRA在微调任务上的逐层性质(layerwise properties)</li>
+<li>LoRA在微调任务上的逐层性质(layerwise properties)</li>
 <li>观察到不同层之间权重范数的意外但一致的偏度unexpected but consistent
 skewness of weight norms across different layers</li>
 </ol></li>
 <li>成果
 <ol type="1">
-<li>简单训练策略逐层法Importance Sampled AdamW ( LISA
-)，这是LoRA的一个很有前途的替代方案，</li>
-<li>在广泛的设置中优于LoRA和全参数训练，并且内存成本与LoRA一样低。</li>
+<li>Layerwise Importance Sampled AdamW ( LISA )，lora的替代方案</li>
+<li>在广泛设置中优于LoRA和全参数训练，并且内存成本与LoRA一样低。</li>
 <li>将重要性采样(importance
 sampling)的思想应用于LLMs中的不同层，并在优化过程中随机冻结(freeze)大多数中间层。</li>
-</ol></li>
-<li>实验结果
-<ol type="1">
-<li>在GPU内存消耗相近或更少的情况下，LISA在下游微调任务中优于LoRA甚至全参数调优，其中在MT
-- Bench评分方面LISA始终优于LoRA超过10 % - 35
-%，同时在MMLU、AGIEval和WinoGrande中达到了相当或更好的性能。</li>
-<li>在大型模型上，特别是LLaMA - 2 - 70B，LISA在MT -
-Bench、GSM8K和PubMedQA上都超过了LoRA，证明了其在不同领域的有效性。</li>
 </ol></li>
 </ol>
 <h1 id="introduction">Introduction</h1>
@@ -283,57 +270,53 @@ Bench、GSM8K和PubMedQA上都超过了LoRA，证明了其在不同领域的有�
 <ol type="1">
 <li>adapter weights</li>
 <li>prompt weights</li>
-<li>LoRA(因其独特的将适配器合并回基模型参数的能力而脱颖而出，成为应用最广泛的方法之一，显著提高了效率。)</li>
+<li>LoRA(因其独特的将适配器合并回基模型参数的能力而脱颖而出)</li>
 </ol></li>
 <li>LoRA的问题：
 <ol type="1">
-<li>LoRA
-在微调任务中的性能尚未达到在所有设置中普遍超越全参数微调的程度。</li>
-<li>特别地，在不断预训练的过程中，观察到LoRA在大规模数据集上往往会表现得步履蹒跚，这使得人们对LoRA在这种情况下的有效性产生了怀疑。</li>
+<li>没法在所有设置中超越全参</li>
+<li>大规模数据集上表现不行</li>
 <li>我们将这归因于LoRA的可训练参数比基模型少得多，这限制了LoRA训练的表示能力。</li>
 </ol></li>
 <li>研究LoRA
 <ol type="1">
-<li>深入研究了LoRA在每一层的训练统计量，致力于弥合LoRA和全参数微调之间的差异。</li>
-<li>令人惊讶的是，我们发现LoRA的逐层权重规范(layerwise weight
+<li>研究了LoRA在每一层的训练统计量</li>
+<li>发现LoRA的逐层权重规范(layerwise weight
 norms)具有不寻常的偏态分布(skewed
 distribution)，其中底层和/或顶层在更新期间占据了大部分权重。</li>
 <li>相比之下，其他的自注意力层只占少量，这意味着不同的层在更新时具有不同的重要性。</li>
-<li>这个关键的观察启发我们根据不同层的重要性来"采样"，这与重要性采样的思想相吻合。</li>
+<li>根据不同层的重要性来"采样"，重要性采样的思想</li>
 </ol></li>
-<li>本文成果
+<li>成果
 <ol type="1">
 <li>逐层法Importance Sampled Adam ( LISA )算法</li>
 <li>通过选择性地更新仅重要的LLM层而不接触其他层，LISA能够以较少或类似于LoRA的内存消耗来训练大规模语言模型(≥65B参数)。</li>
-<li>此外，在下游任务上进行微调后，LISA的性能大大优于LoRA和传统的全参数微调方法，这表明LISA作为LoRA的一种有前途的替代方法具有很大的潜力。</li>
+<li>在下游任务上进行微调后，LISA的性能优于LoRA和传统的全参数微调方法</li>
 </ol></li>
 <li>贡献
 <ol type="1">
-<li>我们在LoRA中发现了跨层的权重范数分布倾斜的现象，这意味着不同层在大规模LLM训练中的重要性不同</li>
-<li>我们提出了逐层法Importance Sampled Adam W ( LISA
+<li>在LoRA中发现了跨层的权重范数分布倾斜的现象，这意味着不同层在大规模LLM训练中的重要性不同</li>
+<li>提出了逐层法Importance Sampled Adam W ( LISA
 )，这是一种简单的优化方法，能够以更少或类似于LoRA的内存成本扩展多达70B个LLM</li>
-<li>我们展示了LISA在现代LLM微调任务中的有效性，在MT -
-Bench中比LoRA提高了10 % ~ 35
-%，并在多个基准测试中取得了更好的性能.此外，LISA表现出比LoRA更好的收敛行为。在某些设定下，LISA甚至优于全参数训练。在不同规模的模型(
-7B ~ 70B )和任务（包括指令跟随、医疗问答和数学问题）</li>
+<li>展示了LISA在现代LLM微调任务中的有效性，LISA表现出比LoRA更好的收敛行为。</li>
 </ol></li>
 </ol>
 <h1 id="related-work">Related Work</h1>
+<p>这一章的内容不是很重点，就是相关技术和目前进展而已，主要设计lora+冻结。</p>
 <h2 id="llm">LLM</h2>
-<p>模型中不断增长的参数数量导致了巨大的GPU内存消耗，使得在低资源场景下对大规模模型(≥65B
-)进行微调变得不可行。</p>
+<p>低资源场景下对大规模模型(≥65B )进行微调变得不可行。</p>
 <h2 id="peft">PEFT</h2>
 <p>参数有效微调( PEFT
-)方法通过仅对参数子集进行微调来适应预训练模型。一般而言，PEFT方法可以分为3类：</p>
+)方法通过仅对参数子集进行微调来适应预训练模型。可以分为3类：</p>
 <ol type="1">
 <li>Prompt Learning methods
 强调用冻结的模型参数优化输入令牌或输入嵌入，通常在所有三种类型中具有最小的训练成本。</li>
 <li>Adapter methods
-通常会引入比原始模型参数少得多的辅助模块，在训练时只对适配器模块进行更新。</li>
+会引入比原始模型参数少得多的辅助模块，在训练时只对适配器模块进行更新。</li>
 <li>Selective methods
 与它们相比，选择性方法与LISA的关系更为密切，LISA侧重于在不增加额外模块的情况下优化模型参数的一部分。</li>
 </ol>
-<p>该领域的最新进展通过冻结layer引入了几个技术：</p>
+<p>通过冻结layer引入了几个技术：</p>
 <ol type="1">
 <li>AutoFreeze 提供了一种自适应机制来自动识别冻结层，并加速训练过程</li>
 <li>FreezeOut逐步冻结中间层，在不显著影响准确率的情况下显著减少训练时间</li>
@@ -342,13 +325,13 @@ Bench中比LoRA提高了10 % ~ 35
 </ol>
 <h2 id="lora">LoRA</h2>
 <ol type="1">
-<li>相比之下，低秩自适应( Low-Rank Adaptation，LoRA
+<li>低秩自适应( Low-Rank Adaptation，LoRA
 )技术在普通的LLM训练中更为普遍。</li>
 <li>技术原理：LoRA通过使用低秩矩阵来减少可训练参数的数量，从而减少计算负担和内存成本。</li>
 <li>优点
 <ol type="1">
 <li>一个关键优势是它与具有线性层的模型的兼容性，其中分解后的低秩矩阵可以合并回原始模型。这样可以在不改变模型架构的情况下进行高效的部署。</li>
-<li>因此，LoRA可以与其他技术无缝结合，如量化quantization或混合专家(MoE)。</li>
+<li>LoRA可以与其他技术无缝结合，如量化quantization或混合专家(MoE)。</li>
 </ol></li>
 <li>缺点
 <ol type="1">
@@ -359,38 +342,32 @@ Bench中比LoRA提高了10 % ~ 35
 <h2 id="large-scale-optimization-algorithms">Large-scale Optimization
 Algorithms</h2>
 <ul>
-<li><p>除了改变模型结构的方法外，也有提高LLMs优化算法效率的努力。</p></li>
-<li><p>其中一种方法是逐层优化 layerwise optimization</p>
+<li>除了改变模型结构的方法外，也有提高LLMs优化算法效率的努力。</li>
+<li>其中一种方法是逐层优化 layerwise optimization
 <ul>
-<li>之前的逐层优化：证明逐层优化好
+<li>之前的逐层优化
 <ul>
 <li>深度信念网络( Deep Belief Networks，DBN
 )引入了一种有效的逐层预训练方法，证明了顺序层优化的好处。</li>
 <li>这一想法被扩展后，他们说明了一种贪婪的、无监督的方法来预训练每一层深度网络的优势。</li>
 </ul></li>
 </ul></li>
-<li><p>在大批量训练的背景下</p>
+<li>在大批量训练的背景下
 <ul>
 <li>开发了LARS和LAMB(这两个都是优化算法)，以提高泛化能力并减轻与大批量训练相关的性能下降。</li>
 </ul></li>
-<li><p>尽管有这些创新，Adam 和Adam W
-仍然是大多数LLM设置中使用的主要优化方法。</p></li>
-<li><p>最近，还进行了其他降低LLMs训练成本的尝试。</p>
+<li>尽管有这些创新，Adam 和Adam W
+仍然是大多数LLM设置中使用的主要优化方法。</li>
+</ul>
+<p>其他降低LLMs训练成本的尝试：</p>
 <ul>
 <li>零阶优化MeZO，在训练过程中带来了显著的内存节省。然而，它在多个基准测试中也引起了相当大的性能下降，特别是在复杂的微调场景中。</li>
 <li>在加速方面，Sophia将裁剪后的二阶信息融入到优化中，在LLM训练上获得了非平凡的加速比。显著的缺点是其Hessian估计的内在复杂性和在大尺寸模型(例如,≥65B)中未被验证的经验性能。</li>
-</ul></li>
-<li><p>与我们的工作平行，提出了GaLore，一种存储高效训练策略，通过将梯度投影到低秩紧凑空间来降低内存开销。</p>
-<ul>
+<li>与我们的工作平行，提出了GaLore，一种存储高效训练策略，通过将梯度投影到低秩紧凑空间来降低内存开销。</li>
 <li>然而，在微调设置中的性能仍然没有超过全参数训练。综上所述，LoRA-variant
 methods和Adam
 W仍然是大尺度LLM微调的主导范式，其性能仍需进一步改进。</li>
-</ul></li>
 </ul>
-<p>Q:</p>
-<ol type="1">
-<li>改变模型结构的方法就是PEFT的吗？还是冻结？</li>
-</ol>
 <h1 id="method">Method</h1>
 <h2 id="motivation">Motivation</h2>
 <ol type="1">
