@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="百篇paper计划(10&#x2F;100)，关于持续性，不知道对我有没有启发，先看看吧。 这一篇的实验要求比较高，不精读了，看思想。它有个前提是jacobi方法，没这个基础的话看不太懂。 做的是大模型** 更快 **方向的改进。">
+    <meta name="description" content="百篇paper计划(10&#x2F;100)，关于持续性，不知道对我有没有启发，先看看吧。 这一篇的实验要求比较高，不精读了，看思想。它有个前提是jacobi方法，没这个基础的话看不太懂。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CLLMs: Consistency Large Language Models">
 <meta property="og:url" content="http://zhon.fun/2024/10/22/CLLMs-Consistency-Large-Language-Models/index.html">
 <meta property="og:site_name" content="没啥标题">
-<meta property="og:description" content="百篇paper计划(10&#x2F;100)，关于持续性，不知道对我有没有启发，先看看吧。 这一篇的实验要求比较高，不精读了，看思想。它有个前提是jacobi方法，没这个基础的话看不太懂。 做的是大模型** 更快 **方向的改进。">
+<meta property="og:description" content="百篇paper计划(10&#x2F;100)，关于持续性，不知道对我有没有启发，先看看吧。 这一篇的实验要求比较高，不精读了，看思想。它有个前提是jacobi方法，没这个基础的话看不太懂。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-10-22T07:59:04.000Z">
-<meta property="article:modified_time" content="2024-10-22T09:00:43.891Z">
+<meta property="article:modified_time" content="2024-10-22T09:27:04.582Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="consistency llm">
 <meta name="twitter:card" content="summary">
@@ -195,7 +195,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-10-22 15:59:04 / 修改时间：17:00:43" itemprop="dateCreated datePublished" datetime="2024-10-22T15:59:04+08:00">2024-10-22</time>
+      <time title="创建时间：2024-10-22 15:59:04 / 修改时间：17:27:04" itemprop="dateCreated datePublished" datetime="2024-10-22T15:59:04+08:00">2024-10-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -217,15 +217,19 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>百篇paper计划(10/100)，关于持续性，不知道对我有没有启发，先看看吧。</p>
-<p>这一篇的实验要求比较高，不精读了，看思想。它有个前提是jacobi方法，没这个基础的话看不太懂。</p>
-<p>做的是大模型** 更快 **方向的改进。 <span id="more"></span></p>
+<p>这一篇的实验要求比较高，不精读了，看思想。它有个前提是jacobi方法，没这个基础的话看不太懂。
+<span id="more"></span></p>
 <ul>
 <li>title: CLLMs: Consistency Large Language Models</li>
 <li>rank: In the proceedings of the 41st International Conference on
 Machine Learning (ICML) 2024</li>
 <li>code: <a
 target="_blank" rel="noopener" href="https://github.com/hao-ailab/Consistency%20LLM">github</a></li>
-<li>tag: 持续性，降低延迟的</li>
+<li>tag:
+<ul>
+<li>更快</li>
+<li>推理过程</li>
+</ul></li>
 <li>time: 2024年2月28日(latest)</li>
 </ul>
 <h1 id="abstract">abstract</h1>
@@ -337,7 +341,7 @@ pass）只能生成一个token，因为每个y都是根据前面的求出来的�
 i=1,...,n\)</span></li>
 <li>定义：Jacobi decoding
 是一种用于稀疏图码的迭代译码算法。它的灵感来源于 Jacobi
-方法，该方法最初用于求解线性方程组，是一种并行更新的解码技术。它一步可以产生多个token</li>
+方法，该方法最初用于求解非线性方程组，是一种并行更新的解码技术。它一步可以产生多个token</li>
 <li>具体计算过程
 <ol type="1">
 <li>把前任的yi计算公式换成f=yi-argmax...的形式，就变成f=0的这个非线性方程组</li>
@@ -722,7 +726,15 @@ token序列作为训练样本。这可以去除Jacobi轨迹收集开销，使得
 <p>重点为第三节 methodology</p>
 <h3 id="jacobi">jacobi</h3>
 <ol type="1">
-<li>传统的自回归AR，来源于jacobi求解线性方程组，可以一步产生多个token</li>
+<li>优点：可以并行求解，每步可以预测出多个token，并且在贪婪采样策略下雨ar解码结果一致。所以jacobi好啊，为啥我没看到有人解说它这个方法？</li>
+<li>过程（没有仔细阅读jacobi那篇论文，稍微说一下）
+<ol type="1">
+<li>一句话说明一下，把自回归的过程看作是联立方程组求解（即从之前的输入中找概率最大的=输出，并将其加入进行下一步预测）自行迭代的方求解，因为是greedy
+decoing，所以每次迭代至少能获得一个稳定的token，这样迭代次数肯定小于等于方程的个数</li>
+<li>首先从输入提示中随机猜测序列的下一个token（以下简称为n
+-token序列，除非另有说明）</li>
+</ol></li>
+<li>缺点：</li>
 </ol>
 <h3 id="cllms-1">cllms</h3>
 <ol type="1">
