@@ -28,7 +28,7 @@
 <meta property="og:description" content="百篇paper计划(10&#x2F;100)，关于持续性，不知道对我有没有启发，先看看吧。 这一篇的实验要求比较高，不精读了，看思想。它有个前提是jacobi方法，没这个基础的话看不太懂。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-10-22T07:59:04.000Z">
-<meta property="article:modified_time" content="2024-10-22T09:27:04.582Z">
+<meta property="article:modified_time" content="2024-10-23T07:27:39.677Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="consistency llm">
 <meta name="twitter:card" content="summary">
@@ -114,7 +114,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#related-work"><span class="nav-number">3.</span> <span class="nav-text">related work</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E6%95%88%E7%9A%84llm%E6%8E%A8%E7%90%86"><span class="nav-number">3.1.</span> <span class="nav-text">高效的llm推理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#llm%E8%92%B8%E9%A6%8F"><span class="nav-number">3.2.</span> <span class="nav-text">LLM蒸馏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.3.</span> <span class="nav-text">一致性模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#methodology"><span class="nav-number">4.</span> <span class="nav-text">Methodology</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#jacobi%E8%A7%A3%E7%A0%81%E6%96%B9%E6%B3%95"><span class="nav-number">4.1.</span> <span class="nav-text">Jacobi解码方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cllms"><span class="nav-number">4.2.</span> <span class="nav-text">CLLMs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jacobi%E8%BD%A8%E8%BF%B9%E9%87%87%E9%9B%86"><span class="nav-number">4.2.1.</span> <span class="nav-text">Jacobi轨迹采集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83"><span class="nav-number">4.2.2.</span> <span class="nav-text">训练</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E6%8D%9F%E5%A4%B1"><span class="nav-number">4.2.2.1.</span> <span class="nav-text">一致性损失</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ar-%E6%8D%9F%E5%A4%B1"><span class="nav-number">4.2.2.2.</span> <span class="nav-text">AR 损失</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cllms%E4%B8%AD%E9%97%B4%E7%9A%84%E5%8A%A0%E9%80%9F%E6%9C%BA%E5%88%B6"><span class="nav-number">4.3.</span> <span class="nav-text">CLLMs中间的加速机制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">5.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0"><span class="nav-number">5.1.</span> <span class="nav-text">评估</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#benchmarks-and-setup"><span class="nav-number">5.1.1.</span> <span class="nav-text">Benchmarks and Setup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#baseline"><span class="nav-number">5.1.2.</span> <span class="nav-text">baseline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C"><span class="nav-number">5.1.3.</span> <span class="nav-text">结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cllms%E4%B8%AD%E7%9A%84%E5%8A%A0%E9%80%9F%E6%9C%BA%E5%88%B6"><span class="nav-number">5.2.</span> <span class="nav-text">Cllms中的加速机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C"><span class="nav-number">5.3.</span> <span class="nav-text">消融实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E8%A7%84%E6%A8%A1%E5%92%8C%E5%8F%AF%E6%8E%A8%E5%B9%BF%E6%80%A7"><span class="nav-number">5.3.1.</span> <span class="nav-text">数据集规模和可推广性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E9%95%BF%E5%BA%A6%E7%9A%84n---token%E5%BA%8F%E5%88%97"><span class="nav-number">5.3.2.</span> <span class="nav-text">不同长度的n - token序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E8%AE%BE%E8%AE%A1"><span class="nav-number">5.3.3.</span> <span class="nav-text">损失设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#limitations-and-discussion"><span class="nav-number">5.4.</span> <span class="nav-text">Limitations and Discussion</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusion"><span class="nav-number">6.</span> <span class="nav-text">conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#self"><span class="nav-number">7.</span> <span class="nav-text">self</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E5%95%A5"><span class="nav-number">7.1.</span> <span class="nav-text">做啥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%92%8B%E5%81%9A"><span class="nav-number">7.2.</span> <span class="nav-text">咋做</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jacobi"><span class="nav-number">7.2.1.</span> <span class="nav-text">jacobi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cllms-1"><span class="nav-number">7.2.2.</span> <span class="nav-text">cllms</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E8%BF%9B%E5%92%8C%E9%A9%BB%E7%95%99%E4%BB%A4%E7%89%8C%E7%8E%B0%E8%B1%A1"><span class="nav-number">7.2.3.</span> <span class="nav-text">快进和驻留令牌现象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E8%AF%81"><span class="nav-number">7.3.</span> <span class="nav-text">实证</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#related-work"><span class="nav-number">3.</span> <span class="nav-text">related work</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E6%95%88%E7%9A%84llm%E6%8E%A8%E7%90%86"><span class="nav-number">3.1.</span> <span class="nav-text">高效的llm推理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#llm%E8%92%B8%E9%A6%8F"><span class="nav-number">3.2.</span> <span class="nav-text">LLM蒸馏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.3.</span> <span class="nav-text">一致性模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#methodology"><span class="nav-number">4.</span> <span class="nav-text">Methodology</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#jacobi%E8%A7%A3%E7%A0%81%E6%96%B9%E6%B3%95"><span class="nav-number">4.1.</span> <span class="nav-text">Jacobi解码方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cllms"><span class="nav-number">4.2.</span> <span class="nav-text">CLLMs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jacobi%E8%BD%A8%E8%BF%B9%E9%87%87%E9%9B%86"><span class="nav-number">4.2.1.</span> <span class="nav-text">Jacobi轨迹采集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83"><span class="nav-number">4.2.2.</span> <span class="nav-text">训练</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E6%8D%9F%E5%A4%B1"><span class="nav-number">4.2.2.1.</span> <span class="nav-text">一致性损失</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ar-%E6%8D%9F%E5%A4%B1"><span class="nav-number">4.2.2.2.</span> <span class="nav-text">AR 损失</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cllms%E4%B8%AD%E9%97%B4%E7%9A%84%E5%8A%A0%E9%80%9F%E6%9C%BA%E5%88%B6"><span class="nav-number">4.3.</span> <span class="nav-text">CLLMs中间的加速机制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">5.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0"><span class="nav-number">5.1.</span> <span class="nav-text">评估</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#benchmarks-and-setup"><span class="nav-number">5.1.1.</span> <span class="nav-text">Benchmarks and Setup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#baseline"><span class="nav-number">5.1.2.</span> <span class="nav-text">baseline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C"><span class="nav-number">5.1.3.</span> <span class="nav-text">结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cllms%E4%B8%AD%E7%9A%84%E5%8A%A0%E9%80%9F%E6%9C%BA%E5%88%B6"><span class="nav-number">5.2.</span> <span class="nav-text">Cllms中的加速机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C"><span class="nav-number">5.3.</span> <span class="nav-text">消融实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E8%A7%84%E6%A8%A1%E5%92%8C%E5%8F%AF%E6%8E%A8%E5%B9%BF%E6%80%A7"><span class="nav-number">5.3.1.</span> <span class="nav-text">数据集规模和可推广性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E9%95%BF%E5%BA%A6%E7%9A%84n---token%E5%BA%8F%E5%88%97"><span class="nav-number">5.3.2.</span> <span class="nav-text">不同长度的n - token序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E8%AE%BE%E8%AE%A1"><span class="nav-number">5.3.3.</span> <span class="nav-text">损失设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#limitations-and-discussion"><span class="nav-number">5.4.</span> <span class="nav-text">Limitations and Discussion</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusion"><span class="nav-number">6.</span> <span class="nav-text">conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#self"><span class="nav-number">7.</span> <span class="nav-text">self</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E5%95%A5"><span class="nav-number">7.1.</span> <span class="nav-text">做啥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%92%8B%E5%81%9A"><span class="nav-number">7.2.</span> <span class="nav-text">咋做</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jacobi"><span class="nav-number">7.2.1.</span> <span class="nav-text">jacobi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cllms-1"><span class="nav-number">7.2.2.</span> <span class="nav-text">cllms</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E9%80%9F%E6%9C%BA%E5%88%B6"><span class="nav-number">7.2.3.</span> <span class="nav-text">加速机制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E8%AF%81"><span class="nav-number">7.3.</span> <span class="nav-text">实证</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -193,9 +193,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-10-22 15:59:04 / 修改时间：17:27:04" itemprop="dateCreated datePublished" datetime="2024-10-22T15:59:04+08:00">2024-10-22</time>
+      <time title="创建时间：2024-10-22 15:59:04" itemprop="dateCreated datePublished" datetime="2024-10-22T15:59:04+08:00">2024-10-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-23 15:27:39" itemprop="dateModified" datetime="2024-10-23T15:27:39+08:00">2024-10-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -224,13 +230,14 @@
 <li>rank: In the proceedings of the 41st International Conference on
 Machine Learning (ICML) 2024</li>
 <li>code: <a
-target="_blank" rel="noopener" href="https://github.com/hao-ailab/Consistency%20LLM">github</a></li>
+target="_blank" rel="noopener" href="https://github.com/hao-ai-lab/Consistency_LLM">github</a></li>
 <li>tag:
 <ul>
 <li>更快</li>
 <li>推理过程</li>
 </ul></li>
 <li>time: 2024年2月28日(latest)</li>
+<li>评价：感觉挺有意思的，做得实验可真够多。需要的资源太多，代码先不看了，这一篇结束⭐</li>
 </ul>
 <h1 id="abstract">abstract</h1>
 <ol type="1">
@@ -501,7 +508,7 @@ p的生成l的基础上加入了传统的AR损失：</p>
 <p><span
 class="math display">\[\mathcal{L}_{\mathrm{AR}}=\mathbb{E}_{(\boldsymbol{x},\boldsymbol{l})\sim\mathcal{D}}\Big[-\sum_{i=1}^N\log
 q_\theta(l_i|\boldsymbol{l}_{&lt;i},\boldsymbol{x})\Big]\]</span></p>
-<p>这个公式哟有助于保持生成质量大幅度提升。</p>
+<p>这个公式有助于保持生成质量大幅度提升。</p>
 <p>所以最后总的训练CLLM的损失为 <span class="math display">\[
 \mathcal{L}(  \theta  )=  \mathcal{L}_ {consistency}  +  w\mathcal{L}_
 {AR}
@@ -731,10 +738,20 @@ token序列作为训练样本。这可以去除Jacobi轨迹收集开销，使得
 <ol type="1">
 <li>一句话说明一下，把自回归的过程看作是联立方程组求解（即从之前的输入中找概率最大的=输出，并将其加入进行下一步预测）自行迭代的方求解，因为是greedy
 decoing，所以每次迭代至少能获得一个稳定的token，这样迭代次数肯定小于等于方程的个数</li>
-<li>首先从输入提示中随机猜测序列的下一个token（以下简称为n
+<li>从输入提示中随机猜测序列的下一个token（以下简称为n
 -token序列，除非另有说明）</li>
+<li>将n
+-token序列连同提示一起馈送到LLM中，以进行迭代更新。这个过程会持续进行，直到n
+-token的序列稳定下来，不再发生变化，达到一个固定点。</li>
+<li>终，n -token的序列会收敛到在贪婪策略下由AR解码生成的输出。</li>
 </ol></li>
-<li>缺点：</li>
+<li>从最初的随机猜测到最终的AR生成结果的这一过程被称为「Jacobi轨迹」。</li>
+<li>缺点
+<ol type="1">
+<li>只能用于贪婪解码</li>
+<li>不适合llm：因为当LLM在先前的token中存在错误时，很难产生正确的token</li>
+</ol></li>
+<li>所以要cllm</li>
 </ol>
 <h3 id="cllms-1">cllms</h3>
 <ol type="1">
@@ -744,8 +761,23 @@ decoing，所以每次迭代至少能获得一个稳定的token，这样迭代�
 <li>数据增强：泛化性，随机纠正D种错误预测的标记</li>
 <li>后处理：低质量，用一个基于规则的检测器处理D</li>
 </ol></li>
+<li>训练
+<ol type="1">
+<li>一致性损失
+<ol type="1">
+<li>全局一致性</li>
+<li>局部一致性</li>
+<li>二者比较</li>
+</ol></li>
+<li>ar损失</li>
+<li>就是让这两个损失分别最小</li>
+</ol></li>
 </ol>
-<h3 id="快进和驻留令牌现象">快进和驻留令牌现象</h3>
+<h3 id="加速机制">加速机制</h3>
+<ol type="1">
+<li>实验研究</li>
+<li>其它可能影响的结果</li>
+</ol>
 <h2 id="实证">实证</h2>
 <p>第四节的内容：</p>
 <ol type="1">
