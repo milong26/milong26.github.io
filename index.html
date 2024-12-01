@@ -158,148 +158,6 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2024/11/25/MANISKILL3-GPU-PARALLELIZED-ROBOTICS-SIMULATION-AND-RENDERING-FOR-GENERALIZABLE-EMBODIED-AI/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="milong26">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="没啥标题">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 没啥标题">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/11/25/MANISKILL3-GPU-PARALLELIZED-ROBOTICS-SIMULATION-AND-RENDERING-FOR-GENERALIZABLE-EMBODIED-AI/" class="post-title-link" itemprop="url">MANISKILL3: GPU PARALLELIZED ROBOTICS  SIMULATION AND RENDERING FOR  GENERALIZABLE EMBODIED AI</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2024-11-25 20:55:43 / 修改时间：21:12:08" itemprop="dateCreated datePublished" datetime="2024-11-25T20:55:43+08:00">2024-11-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <span id="more"></span>
-<p>论文不重要，这一篇重点还在平台啊，<a
-target="_blank" rel="noopener" href="http://maniskill.ai/">官网，需要梯子</a></p>
-<h1 id="abstract">abstract</h1>
-<ol type="1">
-<li>问题：仿真框架不够通用化</li>
-<li>解决：ManiSkill3
-<ol type="1">
-<li>fastest</li>
-<li>状态可视化 + GPU并行</li>
-<li>robotics simulator</li>
-<li>with contact-rich physics</li>
-<li>targeting generalizable manipulation</li>
-</ol></li>
-</ol>
-<h1 id="introduction">introduction</h1>
-<ol type="1">
-<li>GPU 并行模拟：通过强化学习</li>
-<li>问题：不支持异构模拟，不支持快速并行渲染功能，所以用强化学习时会很慢</li>
-<li>“ManiSkill3” 的优点
-<ol type="1">
-<li>快速并行渲染和低开销</li>
-<li>环境很全，全部GPU并行化</li>
-<li>异构模拟：ManiSkill3
-可以在每个并行环境中模拟和渲染完全不同的对象、关节，甚至整个房间规模的场景</li>
-<li>api好用</li>
-<li>从少量演示中生成可扩展的数据生成管道</li>
-</ol></li>
-</ol>
-<h1 id="realted-works">realted works</h1>
-<p>ManiSkill 通过不同方法的组合来获取大规模演示demonstration。</p>
-<ul>
-<li>对简单任务：使用 RL 的运动规划和奖励来生成演示。</li>
-<li>对没有简单定义的运动规划脚本或奖励函数的更多复杂任务：依赖于 RLPD和
-RFCL等演示算法的在线学习</li>
-</ul>
-<h1 id="maniskill3的核心特征">Maniskill3的核心特征</h1>
-<ol type="1">
-<li>支持开箱即用的统一 的GPU 并行化任务：有基于任务的API
-这个和第五点差不多吧</li>
-<li>GPU 并行模拟和渲染</li>
-<li>异构 GPU
-模拟：这是能够在不同的并行环境中模拟不同对象几何图形、不同数量对象以及具有不同景深的不同关节的功能。</li>
-<li>用于机器人操作的 SIM2REAL 和 REAL2SIM：都可以通过数字孪生使用
-ManiSkill3来完成</li>
-<li>用于构建 GPU 模拟机器人任务的简单统一 API
-<ol type="1">
-<li>用于关节、链接、关节和角色的面向对象的 API
-<ol type="1">
-<li>高级关节/角色，直至单个链接/关节和网格</li>
-<li>ManiSkill3 中的姿势信息是面向对象的，并存储为批处理的 Pose 对象</li>
-</ol></li>
-<li>机器人和控制器：原生支持 URDF 和 Mujoco MJCF 定义格式，并直接基于
-URDF/MJCF 构建关节机器人</li>
-</ol></li>
-<li>演示数据集
-<ol type="1">
-<li>对于最简单的任务，我们编写并开源了一些基于运动规划的解决方案来生成演示数据。一些具有易于定义的奖励函数的任务定义了密集的奖励函数，并使用融合的
-RL 策略来生成演示数据。</li>
-<li>对于更困难的任务，我们通过远程操作工具收集演示数据（通常约为 10
-个演示）。然后，我们使用 RFCL 或 RLPD
-来运行快速的在线模仿学习，并从融合策略中生成数据。</li>
-</ol></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://zhon.fun/2024/06/12/%E6%97%A5%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -336,7 +194,7 @@ RL 策略来生成演示数据。</li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-25 21:12:03" itemprop="dateModified" datetime="2024-11-25T21:12:03+08:00">2024-11-25</time>
+      <time title="修改时间：2024-12-01 20:01:51" itemprop="dateModified" datetime="2024-12-01T20:01:51+08:00">2024-12-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -362,6 +220,92 @@ RL 策略来生成演示数据。</li>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/06/12/%E6%97%A5%E8%AE%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2024/11/25/MANISKILL3-GPU-PARALLELIZED-ROBOTICS-SIMULATION-AND-RENDERING-FOR-GENERALIZABLE-EMBODIED-AI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="milong26">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/11/25/MANISKILL3-GPU-PARALLELIZED-ROBOTICS-SIMULATION-AND-RENDERING-FOR-GENERALIZABLE-EMBODIED-AI/" class="post-title-link" itemprop="url">MANISKILL3: GPU PARALLELIZED ROBOTICS  SIMULATION AND RENDERING FOR  GENERALIZABLE EMBODIED AI</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-11-25 20:55:43 / 修改时间：21:23:06" itemprop="dateCreated datePublished" datetime="2024-11-25T20:55:43+08:00">2024-11-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>一个机器人模拟平台的论文</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/11/25/MANISKILL3-GPU-PARALLELIZED-ROBOTICS-SIMULATION-AND-RENDERING-FOR-GENERALIZABLE-EMBODIED-AI/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
