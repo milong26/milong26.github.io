@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="机器人模拟平台robosuite">
+<meta property="og:type" content="article">
+<meta property="og:title" content="robosuite平台">
+<meta property="og:url" content="http://zhon.fun/2024/12/02/robosuite%E5%B9%B3%E5%8F%B0/index.html">
+<meta property="og:site_name" content="没啥标题">
+<meta property="og:description" content="机器人模拟平台robosuite">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://robosuite.ai/docs/_images/module_overview.png">
+<meta property="article:published_time" content="2024-12-02T06:06:04.000Z">
+<meta property="article:modified_time" content="2024-12-02T06:06:04.518Z">
+<meta property="article:author" content="milong26">
+<meta property="article:tag" content="robotic">
+<meta property="article:tag" content="simulation">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://robosuite.ai/docs/_images/module_overview.png">
+
+
+<link rel="canonical" href="http://zhon.fun/2024/12/02/robosuite%E5%B9%B3%E5%8F%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2024/12/02/robosuite%E5%B9%B3%E5%8F%B0/","path":"2024/12/02/robosuite平台/","title":"robosuite平台"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>robosuite平台 | 没啥标题</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">没啥标题</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">活下去</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#overview"><span class="nav-number">1.1.</span> <span class="nav-text">overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#install"><span class="nav-number">1.2.</span> <span class="nav-text">install</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pre"><span class="nav-number">1.2.1.</span> <span class="nav-text">pre</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#install-from-pip"><span class="nav-number">1.2.2.</span> <span class="nav-text">install from pip</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#basic-usage"><span class="nav-number">1.3.</span> <span class="nav-text">basic usage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#demo"><span class="nav-number">1.4.</span> <span class="nav-text">demo</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#modules"><span class="nav-number">2.</span> <span class="nav-text">modules</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">milong26</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2024/12/02/robosuite%E5%B9%B3%E5%8F%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="milong26">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="robosuite平台 | 没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          robosuite平台
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-12-02 14:06:04" itemprop="dateCreated datePublished" datetime="2024-12-02T14:06:04+08:00">2024-12-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/it/" itemprop="url" rel="index"><span itemprop="name">it</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>机器人模拟平台robosuite</p>
+<span id="more"></span>
+<p><a
+target="_blank" rel="noopener" href="https://github.com/ARISE-Initiative/robosuite">github主页</a></p>
+<h1 id="introduction">introduction</h1>
+<h2 id="overview">overview</h2>
+<p>robosuite是一个由MuJoCo物理引擎支持的机器人学习仿真框架。它还提供了一套可重复研究的基准环境。当前版本支持各种机器人实施例（包括类人机器人），自定义机器人组合，复合控制器（包括全身控制器），更多的远程操作设备，照片般逼真的渲染。</p>
+<p>该项目是更广泛的通过模拟环境推进机器人智能计划的一部分，旨在降低人工智能和机器人交叉领域尖端研究的进入门槛。</p>
+<p>教程部分参考<a
+target="_blank" rel="noopener" href="https://robosuite.ai/docs/installation.html">robosuite.ai</a></p>
+<h2 id="install">install</h2>
+<p>主要参考：https://robosuite.ai/docs/installation.html</p>
+<h3 id="pre">pre</h3>
+<ol type="1">
+<li>前提：安装好anaconda</li>
+<li>环境：<code>conda create -n robosuite python=3.10</code></li>
+<li>use：<code>conda activate robosuite</code></li>
+</ol>
+<h3 id="install-from-pip">install from pip</h3>
+<ol type="1">
+<li><code>pip install robosuite</code></li>
+<li>测试：<code>python -m robosuite.demos.demo_random_action</code></li>
+<li>可能会遇到问题，我遇到的是mujoco.dll not found，参考教程
+<ol type="1">
+<li>先找到MuJoCo安装目录
+<ol type="1">
+<li>保存 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> mujoco</span><br><span class="line"><span class="built_in">print</span>(mujoco.__path__)</span><br></pre></td></tr></table></figure></li>
+<li>在robosuite环境下执行</li>
+<li>得到<code>D:\\conf\\anaconda\\envs\\robosuite\\lib\\site-packages\\mujoco</code></li>
+</ol></li>
+<li>把dll文件copy and paste this file into anaconda3{your env
+name}-packages</li>
+</ol></li>
+<li>其它问题翻文档</li>
+</ol>
+<p>后面在使用之前都要启动环境<code>conda activate robosuite</code></p>
+<h2 id="basic-usage">basic usage</h2>
+<p>主要参考：https://robosuite.ai/docs/basicusage.html</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> robosuite <span class="keyword">as</span> suite</span><br><span class="line"></span><br><span class="line"><span class="comment"># create environment instance</span></span><br><span class="line">env = suite.make(</span><br><span class="line">    env_name=<span class="string">&quot;Lift&quot;</span>, <span class="comment"># try with other tasks like &quot;Stack&quot; and &quot;Door&quot;</span></span><br><span class="line">    robots=<span class="string">&quot;Panda&quot;</span>,  <span class="comment"># try with other robots like &quot;Sawyer&quot; and &quot;Jaco&quot;</span></span><br><span class="line">    has_renderer=<span class="literal">True</span>,</span><br><span class="line">    has_offscreen_renderer=<span class="literal">False</span>,</span><br><span class="line">    use_camera_obs=<span class="literal">False</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># reset the environment</span></span><br><span class="line">env.reset()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>):</span><br><span class="line">    action = np.random.randn(*env.action_spec[<span class="number">0</span>].shape) * <span class="number">0.1</span></span><br><span class="line">    obs, reward, done, info = env.step(action)  <span class="comment"># take action in the environment</span></span><br><span class="line">    env.render()  <span class="comment"># render on display</span></span><br></pre></td></tr></table></figure>
+<p>上面的脚本使用屏幕渲染器创建了一个模拟环境，这对于可视化和定性评估很有用。step（）函数接受一个动作作为输入，并返回一个元组（obs，reward，done，info），其中obs是一个包含观测值[（name_string，np.array），.]的OrderedDict，reward是每步获得的即时奖励，done是指示剧集是否已终止的布尔标志，info是包含附加元数据的字典。</p>
+<h2 id="demo">demo</h2>
+<p>运行<code>demo_random_action.py</code> (从<a
+target="_blank" rel="noopener" href="https://github.com/ARISE-Initiative/robosuite/tree/master/robosuite/demos">demo</a>里面下载)</p>
+<h1 id="modules">modules</h1>
+<p>2大类api</p>
+<ol type="1">
+<li>以模块化和编程方式定义仿真环境的<strong>建模api</strong></li>
+<li>用于与外部输入（例如来自策略或I/O设备的输入）接口的<strong>模拟API</strong>。</li>
+</ol>
+<p>这边模拟和仿真都是simulation</p>
+<p>由建模API指定的<strong>仿真模型</strong>由<strong>MuJoCo引擎</strong>实例化以创建称为<strong>环境</strong>的仿真运行时
+(simulation
+runtime)。环境通过传感器（例如摄像头和本体感受）生成观察结果，并通过机器人的控制器接收来自策略或设备的动作命令。</p>
+<figure>
+<img src="https://robosuite.ai/docs/_images/module_overview.png"
+alt="框架" />
+<figcaption aria-hidden="true">框架</figcaption>
+</figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/robotic/" rel="tag"># robotic</a>
+              <a href="/tags/simulation/" rel="tag"># simulation</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/11/25/MANISKILL3-GPU-PARALLELIZED-ROBOTICS-SIMULATION-AND-RENDERING-FOR-GENERALIZABLE-EMBODIED-AI/" rel="prev" title="MANISKILL3: GPU PARALLELIZED ROBOTICS  SIMULATION AND RENDERING FOR  GENERALIZABLE EMBODIED AI">
+                  <i class="fa fa-angle-left"></i> MANISKILL3: GPU PARALLELIZED ROBOTICS  SIMULATION AND RENDERING FOR  GENERALIZABLE EMBODIED AI
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">milong26</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
