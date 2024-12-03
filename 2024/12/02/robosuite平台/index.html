@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://robosuite.ai/docs/_images/module_overview.png">
 <meta property="article:published_time" content="2024-12-02T06:22:27.000Z">
-<meta property="article:modified_time" content="2024-12-03T09:17:54.946Z">
+<meta property="article:modified_time" content="2024-12-03T09:21:53.368Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="robotic">
 <meta property="article:tag" content="simulation">
@@ -204,7 +204,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-03 17:17:54" itemprop="dateModified" datetime="2024-12-03T17:17:54+08:00">2024-12-03</time>
+      <time title="修改时间：2024-12-03 17:21:53" itemprop="dateModified" datetime="2024-12-03T17:21:53+08:00">2024-12-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -301,16 +301,17 @@ Gym部分中的一些代码片段编写此脚本，它怎么一直弹窗口，�
 <li>demo_device_control.py
 终于可以控制设备了，参数--device，可以选择Keyboard或者spacemouse，但是spacemouse我没有，目前仅支持mac和linux
 <ol type="1">
-<li>keyboard.py 里面写了具体键位对应的功能
-<ol type="1">
-<li>平移xyz三个方向，6个</li>
-<li>旋转xyz三个方向，6个</li>
-<li>reset q</li>
-<li>b base mode</li>
-<li>s switch activate arm</li>
-<li>= switch activate robot</li>
-<li>sapce 切换gripper状态</li>
-</ol></li>
+<li>Ctrl+q reset simulation</li>
+<li>spacebar toggle gripper (open/close)</li>
+<li>up-right-down-left move horizontally in x-y plane</li>
+<li>.-; move vertically</li>
+<li>o-p rotate (yaw)</li>
+<li>y-h rotate (pitch)</li>
+<li>e-r rotate (roll)</li>
+<li>b toggle arm/base mode (if appli cable)</li>
+<li>s switch active arm (if multi-armed robot)</li>
+<li>= switch active robot (if multi-robot env)</li>
+<li>ESC quit</li>
 </ol></li>
 <li>demo_video_recording.py --environment Lift --robots Panda
 录像的，需要先install
