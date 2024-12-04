@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://robosuite.ai/docs/_images/module_overview.png">
 <meta property="article:published_time" content="2024-12-02T06:22:27.000Z">
-<meta property="article:modified_time" content="2024-12-03T09:21:53.368Z">
+<meta property="article:modified_time" content="2024-12-04T08:19:45.557Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="robotic">
 <meta property="article:tag" content="simulation">
@@ -204,7 +204,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-03 17:21:53" itemprop="dateModified" datetime="2024-12-03T17:21:53+08:00">2024-12-03</time>
+      <time title="修改时间：2024-12-04 16:19:45" itemprop="dateModified" datetime="2024-12-04T16:19:45+08:00">2024-12-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -286,10 +286,10 @@ target="_blank" rel="noopener" href="https://github.com/ARISE-Initiative/robosui
 robosuite_models，演示了robosuite中每个控制器的各种功能，这个没咋看懂，controller是啥</li>
 <li>demo_domain_randomization.py 需要mujoco-py version 3.1.1
 不知道版本的话用<code>print(mujoco.__version__)</code>，需要先卸载之前的，再根据版本下载<code>pip install mujoco==3.1.1</code>
-域随机化</li>
+，域随机化</li>
 <li>demo_sensor_corruption.py 传感器
 为啥这个可以操控了，输出挺恐怖的</li>
-<li>demo_gripper_selection.py 选择夹持器，但我一个都选不了？</li>
+<li>demo_gripper_selection.py 展示了能用的夹子</li>
 <li>demo_gripper_interaction.py
 我怎么没找到交互的地方……将夹持器导入场景并使其与具有执行器的对象交互的过程。它还展示了如何使用MJCF实用程序函数的Modeling
 API按程序生成场景</li>
@@ -297,10 +297,9 @@ API按程序生成场景</li>
 <li>demo_gym_functionality.py
 需要先安装gymnasium，如何调整环境以兼容OpenAI Gym-style API，基于OpenAI
 gym文档Getting Started with
-Gym部分中的一些代码片段编写此脚本，它怎么一直弹窗口，没看懂这个，感觉gym库应该有怎么用openai的，待会儿看看</li>
+Gym部分中的一些代码片段编写此脚本。可以把自己的数据集封装到gym中</li>
 <li>demo_device_control.py
-终于可以控制设备了，参数--device，可以选择Keyboard或者spacemouse，但是spacemouse我没有，目前仅支持mac和linux
-<ol type="1">
+终于可以控制设备了，参数--device，可以选择Keyboard或者spacemouse，但是spacemouse我没有，目前仅支持mac和linux</li>
 <li>Ctrl+q reset simulation</li>
 <li>spacebar toggle gripper (open/close)</li>
 <li>up-right-down-left move horizontally in x-y plane</li>
@@ -312,7 +311,6 @@ Gym部分中的一些代码片段编写此脚本，它怎么一直弹窗口，�
 <li>s switch active arm (if multi-armed robot)</li>
 <li>= switch active robot (if multi-robot env)</li>
 <li>ESC quit</li>
-</ol></li>
 <li>demo_video_recording.py --environment Lift --robots Panda
 录像的，需要先install
 imagoio,egl也要修改，参考教程里面的安装部分，根据报错还需要安装imageio[ffmpeg]或者imageio[pyav]，我也不知道哪一个好点。文件存放在执行python时的文件夹里面</li>
@@ -328,11 +326,26 @@ please use the exporter in the mujoco repository:
 https://github.com/google-deepmind/mujoco/blob/main/python/mujoco/usd/exporter.py，下载下来代替原来的exporter.py（控制台的报错信息可以定位到），最后保存的文件位置也是在执行的目录里面</li>
 </ol></li>
 </ol>
-<p>还有一些教程里没有但文件里有的</p>
+<p>给gym单开一个</p>
 <ol type="1">
-<li>demo_composite_robot.py 有个sanity
-check的注释，貌似是完整性检查，看不懂</li>
-<li></li>
+<li>使用gym的话要先安装，可以用示例代码</li>
+<li>运行的时候可能会报错，没安装好，可以参考<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/tortorish/article/details/131374265">csdn，安装gym[box2d]失败</a>
+<ol type="1">
+<li><code>pip install gymnasium[all]</code></li>
+<li>遇到报错ERROR: Could not build wheels for box2d-py, which is
+required to install pyproject.toml-based
+projects：<code>conda install swig</code></li>
+<li>遇到报错error: Microsoft Visual C++ 14.0 or greater is required. Get
+it with "Microsoft C++ Build Tools":
+https://visualstudio.microsoft.com/visual-cpp-build-tools/
+<ol type="1">
+<li>从<a
+target="_blank" rel="noopener" href="https://visualstudio.microsoft.com/zh-hans/visual-cpp-build-tools/">visualstudioc++</a>直接点下载生成工具</li>
+<li>选使用C++的桌面开发，点击安装。</li>
+</ol></li>
+</ol></li>
+<li>测试代码 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gymnasium <span class="keyword">as</span> gym</span><br><span class="line">env = gym.make(<span class="string">&quot;LunarLander-v2&quot;</span>, render_mode=<span class="string">&quot;human&quot;</span>)</span><br><span class="line">observation, info = env.reset(seed=<span class="number">42</span>)</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>):</span><br><span class="line">   action = env.action_space.sample()  <span class="comment"># this is where you would insert your policy</span></span><br><span class="line">   observation, reward, terminated, truncated, info = env.step(action)</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> terminated <span class="keyword">or</span> truncated:</span><br><span class="line">      observation, info = env.reset()</span><br><span class="line">env.close()</span><br></pre></td></tr></table></figure></li>
 </ol>
 <h1 id="modules">modules</h1>
 <h2 id="overview-1">overview</h2>
