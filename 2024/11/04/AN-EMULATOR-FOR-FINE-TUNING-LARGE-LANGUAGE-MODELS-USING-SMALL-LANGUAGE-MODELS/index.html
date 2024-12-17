@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="百篇paper计划(11&#x2F;100)，用小模型微调大模型。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AN EMULATOR FOR FINE-TUNING LARGE LANGUAGE  MODELS USING SMALL LANGUAGE MODELS">
+<meta property="og:url" content="http://zhon.fun/2024/11/04/AN-EMULATOR-FOR-FINE-TUNING-LARGE-LANGUAGE-MODELS-USING-SMALL-LANGUAGE-MODELS/index.html">
+<meta property="og:site_name" content="没啥标题">
+<meta property="og:description" content="百篇paper计划(11&#x2F;100)，用小模型微调大模型。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-11-04T08:20:53.000Z">
+<meta property="article:modified_time" content="2024-12-17T06:08:35.672Z">
+<meta property="article:author" content="milong26">
+<meta property="article:tag" content="fine-tune">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhon.fun/2024/11/04/AN-EMULATOR-FOR-FINE-TUNING-LARGE-LANGUAGE-MODELS-USING-SMALL-LANGUAGE-MODELS/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2024/11/04/AN-EMULATOR-FOR-FINE-TUNING-LARGE-LANGUAGE-MODELS-USING-SMALL-LANGUAGE-MODELS/","path":"2024/11/04/AN-EMULATOR-FOR-FINE-TUNING-LARGE-LANGUAGE-MODELS-USING-SMALL-LANGUAGE-MODELS/","title":"AN EMULATOR FOR FINE-TUNING LARGE LANGUAGE  MODELS USING SMALL LANGUAGE MODELS"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>AN EMULATOR FOR FINE-TUNING LARGE LANGUAGE  MODELS USING SMALL LANGUAGE MODELS | 没啥标题</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">没啥标题</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">活下去</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#INTRODUCTION"><span class="nav-number">2.</span> <span class="nav-text">INTRODUCTION</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RELATED-WORK"><span class="nav-number">3.</span> <span class="nav-text">RELATED WORK</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#EMULATED-FINE-TUNING-DECOUPLING-PRE-TRAINING-FINE-TUNING"><span class="nav-number">4.</span> <span class="nav-text">EMULATED FINE-TUNING: DECOUPLING PRE-TRAINING &amp; FINE-TUNING</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Preliminaries"><span class="nav-number">4.1.</span> <span class="nav-text">Preliminaries</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scale-Decoupling-with-EFT"><span class="nav-number">4.2.</span> <span class="nav-text">Scale Decoupling with EFT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E5%BE%AE%E8%B0%83%E9%87%87%E6%A0%B7"><span class="nav-number">4.2.1.</span> <span class="nav-text">模拟微调采样</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Computational-Factors-and-Language-Model-Up-Scaling"><span class="nav-number">4.3.</span> <span class="nav-text">Computational Factors and Language Model Up-Scaling</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#EXPERIMENTS"><span class="nav-number">5.</span> <span class="nav-text">EXPERIMENTS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8EScaling-Pre-training-%E5%92%8C-Fine-tuning%E8%BF%99%E4%B8%A4%E4%B8%AA%E9%87%8C%E9%9D%A2%E4%BA%A7%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88%E8%83%BD%E5%8A%9B"><span class="nav-number">5.1.</span> <span class="nav-text">从Scaling Pre-training 和 Fine - tuning这两个里面产生了什么能力?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eft%E5%AE%9E%E7%8E%B0%E4%BA%86%E5%8A%A8%E6%80%81Test-time%E5%A5%96%E5%8A%B1%E6%8F%92%E5%80%BC"><span class="nav-number">5.2.</span> <span class="nav-text">Eft实现了动态Test - time奖励插值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%8E%A8%E6%B5%8B%E8%A7%A3%E7%A0%81%E7%9A%84Up-Scaleed%E6%A8%A1%E5%9E%8B%E7%9A%84%E9%AB%98%E6%95%88%E9%87%87%E6%A0%B7"><span class="nav-number">5.3.</span> <span class="nav-text">基于推测解码的Up - Scaleed模型的高效采样</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#up-sacling%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BF%9D%E5%AE%88%E8%A7%A3%E7%A0%81%E7%AD%96%E7%95%A5"><span class="nav-number">5.4.</span> <span class="nav-text">up sacling模型的保守解码策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86GPT-4%E4%BA%8B%E5%AE%9E%E5%88%A4%E6%96%AD%E4%B8%8E%E4%BA%BA%E7%B1%BB%E8%AF%84%E4%BB%B7%E8%80%85%E8%BF%9B%E8%A1%8C%E6%AF%94%E8%BE%83%E8%80%8C%E4%BD%BF%E7%94%A8%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%AF%B9%E4%BA%BA%E7%B1%BB%E5%81%8F%E5%A5%BD%E6%88%96%E6%9C%89%E7%94%A8%E6%80%A7%E8%BF%9B%E8%A1%8C%E8%AF%84%E4%BB%B7%E6%98%AF%E6%9C%89%E7%9A%84"><span class="nav-number">5.5.</span> <span class="nav-text">将GPT - 4事实判断与人类评价者进行比较而使用大型语言模型对人类偏好或有用性进行评价是有的</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">6.</span> <span class="nav-text">结论</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">milong26</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2024/11/04/AN-EMULATOR-FOR-FINE-TUNING-LARGE-LANGUAGE-MODELS-USING-SMALL-LANGUAGE-MODELS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="milong26">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="AN EMULATOR FOR FINE-TUNING LARGE LANGUAGE  MODELS USING SMALL LANGUAGE MODELS | 没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AN EMULATOR FOR FINE-TUNING LARGE LANGUAGE  MODELS USING SMALL LANGUAGE MODELS
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-11-04 16:20:53" itemprop="dateCreated datePublished" datetime="2024-11-04T16:20:53+08:00">2024-11-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-12-17 14:08:35" itemprop="dateModified" datetime="2024-12-17T14:08:35+08:00">2024-12-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>百篇paper计划(11&#x2F;100)，用小模型微调大模型。</p>
+<span id="more"></span>
+<ul>
+<li>论文标题：AN EMULATOR FOR FINE-TUNING LARGE LANGUAGE  MODELS USING SMALL LANGUAGE MODELS</li>
+<li>rank：NeurIPS 2023 poster</li>
+<li>打标签：微调，小模型</li>
+<li>时间：2023年10月19日</li>
+</ul>
+<h1 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a>abstract</h1><ol>
+<li>目前：LMs通常2个训练管道<ol>
+<li>第一个预训练阶段：用很大、多样化的文本数据集</li>
+<li>第二个微调（有时候是对齐）：用有针对性地例子或其他期望行为的规范</li>
+</ol>
+</li>
+<li>问题：lm的知识和技能到底是来自预训练还是微调？</li>
+<li>解决：引入一个方法：模拟微调 emulated fine-tune<ol>
+<li>目的：解耦lm在预训练时和微调学到的知识</li>
+<li>测试：如果我们在预训练时将一个大模型学习到的知识与在微调(反之亦然)时将一个小模型学习到的知识结合起来会发生什么?</li>
+<li>来源：从人类偏好学习中发展出来的基于RL的框架</li>
+<li>是啥：从分布中采样的方法</li>
+<li>效果：在不同尺度上近似与训练和微调的结果。</li>
+</ol>
+</li>
+<li>实验<ol>
+<li>在EFT上的实验表明，增加微调倾向于提高有用性，而增加预训练倾向于提高事实性。</li>
+<li>在去耦尺度之外，证明了EFT可以在不需要额外训练的情况下，对有用性和无害性等相互竞争的行为特质进行测试时间调整。</li>
+<li>最后，仿真微调的一个特例，我们称之为LM尺度扩展，通过将大的预训练模型与小的微调模型集成，避免了大的预训练模型的资源密集型微调，本质上是模仿大的预训练模型微调的结果。</li>
+<li>尺度扩展在Llama、Llama - 2和Falcon系列中不断提高指令跟随模型的有用性和真实性，无需额外的超参数或训练。</li>
+</ol>
+</li>
+</ol>
+<h1 id="INTRODUCTION"><a href="#INTRODUCTION" class="headerlink" title="INTRODUCTION"></a>INTRODUCTION</h1><p>前面重复叙述的就不说了，就是拓展abstract里面的背景和问题，老生常谈。但是EFT部分扩充了许多。</p>
+<ol>
+<li>功能（可以实现什么，下文的”阶段”是预训练或者微调）<ol>
+<li>直接研究当一个阶段被放大或缩小时变化的能力</li>
+<li>在不增加计算成本的情况下逼近大模型微调结果的实际效益；</li>
+<li>在测试时刻修改微调目标(例如,有益性和无害性之间的权衡)的能力，无需额外训练。</li>
+</ol>
+</li>
+<li>怎么做的<ol>
+<li>基于简单因式分解，将微调后的语言模型的logits分解为<ol>
+<li>预训练的基模型的基对数概率 base log probabilities</li>
+<li>“行为delta “，或基模型与微调模型的对数概率之差。该delta是微调中学习到的行为变化的紧凑表示，可以通过强化学习或贝叶斯推理框架进行验证。</li>
+</ol>
+</li>
+<li>EFT可以模拟在一个尺度上预训练、在另一个尺度上微调的结果，通过增加模型在一个尺寸上计算的基对数概率和在另一个不同尺寸的模型上计算的行为delta。</li>
+<li>例如，使用Llama - 2家族的模型，我们可以模拟70B尺度下的预训练和7B尺度下的微调结果，通过执行对数概率代数Llama-2-base 70B + (Llama-2-chat 7B - Llama-2-base 7B)，其中第一个项是基本对数概率，括号中的项是行为delta。</li>
+</ol>
+</li>
+<li>实验分析<ol>
+<li>实验：利用eft，对多个模型族和数据集在不同尺度下的预训练和微调结果进行了分析。</li>
+<li>结果：在规模上进行预训练可以获得更多的原始知识积累(提高了事实正确性)，而在更大的规模上进行微调可以获得更多的有用性(提高了用户满意度) </li>
+<li>其它结果：<ol>
+<li>还发现EFT可以通过一个我们称之为升尺度（up-scaling）的过程来提高小微调模型的性能，本质上是将小微调模型与一个更大的预训练模型集成在一起，而不需要对任何一个模型进行任何微调或修改。</li>
+<li>我们的实验表明，在微调一个小的语言模型是可行的(如Falcon - 7B)，但微调一个大的语言模型不是由于资源限制(如Falcon - 180B)的场景中，上缩可以捕获微调大模型的大部分好处，而不需要执行任何模型微调。</li>
+<li>最后，我们证明了EFT还可以通过混合不同权重的行为delta来模拟在测试时刻对微调目标的修改。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>总结贡献<ol>
+<li>EFT框架</li>
+<li>实验证明了缩放预训练导致事实性知识的提高，而缩放微调导致任务依从性的提高</li>
+<li>模型升尺度技术，该技术使得一个小的微调模型和一个大的基模型能够近似微调一个大的基模型的计算密集型结果。</li>
+</ol>
+</li>
+</ol>
+<h1 id="RELATED-WORK"><a href="#RELATED-WORK" class="headerlink" title="RELATED WORK"></a>RELATED WORK</h1><ol>
+<li>之前工作<ol>
+<li>通过无监督生成建模预训练的语言模型可以进行微调以进行通用对话生成很好的模型。</li>
+<li>增加模型规模</li>
+</ol>
+</li>
+<li>和本文相关的3个<ol>
+<li>对比解码<ol>
+<li>以前的：改进语言模型采样，将小语言模型(用一个小的常数超参数来刻度)的对数概率从大语言模型的对数概率中减去。</li>
+<li>我们的：于将这种对数概率差异解释为对数重要度权重，并将其用于二次加权中另一个模型的对数概率，而不需要增加缩放超参数。</li>
+</ol>
+</li>
+<li>尺度对RLHF期间使用的奖励模型的影响，这可以解释为在我们的工作中对微调阶段进行缩放；然而，他们没有探索预训练规模，也没有调查任何一个规模对独立模型能力的影响。</li>
+<li>训练了一个模型在抽样过程中对基模型的条件分布重新加权。我们的工作不同之处在于，EFT不需要训练新的奖赏模型，在强化学习中具有原则性的基础，并且由于将奖赏参数化为对数概率(拉斐洛夫等, 2023)的比例，因此可以更有效地根据词汇量进行扩展。</li>
+</ol>
+</li>
+</ol>
+<h1 id="EMULATED-FINE-TUNING-DECOUPLING-PRE-TRAINING-FINE-TUNING"><a href="#EMULATED-FINE-TUNING-DECOUPLING-PRE-TRAINING-FINE-TUNING" class="headerlink" title="EMULATED FINE-TUNING: DECOUPLING PRE-TRAINING &amp; FINE-TUNING"></a>EMULATED FINE-TUNING: DECOUPLING PRE-TRAINING &amp; FINE-TUNING</h1><p>包含以下内容</p>
+<ol>
+<li>描述模拟微调( EFT )的框架</li>
+<li>它如何使预训练和微调的规模解耦</li>
+<li>在实际中特别有用的模拟微调的特例——升尺度</li>
+</ol>
+<h2 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h2><p>eft将微调过程视为具有KL散度约束的强化学习( RL )，以防止从参考模型中发散，在这种情况下，参考模型指预训练模型。也就是说，我们把微调π ft的结果看成是问题的解</p>
+<p>$$\pi_{\mathfrak{l}}&#x3D;\pi^*(r,\pi_{\mathrm{ref}})&#x3D;\arg\max_{\pi}\mathbb{E}<em>{x\sim p(x),y\sim\pi(\cdot|x)}\left[r(x,y)-\beta\mathrm{KL}(\pi(\cdot\mid x)|\pi</em>{\mathrm{ref}}(\cdot\mid x))\right]$$</p>
+<ol>
+<li>目标函数：公式右侧的部分表示一个最大化问题，这里的argmax 表示我们要找到使得整个表达式达到最大值的策略𝜋</li>
+<li>期望：E表示对随机变量x和y的期望，x是按照p(x)采样的，P (x)是一个固定的提示分布(或数据集)</li>
+<li>奖励函数：r(x,y) 是一个奖励函数，它根据状态 x 和动作 y 计算得到奖励。目标是最大化这个奖励。</li>
+<li>KL 散度：Kullback-Leibler 散度，用于测量策略 π 与参考策略 π_ref之间的差异。这个项的存在通常是为了引入某种正则化，使得优化的策略不会偏离参考策略太远。</li>
+<li>超参数：β控制KL对预训练模型（参考模型）的约束强度</li>
+</ol>
+<p>之前已经有工作求出来这个解了：<br>$$\pi^{*}(r,\pi_{\mathrm{ref}})(y\mid x)&#x3D;{\frac{1}{Z(x)}}\pi_{\mathrm{ref}}(y\mid x)\exp\left({\frac{1}{\beta}}r(x,y)\right)$$</p>
+<p>其中$Z(x)\ &#x3D;\ \sum_{y}\pi_{\mathrm{ref}}(y\ \mid\ x)\exp\Big(\frac{1}{\beta}r(x,y)\Big)$</p>
+<hr>
+<p>关键的是，虽然EFT框架是基于RL的微调解释的，但它适用于任何微调模型，因为任何语言模型都可以看作是对KL约束的RL的解决方案，并对预训练模型进行约束。</p>
+<p>具体来说，任何微调的语言模型π ft和预训练模型π Ref都可以通过一个奖励函数来建立映射关系，这个函数是$r_{π_{ft}}(x,y)$，使得KL约束的RL问题的解是微调模型<br>$$\pi^{*}(r_{\pi_{\mathrm{ft}}},\pi_{\mathrm{ref}})&#x3D;\pi_{\mathrm{ft}}$$<br>其中</p>
+<p>$$r_{\pi_{\mathrm{ft}}}(x,y)&#x3D;\beta\log\frac{\pi_\mathrm{ft}(y|x)}{\pi_\mathrm{ref}(y|x)}$$</p>
+<p>表示微调模型$\pi_{ft}$和参考模型$\pi_{ref}$在给定输入x下生成输出y的相对概率关系</p>
+<p>利用语言模型和奖励之间的这种对偶性，对于任何从预训练模型π ref微调过来的语言模型π ft，我们都可以重写</p>
+<p>$$\pi_{\mathrm{ft}}(y\mid x)&#x3D;\pi_{\mathrm{ref}}(y\mid x)\exp\left(\underbrace{\log\frac{\pi_{\mathrm{ft}}(y\mid x)}{\pi_{\mathrm{ref}}(y\mid x)}}<em>{\mathrm{Implicit~reward}}\right)&#x3D;\pi</em>{\mathrm{ref}}(y\mid x)\exp\left(r_{\pi_{\mathrm{ft}}}(x,y)\right)$$</p>
+<p>换句话说，<strong>微调模型π ft是以π ref为参考模型的KL约束报酬最大化问题的最优策略</strong>，其报酬函数为<br>$$r_{\pi_\mathrm{ft}}(x,y)&#x3D;\log{\frac{\pi_\mathrm{ft}(y|x)}{\pi_\mathrm{ref}(y|x)}}$$<br>我们现在已经清楚地描述了从预训练和微调中获得的信息的位置：预训练知识以基本的对数概率表示，而从微调中获得的能力则在奖励(从微调后的模型对数概率中减去基本对数概率的行为差值)中捕获。这种划分使得这些成分可以独立缩放，我们将在下面介绍。</p>
+<hr>
+<p>这一节总共可以看成2部分，也就是之前用分割线画出来的2部分。</p>
+<p>第一部分讲述EFT强调用RL约束下的微调后的模型用参考模型求解的计算公式。</p>
+<p>第二部分对所有参考-&gt;微调模型来说，也可以看作屎用一个RL约束求最优策略。（虽然这部分的公式写得很混乱，作者真的推导出来了吗？）</p>
+<h2 id="Scale-Decoupling-with-EFT"><a href="#Scale-Decoupling-with-EFT" class="headerlink" title="Scale Decoupling with EFT"></a>Scale Decoupling with EFT</h2><p>给上一节最后的公式增加上下标，以明确用于计算相应条件句的模型大小，表示用于计算每个数量的模型的规模：</p>
+<p>$$\pi_{M}^{N}(y\mid x)&#x3D;\frac{1}{Z_{M}^{N}(x)}\pi_{\mathrm{pef}}^{N}(y\mid x)\exp\Bigl(r_{\pi}^{M}(x,y)\Bigr)\propto\pi_{\mathrm{ef}}^{N}(y\mid x)\frac{\pi^{M}(y\mid x)}{\pi_{\mathrm{nf}}^{M}(y\mid x)}$$</p>
+<p>公式解读：</p>
+<ol>
+<li>M规模的reward函数$r_{\pi}^{M}(x,y)&#x3D;\mathrm{log},\frac{\pi^{M}(y|x)}{\pi_{\mathrm{ref}}^{M}(y|x)}$</li>
+<li>$\propto$是近似的意思</li>
+<li>尺度解耦的配分函数是$Z_{M}^{N}(x):&#x3D;:\sum_{y}\pi_{\mathrm{ref}}^{N}(y:\mid x)\exp\left(r^{M}(x,y)\right).$，它和上节最后一个公式不同，因为参考模型的大小不一样。</li>
+</ol>
+<p>也就是说，$\pi^N_M$对应于模拟混合大小为N的模型在预训练时学习到的知识和大小为M的模型在微调时学习到的知识。（这个是根据公式定义给出来的，因为公式的上标）</p>
+<p>而设定N &#x3D; M对应的是对原政策的简单抽样，在本文中，我们特别探讨N 不等于 M的设定。</p>
+<ol>
+<li>对于N &lt; M，我们模拟将小参考(预训练)模型的知识与大模型在微调过程中学习到的知识混合；</li>
+<li>对于N &gt; M，我们模拟将一个大的预训练模型的知识与一个小模型在微调过程中学习到的知识混合。</li>
+</ol>
+<h3 id="模拟微调采样"><a href="#模拟微调采样" class="headerlink" title="模拟微调采样"></a>模拟微调采样</h3><p>我们的实验依赖于从EFT模型中抽取样本。为此，我们根据eq4(就是Scale Decoupling with EFT开头的第一个公式)计算每个token的条件，但使用了一个(难以解决的)序列级配分函数的逐时步近似a per-timestep approximation of the (intractable) sequence-level partition function：</p>
+<p>$$\tilde{\pi}(y t\mid x,y_{&lt;t})&#x3D;\frac{1}{Z(x,y_{\lt t})}\pi_{\mathrm{ref}}^{N}(y_t\mid x,y_{\lt t})\frac{\pi^{M}(y_{t}\mid x,y_{\lt t})}{\pi_{\mathrm{ref}}^{M}(y_{t}\mid x,y_{\lt t})}$$</p>
+<p>其中$Z(x,y_{&lt;t}):&#x3D;:\sum_{y_{t}}:\pi_{\mathrm{ref}}^{N}(y_t:\mid x,y_{\lt t})\frac{\pi^{M}(y_{t}|x,y_{\lt t})}{\pi_{\mathrm{ref}}^M(y_t \mid x,y_{&lt;t}) }$是逐时步配分函数</p>
+<p>以上公式都是把之前的公式填充了关于时间步t的下标。</p>
+<p>最近在偏好学习中出现了类似的时间贪婪近似，它将偏好学习解释为不是学习一个奖励函数，而是学习一个优势函数。</p>
+<h2 id="Computational-Factors-and-Language-Model-Up-Scaling"><a href="#Computational-Factors-and-Language-Model-Up-Scaling" class="headerlink" title="Computational Factors and Language Model Up-Scaling"></a>Computational Factors and Language Model Up-Scaling</h2><p>定义：</p>
+<ol>
+<li>N &gt; M：up-scaling,，因为我们模拟了微调一个大模型的结果；</li>
+<li>N &lt; M：down-scaling，因为我们模拟了微调一个小模型的结果。</li>
+</ol>
+<p>分析：</p>
+<ol>
+<li>down-scaling假定在更大尺度上获得实际的微调模型，为了模拟在更小尺度上微调的结果。在这种情况下，简单地从大的微调模型中采样将在计算上更便宜和更有效。相比之下，up-scaling假设针对特定的任务或感兴趣的领域访问一个小的微调模型(计算成本低,可得)和一个大的预训练模型(其中许多是由拥有相当资源的组织自由释放的)。</li>
+<li>从N &gt;&gt; M的EFT模型中采样效率更高：EFT采样需要计算一个大小为N ( N -尺度预训练模型)的模型的前向传递，以及两个大小为M ( N尺度微调模型和N尺度预训练模型)的模型的前向传递。当N比M大得多时，这种计算成本与从实际的N尺度微调模型中采样的成本基本相同。<blockquote>
+<p>这里第二个括号里面写错了吧，应该是 M尺度微调模型和M尺度预训练模型<br>3.若M相对于N较小，则存在投机解码(speculative decoding)对EFT的自然适应，其中M尺度微调模型为全EFT模型提出大块令牌进行检验。4.3节证实了投机解码可以在不改变模型样本的情况下，使从扩大模型中采样的速度提高近2.5倍。</p>
+</blockquote>
+</li>
+</ol>
+<p>结论是eft up-scaling更好</p>
+<h1 id="EXPERIMENTS"><a href="#EXPERIMENTS" class="headerlink" title="EXPERIMENTS"></a>EXPERIMENTS</h1><ol>
+<li>问题：当独立地调整预训练和微调时，能力会发生什么变化?</li>
+<li>解决：用EFT来评估各种量表组合的有用性和真实性。还尝试用EFT在不同的行为差值之间进行插值，例如在测试时间改变有用性和无害性之间的期望平衡，而不需要额外的训练。</li>
+<li>证明：利用EFT进行尺度上推需要修改小的微调模型对稀疏时间步长集的条件，通过使用投机解码来适应EFT尺度上推，从而在采样上获得了较大的加速比。</li>
+<li>消融：以显示过滤噪声令牌重加权的一些潜在好处。</li>
+<li>对模型生成的响应进行了人工评估，以验证基于GPT - 4的事实检查的准确性。</li>
+<li>基础设置<ol>
+<li>两个数据集来评估对话代理向用户提供有帮助的事实性帮助的能力。<ol>
+<li>Anthropic Helpful- Harmless ( HH )对话数据集</li>
+<li>ELI5数据集的提示</li>
+</ol>
+</li>
+<li>三个独立的预训练语言模型和相应的微调模型。<ol>
+<li>Llama - 1<ol>
+<li>Llama - 1基模型 ( 7B和65B尺度)</li>
+<li>Vicuna微调模型 ( 7B和33B尺度) (没有70B Vicuna模型可用)计算隐式奖励。Vicuna模型是从Llama - 1基础模型微调过来的，基于用户与ChatGPT共享的对话。</li>
+</ol>
+</li>
+<li>Llama - 2实验<ol>
+<li>7B和70B尺度下的Llama - 2基模型</li>
+<li>7B和70B尺度下的Llama - 2 - chat模型来计算隐式奖励。Llama - 2 - chat模型是在Llama - 2基模型的基础上，结合监督学习和基于人类反馈的强化学习进行微调的。</li>
+</ol>
+</li>
+<li>Falcon实验<ol>
+<li>7B和180B尺度下的Falcon基础模型</li>
+<li>7B和180B尺度下的Falcon指令&#x2F;聊天模型来计算隐式奖励。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>以GPT - 4作为人类评价的代理指标来评价有用性、事实性和无害性。<ol>
+<li>通过提示GPT - 4来衡量有用性，以估计关键用户对聊天机器人给出的响应感到满意的概率；</li>
+<li>通过促使GPT - 4统计给定答案中的事实错误来测量有用性；</li>
+<li>通过提示GPT - 4来衡量有害性，以估计响应会对用户或社会造成伤害的可能性。在这两种情况下，GPT - 4都需要在做出决定前提供推理，以辅助可解释性。我们对温度为0的响应进行采样。</li>
+<li>进一步，我们在4.5节中与众包注释者进行了比较，发现在GPT - 4与人类分歧的案例中，人类判断的错误，而不是GPT - 4的分析，导致了将近80 %的分歧。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="从Scaling-Pre-training-和-Fine-tuning这两个里面产生了什么能力"><a href="#从Scaling-Pre-training-和-Fine-tuning这两个里面产生了什么能力" class="headerlink" title="从Scaling Pre-training 和 Fine - tuning这两个里面产生了什么能力?"></a>从Scaling Pre-training 和 Fine - tuning这两个里面产生了什么能力?</h2><ol>
+<li>研究对象：独立伸缩(independently scaling)预训练和使用模拟微调进行微调的结果。</li>
+<li>咋搞：对于每个数据集和模型族，我们使用4个模型来生成对所有256个评价提示的响应，这4个模型包括<ol>
+<li>单独的小微调模型</li>
+<li>单独的大微调模型</li>
+<li>Eft up scaling模型，模拟小规模微调和大规模预训练知识的结合；</li>
+<li>EFT down scaling模型，模拟大规模微调与小规模预训练知识的结合。</li>
+</ol>
+</li>
+<li>其他设置：所有实验均采用温度为1.0的温度采样，没有使用top - p或top - k (除非另有说明)。</li>
+<li>结果：图3&#x2F;图4&#x2F;图6 数据稍微有点差别，但过程和结果是相似的<ol>
+<li>小的base+大的reward 和 大base+小reward 这两组相比</li>
+<li>比较helpfulness和factuality</li>
+<li>缩放预训练主要带来事实性的提升，而缩放微调主要带来感知有用性的提升。</li>
+</ol>
+</li>
+</ol>
+<h2 id="Eft实现了动态Test-time奖励插值"><a href="#Eft实现了动态Test-time奖励插值" class="headerlink" title="Eft实现了动态Test - time奖励插值"></a>Eft实现了动态Test - time奖励插值</h2><p>虽然解耦尺度（decoupling scale）是EFT的一个明显特征，但显式解耦预训练和微调的另一个好处是能够在采样时刻对奖励函数进行修改。考虑竞争性微调目标的情况，如有用性目标和无害性目标。因此，微调一般对话代理的一种观点是<strong>试图在特定的有害预算下提供最大的帮助</strong>。通过改变有害性预算，我们可以产生一个有益-有害的边界。然而，现有的微调过程在微调时刻存在特定的有益性和危害性折衷关系，并且这种折衷关系在采样时刻不容易被修改。</p>
+<p>相比之下，通过模拟微调，这种对奖赏的测试时间调制是自然而直接的。图5展示了在7B预训练和微调尺度下，以及将预训练模型升级到70B时，在有用性和无害性之间进行插值的结果。我们看到清晰的、平滑的边界，并且扩大规模提供了一个帕累托改进（Pareto improvement），所有这些都不需要对每个权衡进行重新训练。</p>
+<p>为了使用EFT对测试时刻的行为进行插值，我们假设存在两个小规模的微调模型，一个微调为纯有用性$\pi_{help}$，一个微调为纯无害性$\pi_{safe}$。在本实验中，我们使用Llama - 2 - 7B作为基模型，并用Anthropic-HH- HH数据集的有益基和无害基分割，使用DPO对这两个模型进行微调。</p>
+<p>在测试时，对公式4（也就是scale decoupling with EFT，首次加入NM上下标的那个公式）中的r，我们使用插值奖励$r_{\lambda}^{M}(x,y)&#x3D;\lambda r_{\mathrm{help}}^{M}(x,y)+(1-\lambda)\pi_{\mathrm{safe}}^{M}$，其中λ &#x3D; 1对应纯有益性，λ &#x3D; 0纯无害性。当λ∈( 0、1 )时，对应于一些有益和无害的混合。我们还可以将奖励插值与模型升尺度相结合，以模拟对一个大的预训练进行微调</p>
+<h2 id="基于推测解码的Up-Scaleed模型的高效采样"><a href="#基于推测解码的Up-Scaleed模型的高效采样" class="headerlink" title="基于推测解码的Up - Scaleed模型的高效采样"></a>基于推测解码的Up - Scaleed模型的高效采样</h2><p>从本质上讲，EFT升尺度(小规模微调+大规模预训练模型)需要每个令牌从”小”模型中向前传递2次，从”大”模型中向前传递1次。然而EFT的尺寸不对称使得猜测性解码成为加速推理的自然选择。猜测解码使用一个小的代理模型加速LLM的自回归生成，以自回归地提出一个令牌块，然后大模型可以并行检查。如果小模型能很好地逼近大模型，并产生与大模型相同的令牌，则大模型中总的前向道次数可以大大减少。对于EFT升尺度，我们假设对于大多数令牌，单独的小微调模型可能近似升尺度模型；我们在图7中定性地验证了这一假设，图7表明，小的微调模型与升尺度模型之间的总变化距离对大多数令牌来说很小，而对少数令牌来说非常大。因此，投机性解码很可能会加速EFT的扩大。</p>
+<p>我们将猜测解码应用于EFT，发现当Llama - 2 - 7B - chat以Llama - 2 - 70B - base进行扩展时，猜测EFT解码可以将采样加速近2.5倍，同时产生与正常自回归生成相同的样本。这一改进是仅采样7B聊天模型相比仅采样70B聊天模型加速比的50 %以上。为了从一个放大的模型中推测解码，小的微调模型提出了一个带有正常自回归采样的k个令牌块。然后，大、小基模型都在该块上运行一个前向通道(由于变压器的并联性质)，这允许在事后计算每个时间步的真实EFT条件。如果从真实条件句中采样产生相同的tokens，我们只需继续采样一个新提出的块。在出现分歧的情况下，我们将世代回溯到小的微调模型和完整的升尺度模型达成一致的最后一个令牌。如果没有令牌同意，我们使用从第一个真实的后见扩大条件中采样的令牌。</p>
+<h2 id="up-sacling模型的保守解码策略"><a href="#up-sacling模型的保守解码策略" class="headerlink" title="up sacling模型的保守解码策略"></a>up sacling模型的保守解码策略</h2><p>我们之前的所有实验都只是简单地从式( 4 )所描述的原始重加权条件句中采样，没有引入任何新的解码策略或超参数。在这一部分中，我们探索了能否通过后处理含噪预测来进一步改善EFT样本。EFT上采样本质上是从一个小的微调语言模型中提取条件句，并使用一个大基模型的条件句除以一个小基模型的条件句对它们进行重加权(上采样)。然而，对于低概率的(和可能是劣质的模型)令牌，升尺度比率$\frac{P_{base - large} ( x_t \mid x <em>{&lt; t} )}{P</em>{base - small} ( x_t \mid x _{&lt; t} )}$可能变得非常大，导致分配给低质量令牌的概率很高。</p>
+<p>为了解决这个潜在的问题，我们对升尺度权重进行top - p滤波。完整的结果见表1，表明与从未过滤的条件句中采样相比，对升尺度权重进行top - p滤波会在真实性和有用性方面产生轻微的改善。为了进行top - p滤波，我们首先从只有小微调模型的条件中计算出” top-p “的令牌集合，即概率和超过p的最小令牌集合。然而，与传统的top - p译码(霍尔茨曼等, 2020)不同，我们并没有将其他令牌的条件设置为零。相反，对于这些令牌，我们简单地将升尺度权重设置为1，以防止对极不可能的延续进行无意的升尺度。</p>
+<h2 id="将GPT-4事实判断与人类评价者进行比较而使用大型语言模型对人类偏好或有用性进行评价是有的"><a href="#将GPT-4事实判断与人类评价者进行比较而使用大型语言模型对人类偏好或有用性进行评价是有的" class="headerlink" title="将GPT - 4事实判断与人类评价者进行比较而使用大型语言模型对人类偏好或有用性进行评价是有的"></a>将GPT - 4事实判断与人类评价者进行比较而使用大型语言模型对人类偏好或有用性进行评价是有的</h2><p>为了证实我们的GPT - 4真实性判断是有意义的，我们在一组数据上比较了人类和GPT - 4提供的注释。人体标签采集的详细信息见附录。我们从ELI5和Falcon - 40binstruct (根据GPT - 4选择,因为其产生事实错误的比率接近0.5)中生成了100条提示和相应的响应的评估数据集。我们获得了人类和GPT - 4的标签，用于100个回复中每个事实错误的数量。然后，我们对这些预测进行二值化处理，以解释人类或GPT - 4如何评估单一事实的差异；也就是说，我们比较了该响应中是否存在事实错误，或者根本没有事实错误所对应的二元变量?除了计算一致率外，我们还考察了30个人类和GPT - 4不一致的例子，并仔细地标注了一个”基本真值”值，以确定响应是否包含事实错误。我们发现人类和GPT - 4的标签有61 %的时间是一致的；当人和GPT - 4不一致时，作者仔细收集的金标发现GPT - 4有77 %的时间是正确的，标准误差为7.8 %。这一结果表明，GPT - 4是一个比时间限制的人类众包工人更准确的事实正确性的注释器。</p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>扩展预训练和微调(或”对齐”)的两阶段流水线仍然是构建更强大的语言系统的主要策略。在本文中，我们提出了一种模拟微调的方法，可以对这两个阶段的结果进行直接的实证探索。使用这种方法，我们证明了微调一个大的预训练语言模型的大部分真实性增益可以通过上缩放获得，它将一个大的基模型和一个小的微调模型结合起来，以模拟当这种大规模微调在计算上令人望而却步时微调大的基模型的结果。此外，我们还发现，在没有额外训练的情况下，可以动态调整行为，例如权衡有用性和无害性。未来的工作可以使用模拟微调来研究模型能力的额外维度，在不需要额外微调的情况下在其他测试时间模型行为之间进行插值，或者探索从EFT结构模型中采样的替代方法，以提高效率或性能。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/fine-tune/" rel="tag"># fine-tune</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/10/28/latexocr/" rel="prev" title="latexocr">
+                  <i class="fa fa-angle-left"></i> latexocr
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/11/22/Kubric-A-scalable-dataset-generator/" rel="next" title="Kubric: A scalable dataset generator">
+                  Kubric: A scalable dataset generator <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">milong26</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

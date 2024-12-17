@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="到了新环境，安排我看的论文，说是了解一下就行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kubric: A scalable dataset generator">
+<meta property="og:url" content="http://zhon.fun/2024/11/22/Kubric-A-scalable-dataset-generator/index.html">
+<meta property="og:site_name" content="没啥标题">
+<meta property="og:description" content="到了新环境，安排我看的论文，说是了解一下就行">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-11-22T11:48:12.000Z">
+<meta property="article:modified_time" content="2024-12-17T06:08:35.676Z">
+<meta property="article:author" content="milong26">
+<meta property="article:tag" content="data-generate">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhon.fun/2024/11/22/Kubric-A-scalable-dataset-generator/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2024/11/22/Kubric-A-scalable-dataset-generator/","path":"2024/11/22/Kubric-A-scalable-dataset-generator/","title":"Kubric: A scalable dataset generator"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Kubric: A scalable dataset generator | 没啥标题</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">没啥标题</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">活下去</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#related-work"><span class="nav-number">3.</span> <span class="nav-text">related work</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#infrastructure"><span class="nav-number">4.</span> <span class="nav-text">infrastructure</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="nav-number">4.1.</span> <span class="nav-text">设计原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kubric-worker"><span class="nav-number">4.2.</span> <span class="nav-text">kubric worker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#assets"><span class="nav-number">4.3.</span> <span class="nav-text">assets</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scene-Understanding-Datasets-SunDs"><span class="nav-number">4.4.</span> <span class="nav-text">Scene Understanding Datasets (SunDs)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kubric-%E6%95%B0%E6%8D%AE%E9%9B%86%E5%92%8C%E6%8C%91%E6%88%98"><span class="nav-number">5.</span> <span class="nav-text">Kubric 数据集和挑战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#object-discovery-from-video"><span class="nav-number">5.1.</span> <span class="nav-text">object discovery from video</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#optical-flow"><span class="nav-number">5.2.</span> <span class="nav-text">optical flow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Texture-structure-in-NeRF"><span class="nav-number">5.3.</span> <span class="nav-text">Texture-structure in NeRF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusion"><span class="nav-number">6.</span> <span class="nav-text">conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%90%8E%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B"><span class="nav-number">7.</span> <span class="nav-text">最后总结一下</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">milong26</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2024/11/22/Kubric-A-scalable-dataset-generator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="milong26">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Kubric: A scalable dataset generator | 没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kubric: A scalable dataset generator
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-11-22 19:48:12" itemprop="dateCreated datePublished" datetime="2024-11-22T19:48:12+08:00">2024-11-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-12-17 14:08:35" itemprop="dateModified" datetime="2024-12-17T14:08:35+08:00">2024-12-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>到了新环境，安排我看的论文，说是了解一下就行</p>
+<span id="more"></span>
+
+<p>代码：<a target="_blank" rel="noopener" href="https://github.com/google-research/kubric">https://github.com/google-research/kubric</a></p>
+<h1 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a>abstract</h1><ol>
+<li>研究啥：合成数据</li>
+<li>相关工作为什么不行：</li>
+<li>kubric是什么：一个python框架</li>
+<li>特点：可以与PyBullet 和 Blender 连接</li>
+</ol>
+<h1 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h1><p>kubric</p>
+<ol>
+<li>python pipeline</li>
+<li>用于生成逼真的数据，图像和视频</li>
+<li>支持大规模生成</li>
+<li>多功能性</li>
+</ol>
+<h1 id="related-work"><a href="#related-work" class="headerlink" title="related work"></a>related work</h1><p>相比别的合成数据项目，kubric的优点：Kubric 会自动为每一帧生成图像提示，并轻松支持各种视角和照明条件。</p>
+<ol>
+<li>专门的合成数据pipeline：缺点是它们通常用于特定任务</li>
+<li>通用的数据集创建pipeline：主要区别在于 Kubric 专注于将工作负载扩展到许多工作线程，以及与 TensorFlow 数据集的集成。</li>
+</ol>
+<h1 id="infrastructure"><a href="#infrastructure" class="headerlink" title="infrastructure"></a>infrastructure</h1><p>kubric需要充当渲染引擎、物理模拟器、数据导出设施这三者之间的链接</p>
+<h2 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h2><ol>
+<li>开源</li>
+<li>易于使用：在后台使用 PyBullet 和 Blender 提供一个简单的面向对象的 API 接口</li>
+<li>真实：用blender的Cycles 光线追踪引擎，这样生成的数据能和真实数据差不多</li>
+<li>可拓展性：可以到云上</li>
+<li>便携且可重复：分发 Kubric Docker 镜像</li>
+<li>导出数据：注释、SunDs</li>
+</ol>
+<h2 id="kubric-worker"><a href="#kubric-worker" class="headerlink" title="kubric worker"></a>kubric worker</h2><p>kubric工作流程：写一个worker script，然后多次运行worker来生成完整数据集，然后收集生成数据</p>
+<p><strong>scene structure</strong> 每个worker包含：</p>
+<ol>
+<li>一个Scene object，跟踪全局设置（例如，分辨率、要渲染的帧数、重力）、</li>
+<li>一个 Camera </li>
+<li>其它，统称为Assets。</li>
+</ol>
+<p>将Assets添加到场景中时，将在每个视图中创建相应的对象。</p>
+<p><strong>simulator</strong> 物理模拟用PyBullet</p>
+<p><strong>renderer</strong> bpy作为blender的接口</p>
+<p><strong>annotation</strong> blender自带的功能</p>
+<h2 id="assets"><a href="#assets" class="headerlink" title="assets"></a>assets</h2><ol>
+<li>问题：要使用集中asset collections的话，需要大量的清理和转换，以使他们与给定的pipeline兼容</li>
+<li>kubric怎么解决：在一个public google cloud bucket种提供了多个经过预处理的collection of assests</li>
+<li>怎么处理collection的？每个数据集源都和一个manifest.json文件相关联</li>
+</ol>
+<h2 id="Scene-Understanding-Datasets-SunDs"><a href="#Scene-Understanding-Datasets-SunDs" class="headerlink" title="Scene Understanding Datasets (SunDs)"></a>Scene Understanding Datasets (SunDs)</h2><ol>
+<li>目的：便于将数据摄取到机器学习模型中</li>
+<li>所有 SunDs 数据集都由两个子数据集组成： <ol>
+<li>场景数据集包含高级场景元数据（例如场景边界、整个场景的网格等）。 </li>
+<li>帧数据集包含场景中的各个示例 （例如，RGB 图像、边界框等）。</li>
+</ol>
+</li>
+<li>SunDs 抽象出特定于数据集的文件格式（json、npz、文件夹结构等），并返回机器学习模型（TF、Jax、Torch）可直接摄取的张量。</li>
+</ol>
+<h1 id="Kubric-数据集和挑战"><a href="#Kubric-数据集和挑战" class="headerlink" title="Kubric 数据集和挑战"></a>Kubric 数据集和挑战</h1><p>相当于实验设计</p>
+<p>每个问题都依赖于不同的注释子集（流、分段、深度、摄像机姿势或对象姿势），使用不同的功能子集（例如，物理或绑定动画），并且需要控制不同的因素（背景、材质或照明）</p>
+<h2 id="object-discovery-from-video"><a href="#object-discovery-from-video" class="headerlink" title="object discovery from video"></a>object discovery from video</h2><p>对象发现方法旨在将场景分解为其组成组件，并在最少的监督下查找对象实例分割掩码。</p>
+<h2 id="optical-flow"><a href="#optical-flow" class="headerlink" title="optical flow"></a>optical flow</h2><p>光流是指视频中从一帧中的像素到下一帧的 2D 运动.</p>
+<p>光流实际上是计算机视觉中第一个依赖合成数据进行评估的子领域 </p>
+<h2 id="Texture-structure-in-NeRF"><a href="#Texture-structure-in-NeRF" class="headerlink" title="Texture-structure in NeRF"></a>Texture-structure in NeRF</h2><h1 id="conclusion"><a href="#conclusion" class="headerlink" title="conclusion"></a>conclusion</h1><ol>
+<li>kubric<ol>
+<li>一个通用的 Python 框架，</li>
+<li>其中包含用于大规模生成的工具，</li>
+<li>集成了来自多个来源的资产、丰富的注释和通用的导出数据格式 （SunDS），用于将数据直接移植到训练管道中。</li>
+<li>Kubric 能够生成高质量的合成数据，解决了管理自然图像数据所固有的许多问题，并避免了构建特定于任务的一次性管道的费用。</li>
+</ol>
+</li>
+<li>我们在 11 个案例研究中展示了我们的框架的有效性，并为一系列不同的视觉任务生成了不同复杂程度的数据集。在每种情况下，Kubric 都大大减少了生成所需数据的工程工作，并促进了重用和协作。我们希望它能通过降低生成高质量合成数据的门槛来帮助社区，减少碎片化，并促进管道和数据集的共享。</li>
+<li>虽然 Kubric 已经非常有用，但它仍在开发中，尚不支持 Blender 和 PyBullet 的许多功能。值得注意的示例包括体积效果（如雾或火）、软体和布料模拟，以及高级摄像机效果（如景深和运动模糊）。</li>
+<li>我们还计划预处理和统一来自更多来源的assets，。目前，Kubric 需要大量的计算资源，因为它依赖于路径追踪渲染器而不是光栅化渲染器。我们希望添加对光栅化后端的支持，允许用户在速度和渲染质量之间进行权衡。我们在补充材料的 A 部分讨论了围绕我们系统应用的潜在社会影响和道德影响。</li>
+</ol>
+<h1 id="最后总结一下"><a href="#最后总结一下" class="headerlink" title="最后总结一下"></a>最后总结一下</h1><ol>
+<li>kubric是什么<ol>
+<li>pythonfarmework</li>
+<li>interface with pyBullet and Blender</li>
+<li>to generate scenes</li>
+<li>with annotation</li>
+<li>can scale</li>
+</ol>
+</li>
+<li>构成<ol>
+<li>kubric worker<ol>
+<li>scene structure 跟踪所有全局设置</li>
+<li>camera</li>
+<li>assets created from cloud like google</li>
+</ol>
+</li>
+<li>renderer-blender还有一个annotation的功能</li>
+<li>simulator</li>
+<li>SunSs：数据集转化成tensor</li>
+</ol>
+</li>
+<li>验证：用kubric生成的数据给这些模型进行预训练</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/data-generate/" rel="tag"># data-generate</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/11/04/AN-EMULATOR-FOR-FINE-TUNING-LARGE-LANGUAGE-MODELS-USING-SMALL-LANGUAGE-MODELS/" rel="prev" title="AN EMULATOR FOR FINE-TUNING LARGE LANGUAGE  MODELS USING SMALL LANGUAGE MODELS">
+                  <i class="fa fa-angle-left"></i> AN EMULATOR FOR FINE-TUNING LARGE LANGUAGE  MODELS USING SMALL LANGUAGE MODELS
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/11/24/GR-2-A-Generative-Video-Language-Action-Model-with-Web-Scale-Knowledge-for-Robot-Manipulation/" rel="next" title="GR-2: A Generative Video-Language-Action Model with Web-Scale Knowledge for Robot Manipulation">
+                  GR-2: A Generative Video-Language-Action Model with Web-Scale Knowledge for Robot Manipulation <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">milong26</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

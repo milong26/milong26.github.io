@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="机器人模拟平台robosuite">
+<meta property="og:type" content="article">
+<meta property="og:title" content="robosuite平台">
+<meta property="og:url" content="http://zhon.fun/2024/12/02/robosuite%E5%B9%B3%E5%8F%B0/index.html">
+<meta property="og:site_name" content="没啥标题">
+<meta property="og:description" content="机器人模拟平台robosuite">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://robosuite.ai/docs/_images/module_overview.png">
+<meta property="article:published_time" content="2024-12-02T06:22:27.000Z">
+<meta property="article:modified_time" content="2024-12-17T06:08:35.687Z">
+<meta property="article:author" content="milong26">
+<meta property="article:tag" content="robotic">
+<meta property="article:tag" content="simulation">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://robosuite.ai/docs/_images/module_overview.png">
+
+
+<link rel="canonical" href="http://zhon.fun/2024/12/02/robosuite%E5%B9%B3%E5%8F%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2024/12/02/robosuite%E5%B9%B3%E5%8F%B0/","path":"2024/12/02/robosuite平台/","title":"robosuite平台"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>robosuite平台 | 没啥标题</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">没啥标题</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">活下去</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#overview"><span class="nav-number">1.1.</span> <span class="nav-text">overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#install"><span class="nav-number">1.2.</span> <span class="nav-text">install</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pre"><span class="nav-number">1.2.1.</span> <span class="nav-text">pre</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#install-from-source"><span class="nav-number">1.2.2.</span> <span class="nav-text">install from source</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#basic-usage"><span class="nav-number">1.3.</span> <span class="nav-text">basic usage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#demo"><span class="nav-number">1.4.</span> <span class="nav-text">demo</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#modules"><span class="nav-number">2.</span> <span class="nav-text">modules</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#overview-1"><span class="nav-number">2.1.</span> <span class="nav-text">overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#robots"><span class="nav-number">2.2.</span> <span class="nav-text">robots</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%B3%95"><span class="nav-number">2.2.1.</span> <span class="nav-text">用法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">运行时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">调用对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.2.2.</span> <span class="nav-text">模型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Algorithms"><span class="nav-number">3.</span> <span class="nav-text">Algorithms</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Benchmark"><span class="nav-number">3.1.</span> <span class="nav-text">Benchmark</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E6%A1%86%E6%9E%B6"><span class="nav-number">3.1.1.</span> <span class="nav-text">代码框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WSL%E9%85%8D%E7%BD%AE-fail%E7%BA%AA%E5%BF%B5"><span class="nav-number">3.1.2.</span> <span class="nav-text">WSL配置 fail纪念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#windows%E9%85%8D%E7%BD%AE-fail%E7%BA%AA%E5%BF%B5"><span class="nav-number">3.1.3.</span> <span class="nav-text">windows配置 fail纪念</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E6%96%B0%E7%9A%84%E4%BD%BF%E7%94%A8%E8%BF%99%E4%B8%AA%E5%B9%B3%E5%8F%B0%E7%9A%84%E7%AE%97%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">比较新的使用这个平台的算法</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">milong26</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2024/12/02/robosuite%E5%B9%B3%E5%8F%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="milong26">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="robosuite平台 | 没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          robosuite平台
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-12-02 14:22:27" itemprop="dateCreated datePublished" datetime="2024-12-02T14:22:27+08:00">2024-12-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-12-17 14:08:35" itemprop="dateModified" datetime="2024-12-17T14:08:35+08:00">2024-12-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/it/" itemprop="url" rel="index"><span itemprop="name">it</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>机器人模拟平台robosuite </p>
+<span id="more"></span>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/ARISE-Initiative/robosuite">github主页</a></p>
+<h1 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h1><h2 id="overview"><a href="#overview" class="headerlink" title="overview"></a>overview</h2><p>robosuite是一个由MuJoCo物理引擎支持的机器人学习仿真框架。它还提供了一套可重复研究的基准环境。当前版本支持各种机器人实施例（包括类人机器人），自定义机器人组合，复合控制器（包括全身控制器），更多的远程操作设备，照片般逼真的渲染。</p>
+<p>该项目是更广泛的通过模拟环境推进机器人智能计划的一部分，旨在降低人工智能和机器人交叉领域尖端研究的进入门槛。</p>
+<p>教程部分参考<a target="_blank" rel="noopener" href="https://robosuite.ai/docs/installation.html">robosuite.ai</a></p>
+<h2 id="install"><a href="#install" class="headerlink" title="install"></a>install</h2><p>主要参考：<a target="_blank" rel="noopener" href="https://robosuite.ai/docs/installation.html">https://robosuite.ai/docs/installation.html</a></p>
+<p><strong>但是，pip的跟最新的不一样，建议走source安装法</strong></p>
+<h3 id="pre"><a href="#pre" class="headerlink" title="pre"></a>pre</h3><p>按官网流程控制台好几次都出现modulenotfound的问题，现在换了idea配置conda，参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/tqlisno1/article/details/108908775">Idea配置anaconda</a>，具体的就是选择3.10的python</p>
+<p>不知道管不管用，这次我重启了之后还正常，看看明天怎么样（怎么玄学起来了）</p>
+<hr>
+<ol>
+<li>前提：安装好anaconda</li>
+<li>环境：<code>conda create -n robosuite python=3.10</code></li>
+<li>use：<code>conda activate robo</code></li>
+</ol>
+<h3 id="install-from-source"><a href="#install-from-source" class="headerlink" title="install from source"></a>install from source</h3><ol>
+<li><p><code>git clone https://github.com/ARISE-Initiative/robosuite.git</code></p>
+<p><code>cd robosuite</code></p>
+</li>
+<li><p><code>pip3 install -r requirements.txt</code></p>
+</li>
+<li><p><code>pip3 install -r requirements-extra.txt</code></p>
+</li>
+<li><p>测试：<code>python -m robosuite.demos.demo_random_action</code></p>
+</li>
+<li><p>可能会遇到问题，我遇到的是mujoco.dll not found，参考教程</p>
+<ol>
+<li>先找到MuJoCo安装目录<ol>
+<li>保存<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> mujoco</span><br><span class="line"><span class="built_in">print</span>(mujoco.__path__)</span><br></pre></td></tr></table></figure></li>
+<li>在robosuite环境下执行</li>
+<li>得到<code>D:\\conf\\anaconda\\envs\\robosuite\\lib\\site-packages\\mujoco</code></li>
+</ol>
+</li>
+<li>把dll文件copy and paste this file into anaconda3\envs{your env name}\Lib\site-packages\robosuite\utils</li>
+</ol>
+</li>
+<li><p>其它问题翻文档</p>
+</li>
+</ol>
+<p>jianyi<br>后面在使用之前都要启动环境<code>conda activate robosuite</code></p>
+<p>跑的时候如果出现’ModuleNotFound’，多半是系统路径的问题，因为之前用pip intall郭robosuite，里面代码跑的时候会优先找anaconda里面的robosuite而不是项目的，所以要把之前残留的删了（只pip uninstall没用，也可能是因为我没重启）</p>
+<h2 id="basic-usage"><a href="#basic-usage" class="headerlink" title="basic usage"></a>basic usage</h2><p>主要参考：<a target="_blank" rel="noopener" href="https://robosuite.ai/docs/basicusage.html">https://robosuite.ai/docs/basicusage.html</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> robosuite <span class="keyword">as</span> suite</span><br><span class="line"></span><br><span class="line"><span class="comment"># create environment instance</span></span><br><span class="line">env = suite.make(</span><br><span class="line">    env_name=<span class="string">&quot;Lift&quot;</span>, <span class="comment"># try with other tasks like &quot;Stack&quot; and &quot;Door&quot;</span></span><br><span class="line">    robots=<span class="string">&quot;Panda&quot;</span>,  <span class="comment"># try with other robots like &quot;Sawyer&quot; and &quot;Jaco&quot;</span></span><br><span class="line">    has_renderer=<span class="literal">True</span>,</span><br><span class="line">    has_offscreen_renderer=<span class="literal">False</span>,</span><br><span class="line">    use_camera_obs=<span class="literal">False</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># reset the environment</span></span><br><span class="line">env.reset()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>):</span><br><span class="line">    action = np.random.randn(*env.action_spec[<span class="number">0</span>].shape) * <span class="number">0.1</span></span><br><span class="line">    obs, reward, done, info = env.step(action)  <span class="comment"># take action in the environment</span></span><br><span class="line">    env.render()  <span class="comment"># render on display</span></span><br></pre></td></tr></table></figure>
+<p>上面的脚本使用屏幕渲染器创建了一个模拟环境，这对于可视化和定性评估很有用。step（）函数接受一个动作作为输入，并返回一个元组（obs，reward，done，info），其中obs是一个包含观测值[（name_string，np.array），.]的OrderedDict，reward是每步获得的即时奖励，done是指示剧集是否已终止的布尔标志，info是包含附加元数据的字典。</p>
+<h2 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h2><p>从<a target="_blank" rel="noopener" href="https://github.com/ARISE-Initiative/robosuite/tree/master/robosuite/demos">demo</a>里面下载demo</p>
+<ol>
+<li>demo_random_action.py 随机动作</li>
+<li>demo_control.py 需要pip install robosuite_models，演示了robosuite中每个控制器的各种功能，这个没咋看懂，controller是啥</li>
+<li>demo_domain_randomization.py 需要mujoco-py version 3.1.1 不知道版本的话用<code>print(mujoco.__version__)</code>，需要先卸载之前的，再根据版本下载<code>pip install mujoco==3.1.1</code> ，域随机化</li>
+<li>demo_sensor_corruption.py 传感器 为啥这个可以操控了，输出挺恐怖的</li>
+<li>demo_gripper_selection.py 展示了能用的夹子</li>
+<li>demo_gripper_interaction.py 我怎么没找到交互的地方……将夹持器导入场景并使其与具有执行器的对象交互的过程。它还展示了如何使用MJCF实用程序函数的Modeling API按程序生成场景</li>
+<li>demo_collect_and_playback_data.py 轨迹回放</li>
+<li>demo_gym_functionality.py 需要先安装gymnasium，如何调整环境以兼容OpenAI Gym-style API，基于OpenAI gym文档Getting Started with Gym部分中的一些代码片段编写此脚本。可以把自己的数据集封装到gym中</li>
+<li>demo_device_control.py 终于可以控制设备了，参数–device，可以选择Keyboard或者spacemouse，但是spacemouse我没有，目前仅支持mac和linux</li>
+<li>Ctrl+q	reset simulation</li>
+<li>spacebar	toggle gripper (open&#x2F;close)</li>
+<li>up-right-down-left	move horizontally in x-y plane</li>
+<li>.-;	move vertically</li>
+<li>o-p	rotate (yaw)</li>
+<li>y-h	rotate (pitch)</li>
+<li>e-r	rotate (roll)</li>
+<li>b	toggle arm&#x2F;base mode (if appli cable)</li>
+<li>s	switch active arm (if multi-armed robot)</li>
+<li>&#x3D;	switch active robot (if multi-robot env)</li>
+<li>ESC	quit</li>
+<li>demo_video_recording.py –environment Lift –robots Panda 录像的，需要先install imagoio,egl也要修改，参考教程里面的安装部分，根据报错还需要安装imageio[ffmpeg]或者imageio[pyav]，我也不知道哪一个好点。文件存放在执行python时的文件夹里面</li>
+<li>python demo_renderers.py ，有mjviewer和mujoco两种，看不出来什么区别</li>
+<li>demo_usd_export.py 过程比较繁琐，允许用户在外部渲染器（如NVIDIA Omniverse和Blender）中渲染robosuite轨迹<ol>
+<li><code>pip install usd-core pillow tqdm</code></li>
+<li>安装依赖项后，可以通过从<code>from robosuite.utils.usd import exporter</code>导入USD导出器。exporter模块中的USDExporter类处理导出与robosuite轨迹关联的所有必要资产和USD文件。</li>
+<li>尝试运行，啥都没有，有个警告If using later versions of mujoco, please use the exporter in the mujoco repository: <a target="_blank" rel="noopener" href="https://github.com/google-deepmind/mujoco/blob/main/python/mujoco/usd/exporter.py%EF%BC%8C%E4%B8%8B%E8%BD%BD%E4%B8%8B%E6%9D%A5%E4%BB%A3%E6%9B%BF%E5%8E%9F%E6%9D%A5%E7%9A%84exporter.py%EF%BC%88%E6%8E%A7%E5%88%B6%E5%8F%B0%E7%9A%84%E6%8A%A5%E9%94%99%E4%BF%A1%E6%81%AF%E5%8F%AF%E4%BB%A5%E5%AE%9A%E4%BD%8D%E5%88%B0%EF%BC%89%EF%BC%8C%E6%9C%80%E5%90%8E%E4%BF%9D%E5%AD%98%E7%9A%84%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE%E4%B9%9F%E6%98%AF%E5%9C%A8%E6%89%A7%E8%A1%8C%E7%9A%84%E7%9B%AE%E5%BD%95%E9%87%8C%E9%9D%A2">https://github.com/google-deepmind/mujoco/blob/main/python/mujoco/usd/exporter.py，下载下来代替原来的exporter.py（控制台的报错信息可以定位到），最后保存的文件位置也是在执行的目录里面</a></li>
+</ol>
+</li>
+</ol>
+<p>给gym单开一个</p>
+<ol>
+<li>使用gym的话要先安装，可以用示例代码</li>
+<li>运行的时候可能会报错，没安装好，可以参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/tortorish/article/details/131374265">csdn，安装gym[box2d]失败</a><ol>
+<li><code>pip install gymnasium[all]</code></li>
+<li>遇到报错ERROR: Could not build wheels for box2d-py, which is required to install pyproject.toml-based projects：<code>conda install swig</code></li>
+<li>遇到报错error: Microsoft Visual C++ 14.0 or greater is required. Get it with “Microsoft C++ Build Tools”: <a target="_blank" rel="noopener" href="https://visualstudio.microsoft.com/visual-cpp-build-tools/">https://visualstudio.microsoft.com/visual-cpp-build-tools/</a><ol>
+<li>从<a target="_blank" rel="noopener" href="https://visualstudio.microsoft.com/zh-hans/visual-cpp-build-tools/">visualstudioc++</a>直接点下载生成工具</li>
+<li>选使用C++的桌面开发，点击安装。</li>
+</ol>
+</li>
+<li>然后重新装一下</li>
+</ol>
+</li>
+<li>测试代码<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gymnasium <span class="keyword">as</span> gym</span><br><span class="line">env = gym.make(<span class="string">&quot;LunarLander-v2&quot;</span>, render_mode=<span class="string">&quot;human&quot;</span>)</span><br><span class="line">observation, info = env.reset(seed=<span class="number">42</span>)</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>):</span><br><span class="line">   action = env.action_space.sample()  <span class="comment"># this is where you would insert your policy</span></span><br><span class="line">   observation, reward, terminated, truncated, info = env.step(action)</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> terminated <span class="keyword">or</span> truncated:</span><br><span class="line">      observation, info = env.reset()</span><br><span class="line">env.close()</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="modules"><a href="#modules" class="headerlink" title="modules"></a>modules</h1><h2 id="overview-1"><a href="#overview-1" class="headerlink" title="overview"></a>overview</h2><p>2大类api</p>
+<ol>
+<li>以模块化和编程方式定义仿真环境的<strong>建模api</strong></li>
+<li>用于与外部输入（例如来自策略或I&#x2F;O设备的输入）接口的<strong>模拟API</strong>。</li>
+</ol>
+<p>这边模拟和仿真都是simulation</p>
+<p>由建模API指定的<strong>仿真模型</strong>由<strong>MuJoCo引擎</strong>实例化以创建称为<strong>环境</strong>的仿真运行时 (simulation runtime)。环境通过传感器（例如摄像头和本体感受）生成观察结果，并通过机器人的控制器接收来自策略或设备的动作命令。</p>
+<p><img src="https://robosuite.ai/docs/_images/module_overview.png" alt="框架"></p>
+<p>里面包含Task,Environment</p>
+<p>simulation model 由 Task object 定义，封装了机器人仿真的三个基本组成部分：</p>
+<ol>
+<li>robot model：等于等于1个，加载机器人的模型，也可以选择加载其他模型</li>
+<li>object model：可有可无，可以从3D对象资源加载，也可以通过编程API以程序方式生成。</li>
+<li>arena：只能有一个，定义机器人的工作空间，包括环境固定装置（如桌面）及其放置位置。</li>
+</ol>
+<p>任务类将这些成分组合成MuJoCo的MJCF建模语言中的单个XML对象。该MJCF对象通过mujoco库传递给MuJoCo引擎，以实例化MjModel对象以供模拟运行时使用。</p>
+<p>Environment对象为外部输入提供OpenAI Gym-style API，以便与仿真进行交互。</p>
+<p>外部输入对应于用于控制机器人及其所拥有的任何致动器的动作命令，其中动作空间的运动分量特定于机器人所使用的控制器。这些动作命令可以由算法自动生成，也可以来自用于人类远程操作的I&#x2F;O设备。</p>
+<p>机器人的控制器负责解释这些动作命令，并将其转换为传递到底层物理引擎的低级别扭矩，该引擎执行内部计算以确定仿真的下一个状态。传感器从MjSim对象中检索信息，并生成观察结果，作为机器人接收的物理信号，作为对其动作的响应。我们的框架支持多模态传感模式，并提供模块化API来模拟真实的传感器动态。除了这些感官数据，环境还提供有关任务进度和成功条件的其他信息，包括奖励函数和其他元数据。</p>
+<h2 id="robots"><a href="#robots" class="headerlink" title="robots"></a>robots</h2><p>robots对应overview图中Task内部的Robot model。Robots作为给定代理的体现以及环境中的中心交互点和MuJoCo的关键接口，用于机器人相关的状态和控制。robosuite通过基于Robot的类捕获了这种抽象级别，支持固定基座和移动基座变体。Robot类由<strong>RobotModel、RobotBaseModel和Controller</strong>集中定义。RobotModel类的子类还可以包括其他模型。</p>
+<p>Rivirs能实现的功能有：</p>
+<ol>
+<li>多样化和现实的模型：robosuite提供了20个商用机器人（包括人形GR 1机器人），15个抓取器（包括inspire灵巧手模型）和6个控制器的模型，模型属性直接来自公司网站或原始规格表。</li>
+<li>模块化支持：机器人被设计为即插即用-机器人，模型和控制器的任何组合都可以使用，假设给定的环境旨在用于所需的机器人配置。由于每个机器人都被分配了一个唯一的ID号，因此相同机器人的多个实例可以在仿真中实例化而不会出错。</li>
+<li>自封闭抽象：对于给定的任务和环境，与特定机器人实例相关的任何信息都可以在该实例的属性和方法中找到。这意味着每个机器人负责在每个情节开始时直接在模拟中设置其初始状态，并且还通过其控制器的转换动作输出的扭矩直接控制模拟中的机器人。</li>
+</ol>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>在环境创建过程中（suite.make(…)），各个机器人会被实例化和初始化。所需的机器人模型（RobotModel）、坐骑模型（MountModel）和控制器（Controller）（可指定多个和&#x2F;或附加模型，例如用于机械手双臂机器人）将被加载到每个机器人中，这些模型将被传递到环境中，以组成最终的 MuJoCo 仿真对象。然后将每个机器人设置为初始状态。</p>
+<h4 id="运行时"><a href="#运行时" class="headerlink" title="运行时"></a>运行时</h4><p>在给定的模拟事件期间（env.step(…)调用），环境将接收一组动作，并根据它们各自的动作空间将它们相应地分配给每个机器人。然后，每个机器人通过各自的控制器将这些动作转换为低级别的扭矩，并在仿真中直接执行这些扭矩。在环境步骤结束时，每个机器人将其机器人特定的观测值集传递给环境，然后环境将连接并附加额外的任务级观测值，然后将它们作为env.step(…)的输出</p>
+<h4 id="调用对象"><a href="#调用对象" class="headerlink" title="调用对象"></a>调用对象</h4><p>在任何给定时间，每个机器人都有一组properties，可以随时访问其实时值。这些包括给定机器人的规格，例如其DoF，动作尺寸和扭矩限制，以及本体感受值，例如其关节位置和速度。此外，如果机器人启用了任何传感器，也可以轮询这些读数。机器人属性的完整列表可以在机器人API部分找到。</p>
+<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><h1 id="Algorithms"><a href="#Algorithms" class="headerlink" title="Algorithms"></a>Algorithms</h1><h2 id="Benchmark"><a href="#Benchmark" class="headerlink" title="Benchmark"></a>Benchmark</h2><p>v1.0是最新的吧？v0.3早一点。</p>
+<p>也就是说robosuite+sac需要2天才能跑完一个实验，我应该不用跑吧……</p>
+<ol>
+<li>v1.0<ol>
+<li>robosuite提供的benchmark <ol>
+<li>利用强化学习库 rlkit</li>
+<li>测试 Soft Actor-Critic，无模型rl算法 （2018年）</li>
+</ol>
+</li>
+<li>测试结果<a target="_blank" rel="noopener" href="https://github.com/ARISE-Initiative/robosuite-benchmark">github:benchmarking for robosuite+SAC</a></li>
+<li>效果<ol>
+<li>所有代理都经过了500个epoch的训练，每个epoch有500个步骤，并使用相同的标准化算法超参数</li>
+<li>这些实验在2个CPU和12 G VRAM上运行，没有GPU，每个实验大约需要两天才能完成。</li>
+</ol>
+</li>
+<li>结论：用panda(osc)</li>
+</ol>
+</li>
+<li>v0.3<ol>
+<li>查阅Surreal论文，其他啥都没说</li>
+<li>还提供了一个思路RoboTurk数据集上的模仿学习</li>
+</ol>
+</li>
+</ol>
+<h3 id="代码框架"><a href="#代码框架" class="headerlink" title="代码框架"></a>代码框架</h3><blockquote>
+<p>windows和wsl上都失败了orz，我试试阅读下代码吧，了解一下框架</p>
+</blockquote>
+<p>之前根据教程，确认运行实验是运行scripts&#x2F;train.py，其他可视化环节先不管(也可以顺便看一下为什么我windows上面的log地址能不能手动改一下，好吧一开始初始化就有问题。。)</p>
+<ol>
+<li>train.py执行先配置参数，后面到utils&#x2F;rlkit_utils.py执行experiment.py</li>
+<li>rlkit.py里面有用到robosuite相关的包，<em>尤其是GymWrapper</em><ol>
+<li>tran调用的是rlkit.py里面的experiment，参数varient<ol>
+<li>对每个参数<ol>
+<li>根据参数设置controller</li>
+<li>设置robosuite环境并加入到suites中</li>
+</ol>
+</li>
+<li>GymWrapper 封装 suites</li>
+<li>MLP</li>
+<li>用agent实例化tran</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>跑实验<a target="_blank" rel="noopener" href="https://github.com/ARISE-Initiative/robosuite-benchmark">github benchmark:robosuite+SAC</a></p>
+<p><strong>benchmark这个版本只能在linux或者mac上面跑，windows真不行</strong></p>
+<p>我非常怀疑是因为这个benchmark自己的问题:&lt;</p>
+<hr>
+<h3 id="WSL配置-fail纪念"><a href="#WSL配置-fail纪念" class="headerlink" title="WSL配置 fail纪念"></a>WSL配置 fail纪念</h3><p>用WSL 18.04跑的</p>
+<ol>
+<li>根据github read-me操作</li>
+<li>安装anaconda</li>
+<li>pip install requirements时出现问题，一看果然又是mujoco，建议先用<code>pip install mujoco==2.0.2.9</code>试试<ol>
+<li>command ‘gcc‘ failed with exit status 1报错<ol>
+<li>gcc –version发现没有，根据它的提示安装</li>
+<li>ubuntu18.04默认安装7的gcc，看起来能用</li>
+</ol>
+</li>
+<li>再运行install，出现新报错fatal error: ffi.h: No such file or directory<ol>
+<li>执行<code>sudo apt-get install build-essential libssl-dev libffi-dev python-dev</code></li>
+</ol>
+</li>
+<li>新报错 missing MuJoCo，太熟悉了<ol>
+<li>下载mujo200: sudo wget <a target="_blank" rel="noopener" href="https://www.roboti.us/download/mujoco200_linux.zip">https://www.roboti.us/download/mujoco200_linux.zip</a></li>
+<li>unzip ，需要先安装unzip 到 home下的.mujoco文件夹里面<ol>
+<li><code>mkdir ~/.mujoco</code></li>
+<li>并把解压后的文件夹命名为mujoco200</li>
+</ol>
+</li>
+<li>下载key：sudo wget <a target="_blank" rel="noopener" href="https://www.roboti.us/file/mjkey.txt">https://www.roboti.us/file/mjkey.txt</a></li>
+<li>移动license<ol>
+<li><code>cp mjkey.txt ~/.mujoco</code></li>
+<li><code>cp mjkey.txt ~/.mujoco/mujoco200/bin</code></li>
+</ol>
+</li>
+<li>测试<ol>
+<li><code>cd ~/.mujoco/mujoco200/bin </code></li>
+<li><code>./simulate ../model/humanoid.xml</code></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>继续<code>pip install -r requirements.txt</code>这下应该没问题了，之前windows上面也主要是</li>
+<li>出现了这样的报错……  ERROR: Could not find a version that satisfies the requirement mink&gt;&#x3D;0.0.5 (from robosuite&gt;&#x3D;1.0.1-&gt;-r requirements.txt (line 1)) (from versions: none)<br>ERROR: No matching distribution found for mink&gt;&#x3D;0.0.5 (from robosuite&gt;&#x3D;1.0.1-&gt;-r requirements.txt (line 1))，先搞定别的</li>
+<li>安装完其他的之后从github里找个配置文件的例子，跑一下<ol>
+<li>安装gtimer模块，pip install</li>
+<li>不知道为什么找不到gym，再根据requirements安装下<ol>
+<li>报错，说要mjpro150，我服了，再干一遍</li>
+<li>还是有问题说Failed building wheel for atari-py：sudo apt install cmake libz-dev</li>
+<li>提示Please add following line to .bashrc:export LD_LIBRARY_PATH&#x3D;$LD_LIBRARY_PATH:&#x2F;home&#x2F;bmtest&#x2F;.mujoco&#x2F;mjpro150&#x2F;bin</li>
+<li>报错，GL&#x2F;osmesa.h文件：sudo apt install libosmesa6-dev</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>还是报错，requirement.txt上 gym和mujoco-py的版本不一致 ;-;</li>
+<li>而且mujoco150和mujoco200到底安装哪个我也不清楚，烦</li>
+</ol>
+<hr>
+<h3 id="windows配置-fail纪念"><a href="#windows配置-fail纪念" class="headerlink" title="windows配置 fail纪念"></a>windows配置 fail纪念</h3><ol>
+<li>根据说明clone</li>
+<li>新建环境，它没有windows的，我按照mac来，因为linux比mac就多最后一行</li>
+<li>为了方便使用也在idea上设置一下</li>
+<li>先帝创业未半而中道崩殂,老版本都比较贴近linux</li>
+<li>其他都能搞完，主要是mujoco和mujoco-py有点难搞<ol>
+<li>mujoco:150<ol>
+<li><a target="_blank" rel="noopener" href="https://www.roboti.us/index.html">下载</a>，本体和license都要，找150的</li>
+<li>解压之后 mjkey.txt放到 \mujoco和\mujoco\bin\里面</li>
+<li>mujoco文件夹的位置和命名需要放在c:\users..里面，必须</li>
+<li>检测，能出现图像才算胜利<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd C:\Users\xxx\.mujoco\mjpro150\bin</span><br><span class="line">simulate.exe ../model/humanoid.xml</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li>配置mujoco：<a target="_blank" rel="noopener" href="https://blog.51cto.com/u_15346769/5275646">参考</a>，添加系统变量后要重启</li>
+<li>mujoco-py<ol>
+<li>因为github上面找不到这个版本的，只能下载到本地后移动文件夹到虚拟环境中</li>
+<li><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_15346769/5275646">参考</a></li>
+<li>import mujoco_py 一直报缺少一个头文件的问题，后面解决了是要200的mujoco，把原来150的换一下，再改环境变量，import没问题了orz，希望robosuite和gym不会出问题……看起来这下mujoco-py没问题了</li>
+</ol>
+</li>
+<li>试了下import gym和robosuite，暂时还没报错，继续这么下去吧。</li>
+</ol>
+</li>
+<li>跟着github的readme搞剩下的，很简单</li>
+<li>export PYTHONPATH&#x3D;.:$PYTHONPATH 要改成set，export是linux的</li>
+<li>google这个<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42145681/article/details/116567365">https://blog.csdn.net/qq_42145681/article/details/116567365</a></li>
+<li>运行时遇到import util错误，在train.py的from util…之前加上sys.path.append(‘.’)，要在根目录执行，如果要在scripts目录下运行的话就要append两个点</li>
+<li>UnicodeEncodeError: ‘locale’ codec can’t encode character ‘\u4e2d’ in position 25: encoding error，根据这个，remove %Z</li>
+</ol>
+<h1 id="比较新的使用这个平台的算法"><a href="#比较新的使用这个平台的算法" class="headerlink" title="比较新的使用这个平台的算法"></a>比较新的使用这个平台的算法</h1>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/robotic/" rel="tag"># robotic</a>
+              <a href="/tags/simulation/" rel="tag"># simulation</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/11/25/MANISKILL3-GPU-PARALLELIZED-ROBOTICS-SIMULATION-AND-RENDERING-FOR-GENERALIZABLE-EMBODIED-AI/" rel="prev" title="MANISKILL3: GPU PARALLELIZED ROBOTICS  SIMULATION AND RENDERING FOR  GENERALIZABLE EMBODIED AI">
+                  <i class="fa fa-angle-left"></i> MANISKILL3: GPU PARALLELIZED ROBOTICS  SIMULATION AND RENDERING FOR  GENERALIZABLE EMBODIED AI
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/12/09/todo-app%E6%B5%8B%E8%AF%84/" rel="next" title="todo app测评">
+                  todo app测评 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">milong26</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

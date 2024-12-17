@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="小样本llm论文阅读，百篇paper计划(3&#x2F;100)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TinyLLM: Learning a Small Student from Multiple Large Language Models">
+<meta property="og:url" content="http://zhon.fun/2024/03/24/TinyLLM-Learning-a-Small-Student-from-Multiple-Large-Language-Models/index.html">
+<meta property="og:site_name" content="没啥标题">
+<meta property="og:description" content="小样本llm论文阅读，百篇paper计划(3&#x2F;100)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/03/25/OgEaDY.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/03/26/OgdfvP.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/03/26/Ogdldb.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/03/26/OgdjOl.png">
+<meta property="article:published_time" content="2024-03-24T12:41:50.000Z">
+<meta property="article:modified_time" content="2024-12-17T06:08:35.683Z">
+<meta property="article:author" content="milong26">
+<meta property="article:tag" content="llm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ooo.0x0.ooo/2024/03/25/OgEaDY.png">
+
+
+<link rel="canonical" href="http://zhon.fun/2024/03/24/TinyLLM-Learning-a-Small-Student-from-Multiple-Large-Language-Models/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2024/03/24/TinyLLM-Learning-a-Small-Student-from-Multiple-Large-Language-Models/","path":"2024/03/24/TinyLLM-Learning-a-Small-Student-from-Multiple-Large-Language-Models/","title":"TinyLLM: Learning a Small Student from Multiple Large Language Models"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>TinyLLM: Learning a Small Student from Multiple Large Language Models | 没啥标题</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">没啥标题</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">活下去</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%BB%8E%E4%BD%95%E6%9D%A5"><span class="nav-number">2.1.</span> <span class="nav-text">问题从何来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tinyllm%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">2.2.</span> <span class="nav-text">tinyllm是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tinyllm%E6%80%8E%E4%B9%88%E5%81%9A%E7%9A%84-%E5%8A%9F%E8%83%BD"><span class="nav-number">2.3.</span> <span class="nav-text">tinyllm怎么做的+功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0%E4%B8%8E%E7%BB%93%E6%9E%9C"><span class="nav-number">2.4.</span> <span class="nav-text">评估与结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E8%B4%A1%E7%8C%AE"><span class="nav-number">2.5.</span> <span class="nav-text">主要贡献</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.6.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#method"><span class="nav-number">3.</span> <span class="nav-text">method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86"><span class="nav-number">3.1.</span> <span class="nav-text">预备知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E9%80%89%E7%AD%94%E9%A2%98"><span class="nav-number">3.1.1.</span> <span class="nav-text">多选答题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F"><span class="nav-number">3.1.2.</span> <span class="nav-text">知识蒸馏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E6%95%99%E5%B8%88%E9%82%A3%E9%87%8C%E8%8E%B7%E5%8F%96%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80"><span class="nav-number">3.2.</span> <span class="nav-text">从教师那里获取理论基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E5%A2%83%E5%AE%9E%E4%BE%8B%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">3.2.1.</span> <span class="nav-text">语境实例生成器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%99%E5%B8%88%E5%BC%BA%E5%88%B6%E6%80%9D%E7%BB%B4%E9%93%BE"><span class="nav-number">3.2.2.</span> <span class="nav-text">教师强制思维链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E4%BD%8D%E6%95%99%E5%B8%88%E7%9A%84%E7%90%86%E8%AE%BA"><span class="nav-number">3.2.3.</span> <span class="nav-text">多位教师的理论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E4%B8%80%E4%B8%AA%E5%B0%8F%E7%9A%84%E5%AD%A6%E7%94%9F%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.2.4.</span> <span class="nav-text">学习一个小的学生模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-1"><span class="nav-number">3.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">4.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE"><span class="nav-number">4.1.</span> <span class="nav-text">实验设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">4.1.1.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E5%87%86baseline"><span class="nav-number">4.1.2.</span> <span class="nav-text">基准baseline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82"><span class="nav-number">4.1.3.</span> <span class="nav-text">实现细节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E6%AF%94%E8%BE%83"><span class="nav-number">4.2.</span> <span class="nav-text">结果比较</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8E%E5%AD%A6%E7%94%9F%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-number">4.2.1.</span> <span class="nav-text">与学生学习方法的比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%92%8C%E6%95%99%E5%B8%88%E6%A8%A1%E5%9E%8B%E6%AF%94%E8%BE%83"><span class="nav-number">4.2.2.</span> <span class="nav-text">和教师模型比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C"><span class="nav-number">4.3.</span> <span class="nav-text">消融实验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E7%81%B5%E6%95%8F%E5%BA%A6"><span class="nav-number">4.4.</span> <span class="nav-text">参数灵敏度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-2"><span class="nav-number">4.5.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-3"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">milong26</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2024/03/24/TinyLLM-Learning-a-Small-Student-from-Multiple-Large-Language-Models/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="milong26">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="TinyLLM: Learning a Small Student from Multiple Large Language Models | 没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          TinyLLM: Learning a Small Student from Multiple Large Language Models
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-24 20:41:50" itemprop="dateCreated datePublished" datetime="2024-03-24T20:41:50+08:00">2024-03-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-12-17 14:08:35" itemprop="dateModified" datetime="2024-12-17T14:08:35+08:00">2024-12-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>小样本llm论文阅读，百篇paper计划(3&#x2F;100)</p>
+<span id="more"></span>
+
+
+<p>要看小样本了，随便找了一篇比较新的，不好看不要怪我。</p>
+<ul>
+<li>论文标题：TinyLLM: Learning a Small Student from Multiple Large Language Models</li>
+<li>arxiv地址：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2402.04616">链接</a></li>
+<li>code：</li>
+<li></li>
+</ul>
+<h1 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a>abstract</h1><ul>
+<li>问题：将推理能力从较强的大语言模型转移到较小的llms上面</li>
+<li>目前：知识蒸馏knowledge distillation，其优点是突出的高效性和泛化性，缺点是知识多样性有限、缺乏丰富的上下文信息。</li>
+<li>要解决：解决以上提到的知识蒸馏的bug，促进紧凑语言模型(compact language model)的学习</li>
+<li>提出：TINYLLM，是一种知识蒸馏范式，从多个大的教师llm中学习一个小的学生llm</li>
+<li>具体来说：鼓励学生llm不仅能够生成正确的答案，还要理解答案背后的理论基础；鉴于不同的LLMs具有不同的推理能力，我们引导学生模型从不同的教师LLMs中同化知识。</li>
+<li>其他贡献：进一步引入了一个语境范例生成器(in-context example generator)和一个教师驱动的思维链(chain of thought)策略，以确保理论基础的准确性和在适当的情景中的基础。</li>
+<li>实验与结果：在两个推理任务的6个数据集上的大量实验证明了本文方法的优越性。实验结果表明，尽管TinyLLM的模型尺寸较小，但其性能明显优于大型教师LLM。</li>
+</ul>
+<blockquote>
+<p>看第一遍之后的想法：</p>
+<p>有几个术语不知道：知识蒸馏、紧凑语言模型、教师llm和学生llm是怎么运行的、预警范例生成器、思维链。</p>
+<p>它这个是根据任务做的，还是可以推广到所有模型上？</p>
+</blockquote>
+<h1 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h1><h2 id="问题从何来"><a href="#问题从何来" class="headerlink" title="问题从何来"></a>问题从何来</h2><p>问题就是大模型好，小模型不行。知识蒸馏是缓解较大模型和较小模型之间性能差距的工具。</p>
+<p>但是知识蒸馏有俩问题：</p>
+<ul>
+<li><p>有限的知识多样性：</p>
+<p>  目前的研究主要采用<strong>单一教师</strong>的方法，将学生模型的学习范围限制在其自身训练和结构设计中得到的知识。这意味着学生模型仅限于教师的观点、偏见和潜在弱点。</p>
+</li>
+<li><p>缺乏丰富的情境信息：</p>
+<p>虽然理论在有效推理中起重要作用，但目前的研究主要集中在利用真值标签，这些标签表明了正确的答案，但并没有提供关于答案背后的推理和思维过程的见解。</p>
+</li>
+</ul>
+<h2 id="tinyllm是什么"><a href="#tinyllm是什么" class="headerlink" title="tinyllm是什么"></a>tinyllm是什么</h2><p>针对上述问题，提出TINYLLM，即一个通过对多个大的教师LLM在理论指导下提取知识，从而提高小的学生LLM推理能力的范式。</p>
+<blockquote>
+<p>注：TINYLLM是一种diagram范式<br>范式是什么？</p>
+</blockquote>
+<h2 id="tinyllm怎么做的-功能"><a href="#tinyllm怎么做的-功能" class="headerlink" title="tinyllm怎么做的+功能"></a>tinyllm怎么做的+功能</h2><p>具体来说：TinyLLM通过引入多个教师模型作为共同顾问(co-advisors)来缓解有限的知识多样性问题。为了充分利用每个教师模型，缓解缺乏丰富上下文信息的问题，TinyLLM要求教师提供<strong>合理的理由</strong>来支持答案。通过向多位教师学习，学生模型可以继承更广泛的技能和知识，从而获得更好的泛化能力。</p>
+<p>此外，为了确保理论基础建立在情境适当的场景中，并反映真实的底层推理过程，TinyLLM具有<strong>语境示例生成器</strong>和<strong>教师强制的思维链策略</strong>，使教师通过演示理解任务并生成准确的理论基础。</p>
+<h2 id="评估与结果"><a href="#评估与结果" class="headerlink" title="评估与结果"></a>评估与结果</h2><p>为了全面评估我们的方法，我们在<strong>常识和生物医学推理任务</strong>的6个数据集上进行了实验。</p>
+<p>结果表明，与完全微调(full fine-tuning)相比，使用我们的范式可以提高xx性能，并且模型尺寸明显较小。我们还进行了消融研究，以证明教师理论的有效性，并进行了超参数分析，以进行综合评估。</p>
+<h2 id="主要贡献"><a href="#主要贡献" class="headerlink" title="主要贡献"></a>主要贡献</h2><blockquote>
+<p>不用管orz</p>
+</blockquote>
+<ul>
+<li>我们发现现有学习较小语言模型的工作存在两个问题：1 )知识多样性有限；2 )缺乏丰富的上下文信息。</li>
+<li>为了解决这些问题，我们提出了一种新的知识蒸馏范式TinyLLM，通过从多个大型教师LLM中迁移推理能力来学习一个小型学生LLM。我们鼓励学生LLM理解生成答案背后的原理。</li>
+<li>在六个数据集和两个推理任务中，大量实验验证了TinyLLM的优越性。TinyLLM在模型大小为1.1 %的情况下，可以获得高达+ 12.57 %的性能提升。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>背景：要搞小模型，就要知识蒸馏，知识蒸馏有俩问题</li>
+<li>解决：提出llm<ol>
+<li>是什么：一个范式，学习多个教师+理论指导</li>
+<li>咋做的：多个教师作为co-advisors，要求教师提供理由</li>
+<li>额外的：语境示例生成器+教师强制的思维链</li>
+</ol>
+</li>
+</ol>
+<h1 id="method"><a href="#method" class="headerlink" title="method"></a>method</h1><p>tinyllm的流程图<br><img src="https://ooo.0x0.ooo/2024/03/25/OgEaDY.png" alt="tinyllm流程图"></p>
+<p>给定一个输入问题，我们首先生成<strong>语境例子</strong>，并通过教师驱动的思维链策略从多个大型LLM中获得<strong>理论基础</strong>。之后，一个小型的学生LLM被训练通过<strong>多任务指导调整</strong>来整合来自不同教师的理论基础，以及基本真值标签。</p>
+<h2 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h2><h3 id="多选答题"><a href="#多选答题" class="headerlink" title="多选答题"></a>多选答题</h3><p>k-way多选问题回答(MCQA)定义：</p>
+<p>给定一个问题Qi，一个候选答案选项集Oi &#x3D; { Oi1，Oi2，..，Oik }，模型的任务是从集合Oi中选择正确的答案，使得所选答案与真实答案标签Ai对齐。</p>
+<h3 id="知识蒸馏"><a href="#知识蒸馏" class="headerlink" title="知识蒸馏"></a>知识蒸馏</h3><p>知识蒸馏过程从教师模型开始，用θT参数化的T表示，该模型已经在大型语料库上进行了预训练。之后，带有参数θS的学生模型S要完成利用T的强大能力直接从T中提取知识的任务。</p>
+<h2 id="从教师那里获取理论基础"><a href="#从教师那里获取理论基础" class="headerlink" title="从教师那里获取理论基础"></a>从教师那里获取理论基础</h2><h3 id="语境实例生成器"><a href="#语境实例生成器" class="headerlink" title="语境实例生成器"></a>语境实例生成器</h3><p>为了使教师生成的理据能够扎根于情境适宜的场景中，我们引入了一个可选的语境实例生成器。该工具为任意给定的输入生成语境示例，提供关于输入数据和任务的更多详细信息。</p>
+<p>为简单起见，我们在<strong>同一数据集</strong>中随机选取例子。这有助于教师LLMs更深入地理解任务的性质和特点。通过集成该生成器，我们促进了教师模型更明智和细致入微地生成理论基础，增强了学生模型的学习体验。</p>
+<h3 id="教师强制思维链"><a href="#教师强制思维链" class="headerlink" title="教师强制思维链"></a>教师强制思维链</h3><p>用教师强迫策略来确保理论基础的有效性。</p>
+<p>与现有方法【<em>简单地使用规则思维链(CoT)机制），其中LLM由问题集和选项集{Qi,Oi}提示以直接获得理据Ri</em>】相比，TinyLLM在将正确答案Ai整合到输入中方面具有明显的优势。</p>
+<p>我们假设是因为：Ai与Qi和Oi放一起有助于对输入语境和导致答案的正确逻辑理据进行更细致入微的理解，从而促进更明智和准确的生成过程。</p>
+<p>具体来说，我们考虑问题、选项和答案的串联{ Qi，Oi，Ai }作为LLMs的输入。</p>
+<h3 id="多位教师的理论"><a href="#多位教师的理论" class="headerlink" title="多位教师的理论"></a>多位教师的理论</h3><p>给定M个教师，TinyLLM开创性地使用了多教师架构，其中每个教师Tm是一个LLM。特别地，利用问题Qi、选项Oi、正确答案Ai和语境示例Pi推导出特定教师模型θ Tm对第i个问题产生的理据R^m_i。该过程形式化为：<br>$$<br>R_i^m&#x3D;T^m(Q_i,O_i,A_i,P_i;\theta_{T^m})<br>$$</p>
+<h3 id="学习一个小的学生模型"><a href="#学习一个小的学生模型" class="headerlink" title="学习一个小的学生模型"></a>学习一个小的学生模型</h3><p>将理论知识作为监督的直接策略是将教师模型产生的每个理据$R_i^m$与问题Qi和选项Oi一起作为学生模型的补充输入。然而，该方法在推理阶段由于<strong>计算资源</strong>的限制而面临挑战，特别是因为训练集和测试集中的每个数据样本都必须预先生成理论基础。</p>
+<p>为了克服这个问题，我们在训练过程中<strong>使用理论知识作为监督信号的一种形式</strong>，以开发一个善于生成自己解释的模型。随后，这个训练好的模型可以在测试集上使用，不需要预先生成合理的论据，以促进准确的推理。</p>
+<blockquote>
+<p>哪里不需要预先生成论据R了？是测试集上不用生成吗</p>
+</blockquote>
+<p>具体来说，TinyLLM将来自多个教师模型的理论整合到一个统一的多任务教学调优框架中。这就需要分配一个唯一的前缀p来区分来自不同教师的学习任务。学生模型不仅需要被训用于预测标签，还要生成和教师差不多的论据。总体的损失函数L:<br>$$<br>L&#x3D;L_A+\sum_{m&#x3D;1}^M \alpha ^m L_{T^m}<br>$$<br>LA表示向真实答案学习的目标，LTm表示向第m个教师学习的目标，αm为Tm的重要性权重，M为教师LLM的数量。形式上，LA和LTm定义如下：<br>$$<br>L_A&#x3D;\frac{1}{N}\sum_{i&#x3D;1}^N l(S(Q_i,O_i,P_A;\theta <em>S),A_i)\\<br>L</em>{T_m}&#x3D;\frac{1}{N}l(S(Q_i,O_i,p_m;\theta _S),R_i^m)<br>$$</p>
+<p>N是数据集的个数，l表示预测令牌和目标令牌之间的交叉熵损失cross-entropy loss。LA鼓励学生S在给定问题Qi、选项Oi和生成答案的指令前缀pA的情况下，通过最小化<strong>它</strong>与学生输出之间的差异来生成真值答案Ai。</p>
+<blockquote>
+<p>“它”指代LA产生的输出</p>
+</blockquote>
+<p>另一方面，$L^m_T$通过学习教师Tm的推理理据$R^m_i$，以Tm的指令前缀pm为指导，促进学生S模仿Tm的推理能力。</p>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>预备知识<ol>
+<li>多选QCMA</li>
+<li>知识蒸馏：教师和学生模型</li>
+</ol>
+</li>
+<li>从教师获得理论<ol>
+<li>语境实例生成器：为任意给定的输入生成语境示例</li>
+<li>教师强制思维链：问题、选项和答案的串联作为llms的输入</li>
+<li>从多个教师学习理论</li>
+</ol>
+</li>
+<li>学生模型的学习方式<ol>
+<li>学习答案LA</li>
+<li>学习结束LTm</li>
+</ol>
+</li>
+</ol>
+<h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><h2 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p>我们遵循GNP中的设置来使用常识推理和生物医学推理数据集，包括OpenBookQA ( OBQA )，AI2推理挑战( ARC ) ，物理交互问答( PIQA ) ，RiddleSense ( Riddle )，PubMedQA ( PQA ) 和BioASQ。</p>
+<h3 id="基准baseline"><a href="#基准baseline" class="headerlink" title="基准baseline"></a>基准baseline</h3><p>我们将TinyLLM与教师的表现和各种训练方法进行了比较，包括没有训练的inference配置，更新参数子集的高效训练方法LoRA，以及更新学生所有参数的全微调。</p>
+<h3 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h3><p>对于TinyLLM，设置学习率为$5\times 10^{-5}$，批大小为16，最大输入长度为1024，epoch为1。</p>
+<p>权衡权重$\alpha_{T_n}$在{ 0.01，0.1，0.5，1，2，3 }内取值。</p>
+<p>对于LLMs的选择，我们使用FLAN - T5  small ( 80M )，base ( 250M )，and large ( 780M )作为学生，FLAN-T5 xlarge ( 3B )和LLaMA 2-chat  ( 7B )作为教师。</p>
+<p>实验在4个NVIDIA Tesla H100 GPU上进行。</p>
+<h2 id="结果比较"><a href="#结果比较" class="headerlink" title="结果比较"></a>结果比较</h2><h3 id="与学生学习方法的比较"><a href="#与学生学习方法的比较" class="headerlink" title="与学生学习方法的比较"></a>与学生学习方法的比较</h3><p><img src="https://ooo.0x0.ooo/2024/03/26/OgdfvP.png" alt="结果"></p>
+<p>六个数据集和两个推理任务的结果如表1所示。从表中，我们观察到采用全微调方法，尽管其理论上增强了参数调整的能力，但并不总是产生优于LoRA的结果。相反，TinyLLM在所有数据集和LLM大小上都表现出显著的性能增强。</p>
+<p>总体而言，TinyLLM在参数为80M、250M和780M的学生中平均提升了+ 12.57 %、+ 11.40 %和+ 5.07 %。这验证了TinyLLM的有效性，强调了向教师学习的重要性和好处。</p>
+<h3 id="和教师模型比较"><a href="#和教师模型比较" class="headerlink" title="和教师模型比较"></a>和教师模型比较</h3><p>与教师模型相比，TinyLLM也表现出更优越的性能。例如，一个780M的学生在不同的数据集上可以达到73.88的平均性能，比3B教师提高了+ 14.56 %，比7B教师提高了+ 23.40 %。此外，具有250M参数的更小的学生模型可以超越教师( + 0.70%在3B , + 16.82%在7B)，而只使用了8.3 %和3.6 %的教师参数。</p>
+<h2 id="消融实验"><a href="#消融实验" class="headerlink" title="消融实验"></a>消融实验</h2><p>为了进行全面的评估，我们进行了消融研究，以验证语境范例生成器的贡献和来自多位教师的理论基础。为了方便起见，我们创建了TinyLLM的三个消融变体。</p>
+<ul>
+<li>W &#x2F; o  in-contect：排除了理据生成过程中的语境实例。</li>
+<li>w &#x2F; o LLaMa和 w &#x2F; o T5排除了蒸馏过程中相应教师模型对理据的监督。</li>
+</ul>
+<p>表2描述了完整的TinyLLM模型和它在六个数据集上的消融之间的比较。从表中可以看出，删除语境中的例子和教师理据的成绩下降，说明了它们对模型的提升是有效的。通过组合所有的设计，所提出的TinyLLM达到了最好的性能。这些发现表明，从多位教师那里学习高质量的理性信号，有利于提取具有较好推理能力的小LLM。</p>
+<p><img src="https://ooo.0x0.ooo/2024/03/26/Ogdldb.png" alt="表2"></p>
+<h2 id="参数灵敏度"><a href="#参数灵敏度" class="headerlink" title="参数灵敏度"></a>参数灵敏度</h2><p><img src="https://ooo.0x0.ooo/2024/03/26/OgdjOl.png" alt="图2"></p>
+<p>权衡权重(trade-off weights,也就是公式中的$\alpha_{T_n}$)的探索揭示了模型对不同参数值选择的适应性。我们在图2中的常识推理数据集ARC和生物医学推理数据集PQA上进行了敏感性实验。从图中可以看出，不同数据集和任务的最优参数不同。造成这种现象的原因是生物医学推理问题往往冗长复杂，弱化了教师理据性的影响，使得较小的α值就足够了。相比之下，常识推理问题通常简洁明了，使得来自教师模型的理论基础具有价值，并导致α的大量值。</p>
+<h2 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>实验设置</li>
+<li>结果<ol>
+<li>tinyllm和其他方法</li>
+<li>tinyllm和教师llm</li>
+<li>消融实验证明有效性</li>
+</ol>
+</li>
+</ol>
+<h1 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h1><p>在本文中，我们提出了TinyLLM，一种新颖的知识蒸馏范式，从多个大的教师LLM中学习一个小的学生LLM。TinyLLM涉及多个创新设计，例如在不同教师之间继承更广泛的知识，并使用语境示例生成器和教师驱动的思维链策略学习上下文相关的、准确的原理。在六个数据集和两个推理任务上的大量实验验证了TinyLLM的优越性。</p>
+<p>未竟之事：</p>
+<ol>
+<li>教师-学生模型怎么运作的</li>
+<li>思维链是什么</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/llm/" rel="tag"># llm</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/03/18/Towards-A-Unified-View-Of-Parameter-Efficient-Transfer-Learning/" rel="prev" title="Towards A Unified View Of Parameter-Efficient Transfer Learning">
+                  <i class="fa fa-angle-left"></i> Towards A Unified View Of Parameter-Efficient Transfer Learning
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/04/02/%E5%B1%80%E9%83%A8%E6%9C%80%E4%BC%98%E5%92%8C%E9%9E%8D%E7%82%B9/" rel="next" title="局部最优和鞍点">
+                  局部最优和鞍点 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">milong26</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

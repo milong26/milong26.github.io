@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="百篇paper计划(1&#x2F;100)，推荐阅读的，没有选择趋向。内容是：用有限的资源（主要是内存）进行全参数大模型微调，研究重点集中在微调部分，做的是内存优化的工作。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FULL PARAMETER FINE-TUNING FOR LARGE LANGUAGE MODELS WITH LIMITED RESOURCES">
+<meta property="og:url" content="http://zhon.fun/2023/11/24/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/index.html">
+<meta property="og:site_name" content="没啥标题">
+<meta property="og:description" content="百篇paper计划(1&#x2F;100)，推荐阅读的，没有选择趋向。内容是：用有限的资源（主要是内存）进行全参数大模型微调，研究重点集中在微调部分，做的是内存优化的工作。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-11-24T09:10:38.000Z">
+<meta property="article:modified_time" content="2024-12-17T06:08:35.683Z">
+<meta property="article:author" content="milong26">
+<meta property="article:tag" content="llm">
+<meta property="article:tag" content="fine tune">
+<meta property="article:tag" content="full parameterwww">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhon.fun/2023/11/24/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2023/11/24/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/","path":"2023/11/24/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/","title":"FULL PARAMETER FINE-TUNING FOR LARGE LANGUAGE MODELS WITH LIMITED RESOURCES"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>FULL PARAMETER FINE-TUNING FOR LARGE LANGUAGE MODELS WITH LIMITED RESOURCES | 没啥标题</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">没啥标题</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">活下去</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#related-work"><span class="nav-number">3.</span> <span class="nav-text">related work</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Activation-Checkpointing"><span class="nav-number">3.1.</span> <span class="nav-text">Activation Checkpointing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mixed-Precision-Training"><span class="nav-number">3.2.</span> <span class="nav-text">Mixed-Precision Training</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Heterogeneous-Training-System"><span class="nav-number">3.3.</span> <span class="nav-text">Heterogeneous Training System</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#method"><span class="nav-number">4.</span> <span class="nav-text">method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8"><span class="nav-number">4.1.</span> <span class="nav-text">优化器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8SGD"><span class="nav-number">4.1.1.</span> <span class="nav-text">使用SGD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E5%B9%B3%E6%BB%91%E7%9A%84%E6%8D%9F%E5%A4%B1%E9%9D%A2"><span class="nav-number">4.1.1.1.</span> <span class="nav-text">更平滑的损失面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E6%9C%80%E4%BC%98%E5%B0%B1%E5%A4%9F%E4%BA%86"><span class="nav-number">4.1.1.2.</span> <span class="nav-text">局部最优就够了</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9E%8D%E7%82%B9%E5%BE%88%E9%81%A5%E8%BF%9C"><span class="nav-number">4.1.1.3.</span> <span class="nav-text">鞍点很遥远</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#batch-size"><span class="nav-number">4.1.2.</span> <span class="nav-text">batch size</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lomo"><span class="nav-number">4.2.</span> <span class="nav-text">lomo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B%E7%9A%84%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="nav-number">4.3.</span> <span class="nav-text">训练过程的稳定性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E6%AD%A3%E5%88%99%E5%8C%96%E5%92%8C%E8%A3%81%E5%89%AA%E7%9A%84%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88"><span class="nav-number">4.3.1.</span> <span class="nav-text">梯度正则化和裁剪的替代方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E8%AF%81%E7%B2%BE%E5%BA%A6"><span class="nav-number">4.3.2.</span> <span class="nav-text">保证精度</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#experiment"><span class="nav-number">5.</span> <span class="nav-text">experiment</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8"><span class="nav-number">5.1.</span> <span class="nav-text">内存占用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8%E7%8A%B6%E6%80%81"><span class="nav-number">5.1.1.</span> <span class="nav-text">优化器状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6"><span class="nav-number">5.1.2.</span> <span class="nav-text">梯度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB"><span class="nav-number">5.1.3.</span> <span class="nav-text">激活</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%9E%E5%90%90%E9%87%8F"><span class="nav-number">5.2.</span> <span class="nav-text">吞吐量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E6%B8%B8%E8%A1%A8%E7%8E%B0"><span class="nav-number">5.3.</span> <span class="nav-text">下游表现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E7%BB%93%E6%9E%9C"><span class="nav-number">5.3.1.</span> <span class="nav-text">主要结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E8%BE%83lora"><span class="nav-number">5.3.2.</span> <span class="nav-text">比较lora</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%84"><span class="nav-number">7.</span> <span class="nav-text">附</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB"><span class="nav-number">7.1.</span> <span class="nav-text">代码解读</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">milong26</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2023/11/24/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="milong26">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="FULL PARAMETER FINE-TUNING FOR LARGE LANGUAGE MODELS WITH LIMITED RESOURCES | 没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          FULL PARAMETER FINE-TUNING FOR LARGE LANGUAGE MODELS WITH LIMITED RESOURCES
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-11-24 17:10:38" itemprop="dateCreated datePublished" datetime="2023-11-24T17:10:38+08:00">2023-11-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-12-17 14:08:35" itemprop="dateModified" datetime="2024-12-17T14:08:35+08:00">2024-12-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>百篇paper计划(1&#x2F;100)，推荐阅读的，没有选择趋向。内容是：用有限的资源（主要是内存）进行全参数大模型微调，研究重点集中在微调部分，做的是内存优化的工作。</p>
+<span id="more"></span>
+<ul>
+<li>论文标题：Full Parameter Fine-tuning for Large Language Models with Limited Resources</li>
+<li>arxiv地址：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2306.09782">链接</a></li>
+<li>code：<a target="_blank" rel="noopener" href="https://github.com/OpenLMLab/LOMO">github</a></li>
+</ul>
+<h1 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a>abstract</h1><ul>
+<li><p>背景：LLMs给NLP问题带来了革命性变化，but需要大量GPU资源</p>
+</li>
+<li><p>已有：高效参数微调（PEFT），没有彻底解决<br><a href="%E9%AB%98%E6%95%88%E5%8F%82%E6%95%B0%E5%BE%AE%E8%B0%83.md">PEFT参考文档</a></p>
+<blockquote>
+<p>parameter-efficient fine-tuning vs full-parameter fine-tune </p>
+</blockquote>
+</li>
+<li><p>创新：提出了新的优化器 LOw-Memory-Optimization<br>内容：在一个步骤融合了梯度计算和参数更新</p>
+<blockquote>
+<p>怎么融合(fuse)？</p>
+</blockquote>
+</li>
+<li><p>效果：和标准方法（DeepSpeed解决方案）相比，我们将内存使用量减少到10.8%。<br>因此，我们的方法可以在一台拥有8×RTX 3090的机器上对65B模型进行全参数微调，每台机器都有24GB内存</p>
+</li>
+</ul>
+<h1 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h1><blockquote>
+<p>感觉就是把摘要扩写了一遍</p>
+</blockquote>
+<ul>
+<li><p>背景：LLMs 厉害，但是要钱。</p>
+</li>
+<li><p>目前：有效参数微调方法<br>比如：LoRA,Prefix-tuning<br>但是：没有全参数的</p>
+</li>
+<li><p>解决问题：我们要找个办法实现全参数微调</p>
+</li>
+<li><p>干了啥</p>
+<ul>
+<li>分析LLMs里面内存使用的四个主要方面：<br>激活，优化器状态，梯度张量和参数</li>
+<li>从三个方面优化了训练过程：<ul>
+<li>SGD-优化器：由于SGD不存储任何中间状态，可以删除整个优化器状态部分<a href="SGD.md">SGD是什么</a></li>
+<li>LOMO把梯度tensor的内存使用降到了O(1)</li>
+<li>为了稳定使用混合精度训练：集成梯度归一化和损失缩放，并将某些计算过渡到全精度</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>结果<br>内存使用量等于参数使用量加上激活量和最大梯度张量。</p>
+<p>分析了：</p>
+<ol>
+<li>内存和吞吐量</li>
+<li>下游表现</li>
+</ol>
+</li>
+<li><p>贡献</p>
+<ol>
+<li>SGD</li>
+<li>LOMO</li>
+<li>验证</li>
+</ol>
+</li>
+</ul>
+<h1 id="related-work"><a href="#related-work" class="headerlink" title="related work"></a>related work</h1><p>都是节省内存的技术</p>
+<h2 id="Activation-Checkpointing"><a href="#Activation-Checkpointing" class="headerlink" title="Activation Checkpointing"></a>Activation Checkpointing</h2><p>计算图中策略性地选择的检查点节点的激活变量在正向阶段后保留在内存中，而其余节点的激活变量在梯度计算时最多重新计算一次。激活内存可以降低原始内存使用量的平方根，代价是需要多一次正向传递。<br>在前向传播过程中，有选择性的丢弃一些产生的中间激活值，当反向传播需要使用这些激活值时，再依据上一个保存的激活值来计算出这些需要的激活值来帮助完成反向传播。这样一来，便可以大大减少训练过程中所需要的存储空间。</p>
+<h2 id="Mixed-Precision-Training"><a href="#Mixed-Precision-Training" class="headerlink" title="Mixed-Precision Training"></a>Mixed-Precision Training</h2><p>混合精度，32位浮点数和16位浮点数混合使用</p>
+<h2 id="Heterogeneous-Training-System"><a href="#Heterogeneous-Training-System" class="headerlink" title="Heterogeneous Training System"></a>Heterogeneous Training System</h2><p>通过利用异构内存（如CPU和NVMe内存）来减少GPU内存消耗</p>
+<blockquote>
+<p>但是怎么做？？</p>
+</blockquote>
+<h1 id="method"><a href="#method" class="headerlink" title="method"></a>method</h1><h2 id="优化器"><a href="#优化器" class="headerlink" title="优化器"></a>优化器</h2><p>adam和SGD比起来哪里不好了！<br>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/S20144144/article/details/103417502">https://blog.csdn.net/S20144144/article/details/103417502</a></p>
+<h3 id="使用SGD"><a href="#使用SGD" class="headerlink" title="使用SGD"></a>使用SGD</h3><p>SGD遭人诟病的有三个：</p>
+<ul>
+<li>大曲率损失面（什么叫曲率？）</li>
+<li>局部最优</li>
+<li>鞍点<br>作者对LLMs问题上用SGD时这些可能的问题逐一分析</li>
+</ul>
+<h4 id="更平滑的损失面"><a href="#更平滑的损失面" class="headerlink" title="更平滑的损失面"></a>更平滑的损失面</h4><p>验证了更大的模型有更加平滑的损失面<br>所以LLMs上面这一点可以忽略</p>
+<h4 id="局部最优就够了"><a href="#局部最优就够了" class="headerlink" title="局部最优就够了"></a>局部最优就够了</h4><p>微调的目标是让模型能够解决新任务，基础模型没变。<br>而且有限的训练数据（和预训练时期相比）也不可能实现全局最优。</p>
+<h4 id="鞍点很遥远"><a href="#鞍点很遥远" class="headerlink" title="鞍点很遥远"></a>鞍点很遥远</h4><p>对于传统的NLP任务，LLM 参数的初始点通常是在谷底，如果模型是通过指令微调，当出现新任务时，模型在某种程度上对这些任务都是似曾相识，那么saddle points通常出现在边缘且距离valley有一定距离，因此如果在改变参数值不大的情况下是也许不会碰到saddle points在finetune过程中。<br>关于散点详细介绍可以看<a href="%E5%B1%80%E9%83%A8%E6%9C%80%E4%BC%98%E5%92%8C%E9%9E%8D%E7%82%B9.md">局部最优和鞍点</a></p>
+<p>从结论上来看，SGD是可以胜任微调工作。</p>
+<h3 id="batch-size"><a href="#batch-size" class="headerlink" title="batch size"></a>batch size</h3><p>在一个batch中含有2个样本的参数更新公式如下：<br>$$<br>\theta ^{‘} &#x3D; \theta - \alpha[\nabla \mathcal{L} (d_i, f(d_i, \theta)) + \nabla \mathcal{L}(d_j, f(d_j, \theta)) ]<br>$$<br>模型参数在这两个样本上的更新过程：<br>$$<br>\theta_1 &#x3D; \theta - \alpha \nabla \mathcal{L}(d_i, f(d_i, \theta)) \ \theta_2 &#x3D; \theta_1 - \alpha \nabla \mathcal{L}(d_j, f(d_j, \theta_1)) \ \theta_2 &#x3D; \theta - \alpha \nabla \mathcal{L}(d_i, f(d_i, \theta)) - \alpha \nabla \mathcal{L}(d_j, f(d_j, \theta_1))<br>$$</p>
+<p>利用微分中值定理</p>
+<p>$$<br>\mathcal{L’}(d_j,\xi) &#x3D; \frac{\mathcal{L(d_j, f(d_j,\theta_1))} - \mathcal{L}(d_j, f(d_j, \theta)}{f(d_j, \theta_1) - f(d_j, \theta)} \ \mathcal{L}(d_j, f(d_j, \theta_1)) &#x3D; \mathcal{L}(d_j, f(d_j, \theta)) + \mathcal{L’}(d_j, \xi)(f(d_j, \theta_1) - f(d_j, \theta))<br>$$</p>
+<p>代入后得到<br>$$<br>\theta_2 &#x3D; \theta - \alpha \nabla \mathcal{L}(d_i,f(d_i,\theta)) - \alpha \nabla [\mathcal{L(d_j, f(d_j, \theta))} + \mathcal{L’}(d_j, \xi)(f(d_j, \theta_1) - f(d_j, \theta))] \ \theta_2 &#x3D; \theta - \alpha [\nabla \mathcal{L}(d_i,f(d_i,\theta)) +  \nabla \mathcal{L(d_j, f(d_j, \theta))}] + \alpha \nabla \mathcal{L’}(d_j, \xi)(f(d_j, \theta_1) - f(d_j, \theta))<br>$$</p>
+<p>化简之后<br>$$<br>\theta_2 - \theta^{‘} &#x3D; \alpha \nabla \mathcal{L’}(d_j, \xi)(f(d_j, \theta_1) - f(d_j, \theta))<br>$$<br>按照假设loss surface足够平滑，等号后边的式子可以忽略不计。当使用SGD作为optimizer时，可以采用较大的batch size 提高训练稳定性；这也从另外一个方面解释了SGD在小模型上效果不佳但在大模型上效果较好。</p>
+<h2 id="lomo"><a href="#lomo" class="headerlink" title="lomo"></a>lomo</h2><p>梯度张量的作用：计算优化器状态和梯度正则化，因为用SGD，第一个可以省掉了，接下来的问题就是梯度正则化。</p>
+<p>LOMO：在一步内同时完成梯度计算和参数更新，以避免存储梯度张量。</p>
+<p>两步计算过程是先计算梯度，再更新参数：而所提出的方法是计算完梯度之后，直接对参数进行更新。</p>
+<p>Pytorch中提供类似 injecting hook function但无法实现参数的即时更新；作者所采用方法是随着backward，progagation的进行只存储一个参数的梯度，这种方案将之前存储所有参数的梯度，降低到只存储一个参数，从而减少了内存的占用</p>
+<h2 id="训练过程的稳定性"><a href="#训练过程的稳定性" class="headerlink" title="训练过程的稳定性"></a>训练过程的稳定性</h2><h3 id="梯度正则化和裁剪的替代方案"><a href="#梯度正则化和裁剪的替代方案" class="headerlink" title="梯度正则化和裁剪的替代方案"></a>梯度正则化和裁剪的替代方案</h3><p>梯度正则化和裁剪用来干什么的：防止梯度爆炸和消失。提出了两个方法</p>
+<ul>
+<li>Clip gradient by values，而不是采用gradient norm。Clip gradient by values是缓解梯度爆炸有效的方案，但这种方式唯一需要考虑的是，通过gradient value来进行裁剪会改变方向。采用这种方法时需要考虑学习率的设置，根据经验学习率应低于1e-3</li>
+<li>用额外的过程来计算gradient norm。计算梯度的norm，由于所提出的算法并不会记录所有参数值，作者提出了一个可以探索的方案就是计算相邻层参数的norm来替代全局；当然这种方法仍值得广泛讨论，因为对于不同的parameters采用了不同的update step size</li>
+</ul>
+<p>矛盾点：目前的训练框架是根据所有参数来计算梯度准则的，因此需要两次后向传递（backward）。</p>
+<p>解决：一种解决方案是用一组参数（例如相邻层）来近似梯度张量的规范。然而，这种方法确实存在偏差，因为它会导致不同参数的更新步长不同。更新时，参数会根据梯度准则乘以一个比例系数。由于不同参数组的梯度准则不同，这种近似方法会导致比例系数的差异。尽管存在这种局限性，这种分组梯度削波方法仍可视为根据不同参数组的梯度准则对其采用动态学习率。</p>
+<p>真解决：动态learning rate</p>
+<h3 id="保证精度"><a href="#保证精度" class="headerlink" title="保证精度"></a>保证精度</h3><p>为了保证训练速度和精度，采用dynamic loss scaling 和将确定的计算转化为全精度计算。作者提出将一个dynamic loss scaler 和LOMO进行集成，它在整个训练过程中条件scaling factor。</p>
+<p>当特定数量的后向传播为发生溢出时，scale factor加倍，反正则减半。这里出现个疑惑点即怎么去判断是否有溢出，实际过程中只有当后向传递结束时我们才能知道是否有溢出发生。为了解决这个问题，作者提出二次后传方案，即第一次后向传播时判断是否有溢出，如果没有溢出在第二次传递时更新参数。</p>
+<h1 id="experiment"><a href="#experiment" class="headerlink" title="experiment"></a>experiment</h1><p>评估标准：内存占用、吞吐率、下游任务表现<br>模型：LLaMA(7B-65B)<br>硬件：RTX 3090 GPU</p>
+<h2 id="内存占用"><a href="#内存占用" class="headerlink" title="内存占用"></a>内存占用</h2><p>比较的是是否用激活检查点、三个优化器的内存占用</p>
+<p>结论：</p>
+<ol>
+<li>LOMO不存储优化器状态，保存一点的梯度</li>
+<li>使用ac的明显消耗更少</li>
+<li>内存使用量的大幅减少主要归功于梯度和优化器状态对内存需求的降低。</li>
+</ol>
+<p>我提的问题：</p>
+<ol>
+<li>为什么没做bacth-size？</li>
+<li>为什么SGD还保存优化器状态，不是说不保存吗？</li>
+</ol>
+<h3 id="优化器状态"><a href="#优化器状态" class="headerlink" title="优化器状态"></a>优化器状态</h3><p>用AdamW,sgd和LOMO实验时优化器状态、梯度、参数和激活的内存使用占比。</p>
+<p>混合精度训练方法，在这种方法中，权重、动量和方差的全精度副本被保留在优化器状态中，用于权重更新。用 SGD 优化器替换 AdamW 优化器可以有效降低内存中优化器状态的百分比，从而减少 GPU 内存使用量。这是因为 SGD 优化器不需要存储全精度动量和方差。对 LOMO 而言，参数更新和后退融合为一个步骤，进一步消除了对优化器状态内存的需求。</p>
+<h3 id="梯度"><a href="#梯度" class="headerlink" title="梯度"></a>梯度</h3><p>在使用 LOMO 的训练过程中，一旦接收到梯度，就会立即更新参数，然后将梯度从内存中丢弃。因此，梯度内存消耗的上限取决于与最大参数矩阵相关的梯度。这种方法大大减少了内存使用量，几乎与参数的大小相当。</p>
+<h3 id="激活"><a href="#激活" class="headerlink" title="激活"></a>激活</h3><p>LOMO 与激活检查点等减少激活内存的技术兼容。</p>
+<h2 id="吞吐量"><a href="#吞吐量" class="headerlink" title="吞吐量"></a>吞吐量</h2><p>吞吐量以每 GPU 每秒处理的令牌数（TGS）来衡量，参数分区使用 ZeRO-3 实现。</p>
+<ul>
+<li>对于 7B 模型，LOMO 的吞吐量非常可观，比 AdamW 和 SGD 高出约 11 倍。因为LOMO可以仅在一个CPU上就能run 7B 模型，从而减少了 GPU 之间的通信开销。与 AdamW 相比，SGD 的吞吐量略高，这是因为 SGD 排除了动量和方差计算。</li>
+<li>至于 13B 模型，由于内存限制，无法在现有的 8 个 RTX 3090 GPU 上使用 AdamW 进行训练。在这种需要 LOMO 进行模型并行化的情况下，LOMO 的吞吐量仍然优于 SGD。这一优势归功于 LOMO 的内存效率特性，以及只需要两个 GPU 就能在相同设置下训练模型，从而降低了通信成本，提高了吞吐量。</li>
+<li>在训练 30B 模型时，SGD 在使用 8 个 RTX 3090 GPU 时遇到了内存不足（OOM）问题，而 LOMO 仅在使用 4 个 GPU 时表现良好。</li>
+<li>最后，我们使用 8 个 RTX 3090 GPU 成功训练了 65B 模型，吞吐量达到 4.93 TGS。利用这样的服务器配置和 LOMO，对 1000 个样本（每个样本包含 512 个 token）的训练过程大约需要 3.6 个小时。</li>
+</ul>
+<h2 id="下游表现"><a href="#下游表现" class="headerlink" title="下游表现"></a>下游表现</h2><blockquote>
+<p>downstream performance是什么啊？就是真正要做的fine-tune任务</p>
+</blockquote>
+<ul>
+<li>目的：为了评估 LOMO 在微调大型语言模型方面的有效性</li>
+<li>干活：将LOMO 与其他两种方法进行了比较，一种是不需要微调的 Zero-shot，另一种是目前最流行的参数高效微调技术之一 LoRA。LoRA优点： 对密集层重新参数化，只更新低等级矩阵，同时在推理过程中不引入延迟。</li>
+<li>数据集： SuperGLUE </li>
+<li>样本数据构成：鉴于运行大型语言模型的计算成本较高，从训练集中随机抽样 1000 个训练数据，从验证集中随机抽样 1000 个测试数据，并报告使用相同随机种子获得的最佳结果。</li>
+<li>评价指标： 准确度</li>
+</ul>
+<h3 id="主要结果"><a href="#主要结果" class="headerlink" title="主要结果"></a>主要结果</h3><p>LOMO 的性能明显优于 Zero-shot<br>在大多数实验中，LOMO 的性能普遍优于 LoRA<br>LOMO可以扩展到65B</p>
+<h3 id="比较lora"><a href="#比较lora" class="headerlink" title="比较lora"></a>比较lora</h3><p>无论 LoRA 取得了多高的结果，LOMO 始终能增强 LoRA 的性能。这表明，LOMO 和 LoRA 采用的不同微调方法是互补的。<br>具体来说，LOMO 侧重于微调预训练模型的权重，而 LoRA 则对其他模块进行微调。因此，LOMO 不会影响 LoRA 的性能，反而有助于为下游任务进行更好的模型调整。<br>实验结果表明，在某些场景下，LOMO的效果是比LoRA差，原因是LOMO是全参数微调，微调数据有限训练不充分，另一方面LOMO和LoRA采用两种不同的架构，后者只是采用了一个shortcut，在某些场景下会更加有利。LOMO关注的是微调pre-trained 模型权重，而LoRA微调附加的模块。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>贡献：</p>
+<ul>
+<li>LOMO优化器 在利用有限的资源促进大型语言模型的全参数微调</li>
+<li>演示了在配备 RTX 3090 GPU 的服务器上对 65B 模型进行微调的可行性</li>
+<li>通过分析 LOMO 的内存使用情况、进行吞吐量测试以及在 SuperGLUE 上进行实验，我们展示了其有效性和潜在影响</li>
+</ul>
+<p>未来：</p>
+<ul>
+<li>进一步降低训练大型语言模型所需的资源门槛，从而使这些模型得到更广泛的访问和采用</li>
+<li>参数占用多，探索参数量化技术，这可以大大减少内存的使用</li>
+<li>LOMO 的更多应用场景，并深入研究优化大型语言模型的理论分析</li>
+</ul>
+<h1 id="附"><a href="#附" class="headerlink" title="附"></a>附</h1><h2 id="代码解读"><a href="#代码解读" class="headerlink" title="代码解读"></a>代码解读</h2><ul>
+<li><input disabled="" type="checkbox"> 代码以后再看，也不知道还要不要看了</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 继承Optimizer类，从torch.optim中import的Optimizer类中已经有hook相关</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">LOMO</span>(<span class="title class_ inherited__">Optimizer</span>):</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/llm/" rel="tag"># llm</a>
+              <a href="/tags/fine-tune/" rel="tag"># fine tune</a>
+              <a href="/tags/full-parameterwww/" rel="tag"># full parameterwww</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/03/06/%E9%A9%AC%E4%BA%86%E5%B0%B1%E6%98%AF%E5%BF%98%E4%BA%86/" rel="prev" title="马了就是忘了">
+                  <i class="fa fa-angle-left"></i> 马了就是忘了
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/03/04/hexo%E5%BB%BA%E7%AB%99/" rel="next" title="hexo建站">
+                  hexo建站 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">milong26</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
