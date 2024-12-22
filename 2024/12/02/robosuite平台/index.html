@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://robosuite.ai/docs/_images/module_overview.png">
 <meta property="article:published_time" content="2024-12-02T06:22:27.000Z">
-<meta property="article:modified_time" content="2024-12-18T07:43:56.934Z">
+<meta property="article:modified_time" content="2024-12-22T12:38:59.067Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="robotic">
 <meta property="article:tag" content="simulation">
@@ -204,7 +204,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-18 15:43:56" itemprop="dateModified" datetime="2024-12-18T15:43:56+08:00">2024-12-18</time>
+      <time title="修改时间：2024-12-22 20:38:59" itemprop="dateModified" datetime="2024-12-22T20:38:59+08:00">2024-12-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -557,7 +557,47 @@
 <li>运行时遇到import util错误，在train.py的from util…之前加上sys.path.append(‘.’)，要在根目录执行，如果要在scripts目录下运行的话就要append两个点</li>
 <li>UnicodeEncodeError: ‘locale’ codec can’t encode character ‘\u4e2d’ in position 25: encoding error，根据这个，remove %Z</li>
 </ol>
-<h1 id="比较新的使用这个平台的算法"><a href="#比较新的使用这个平台的算法" class="headerlink" title="比较新的使用这个平台的算法"></a>比较新的使用这个平台的算法</h1>
+<h1 id="比较新的使用这个平台的算法"><a href="#比较新的使用这个平台的算法" class="headerlink" title="比较新的使用这个平台的算法"></a>比较新的使用这个平台的算法</h1><ol>
+<li>airhockey_challenge_robosuite<ol>
+<li>又是一个不写python版本的项目，target-version &#x3D; [“py36”, “py37”, “py38”]，那我用py38</li>
+<li>conda create -n airhockey python&#x3D;&#x3D;3.8</li>
+<li>conda activate airhockey,pip3 install -e .</li>
+<li>尝试运行，报错ImportError: Cannot initialize a EGL device display. This likely means that your EGL driver does not support the PLATFORM_DEVICE extension, which is required for creating a headless rendering context. 烦，egl到底是个什么鬼东西</li>
+<li>lspci | grep -i vga 输出VGA compatible controller: Intel Corporation TigerLake-LP GT2 [Iris Xe Graphics] (rev 01)</li>
+<li>是intel的,接下来装mesa</li>
+<li>sudo apt update</li>
+<li>是不是设备的问题没法用egl阿,不想安装egl了，麻烦，不知道为什么上午成功了。。</li>
+</ol>
+</li>
+<li>cec_main<ol>
+<li>conda create -n cec python&#x3D;&#x3D;3.8</li>
+<li>pip install -r requirements.txt</li>
+<li>报错：Cargo, the Rust package manager, is not installed or is not on PATH.This package requires Rust and Cargo to compile extensions. Install it through the system’s package manager or via <a target="_blank" rel="noopener" href="https://rustup.rs/%E8%A7%A3%E5%86%B3%EF%BC%9Acurl">https://rustup.rs/解决：curl</a> <a target="_blank" rel="noopener" href="https://sh.rustup.rs/">https://sh.rustup.rs</a> -sSf | sh，关闭终端后再打开</li>
+<li>再pip install requirements，有点慢</li>
+<li>后面很顺利，就是时间很长</li>
+<li>下一阶段准备数据，看了下机器人相关的数据是robomic</li>
+<li>robomimic这个数据集根robosuite有关系阿，以后详细看看<a target="_blank" rel="noopener" href="https://robomimic.github.io/docs/datasets/overview.html">https://robomimic.github.io/docs/datasets/overview.html</a></li>
+<li>怎么是个github仓库，我的数据呢，好吧先安装仓库，python环境一样就不用新建环境了</li>
+<li>居然还没装git，我装我装sudo apt install git</li>
+<li>顺便安装了向日葵，以后如果要卸载的话<a target="_blank" rel="noopener" href="https://sunlogin.oray.com/download/linux?type=personal">https://sunlogin.oray.com/download/linux?type=personal</a> 向日葵还是山了把</li>
+<li>下载件夹金错乐 ，应该是git clone <a target="_blank" rel="noopener" href="https://github.com/NVlabs/mimicgen.git">https://github.com/NVlabs/mimicgen.git</a></li>
+<li>sudo apt install build-essential 用这个解决egl_probe安装错误的问题</li>
+<li>后面的正常了，还好</li>
+<li>还要安装robosuite，老熟人了</li>
+<li>下载的时候解决下huggingface_之后install，报错cmake，pip安装</li>
+<li>还是报错：Failed to build egl_probe ERROR: ERROR: Failed to build installable wheels for some pyproject.toml based projects (egl_probe)</li>
+<li>再安装make sudo apt install make</li>
+<li>实施pip install –upgrade setuptools，失败</li>
+<li>不太好从github仓库下载，卸载了，还是直接网上下载数据集，直接huggingface，打不开</li>
+<li>woc，文hub.errors.LocalEntryNotFoundError: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.</li>
+<li>网络问题，用镜像解决<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44257107/article/details/136532423%EF%BC%8C">https://blog.csdn.net/weixin_44257107/article/details/136532423，</a></li>
+<li>执行的命令行不知道怎么写，<a target="_blank" rel="noopener" href="https://github.com/CEC-Agent/CEC/issues/1">https://github.com/CEC-Agent/CEC/issues/1</a> issue有提到，但我同样出现报错</li>
+<li>Set the environment variable HYDRA_FULL_ERROR&#x3D;1 for a complete stack trace. 针对这个问题，参考下这个<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44212848/article/details/138118183%EF%BC%8C%E4%BD%86%E6%88%91%E6%98%AFubuntu">https://blog.csdn.net/weixin_44212848/article/details/138118183，但我是ubuntu</a></li>
+</ol>
+</li>
+<li></li>
+</ol>
+
     </div>
 
     
