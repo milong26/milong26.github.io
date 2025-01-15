@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="以前写毕设学的，留个纪念。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FreeAdversarialTraining">
+<meta property="og:url" content="http://zhon.fun/2022/04/16/FreeAdversarialTraining/index.html">
+<meta property="og:site_name" content="没啥标题">
+<meta property="og:description" content="以前写毕设学的，留个纪念。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-16T08:32:50.000Z">
+<meta property="article:modified_time" content="2025-01-15T10:01:25.605Z">
+<meta property="article:author" content="milong26">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhon.fun/2022/04/16/FreeAdversarialTraining/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2022/04/16/FreeAdversarialTraining/","path":"2022/04/16/FreeAdversarialTraining/","title":"FreeAdversarialTraining"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>FreeAdversarialTraining | 没啥标题</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">没啥标题</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">活下去</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#adversarial-training-for-free"><span class="nav-number">1.</span> <span class="nav-text">Adversarial Training for
+Free!</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90"><span class="nav-number">1.1.</span> <span class="nav-text">源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95"><span class="nav-number">1.2.</span> <span class="nav-text">阅读记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%90%86%E8%A7%A3"><span class="nav-number">1.3.</span> <span class="nav-text">代码理解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#section"><span class="nav-number">2.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#parase-config-file-and-initiate-logging"><span class="nav-number">3.</span> <span class="nav-text">Parase config file and
+initiate logging</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#free-adversarial-training-module"><span class="nav-number">4.</span> <span class="nav-text">Free Adversarial Training
+Module</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">milong26</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2022/04/16/FreeAdversarialTraining/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="milong26">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="FreeAdversarialTraining | 没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          FreeAdversarialTraining
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-04-16 16:32:50" itemprop="dateCreated datePublished" datetime="2022-04-16T16:32:50+08:00">2022-04-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-01-15 18:01:25" itemprop="dateModified" datetime="2025-01-15T18:01:25+08:00">2025-01-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/it/" itemprop="url" rel="index"><span itemprop="name">it</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>以前写毕设学的，留个纪念。</p>
+<span id="more"></span>
+<h1 id="adversarial-training-for-free">Adversarial Training for
+Free!</h1>
+<h2 id="源">源</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1904.12843">链接</a></li>
+<li>源代码
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://github.com/ashafahi/free_adv_train">tensorflow</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://github.com/mahyarnajibi/FreeAdversarialTraining">pytorch</a></li>
+</ul></li>
+</ul>
+<h2 id="阅读记录">阅读记录</h2>
+<ol start="0" type="1">
+<li><p>Abstract</p>
+<ol type="1">
+<li><p>复杂数据集重生成strong 对抗样本代价很高</p></li>
+<li><p>提供了一个改进算法：重新使用更新模型参数时计算的梯度信息</p>
+<blockquote>
+<p>recycling the gradient information computed when updating model
+parameters</p>
+</blockquote></li>
+</ol></li>
+<li><p>Introduction</p></li>
+<li><p>Non-targeted adversarial examples</p></li>
+</ol>
+<h2 id="代码理解">代码理解</h2>
+<ol start="0" type="1">
+<li><p>算法</p>
+<figure>
+<img
+src="C:\Users\milox\AppData\Roaming\Typora\typora-user-images\image-20220417170642455.png"
+alt="image-20220417170642455" />
+<figcaption aria-hidden="true">image-20220417170642455</figcaption>
+</figure>
+<p>问题：</p>
+<ul>
+<li>hop steps是啥free-m的m嘛</li>
+</ul></li>
+<li><p>torch主要代码 main.py</p>
+<p>```python # This module is adapted from
+https://github.com/pytorch/examples/blob/master/imagenet/main.py import
+init_paths import argparse import os import time import sys import torch
+import torch.nn as nn import torch.backends.cudnn as cudnn import
+torch.optim import torchvision.transforms as transforms import
+torchvision.datasets as datasets from torch.autograd import Variable
+import math import numpy as np from utils import * from validation
+import validate, validate_pgd import torchvision.models as models</p>
+<h1 id="section"></h1>
+<p>def parse_args(): parser =
+argparse.ArgumentParser(description='PyTorch ImageNet Training')
+parser.add_argument('data', metavar='DIR', help='path to dataset')
+parser.add_argument('--output_prefix', default='free_adv', type=str,
+help='prefix used to define output path') parser.add_argument('-c',
+'--config', default='configs.yml', type=str, metavar='Path', help='path
+to the config file (default: configs.yml)')
+parser.add_argument('--resume', default='', type=str, metavar='PATH',
+help='path to latest checkpoint (default: none)')
+parser.add_argument('-e', '--evaluate', dest='evaluate',
+action='store_true', help='evaluate model on validation set')
+parser.add_argument('--pretrained', dest='pretrained',
+action='store_true', help='use pre-trained model') return
+parser.parse_args()</p>
+<h1 id="parase-config-file-and-initiate-logging">Parase config file and
+initiate logging</h1>
+<p>configs = parse_config_file(parse_args()) logger =
+initiate_logger(configs.output_name) print = logger.info cudnn.benchmark
+= True</p>
+<p>def main(): # Scale and initialize the parameters best_prec1 = 0
+configs.TRAIN.epochs = int(math.ceil(configs.TRAIN.epochs /
+configs.ADV.n_repeats)) configs.ADV.fgsm_step /=
+configs.DATA.max_color_value configs.ADV.clip_eps /=
+configs.DATA.max_color_value</p>
+<pre><code># Create output folder
+if not os.path.isdir(os.path.join(&#39;trained_models&#39;, configs.output_name)):
+    os.makedirs(os.path.join(&#39;trained_models&#39;, configs.output_name))
+
+# Log the config details
+logger.info(pad_str(&#39; ARGUMENTS &#39;))
+for k, v in configs.items(): print(&#39;&#123;&#125;: &#123;&#125;&#39;.format(k, v))
+logger.info(pad_str(&#39;&#39;))
+
+
+# Create the model
+if configs.pretrained:
+    print(&quot;=&gt; using pre-trained model &#39;&#123;&#125;&#39;&quot;.format(configs.TRAIN.arch))
+    model = models.__dict__[configs.TRAIN.arch](pretrained=True)
+else:
+    print(&quot;=&gt; creating model &#39;&#123;&#125;&#39;&quot;.format(configs.TRAIN.arch))
+    model = models.__dict__[configs.TRAIN.arch]()
+
+# Wrap the model into DataParallel
+model = torch.nn.DataParallel(model).cuda()
+
+# Criterion:
+criterion = nn.CrossEntropyLoss().cuda()
+
+# Optimizer:
+optimizer = torch.optim.SGD(model.parameters(), configs.TRAIN.lr,
+                            momentum=configs.TRAIN.momentum,
+                            weight_decay=configs.TRAIN.weight_decay)
+
+# Resume if a valid checkpoint path is provided
+if configs.resume:
+    if os.path.isfile(configs.resume):
+        print(&quot;=&gt; loading checkpoint &#39;&#123;&#125;&#39;&quot;.format(configs.resume))
+        checkpoint = torch.load(configs.resume)
+        configs.TRAIN.start_epoch = checkpoint[&#39;epoch&#39;]
+        best_prec1 = checkpoint[&#39;best_prec1&#39;]
+        model.load_state_dict(checkpoint[&#39;state_dict&#39;])
+        optimizer.load_state_dict(checkpoint[&#39;optimizer&#39;])
+        print(&quot;=&gt; loaded checkpoint &#39;&#123;&#125;&#39; (epoch &#123;&#125;)&quot;
+              .format(configs.resume, checkpoint[&#39;epoch&#39;]))
+    else:
+        print(&quot;=&gt; no checkpoint found at &#39;&#123;&#125;&#39;&quot;.format(configs.resume))
+
+
+# Initiate data loaders
+traindir = os.path.join(configs.data, &#39;train&#39;)
+valdir = os.path.join(configs.data, &#39;val&#39;)
+
+train_dataset = datasets.ImageFolder(
+    traindir,
+    transforms.Compose([
+        transforms.RandomResizedCrop(configs.DATA.crop_size),
+        transforms.RandomHorizontalFlip(),
+        transforms.ToTensor(),
+    ]))
+
+train_loader = torch.utils.data.DataLoader(
+    train_dataset, batch_size=configs.DATA.batch_size, shuffle=True,
+    num_workers=configs.DATA.workers, pin_memory=True, sampler=None)
+
+normalize = transforms.Normalize(mean=configs.TRAIN.mean,
+                                std=configs.TRAIN.std)
+val_loader = torch.utils.data.DataLoader(
+    datasets.ImageFolder(valdir, transforms.Compose([
+        transforms.Resize(configs.DATA.img_size),
+        transforms.CenterCrop(configs.DATA.crop_size),
+        transforms.ToTensor(),
+    ])),
+    batch_size=configs.DATA.batch_size, shuffle=False,
+    num_workers=configs.DATA.workers, pin_memory=True)
+
+# If in evaluate mode: perform validation on PGD attacks as well as clean samples
+if configs.evaluate:
+    logger.info(pad_str(&#39; Performing PGD Attacks &#39;))
+    for pgd_param in configs.ADV.pgd_attack:
+        validate_pgd(val_loader, model, criterion, pgd_param[0], pgd_param[1], configs, logger)
+    validate(val_loader, model, criterion, configs, logger)
+    return
+
+
+for epoch in range(configs.TRAIN.start_epoch, configs.TRAIN.epochs):
+    adjust_learning_rate(configs.TRAIN.lr, optimizer, epoch, configs.ADV.n_repeats)
+
+    # train for one epoch
+    train(train_loader, model, criterion, optimizer, epoch)
+
+    # evaluate on validation set
+    prec1 = validate(val_loader, model, criterion, configs, logger)
+
+    # remember best prec@1 and save checkpoint
+    is_best = prec1 &gt; best_prec1
+    best_prec1 = max(prec1, best_prec1)
+    save_checkpoint(&#123;
+        &#39;epoch&#39;: epoch + 1,
+        &#39;arch&#39;: configs.TRAIN.arch,
+        &#39;state_dict&#39;: model.state_dict(),
+        &#39;best_prec1&#39;: best_prec1,
+        &#39;optimizer&#39; : optimizer.state_dict(),
+    &#125;, is_best, os.path.join(&#39;trained_models&#39;, configs.output_name))
+
+# Automatically perform PGD Attacks at the end of training
+logger.info(pad_str(&#39; Performing PGD Attacks &#39;))
+for pgd_param in configs.ADV.pgd_attack:
+    validate_pgd(val_loader, model, criterion, pgd_param[0], pgd_param[1], configs, logger)</code></pre>
+<h1 id="free-adversarial-training-module">Free Adversarial Training
+Module</h1>
+<p>global global_noise_data global_noise_data =
+torch.zeros([configs.DATA.batch_size, 3, configs.DATA.crop_size,
+configs.DATA.crop_size]).cuda() def train(train_loader, model,
+criterion, optimizer, epoch): global global_noise_data # 标准化数据 mean
+= torch.Tensor(np.array(configs.TRAIN.mean)[:, np.newaxis, np.newaxis])
+mean = mean.expand(3,configs.DATA.crop_size,
+configs.DATA.crop_size).cuda() std =
+torch.Tensor(np.array(configs.TRAIN.std)[:, np.newaxis, np.newaxis]) std
+= std.expand(3, configs.DATA.crop_size, configs.DATA.crop_size).cuda() #
+Initialize the meters batch_time = AverageMeter() data_time =
+AverageMeter() losses = AverageMeter() top1 = AverageMeter() top5 =
+AverageMeter() # switch to train mode model.train() for i, (input,
+target) in enumerate(train_loader): end = time.time() input =
+input.cuda(non_blocking=True) target = target.cuda(non_blocking=True)
+data_time.update(time.time() - end) for j in
+range(configs.ADV.n_repeats): # Ascend on the global noise noise_batch =
+Variable(global_noise_data[0:input.size(0)], requires_grad=True).cuda()
+in1 = input + noise_batch in1.clamp_(0, 1.0) in1.sub_(mean).div_(std)
+output = model(in1) loss = criterion(output, target)</p>
+<pre><code>        prec1, prec5 = accuracy(output, target, topk=(1, 5))
+        losses.update(loss.item(), input.size(0))
+        top1.update(prec1[0], input.size(0))
+        top5.update(prec5[0], input.size(0))
+
+        # compute gradient and do SGD step
+        optimizer.zero_grad()
+        loss.backward()
+
+        # Update the noise for the next iteration
+        pert = fgsm(noise_batch.grad, configs.ADV.fgsm_step)
+        global_noise_data[0:input.size(0)] += pert.data
+        global_noise_data.clamp_(-configs.ADV.clip_eps, configs.ADV.clip_eps)
+
+        optimizer.step()
+        # measure elapsed time
+        batch_time.update(time.time() - end)
+        end = time.time()
+
+        if i % configs.TRAIN.print_freq == 0:
+            print(&#39;Train Epoch: [&#123;0&#125;][&#123;1&#125;/&#123;2&#125;]\t&#39;
+                  &#39;Time &#123;batch_time.val:.3f&#125; (&#123;batch_time.avg:.3f&#125;)\t&#39;
+                  &#39;Data &#123;data_time.val:.3f&#125; (&#123;data_time.avg:.3f&#125;)\t&#39;
+                  &#39;Loss &#123;cls_loss.val:.4f&#125; (&#123;cls_loss.avg:.4f&#125;)\t&#39;
+                  &#39;Prec@1 &#123;top1.val:.3f&#125; (&#123;top1.avg:.3f&#125;)\t&#39;
+                  &#39;Prec@5 &#123;top5.val:.3f&#125; (&#123;top5.avg:.3f&#125;)&#39;.format(
+                   epoch, i, len(train_loader), batch_time=batch_time,
+                   data_time=data_time, top1=top1, top5=top5,cls_loss=losses))
+            sys.stdout.flush()</code></pre>
+<p>if <strong>name</strong> == '<strong>main</strong>': main()</p></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/03/06/%E9%A9%AC%E4%BA%86%E5%B0%B1%E6%98%AF%E5%BF%98%E4%BA%86/" rel="next" title="马了就是忘了">
+                  马了就是忘了 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">milong26</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
