@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="RDT-1B: A DIFFUSION FOUNDATION MODEL FOR BIMANUAL MANIPULATION。双臂机器人操作，扩散模型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RDT-1B: A DIFFUSION FOUNDATION MODEL FOR  BIMANUAL MANIPULATION">
+<meta property="og:url" content="http://zhon.fun/2025/01/15/RDT-1B-A-DIFFUSION-FOUNDATION-MODEL-FOR-BIMANUAL-MANIPULATION/index.html">
+<meta property="og:site_name" content="没啥标题">
+<meta property="og:description" content="RDT-1B: A DIFFUSION FOUNDATION MODEL FOR BIMANUAL MANIPULATION。双臂机器人操作，扩散模型">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-01-15T08:55:49.000Z">
+<meta property="article:modified_time" content="2025-01-15T08:55:49.261Z">
+<meta property="article:author" content="milong26">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhon.fun/2025/01/15/RDT-1B-A-DIFFUSION-FOUNDATION-MODEL-FOR-BIMANUAL-MANIPULATION/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2025/01/15/RDT-1B-A-DIFFUSION-FOUNDATION-MODEL-FOR-BIMANUAL-MANIPULATION/","path":"2025/01/15/RDT-1B-A-DIFFUSION-FOUNDATION-MODEL-FOR-BIMANUAL-MANIPULATION/","title":"RDT-1B: A DIFFUSION FOUNDATION MODEL FOR  BIMANUAL MANIPULATION"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>RDT-1B: A DIFFUSION FOUNDATION MODEL FOR  BIMANUAL MANIPULATION | 没啥标题</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">没啥标题</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">活下去</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#problem-formulation-and-challenges"><span class="nav-number">3.</span> <span class="nav-text">PROBLEM FORMULATION AND
+CHALLENGES</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#rdt"><span class="nav-number">4.</span> <span class="nav-text">RDT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#rdt-model"><span class="nav-number">4.1.</span> <span class="nav-text">RDT MODEL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#diffusion-modeling"><span class="nav-number">4.1.1.</span> <span class="nav-text">Diffusion Modeling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#encoding-of-heterogeneous-multi-modal-inputs"><span class="nav-number">4.1.2.</span> <span class="nav-text">Encoding of
+Heterogeneous Multi-Modal Inputs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#network-structure"><span class="nav-number">4.1.3.</span> <span class="nav-text">Network Structure</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#data"><span class="nav-number">4.2.</span> <span class="nav-text">data</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E5%BC%82%E6%9E%84%E5%A4%9A%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%95%B0%E6%8D%AE%E4%B8%8A%E8%AE%AD%E7%BB%83"><span class="nav-number">4.2.1.</span> <span class="nav-text">在异构多机器人数据上训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B6%E9%9B%86%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">4.2.2.</span> <span class="nav-text">收集数据集</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">5.</span> <span class="nav-text">实验</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">milong26</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2025/01/15/RDT-1B-A-DIFFUSION-FOUNDATION-MODEL-FOR-BIMANUAL-MANIPULATION/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="milong26">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="RDT-1B: A DIFFUSION FOUNDATION MODEL FOR  BIMANUAL MANIPULATION | 没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          RDT-1B: A DIFFUSION FOUNDATION MODEL FOR  BIMANUAL MANIPULATION
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-01-15 16:55:49" itemprop="dateCreated datePublished" datetime="2025-01-15T16:55:49+08:00">2025-01-15</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>RDT-1B: A DIFFUSION FOUNDATION MODEL FOR BIMANUAL
+MANIPULATION。双臂机器人操作，扩散模型 <span id="more"></span></p>
+<h1 id="abstract">abstract</h1>
+<ol type="1">
+<li>解决coordination和traning data lack问题</li>
+<li>Robotics Diffusion Transformer</li>
+<li>基于扩散基础模型，bimanual manipulation</li>
+<li>diffusion model+Transformer to deal with multi-modal</li>
+<li>for data scarcity: Physically Interpretable Unified Action
+Space</li>
+<li>pre-train on large and scale up</li>
+<li>fine-tune on self multi-task dataset</li>
+<li>experiments on real robot show outperform,good generalization</li>
+</ol>
+<h1 id="introduction">introduction</h1>
+<ol type="1">
+<li>问题：narrow generalization and failing in complex tasks</li>
+<li>解决：“imitation learning on large-scale datasets”
+（选中模仿学习）</li>
+<li>问题：数据缺少</li>
+<li>解决：首先对广泛的多机器人数据集进行预训练，然后对目标双臂机器人上收集的小数据集进行微调。</li>
+<li>有两个难点
+<ol type="1">
+<li>需要一个架构，有表现力和可扩展性</li>
+<li>数据异构</li>
+</ol></li>
+<li>RDT
+<ol type="1">
+<li>最大的双手操控基础模型，通用性强，用“Diffusion Transformers
+(DiTs)”作为骨干网络</li>
+<li>设计思路
+<ol type="1">
+<li>expressiveness：利用扩散模型的能力来建模复杂的分布</li>
+<li>scalability:利用 Transformer 主干并精心设计多模式编码</li>
+<li>characterize：对原有DiT结构进行重要修改，包括 MLP
+解码、改进的归一化和交替条件注入</li>
+<li>heterogeneous：提出物理上可解释的统一行动空间</li>
+</ol></li>
+</ol></li>
+<li>实验
+<ol type="1">
+<li>在最大集合上预训练 RDT 模型</li>
+<li>在自收集的多任务双手数据集上微调 RDT</li>
+</ol></li>
+</ol>
+<h1 id="problem-formulation-and-challenges">PROBLEM FORMULATION AND
+CHALLENGES</h1>
+<ol type="1">
+<li>选择
+<ol type="1">
+<li>ALOHA双臂机器人</li>
+<li>语言条件下的视觉双手操作</li>
+</ol></li>
+<li>instruction,observation,time,action,RGB observation,low-dimensional
+proprioception of the robot,control frequency的设置
+<ol type="1">
+<li>low-dimensional proprioception of the robot 不知道是什么</li>
+</ol></li>
+<li>task：给定一项新任务，需要一种实用的策略来泛化到训练数据中未出现的未见过的元素。</li>
+<li>policy:预训练和微调管道</li>
+<li>开发这样的“foundation model” 有俩challenge（introduction提到的）
+<ol type="1">
+<li>architecture
+<ol type="1">
+<li>expressiveness</li>
+<li>scalability</li>
+</ol></li>
+<li>heterogeneous data</li>
+</ol></li>
+</ol>
+<h1 id="rdt">RDT</h1>
+<p>整体的框架见论文图3</p>
+<h2 id="rdt-model">RDT MODEL</h2>
+<p>为了解决第一个challenge。</p>
+<h3 id="diffusion-modeling">Diffusion Modeling</h3>
+<p>将扩散模型应用于机器人任务的2个挑战</p>
+<ol type="1">
+<li>机器人物理量的特点是其非线性动力学和物理相互作用（如碰撞、约束和阻尼等材料属性）可能引起的高频变化</li>
+<li>不稳定的数值范围，可能是传感器导致的</li>
+</ol>
+<h3 id="encoding-of-heterogeneous-multi-modal-inputs">Encoding of
+Heterogeneous Multi-Modal Inputs</h3>
+<p>这个异构是SD带来的，和第二个challenge不一样。</p>
+<p>为了将这些不同的模态编码到一个统一的潜在空间中，用以下编码方法</p>
+<ol type="1">
+<li>针对表示物理量的低维输入，MLP（具有傅里叶特征可以有效地捕捉低维空间中的高频变化</li>
+<li>图像输入是高维的，包含丰富的空间和语义信息，用图像-文本对齐的预训练视觉编码器
+SigLIP</li>
+<li>语言输入的长度各不相同，并且高度抽象，用预先训练的基于 Transformer
+的语言模型 T5-XXL</li>
+</ol>
+<p>除了结构之外，异构性还意味着不同输入中包含的信息量不同。首先，不同模态的数据包含的信息量不同。例如，图像通常比文本包含更多的信息，并且在编码后，它们会产生更多的标记。其次，同一模态的不同输入可能包含非常不同的信息量。例如，与腕式摄像头相比，机器人的外部摄像头具有更全局的视野，包含的信息也更丰富，如图
+3
+的右上方所示。在这种情况下，模型可能会学习一条捷径：只关注外部视图而忽略手腕视图，从而失去感知深度的能力。为了解决这个问题，我们在编码过程中以一定的概率随机独立地屏蔽每个多模态输入，以防止模型过度依赖特定的输入。</p>
+<h3 id="network-structure">Network Structure</h3>
+<ol type="1">
+<li>Transformer 作为可扩展的骨干网络</li>
+<li>对Diffusion Transfomer (DiT)做3个改进
+<ol type="1">
+<li>QKNorm &amp; RMSNorm
+<ol type="1">
+<li>输入机器人物理量的数值范围不稳定，会导致梯度不稳定和数值溢出等问题，尤其是在训练大型基础模型时。</li>
+<li>为了解决这个问题，我们添加了
+QKNorm以避免在计算注意力时数值不稳定。</li>
+<li>此外，我们还注意到，我们的问题可以被认为是一个时间序列预测任务，原始
+DiT 的 LayerNorm
+中的居中操作可能会导致标记转移和注意力转移，从而破坏时间序列的对称性。</li>
+<li>因此，我们用RMSNorm替换LayerNorm，而无需进行居中操作。</li>
+</ol></li>
+<li>MLP Decoder
+<ol type="1">
+<li>为了提高非线性机器人动作的逼近能力</li>
+<li>将最终的线性解码器替换为非线性 MLP
+解码器，作为从潜在空间返回物理空间的投影</li>
+</ol></li>
+<li>Alternating Condition Injection (ACI)
+<ol type="1">
+<li>条件（图像和语言）高维且长度会变，难以压缩为单个令牌</li>
+<li>采用交叉注意corss
+attention适应不同长度的条件，避免在进一步压缩中丢失信息</li>
+<li>图像标记通常比文本标记多得多</li>
+<li>在连续层的交叉注意力中策略性地交替注入图像和文本标记</li>
+</ol></li>
+</ol></li>
+</ol>
+<h2 id="data">data</h2>
+<h3 id="在异构多机器人数据上训练">在异构多机器人数据上训练</h3>
+<p>一个统一的action space</p>
+<ol type="1">
+<li>使用单个空间来容纳其本体感觉 zt 和动作 at</li>
+<li>包含所有主要物理量</li>
+</ol>
+<h3 id="收集数据集">收集数据集</h3>
+<p>为了进行微调。</p>
+<p>为了确保数据集的高质量</p>
+<ol type="1">
+<li>数量：6K+ 轨迹</li>
+<li>综合性：300+ challenging tasks</li>
+<li>差异性： 100+ 个不同大小和纹理的刚体和非刚体的物体，以及 15+
+个具有不同照明条件的不同房间。此外，我们进一步利用 GPT-4-Turbo （Achiam
+et al.， 2023） 重写人工注释的指令，以增加文本多样性。</li>
+</ol>
+<h1 id="实验">实验</h1>
+<p>想解决5个问题</p>
+<ol type="1">
+<li>generalize</li>
+<li>effective</li>
+<li>facilitate</li>
+<li>capable</li>
+<li>helpful</li>
+</ol>
+<p>看视频学的</p>
+<ol type="1">
+<li>前任工作里面有一个code as policies[5] 通过编程 rule base
+会限制应用范围</li>
+<li>另外一些工作就是end-to-end，泛化性差</li>
+<li>所以本文模仿学习 end-to-end，不用rl</li>
+<li>[10-13]是用rl的，可以看看</li>
+</ol>
+<p>没搞清楚的问题</p>
+<ol type="1">
+<li>预训练也是用RDT这个框架的吗？输入要求的图片也有？
+<ol type="1">
+<li>之前视频里面说直接看代码就行，先看代码里面有没有说预训练的部分</li>
+<li>太好了，找到<a
+target="_blank" rel="noopener" href="https://github.com/thu-ml/RoboticsDiffusionTransformer/blob/main/docs/pretrain.md">pretrain</a>的文档了</li>
+</ol></li>
+<li>扩散模型在RDT起到的作用是
+<ol type="1">
+<li>扩散模型做什么的：原始数据加噪声，去噪声，输出没加噪声的</li>
+<li>在RDT里面，DM有两个步骤
+<ol type="1">
+<li>加噪声：从真实action生成带噪声的动作</li>
+<li>利用RDT那个网络框架得到去噪的action</li>
+<li>训练目标就是最小化MSE</li>
+</ol></li>
+</ol></li>
+<li>DiT在这中间也没做什么
+<ol type="1">
+<li>DiT就相当于锦（扩散模型）上添花</li>
+</ol></li>
+<li>重新看的时候才注意到图像处理的部分SigLip反而没那么重要……它后面还提到一个petr进行3d编码，那个才是比较重要的……那个能把多张2d图片编码成3d位置（自动驾驶里面的），不然单纯的图像景深什么的也没法做得很准确吧。如果我搞这部分我肯定会想死磕2d图片到3d位置定位这里（梦回本科学图形学。。）</li>
+</ol>
+<p>流程如下</p>
+<ol type="1">
+<li>预训练
+<ol type="1">
+<li>准备数据集
+<ol type="1">
+<li>下载</li>
+<li>清洗，转换格式</li>
+<li>统一动作空间</li>
+</ol></li>
+<li>输入：
+<ol type="1">
+<li>图片经过SigLIP处理、指令T5-XXL处理。ACI交替注入token</li>
+<li>经过噪声处理的action、proprio，映射到unified action
+space中，MLP。其他如控制频率等，MLP。二者连接</li>
+</ol></li>
+<li>有cross-attention的DiT Block</li>
+<li>norm、mlp</li>
+<li>损失函数，最小化MSE</li>
+</ol></li>
+<li>微调
+<ol type="1">
+<li>输入数据：目标机器人的任务指令（语言）、视觉观察（图片）、机器人状态和动作</li>
+<li>训练过程和预训练一致，数据来源为自己调整的机器人(原文中使用ALOHA)</li>
+</ol></li>
+<li>推理
+<ol type="1">
+<li>输入：本体感觉proprio，相机获取的图像images，指令instruction；输出action</li>
+<li>用DPM-Solver++加快训练速度</li>
+</ol></li>
+<li>验证模型对相机位置的健壮性：修改相机位置、角度后收集捕获的图片作为模型输入，评价标准为能否生成正确的动作轨迹
+<ol type="1">
+<li>说明：原来的模型提供了3个相机：场景相机、左臂、右臂。其中场景相机固定，左右臂跟随双臂移动。</li>
+<li>验证已训练好的模型
+<ol type="1">
+<li>左右相机跟随机械臂
+<ol type="1">
+<li>修改左右相机相对机械臂的位置和视角</li>
+<li>修改场景相机的位置和观察角度</li>
+</ol></li>
+<li>左右臂不跟随机械臂运动，
+<ol type="1">
+<li>对比固定左右相机的位置和角度后输出的运动轨迹与之前的差异</li>
+<li>改变左右相机相对物体、机械臂的位置，比较输出的运动轨迹</li>
+</ol></li>
+</ol></li>
+<li>修改相机位置，重新微调模型
+<ol type="1">
+<li>改变3个相机的位置和角度(仿照4.2)</li>
+<li>修改原文网络结构中和图像相关的方法
+<ol type="1">
+<li>直接处理图像的：siglip</li>
+<li>位置嵌入：PETR</li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/01/10/git/" rel="prev" title="git">
+                  <i class="fa fa-angle-left"></i> git
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">milong26</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
