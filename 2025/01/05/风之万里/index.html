@@ -28,7 +28,7 @@
 <meta property="og:description" content="刚看完十二国记，名字取自那里。留存作为我在这儿学习的记录.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-01-05T14:25:05.000Z">
-<meta property="article:modified_time" content="2025-02-14T02:42:45.844Z">
+<meta property="article:modified_time" content="2025-02-19T01:46:47.084Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="diary">
 <meta name="twitter:card" content="summary">
@@ -114,7 +114,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#genesis"><span class="nav-number">1.</span> <span class="nav-text">genesis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A3%85%E8%BD%BD%E7%89%A9%E4%BD%93%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">装载物体模型</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#genesis"><span class="nav-number">1.</span> <span class="nav-text">genesis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A3%85%E8%BD%BD%E7%89%A9%E4%BD%93%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">装载物体模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shadow-hand"><span class="nav-number">3.</span> <span class="nav-text">shadow hand</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -201,7 +201,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-02-14 10:42:45" itemprop="dateModified" datetime="2025-02-14T10:42:45+08:00">2025-02-14</time>
+      <time title="修改时间：2025-02-19 09:46:47" itemprop="dateModified" datetime="2025-02-19T09:46:47+08:00">2025-02-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -300,6 +300,28 @@ object</a> 有urdf格式的数据集，但是没有任务</li>
 <p>不能用panda hand，用灵巧手，dex hand？掏出我以前看过的BI-DEXHands</p>
 <p><a
 target="_blank" rel="noopener" href="https://pdfs.semanticscholar.org/870b/d5b264d23a1166ca22a21ac0bdd5c2e5579e.pdf">不知道又没有用</a></p>
+<h1 id="shadow-hand">shadow hand</h1>
+<ol type="1">
+<li>怎么获取不麻烦，可以shaow hand company找或者网上一堆资源orz</li>
+<li>如何控制dof
+<ol type="1">
+<li>初始dof可以知道</li>
+<li>中间的怎么运算 motion_plan应该可以吧</li>
+<li>什么样的指令能转换成期望的dof</li>
+</ol></li>
+<li>找资源ing
+<ol type="1">
+<li><a
+target="_blank" rel="noopener" href="https://github.com/kochlisGit/Shadow-Hand-Controller">Shadow-Hand-Controller</a>
+<ol type="1">
+<li>最后的要求：只有7个动作</li>
+<li>通过行为克隆和强化学习让机器人最后支持7个特定的指令</li>
+<li>mujoco的</li>
+<li>那它的dof数据从哪来？我是说输入指令后模型会给出control序列(20个)</li>
+</ol></li>
+</ol></li>
+</ol>
+<p>安装ompl出问题，OMPL wheels are built only for glibc &gt;=2.28</p>
 
     </div>
 
