@@ -28,7 +28,7 @@
 <meta property="og:description" content="刚看完十二国记，名字取自那里。留存作为我在这儿学习的记录.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-01-05T14:25:05.000Z">
-<meta property="article:modified_time" content="2025-02-19T02:01:32.583Z">
+<meta property="article:modified_time" content="2025-02-20T08:14:56.614Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="diary">
 <meta name="twitter:card" content="summary">
@@ -201,7 +201,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-02-19 10:01:32" itemprop="dateModified" datetime="2025-02-19T10:01:32+08:00">2025-02-19</time>
+      <time title="修改时间：2025-02-20 16:14:56" itemprop="dateModified" datetime="2025-02-20T16:14:56+08:00">2025-02-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -323,6 +323,58 @@ target="_blank" rel="noopener" href="https://github.com/kochlisGit/Shadow-Hand-C
 </ol>
 <p>安装ompl出问题，OMPL wheels are built only for glibc &gt;=2.28</p>
 <p>不能升级系统，试试自己编译吧</p>
+<p>OMPL编译过程，用1.16.0版本</p>
+<ol type="1">
+<li>下载source code:wget
+https://github.com/ompl/ompl/archive/refs/tags/1.6.0.tar.gz</li>
+<li>tar -xzvf 1.6.0.tar.gz</li>
+<li>cd ompl-1.6.0</li>
+<li>安装dependency
+<ol type="1">
+<li>Boost (version 1.68 or higher)
+<ol type="1">
+<li>安装目录/application mkdir boost cd boost</li>
+<li>下载tar.gz格式 wget
+https://archives.boost.io/release/1.70.0/source/boost_1_70_0.tar.gz</li>
+<li>tar -xvzf boost_1_70_0.tar.gz</li>
+<li>cd boost_1_70_0</li>
+<li>./bootstrap.sh --prefix=/data/zly/application/boost</li>
+<li>./b2 install --prefix=/data/zly/application/boost -j$(nproc)</li>
+<li><code>echo 'export BOOST_ROOT=/data/zly/application/boost' &gt;&gt; ~/.bashrc    echo 'export LD_LIBRARY_PATH=$BOOST_ROOT/lib:$LD_LIBRARY_PATH' &gt;&gt; ~/.bashrc    echo 'export CPATH=$BOOST_ROOT/include:$CPATH' &gt;&gt; ~/.bashrc    echo 'export LIBRARY_PATH=$BOOST_ROOT/lib:$LIBRARY_PATH' &gt;&gt; ~/.bashrc</code></li>
+<li>source ~/.bashrc</li>
+<li>echo $BOOST_ROOT 出现/data/zly/application/boost 即成功</li>
+</ol></li>
+<li>CMake (version 3.12 or higher)
+<ol type="1">
+<li>cmake --version 输出版本不够，还得安装高级的</li>
+<li>mkdir cmake（还在/application目录下）</li>
+<li>wget https://cmake.org/files/v3.18/cmake-3.18.0.tar.gz</li>
+<li>tar -zxvf cmake-3.18.0.tar.gz</li>
+<li>cd cmake-3.18.0</li>
+<li>./bootstrap --prefix=/data/zly/application/cmake</li>
+<li>make -j$(nproc) # 使用所有可用的 CPU
+核心进行并行编译，加速编译过程</li>
+<li>make install</li>
+</ol></li>
+<li>Eigen (version 3.3 or higher)
+<ol type="1">
+<li>emm一看就没安装</li>
+<li>继续在/application/eigen目录下安装</li>
+<li>tar -xzvf eigen-3.3.9.tar.gz</li>
+<li>cd eigen-3.3.9</li>
+<li>因为Eigen
+是一个头文件库，不需要像其他库那样进行编译和链接，只需要将头文件放到合适的位置即可。你可以直接将其安装到
+/data/zly/application/eigen 目录下：
+<ol type="1">
+<li>mkdir -p /data/zly/application/eigen/include</li>
+<li>cp -r Eigen /data/zly/application/eigen/include/</li>
+</ol></li>
+<li>echo 'export EIGEN3_INCLUDE_DIR=/data/zly/application/eigen/include'
+&gt;&gt; ~/.bashrc</li>
+<li>source ~/.bashrc</li>
+</ol></li>
+</ol></li>
+</ol>
 
     </div>
 
