@@ -20,23 +20,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="没啥标题">
-<meta property="og:url" content="http://zhon.fun/archives/2024/09/index.html">
+    <meta name="description" content="windows上能用linux子系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wsl">
+<meta property="og:url" content="http://zhon.fun/2025/02/25/wsl/index.html">
 <meta property="og:site_name" content="没啥标题">
+<meta property="og:description" content="windows上能用linux子系统">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-02-25T07:11:18.000Z">
+<meta property="article:modified_time" content="2025-02-25T07:11:18.382Z">
 <meta property="article:author" content="milong26">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://zhon.fun/archives/2024/09/">
+<link rel="canonical" href="http://zhon.fun/2025/02/25/wsl/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"archives/2024/09/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2025/02/25/wsl/","path":"2025/02/25/wsl/","title":"wsl"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>归档 | 没啥标题</title>
+<title>wsl | 没啥标题</title>
   
 
 
@@ -69,7 +74,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">没啥标题</h1>
+      <p class="site-title">没啥标题</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">活下去</p>
@@ -96,7 +101,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -109,6 +114,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A6%81%E6%B1%82"><span class="nav-number">1.</span> <span class="nav-text">要求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%AD%90%E7%B3%BB%E7%BB%9F"><span class="nav-number">3.</span> <span class="nav-text">删除子系统</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -148,70 +154,132 @@
 
     </div>
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2025/02/25/wsl/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="milong26">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="wsl | 没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          wsl
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-25 15:11:18" itemprop="dateCreated datePublished" datetime="2025-02-25T15:11:18+08:00">2025-02-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/it/" itemprop="url" rel="index"><span itemprop="name">it</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>windows上能用linux子系统</p>
+<span id="more"></span>
+<h1 id="要求">要求</h1>
+<p>必须运行 Windows 10 版本 2004 及更高版本（内部版本 19041
+及更高版本）或 Windows 11 才能使用以下命令。</p>
+<h1 id="安装">安装</h1>
+<ol type="1">
+<li>先打开服务</li>
+<li>wsl --install--no-distribution，先不安装发行版</li>
+<li>wsl --list --online 列出可用的 Linux 发行版
+<ol type="1">
+<li>可能报错：无法从“https://raw.githubusercontent.com/microsoft/WSL/master/distributions/DistributionInfo.json”中提取列表分发。无法解析服务器的名称或地址
+<ol type="1">
+<li>网络问题，连不上githubsercontent。要么挂梯</li>
+<li>要么参考<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/WQearl/article/details/137348303">改host或者dns</a></li>
+</ol></li>
+</ol></li>
+<li>指定安装一个发行版：wsl --install -d <Distribution Name></li>
+<li>输入用户名：jjcfz；密码：102104</li>
+<li>安装的时候遇到提示：wsl: 检测到 localhost 代理配置，但未镜像到
+WSL。NAT 模式下的 WSL 不支持 localhost 代理。
+<ol type="1">
+<li>打开或创建wsl配置文件 c:/users/用户名/.wslconfig</li>
+<li>添加 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[experimental]</span><br><span class="line">autoMemoryReclaim=gradual</span><br><span class="line">networkingMode=mirrored</span><br><span class="line">dnsTunneling=true</span><br><span class="line">firewall=true</span><br><span class="line">autoProxy=true</span><br></pre></td></tr></table></figure></li>
+</ol></li>
+</ol>
+<h1 id="删除子系统">删除子系统</h1>
+<ol type="1">
+<li>wsl --shutdown</li>
+<li>wsl --list --verbose STATE=Stopped表示已停止</li>
+<li>wsl --unregister name-of-linux-system</li>
+<li>手动删除残留文件C:</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+          </div>
+
         
-        <span class="collection-header">还行! 目前共计 46 篇日志。 继续努力。</span>
-      </div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2024</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-09-13T10:12:29+08:00"
-              content="2024-09-13">
-          09-13
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2024/09/13/TRANSFORMER-EXPLAINER-Interactive-Learning-of-Text-Generative-Models/" itemprop="url">
-          <span itemprop="name">TRANSFORMER EXPLAINER: Interactive Learning of Text-Generative Models</span>
-        </a>
-      </div>
-
-      
-    </header>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/02/21/ubuntu/" rel="prev" title="ubuntu">
+                  <i class="fa fa-angle-left"></i> ubuntu
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-09-12T11:34:24+08:00"
-              content="2024-09-12">
-          09-12
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2024/09/12/nodejs/" itemprop="url">
-          <span itemprop="name">nodejs</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
+</div>
 
 
-    </div>
-  </div>
-  
-  
-  
+
+
+
 
 </div>
   </main>
