@@ -20,28 +20,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="看genesus的代码看得头秃，分不清它的wxyz顺序，学习一下">
+    <meta name="description" content="看论文看到了但没懂表示什么">
 <meta property="og:type" content="article">
-<meta property="og:title" content="quaternion四元数">
-<meta property="og:url" content="http://zhon.fun/2025/01/08/quaternion%E5%9B%9B%E5%85%83%E6%95%B0/index.html">
+<meta property="og:title" content="one-shot">
+<meta property="og:url" content="http://zhon.fun/2025/02/27/one-shot/index.html">
 <meta property="og:site_name" content="没啥标题">
-<meta property="og:description" content="看genesus的代码看得头秃，分不清它的wxyz顺序，学习一下">
+<meta property="og:description" content="看论文看到了但没懂表示什么">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-01-08T02:05:53.000Z">
-<meta property="article:modified_time" content="2025-02-07T11:01:50.428Z">
+<meta property="article:published_time" content="2025-02-27T06:39:26.000Z">
+<meta property="article:modified_time" content="2025-02-27T06:39:26.379Z">
 <meta property="article:author" content="milong26">
-<meta property="article:tag" content="3d">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://zhon.fun/2025/01/08/quaternion%E5%9B%9B%E5%85%83%E6%95%B0/">
+<link rel="canonical" href="http://zhon.fun/2025/02/27/one-shot/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2025/01/08/quaternion%E5%9B%9B%E5%85%83%E6%95%B0/","path":"2025/01/08/quaternion四元数/","title":"quaternion四元数"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2025/02/27/one-shot/","path":"2025/02/27/one-shot/","title":"one-shot"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>quaternion四元数 | 没啥标题</title>
+<title>one-shot | 没啥标题</title>
   
 
 
@@ -164,7 +163,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2025/01/08/quaternion%E5%9B%9B%E5%85%83%E6%95%B0/">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2025/02/27/one-shot/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -177,12 +176,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="quaternion四元数 | 没啥标题">
+      <meta itemprop="name" content="one-shot | 没啥标题">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          quaternion四元数
+          one-shot
         </h1>
 
         <div class="post-meta-container">
@@ -193,14 +192,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-01-08 10:05:53" itemprop="dateCreated datePublished" datetime="2025-01-08T10:05:53+08:00">2025-01-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-02-07 19:01:50" itemprop="dateModified" datetime="2025-02-07T19:01:50+08:00">2025-02-07</time>
+      <time title="创建时间：2025-02-27 14:39:26" itemprop="dateCreated datePublished" datetime="2025-02-27T14:39:26+08:00">2025-02-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -221,14 +213,14 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>看genesus的代码看得头秃，分不清它的wxyz顺序，学习一下</p>
+    <div class="post-body" itemprop="articleBody"><p>看论文看到了但没懂表示什么</p>
 <span id="more"></span>
-<p>四元数定义：q=w+xi+yj+zk</p>
-<p>w,x,y,z是实数，ijk是虚数</p>
-<p>当用一个四元数乘以一个向量时，实际上就是让该向量围绕着这个四元数所描述的旋转轴，转动这个四元数所描述的角度而得到的向量。</p>
-<p>w表示旋转角度
-w=cos(theta/2)，其中theta是旋转角，(xyz)是旋转轴：(x,y,z)=sin(theta/2)*(x,y,z)旋转轴</p>
-<p>比如绕y轴逆时针旋转90度，quat=(0.7,0,0.7,0)，绕x轴旋转90度，quat=(0.7,0.7,0,0)，复合起来的结果可以看错是(w+xi+yj+zk)的矢量计算</p>
+<p>以前听说one-hot编码，搞混了</p>
+<p>相近的概念有zero-shot,few-shot,one-shot</p>
+<p>Zero-Shot学习、One-Shot学习、Few-Shot学习是机器学习中的概念，主要用于解决训练数据少，导致模型泛化能力差的问题。</p>
+<p>Zero-Shot学习：在训练集中没有某个类别的样本，但在测试集中出现了这个类别。我们需要模型在训练过程中，即使没有接触过这个类别的样本，但仍然可以通过对这个类别的描述，对没见过的类别进行分类。
+One-Shot学习：可以理解为用一条数据fine-tune模型。例如，在人脸识别场景里，你只提供一张照片，门禁就能认识各个角度的你。属于Few-Shot学习的特例。
+Few-Shot学习：在模型训练过程中，如果每个类别只有少量样本（一个或几个），研究人员希望机器学习模型在学习了一定类别的大量数据后，对于新的类别，只需要少量的样本就能快速学习。</p>
 
     </div>
 
@@ -237,22 +229,16 @@ w=cos(theta/2)，其中theta是旋转角，(xyz)是旋转轴：(x,y,z)=sin(theta
     
 
     <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/3d/" rel="tag"># 3d</a>
-          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2025/01/07/zotero/" rel="prev" title="zotero">
-                  <i class="fa fa-angle-left"></i> zotero
+                <a href="/2025/02/25/wsl/" rel="prev" title="wsl">
+                  <i class="fa fa-angle-left"></i> wsl
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/01/10/git/" rel="next" title="git">
-                  git <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
