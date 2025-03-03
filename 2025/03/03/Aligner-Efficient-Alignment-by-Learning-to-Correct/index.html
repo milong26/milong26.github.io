@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="百篇paper计划(8&#x2F;100)，对齐，新的方向，提高准确率的，还是微调上面的。 所以LLM的方向实际上就两种：微调和压缩？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Aligner: Efficient Alignment by Learning to Correct">
+<meta property="og:url" content="http://zhon.fun/2025/03/03/Aligner-Efficient-Alignment-by-Learning-to-Correct/index.html">
+<meta property="og:site_name" content="没啥标题">
+<meta property="og:description" content="百篇paper计划(8&#x2F;100)，对齐，新的方向，提高准确率的，还是微调上面的。 所以LLM的方向实际上就两种：微调和压缩？">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-03-03T02:18:23.000Z">
+<meta property="article:modified_time" content="2025-03-03T02:18:23.118Z">
+<meta property="article:author" content="milong26">
+<meta property="article:tag" content="aligner">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhon.fun/2025/03/03/Aligner-Efficient-Alignment-by-Learning-to-Correct/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2025/03/03/Aligner-Efficient-Alignment-by-Learning-to-Correct/","path":"2025/03/03/Aligner-Efficient-Alignment-by-Learning-to-Correct/","title":"Aligner: Efficient Alignment by Learning to Correct"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Aligner: Efficient Alignment by Learning to Correct | 没啥标题</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">没啥标题</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">活下去</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#aligner"><span class="nav-number">3.</span> <span class="nav-text">aligner</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E9%82%A3%E4%B9%8B%E5%89%8D"><span class="nav-number">3.1.</span> <span class="nav-text">在那之前</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sft%E7%9B%91%E7%9D%A3%E5%BE%AE%E8%B0%83"><span class="nav-number">3.1.1.</span> <span class="nav-text">SFT监督微调</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E9%87%8D%E7%82%B9"><span class="nav-number">4.</span> <span class="nav-text">总结重点</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">milong26</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2025/03/03/Aligner-Efficient-Alignment-by-Learning-to-Correct/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="milong26">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Aligner: Efficient Alignment by Learning to Correct | 没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Aligner: Efficient Alignment by Learning to Correct
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-03-03 10:18:23" itemprop="dateCreated datePublished" datetime="2025-03-03T10:18:23+08:00">2025-03-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>百篇paper计划(8/100)，对齐，新的方向，提高准确率的，还是微调上面的。</p>
+<p>所以LLM的方向实际上就两种：微调和压缩？</p>
+<span id="more"></span>
+<ul>
+<li>论文标题：Aligner: Efficient Alignment by Learning to Correct</li>
+<li>code：</li>
+<li>打标签：对齐</li>
+<li>时间：2024年6月24日(latest)</li>
+</ul>
+<p>9/19开始看，希望9/20能看完第一遍</p>
+<h1 id="abstract">abstract</h1>
+<ol type="1">
+<li>llm需要alignment method</li>
+<li>现有的方法比较复杂，但是需求是快速迭代，所以需要一个可在这些限制条件下运行的与模型无关的alignment方法</li>
+<li>aligner，是一个alignment
+paradigm，利用一个小模型，学习首选答案和非首选答案之间的correctional
+residual 修正残差</li>
+<li>aligner是一个与模型无关的plug-and-play模块，可以用在各种开源、基于API的模型上面，满足快速迭代的需求，还有其他一堆应用好处</li>
+<li>实验是在11个不同的llm中部署相同的aligner模型评估，评估3H
+有helpfulness,harmlessness,honesty</li>
+</ol>
+<p>Q:</p>
+<ol type="1">
+<li>什么是alignment method，有同行吗
+<ol type="1">
+<li>alignment是什么？简单的说就是对齐人类的意图，换句话就是人类希望AI产生怎样的行为，那么AI就应该产生什么行为。</li>
+</ol></li>
+<li>修正残差 correctional residual是啥
+<ol type="1">
+<li>矫正残差（correctional
+residual）通常指的是在统计模型或预测模型中，通过某种方法对原始残差进行修正以提高模型精度的过程</li>
+<li>原始残差？残差在数理统计中是指实际观察值与估计值（拟合值）之间的差</li>
+</ol></li>
+</ol>
+<h1 id="introduction">introduction</h1>
+<ol type="1">
+<li>背景
+<ol type="1">
+<li>同行有那些：supervised
+fine-tune(SFT)用人类演示来微调、RLHF根据人类偏好训练奖励模型，用强化学习来微调</li>
+<li>好处：3H的结果不错，</li>
+<li>坏处：消耗太多的训练资源，并且难以保证性能一致性，实际应用时需求是动态变化的，模型可能会遇到对齐训练之外的情况，并表现出不期望的行为，这些行为很难立即使用耗时的方法解决，例如SFT和RLHF。</li>
+</ol></li>
+<li>问题：尝试开发一种高效、轻量、模型无关的对齐方法?</li>
+<li>解决
+<ol type="1">
+<li>思路来源：受残差学习的启发，我们通过关注复制和校正操作来简化对齐过程。</li>
+<li>aligner是什么：是一个对齐范式alignment
+paradigm，不涉及RL过程，具体见论文图1</li>
+<li>特性：plug-and-play模块，堆叠在llm的上游</li>
+<li>如何运行：aligner将来自上游模型的初始答案重新分配为更有帮助和无害的答案，从而使合成的LLM响应与人类意图保持一致。可以将aligner类比为LLMs在架构和能力上的残差学习增强器，就像一个通过捷径添加修改而不改变基础结构的残差块一样，aligner采用了复制和更正的方法来改进原始答案。</li>
+<li>aligner的优点：保留上游模型参数的同时，增强参数(还是增强模型？)这样能和期望的结果一致</li>
+</ol></li>
+<li>具体aligner怎么设计的
+<ol type="1">
+<li>在偏好数据集 preference
+dataset上进行微调，以学习偏好和非偏好相应之间的校正残差</li>
+<li>堆叠在上游模型上以实现校正对齐</li>
+<li>这里的上游LLM指的是用于对齐的模型，并将其与RLHF过程中的源模型进行比较。</li>
+<li>与需要训练和加载多个模型的RLHF方法不同，aligner只需要一个额外的模块堆叠在上游的LLM上。而且计算资源只取决于aligner，跟上游llm无关</li>
+</ol></li>
+<li>aligner为什么好
+<ol type="1">
+<li>从表示学习的角度看，aligner表现出可解释的残差行为</li>
+<li>如图4所示，aligner在早期层根据原始答案的质量来决定对原始答案的参考程度和额外修正的程度，而它的中期和后期层则用于实现这一决策。</li>
+<li>该机制比直接学习从输入查询到对齐答案的映射更简单。这种简单性表明，小的输纸装置也可以学习复杂的校正模式，证明了它们能够以相对较少的推理来驾驭强大的模型，这进一步强调了我们的输纸装置范式的优越性。</li>
+<li>总结下它的优点
+<ol type="1">
+<li>资源高效：在没有actor, critic, reward, and
+reference模型等额外模型的情况下，aligner就只是一个在偏好数据集上训练的小模型，用于学习校正残差。</li>
+<li>即插即用：aligner的即插即用特性和模型不可知论使得它非常适合于没有参数访问的基于API的模型。一旦训练好，aligner可以应用于各种上游LLMs，而无需进行参数调整。</li>
+</ol></li>
+</ol></li>
+</ol>
+<p>Q：</p>
+<ol type="1">
+<li>难以保证性能一致性(ensure consistent
+performance)是什么样的结果？(后面好像有，第二遍看得时候应该可以解答了)</li>
+<li>残差学习怎么启发你了？</li>
+<li>经常说到的corrected是什么意思，还有校正残差</li>
+<li>这一章还不够精简</li>
+</ol>
+<h1 id="aligner">aligner</h1>
+<h2 id="在那之前">在那之前</h2>
+<h3 id="sft监督微调">SFT监督微调</h3>
+<p>目的是利用监督学习，特别是最大似然估计，在一个高质量的数据集上对预训练的LLM进行微调以生成目标答案</p>
+<h1 id="总结重点">总结重点</h1>
+<ol type="1">
+<li>aligner是什么？一个和模型无关的模块</li>
+<li>目的？</li>
+<li>好在哪？</li>
+<li>怎么做到的？</li>
+<li>结果？</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/aligner/" rel="tag"># aligner</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/03/03/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/" rel="prev" title="最短路径问题">
+                  <i class="fa fa-angle-left"></i> 最短路径问题
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/03/03/A-Comprehensive-Survey-of-LLM-Alignment-Techniques-RLHF-RLAIF-PPO-DPO-and/" rel="next" title="A Comprehensive Survey of LLM Alignment Techniques: RLHF, RLAIF, PPO, DPO and More">
+                  A Comprehensive Survey of LLM Alignment Techniques: RLHF, RLAIF, PPO, DPO and More <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">milong26</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
