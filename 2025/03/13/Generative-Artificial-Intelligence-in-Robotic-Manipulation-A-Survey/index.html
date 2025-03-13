@@ -20,28 +20,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="图论，求两点之间的最短路径  我记得一共有3种算法： Bellman-Ford algorithm、、 总结一下然后找个例题，用c++写一遍 希望这一篇不会鸽了 好像有向图和无向图有一点不一样">
+    <meta name="description" content="what i want to get  了解其所描述的通用机器人操作是否和我想的一样：qpos of robot 找里面有没有我想要的数据集：text-guided robotic video task 只要看dexterous部分">
 <meta property="og:type" content="article">
-<meta property="og:title" content="最短路径问题">
-<meta property="og:url" content="http://zhon.fun/2025/03/03/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="Generative Artificial Intelligence in Robotic Manipulation: A Survey">
+<meta property="og:url" content="http://zhon.fun/2025/03/13/Generative-Artificial-Intelligence-in-Robotic-Manipulation-A-Survey/index.html">
 <meta property="og:site_name" content="没啥标题">
-<meta property="og:description" content="图论，求两点之间的最短路径  我记得一共有3种算法： Bellman-Ford algorithm、、 总结一下然后找个例题，用c++写一遍 希望这一篇不会鸽了 好像有向图和无向图有一点不一样">
+<meta property="og:description" content="what i want to get  了解其所描述的通用机器人操作是否和我想的一样：qpos of robot 找里面有没有我想要的数据集：text-guided robotic video task 只要看dexterous部分">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-03-03T02:17:31.000Z">
-<meta property="article:modified_time" content="2025-03-03T02:17:31.031Z">
+<meta property="article:published_time" content="2025-03-13T07:59:45.000Z">
+<meta property="article:modified_time" content="2025-03-13T07:59:45.905Z">
 <meta property="article:author" content="milong26">
-<meta property="article:tag" content="graph">
+<meta property="article:tag" content="robotic">
+<meta property="article:tag" content="survey">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://zhon.fun/2025/03/03/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/">
+<link rel="canonical" href="http://zhon.fun/2025/03/13/Generative-Artificial-Intelligence-in-Robotic-Manipulation-A-Survey/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2025/03/03/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/","path":"2025/03/03/最短路径问题/","title":"最短路径问题"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2025/03/13/Generative-Artificial-Intelligence-in-Robotic-Manipulation-A-Survey/","path":"2025/03/13/Generative-Artificial-Intelligence-in-Robotic-Manipulation-A-Survey/","title":"Generative Artificial Intelligence in Robotic Manipulation: A Survey"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>最短路径问题 | 没啥标题</title>
+<title>Generative Artificial Intelligence in Robotic Manipulation: A Survey | 没啥标题</title>
   
 
 
@@ -114,7 +115,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#bellman-ford"><span class="nav-number">1.</span> <span class="nav-text">Bellman-Ford</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">基础算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.1.1.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%AA%E4%BB%A3%E7%A0%81"><span class="nav-number">1.1.2.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-number">1.1.3.</span> <span class="nav-text">分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="nav-number">1.2.</span> <span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%9C%A8%E5%93%AA"><span class="nav-number">1.3.</span> <span class="nav-text">动态规划在哪</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#c%E4%BB%A3%E7%A0%81"><span class="nav-number">1.4.</span> <span class="nav-text">c++代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">例题</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BA%E6%96%87%E8%AF%B4%E4%BA%86%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">论文说了什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#what-i-need"><span class="nav-number">2.</span> <span class="nav-text">what i need</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E6%96%87"><span class="nav-number">2.1.</span> <span class="nav-text">正文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E7%94%A8"><span class="nav-number">2.2.</span> <span class="nav-text">引用</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -165,7 +166,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2025/03/03/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2025/03/13/Generative-Artificial-Intelligence-in-Robotic-Manipulation-A-Survey/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -178,12 +179,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="最短路径问题 | 没啥标题">
+      <meta itemprop="name" content="Generative Artificial Intelligence in Robotic Manipulation: A Survey | 没啥标题">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          最短路径问题
+          Generative Artificial Intelligence in Robotic Manipulation: A Survey
         </h1>
 
         <div class="post-meta-container">
@@ -194,7 +195,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-03-03 10:17:31" itemprop="dateCreated datePublished" datetime="2025-03-03T10:17:31+08:00">2025-03-03</time>
+      <time title="创建时间：2025-03-13 15:59:45" itemprop="dateCreated datePublished" datetime="2025-03-13T15:59:45+08:00">2025-03-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -202,7 +203,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+          <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
         </span>
     </span>
 
@@ -215,72 +216,62 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>图论，求两点之间的最短路径</p>
-<blockquote>
-<p>我记得一共有3种算法： Bellman-Ford algorithm、、
-总结一下然后找个例题，用c++写一遍 希望这一篇不会鸽了
-好像有向图和无向图有一点不一样</p>
-</blockquote>
+    <div class="post-body" itemprop="articleBody"><p>what i want to get</p>
+<ol type="1">
+<li>了解其所描述的通用机器人操作是否和我想的一样：qpos of robot</li>
+<li>找里面有没有我想要的数据集：text-guided robotic video task</li>
+<li>只要看dexterous部分</li>
+</ol>
 <span id="more"></span>
-<h1 id="bellman-ford">Bellman-Ford</h1>
-<p>最简单、时间复杂度最高，含有动态规划的思想</p>
-<p>参考：https://www.cnblogs.com/gaochundong/p/bellman_ford_algorithm.html
-9月5日之前写完bellman-ford这一部分</p>
-<h2 id="基础算法">基础算法</h2>
-<h3 id="步骤">步骤</h3>
+<p>综述论文看得好累。(/100)。粗略看了一遍味同嚼蜡，我还是需要看更多的论文，先满足需求：找dexterous相关。</p>
+<h1 id="论文说了什么">论文说了什么</h1>
+<p>看了一遍之后大致了解将ai in robotic manipulation分成好几层</p>
+<h1 id="what-i-need">what i need</h1>
+<h2 id="正文">正文</h2>
 <ol type="1">
-<li>创建源顶点 v 到图中所有顶点的距离的集合
-distSet，为图中的所有顶点指定一个距离值，初始均为 Infinite，源顶点距离为
-0；</li>
-<li>计算最短路径，执行 V - 1 次遍历：对于图中的每条边：如果起点 u 的距离
-d 加上边的权值 w 小于终点 v 的距离 d，则更新终点 v 的距离值 d；</li>
-<li>检测图中是否有负权边形成了环，遍历图中的所有边，计算 u 至 v
-的距离，如果对于 v 存在更小的距离，则说明存在环；</li>
-</ol>
-<h3 id="伪代码">伪代码</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">BELLMAN-FORD(G, w, s)</span><br><span class="line">  INITIALIZE-SINGLE-SOURCE(G, s)</span><br><span class="line">  for i  1 to |V[G]| - 1</span><br><span class="line">       do for each edge (u, v)  E[G]</span><br><span class="line">            do RELAX(u, v, w)</span><br><span class="line">  for each edge (u, v)  E[G]</span><br><span class="line">       do if d[v] &gt; d[u] + w(u, v)</span><br><span class="line">            then return FALSE</span><br><span class="line">  return TRUE</span><br></pre></td></tr></table></figure>
-<h3 id="分析">分析</h3>
+<li>在正文中检索<code>dexterous</code>
 <ol type="1">
-<li>初始化一个数组dist，起点和其它点</li>
-<li>进行边数-1次循环（为什么？包含n个点的图，最短路径最多经过n-1条边）
+<li>ISAGrasp [78]
+提出通过对应感知生成模型进行隐式形状增强抓取，以推断人类对灵巧作的演示
+no dataset
 <ol type="1">
-<li>对图上的每条边：
+<li>FOUNDATION LAYER,data generation,Data Augmentation using Generative
+Model part</li>
+<li>用于证明：扩散模型通常用于修改或编辑纹理和形状以执行增强过程。</li>
+</ol></li>
+<li>除了纯粹的机器人抓取之外，Wu等[192]将VAE的用途扩展到人类抓取的产生，重点关注全身交互。
+不符合dexterous手抓取，pass
 <ol type="1">
-<li>边的起点u和终点v</li>
-<li>如果dist[u]+这条边的长度小于dist[v]，那就用和更新dist[v]</li>
-<li>否则不变</li>
+<li>POLICY LAYER,Grasp Generation，VAE-based methods.</li>
+<li>该模型采用条件 VAE （CVAE）
+共同生成静态抓取姿势和详细的接触图。</li>
+<li>这种集成能够合成逼真和多样化的全身抓取动作，捕捉灵巧的手指运动和全身动态。</li>
+</ol></li>
+<li>在灵巧抓取的背景下，Zhao et al. [194] 提出的 CVAE
+框架预测每个手指的单独接触图，利用这些详细的表示来优化抓取配置。Wu等[195]将基于VAE的采样与双层优化相结合，以应对多样性和物理可行性的双重挑战。从
+VAE
+中采样初始抓取配置，捕获多模态抓取分布。然后，这些示例将构建一个双层优化框架，该框架强制执行碰撞避免、扳手闭合和摩擦稳定性等约束。总体而言，将
+VAE
+集成到抓取综合中强调了它们通过嵌入特定于任务的约束和利用潜在变量建模来有效捕获机器人和人类抓取任务的多模态和不确定性的能力。
+<ol type="1">
+<li>POLICY LAYER,Grasp Generation，VAE-based methods.</li>
+</ol></li>
+<li>上述工作主要将扩散模型应用于两指抓取任务，而最近的研究也广泛探索了使用多指末端执行器（包括灵巧的手）进行抓取。具体来说，Weng
+et al. [188] 使用基于去噪扩散概率模型 （DDPM）
+的条件扩散模型来生成对部分点云的灵巧抓取。他们进一步利用Mayer等[200]进行质量评估，并采用改进策略来提高成功率。Zhang等[189]还使用DDPM在杂乱的场景中生成灵巧的抓取姿势，而条件基于从场景中提取的局部特征，目标是代表手腕姿势的12D向量，结合了平移和扁平旋转矩阵。为了将该方法推广到不同的硬件设备，Freiberg
+等人 [64]
+提出了一种使用等变扩散模型的抓取不可知的抓取方法，该方法对具有可抓取物体的场景进行编码，并通过集成抓手几何来解码抓取姿势，展示了从平行下颚到灵巧手的多个抓手的泛化性。
+<ol type="1">
+<li>OLICY LAYER,Grasp Generation，Diffusion-based methods.</li>
 </ol></li>
 </ol></li>
-<li>第n次更新，如果出现dist[v]大于dist[u]+边长的情况，就表示出现了负环路</li>
+<li>根据引用找对应的参考文献，问：是否有数据集。记录在其它log里面了</li>
 </ol>
-<h2 id="复杂度分析">复杂度分析</h2>
-<p>实现的时间复杂度为 O(V*E)，其中 V 为顶点数量，E 为边的数量。因为第 2
-行的初始化占用了 Θ(V)，第 3-4 行对边进行了 V - 1
-趟操作，每趟操作的运行时间为 Θ(E)。第 6-7 行的 for 循环运行时间为
-O(E)。</p>
-<h2 id="动态规划在哪">动态规划在哪</h2>
-<p>令d(v,k)表示源点s到顶点v且最多含有k条边的最短路径，于是d(v,n−1)就是我们的目标。如果一条路径具有n
-nn条以上的边，则一定有环路。</p>
-<p>对k=0</p>
-<p><span class="math display">\[
-d(v,0)=
-\left\{
-\begin{array}{rcl}
-0       &amp;      &amp; {v=s}\\
-\infty       &amp;      &amp; {v\not ={s}}
-\end{array} \right.
-\]</span></p>
-<p>对0＜k≤n−1，有<span
-class="math inline">\(d(v,k)=min{d(u,k−1)+cost(u,v)∣u是v的前驱顶点}\)</span></p>
-<h2 id="c代码">c++代码</h2>
-<p>参考https://www.bilibili.com/video/BV1cj421S7Wi/?spm_id_from=333.337.search-card.all.click&amp;vd_source=52a8e0c923505716d18229113eb20c33</p>
-<h1 id="例题">例题</h1>
+<h2 id="引用">引用</h2>
 <ol type="1">
-<li><a
-target="_blank" rel="noopener" href="https://leetcode.com/problems/path-with-maximum-probability/">leetcode.1514</a>
-无向，乘法</li>
-<li></li>
+<li>引用中检索<code>dexterous</code>，还有什么已经漏掉的？</li>
 </ol>
+<p>看综述不能纯从头都尾看，先确定需求。这篇综述的重点在于将目前的研究按照ai的用法分成几个部分，然后对用法进行分析，因为是用法所以有点太深奥了。</p>
 
     </div>
 
@@ -290,21 +281,19 @@ target="_blank" rel="noopener" href="https://leetcode.com/problems/path-with-max
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/graph/" rel="tag"># graph</a>
+              <a href="/tags/robotic/" rel="tag"># robotic</a>
+              <a href="/tags/survey/" rel="tag"># survey</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2025/03/03/robotic-grasp%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86/" rel="prev" title="robotic grasp相关文献整理">
-                  <i class="fa fa-angle-left"></i> robotic grasp相关文献整理
+                <a href="/2025/03/10/Gymnasium-Robotics/" rel="prev" title="Gymnasium-Robotics">
+                  <i class="fa fa-angle-left"></i> Gymnasium-Robotics
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/03/03/Aligner-Efficient-Alignment-by-Learning-to-Correct/" rel="next" title="Aligner: Efficient Alignment by Learning to Correct">
-                  Aligner: Efficient Alignment by Learning to Correct <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -365,7 +354,7 @@ target="_blank" rel="noopener" href="https://leetcode.com/problems/path-with-max
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 
