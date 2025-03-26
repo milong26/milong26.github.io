@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="2夹，tactile，精细操作(其实也就4种)。(19&#x2F;100)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DIFFTACTILE: A PHYSICS-BASED DIFFERENTIABLE  TACTILE SIMULATOR FOR CONTACT-RICH ROBOTIC  MANIPULATION">
+<meta property="og:url" content="http://zhon.fun/2025/03/25/DIFFTACTILE-A-PHYSICS-BASED-DIFFERENTIABLE-TACTILE-SIMULATOR-FOR-CONTACT-RICH-ROBOTIC-MANIPULATION/index.html">
+<meta property="og:site_name" content="没啥标题">
+<meta property="og:description" content="2夹，tactile，精细操作(其实也就4种)。(19&#x2F;100)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-03-25T07:08:42.000Z">
+<meta property="article:modified_time" content="2025-03-25T07:08:42.760Z">
+<meta property="article:author" content="milong26">
+<meta property="article:tag" content="tactile">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhon.fun/2025/03/25/DIFFTACTILE-A-PHYSICS-BASED-DIFFERENTIABLE-TACTILE-SIMULATOR-FOR-CONTACT-RICH-ROBOTIC-MANIPULATION/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2025/03/25/DIFFTACTILE-A-PHYSICS-BASED-DIFFERENTIABLE-TACTILE-SIMULATOR-FOR-CONTACT-RICH-ROBOTIC-MANIPULATION/","path":"2025/03/25/DIFFTACTILE-A-PHYSICS-BASED-DIFFERENTIABLE-TACTILE-SIMULATOR-FOR-CONTACT-RICH-ROBOTIC-MANIPULATION/","title":"DIFFTACTILE: A PHYSICS-BASED DIFFERENTIABLE  TACTILE SIMULATOR FOR CONTACT-RICH ROBOTIC  MANIPULATION"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>DIFFTACTILE: A PHYSICS-BASED DIFFERENTIABLE  TACTILE SIMULATOR FOR CONTACT-RICH ROBOTIC  MANIPULATION | 没啥标题</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">没啥标题</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">活下去</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">milong26</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2025/03/25/DIFFTACTILE-A-PHYSICS-BASED-DIFFERENTIABLE-TACTILE-SIMULATOR-FOR-CONTACT-RICH-ROBOTIC-MANIPULATION/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="milong26">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="DIFFTACTILE: A PHYSICS-BASED DIFFERENTIABLE  TACTILE SIMULATOR FOR CONTACT-RICH ROBOTIC  MANIPULATION | 没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DIFFTACTILE: A PHYSICS-BASED DIFFERENTIABLE  TACTILE SIMULATOR FOR CONTACT-RICH ROBOTIC  MANIPULATION
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-03-25 15:08:42" itemprop="dateCreated datePublished" datetime="2025-03-25T15:08:42+08:00">2025-03-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>2夹，tactile，精细操作(其实也就4种)。(19/100)</p>
+<span id="more"></span>
+<p>阅读之前的问题</p>
+<ol type="1">
+<li>这个平台能将触觉传感器显示到什么程度</li>
+<li>有没有force/torque相关的显示》好像没有力传感器</li>
+<li>给一个物体施加力，它能感受到吗》</li>
+<li>多材质模拟器🆗，材质会表现成什么样，传感器接收到什么效果</li>
+<li>这个项目有完成什么任务，how to</li>
+</ol>
+<p>no need
+了解具体怎么实现这个的，只要知道怎么用，是否满足我的需求？</p>
+<ol type="1">
+<li>触觉反馈什么样</li>
+<li>可以微分，这是什么概念</li>
+<li>这篇论文(对我来说)重点从4开始的</li>
+<li>有两组任务，触觉感应可以实现更安全、更具适应性的抓取，以处理水果等易碎物体。（哇）</li>
+<li>四要素
+<ol type="1">
+<li>State
+<ol type="1">
+<li>每个触觉传感器都表示为具有 N 个节点和 M 个四面体元素的 FEM 实体。
+<ol type="1">
+<li>每个节点都是6D vector=(3 for position,3 for velocity)</li>
+<li>每个元素联系从元素到其关联的四个节点的 4D 索引映射</li>
+</ol></li>
+<li>基于 MPM 和基于 PBD 的对象都用粒子表示，同样，每个粒子 oi 也有一个
+6D 状态向量 oi（t） = {pi（t）， vi（t）}。</li>
+</ol></li>
+<li>Observation
+<ol type="1">
+<li>我们为每个仿真步骤 t
+定义了两种类型的观察，即状态观察和触觉观察。</li>
+<li>状态观察包括触觉传感器和物体的位姿 Ts（t）、To（t）
+以及每个节点或粒子的状态 si（t）、oi（t）。</li>
+<li>对于触觉观察，我们可以将传感器的表面三角形网格输出为变形图、传感器的表面力分布或聚合的三轴力矢量。</li>
+</ol></li>
+<li>action
+<ol type="1">
+<li>在每个时间步 t
+处，从控制器查询末端执行器（触觉传感器或带有运动链的夹爪到触觉传感器）的动作，表示为速度矢量
+vs（t） = {∆Rs（t）， ∆ts（t）}，以更新 FEM 节点的速度。</li>
+</ol></li>
+<li>reward/loss
+<ol type="1">
+<li>分为状态奖励和触觉奖励</li>
+</ol></li>
+</ol></li>
+<li>4.5节grasping可能符合我的需求
+<ol type="1">
+<li>我们评估了我们的模拟器在抓取具有各种对象属性（包括不同形状、大小、重量和材料属性）的物体方面的作用。如图
+2 所示，我们从
+EGAD数据集中选择了四个具有不同形状复杂性的物体，并为每个物体分配了两种不同的材料属性，即弹性和弹塑性。
+<ol type="1">
+<li>EGAD是什么数据集?
+用于机器人操作的多样性和再现性的进化抓取分析数据集。貌似没有强调灵巧手，一时半会儿看不出来里面有什么，</li>
+<li>图2的tactile view表示什么???
+<ol type="1">
+<li>3.3 OPTICAL SIMULATION里面的</li>
+<li>输入为表面法线和视角方向，输出为RGB像素值</li>
+<li>用数据驱动的方法重建基于视觉的触觉传感器对接触的光学响应。​Tactile
+View
+是触觉传感器物理变形的可视化表征，通过高保真光学模拟生成，为机器人提供接触几何、力学特性等密集反馈。</li>
+<li>一句话解释就是用二维的RGB值表示处决信息</li>
+</ol></li>
+</ol></li>
+<li>我们的目标是通过基于梯度的轨迹优化来稳定、自适应地抓取物体，以避免滑倒和损坏物体。在这里，我们使用两个触觉传感器作为指尖，并将它们安装在一个平行的钳口夹持器上。在每个轨迹中，抓手首先抓住物体，然后抬起它。根据我们的目标，我们定义了三种类型的损失目标
+<ol type="1">
+<li>位置损失 Lpos：我们设定了一个 3D 目标位置，以便在lift后到达;</li>
+<li>变形损失
+Ldeform：我们的目标是利用物体的符号距离场和当前物体与目标物体之间质量分布的
+L1 距离来惩罚变形，从而在抓取过程中保持物体的形状the L1 distance of the
+mass distribution between the current object and the target one
+<ol type="1">
+<li>变形损失有两个：1是物体的sign distance field(SDF);2是
+当前物体与目标物体之间的mass distribution的L1距离</li>
+<li>只用第一个不够？（1只能看形状，2考虑内部）</li>
+</ol></li>
+<li>滑移损失
+Lslip：我们利用在指尖和物体之间检测到的剪切力来惩罚抓取过程中的滑移。
+<ol type="1">
+<li>slip是什么？摩擦力不足</li>
+<li>剪切力(shear force)</li>
+</ol></li>
+</ol></li>
+<li>我们根据三个指标评估有或没有触觉反馈的抓取情况。我们对这两种类型的对象都使用
+Lpos，并且我们只对弹塑性对象使用
+Ldeform。此外，我们测量物体相对于传感器的两组物体的滑移距离，滑移距离表示为
+Dslip。我们在表 4 中表明，触觉反馈大大提高了抓取质量。
+<ol type="1">
+<li>elastoplastic 这个属性怎么附加到物体上的</li>
+<li>怎么根据触觉反馈进行抓取来着，我怎么好想没看过</li>
+</ol></li>
+</ol></li>
+<li>用触觉做操作是不是就用那个tactile view？</li>
+<li>怎么给object设定材质的？</li>
+</ol>
+<p>最终从这篇文章get到的</p>
+<ol type="1">
+<li>3.3节用图像表示传感器信息（虽然我没看懂怎么转换的）</li>
+<li>deform的loss设计：用到SDF和mass distribution</li>
+<li>想做细微的操作离不开触觉传感器吧，只用视觉没法做-.-</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/tactile/" rel="tag"># tactile</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/03/24/python%E5%8E%8B%E7%BC%A9pdf/" rel="prev" title="python压缩pdf">
+                  <i class="fa fa-angle-left"></i> python压缩pdf
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/03/26/dexgrasp%E7%B1%BB%E6%95%B0%E6%8D%AE%E9%9B%86%E6%94%B6%E9%9B%86/" rel="next" title="dexgrasp类数据集收集">
+                  dexgrasp类数据集收集 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">milong26</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
