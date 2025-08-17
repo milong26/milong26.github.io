@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="state在整个结构里面处在什么位置 SmolVLA 由一个紧凑的预训练视觉语言模型组成，丢弃最后的 L − N 层（剪刀图标）。其余层嵌入了三个输入：（i）语言指令，（ii）RGB图像，以及（iii）机器人感觉运动状态。它们合并的标记为交替交叉注意力（金色）和自我注意力（浅黄色）块的动作专家提供信息，这些块通过流匹配进行训练，以输出 n 个低级动作块，在 . . . ， at+n。Sm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="smolvla">
+<meta property="og:url" content="http://zhon.fun/2025/08/17/smolvla/index.html">
+<meta property="og:site_name" content="没啥标题">
+<meta property="og:description" content="state在整个结构里面处在什么位置 SmolVLA 由一个紧凑的预训练视觉语言模型组成，丢弃最后的 L − N 层（剪刀图标）。其余层嵌入了三个输入：（i）语言指令，（ii）RGB图像，以及（iii）机器人感觉运动状态。它们合并的标记为交替交叉注意力（金色）和自我注意力（浅黄色）块的动作专家提供信息，这些块通过流匹配进行训练，以输出 n 个低级动作块，在 . . . ， at+n。Sm">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-08-17T14:39:53.000Z">
+<meta property="article:modified_time" content="2025-08-17T14:39:53.744Z">
+<meta property="article:author" content="milong26">
+<meta property="article:tag" content="vla">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhon.fun/2025/08/17/smolvla/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2025/08/17/smolvla/","path":"2025/08/17/smolvla/","title":"smolvla"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>smolvla | 没啥标题</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">没啥标题</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">活下去</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#train"><span class="nav-number">1.</span> <span class="nav-text">train</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">主函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#validate"><span class="nav-number">1.1.1.</span> <span class="nav-text">validate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dataset"><span class="nav-number">1.1.2.</span> <span class="nav-text">dataset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#policy"><span class="nav-number">1.1.3.</span> <span class="nav-text">policy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#train-1"><span class="nav-number">1.1.4.</span> <span class="nav-text">train</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">milong26</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2025/08/17/smolvla/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="milong26">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="smolvla | 没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          smolvla
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-08-17 22:39:53" itemprop="dateCreated datePublished" datetime="2025-08-17T22:39:53+08:00">2025-08-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><span id="more"></span>
+<p>state在整个结构里面处在什么位置 SmolVLA
+由一个紧凑的预训练视觉语言模型组成，丢弃最后的 L − N
+层（剪刀图标）。其余层嵌入了三个输入：（i）语言指令，（ii）RGB图像，以及（iii）机器人感觉运动状态。它们合并的标记为交替交叉注意力（金色）和自我注意力（浅黄色）块的动作专家提供信息，这些块通过流匹配进行训练，以输出
+n 个低级动作块，在 . . . ， at+n。SmolVLA
+在公共社区数据集上进行预训练，并在低成本机器人上进行评估。</p>
+<h1 id="train">train</h1>
+<ol type="1">
+<li>除了基础参数外，我需要加的
+<ol type="1">
+<li>训练的时候用/不用深度图，需要在输入特征里面</li>
+<li>训练的时候用哪一种language方法
+<ol type="1">
+<li>"":baseline</li>
+<li>mtask_relative</li>
+<li>mtask_grid_xxcm</li>
+<li>add_task_to_state好像得单独一个</li>
+</ol></li>
+</ol></li>
+</ol>
+<h2 id="主函数">主函数</h2>
+<p>def train(cfg: TrainPipelineConfig):</p>
+<h3 id="validate">validate</h3>
+<p>对policy_path</p>
+<p>从 CLI（命令行参数）里获取 --policy
+参数对应的路径。会再解析命令行里的 policy
+相关覆盖参数（cli_overrides）。用 PreTrainedConfig.from_pretrained(...)
+加载 policy 的配置（只加载配置，不加载权重）。记录
+self.policy.pretrained_path = policy_path。</p>
+<p>也就是当train的cfg有policy的时候，cfg.policy=PreTrainedConfig.from_pretrained(policy_path...)创建了一个类，包含的通常是超参数、路径、模型结构信息等，然后
+self.policy.pretrained_path = policy_path。</p>
+<p>此时还没有加载模型的配置，那模型的输入特征是在这里决定的吗？</p>
+<p>--policy.path=models/forsmolvla/smolvla_base这个是训练的时候的设置，所以只是加载预训练的smolvla_base的输入设置</p>
+<p>我看了这个smolvla_base的input
+feature规定state是6维，所以我如果想fine-tune的话，得改这个base的设置🤔</p>
+<h3 id="dataset">dataset</h3>
+<p>dataset = make_dataset(cfg)</p>
+<p>应该就是提取cfg里面dataset的部分吧？感觉训练的时候关于datset的处理（用不用深度/文本处理应该写在dataset里面，而不是写在train.py里面）</p>
+<p>这个要改就得改lerobotdataset的处理，希望可以自定义一个配置类，先这么些</p>
+<ol type="1">
+<li>lerobotdataset类的init新增 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下面是为了train的自定义内容</span></span><br><span class="line">language_tip_mode: <span class="built_in">str</span>=<span class="string">&quot;&quot;</span>, <span class="comment"># 当空的时候就等于baseline</span></span><br><span class="line">add_location_to_state: <span class="built_in">bool</span> = <span class="literal">False</span>,   <span class="comment"># 控制是将location加到state里面</span></span><br><span class="line">exclude_features: <span class="built_in">list</span>[<span class="built_in">str</span>] = <span class="literal">None</span>,    <span class="comment"># 控制需要过滤的 key，最终的训练（主要是为了过滤掉depth）</span></span><br><span class="line">obj_detector=<span class="literal">None</span>,                     <span class="comment"># 可选的目标检测器，为了state加的</span></span><br></pre></td></tr></table></figure></li>
+<li>把 FilteredBatchLoader.add_location_to_state 移到
+lerobotDataset里面：_add_location_to_state函数（dataset是无辜的要怪就怪模型结构），调用加在geitem函数里面</li>
+<li>filter加载getitem函数的最后，return 之前</li>
+<li>make_dataset传入参数</li>
+<li>train清理之前的config，传入参数到make_dataset里边</li>
+<li>正向流程
+<ol type="1">
+<li>整理train cfg的模板，增加，同样config/train.py里面也要修改
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">language_tip_mode:</span> <span class="string">str=&quot;&quot;,</span> <span class="comment"># 当空的时候就等于baseline</span></span><br><span class="line"><span class="attr">add_location_to_state:</span> <span class="string">bool</span> <span class="string">=</span> <span class="literal">False</span><span class="string">,</span>   <span class="comment"># 控制是将location加到state里面</span></span><br></pre></td></tr></table></figure></li>
+<li>train里面dataste=make_dataset(cfg)</li>
+<li>调用lerobotdataset初始化</li>
+<li>getitem得到一帧对应的color，depth，state，force，action等</li>
+<li>返回一帧的color，state，action</li>
+</ol></li>
+<li>测试：
+<ol type="1">
+<li>能不能正常train baseline</li>
+<li>能不能正常train language_mode 看task就行</li>
+<li>能不能train state（显然不行） 看state</li>
+</ol></li>
+</ol>
+<h3 id="policy">policy</h3>
+<ol type="1">
+<li>用cfg.policy（就是validate的时候cfg.policy=PreTrainedConfig.from_pretrained(policy_path...)创建的类）和dataset.meta创建policy
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">policy = make_policy(</span><br><span class="line">   cfg=cfg.policy,</span><br><span class="line">   ds_meta=dataset.meta,</span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
+<li>make_policy用meta干什么，meta也要修改，但不能在lerobotdataset里面，而是make_policy的时候。这个policy是我最后要得到的policy吧。meta就规定了input
+feature和output feature
+<ol type="1">
+<li>过滤depth和force这两个feature</li>
+<li>当且仅当state要求改的时候才改</li>
+</ol></li>
+<li>policy = policy_cls.from_pretrained(**kwargs)
+<ol type="1">
+<li>smolvla里面没有代码，应该调用的是Pretrainedpolicy这个基类的from_pretrained</li>
+<li>能保证传入的kwargs是正确的。然后instance = cls(config,
+**kwargs)是生成SmolVLAPolicy实例的，为什么这里的cls里面已经没有10那个信息了？
+<ol type="1">
+<li>cls 实际上是 SmolVLAPolicy
+类的初始化，初始化里面有一个加载空flowmatching模型的，就是cls.model=VLAFlowMatching(config)。然后VLAFlowMatching的初始化里面有self.state_proj
+= nn.Linear( self.config.max_state_dim,
+self.vlm_with_expert.config.text_config.hidden_size )。</li>
+<li>所以instance的结果里面只有两个包含state的内容
+<ol type="1">
+<li>SmolVLAPolicy( (normalize_inputs): Normalize(
+(buffer_observation_state): ParameterDict( (mean): Parameter containing:
+[torch.FloatTensor of size 6] (std): Parameter containing:
+[torch.FloatTensor of size 6] )
+)这个是预训练模型的前6维的权重，后面还需要用</li>
+<li>(state_proj): Linear(in_features=32, out_features=960,
+bias=True)这个是投影到32维</li>
+</ol></li>
+</ol></li>
+</ol></li>
+<li>from_pretrained里面policy = cls._load_as_safetensor(instance,
+model_file, config.device, strict)
+<ol type="1">
+<li>cls还是 SmolVLAPolicy，就是调用_load_as_safetensor这个class
+method</li>
+<li>用的是smolvlapolicy里面的_load_as_safetensor
+<ol type="1">
+<li>safetensors.torch.load_model(model, model_file, strict=strict,
+device=map_location)把权重加载到模型实例里</li>
+<li>return load_smolvla( model, model_file, device=map_location,
+checkpoint_keys_mapping="model._orig_mod.//model.", )调用特定的 loader
+做额外处理</li>
+</ol></li>
+</ol></li>
+<li>load_smolvla函数，我需要在这里确保state的权重能1.前6位正常加，7-10位初始化一下
+<ol type="1">
+<li>有没有办法识别input
+feature此时是6还是10？目前这个模型传到这里只剩下cls两个关于state的部分了，所以从外部引入</li>
+<li>给7-10维重置，变成用 Xavier 均匀初始化覆盖,bias 清零</li>
+</ol></li>
+</ol>
+<h3 id="train-1">train</h3>
+<ol type="1">
+<li>policy.train()运行的是SmolVLMWithExpertModel的train，设置冻结哪一块</li>
+<li>开始按步数训练 train_tracker, output_dict =
+update_policy(policy)</li>
+<li>update_policy函数
+<ol type="1">
+<li>训练逻辑 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">loss, output_dict = policy.forward(batch)</span><br><span class="line">grad_scaler.scale(loss).backward()</span><br><span class="line">grad_scaler.unscale_(optimizer)</span><br><span class="line">torch.nn.utils.clip_grad_norm_(policy.parameters(), ...)</span><br><span class="line">grad_scaler.step(optimizer)</span><br><span class="line">optimizer.zero_grad()</span><br></pre></td></tr></table></figure>
+问题可能发生在，state更新参数的时候7-10维变化比较大</li>
+</ol></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vla/" rel="tag"># vla</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/08/04/cuda/" rel="prev" title="cuda">
+                  <i class="fa fa-angle-left"></i> cuda
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">milong26</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
