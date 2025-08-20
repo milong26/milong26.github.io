@@ -158,261 +158,6 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2025/08/17/smolvla/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="milong26">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="没啥标题">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 没啥标题">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/08/17/smolvla/" class="post-title-link" itemprop="url">smolvla</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-08-17 22:39:53" itemprop="dateCreated datePublished" datetime="2025-08-17T22:39:53+08:00">2025-08-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-18 16:11:30" itemprop="dateModified" datetime="2025-08-18T16:11:30+08:00">2025-08-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <span id="more"></span>
-<p>state在整个结构里面处在什么位置 SmolVLA
-由一个紧凑的预训练视觉语言模型组成，丢弃最后的 L − N
-层（剪刀图标）。其余层嵌入了三个输入：（i）语言指令，（ii）RGB图像，以及（iii）机器人感觉运动状态。它们合并的标记为交替交叉注意力（金色）和自我注意力（浅黄色）块的动作专家提供信息，这些块通过流匹配进行训练，以输出
-n 个低级动作块，在 . . . ， at+n。SmolVLA
-在公共社区数据集上进行预训练，并在低成本机器人上进行评估。</p>
-<h1 id="train">train</h1>
-<ol type="1">
-<li>除了基础参数外，我需要加的
-<ol type="1">
-<li>训练的时候用/不用深度图，需要在输入特征里面</li>
-<li>训练的时候用哪一种language方法
-<ol type="1">
-<li>"":baseline</li>
-<li>mtask_relative</li>
-<li>mtask_grid_xxcm</li>
-<li>add_task_to_state好像得单独一个</li>
-</ol></li>
-</ol></li>
-</ol>
-<h2 id="主函数">主函数</h2>
-<p>def train(cfg: TrainPipelineConfig):</p>
-<h3 id="validate">validate</h3>
-<p>对policy_path</p>
-<p>从 CLI（命令行参数）里获取 --policy
-参数对应的路径。会再解析命令行里的 policy
-相关覆盖参数（cli_overrides）。用 PreTrainedConfig.from_pretrained(...)
-加载 policy 的配置（只加载配置，不加载权重）。记录
-self.policy.pretrained_path = policy_path。</p>
-<p>也就是当train的cfg有policy的时候，cfg.policy=PreTrainedConfig.from_pretrained(policy_path...)创建了一个类，包含的通常是超参数、路径、模型结构信息等，然后
-self.policy.pretrained_path = policy_path。</p>
-<p>此时还没有加载模型的配置，那模型的输入特征是在这里决定的吗？</p>
-<p>--policy.path=models/forsmolvla/smolvla_base这个是训练的时候的设置，所以只是加载预训练的smolvla_base的输入设置</p>
-<p>我看了这个smolvla_base的input
-feature规定state是6维，所以我如果想fine-tune的话，得改这个base的设置🤔</p>
-<h3 id="dataset">dataset</h3>
-<p>dataset = make_dataset(cfg)</p>
-<p>应该就是提取cfg里面dataset的部分吧？感觉训练的时候关于datset的处理（用不用深度/文本处理应该写在dataset里面，而不是写在train.py里面）</p>
-<p>这个要改就得改lerobotdataset的处理，希望可以自定义一个配置类，先这么些</p>
-<ol type="1">
-<li>lerobotdataset类的init新增 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下面是为了train的自定义内容</span></span><br><span class="line">language_tip_mode: <span class="built_in">str</span>=<span class="string">&quot;&quot;</span>, <span class="comment"># 当空的时候就等于baseline</span></span><br><span class="line">add_location_to_state: <span class="built_in">bool</span> = <span class="literal">False</span>,   <span class="comment"># 控制是将location加到state里面</span></span><br><span class="line">exclude_features: <span class="built_in">list</span>[<span class="built_in">str</span>] = <span class="literal">None</span>,    <span class="comment"># 控制需要过滤的 key，最终的训练（主要是为了过滤掉depth）</span></span><br><span class="line">obj_detector=<span class="literal">None</span>,                     <span class="comment"># 可选的目标检测器，为了state加的</span></span><br></pre></td></tr></table></figure></li>
-<li>把 FilteredBatchLoader.add_location_to_state 移到
-lerobotDataset里面：_add_location_to_state函数（dataset是无辜的要怪就怪模型结构），调用加在geitem函数里面</li>
-<li>filter加载getitem函数的最后，return 之前</li>
-<li>make_dataset传入参数</li>
-<li>train清理之前的config，传入参数到make_dataset里边</li>
-<li>正向流程
-<ol type="1">
-<li>整理train cfg的模板，增加，同样config/train.py里面也要修改
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">language_tip_mode:</span> <span class="string">str=&quot;&quot;,</span> <span class="comment"># 当空的时候就等于baseline</span></span><br><span class="line"><span class="attr">add_location_to_state:</span> <span class="string">bool</span> <span class="string">=</span> <span class="literal">False</span><span class="string">,</span>   <span class="comment"># 控制是将location加到state里面</span></span><br></pre></td></tr></table></figure></li>
-<li>train里面dataste=make_dataset(cfg)</li>
-<li>调用lerobotdataset初始化</li>
-<li>getitem得到一帧对应的color，depth，state，force，action等</li>
-<li>返回一帧的color，state，action</li>
-</ol></li>
-<li>测试：
-<ol type="1">
-<li>能不能正常train baseline</li>
-<li>能不能正常train language_mode 看task就行</li>
-<li>能不能train state（显然不行） 看state</li>
-</ol></li>
-</ol>
-<h3 id="policy">policy</h3>
-<ol type="1">
-<li>用cfg.policy（就是validate的时候cfg.policy=PreTrainedConfig.from_pretrained(policy_path...)创建的类）和dataset.meta创建policy
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">policy = make_policy(</span><br><span class="line">   cfg=cfg.policy,</span><br><span class="line">   ds_meta=dataset.meta,</span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
-<li>make_policy用meta干什么，meta也要修改，但不能在lerobotdataset里面，而是make_policy的时候。这个policy是我最后要得到的policy吧。meta就规定了input
-feature和output feature
-<ol type="1">
-<li>过滤depth和force这两个feature</li>
-<li>当且仅当state要求改的时候才改</li>
-</ol></li>
-<li>policy = policy_cls.from_pretrained(**kwargs)
-<ol type="1">
-<li>smolvla里面没有代码，应该调用的是Pretrainedpolicy这个基类的from_pretrained</li>
-<li>能保证传入的kwargs是正确的。然后instance = cls(config,
-**kwargs)是生成SmolVLAPolicy实例的，为什么这里的cls里面已经没有10那个信息了？
-<ol type="1">
-<li>cls 实际上是 SmolVLAPolicy
-类的初始化，初始化里面有一个加载空flowmatching模型的，就是cls.model=VLAFlowMatching(config)。然后VLAFlowMatching的初始化里面有self.state_proj
-= nn.Linear( self.config.max_state_dim,
-self.vlm_with_expert.config.text_config.hidden_size )。</li>
-<li>所以instance的结果里面只有两个包含state的内容
-<ol type="1">
-<li>SmolVLAPolicy( (normalize_inputs): Normalize(
-(buffer_observation_state): ParameterDict( (mean): Parameter containing:
-[torch.FloatTensor of size 6] (std): Parameter containing:
-[torch.FloatTensor of size 6] )
-)这个是预训练模型的前6维的权重，后面还需要用</li>
-<li>(state_proj): Linear(in_features=32, out_features=960,
-bias=True)这个是投影到32维</li>
-</ol></li>
-</ol></li>
-</ol></li>
-<li>from_pretrained里面policy = cls._load_as_safetensor(instance,
-model_file, config.device, strict)
-<ol type="1">
-<li>cls还是 SmolVLAPolicy，就是调用_load_as_safetensor这个class
-method</li>
-<li>用的是smolvlapolicy里面的_load_as_safetensor
-<ol type="1">
-<li>safetensors.torch.load_model(model, model_file, strict=strict,
-device=map_location)把权重加载到模型实例里</li>
-<li>return load_smolvla( model, model_file, device=map_location,
-checkpoint_keys_mapping="model._orig_mod.//model.", )调用特定的 loader
-做额外处理</li>
-</ol></li>
-</ol></li>
-<li>load_smolvla函数，我需要在这里确保state的权重能1.前6位正常加，7-10位初始化一下
-<ol type="1">
-<li>有没有办法识别input
-feature此时是6还是10？目前这个模型传到这里只剩下cls两个关于state的部分了，所以从外部引入</li>
-<li>给7-10维重置，变成用 Xavier 均匀初始化覆盖,bias 清零</li>
-</ol></li>
-</ol>
-<h3 id="train-1">train</h3>
-<ol type="1">
-<li>policy.train()运行的是SmolVLMWithExpertModel的train，设置冻结哪一块</li>
-<li>开始按步数训练 train_tracker, output_dict =
-update_policy(policy)</li>
-<li>update_policy函数
-<ol type="1">
-<li>训练逻辑 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">loss, output_dict = policy.forward(batch)</span><br><span class="line">grad_scaler.scale(loss).backward()</span><br><span class="line">grad_scaler.unscale_(optimizer)</span><br><span class="line">torch.nn.utils.clip_grad_norm_(policy.parameters(), ...)</span><br><span class="line">grad_scaler.step(optimizer)</span><br><span class="line">optimizer.zero_grad()</span><br></pre></td></tr></table></figure>
-问题可能发生在，state更新参数的时候7-10维变化比较大</li>
-</ol></li>
-<li>normalize归一化没有匹配维度
-<ol type="1">
-<li>modeling_smolvla里面SmolVLAPolicy的init有self.normalize_inputs =
-Normalize(config.input_features, config.normalization_mapping,
-dataset_stats)</li>
-<li>state前6维的mean，std是从dataset_stats里来的，dataset_stats是从SmolVLAPolicy的init传入的</li>
-<li>之前make_policy传入的kwargs["dataset_stats"] =
-meta_for_policy.stats，相当于ds_meta.stats</li>
-<li>ds_meta是ds_meta=dataset.meta，所以还是本地传入的，看到episode_stats.jsonl文件里面有类似min，max，std的，get
-<ol type="1">
-<li>怎么写入save_episode有一个write_episode_stats函数</li>
-<li>怎么读 直接从meta里面读的，这个我好像改不了</li>
-<li>怎么计算：ep_stats = compute_episode_stats(episode_buffer,
-self.features)</li>
-<li>形式： "observation.state": {"min": [-47.14912414550781,
--96.49805450439453, 9.134847640991211, -1.6986300945281982,
-2.4175825119018555, 0.6323396563529968], "max": [8.552631378173828,
-44.06614685058594, 99.51667785644531, 42.136985778808594,
-52.91819381713867, 56.36856460571289], "mean": [-13.58438491821289,
--31.481496810913086, 56.781070709228516, 22.7191219329834,
-25.275249481201172, 15.44166374206543], "std": [19.134763717651367,
-52.86572265625, 35.76657485961914, 15.830253601074219,
-18.950584411621094, 18.50875473022461], "count":
-[181]},也就是一个episode里面所有state每个维度的统计。</li>
-<li>然后变成全局的：aggregate_feature_stats</li>
-<li>修改过程，使得可以在算出来
-<ol type="1">
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li>在正式normalize之前，需要确保能传入datset["observation.state"]以计算</li>
-<li>batch =
-self.normalize_inputs(batch)这里用的是Normalize的forward，正好传入了batch
-<ol type="1">
-<li>一个batch里面有什么？若干个epsiode？</li>
-<li>怎么normalize的forward里面的mean和std又变成全局的了，全局还不好算？</li>
-<li>normalize类用create_stats_buffers这个函数把所有episode的mean和std算到一个全局的里面</li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol>
-<h2 id="dataloader">dataloader</h2>
-<p>之前写在train.py里面的，for key in batch:之后，为了保存数据到本地
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">states = batch[<span class="string">&quot;observation.state&quot;</span>].detach().cpu()</span><br><span class="line"><span class="keyword">if</span> states.dim() == <span class="number">3</span>:   <span class="comment"># e.g. [B, 1, 10] → squeeze掉</span></span><br><span class="line">    states = states.squeeze(<span class="number">1</span>)</span><br><span class="line">episode_indices = batch[<span class="string">&quot;episode_index&quot;</span>].detach().cpu().tolist()</span><br><span class="line">frame_indices = batch[<span class="string">&quot;frame_index&quot;</span>].detach().cpu().tolist()</span><br><span class="line">states_list = states.numpy().tolist()</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;modified_states.jsonl&quot;</span>, <span class="string">&quot;a&quot;</span>) <span class="keyword">as</span> f:  <span class="comment"># 追加写入</span></span><br><span class="line">    <span class="keyword">for</span> ep, fr, st <span class="keyword">in</span> <span class="built_in">zip</span>(episode_indices, frame_indices, states_list):</span><br><span class="line">        record = &#123;</span><br><span class="line">            <span class="string">&quot;episode_index&quot;</span>: <span class="built_in">int</span>(ep),</span><br><span class="line">            <span class="string">&quot;frame_index&quot;</span>: <span class="built_in">int</span>(fr),</span><br><span class="line">            <span class="string">&quot;state&quot;</span>: st</span><br><span class="line">        &#125;</span><br><span class="line">        f.write(json.dumps(record, ensure_ascii=<span class="literal">False</span>) + <span class="string">&quot;\n&quot;</span>)</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://zhon.fun/2024/07/10/%E5%8A%A8%E7%94%BB%E7%9B%AE%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -449,7 +194,7 @@ self.normalize_inputs(batch)这里用的是Normalize的forward，正好传入了
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-18 10:29:40" itemprop="dateModified" datetime="2025-08-18T10:29:40+08:00">2025-08-18</time>
+      <time title="修改时间：2025-08-20 20:34:33" itemprop="dateModified" datetime="2025-08-20T20:34:33+08:00">2025-08-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -475,6 +220,190 @@ self.normalize_inputs(batch)这里用的是Normalize的forward，正好传入了
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/07/10/%E5%8A%A8%E7%94%BB%E7%9B%AE%E5%BD%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2025/08/17/smolvla/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="milong26">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/08/17/smolvla/" class="post-title-link" itemprop="url">smolvla</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-08-17 22:39:53" itemprop="dateCreated datePublished" datetime="2025-08-17T22:39:53+08:00">2025-08-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-08-20 20:32:17" itemprop="dateModified" datetime="2025-08-20T20:32:17+08:00">2025-08-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>主要是代码理解和修改</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/08/17/smolvla/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2025/01/10/git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="milong26">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/01/10/git/" class="post-title-link" itemprop="url">git</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-01-10 10:55:21" itemprop="dateCreated datePublished" datetime="2025-01-10T10:55:21+08:00">2025-01-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-08-19 10:59:41" itemprop="dateModified" datetime="2025-08-19T10:59:41+08:00">2025-08-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/it/" itemprop="url" rel="index"><span itemprop="name">it</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>git一些问题累积</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/01/10/git/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -659,98 +588,6 @@ self.normalize_inputs(batch)这里用的是Normalize的forward，正好传入了
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/12/19/conda/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2025/01/10/git/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="milong26">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="没啥标题">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 没啥标题">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/01/10/git/" class="post-title-link" itemprop="url">git</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-01-10 10:55:21" itemprop="dateCreated datePublished" datetime="2025-01-10T10:55:21+08:00">2025-01-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-11 10:38:19" itemprop="dateModified" datetime="2025-08-11T10:38:19+08:00">2025-08-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/it/" itemprop="url" rel="index"><span itemprop="name">it</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>git一些问题累积</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/01/10/git/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

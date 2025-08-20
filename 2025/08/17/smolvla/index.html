@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="state在整个结构里面处在什么位置 SmolVLA 由一个紧凑的预训练视觉语言模型组成，丢弃最后的 L − N 层（剪刀图标）。其余层嵌入了三个输入：（i）语言指令，（ii）RGB图像，以及（iii）机器人感觉运动状态。它们合并的标记为交替交叉注意力（金色）和自我注意力（浅黄色）块的动作专家提供信息，这些块通过流匹配进行训练，以输出 n 个低级动作块，在 . . . ， at+n。Sm">
+    <meta name="description" content="主要是代码理解和修改">
 <meta property="og:type" content="article">
 <meta property="og:title" content="smolvla">
 <meta property="og:url" content="http://zhon.fun/2025/08/17/smolvla/index.html">
 <meta property="og:site_name" content="没啥标题">
-<meta property="og:description" content="state在整个结构里面处在什么位置 SmolVLA 由一个紧凑的预训练视觉语言模型组成，丢弃最后的 L − N 层（剪刀图标）。其余层嵌入了三个输入：（i）语言指令，（ii）RGB图像，以及（iii）机器人感觉运动状态。它们合并的标记为交替交叉注意力（金色）和自我注意力（浅黄色）块的动作专家提供信息，这些块通过流匹配进行训练，以输出 n 个低级动作块，在 . . . ， at+n。Sm">
+<meta property="og:description" content="主要是代码理解和修改">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-08-17T14:39:53.000Z">
-<meta property="article:modified_time" content="2025-08-18T08:11:30.445Z">
+<meta property="article:modified_time" content="2025-08-20T12:32:17.829Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="vla">
 <meta name="twitter:card" content="summary">
@@ -114,7 +114,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#train"><span class="nav-number">1.</span> <span class="nav-text">train</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">主函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#validate"><span class="nav-number">1.1.1.</span> <span class="nav-text">validate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dataset"><span class="nav-number">1.1.2.</span> <span class="nav-text">dataset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#policy"><span class="nav-number">1.1.3.</span> <span class="nav-text">policy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#train-1"><span class="nav-number">1.1.4.</span> <span class="nav-text">train</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dataloader"><span class="nav-number">1.2.</span> <span class="nav-text">dataloader</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#train"><span class="nav-number">1.</span> <span class="nav-text">train</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">主函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#validate"><span class="nav-number">1.1.1.</span> <span class="nav-text">validate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dataset"><span class="nav-number">1.1.2.</span> <span class="nav-text">dataset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#policy"><span class="nav-number">1.1.3.</span> <span class="nav-text">policy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#train-1"><span class="nav-number">1.1.4.</span> <span class="nav-text">train</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vlaflowmatching"><span class="nav-number">1.1.5.</span> <span class="nav-text">VLAFlowMatching</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#init"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">init</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#embed_prefix"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">embed_prefix</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#section"><span class="nav-number">1.1.5.3.</span> <span class="nav-text"></span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dataloader"><span class="nav-number">2.</span> <span class="nav-text">dataloader</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#evaluate"><span class="nav-number">3.</span> <span class="nav-text">evaluate</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#config"><span class="nav-number">3.1.</span> <span class="nav-text">config</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#policy_server"><span class="nav-number">3.1.1.</span> <span class="nav-text">policy_server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#robot_clinet"><span class="nav-number">3.1.2.</span> <span class="nav-text">robot_clinet</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -201,7 +201,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-18 16:11:30" itemprop="dateModified" datetime="2025-08-18T16:11:30+08:00">2025-08-18</time>
+      <time title="修改时间：2025-08-20 20:32:17" itemprop="dateModified" datetime="2025-08-20T20:32:17+08:00">2025-08-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -222,7 +222,8 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><span id="more"></span>
+    <div class="post-body" itemprop="articleBody"><p>主要是代码理解和修改</p>
+<span id="more"></span>
 <p>state在整个结构里面处在什么位置 SmolVLA
 由一个紧凑的预训练视觉语言模型组成，丢弃最后的 L − N
 层（剪刀图标）。其余层嵌入了三个输入：（i）语言指令，（ii）RGB图像，以及（iii）机器人感觉运动状态。它们合并的标记为交替交叉注意力（金色）和自我注意力（浅黄色）块的动作专家提供信息，这些块通过流匹配进行训练，以输出
@@ -390,9 +391,91 @@ self.normalize_inputs(batch)这里用的是Normalize的forward，正好传入了
 </ol></li>
 </ol></li>
 </ol>
-<h2 id="dataloader">dataloader</h2>
+<h3 id="vlaflowmatching">VLAFlowMatching</h3>
+<h4 id="init">init</h4>
+<ol type="1">
+<li><p>self.vlm_with_expert =
+SmolVLMWithExpertModel(...)构建带专家头的多模态主干，这个对象里包含：</p>
+<p>视觉编码器（如 SigLIP）+ 语言嵌入层；</p>
+<p>一个 Transformer（“VLM”主体）；</p>
+<p>动作“专家（Expert）”分支以及处理器（processor / tokenizer）。</p>
+<p>此时的self.config.vlm_model_name="models/forsmolvla/HuggingFaceTB/SmolVLM2-500M-Video-Instruct"</p>
+<p>所以vlm_with_expert加载的就是冻结的vlm？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">self.vlm_with_expert = SmolVLMWithExpertModel(</span><br><span class="line">            model_id=self.config.vlm_model_name,</span><br><span class="line">            freeze_vision_encoder=self.config.freeze_vision_encoder,</span><br><span class="line">            train_expert_only=self.config.train_expert_only,</span><br><span class="line">            load_vlm_weights=self.config.load_vlm_weights,</span><br><span class="line">            attention_mode=self.config.attention_mode,</span><br><span class="line">            num_expert_layers=self.config.num_expert_layers,</span><br><span class="line">            num_vlm_layers=self.config.num_vlm_layers,</span><br><span class="line">            self_attn_every_n_layers=self.config.self_attn_every_n_layers,</span><br><span class="line">            expert_width_multiplier=self.config.expert_width_multiplier,</span><br><span class="line">      )</span><br></pre></td></tr></table></figure>
+<p>这个代码初始化了一个什么？</p></li>
+<li><p>self.state_proj这个是把原来的32维的state投影到文本隐藏维（text_config.hidden_size），这个维度是从
+self.vlm_with_expert里面来的</p></li>
+<li><p>action_in_proj / action_out_proj：将 动作维 映射到专家隐藏维
+D_exp，便于送入专家分支；将专家输出再投回
+动作维，得到对目标速度场的预测</p></li>
+<li><p>set_requires_grad，如果config.train_state_proj是true的话，就会设置state_proj里面的所有参数require_grad为true，所以这里应该是true</p></li>
+<li><p>一些关于图像的token，不关注了</p></li>
+<li><p>一个prefix_length，默认是 prefix_length: int = -1</p></li>
+</ol>
+<h4 id="embed_prefix">embed_prefix</h4>
+<ol type="1">
+<li>输入state</li>
+<li>目的：把图像、（可选的）图像特殊 token、语言
+token、状态拼成一段“前缀序列”，并生成对应的 pad mask 与
+跨段注意力屏蔽标记。</li>
+<li>先对每个图像做</li>
+</ol>
+<h4 id="section"></h4>
+<h1 id="dataloader">dataloader</h1>
 <p>之前写在train.py里面的，for key in batch:之后，为了保存数据到本地
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">states = batch[<span class="string">&quot;observation.state&quot;</span>].detach().cpu()</span><br><span class="line"><span class="keyword">if</span> states.dim() == <span class="number">3</span>:   <span class="comment"># e.g. [B, 1, 10] → squeeze掉</span></span><br><span class="line">    states = states.squeeze(<span class="number">1</span>)</span><br><span class="line">episode_indices = batch[<span class="string">&quot;episode_index&quot;</span>].detach().cpu().tolist()</span><br><span class="line">frame_indices = batch[<span class="string">&quot;frame_index&quot;</span>].detach().cpu().tolist()</span><br><span class="line">states_list = states.numpy().tolist()</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;modified_states.jsonl&quot;</span>, <span class="string">&quot;a&quot;</span>) <span class="keyword">as</span> f:  <span class="comment"># 追加写入</span></span><br><span class="line">    <span class="keyword">for</span> ep, fr, st <span class="keyword">in</span> <span class="built_in">zip</span>(episode_indices, frame_indices, states_list):</span><br><span class="line">        record = &#123;</span><br><span class="line">            <span class="string">&quot;episode_index&quot;</span>: <span class="built_in">int</span>(ep),</span><br><span class="line">            <span class="string">&quot;frame_index&quot;</span>: <span class="built_in">int</span>(fr),</span><br><span class="line">            <span class="string">&quot;state&quot;</span>: st</span><br><span class="line">        &#125;</span><br><span class="line">        f.write(json.dumps(record, ensure_ascii=<span class="literal">False</span>) + <span class="string">&quot;\n&quot;</span>)</span><br></pre></td></tr></table></figure></p>
+<h1 id="evaluate">evaluate</h1>
+<ol type="1">
+<li>要新增的功能
+<ol type="1">
+<li>服务器端推理次数统计：只要在policy_server端增加log就行，init里面搞个计数器</li>
+<li>能测试baseline，修改task和修改state
+<ol type="1">
+<li>task各种形式</li>
+<li>state要proj和normalize</li>
+</ol></li>
+</ol></li>
+</ol>
+<h2 id="config">config</h2>
+<p>基本上处理都可以从pretrained_name_or_path里面看出来吧，只要在配置的yaml文件里面写清楚model的path就行，然后服务器根据名字选择出
+mtask,mstate和baseline</p>
+<ol type="1">
+<li>baseline</li>
+<li>mtask_
+<ol type="1">
+<li>relative</li>
+<li>grid_2cm</li>
+<li>grid_5cm</li>
+</ol></li>
+<li>mstate_
+<ol type="1">
+<li>relative</li>
+<li>1m</li>
+</ol></li>
+</ol>
+<h3 id="policy_server">policy_server</h3>
+<ol type="1">
+<li>根据config得到控制</li>
+<li>推理之前_predict_action_chunk里面处理state和task</li>
+<li>推理state的时候是否还需要修改normalize？
+<ol type="1">
+<li>prepare_batch函数里面看到了，来改吧</li>
+<li>之前forward函数里面有batch =
+self.normalize_inputs(batch,adding_state_stat)</li>
+<li>需要确保self.add_location_to_state有对应的值
+<ol type="1">
+<li>self.add_location_to_state=config.add_location_to_state</li>
+<li>cfg是SmolVLAConfig，也就是模型初始化的时候要有add_location_to_state这个设置</li>
+</ol></li>
+<li>self.add_state_dim加载正确</li>
+</ol></li>
+<li>推理的时候去掉side_depth这个多余的feature</li>
+</ol>
+<h3 id="robot_clinet">robot_clinet</h3>
+<ol type="1">
+<li>注释掉validate_robot_cameras_for_policy(lerobot_features,
+policy_image_features)，因为本地不用这个</li>
+</ol>
 
     </div>
 
