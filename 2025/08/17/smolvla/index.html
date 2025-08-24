@@ -28,7 +28,7 @@
 <meta property="og:description" content="主要是代码理解和修改">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-08-17T14:39:53.000Z">
-<meta property="article:modified_time" content="2025-08-20T12:32:17.829Z">
+<meta property="article:modified_time" content="2025-08-22T07:36:27.915Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="vla">
 <meta name="twitter:card" content="summary">
@@ -114,7 +114,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#train"><span class="nav-number">1.</span> <span class="nav-text">train</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">主函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#validate"><span class="nav-number">1.1.1.</span> <span class="nav-text">validate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dataset"><span class="nav-number">1.1.2.</span> <span class="nav-text">dataset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#policy"><span class="nav-number">1.1.3.</span> <span class="nav-text">policy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#train-1"><span class="nav-number">1.1.4.</span> <span class="nav-text">train</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vlaflowmatching"><span class="nav-number">1.1.5.</span> <span class="nav-text">VLAFlowMatching</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#init"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">init</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#embed_prefix"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">embed_prefix</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#section"><span class="nav-number">1.1.5.3.</span> <span class="nav-text"></span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dataloader"><span class="nav-number">2.</span> <span class="nav-text">dataloader</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#evaluate"><span class="nav-number">3.</span> <span class="nav-text">evaluate</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#config"><span class="nav-number">3.1.</span> <span class="nav-text">config</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#policy_server"><span class="nav-number">3.1.1.</span> <span class="nav-text">policy_server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#robot_clinet"><span class="nav-number">3.1.2.</span> <span class="nav-text">robot_clinet</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#train"><span class="nav-number">1.</span> <span class="nav-text">train</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">主函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#validate"><span class="nav-number">1.1.1.</span> <span class="nav-text">validate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dataset"><span class="nav-number">1.1.2.</span> <span class="nav-text">dataset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#policy"><span class="nav-number">1.1.3.</span> <span class="nav-text">policy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#train-1"><span class="nav-number">1.1.4.</span> <span class="nav-text">train</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vlaflowmatching"><span class="nav-number">1.1.5.</span> <span class="nav-text">VLAFlowMatching</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#init"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">init</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#embed_prefix"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">embed_prefix</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#embed_suffix"><span class="nav-number">1.1.5.3.</span> <span class="nav-text">embed_suffix</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#forward"><span class="nav-number">1.1.5.4.</span> <span class="nav-text">forward</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#smolvlmwithexpertmodel"><span class="nav-number">1.1.6.</span> <span class="nav-text">SmolVLMWithExpertModel</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#init-1"><span class="nav-number">1.1.6.1.</span> <span class="nav-text">init</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#forward-1"><span class="nav-number">1.1.6.2.</span> <span class="nav-text">forward</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E6%B5%81%E7%A8%8B"><span class="nav-number">1.1.7.</span> <span class="nav-text">训练流程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dataloader"><span class="nav-number">2.</span> <span class="nav-text">dataloader</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#evaluate"><span class="nav-number">3.</span> <span class="nav-text">evaluate</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#config"><span class="nav-number">3.1.</span> <span class="nav-text">config</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#policy_server"><span class="nav-number">3.1.1.</span> <span class="nav-text">policy_server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#robot_clinet"><span class="nav-number">3.1.2.</span> <span class="nav-text">robot_clinet</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -127,18 +127,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-count">64</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -201,7 +201,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-20 20:32:17" itemprop="dateModified" datetime="2025-08-20T20:32:17+08:00">2025-08-20</time>
+      <time title="修改时间：2025-08-22 15:36:27" itemprop="dateModified" datetime="2025-08-22T15:36:27+08:00">2025-08-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -418,9 +418,177 @@ D_exp，便于送入专家分支；将专家输出再投回
 <li>目的：把图像、（可选的）图像特殊 token、语言
 token、状态拼成一段“前缀序列”，并生成对应的 pad mask 与
 跨段注意力屏蔽标记。</li>
-<li>先对每个图像做</li>
+<li>图像嵌入</li>
+<li>语言嵌入</li>
+<li>状态嵌入 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 状态嵌入，要改肯定改这里，如果要改的话还要加一个，self.config里面有吗？</span></span><br><span class="line">        <span class="comment"># 可以用self.add_location_to_state（或者改成train_add_location_to_state）</span></span><br><span class="line">        <span class="comment"># 投影到self.vlm_with_expert.config.text_config.hidden_size对应的维数，把状态维度投影到 和语言/图像 token 相同的 hidden_size</span></span><br><span class="line">        state_emb = self.state_proj(state)</span><br><span class="line">        <span class="comment"># 如果只有2维？就加个维。这里也应该肯定是2d的吧</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;prefix_embed这里是1d的&quot;</span>,state_emb.ndim == <span class="number">2</span>)</span><br><span class="line">        state_emb = state_emb[:, <span class="literal">None</span>, :] <span class="keyword">if</span> state_emb.ndim == <span class="number">2</span> <span class="keyword">else</span> state_emb</span><br><span class="line">        <span class="comment"># 追加到总的embs,embs从（image_end_token，lang_emb）变成（image_end_token，lang_emb，state_emb）</span></span><br><span class="line">        embs.append(state_emb)</span><br><span class="line">        <span class="comment"># bsize就是batchsize</span></span><br><span class="line">        bsize = state_emb.shape[<span class="number">0</span>]</span><br><span class="line">        device = state_emb.device</span><br><span class="line">        <span class="comment"># states_seq_len就是状态token的个数</span></span><br><span class="line">        states_seq_len = state_emb.shape[<span class="number">1</span>]</span><br><span class="line">        <span class="comment"># 这段token没有padding，形状是((B, states_seq_len))</span></span><br><span class="line">        state_mask = torch.ones(bsize, states_seq_len, dtype=torch.<span class="built_in">bool</span>, device=device)</span><br><span class="line">        pad_masks.append(state_mask)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Set attention masks so that image and language inputs do not attend to state or actions</span></span><br><span class="line">        att_masks += [<span class="number">1</span>] * (states_seq_len)</span><br></pre></td></tr></table></figure> pad_mask和att_mask</li>
 </ol>
-<h4 id="section"></h4>
+<p>pad_masks（padding mask）</p>
+<p>作用：标记哪些 token 是“真实有效的”，哪些是 padding（补齐长度）。</p>
+<p>取值：布尔值 True/1 = 有效，False/0 = padding。</p>
+<p>形状：(B, L_total)，对应整个序列每个位置。</p>
+<p>att_masks：attention 域掩码</p>
+<p>作用：告诉 make_att_2d_masks 不同 token
+属于哪个“域（domain）”，从而控制谁可以 attend 谁。</p>
+<p>这个函数最后，pad_masks是表示哪个token是有效的（state这里应该都是有效），att_masks的话，图和task是0，state是1</p>
+<h4 id="embed_suffix">embed_suffix</h4>
+<p>把 动作序列 与 时间 t 融合，作为“后缀序列”，只包含动作端的
+token。跟state倒是没什么关系 att_masks 为长度 T_act 的 1 序列。
+配合前缀里的 0/1，通常表示“后缀的动作 token
+属于另一个注意力域”，从而避免图像/文本去看动作；也可允许状态/动作之间的相互可见性（具体由
+make_att_2d_masks 决定）。</p>
+<p>为什么action也要是1？大概懂了点，要分为条件输入和决策输入，emm主要是我不知道还能放在哪儿，理论上来说这个位置信息肯定是放在0比较好的</p>
+<h4 id="forward">forward</h4>
+<p>目标：学习一个 速度场 v_θ(x_t, t)，去逼近真速度 u_t = ε - x_0
+的等价形式（此实现里是 ε - actions），属于 flow
+matching/噪声驱动的动作建模思想。</p>
+<h3 id="smolvlmwithexpertmodel">SmolVLMWithExpertModel</h3>
+<h4 id="init-1">init</h4>
+<ol type="1">
+<li>self.vlm和self.procesor的区别
+<ol type="1">
+<li>self.vlm是AutoModelForImageTextToText.from_pretrained(
+model_id)，g会加载一个 视觉-语言-文本（VLM）大模型</li>
+<li>self.processor =
+AutoProcessor.from_pretrained(model_id)看起来都是from_pretrained(model_id)</li>
+<li>self.vlm是模型权重 + 前向推理逻辑，类似 transformers 里常见的
+AutoModelForCausalLM。这里是 Image+Text → Text
+的多模态大模型（视觉-语言模型，里面应该包含
+<ol type="1">
+<li>model
+<ol type="1">
+<li>是整个 VLM 的 主体 backbone，直接调用 self.vlm.model(...) 会自动执行
+vision_model + connector，给你一个对齐到 text hidden_size 的
+embedding</li>
+<li>.vision_model视觉编码器（把图片转成
+embedding）纯粹的encoder，只负责「把图像转成 patch embedding」
+<ol type="1">
+<li>和VLAFlowMatching里面的prefix_embed的区别是：embed_prefix
+不自己做图像编码，它只是一个「拼接器」</li>
+<li>img_emb =
+self.vlm_with_expert.embed_image(img)这里调用的就是self.vlm_with_experts.vlm.model</li>
+</ol></li>
+<li>.text_model：文本编码器/解码器
+<ol type="1">
+<li>同理，embed_prefix里面对state和language的处理也类似，关注state：</li>
+</ol></li>
+<li>.connector：模态对齐层（把 vision hidden state 映射到 text hidden
+space）</li>
+</ol></li>
+<li>forward</li>
+<li>generate</li>
+</ol></li>
+<li>self.processor是输入预处理器，负责把原始数据（图像、文字字符串）转成
+self.vlm 能接受的张量
+<ol type="1">
+<li>对图像：resize、归一化、转 tensor</li>
+<li>对文本：tokenize → token_id → attention_mask</li>
+</ol></li>
+</ol></li>
+<li>self.vlm.model.text_model.layers减少到前num_vlm_layers（16）层</li>
+<li>构建更窄的 expert 部分lm_expert
+<ol type="1">
+<li>lm_expert_config =
+copy.deepcopy(config.text_config)为什么只用text_config？因为专家模型只管
+text 部分（不管
+vision），vision也被拼接到text里面了。先得到一个大概的config结构，和self.vlm.config.text_config是一样的大小。</li>
+<li>更窄
+<ol type="1">
+<li>原来mlp里面的结构是这样的：hidden_size → intermediate_size →
+hidden_size，也就是先把先把 hidden
+向量投影到一个更宽的空间（intermediate_size），再投影回
+hidden_size，这样模型有更强的表达能力。</li>
+<li>hudden_size （每个 token embedding 的维度，Transformer
+层的输入/输出维度）</li>
+<li>intermediate_size FFN 里间层宽度，挺复杂的不用管这个经验公式</li>
+<li>num_hidden_layers 堆多少层 Transformer，因为 Expert 要“对应”VLM
+的层结构，方便做跨注意力对齐。这样一层 Expert 对应一层 VLM，更容易设计
+cross-attn。如果额外设置了一个num_expert_layers，vlm跟expert不是一层层对应，但是expert_layer要是16的因数，为了方便稀疏交互</li>
+</ol></li>
+<li>self.lm_expert = AutoModel.from_config(lm_expert_config)结构和
+VLM.text_model 一样，但更小、更窄</li>
+<li>大小确定了，值是需要自己训练的，也就是expert需要单独训练。</li>
+</ol></li>
+<li>atten_mode
+<ol type="1">
+<li>因为 cross attention 模式下，Expert 不直接用自己的 K/V，而是用大 VLM
+的 K/V 表示，改值，所以需要维度也匹配一下，不然vlm的值拿不过来：当该层做
+cross attention 时 → Expert 的输入是 VLM 传下来的特征（比如
+hidden_size=1024），必须经过这个替换过的 Linear，投影到 Expert
+自己的宽度（比如 hidden_size=512）。。vlm不是冻结的吗，也有kv？</li>
+<li>不是每一层 Expert 都用 cross attention，每 xx 层保留一次
+纯自注意力，其他层就把 K/V 换成来自 VLM 的（投影过的）K/V，也就是cross
+attention和self-attention</li>
+</ol></li>
+<li>专家不自己负责词嵌入，统一用 VLM 的词嵌入或上游传入的
+inputs_embeds。self.lm_expert.embed_tokens = None</li>
+<li>set_requires_grad
+<ol type="1">
+<li>如果self.freeze_vision_encoder设置为true：整个vlm冻结，expert可以训练，只更新expert的权重</li>
+<li>train_expert_only=True</li>
+</ol></li>
+<li>self.vlm,self.vlm.model,self.vlm.model.vision_encoder</li>
+</ol>
+<h4 id="forward-1">forward</h4>
+<ol type="1">
+<li>batch_size</li>
+<li>对每一层要么self-atten要么cross-atten，记录结果att_outputs,
+past_key_values</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">att_outputs,past_key_values=self_or_cross-attention(</span><br><span class="line">   model_layers,     <span class="comment"># 当前层的子模型层 (vlm 层 + expert 层) 是可训练的部分，包含全部需要更新的权重。</span></span><br><span class="line">inputs_embeds,    <span class="comment"># 该层的输入 hidden states [vlm_embeds, expert_embeds]</span></span><br><span class="line">layer_idx,        <span class="comment"># 当前层编号</span></span><br><span class="line">position_ids,     <span class="comment"># 每个 token 的位置 id (padding 通常是 0 或特殊处理)</span></span><br><span class="line">attention_mask,   <span class="comment"># 注意力 mask，控制哪些 token 能被看到</span></span><br><span class="line">batch_size,       <span class="comment"># 批大小 (B）</span></span><br><span class="line">head_dim,         <span class="comment"># 每个 head 的维度 (D)</span></span><br><span class="line">use_cache,        <span class="comment"># 是否使用 KV cache (推理时加速)</span></span><br><span class="line">fill_kv_cache,    <span class="comment"># 是否往 cache 里填新的 K/V (True=训练; False=推理复用旧KV)</span></span><br><span class="line">past_key_values   <span class="comment"># 存储历史 KV 的字典</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>att_outputs 和 past_key_values 在整个模型中的位置</p>
+<p>这两个是 中间结果，在模型 forward 的流水线上扮演不同角色：</p>
+<p>att_outputs</p>
+<p>这是这一层（vlm + expert）的 attention 输出 hidden states。</p>
+<p>会作为 下一层的输入，一路传到最后一层 → 接 decoder head / classifier
+head。</p>
+<p>所以它处于 「主干计算图」 中，梯度会往回传。</p>
+<p>相当于 transformer 层的 hidden_states。</p>
+<p>past_key_values</p>
+<p>保存每一层的 KV (key, value) 张量。</p>
+<p>在训练时 可以不用（因为我们每次都全量计算），</p>
+<p>在推理时（自回归生成），用它来避免重复计算旧 token 的 KV。</p>
+<p>它处于 「缓存/优化分支」，通常不会参与梯度计算。</p>
+<p>只存储 forward 的中间结果，不会影响训练更新</p>
+<h3 id="训练流程">训练流程</h3>
+<ol type="1">
+<li>train
+<ol type="1">
+<li></li>
+</ol></li>
+<li>smolvlapolicy
+<ol type="1">
+<li>init
+dataset_stats和config.input_features里面的state维度要对应，改一下dataset_stats
+<ol type="1">
+<li>policy =
+make_policy(ds_meta)这个ds_meta就是dataset_stats吗？加上</li>
+</ol></li>
+<li>forward此时传入的batch的state是10维</li>
+</ol></li>
+<li>vlaflowmatching
+<ol type="1">
+<li>self.vlm_with_expert = SmolVLMWithExpertModel</li>
+<li>self.state_proj = nn.Linear( self.config.max_state_dim,
+self.vlm_with_expert.config.text_config.hidden_size )</li>
+<li>(<em>, suffix_out), </em> = self.vlm_with_expert.forward(
+attention_mask=att_2d_masks, position_ids=position_ids,
+past_key_values=None, inputs_embeds=[prefix_embs, suffix_embs],
+use_cache=False, fill_kv_cache=False, )</li>
+</ol></li>
+<li>smolvlmwithexpert
+<ol type="1">
+<li>init</li>
+<li>forward，传入的
+<ol type="1">
+<li>inputs_embeds：外部准备好一个 [batch, seq_len, hidden_dim]
+的张量，它都会进入 forward 流程</li>
+<li>position_ids：这只影响 RoPE（旋转位置编码），它决定每个 token
+在序列里的位置。和你要训练的 state
+的值域/维度没有直接关系，只是告诉注意力计算“第 i 个 token
+的位置是多少”。</li>
+</ol></li>
+</ol></li>
+</ol>
 <h1 id="dataloader">dataloader</h1>
 <p>之前写在train.py里面的，for key in batch:之后，为了保存数据到本地
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">states = batch[<span class="string">&quot;observation.state&quot;</span>].detach().cpu()</span><br><span class="line"><span class="keyword">if</span> states.dim() == <span class="number">3</span>:   <span class="comment"># e.g. [B, 1, 10] → squeeze掉</span></span><br><span class="line">    states = states.squeeze(<span class="number">1</span>)</span><br><span class="line">episode_indices = batch[<span class="string">&quot;episode_index&quot;</span>].detach().cpu().tolist()</span><br><span class="line">frame_indices = batch[<span class="string">&quot;frame_index&quot;</span>].detach().cpu().tolist()</span><br><span class="line">states_list = states.numpy().tolist()</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;modified_states.jsonl&quot;</span>, <span class="string">&quot;a&quot;</span>) <span class="keyword">as</span> f:  <span class="comment"># 追加写入</span></span><br><span class="line">    <span class="keyword">for</span> ep, fr, st <span class="keyword">in</span> <span class="built_in">zip</span>(episode_indices, frame_indices, states_list):</span><br><span class="line">        record = &#123;</span><br><span class="line">            <span class="string">&quot;episode_index&quot;</span>: <span class="built_in">int</span>(ep),</span><br><span class="line">            <span class="string">&quot;frame_index&quot;</span>: <span class="built_in">int</span>(fr),</span><br><span class="line">            <span class="string">&quot;state&quot;</span>: st</span><br><span class="line">        &#125;</span><br><span class="line">        f.write(json.dumps(record, ensure_ascii=<span class="literal">False</span>) + <span class="string">&quot;\n&quot;</span>)</span><br></pre></td></tr></table></figure></p>
@@ -497,6 +665,9 @@ policy_image_features)，因为本地不用这个</li>
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2025/08/20/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%BB%91%E8%AF%9D/" rel="next" title="模型训练黑话">
+                  模型训练黑话 <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>

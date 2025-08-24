@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ooo.0x0.ooo/2024/03/05/Oy0VHp.png">
 <meta property="article:published_time" content="2024-03-05T13:17:53.000Z">
-<meta property="article:modified_time" content="2024-12-17T06:08:35.680Z">
+<meta property="article:modified_time" content="2025-08-22T02:57:24.805Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="transformer">
 <meta name="twitter:card" content="summary">
@@ -132,18 +132,18 @@ Features</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a cla
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-count">64</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -206,7 +206,7 @@ Features</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a cla
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-17 14:08:35" itemprop="dateModified" datetime="2024-12-17T14:08:35+08:00">2024-12-17</time>
+      <time title="修改时间：2025-08-22 10:57:24" itemprop="dateModified" datetime="2025-08-22T10:57:24+08:00">2025-08-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -402,6 +402,24 @@ encoding。</li>
 <li>输出概率结果</li>
 </ol>
 <p>这部分的代码参考<a href="/2024/09/13/TRANSFORMER-EXPLAINER-Interactive-Learning-of-Text-Generative-Models/" title="TRANSFORMER EXPLAINER: Interactive Learning of Text-Generative Models">transformer explainer</a></p>
+<p>写的一坨，当时完全没看懂</p>
+<p>什么叫中间层 intermediate，隐藏层 hidden</p>
+<p>在 Transformer block 里，每一层有：</p>
+<p><code>Attention 层</code>和<code>MLP 层（Feed-Forward Network, FFN）</code></p>
+<p>MLP 部分长这样：</p>
+<p>hidden_size → intermediate_size (扩张，比如 ×4) → hidden_size</p>
+<p>所以：</p>
+<p>hidden_size = token embedding 维度（比如 4096）</p>
+<p>intermediate_size = MLP 的中间层宽度（通常是 hidden_size 的 4
+倍）</p>
+<p>什么是 attend？在 Transformer 里，“attend”指的就是 在 self-attention
+中，一个 token 在计算自己表示时，是否允许读取另一些 token
+的信息。如果允许，一个 token 的 Query 就能和另一个 token 的 Key
+做点积，从而聚合到它的 Value；如果不允许，就在 attention mask
+里屏蔽掉，点积会被置为 -∞，相当于读不到。</p>
+<p>所以：</p>
+<p>“A 可以 attend B” = A 在更新自己的表示时能利用 B 的信息。 “A 不可以
+attend B” = A 在更新时忽视 B。</p>
 
     </div>
 
