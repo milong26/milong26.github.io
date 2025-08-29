@@ -28,7 +28,7 @@
 <meta property="og:description" content="主要是代码理解和修改">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-08-17T14:39:53.000Z">
-<meta property="article:modified_time" content="2025-08-22T07:36:27.915Z">
+<meta property="article:modified_time" content="2025-08-29T09:20:47.085Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="vla">
 <meta name="twitter:card" content="summary">
@@ -201,7 +201,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-22 15:36:27" itemprop="dateModified" datetime="2025-08-22T15:36:27+08:00">2025-08-22</time>
+      <time title="修改时间：2025-08-29 17:20:47" itemprop="dateModified" datetime="2025-08-29T17:20:47+08:00">2025-08-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -644,6 +644,19 @@ self.normalize_inputs(batch,adding_state_stat)</li>
 <li>注释掉validate_robot_cameras_for_policy(lerobot_features,
 policy_image_features)，因为本地不用这个</li>
 </ol>
+<p>8.29重新整理代码，今晚收集第二个物体+整理代码</p>
+<p>git remote add upstream https://github.com/huggingface/lerobot.git
+之前更新的时候不小心丢掉了</p>
+<ol type="1">
+<li>camera:realsense camera更改比较多，主要是新增保存双通道的深度图</li>
+<li>scripts/train.py</li>
+<li>configs/train.py 增加了3个命令行参数 # 自定义 #
+当空的时候就等于baseline<br />
+language_tip_mode: str = "" # 改成模式，有 pure和grid #
+控制是将location加到state里面 add_location_to_state: str = ""
+freeze_except_7_10: bool= False</li>
+</ol>
+<p>factory.py 里面make_dataset</p>
 
     </div>
 
