@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="我要看这篇文章能否复现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TinyVLA: Toward Fast, Data-Efficient Vision-Language-Action Models for Robotic Manipulation">
+<meta property="og:url" content="http://zhon.fun/2025/09/29/TinyVLA-Toward-Fast-Data-Efficient-Vision-Language-Action-Models-for-Robotic-Manipulation/index.html">
+<meta property="og:site_name" content="没啥标题">
+<meta property="og:description" content="我要看这篇文章能否复现">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-09-29T07:19:42.000Z">
+<meta property="article:modified_time" content="2025-09-29T07:19:42.276Z">
+<meta property="article:author" content="milong26">
+<meta property="article:tag" content="robotic">
+<meta property="article:tag" content="vla">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhon.fun/2025/09/29/TinyVLA-Toward-Fast-Data-Efficient-Vision-Language-Action-Models-for-Robotic-Manipulation/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2025/09/29/TinyVLA-Toward-Fast-Data-Efficient-Vision-Language-Action-Models-for-Robotic-Manipulation/","path":"2025/09/29/TinyVLA-Toward-Fast-Data-Efficient-Vision-Language-Action-Models-for-Robotic-Manipulation/","title":"TinyVLA: Toward Fast, Data-Efficient Vision-Language-Action Models for Robotic Manipulation"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>TinyVLA: Toward Fast, Data-Efficient Vision-Language-Action Models for Robotic Manipulation | 没啥标题</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">没啥标题</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">活下去</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BA%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">论文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.1.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C-1"><span class="nav-number">2.</span> <span class="nav-text">实验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#aloha%E6%89%A7%E8%A1%8C%E5%8A%A8%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">aloha执行动作</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">milong26</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2025/09/29/TinyVLA-Toward-Fast-Data-Efficient-Vision-Language-Action-Models-for-Robotic-Manipulation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="milong26">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="TinyVLA: Toward Fast, Data-Efficient Vision-Language-Action Models for Robotic Manipulation | 没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          TinyVLA: Toward Fast, Data-Efficient Vision-Language-Action Models for Robotic Manipulation
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-09-29 15:19:42" itemprop="dateCreated datePublished" datetime="2025-09-29T15:19:42+08:00">2025-09-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>我要看这篇文章能否复现</p>
+<span id="more"></span>
+<h1 id="论文">论文</h1>
+<h2 id="实验">实验</h2>
+<ol type="1">
+<li>模拟基准测试：我们在 MetaWorld 上评估我们的方法。MetaWorld [36] 中的
+50 个任务可以分为多个级别 [37]，即简单、中等、困难和非常困难。</li>
+<li>真实的机器人设置：TinyVLA 既在使用使用 Franka Panda 7Dof
+机器人手臂的单臂设置上进行评估，也可以在使用两个 UR5
+机械臂的双手动设置上进行评估，如图 3
+所示。单臂场景通过固定在机器人两侧的两个外部 ZED 2
+立体摄像头感知。双手动机器人的场景由手腕上的两个摄像头捕捉，顶部还有一个额外的摄像头。这些相机是
+Realsense D435i。</li>
+<li>任务：在单臂设置中，有五个任务：1） 关闭抽屉 （CloseDrawer），2）
+将粉红色立方体堆叠在蓝色立方体的顶部 （StackCubes），3） 打开盒子的盖子
+（OpenBox），4） 将网球放入球盒，以及 5） 直立翻倒的杯子
+（FlipMug）。在双手动人实验中，我们设置了三个涉及两只手臂合作的任务：1）
+将面包转移到盘子上 （TransferBread），2） 拉开袋子的拉链并将网球放入其中
+（PlaceTennisBag），以及 3） 将立方体堆叠在盘子上
+（StackCubes）。值得注意的是，任务的动作空间差异很大。例如，翻转杯需要机器人进行大范围的旋转才能将夹持器横向插入杯中，这与堆垛立方体完全不同，后者是拾取和放置型的。跨度同一任务中不同轨迹的长度也明显不同，例如，堆栈立方体轨迹的长度范围为
+100 到 300。这为 TinyVLA 在学习执行这些任务方面带来了更多挑战。</li>
+<li>数据收集：我们通过远程作收集数据集。我们记录来自两个摄像头视图的 RGB
+流和机器人状态，例如整个机器人控制过程中的关节位置。我们将机器人夹持器的宽度记录为
+0 到 1 之间的值，其中 0 表示完全关闭，1 表示完全打开。TinyVLA 预测 7
+维动作，包括位置 （x， y， z）、旋转 （roll, pitch, yaw） 和
+（gripper_width）。对于所有任务，除了 remove the lid of the box
+任务外，我们不会添加额外的干扰项，以便更好地评估模型对干扰项的泛化能力。我们总共为每个任务收集了
+100 个轨迹，以平衡所有 5 个任务之间的数据分布。</li>
+</ol>
+<p>可以看出来实验的train data需要自己收集，包括RGB
+流和机器人状态，输出预测的7维动作</p>
+<p>freejoint的qpos一共有七个数，其中，qpos[0~2]是freejoint自身坐标系原点在世界坐标系的位置，qpos[3~6]是自身坐标系相对于世界坐标系的四元数；qvel一共有六个数，其中，qvel[0~2]是freejoint速度在世界坐标系下的表示，而qvel[3~5]是freejoint角速度在自身坐标系下的表示</p>
+<h1 id="实验-1">实验</h1>
+<ol type="1">
+<li>按照<a target="_blank" rel="noopener" href="https://github.com/liyaxuanliyaxuan/TinyVLA">tinavla
+github</a> readme的install安装，conda创建<code>tinyvla</code>环境</li>
+<li>data preparation
+<ol type="1">
+<li><code>rlds_to_h5py.py</code>将rlds的数据转换为h5py，rlds数据是它给的吗？然后h5py是要用的。这个py应该需要修改文件位置，cfg</li>
+<li>必须在<code>constants.py</code>中添加一个条目来指定数据的路径，不知道有什么路径可以填</li>
+</ol></li>
+<li>data需要自己找
+<ol type="1">
+<li>h5py格式，结构：<br />
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># h5 data structure</span><br><span class="line">root</span><br><span class="line">  |-action (100,10)</span><br><span class="line">  |-language_raw (1,)</span><br><span class="line">  |-observations</span><br><span class="line">      |-images # multi-view</span><br><span class="line">          |-left (100,480,640,3)</span><br><span class="line">          |-right (100,480,640,3)</span><br><span class="line">          |-wrist (100,480,640,3)</span><br><span class="line">      |-joint_positions (100,7)</span><br><span class="line">      |-qpos (100,7)</span><br><span class="line">      |-qvel (100,7)</span><br></pre></td></tr></table></figure></li>
+<li>之前是rlds的也行</li>
+<li>一定要aloha吗？因为aloha
+scripts。但是我现在不用训练，可以看别的，得搞清楚它这个模型的输出是什么</li>
+<li>仿真环境用的MetaWorld ，实验中做了单臂 Franka 和双手 UR5</li>
+</ol></li>
+<li>data来源
+<ol type="1">
+<li>act++有没有可以用的示例data</li>
+<li>public_mobile_aloha_datasets</li>
+</ol></li>
+<li>训练要收集的数据和维度对所有机器人都通用？</li>
+<li>所以训练数据里面不包含物体的位置，quat等，只有机器人的。</li>
+<li>action，observation的qpos，vel，joint_positions是什么，为什么是这个维度？可以看act++
+<ol type="1">
+<li>The bimanual actions are formulated as target joint positions aarms
+∈ R14 which includes two continuous gripper actions, and the base
+actions are formulated as target base linear and angular velocities
+abase ∈ R2.</li>
+<li>oi is the observation consisting of two wrist camera RGB
+observations, one egocentric top camera RGB observation mounted between
+the arms, and joint positions of the arms, and L is the imitation loss
+function.</li>
+<li>action里面是目标的关节位置，qpos是实时关节位置</li>
+<li>那action和qpos咋收集的：act++这篇里面用模仿学习，真人手和实际机械臂运动带来的差异</li>
+</ol></li>
+<li>什么平台，能不能把数据转换成genesis的世界坐标表示？</li>
+<li>open-source</li>
+<li>eval_real_franka的pred_action为什么是10维，不管，反正最后合成6D位姿+夹爪</li>
+</ol>
+<h1 id="aloha执行动作">aloha执行动作</h1>
+<ol type="1">
+<li>aloha双机械臂模型
+<ol type="1">
+<li>act++的assets，但是不知道show哪个比较好，好了这么复杂的xml
+genesis还没能显示</li>
+</ol></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/robotic/" rel="tag"># robotic</a>
+              <a href="/tags/vla/" rel="tag"># vla</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/09/29/7%E6%AD%A5%E8%BF%BD%E9%97%AE/" rel="prev" title="7步追问">
+                  <i class="fa fa-angle-left"></i> 7步追问
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">milong26</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

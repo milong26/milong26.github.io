@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="“冻结”的模型在训练时是只做 forward，不做 backward。&#x3D; 只做推理，不参与训练 对齐？ checkpoint：保存模型 embedding层是干啥的？干了一些得到task的工作？把 图像嵌入、语言嵌入、状态嵌入 拼接成一整段前缀序列，并且同时构造： pad_masks：标记哪些 token 是“真实的” (1) 哪些是 padding (0)； att_masks">
+    <meta name="description" content="先写着，以后有空再整理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="模型训练黑话">
 <meta property="og:url" content="http://zhon.fun/2025/08/20/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%BB%91%E8%AF%9D/index.html">
 <meta property="og:site_name" content="没啥标题">
-<meta property="og:description" content="“冻结”的模型在训练时是只做 forward，不做 backward。&#x3D; 只做推理，不参与训练 对齐？ checkpoint：保存模型 embedding层是干啥的？干了一些得到task的工作？把 图像嵌入、语言嵌入、状态嵌入 拼接成一整段前缀序列，并且同时构造： pad_masks：标记哪些 token 是“真实的” (1) 哪些是 padding (0)； att_masks">
+<meta property="og:description" content="先写着，以后有空再整理">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-08-20T13:30:13.000Z">
-<meta property="article:modified_time" content="2025-08-22T02:57:24.875Z">
+<meta property="article:modified_time" content="2025-09-29T03:27:28.382Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="training">
 <meta name="twitter:card" content="summary">
@@ -101,7 +101,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -114,6 +114,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">设备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87"><span class="nav-number">2.</span> <span class="nav-text">目标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%9F%E5%90%88fitting"><span class="nav-number">2.0.1.</span> <span class="nav-text">1. 拟合（fitting）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%9B%E5%8C%96generalization"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.
+泛化（generalization）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%A4%E8%80%85%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">2.0.3.</span> <span class="nav-text">3. 两者的关系</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -126,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-count">76</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -137,7 +139,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">66</span>
+        <span class="site-state-item-count">69</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -200,7 +202,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-22 10:57:24" itemprop="dateModified" datetime="2025-08-22T10:57:24+08:00">2025-08-22</time>
+      <time title="修改时间：2025-09-29 11:27:28" itemprop="dateModified" datetime="2025-09-29T11:27:28+08:00">2025-09-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -221,7 +223,8 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><span id="more"></span>
+    <div class="post-body" itemprop="articleBody"><p>先写着，以后有空再整理</p>
+<span id="more"></span>
 <p>“冻结”的模型在训练时是只做 forward，不做 backward。=
 只做推理，不参与训练</p>
 <p>对齐？</p>
@@ -233,6 +236,45 @@
 属于哪一类域（0=图像/语言，1=状态/动作），以便后面 make_att_2d_masks
 限制注意力连接。</p>
 <p>概括之后，构造条件输入序列</p>
+<h1 id="设备">设备</h1>
+<p>TOPS (Tera Operations Per Second) =
+每秒可执行的万亿次整数运算数量。</p>
+<p>Tensor Core 是 NVIDIA 从 Volta 架构开始引入的
+专门加速矩阵运算的单元，对深度学习的训练和推理特别重要。</p>
+<p>它们可以一次性处理 矩阵乘法 + 累加 (MAC)
+运算，这是神经网络计算的核心操作。</p>
+<p>对 AI 推理和训练，Tensor Core 的作用比普通 CUDA 核心更大。</p>
+<h1 id="目标">目标</h1>
+<p>拟合和泛化这两个概念有什么联系吗？</p>
+<p>fitting and generalization</p>
+<h3 id="拟合fitting">1. <strong>拟合（fitting）</strong></h3>
+<ul>
+<li><p>指模型在训练数据上的表现。</p></li>
+<li><p>如果模型能很好地“拟合”训练集，说明它学到了训练数据中的规律。</p></li>
+<li><p>拟合的程度常用训练误差来衡量。</p></li>
+</ul>
+<p>    -
+<strong>欠拟合（underfitting）</strong>：模型太简单，训练集都学不好。</p>
+<p>    -
+<strong>过拟合（overfitting）</strong>：模型太复杂，把训练集里的噪声或偶然性也“背”下来。</p>
+<h3 id="泛化generalization">2.
+<strong>泛化（generalization）</strong></h3>
+<ul>
+<li><p>指模型在<strong>未见过的新数据</strong>上的表现。</p></li>
+<li><p>泛化能力强的模型，不仅训练集学得好，在测试集或现实数据上也能保持较低误差。</p></li>
+</ul>
+<h3 id="两者的关系">3. <strong>两者的关系</strong></h3>
+<ul>
+<li><strong>拟合是前提，泛化是目标</strong>。</li>
+</ul>
+<p>    - 如果模型连训练集都拟合不好（欠拟合），就更不可能泛化好。</p>
+<p>    - 但模型拟合得“过头”（过拟合），就会牺牲泛化能力。</p>
+<ul>
+<li>所以两者之间存在一个平衡点：</li>
+</ul>
+<p>    - 适度拟合 → 泛化效果最佳。</p>
+<p>    - 欠拟合/过拟合都会导致泛化能力下降。</p>
+<p>vla其实不太好有拟合的表现吧，真的会有吗</p>
 
     </div>
 
