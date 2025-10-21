@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="好方法，一直没看，2025&#x2F;10&#x2F;20上午2小时，下午1小时看完论文主要结构，测试没仔细看，代码也没看，主要是我想先比较一下pi0和pi0.5。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pi0">
+<meta property="og:url" content="http://zhon.fun/2025/10/20/pi0/index.html">
+<meta property="og:site_name" content="没啥标题">
+<meta property="og:description" content="好方法，一直没看，2025&#x2F;10&#x2F;20上午2小时，下午1小时看完论文主要结构，测试没仔细看，代码也没看，主要是我想先比较一下pi0和pi0.5。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-10-20T08:08:55.000Z">
+<meta property="article:modified_time" content="2025-10-20T08:08:55.184Z">
+<meta property="article:author" content="milong26">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhon.fun/2025/10/20/pi0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2025/10/20/pi0/","path":"2025/10/20/pi0/","title":"pi0"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>pi0 | 没啥标题</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">没啥标题</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">活下去</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%9F%BA%E4%BA%8E-prompt-%E7%9A%84%E6%96%B9%E6%B3%95prompt-based-adaptation"><span class="nav-number">1.</span> <span class="nav-text">一、基于 Prompt
+的方法（Prompt-based Adaptation）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%9F%BA%E4%BA%8E%E5%BE%AE%E8%B0%83%E7%9A%84%E6%96%B9%E5%90%91fine-tuning-adaptation-based-methods"><span class="nav-number">2.</span> <span class="nav-text">二、基于微调的方向（Fine-tuning
+&#x2F; Adaptation-based Methods）</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">milong26</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2025/10/20/pi0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="milong26">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="pi0 | 没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          pi0
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-10-20 16:08:55" itemprop="dateCreated datePublished" datetime="2025-10-20T16:08:55+08:00">2025-10-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>好方法，一直没看，2025/10/20上午2小时，下午1小时看完论文主要结构，测试没仔细看，代码也没看，主要是我想先比较一下pi0和pi0.5。</p>
+<span id="more"></span>
+<p>看完以后还记得的：</p>
+<ol type="1">
+<li>自己预训练一个vlm的，用网络数据，作为知识，结果表示用vlm的更好</li>
+<li>基础模型实用混杂数据训练的，混杂数据有不同的权重，然后用高质量数据post
+train</li>
+<li>训练动作专家用的是flowmatching</li>
+<li>目的是训练一个泛化性好的模型</li>
+<li>冻结vlm+action expert结构</li>
+</ol>
+<p>这么一看这个工作好像没有高什么创新，但是工作量是挺大的。</p>
+<p>上面应该已经是整篇文章的重点了，还有一些补充：</p>
+<ol type="1">
+<li>pre-train（不是vlm了，已经是vla）用的数据集是各种机器人的，所以有一个数据异构问题，和rdt类似</li>
+<li>为了将流量匹配与 VLM
+相结合，我们使用了一种新颖的动作专家，该专家通过基于流量的输出来增强标准
+VLM。这个专家和smolvla的专家是一样的吗？为啥论文里面没有仔细讲这个专家结构-.-</li>
+</ol>
+<p>加几个阅读文章： 1. <a
+target="_blank" rel="noopener" href="https://blog.csdn.net/v_JULY_v/article/details/143472442">pi0论文解读</a>
+2. <a
+target="_blank" rel="noopener" href="https://blog.csdn.net/v_JULY_v/article/details/146068251">pi0源代码</a>
+3. <a
+target="_blank" rel="noopener" href="https://blog.csdn.net/v_JULY_v/article/details/148370072">pi0+lerobot</a></p>
+<p>看的时候的笔记</p>
+<p>pi0也是冻结vlm+action expert</p>
+<p>flow matching</p>
+<p>base on prompt</p>
+<p>“The model can then be used directly to perform tasks based on a
+prompt, or fine-tuned on high-quality data to enable complex multi-stage
+tasks” (Black et al., 2024, p. 1)</p>
+<p>我感觉基本就这两种改法了？</p>
+<h3 id="一基于-prompt-的方法prompt-based-adaptation">一、基于 Prompt
+的方法（Prompt-based Adaptation）</h3>
+<blockquote>
+<p>“The model can then be used directly to perform tasks based on a
+prompt …”</p>
+</blockquote>
+<p>这类方法不改动模型权重，只通过<strong>输入指令或结构性提示(prompt)</strong>
+来提升模型在新任务上的表现。<br />
+例如：</p>
+<ul>
+<li><p><strong>指令增强（Instruction
+Enhancement）</strong>：改变语言描述方式</p></li>
+<li><p><strong>上下文引导（Contextual
+Prompting）</strong>：通过加入少量示例（in-context
+examples）或环境描述，让模型理解任务目标。</p></li>
+<li><p><strong>视觉提示（Visual
+Prompting）</strong>：在输入图像上添加标记、框选区域或辅助通道，帮助模型理解关键视觉区域。</p></li>
+</ul>
+<p>这类方法的优点是：</p>
+<ul>
+<li><p>不需要重新训练；</p></li>
+<li><p>适合资源受限的场景；</p></li>
+<li><p>易于泛化和快速迁移。</p></li>
+</ul>
+<p>但缺点是：</p>
+<ul>
+<li><p>性能提升受限；</p></li>
+<li><p>对任务复杂度和prompt质量敏感。</p></li>
+</ul>
+<hr />
+<h3
+id="二基于微调的方向fine-tuning-adaptation-based-methods">二、基于微调的方向（Fine-tuning
+/ Adaptation-based Methods）</h3>
+<blockquote>
+<p>“… or fine-tuned on high-quality data to enable complex multi-stage
+tasks.”</p>
+</blockquote>
+<p>这类方法在预训练VLA的基础上，通过<strong>额外训练（fine-tuning）或适配层（adapter
+tuning）</strong>使模型学到特定任务或策略。<br />
+常见形式包括：</p>
+<ul>
+<li><p><strong>全量微调（Full
+Fine-tuning）</strong>：重新训练整个模型；</p></li>
+<li><p><strong>参数高效微调（PEFT，如LoRA、Adapter）</strong>：只训练部分参数；</p></li>
+<li><p><strong>强化学习式微调（RLHF、behavior
+cloning）</strong>：用高质量示范数据或反馈优化策略。</p></li>
+</ul>
+<p>优点：</p>
+<ul>
+<li><p>能显著提升复杂任务（尤其是多阶段任务）的表现；</p></li>
+<li><p>可以弥补prompt-based方法在“操作序列生成”上的不足。</p></li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li><p>需要大量高质量数据；</p></li>
+<li><p>计算成本高；</p></li>
+<li><p>泛化能力可能下降。</p></li>
+</ul>
+<p>那我之前做的应该更接近上下文引导？<strong>In-context Learning
+(ICL</strong></p>
+<p>比如说改模型结构这种方案算哪种？举例：加空间感知和理解模块：</p>
+<ol type="1">
+<li><p>输入里面加</p></li>
+<li><p>action head加？</p></li>
+</ol>
+<p>先回到这篇文章</p>
+<hr />
+<p>解决的问题是提高泛化性</p>
+<p>发现训练数据多样化然后微调或者提示比单一训练有效。也就是微调或者提示通才模型。</p>
+<p>“for effective specialized robot systems, it is more effective to
+first pre-train on highly diverse robot data, and then fine-tune or
+prompt for the desired task” (Black et al., 2024, p. 2)</p>
+<p>所以大问题是要训练一个足够泛化的通才模型，把这个问题拆解到三个挑战里面：</p>
+<p>“First, any such research must be done at a very large scale, because
+the full benefits of large-scale pre-training are often not present at
+smaller scales [54]. Second, it requires developing the right model
+architectures that can effectively make use of diverse data sources,
+while at the same time being able to represent the intricate and subtle
+behaviors necessary to interact with complex physical scenes. Third, it
+requires the right training recipe. This is perhaps the most important
+ingredient, as much of the recent progress with large models in NLP and
+computer vision has relied heavily on delicate strategies for curating
+pre-training and post-training data [35]” (Black et al., 2024, p. 2)</p>
+<ol type="1">
+<li><p>大规模训练</p></li>
+<li><p>正确的模型架构能有效地利用不同的数据源，同时能够表示与复杂物理场景交互所需的复杂而微妙的行为</p></li>
+<li><p>正确的训练方法（最重要）</p></li>
+</ol>
+<p>怎么做的：</p>
+<ol type="1">
+<li><p>冻结vlm，导入互联网规模的数据？继承了语言和视觉语言模型的常识、语义推理和解决问题的能力</p></li>
+<li><p>整合action，训练出vla模型</p></li>
+<li><p>为了用不同机器人资源，用“crossembodiment training” (Black et al.,
+2024, p. 3)</p></li>
+<li><p>flow matching</p></li>
+<li><p>新的动作专家，通过基于流量的输出增强标准 VLM</p></li>
+</ol>
+<p>所以pi0整个架构搞了5个创新点，从数据来源、预处理、到训练方式</p>
+<p>训练方式：“pre-training/post-training separation</p>
+<p>why：仅对高质量数据进行训练并不能教会模型如何从错误中恢复，因为在此类数据中很少出现错误。仅对较低质量的预训练数据进行训练并不能教会模型高效、稳健地行动。将两者结合起来提供了所需的行为：模型尽可能尝试以类似于高质量数据的方式行事，但仍然具有一系列恢复和纠正，可以在发生错误时部署。</p>
+<blockquote>
+<p>所以可以有那个，精细操作然后校正？那这样问题变成精确task上的成功率</p>
+</blockquote>
+<p>“We evaluate our model out of the box with language commands, with
+fine-tuning to downstream tasks, and in combination with a high-level
+semantic policy that outputs intermediate language commands to perform
+complex and temporally extended tasks.” (Black et al., 2024, p. 3)</p>
+<p>后半句话：</p>
+<ul>
+<li><p>high-level semantic policy：一个智能决策系统/策略层，它负责
+<strong>把整体任务分解成可操作的步骤</strong></p></li>
+<li><p>intermediate language commands：不是最终动作，而是
+<strong>中间步骤的语言指令</strong>。</p></li>
+<li><p>类似于对下层模型或系统说：“先去拿杯子，再倒水”，而不是直接控制手臂动作。</p></li>
+</ul>
+<p>看完introduction的问题：</p>
+<ol type="1">
+<li><p>internet-scale数据集是用来训练vlm的？为什么不用人家已经预训练完的？它得到的vlm是用来处理什么东西？</p></li>
+<li><p>所以它是先用internet数据集训练一个vlm作为知识库，然后用开放的具甚至能数据训练action
+expert，这一部分是pre training，然后post
+training就是做下游任务这个结构？其中prompt执行任务还用了一个高层-中层-低层的分层模式</p></li>
+</ol>
+<hr />
+<p>Overview</p>
+<p>在这一章节我的目的：增强对模型的了解程度。看来这一章还是总括，总结了一些技术细节，方法还是在下一章</p>
+<ol type="1">
+<li><p>框架图里面的action expert看不懂</p></li>
+<li><p>paligemma为什么要用这个初始化</p></li>
+<li><p>预训练vlm数据集里面的多种语言标签，子轨迹的细粒度标签这些是什么</p></li>
+<li><p>什么是段注释？这个注释是加在哪里的，视频？图片？还是一个额外的输入标签？训练的时候可以这样搞，那测试咋办</p></li>
+<li><p>原来高质量数据不是用来预训练而是post-train to adapt
+downstream</p></li>
+<li><p>它的轨迹是以秒为单位？</p></li>
+<li><p>“PaliGemma” (Black et al., 2024, p. 4)是什么</p></li>
+<li><p>data mixture有什么特殊工作？不可能直接混合吧</p></li>
+</ol>
+<hr />
+<p>整个流程</p>
+<p>pre train+post train</p>
+<p>训练目标不一样所以数据集质量也不一样</p>
+<p>数据集有不同的加权</p>
+<p>vlm语义推断，高级策略</p>
+<p>实验：</p>
+<ul>
+<li><p>base model：用full dataset train一下</p></li>
+<li><p>parity：该版本仅针对 160k 步进行训练（而我们的主模型为 700k
+步）</p></li>
+<li><p>pi0-small：没有经过vlm的版本</p></li>
+</ul>
+<p><strong>实践：准备pi0和pi0.5用pusht数据微调一下</strong></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/10/20/pi0.5/" rel="prev" title="pi0.5">
+                  <i class="fa fa-angle-left"></i> pi0.5
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">milong26</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
