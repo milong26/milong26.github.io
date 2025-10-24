@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="用lerobot的ur5 dataset。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lerobot">
+<meta property="og:url" content="http://zhon.fun/2025/10/23/lerobot/index.html">
+<meta property="og:site_name" content="没啥标题">
+<meta property="og:description" content="用lerobot的ur5 dataset。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-10-23T06:41:46.000Z">
+<meta property="article:modified_time" content="2025-10-24T06:27:35.775Z">
+<meta property="article:author" content="milong26">
+<meta property="article:tag" content="robot">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhon.fun/2025/10/23/lerobot/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2025/10/23/lerobot/","path":"2025/10/23/lerobot/","title":"lerobot"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>lerobot | 没啥标题</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">没啥标题</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">活下去</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.</span> <span class="nav-text">数据集下载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E5%86%85%E5%AE%B9"><span class="nav-number">3.</span> <span class="nav-text">数据集内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">4.</span> <span class="nav-text">数据集可视化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#berkeley-ur5"><span class="nav-number">5.</span> <span class="nav-text">Berkeley UR5</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#npy-data"><span class="nav-number">5.1.</span> <span class="nav-text">npy data</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#read"><span class="nav-number">5.1.1.</span> <span class="nav-text">read</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#save"><span class="nav-number">5.1.2.</span> <span class="nav-text">save</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#robot_state-np.ndarrayl-15"><span class="nav-number">5.1.2.1.</span> <span class="nav-text">robot_state: np.ndarray((L,
+15))</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#image-np.ndarrayl-480-640-3"><span class="nav-number">5.1.2.2.</span> <span class="nav-text">image: np.ndarray((L, 480, 640,
+3))</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#qpos%E5%AF%BC%E5%85%A5genesis"><span class="nav-number">5.2.</span> <span class="nav-text">qpos导入genesis</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A8%E7%90%86"><span class="nav-number">6.</span> <span class="nav-text">服务器推理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%84"><span class="nav-number">7.</span> <span class="nav-text">运行结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lerobot%E7%94%A8pi0.5%E8%AE%AD%E7%BB%83pusht"><span class="nav-number">8.</span> <span class="nav-text">lerobot用pi0.5训练pusht</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dataset"><span class="nav-number">8.1.</span> <span class="nav-text">dataset</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E6%98%AF%E5%90%A6%E8%AE%BE%E7%BD%AE%E6%88%90%E5%8A%9F"><span class="nav-number">8.1.1.</span> <span class="nav-text">验证是否设置成功</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">milong26</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2025/10/23/lerobot/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="milong26">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="lerobot | 没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          lerobot
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-10-23 14:41:46" itemprop="dateCreated datePublished" datetime="2025-10-23T14:41:46+08:00">2025-10-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-24 14:27:35" itemprop="dateModified" datetime="2025-10-24T14:27:35+08:00">2025-10-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/it/" itemprop="url" rel="index"><span itemprop="name">it</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>用lerobot的ur5 dataset。</p>
+<span id="more"></span>
+<h1 id="安装">安装</h1>
+<ol type="1">
+<li>仿照<a
+target="_blank" rel="noopener" href="https://github.com/huggingface/lerobot?tab=readme-ov-file#installation">install</a></li>
+<li>linux没啥问题，有一个报错，用python3-dev代替python-dev
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Package python-dev is not available, but is referred to by another package.</span><br><span class="line">This may mean that the package is missing, has been obsoleted or is only available from another source</span><br><span class="line">However the following packages replace it:</span><br><span class="line">  python2-dev:i386 python2:i386 python2-dev python2 python-dev-is-python3</span><br></pre></td></tr></table></figure></li>
+<li>pip
+install超时，换镜像<code>pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</code></li>
+<li>下载会很慢，又超时了，加上--default-timeout=100</li>
+</ol>
+<h1 id="数据集下载">数据集下载</h1>
+<ol type="1">
+<li>sudo apt-get install git-lfs</li>
+<li>git clone
+https://hf-mirror.com/datasets/lerobot/berkeley_autolab_ur5</li>
+</ol>
+<h1 id="数据集内容">数据集内容</h1>
+<ol type="1">
+<li><a
+target="_blank" rel="noopener" href="https://sites.google.com/view/berkeley-ur5/home">官网</a></li>
+<li>task
+<ol type="1">
+<li>tiger pick and
+place：任务字符串是“把老虎从红碗里拿出来，放在灰碗里。“填充动物（老虎）总是从红碗开始。两个碗的位置在桌子上是随机的，而夹持器被初始化为固定姿势。从技术上讲，拾取和放置任务只需要夹持器的平移动作。</li>
+<li>cloth
+sweeping：任务字符串为“将绿色布扫到桌子左侧。“布料随机初始化在桌子右侧的一个地方，抓手需要将其水平推到左侧。通过从固定位置添加噪声来随机初始化夹持器的起始姿态。从技术上讲，清扫任务只需要抓手的平移动作。</li>
+<li>杯子堆叠：任务字符串是“拿起蓝色杯子并将其放入棕色杯子。“两个杯子的位置在桌子上是随机的，抓手的起始姿势也是随机的。从技术上讲，堆叠任务只需要夹持器的平移动作。</li>
+<li>瓶子拾取和放置：任务字符串是“将牧场瓶子放入锅中。“锅的位置是固定的，而牧场瓶的位置是随机的。
+夹持器的起始姿势是固定的。此任务涉及平移和旋转操作。</li>
+</ol></li>
+</ol>
+<h1 id="数据集可视化">数据集可视化</h1>
+<p>python lerobot/scripts/visualize_dataset.py<br />
+--repo-id lerobot/berkeley_autolab_ur5<br />
+--root ~/<br />
+--local-files-only 1<br />
+--episode-index 0</p>
+<pre><code>怎么又不支持本地的了？？？</code></pre>
+<h1 id="berkeley-ur5">Berkeley UR5</h1>
+<ol type="1">
+<li><a
+target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1Tsx4zIPiEFR4kKOsR-cwbPNoPlejBaJn">google
+drive下载链接</a></li>
+<li>根据<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40959890/article/details/127393253">pkl,npy比较</a>
+选择npy</li>
+<li>下bottle.npy（流量肉疼）</li>
+</ol>
+<h2 id="npy-data">npy data</h2>
+<p>这一部分用jupyter 很爽:D</p>
+<h3 id="read">read</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line"># 直接加载整个文件（需确保内存足够）</span><br><span class="line">data = np.load(&quot;bottle.npy&quot;,allow_pickle=True)</span><br><span class="line">print(data.shape)  # 查看数组维度</span><br><span class="line">print(data.dtype)  # 查看数据类型</span><br><span class="line">metadata = data.item()</span><br><span class="line">print(metadata.keys())</span><br></pre></td></tr></table></figure>
+<p>(1,) object dict_keys(['robot_state', 'action', 'image', 'task',
+'other'])</p>
+<h3 id="save">save</h3>
+<h4 id="robot_state-np.ndarrayl-15">robot_state: np.ndarray((L,
+15))</h4>
+<ol type="1">
+<li>数据说明
+<ol type="1">
+<li>This stores the robot state at each timestep.</li>
+<li>[joint0, joint1, joint2, joint3, joint4, joint5, x,y,z, qx,qy,qz,qw,
+gripper_is_closed, action_blocked]</li>
+<li>x,y,z, qx,qy,qz,qw is the end-effector pose expressed in the robot
+base frame</li>
+<li>gripper_is_closed is binary: 0 = fully open; 1 = fully closed</li>
+<li>action_blocked is binary: 1 if the gripper opening/closing action is
+being executed and no other actions can be performed; 0 otherwise.</li>
+<li>有用的是0-5，以及倒数2，倒数1不知道有没有用</li>
+</ol></li>
+<li>代码 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment"># 假设 metadata[&#x27;robot_state&#x27;] 是形状为 (L,15) 的 numpy 数组</span></span><br><span class="line">robot_state_data = metadata[<span class="string">&#x27;robot_state&#x27;</span>]</span><br><span class="line"><span class="comment"># 提取目标字段：joint0-joint5 (索引0-5) + gripper_is_closed (索引13)</span></span><br><span class="line">target_indices = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">13</span>]  <span class="comment"># 需要提取的列索引</span></span><br><span class="line">output_lines = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> state <span class="keyword">in</span> robot_state_data:</span><br><span class="line">    <span class="comment"># 提取指定列并转换为列表[6,8](@ref)</span></span><br><span class="line">    extracted = [state[i] <span class="keyword">for</span> i <span class="keyword">in</span> target_indices]</span><br><span class="line">    <span class="comment"># 格式化为字符串（保留4位小数，二进制用整数）</span></span><br><span class="line">    line = <span class="string">&quot; &quot;</span>.join([<span class="string">f&quot;<span class="subst">&#123;x:<span class="number">.4</span>f&#125;</span>&quot;</span> <span class="keyword">if</span> i &lt; <span class="number">6</span> <span class="keyword">else</span> <span class="built_in">str</span>(<span class="built_in">int</span>(x)) <span class="keyword">for</span> i, x <span class="keyword">in</span> <span class="built_in">enumerate</span>(extracted)])</span><br><span class="line">    output_lines.append(line)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 写入TXT文件（使用UTF-8编码保证兼容性）[9,11](@ref)</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;robot_joints_gripper.txt&quot;</span>, <span class="string">&quot;w&quot;</span>, encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">&quot;\n&quot;</span>.join(output_lines))</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>使用的时候 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">read_robot_data</span>(<span class="params">file_path</span>):</span><br><span class="line">    data_list = []</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(file_path, <span class="string">&quot;r&quot;</span>, encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">            <span class="comment"># 去除换行符并分割数据[6,9](@ref)</span></span><br><span class="line">            raw_values = line.strip().split()</span><br><span class="line">            <span class="comment"># 转换数据类型：前6个为float，最后1个为int[8](@ref)</span></span><br><span class="line">            converted = [<span class="built_in">float</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> raw_values[:<span class="number">6</span>]] + [<span class="built_in">int</span>(raw_values[-<span class="number">1</span>])]</span><br><span class="line">            data_list.append(converted)</span><br><span class="line">    <span class="keyword">return</span> data_list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用示例</span></span><br><span class="line">loaded_data = read_robot_data(<span class="string">&quot;robot_joints_gripper.txt&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;加载数据量：<span class="subst">&#123;<span class="built_in">len</span>(loaded_data)&#125;</span> 条&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;首条数据示例：&quot;</span>, loaded_data[<span class="number">0</span>])</span><br></pre></td></tr></table></figure></p>
+<h4 id="image-np.ndarrayl-480-640-3">image: np.ndarray((L, 480, 640,
+3))</h4>
+<ol type="1">
+<li>除了这个image，other里面还有点，只保存这个</li>
+<li>代码 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from PIL import Image</span><br><span class="line"># 假设 images 是形状为 (L, 480, 640, 3) 的 uint8 数组</span><br><span class="line">for i in range(image_data.shape[0]):</span><br><span class="line">    img = Image.fromarray(image_data[i])  # 提取单张图像</span><br><span class="line">    # img.save(f&quot;images/image_&#123;i&#125;.jpg&quot;)        # 保存为JPG</span><br><span class="line">    # 或保存为PNG（无损压缩）</span><br><span class="line">    img.save(f&quot;images/image_&#123;i&#125;.png&quot;, &quot;PNG&quot;, compress_level=0)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="qpos导入genesis">qpos导入genesis</h2>
+<ol type="1">
+<li>提取qpos</li>
+<li>提取gripper，就这些</li>
+</ol>
+<h1 id="服务器推理">服务器推理</h1>
+<h1 id="运行结构">运行结构</h1>
+<h1 id="lerobot用pi0.5训练pusht">lerobot用pi0.5训练pusht</h1>
+<h2 id="dataset">dataset</h2>
+<p>数据集格式估计不对</p>
+<p>Migrate v2.1 → v3.0
+https://huggingface.co/docs/lerobot/lerobot-dataset-v3</p>
+<p>python -m lerobot.datasets.v30.convert_dataset_v21_to_v30
+--repo-id=<HF_USER/DATASET_ID></p>
+<p>但是代码运行之前需要加一个PYTHONPATH=src</p>
+<p>现在用root/repo_id表示数据集的位置了，跟以前不一样</p>
+<p>好像是v3的特性把所有的episode存到一起 ## model</p>
+<p>pip install -e ".[pi]"</p>
+<p>准备号pi0_base和pi05_base：huggingface的下载不了就下hf-mirror.com的</p>
+<p>这个训练命令行太难看了</p>
+<p>hf download
+repo_id之后不用改变位置，直接pretrained_path_or_name就能用。
+除了base模型还需要下载分词器，但是分词器google/paligemma-3b-pt-224需要获取token才能下载，教程：https://hf-mirror.com/login
+获得token之后 hf download google/paligemma-3b-pt-224 --token
+刚刚复制得到的token</p>
+<p>HF_HUB_OFFLINE=1 CUDA_VISIBLE_DEVICES=0 python
+src/lerobot/scripts/lerobot_train.py
+--config_path=fscript/finetune/simple_test.yaml</p>
+<p>这样断网+只用一个gpu，现在可以加载1. 分词器，2. 基础模型</p>
+<p>To run the models in this repository, you will need an NVIDIA GPU
+with at least the following specifications. These estimations assume a
+single GPU, but you can also use multiple GPUs with model parallelism to
+reduce per-GPU memory requirements by configuring
+<code>fsdp_devices</code> in the training config. Please also note that
+the current training script does not yet support multi-node
+training.</p>
+<p>根据pi05的要求，恐怕不能微调……</p>
+<div class="line-block">Mode               | Memory Required | Example
+GPU        |</div>
+<div class="line-block">------------------ | --------------- |
+------------------ |</div>
+<div class="line-block">Inference          | &gt; 8 GB          | RTX
+4090           |</div>
+<div class="line-block">Fine-Tuning (LoRA) | &gt; 22.5 GB       | RTX
+4090           |</div>
+<div class="line-block">Fine-Tuning (Full) | &gt; 70 GB         | A100
+(80GB) / H100 |</div>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">python src/lerobot/scripts/lerobot_train.py \</span><br><span class="line">    --dataset.repo_id=your_dataset \</span><br><span class="line">    --policy.type=pi0 \</span><br><span class="line">    --output_dir=./outputs/pi0_training \</span><br><span class="line">    --job_name=pi0_training \</span><br><span class="line">    --policy.pretrained_path=lerobot/pi0_base \</span><br><span class="line">    --policy.repo_id=your_repo_id \</span><br><span class="line">    --policy.compile_model=true \</span><br><span class="line">    --policy.gradient_checkpointing=true \</span><br><span class="line">    --policy.dtype=bfloat16 \</span><br><span class="line">    --steps=3000 \</span><br><span class="line">    --policy.device=cuda \</span><br><span class="line">    --batch_size=32</span><br></pre></td></tr></table></figure>
+<p>改成 HF_HUB_OFFLINE=1 CUDA_VISIBLE_DEVICES=0 python
+src/lerobot/scripts/lerobot_train.py
+--config_path=fscript/finetune/simple_test.yaml</p>
+<p>其中simple_test.yaml <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 参考pi0 https://huggingface.co/docs/lerobot/pi0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 用pusht数据finetune pi0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 已经可以用multi gpu training了：https://huggingface.co/docs/lerobot/multi_gpu_training</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># CUDA_VISIBLE_DEVICES=0 PYTHONPATH=src lerobot.scripts.lerobot_train --config_path=fscript/finetune/simple_test.yaml</span></span><br><span class="line"></span><br><span class="line"><span class="attr">dataset:</span></span><br><span class="line">  <span class="attr">repo_id:</span> <span class="string">pusht</span></span><br><span class="line">  <span class="attr">root:</span> <span class="string">local/dataset/pusht</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="attr">policy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">pi0</span></span><br><span class="line">  <span class="attr">pretrained_path:</span> <span class="string">lerobot/pi0_base</span></span><br><span class="line">  <span class="attr">repo_id:</span> <span class="string">lerobot/pi0_base</span></span><br><span class="line">  <span class="attr">compile_model:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">gradient_checkpointing:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">dtype:</span> <span class="string">bfloat16</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">device:</span> <span class="string">cuda</span></span><br><span class="line"></span><br><span class="line"><span class="attr">output_dir:</span> <span class="string">outputs/pi0_training</span></span><br><span class="line"><span class="attr">job_name:</span> <span class="string">pi0_training</span></span><br><span class="line"><span class="attr">steps:</span> <span class="number">3000</span></span><br><span class="line"><span class="attr">batch_size:</span> <span class="number">32</span></span><br></pre></td></tr></table></figure></p>
+<p>原来支持multi-gpu training了<a
+target="_blank" rel="noopener" href="https://huggingface.co/docs/lerobot/multi_gpu_training">multi-gpu
+training</a></p>
+<p>pip install accelerate</p>
+<p>想用指定的卡id训练 1. 直接命令行 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HF_HUB_OFFLINE=1 CUDA_VISIBLE_DEVICES=0,1,2 accelerate launch \</span><br><span class="line">  --multi_gpu \</span><br><span class="line">  --num_processes=3 \</span><br><span class="line">  src/lerobot/scripts/lerobot_train.py \</span><br><span class="line">  --config_path=fscript/finetune/simple_test.yaml</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<ol start="2" type="1">
+<li></li>
+</ol>
+<p>先放在这里：hf-mirror的设置 ## 一、设置 HF_ENDPOINT（一次性示例）</p>
+<blockquote>
+<p>若你已在当前终端执行过本行，可跳过</p>
+</blockquote>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export HF_ENDPOINT=https://hf-mirror.com</span><br></pre></td></tr></table></figure>
+<h3 id="验证是否设置成功">验证是否设置成功</h3>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $HF_ENDPOINT</span><br></pre></td></tr></table></figure>
+<p>如果输出：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://hf-mirror.com</span><br></pre></td></tr></table></figure>
+<p>说明设置已生效。</p>
+<ul>
+<li><p><strong>作用</strong>：让 Hugging Face
+相关工具通过镜像站点访问与下载。</p></li>
+<li><p><strong>范围</strong>：仅对当前 shell 会话有效（关闭终端失效）。
+## 二、检查是否存在代理设置</p></li>
+</ul>
+<p>下载失败常见原因是 shell 仍保留了代理环境变量。检查方法：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">env | grep -i proxy || echo &quot;no proxy env&quot;</span><br></pre></td></tr></table></figure>
+<p>若看到如下变量仍存在（示例）：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http_proxy=http://127.0.0.1:7890/</span><br><span class="line">https_proxy=http://127.0.0.1:7890/</span><br><span class="line">HTTP_PROXY=http://127.0.0.1:7890/</span><br><span class="line">HTTPS_PROXY=http://127.0.0.1:7890/</span><br></pre></td></tr></table></figure>
+<p>说明请求会强制走本地代理（即使你关闭了代理软件），容易触发 <code>Connection refused</code>。</p>
+<blockquote>
+<p><code>no_proxy/NO_PROXY</code> 仅表示“这些地址不走代理”，不会影响你直连外网。</p>
+</blockquote>
+<p>最好选择cli下载方式，http可能需要账户 Make sure hf CLI is installed:
+pip install -U "huggingface_hub[cli]"</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hf download lerobot/pi05_base</span><br></pre></td></tr></table></figure>
+<p>上面设置只在当前客户端有用
+下载的模型放在哪里？.cache/huggingface/hub/models--lerobot--pi0_base/snapshots
+应该是这个位置，然后挪到自己要的目录里面</p>
+<p>hf download下载的文件在哪里？什么格式？ hf download
+lerobot/pi0_base这个命令下载的文件，~/.cache/huggingface/hub/models--lerobot--pi0_base/这个目录里面，有3个文件夹，snapshots,refs和blobs
+看起来只有snapshots里面的比较像文件，有文件名而不是奇怪的数字和字母组合，但是，它并不是真正的文件，只是符号链接
+~/.cache/huggingface/hub/models--lerobot--pi0_base/snapshots/e3a5218ef7a5903445baf2cb656912fc35dc8712$
+ll 总计 12 drwxrwxr-x 2 zhonglinyue zhonglinyue 4096 10月 24 10:39 ./
+drwxrwxr-x 3 zhonglinyue zhonglinyue 4096 10月 24 10:31 ../ lrwxrwxrwx 1
+zhonglinyue zhonglinyue 52 10月 24 10:31 config.json -&gt;
+../../blobs/58354c004ec619bc0b0d16faccf9a3c8f89e922b lrwxrwxrwx 1
+zhonglinyue zhonglinyue 52 10月 24 10:31 .gitattributes -&gt;
+../../blobs/a6344aac8c09253b3b630fb776ae94478aa0275b lrwxrwxrwx 1
+zhonglinyue zhonglinyue 76 10月 24 10:39 model.safetensors -&gt;
+../../blobs/8229fd9a7c3c2aafc1e223567b61b5fe3e25eef873bb4233928dbee4bd836303
+lrwxrwxrwx 1 zhonglinyue zhonglinyue 52 10月 24 10:31
+policy_postprocessor.json -&gt;
+../../blobs/4490f0951e4c146a36b9346d36e49c9b676cee23 lrwxrwxrwx 1
+zhonglinyue zhonglinyue 52 10月 24 10:31 policy_preprocessor.json -&gt;
+../../blobs/ac2b548a787170b0b6bb355ceb54d6c01370032e lrwxrwxrwx 1
+zhonglinyue zhonglinyue 52 10月 24 10:31 README.md -&gt;
+../../blobs/55fe0bef62c428ef7319989638938e600874e206</p>
+<p><code>snapshots/...</code> 目录下的文件都是 <strong>符号链接（symlink）</strong>，指向 <code>blobs/...</code> 目录下的实际文件</p>
+<p>这是 Hugging Face Hub 的 <strong>去重存储（content-addressable
+storage）</strong> 机制</p>
+<p>下载到本地以后直接repo_id，pretrained_path_or_name改成id就能直接访问到了</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/robot/" rel="tag"># robot</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/10/22/%E8%91%B5%E8%8A%B1%E5%AE%9D%E5%85%B8%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AB%E8%91%B5%E8%8A%B1%E5%AE%9D%E5%85%B8/" rel="prev" title="研究修炼指南">
+                  <i class="fa fa-angle-left"></i> 研究修炼指南
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">milong26</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
