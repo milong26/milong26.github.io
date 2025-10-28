@@ -28,7 +28,7 @@
 <meta property="og:description" content="先写着，以后有空再整理">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-08-20T13:30:13.000Z">
-<meta property="article:modified_time" content="2025-10-27T08:23:59.140Z">
+<meta property="article:modified_time" content="2025-10-28T02:24:59.213Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="training">
 <meta name="twitter:card" content="summary">
@@ -115,7 +115,8 @@
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">设备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87"><span class="nav-number">2.</span> <span class="nav-text">目标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%9F%E5%90%88fitting"><span class="nav-number">2.0.1.</span> <span class="nav-text">1. 拟合（fitting）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%9B%E5%8C%96generalization"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.
-泛化（generalization）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%A4%E8%80%85%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">2.0.3.</span> <span class="nav-text">3. 两者的关系</span></a></li></ol></li></ol></li></ol></div>
+泛化（generalization）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%A4%E8%80%85%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">2.0.3.</span> <span class="nav-text">3. 两者的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prefix-token-%E5%92%8C-context-token%E6%B2%A1%E6%87%82%E4%B9%9F%E6%B2%A1%E6%9C%89%E6%90%9C%E5%88%B0%E4%BB%80%E4%B9%88%E8%AF%A6%E7%BB%86%E8%A7%A3%E9%87%8A%E7%9A%84"><span class="nav-number">2.0.4.</span> <span class="nav-text">Prefix
+token 和 Context token没懂，也没有搜到什么详细解释的</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -128,7 +129,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -202,7 +203,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-10-27 16:23:59" itemprop="dateModified" datetime="2025-10-27T16:23:59+08:00">2025-10-27</time>
+      <time title="修改时间：2025-10-28 10:24:59" itemprop="dateModified" datetime="2025-10-28T10:24:59+08:00">2025-10-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -307,6 +308,90 @@
 <p>LSTM 架构</p>
 <p>理解：架构描述模型“长什么样”，但不涉及训练细节。一个架构可以用不同方法训练得到不同模型。</p>
 <p>架构不是“更高级的概念”，而是比方法更具体一些，但比模型抽象，因为模型还包含训练后的参数。</p>
+<p>非结构化环境unstructured settings -
+<strong>环境不固定</strong>：物体位置、场景布局随时变化。 -
+<strong>规则不明确</strong>：没有严格的操作流程或约束。 -
+<strong>任务多样</strong>：机器人可能需要完成不同类型的任务，不是单一重复动作。</p>
+<h3
+id="prefix-token-和-context-token没懂也没有搜到什么详细解释的">Prefix
+token 和 Context token没懂，也没有搜到什么详细解释的</h3>
+<p>搜到prefix tuning，找不到，发邮件问一下，希望能有结果</p>
+<p>在语言模型或 Transformer 系统里，“token”
+是模型处理信息的基本单位（可以是单词、子词，甚至是向量化的状态表示）。
+#### <strong>Prefix token</strong></p>
+<ul>
+<li><p><strong>作用</strong>：作为固定的“引导信息”或“任务提示”，模型在生成动作前就已经看到。</p></li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li><p>通常是<strong>静态的</strong>，在生成序列过程中不会变化。</p></li>
+<li><p>类似于给模型预设一个任务或背景。例如：</p>
+<ul>
+<li><p>指定“请把物体抓起来”的指令向量。</p></li>
+<li><p>编码机器人任务参数或初始状态。 在 Transformer 中，这些 token
+会在输入序列开头，帮助模型理解整个任务。</p></li>
+</ul></li>
+</ul></li>
+<li><p>因为 Transformer
+的自注意力机制允许每个生成位置访问序列中之前的所有 token，包括
+prefix。</p></li>
+<li><p>所以即便你在时间步 t 生成第 5 个动作，prefix token
+仍然在输入序列开头，模型可以参考。 #### <strong>Context
+token</strong></p></li>
+<li><p><strong>作用</strong>：提供模型需要<strong>随时参考的可变信息</strong>，通常是场景、历史动作或图像特征。</p></li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li><p>可以是<strong>动态变化的</strong>，随着时间步更新。</p></li>
+<li><p>让模型感知当前状态或环境信息。 模型每一步生成动作时都会看到这些
+token。</p></li>
+</ul></li>
+</ul>
+<p>换句话说，<strong>它们的本质区别是信息类型和功能</strong>：</p>
+<ul>
+<li>prefix = “我要做什么”（任务目标）</li>
+<li>context = “我现在在哪/看到了什么”（状态信息）</li>
+</ul>
+<p>没有严格区分固定/动态</p>
+<p>那为什么要分两种token？？？</p>
+<p>怎样写综述：<strong>在一个大领域（如 autoregression-based
+模型）里，怎么设计一套合理的分类框架，让各种方法都有逻辑地被归纳进去</strong></p>
+<p>从研究的<strong>核心动机、目标、方法路径、约束条件</strong>出发，提炼出“几条研究主线”。一般来说，分类维度可从以下四个层次抽象出来：</p>
+<table>
+<colgroup>
+<col style="width: 41%" />
+<col style="width: 18%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>层次</th>
+<th>问的问题</th>
+<th>典型分类维度</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1️⃣ 目标导向 (What for)</strong></td>
+<td>研究的终极目标是什么？</td>
+<td>泛化、推理、效率、鲁棒性、安全性等</td>
+</tr>
+<tr class="even">
+<td><strong>2️⃣ 方法机制 (How)</strong></td>
+<td>技术路线怎么实现目标？</td>
+<td>自回归 / Diffusion / 强化学习 / 模块化 等</td>
+</tr>
+<tr class="odd">
+<td><strong>3️⃣ 数据与输入 (On what)</strong></td>
+<td>模型依赖什么输入或数据结构？</td>
+<td>视觉语言融合、模态对齐、轨迹标注、模拟器数据 等</td>
+</tr>
+<tr class="even">
+<td><strong>4️⃣ 结构与推理层次 (At what level)</strong></td>
+<td>作用于哪个智能层次？</td>
+<td>感知层、语义规划层、控制层、元学习层 等</td>
+</tr>
+</tbody>
+</table>
+<p>自回归需要做到tokenize inputs</p>
 
     </div>
 
