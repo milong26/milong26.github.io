@@ -28,7 +28,7 @@
 <meta property="og:description" content="用lerobot的ur5 dataset。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-23T06:41:46.000Z">
-<meta property="article:modified_time" content="2025-11-04T13:20:51.888Z">
+<meta property="article:modified_time" content="2025-11-05T03:14:44.413Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="robot">
 <meta name="twitter:card" content="summary">
@@ -204,7 +204,7 @@ HF_ENDPOINT（一次性示例）</span></a><ol class="nav-child"><li class="nav-
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-04 21:20:51" itemprop="dateModified" datetime="2025-11-04T21:20:51+08:00">2025-11-04</time>
+      <time title="修改时间：2025-11-05 11:14:44" itemprop="dateModified" datetime="2025-11-05T11:14:44+08:00">2025-11-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -518,6 +518,32 @@ name符合的类型。参考lerobot_record的代码，发现了 <figure class="h
 <ol type="1">
 <li>定义新的feature</li>
 </ol>
+<p>整个流程： 1. lerobot-record
+--config_path=tools/collect/collect_complex_movement.yaml
+采集joint形式的data 2. python examples/so100_to_so100_EE/new_change.py
+正运动学 3. python examples/so100_to_so100_EE/new_replay.py
+用ee数据反解并执行，感觉还是有细微差距的 4. python
+examples/so100_to_so100_EE/compare_2_actions.py 比较 1.
+新问题：new_replay和compare_2_actions在计算action使用的obs不一样，要改成执行动作之后
+2.
+新问题2：transfer的时候没有问题吗？使用本地的state_joint数值，但是fk为什么要用state？</p>
+<p>fk的计算过程in lerobot 🧩 一、record_loop 的总体数据流逻辑</p>
+<p>在 record_loop() 中，执行循环 roughly 如下：</p>
+<p>obs = robot.get_observation() # ① 获取机器人的关节状态（joints）
+obs_processed = robot_observation_processor(obs) # ② 对 observation
+做处理（通常FK）</p>
+<p>act = teleop.get_action() # ③ 从 teleop 设备拿动作（leader 的
+joints） act_processed_teleop = teleop_action_processor((act, obs)) # ④
+对动作处理（通常FK）</p>
+<p>robot_action_to_send = robot_action_processor((act_processed_teleop,
+obs)) # ⑤ 做IK robot.send_action(robot_action_to_send) # ⑥
+发给follower执行</p>
+<p>从数据流角度看：</p>
+<pre><code>teleop_action_processor：leader joints → leader EE
+
+robot_action_processor：EE → follower joints
+
+robot_observation_processor：follower joints → follower EE</code></pre>
 
     </div>
 
