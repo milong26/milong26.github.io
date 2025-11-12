@@ -28,7 +28,7 @@
 <meta property="og:description" content="用lerobot的ur5 dataset。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-23T06:41:46.000Z">
-<meta property="article:modified_time" content="2025-11-07T01:48:37.897Z">
+<meta property="article:modified_time" content="2025-11-11T08:05:20.948Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="robot">
 <meta name="twitter:card" content="summary">
@@ -204,7 +204,7 @@ HF_ENDPOINT（一次性示例）</span></a><ol class="nav-child"><li class="nav-
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-07 09:48:37" itemprop="dateModified" datetime="2025-11-07T09:48:37+08:00">2025-11-07</time>
+      <time title="修改时间：2025-11-11 16:05:20" itemprop="dateModified" datetime="2025-11-11T16:05:20+08:00">2025-11-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -546,22 +546,116 @@ robot_action_processor：EE → follower joints
 robot_observation_processor：follower joints → follower EE</code></pre>
 <h1 id="metaworld">metaworld</h1>
 <ol type="1">
-<li>下载数据集（） export HF_ENDPOINT=https://hf-mirror.com hf download
-lerobot/metaworld_mt50 --repo-type=dataset --token
+<li><p>下载数据集（） export HF_ENDPOINT=https://hf-mirror.com hf
+download lerobot/metaworld_mt50 --repo-type=dataset --token
 复制token（需要能进huggingface官网）<br />
-</li>
-<li>环境 pip install -e ".[metaworld,smolvla]" hf download
+</p></li>
+<li><p>环境 pip install -e ".[metaworld,smolvla]" hf download
 HuggingFaceTB/SmolVLM2-500M-Instruct hf download
-lerobot/smolvla_base</li>
-<li>测试一个已经训练好的模型：检查metaworld环境 下载模型hf download
+lerobot/smolvla_base</p></li>
+<li><p>测试一个已经训练好的模型：检查metaworld环境 下载模型hf download
 jadechoghari/smolvla_metaworld --token
 复制token（需要能进huggingface官网） HF_HUB_OFFLINE=1 lerobot-eval<br />
 --policy.path="jadechoghari/smolvla_metaworld"<br />
 --env.type=metaworld<br />
 --env.task=medium<br />
 --eval.batch_size=1<br />
---eval.n_episodes=2</li>
+--eval.n_episodes=2</p></li>
+<li><p>重新校准</p></li>
 </ol>
+<p>lerobot-calibrate<br />
+--teleop.type=so100_leader<br />
+--teleop.port=/dev/ttyACM1<br />
+--teleop.id=middle_leader</p>
+<p>lerobot-calibrate<br />
+--robot.type=so100_follower<br />
+--robot.port=/dev/ttyACM0<br />
+--robot.id=middle_follower</p>
+<ol start="2" type="1">
+<li>保存的action不应该是follower读出来的，那只要保证不会跳变+精度足够就ok了？</li>
+<li>之前没有安装深度相关的：pyrealsense2</li>
+<li>采集：lerobot-record
+--config_path=tools/collect/collect_joint_test.yaml</li>
+<li>replay下joint控制的效果：lerobot-replay --robot.type=so100_follower
+--robot.port=/dev/ttyACM0 --robot.id=follower
+--dataset.repo_id=test_10/ee --dataset.episode=2
+同时可以运行一个录制代码</li>
+<li>joint变成ee：python examples/so100_to_so100_EE/new_change.py</li>
+<li>visu</li>
+</ol>
+<p>感觉先collect再change不好，还是直接collect吧。
+先在服务器上处理好模型等 1. 下载位置在~/.cache/huggingface/hub 2. export
+HF_ENDPOINT=https://hf-mirror.com 3. hf download
+HuggingFaceTB/SmolVLM2-500M-Instruct 4. hf download
+lerobot/smolvla_base</p>
+<p>选择哪种方式？ 看action保存的形式：使用pipeline的时候，
+follower-&gt;raw_obs-&gt;robot_action_processor-&gt;obs_processed-&gt;dataset
+leader-&gt;raw_act-&gt;teleop_action_process-&gt;act_processed_teleop=action_values-&gt;dataset
+act_processed_teleop-&gt;robot_observation_processor-&gt;robot_action_sent-&gt;执行</p>
+<p>所以还是保存record比较好，处理一下代码，修改了record_loop里面</p>
+<p>rsync -avz /path/to/local/folder/
+username@remote_host:/path/to/remote/folder/</p>
+<p>rsync -avz test1110/
+zhonglinyue@10.10.16.18:/home/zhonglinyue/.cache/huggingface/lerobot/test1110/</p>
+<p>accelerate launch<br />
+--multi_gpu<br />
+--num_processes=2<br />
+$(which lerobot-train)<br />
+--policy.path=lerobot/smolvla_base<br />
+--dataset.repo_id=test1110/merged<br />
+--batch_size=64<br />
+--steps=20000<br />
+--output_dir=outputs/train/ee_action_ee_state<br />
+--job_name=my_smolvla_training<br />
+--policy.device=cuda<br />
+--wandb.enable=false</p>
+<p>CUDA_VISIBLE_DEVICES=0 HF_HUB_OFFLINE=1 lerobot-train<br />
+--policy.path=lerobot/smolvla_base<br />
+--dataset.repo_id=test1110/merged<br />
+--batch_size=64<br />
+--steps=20000<br />
+--output_dir=outputs/train/ee_action_ee_state<br />
+--job_name=my_smolvla_training<br />
+--policy.device=cuda<br />
+--wandb.enable=false<br />
+--policy.push_to_hub=false<br />
+--rename_map='{"observation.images.side": "observation.images.camera1",
+"observation.images.wrist": "observation.images.camera2"}'</p>
+<p>CUDA_VISIBLE_DEVICES=1 HF_HUB_OFFLINE=1 lerobot-train<br />
+--policy.path=lerobot/smolvla_base<br />
+--dataset.repo_id=test1110/merged<br />
+--batch_size=64<br />
+--steps=20000<br />
+--output_dir=outputs/train/joint_action_joint_state<br />
+--job_name=my_smolvla_training_joint<br />
+--policy.device=cuda<br />
+--wandb.enable=false<br />
+--policy.push_to_hub=false<br />
+--rename_map='{"observation.images.side": "observation.images.camera1",
+"observation.images.wrist": "observation.images.camera2"}'</p>
+<p>rsync -av --progress --exclude='*.safetensors'
+zhonglinyue@10.10.16.18:/home/zhonglinyue/working_folder/lerobot/outputs/
+/home/qwe/gene/lerobot/outputs/</p>
+<p>python -m lerobot.async_inference.policy_server<br />
+--host=10.10.16.18<br />
+--port=8080</p>
+<p>python -m lerobot.async_inference.robot_client<br />
+--server_address=10.10.16.18:8080<br />
+--robot.type=so100_follower<br />
+--robot.port=/dev/ttyACM0<br />
+--robot.id=follower<br />
+--robot.cameras="{ camera1: {type: intelrealsense,
+serial_number_or_name: 806312060427, width: 640, height: 480, fps: 30,
+use_depth: False}, camera2: {type: opencv, index_or_path: 6, width: 640,
+height: 480, fps: 30}}"<br />
+--task="pick up the yellow sachet and place it into the box."<br />
+--policy_type=smolvla<br />
+--pretrained_name_or_path=outputs/train/ee_action_ee_state/checkpoints/020000/pretrained_model<br />
+--policy_device=cuda<br />
+--actions_per_chunk=50<br />
+--chunk_size_threshold=0.5<br />
+--aggregate_fn_name=weighted_average<br />
+--debug_visualize_queue_size=True</p>
 
     </div>
 
