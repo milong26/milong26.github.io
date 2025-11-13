@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="原来是一个系统集成的框架，和Lerobot相比它侧重于真实场景的“系统”。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ros">
+<meta property="og:url" content="http://zhon.fun/2025/11/13/ros/index.html">
+<meta property="og:site_name" content="没啥标题">
+<meta property="og:description" content="原来是一个系统集成的框架，和Lerobot相比它侧重于真实场景的“系统”。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-11-13T02:04:05.000Z">
+<meta property="article:modified_time" content="2025-11-13T02:08:11.152Z">
+<meta property="article:author" content="milong26">
+<meta property="article:tag" content="robot">
+<meta property="article:tag" content="ros">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhon.fun/2025/11/13/ros/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2025/11/13/ros/","path":"2025/11/13/ros/","title":"ros"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ros | 没啥标题</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">没啥标题</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">活下去</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ros%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">ROS定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ros-%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">ROS 解决的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ros-%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">ROS 核心概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lerobot-%E4%B8%8E-ros-%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">4.</span> <span class="nav-text">Lerobot 与 ROS 的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E6%80%BB%E7%BB%93"><span class="nav-number">4.1.</span> <span class="nav-text">五、总结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">milong26</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">74</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2025/11/13/ros/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="milong26">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="ros | 没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ros
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-11-13 10:04:05 / 修改时间：10:08:11" itemprop="dateCreated datePublished" datetime="2025-11-13T10:04:05+08:00">2025-11-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/it/" itemprop="url" rel="index"><span itemprop="name">it</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>原来是一个系统集成的框架，和Lerobot相比它侧重于真实场景的“系统”。</p>
+<span id="more"></span>
+<h1 id="ros定义">ROS定义</h1>
+<p>ROS（Robot Operating System）本质上并不是一个“操作系统”，<br />
+而是一套 <strong>让机器人各部分（传感器、控制器、算法）协同工作</strong>
+的 <strong>通信框架</strong>。</p>
+<p>从数据采集和训练角度看，ROS 主要负责：</p>
+<ul>
+<li><strong>传感器采集</strong>（相机、IMU、力传感器） → 发布数据<br />
+</li>
+<li><strong>控制器接收指令</strong>（电机、机械臂控制） → 执行动作<br />
+</li>
+<li>这些功能运行在不同的 <strong>节点（Node）</strong> 中，由 ROS
+统一管理通信。</li>
+</ul>
+<h1 id="ros-解决的问题">ROS 解决的问题</h1>
+<blockquote>
+<p>ROS 解决的是“系统连接问题”。</p>
+</blockquote>
+<p>当一个机器人系统由多个 <strong>不同的硬件、传感器和控制器</strong>
+组成时，<br />
+ROS 提供一种统一的通信机制，让这些异构模块能够协同工作。</p>
+<h1 id="ros-核心概念">ROS 核心概念</h1>
+<table>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 42%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>概念</th>
+<th>对应你熟悉的东西</th>
+<th>你需要知道的用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Node（节点）</strong></td>
+<td>一个独立运行的模块，例如“相机采集节点”</td>
+<td>类似你的一段数据采集脚本</td>
+</tr>
+<tr class="even">
+<td><strong>Topic（话题）</strong></td>
+<td>数据传输管道，例如 “camera/image_raw”</td>
+<td>类似一个实时数据流或队列</td>
+</tr>
+<tr class="odd">
+<td><strong>Message（消息）</strong></td>
+<td>传输的数据格式</td>
+<td>类似 Python 的 <code>dict</code> 或 Numpy 数组</td>
+</tr>
+</tbody>
+</table>
+<p>简而言之：<strong>节点通过话题发送消息</strong> =
+“模块间通过数据流通信”。</p>
+<h1 id="lerobot-与-ros-的关系">Lerobot 与 ROS 的关系</h1>
+<p>Lerobot 主要专注于
+<strong>数据采集、模型训练和策略学习</strong>，<br />
+并没有直接使用 ROS。<br />
+两者的区别可以概括为：</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 23%" />
+<col style="width: 47%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>类别</th>
+<th>ROS</th>
+<th>Lerobot</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>定位</strong></td>
+<td>让机器人系统运作</td>
+<td>让机器人变得聪明</td>
+</tr>
+<tr class="even">
+<td><strong>核心功能</strong></td>
+<td>通信、模块协调、控制接口</td>
+<td>数据采集、模型训练、策略学习</td>
+</tr>
+<tr class="odd">
+<td><strong>典型用户</strong></td>
+<td>系统集成工程师 / 机器人研发</td>
+<td>机器学习研究者 / 算法开发者</td>
+</tr>
+<tr class="even">
+<td><strong>关键产出</strong></td>
+<td>可运行的机器人系统</td>
+<td>可泛化的智能策略（模型）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="五总结">五、总结</h2>
+<ul>
+<li><strong>ROS</strong>
+侧重于真实场景的“系统集成”，是机器人运行的“基础设施”。<br />
+</li>
+<li><strong>Lerobot</strong>
+更关注模型层面的“智能学习”，是机器人“变聪明”的核心。</li>
+</ul>
+<p>可以理解为：ROS 负责让身体各部分能沟通协作，Lerobot
+负责让大脑学会思考与行动。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/robot/" rel="tag"># robot</a>
+              <a href="/tags/ros/" rel="tag"># ros</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/10/28/Pure-Vision-Language-Action-VLA-Models-A-Comprehensive-Surve/" rel="prev" title="Pure Vision Language Action (VLA) Models:  A Comprehensive Survey">
+                  <i class="fa fa-angle-left"></i> Pure Vision Language Action (VLA) Models:  A Comprehensive Survey
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">milong26</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
