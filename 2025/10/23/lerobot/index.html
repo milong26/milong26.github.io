@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="用lerobot的ur5 dataset。">
+    <meta name="description" content="Lerobot的使用以及代码教程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="lerobot">
 <meta property="og:url" content="http://zhon.fun/2025/10/23/lerobot/index.html">
 <meta property="og:site_name" content="没啥标题">
-<meta property="og:description" content="用lerobot的ur5 dataset。">
+<meta property="og:description" content="Lerobot的使用以及代码教程">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-23T06:41:46.000Z">
-<meta property="article:modified_time" content="2025-11-25T02:40:21.868Z">
+<meta property="article:modified_time" content="2025-11-28T09:04:11.056Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="robot">
 <meta name="twitter:card" content="summary">
@@ -114,7 +114,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">2.</span> <span class="nav-text">数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%87%E9%9B%86"><span class="nav-number">2.1.</span> <span class="nav-text">采集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#so100"><span class="nav-number">2.1.1.</span> <span class="nav-text">so100</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.2.</span> <span class="nav-text">下载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git-clone%E6%96%B9%E5%BC%8F%E4%B8%8D%E6%80%8E%E4%B9%88%E5%A5%BD%E7%94%A8"><span class="nav-number">2.2.1.</span> <span class="nav-text">git clone方式（不怎么好用）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AE%B9"><span class="nav-number">2.3.</span> <span class="nav-text">内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7"><span class="nav-number">2.4.</span> <span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">2.4.1.</span> <span class="nav-text">可视化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E7%89%88%E6%9C%AC"><span class="nav-number">2.4.2.</span> <span class="nav-text">数据集版本</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83"><span class="nav-number">4.</span> <span class="nav-text">训练</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95"><span class="nav-number">4.1.</span> <span class="nav-text">简单</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#async%E6%8E%A8%E7%90%86"><span class="nav-number">5.</span> <span class="nav-text">async推理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#async-inferece-action-on-cpu"><span class="nav-number">5.1.</span> <span class="nav-text">async inferece action on cpu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inference-on-policy_srever"><span class="nav-number">5.2.</span> <span class="nav-text">inference on policy_srever</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#joint-ee"><span class="nav-number">6.</span> <span class="nav-text">joint-&gt;ee</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#record"><span class="nav-number">6.1.</span> <span class="nav-text">record</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#record%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%A4%84%E7%90%86%E4%B8%8E%E4%BF%9D%E5%AD%98"><span class="nav-number">6.1.1.</span> <span class="nav-text">record数据获取、处理与保存</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#metaworld"><span class="nav-number">7.</span> <span class="nav-text">metaworld</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#action%E8%BD%AC%E6%8D%A2"><span class="nav-number">8.</span> <span class="nav-text">action转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lerobot-ee"><span class="nav-number">9.</span> <span class="nav-text">lerobot-ee</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#record-1"><span class="nav-number">9.1.</span> <span class="nav-text">record</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#evaluate"><span class="nav-number">9.2.</span> <span class="nav-text">evaluate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#predict_action"><span class="nav-number">9.2.1.</span> <span class="nav-text">predict_action</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#local"><span class="nav-number">9.2.2.</span> <span class="nav-text">local</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async"><span class="nav-number">9.2.3.</span> <span class="nav-text">async</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9async"><span class="nav-number">9.2.3.1.</span> <span class="nav-text">修改async</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#async%E6%89%A7%E8%A1%8C"><span class="nav-number">9.2.3.2.</span> <span class="nav-text">async执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C"><span class="nav-number">9.2.3.3.</span> <span class="nav-text">执行</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#debug%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%87%AA%E5%AD%98"><span class="nav-number">10.</span> <span class="nav-text">debug配置文件自存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">10.1.</span> <span class="nav-text">服务器</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">2.</span> <span class="nav-text">数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BF%E7%9C%9F"><span class="nav-number">2.1.</span> <span class="nav-text">仿真</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#record%E4%BB%A3%E7%A0%81"><span class="nav-number">2.2.</span> <span class="nav-text">record代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#record_loop%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.1.</span> <span class="nav-text">record_loop函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.3.</span> <span class="nav-text">下载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git-clone%E6%96%B9%E5%BC%8F%E4%B8%8D%E6%80%8E%E4%B9%88%E5%A5%BD%E7%94%A8"><span class="nav-number">2.3.1.</span> <span class="nav-text">git clone方式（不怎么好用）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AE%B9"><span class="nav-number">2.4.</span> <span class="nav-text">内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7"><span class="nav-number">2.5.</span> <span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">2.5.1.</span> <span class="nav-text">可视化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E7%89%88%E6%9C%AC"><span class="nav-number">2.5.2.</span> <span class="nav-text">数据集版本</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83"><span class="nav-number">4.</span> <span class="nav-text">训练</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95"><span class="nav-number">4.1.</span> <span class="nav-text">简单</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A8%E7%90%86"><span class="nav-number">5.</span> <span class="nav-text">推理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#robot_client%E5%92%8Crecord_loop%E5%9C%A8send_action%E4%B8%8A%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">5.1.</span> <span class="nav-text">robot_client和record_loop在send_action上的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#async%E6%8E%A8%E7%90%86"><span class="nav-number">6.</span> <span class="nav-text">async推理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#async-inferece-action-on-cpu"><span class="nav-number">6.1.</span> <span class="nav-text">async inferece action on cpu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inference-on-policy_srever"><span class="nav-number">6.2.</span> <span class="nav-text">inference on policy_srever</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#joint-ee"><span class="nav-number">7.</span> <span class="nav-text">joint-&gt;ee</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#record"><span class="nav-number">7.1.</span> <span class="nav-text">record</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#record%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%A4%84%E7%90%86%E4%B8%8E%E4%BF%9D%E5%AD%98"><span class="nav-number">7.1.1.</span> <span class="nav-text">record数据获取、处理与保存</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#metaworld"><span class="nav-number">8.</span> <span class="nav-text">metaworld</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#action%E8%BD%AC%E6%8D%A2"><span class="nav-number">9.</span> <span class="nav-text">action转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lerobot-ee"><span class="nav-number">10.</span> <span class="nav-text">lerobot-ee</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#record-1"><span class="nav-number">10.1.</span> <span class="nav-text">record</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#evaluate"><span class="nav-number">10.2.</span> <span class="nav-text">evaluate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#predict_action"><span class="nav-number">10.2.1.</span> <span class="nav-text">predict_action</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#local"><span class="nav-number">10.2.2.</span> <span class="nav-text">local</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async"><span class="nav-number">10.2.3.</span> <span class="nav-text">async</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9async"><span class="nav-number">10.2.3.1.</span> <span class="nav-text">修改async</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#async%E6%89%A7%E8%A1%8C"><span class="nav-number">10.2.3.2.</span> <span class="nav-text">async执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C"><span class="nav-number">10.2.3.3.</span> <span class="nav-text">执行</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#debug%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%87%AA%E5%AD%98"><span class="nav-number">11.</span> <span class="nav-text">debug配置文件自存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">11.1.</span> <span class="nav-text">服务器</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -127,7 +127,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-count">86</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -138,7 +138,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">74</span>
+        <span class="site-state-item-count">76</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -201,7 +201,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-25 10:40:21" itemprop="dateModified" datetime="2025-11-25T10:40:21+08:00">2025-11-25</time>
+      <time title="修改时间：2025-11-28 17:04:11" itemprop="dateModified" datetime="2025-11-28T17:04:11+08:00">2025-11-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -222,7 +222,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>用lerobot的ur5 dataset。</p>
+    <div class="post-body" itemprop="articleBody"><p>Lerobot的使用以及代码教程</p>
 <span id="more"></span>
 <h1 id="安装">安装</h1>
 <ol type="1">
@@ -235,17 +235,21 @@ install超时，换镜像<code>pip config set global.index-url https://pypi.tuna
 <li>下载会很慢，又超时了，加上--default-timeout=100</li>
 </ol>
 <h1 id="数据集">数据集</h1>
-<h2 id="采集">采集</h2>
-<h3 id="so100">so100</h3>
-<p>校准：In <code>record.py</code> , keep calibration followed
+<p>数据集来源：自己采集/下载开源 ## 采集流程
+真实机器人采集（需要设备）和仿真数据采集（需要软件，有的比较高级的采集也需要设备）</p>
+<p>不管是仿真还是真实，都会用到record_loop函数 ### 真实-so100 校准：In
+<code>record.py</code> , keep calibration followed
 lerobot-so100-calibrate <a
 target="_blank" rel="noopener" href="https://huggingface.co/docs/lerobot/so100#calibrate">huggingface</a>
 or <a
 target="_blank" rel="noopener" href="https://github.com/huggingface/lerobot/blob/main/docs/source/so100.mdx">github</a>,
 then get 2 json file indicating follower_id.json and leadr_id.json whose
 id name should be written into
-<code>SO100Follower/LeaderConfig(id=)</code> ## record ###
-record_loop函数 <code>record_loop</code>里面，函数的输入参数有 -
+<code>SO100Follower/LeaderConfig(id=)</code></p>
+<h2 id="仿真">仿真</h2>
+<h2 id="record代码">record代码</h2>
+<h3 id="record_loop函数">record_loop函数</h3>
+<p><code>record_loop</code>里面，函数的输入参数有 -
 teleop_action_processor：专门用于teleoperate，原始leader的act（joint）经过这个处理变成ee
 - robot_action_processor：ee形式的action经过变成joint，可以交给机器执行
 - robot_observation_processor：原始obs（joint）经过这个变成ee
@@ -326,6 +330,22 @@ child进程，就可能死锁，是一个使用顺序的问题。解决方案是
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">os.environ[<span class="string">&quot;TOKENIZERS_PARALLELISM&quot;</span>] = <span class="string">&quot;false&quot;</span></span><br></pre></td></tr></table></figure> ## multi gpu 原来支持multi-gpu training了<a
 target="_blank" rel="noopener" href="https://huggingface.co/docs/lerobot/multi_gpu_training">multi-gpu
 training</a></p>
+<h1 id="推理">推理</h1>
+<h2
+id="robot_client和record_loop在send_action上的区别">robot_client和record_loop在send_action上的区别</h2>
+<p>一般直接推理joint-send_action(joint)是没关系的，但是如果我再robot_client里面send_action之前做了其它操作的话，这个操作时间会影响send_action的执行效果，也就是joint_action同步写入不到位。
+这一部分需要了解 - [ ]
+robot_client_ee的代码和evaluate相比，send_action之后有什么操作打断了写？
+- [ ] 怎样演唱robot_client的等待时间，让它可以等写完再执行下一次行为 1.
+sync是什么[[同步和异步]] &lt;-sync是同步那应该写完再执行别的 2.
+evaluate的按照fps控制。</p>
+<p>evalute的时间控制：send_action一定会写完。假设fps控制的循环时间一次30ms。这一次前面花费了20ms，send_action需要消耗6ms，那执行之后等待4ms，进入下一次。如果前面花了30ms，send_action需要消耗6ms，超过30ms了就不等待，直接进入
+下一次。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> timestamp &lt; control_time_s:</span><br><span class="line">	start_loop_t = time.perf_counter()</span><br><span class="line">	<span class="comment"># 获得observation</span></span><br><span class="line">	obs = robot.get_observation()</span><br><span class="line">	<span class="comment"># 计算action</span></span><br><span class="line">	action_values = predict_action(observation=observation_frame)</span><br><span class="line">	<span class="comment"># 转换action到joint能接受的</span></span><br><span class="line">	robot_action_to_send = robot_action_processor((action_values, obs))</span><br><span class="line">	_sent_action = robot.send_action(robot_action_to_send)</span><br><span class="line">	<span class="comment"># Write to dataset</span></span><br><span class="line">	dataset.add_frame(frame)</span><br><span class="line">	dt_s = time.perf_counter() - start_loop_t</span><br><span class="line">	<span class="comment"># 控制时间</span></span><br><span class="line">	precise_sleep(<span class="number">1</span> / fps - dt_s)</span><br></pre></td></tr></table></figure>
+<p>robot_client_ee.py的时间控制比较复杂 1.
+核心流程包含三个：执行action，捕获观察，sleep的时间也是和evaluate比较像，要确认self.config.environment_dt是否和1/fps一致。
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">control_loop</span>(<span class="params">self, task, verbose=<span class="literal">False</span></span>):</span><br><span class="line">	<span class="keyword">while</span> self.running:</span><br><span class="line">	    <span class="keyword">if</span> self.actions_available():</span><br><span class="line">	        _performed_action = self.control_loop_action(verbose)</span><br><span class="line">	    <span class="keyword">if</span> self._ready_to_send_observation():</span><br><span class="line">	        _captured_observation = self.control_loop_observation(task, verbose)</span><br><span class="line">	</span><br><span class="line">	    time.sleep(<span class="built_in">max</span>(<span class="number">0</span>, self.config.environment_dt - (time.perf_counter() - control_loop_start)))</span><br><span class="line"></span><br></pre></td></tr></table></figure> 2. <code>control_loop_action</code>这个函数里面
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从queue里面获取action</span></span><br><span class="line">timed_action = self.action_queue.get_nowait()</span><br><span class="line">ee_action = self._action_tensor_to_action_dict(timed_action.get_action())</span><br><span class="line">joint_action = self.ee_to_follower_joints((ee_action, obs))</span><br><span class="line">_performed_action = self.robot.send_action(joint_action)</span><br></pre></td></tr></table></figure></p>
 <h1 id="async推理">async推理</h1>
 <h2 id="async-inferece-action-on-cpu">async inferece action on cpu</h2>
 <p>现在有个bug是服务器推理本地cpu执行，报错说“RuntimeError: Attempting
