@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="这篇文章用的英文单词好拗口，但是写得挺清晰的，还挺喜欢 解决什么问题？pose estimation，以前的要么慢，要么不够精确。这篇文章首先检测2d关键点，然后cross-camera（用内参计算）规范化，然后扩散模型生成3d（相机坐标），然后MLP推理出joint angle，用fk算出eepose等。 对我有什么启发？相机的归一化能不能拓展到外参？ 并不是VLA！只是传统的视觉">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RoboKeyGen: Robot Pose and Joint Angles Estimation via  Diffusion-based 3D Keypoint Generation">
+<meta property="og:url" content="http://zhon.fun/2025/12/08/RoboKeyGen-Robot-Pose-and-Joint-Angles-Estimation-via-Diffusion-based-3D-Keypoint-Generation/index.html">
+<meta property="og:site_name" content="没啥标题">
+<meta property="og:description" content="这篇文章用的英文单词好拗口，但是写得挺清晰的，还挺喜欢 解决什么问题？pose estimation，以前的要么慢，要么不够精确。这篇文章首先检测2d关键点，然后cross-camera（用内参计算）规范化，然后扩散模型生成3d（相机坐标），然后MLP推理出joint angle，用fk算出eepose等。 对我有什么启发？相机的归一化能不能拓展到外参？ 并不是VLA！只是传统的视觉">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-12-08T08:09:53.000Z">
+<meta property="article:modified_time" content="2025-12-08T08:09:53.120Z">
+<meta property="article:author" content="milong26">
+<meta property="article:tag" content="robot">
+<meta property="article:tag" content="pose-estimation">
+<meta property="article:tag" content="cross-camera-generalization">
+<meta property="article:tag" content="generalization">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhon.fun/2025/12/08/RoboKeyGen-Robot-Pose-and-Joint-Angles-Estimation-via-Diffusion-based-3D-Keypoint-Generation/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2025/12/08/RoboKeyGen-Robot-Pose-and-Joint-Angles-Estimation-via-Diffusion-based-3D-Keypoint-Generation/","path":"2025/12/08/RoboKeyGen-Robot-Pose-and-Joint-Angles-Estimation-via-Diffusion-based-3D-Keypoint-Generation/","title":"RoboKeyGen: Robot Pose and Joint Angles Estimation via  Diffusion-based 3D Keypoint Generation"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>RoboKeyGen: Robot Pose and Joint Angles Estimation via  Diffusion-based 3D Keypoint Generation | 没啥标题</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">没啥标题</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">活下去</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#related-works"><span class="nav-number">3.</span> <span class="nav-text">related works</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#method"><span class="nav-number">4.</span> <span class="nav-text">method</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#experiment"><span class="nav-number">5.</span> <span class="nav-text">experiment</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">milong26</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">79</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2025/12/08/RoboKeyGen-Robot-Pose-and-Joint-Angles-Estimation-via-Diffusion-based-3D-Keypoint-Generation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="milong26">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="RoboKeyGen: Robot Pose and Joint Angles Estimation via  Diffusion-based 3D Keypoint Generation | 没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          RoboKeyGen: Robot Pose and Joint Angles Estimation via  Diffusion-based 3D Keypoint Generation
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-12-08 16:09:53" itemprop="dateCreated datePublished" datetime="2025-12-08T16:09:53+08:00">2025-12-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>这篇文章用的英文单词好拗口，但是写得挺清晰的，还挺喜欢</p>
+<p>解决什么问题？pose
+estimation，以前的要么慢，要么不够精确。这篇文章首先检测2d关键点，然后cross-camera（用内参计算）规范化，然后扩散模型生成3d（相机坐标），然后MLP推理出joint
+angle，用fk算出eepose等。
+对我有什么启发？相机的归一化能不能拓展到外参？</p>
+<p>并不是VLA！只是传统的视觉</p>
+<span id="more"></span>
+<h1 id="abstract">abstract</h1>
+<ol type="1">
+<li>本文做了什么？预测任务分成两个：2d关键点检测和将2d关键点提升到3d</li>
+<li>难点：2d-&gt;3d，用扩散，所以问题变成
+<strong>条件3d关键点生成</strong></li>
+<li>to 跨摄像头适应性，引入 <strong>归一化相机坐标空间（normalized
+camera coordinate space）</strong>
+确保估计的二维关键点在不同相机内在元件上的对齐</li>
+<li>同类的方法居然是渲染与比较？因为问题是从当前状况推断出joint
+state</li>
+</ol>
+<p>一句话总结这篇文章做的东西：识别2d关键点，用扩散模型生成3d关键点，同时利用NCCS做到跨相机泛化性。</p>
+<h1 id="introduction">introduction</h1>
+<ol type="1">
+<li>问题明确了：是pose estimation，而且重点放在joint
+estimation，也就是没有joint-state作为输入</li>
+<li>同类的方法两种：render and
+compare，但是要渲染很慢的；还有一种是key-point-based，比较典型的是一个2d
+heatmap扩展到3d，它能够通过深度输入直接预测机械臂上预定义关键点的三维坐标，快，但是精度比较低，受限于cross-camera-generalization。为什么精度比较低？3d
+heatmap和2d heatmap，以及深度输入算什么？关键点是什么？</li>
+<li>所以提出robokeygen，基于key-point，但是要提升它的精度，提高cross-camera
+generlization。咋做的：高维任务分成2d keypoint detection+ lift 2d
+keypoint to
+3d。2d关键点怎么来？用上面的heatmap吗？3d关键点有什么用？</li>
+<li>方法具体说明：
+<ol type="1">
+<li>预测 predefined keypoint的2d projection-&gt;这个用现有技术</li>
+<li>这些projection 对齐到nccs里面-&gt;我好奇的技术</li>
+<li>基于对齐后的生成3d keypoint-&gt;本文的重点</li>
+<li>用一个已有的pose-fitting算法估计pose</li>
+</ol></li>
+<li>3d关键点为什么能估计位姿？nccs怎么用的？pose-fitting是什么？</li>
+</ol>
+<p>看完introduction，我对这个文章的思路更清晰了，所以对我来说，重点在nccs，关键点作为边角料。</p>
+<h1 id="related-works">related works</h1>
+<ol type="1">
+<li>有点懵，“Robot pose estimation with known joint angles: Recent
+advances in deep learning offer innovative methods for robot pose
+recovery. Dream [5] uses a convolutional network to regress 2D heatmaps
+and compute poses through a Perspective-n-Point (PnP) RANSAC solver
+[17]. SGTAPose [6] integrates temporal information to address
+selfocclusion in pose estimation. Meanwhile, CtRNet [7] employs a
+self-supervision framework, narrowing the sim-to-real gap effectively.
+Notably, these methods depend on immediate joint angles feedback, thus
+limiting their applicability.” (“RoboKeyGen: Robot Pose and Joint Angles
+Estimation via Diffusion-based 3D Keypoint Generation | IEEE Conference
+Publication | IEEE Xplore”, p.
+5376)这一段提到的问题我怎么看不懂，知道关节角度以后为什么还需要各种网络，直接正向运动学就能求出来了？</li>
+<li>量子速度了SGTAPose和DREAM这些：这篇文章解决的是什么问题，告诉我输入是什么，输出是什么
+<ol type="1">
+<li>dream:论文解决的问题：摄像头到机器人位姿估计本文解决的是从单个RGB图像估计外部摄像头相对于机器人的位姿（camera-to-robot
+pose estimation）​ 的问题。传统的手眼标定（hand-eye
+calibration）方法需要依赖标记物（如ArUco码）和离线多帧数据收集，而本文提出的DREAM框架实现了无需标记物、在线、单图像的标定，适用于动态环境中的机器人控制任务（如抓取、避障）。核心挑战是消除对物理标记和复杂校准步骤的依赖，实现实时、通用的摄像头外参估计。方法的输入包括以下元素：单个RGB图像：由外部摄像头捕获的机器人图像，默认分辨率为640×480像素。图像中需包含机器人的可见部分（即使关键点被遮挡）。已知摄像头内参：包括焦距、主点等内部参数，假设已预先校准。机器人关节配置：通过机器人控制器实时获取的关节角度，用于计算关键点的3D位置（通过前向运动学）。方法的输出是：摄像头外参（camera
+extrinsics）：即摄像头坐标系到机器人基础坐标系的刚体变换矩阵（旋转和平移）该变换允许将图像中的观测转换到机器人任务空间，用于实时控制。输出通过以下流程生成：关键点检测：深度学习网络（如VGG或ResNet编码器）处理RGB图像，输出每个关键点的2D置信度图（belief
+maps），红色斑点表示检测到的关键点投影位置：位姿计算：使用PnP（Perspective-n-Point）算法，结合2D关键点、机器人前向运动学计算的3D关键点位置和摄像头内参，求解摄像头外参。方法关键特点仅用合成数据训练：通过域随机化（domain
+randomization）在模拟环境中生成数据，避免真实数据收集。实时性：在NVIDIA
+Titan Xp GPU上可实现实时处理。泛化性强：支持多类机器人（如Franka
+Panda、Kuka LBR iiwa、Baxter）和摄像头传感器。实验结果（如Tab.
+I）表明，单帧精度与传统多帧手眼标定相当，多帧融合可进一步提升准确性。该方法为机器人视觉控制提供了更灵活的在线校准工具。</li>
+<li>sgtapose：这篇文章解决的是在线相机到机器人姿态估计的问题。具体来说，它致力于从单视角连续图像序列中实时估计相机坐标系与机器人基坐标系之间的刚性变换（即姿态），包括旋转和平移。这一任务对于机器人执行抓取、操作等下游应用至关重要，但面临机器人自遮挡和单视角图像模糊性等挑战。输入方面，方法接收以下内容：一是连续两帧的RGB图像（如当前帧I_t和前一帧I_t-1），这些图像包含机器人的视觉信息；二是机器人的关节状态信息，即预定义关键点（如关节）的3D位置{P_t^i}，这些位置在机器人基坐标系中已知；三是相机内参，用于投影计算；四是前一帧的估计相机到机器人姿态，作为时间序列的初始参考。输出方面，方法产生相机到机器人的6D姿态估计结果，具体表示为旋转矩阵R_t和平移向量T_t，构成SE(3)变换。该姿态描述了相机相对于机器人基坐标系的位姿，可直接用于机器人控制任务。方法的核心创新在于利用时间信息和机器人结构先验来提升估计精度。它通过深度学习模型预测图像中机器人关键点的2D坐标，然后结合已知3D信息使用PnP求解器计算初始姿态，并进一步通过结构先验优化得到最终结果。这种方法在合成和真实数据集上实现了高精度和实时性能（如36
+FPS），并在下游任务如机器人抓取中表现出色。总体而言，文章首次展示了从图像序列中估计相机到机器人姿态的有效性，通过时序注意力机制和结构先验融合，显著提升了鲁棒性和准确性。</li>
+<li>CtRNet：这篇文章题为“Markerless Camera-to-Robot Pose Estimation via
+Self-supervised Sim-to-Real
+Transfer”，主要解决的是在视觉引导的机器人控制中，相机到机器人姿态估计的挑战。传统方法依赖于在机器人上附加标记物（如Aruco标记）来进行校准，但这过程繁琐且无法在线调整，限制了在动态环境中的应用。深度学习方法虽然实现了无标记的姿态估计，但通常只使用合成数据训练，面临模拟到现实差距的问题，因为真实世界的3D注释获取成本高。本文旨在克服这些限制，提出一种能够在线校准且无需大量标注数据的解决方案。在输入方面，该框架接收两个主要部分：一是来自相机的RGB图像，提供了视觉信息；二是机器人的关节角度数据，通过机器人系统实时获取。这些输入使得系统能够感知环境并了解机器人的当前配置。输出方面，框架产生两个关键结果：首先是相机到机器人的6自由度姿态估计，即机器人基座坐标系相对于相机坐标系的变换，这包括位置和方向信息；其次是机器人的前景分割掩码，即一个二进制图像，标识出图像中机器人所占的区域。这些输出共同支持精确的机器人定位和视觉反馈。方法上，文章引入了一个端到端的网络CtRNet，它结合了深度学习特征提取和几何视觉求解。网络首先在合成数据上预训练，学习分割和关键点检测，然后通过自监督训练利用真实世界数据进一步优化。自监督部分使用可微分渲染器，将估计的姿态渲染为轮廓图像，并与分割结果比较，通过图像损失反向传播来更新网络参数，从而实现无需真实标签的模拟到现实迁移。总之，本文的核心贡献是提供了一个高效、准确的无标记姿态估计框架，输入为图像和关节数据，输出为姿态和分割结果，通过自训练管道提升了在真实场景中的适用性，为机器人自动化任务提供了可靠支持。深度学习方法做的“机器人姿态估计”与“根据关节角
++ 机器人模型做正向运动学
+(FK)”根本不是一个任务。那个是这是<strong>机器人自身内部坐标系中的几何推断</strong>，属于纯
+kinematics（运动学）领域：只能告诉你机器人在自己内部坐标系里的样子，无法告诉你机器人在相机里的样子</li>
+</ol></li>
+<li>所以这个论文的重点工作是现实在相机里的坐标？这些方法解决的是：从图像估计“相机坐标系到机器人坐标系的外参”也就是
+camera-to-robot extrinsic
+calibration。也就是相机外参标定问题。输入：RGB图像，joint
+angle，相机内参，输出摄像头在机器人坐标系中的 6D 位姿 T_cam_base</li>
+<li>这个问题对VLA重要吗？很重要- 图像是 <strong>camera
+frame</strong>，机器人运动学与控制是在 <strong>robot base
+frame</strong>，VLA 必须把视觉观察对齐到动作坐标系</li>
+<li>扩散模型：这篇文章的重点是用扩散来将二维关键点检测提升为条件三维关键点生成。据我们所知，我们的方法是首次通过扩散模型探索机器人手臂结构。</li>
+</ol>
+<h1 id="method">method</h1>
+<p>重点： 1. 相机相关的 2. 扩散模型怎么设计的？</p>
+<p>问题理论化：输入rgb
+image，正运动学和cad模型。要求输出pose和joint数值</p>
+<p>问题分解成：检测2d+变成3d，具体是 1.
+从image里面预测关键点的二维投影：关键词：pose estimation,keypoint
+detection, segmentation, positional
+embedding。训练一个模型，关键点会提前定义，能从图片里面输出像素坐标。分割是为了去掉背景，用PIDNet-L做的；位置嵌入是为了利用上一帧的关键点。
+2.
+对齐到NCCS：防止不同内参的相机焦距、光心不同，只适用于针孔摄像头啊。2d像素减去光心再除以焦距。因为焦距和光心里面已经包含了横纵向信息。所以不同相机拍出来的同一个机器人图像对应的差不多一样了，所以只需要预测关键点离相机的距离（z
+轴）即可。 3. 用扩撒模型建模2d变成（camera空间中的）3d分布。监督学习？
+1. 变成一个条件生成问题，要建模归一化后的c到xcam 2.
+扩散模型分成两个阶段：训练（方差保持随机微分方程）和生成（DDIM） 3.
+需要有带有标注的机器人数据集 4.
+轻量regression网络预测joint，把3d关键点恢复到robot space里面 1.
+用MLP预测关节角度 2. 正运动学求姿态 5. 什么是pose
+fitting：是指根据已知的3D关键点预测结果，将机器人模型与这些关键点对齐，从而恢复机器人的完整位姿。处理异常点：可微分异常值估计differentiable
+outliers estimation 1.
+核心核心思想：给每个关键点一个<strong>可训练或可优化的权重</strong>，表示这个点是否可信
+2. 如果某个点是异常值，优化会自动降低它的权重 3.
+单帧处理，怎么判断异常？- 这个权重只依赖当前帧 Xcam 与预测的 Xrob
+的残差，Xorb是fk计算出来的。</p>
+<p>有一个问题：step4里面，直接mlp求出joint，但是相机位置的健壮性不行啊</p>
+<h1 id="experiment">experiment</h1>
+<p>往后看的时候确认一下，有没有提到zero-shot moved camera的事情？</p>
+<p>COLMAPCOLMAP是一款开源的结合SfM(Structure-from-Motion)和MVS(Multi-View
+Stereo)的三维重建Pipeline，用来标定相机外参</p>
+<p>baseline： 分成未知joint angle
+和已知。为什么要做已知的对比实验，毕竟joint
+angle是mlp算出来的？<strong>算法不需要去预测
+θ</strong>，只需要做<strong>机器人姿态估计或关键点重建</strong>
+这样可以区分误差的来源是扩散还是MLP</p>
+<p>unknwon用的RoboPose和SPDH</p>
+<p>known：Dream和SGTAPose，CtRNet</p>
+<p>哦这个就是姿态估计，做的是直接抓取，不是VLA。但是能作为一个前提。</p>
+<p>重点看cross-camera，好像只是内参不同啊D:完全没有提到外参，那演示图里面放个相机在不同位置的是干啥
+但是可以拿过来当个参考，外参可以归一化吗？</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/robot/" rel="tag"># robot</a>
+              <a href="/tags/pose-estimation/" rel="tag"># pose-estimation</a>
+              <a href="/tags/cross-camera-generalization/" rel="tag"># cross-camera-generalization</a>
+              <a href="/tags/generalization/" rel="tag"># generalization</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/11/28/%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5/" rel="prev" title="同步和异步">
+                  <i class="fa fa-angle-left"></i> 同步和异步
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">milong26</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
