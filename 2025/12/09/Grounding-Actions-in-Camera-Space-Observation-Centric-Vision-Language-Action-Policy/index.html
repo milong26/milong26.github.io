@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="这一篇总算是有多外参的相机了吧！ 或者可以用这个作为关键词 Extrinsic 关注的就是能应付不同相机的泛化性。 这篇文章可以提供不错的泛化性metric和baseline 方法挺简单的就是坐标转换，思路可以学习一下。 利用“空间对齐”带来泛化提升">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy">
+<meta property="og:url" content="http://zhon.fun/2025/12/09/Grounding-Actions-in-Camera-Space-Observation-Centric-Vision-Language-Action-Policy/index.html">
+<meta property="og:site_name" content="没啥标题">
+<meta property="og:description" content="这一篇总算是有多外参的相机了吧！ 或者可以用这个作为关键词 Extrinsic 关注的就是能应付不同相机的泛化性。 这篇文章可以提供不错的泛化性metric和baseline 方法挺简单的就是坐标转换，思路可以学习一下。 利用“空间对齐”带来泛化提升">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-12-09T14:03:50.000Z">
+<meta property="article:modified_time" content="2025-12-09T14:03:51.001Z">
+<meta property="article:author" content="milong26">
+<meta property="article:tag" content="vla">
+<meta property="article:tag" content="generalization">
+<meta property="article:tag" content="camera-space">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhon.fun/2025/12/09/Grounding-Actions-in-Camera-Space-Observation-Centric-Vision-Language-Action-Policy/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhon.fun/2025/12/09/Grounding-Actions-in-Camera-Space-Observation-Centric-Vision-Language-Action-Policy/","path":"2025/12/09/Grounding-Actions-in-Camera-Space-Observation-Centric-Vision-Language-Action-Policy/","title":"Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy | 没啥标题</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">没啥标题</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">活下去</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#related-work"><span class="nav-number">3.</span> <span class="nav-text">related work</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#method"><span class="nav-number">4.</span> <span class="nav-text">method</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#experiment"><span class="nav-number">5.</span> <span class="nav-text">experiment</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%AF%E8%83%BD%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">可能存在的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E5%A4%8D%E7%8E%B0"><span class="nav-number">7.</span> <span class="nav-text">实验复现</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">milong26</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhon.fun/2025/12/09/Grounding-Actions-in-Camera-Space-Observation-Centric-Vision-Language-Action-Policy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="milong26">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy | 没啥标题">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-12-09 22:03:50 / 修改时间：22:03:51" itemprop="dateCreated datePublished" datetime="2025-12-09T22:03:50+08:00">2025-12-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>这一篇总算是有多外参的相机了吧！</p>
+<p>或者可以用这个作为关键词 <strong>Extrinsic</strong></p>
+<p>关注的就是能应付不同相机的泛化性。</p>
+<p>这篇文章可以提供不错的泛化性metric和baseline</p>
+<p>方法挺简单的就是坐标转换，思路可以学习一下。</p>
+<p>利用“空间对齐”带来泛化提升</p>
+<span id="more"></span>
+<p>代码在<a
+target="_blank" rel="noopener" href="https://github.com/ZTY0213/OC-VLA">OC-VLA</a>，实际是在Dita那个仓库里面</p>
+<p>这个论文可以尝试复现一下，感觉挺有意思的。</p>
+<h1 id="abstract">abstract</h1>
+<p>VLA模型的观察空间与行动空间之间有gap，模型通常预测机器人基座坐标系内的端效器姿态，导致空间不一致。</p>
+<blockquote>
+<p>所以它针对的模型都是ee作为action的吧，如果是joint那更加难搞</p>
+</blockquote>
+<p>所以作者想出来的是以observation为中心的VKA框架，将action预测从基于robot
+base变成基于camera observation。就是直接用外参矩阵</p>
+<p>轻量的</p>
+<blockquote>
+<p>感觉这个和我的想法有点接近，不过我是反过来，想在训练之前就把observation归一化处理。这个是把输出结果映射到camera上面？
+看看我的思路有没有搞头。</p>
+</blockquote>
+<h1 id="introduction">introduction</h1>
+<p>预训练vlm是和相机viewpoint对齐的，但是机器人控制是基于底座（是ee控制啊）</p>
+<p>而且数据采集的时候也是异构的</p>
+<p>所以提出来的方案是：将末端执行器动作与机器人基坐标系解耦，直接预测第三人称摄像机坐标系中的动作，ObservationCentric
+VLA（OC-VLA）。</p>
+<p>具体来说，鉴于机器人底座与每个摄像头之间的外在变换，我们将机器人空间的终端执行器作用转换为其在摄像头坐标系中的等效表示，并采用这些作为预测目标。通过将动作目标锚定在与观察相同的空间（即图像平面），这种表述缓解了感知与动作模态之间的错位，并减轻了摄像机视角变化带来的歧义。此外，它明确鼓励模型学习机器人与摄像头之间的相对空间关系，从而增强其在不同视角和硬件配置间有效泛化的能力。</p>
+<blockquote>
+<p>那这个外参转换可以用于zero-shot推理吗？？？？
+这个有一个缺点是没有相机就做不了吧（障碍那种就没办法了）
+能不能再结合机器人模型做更多？
+这个文章我光看摘要就知道咋做了，因为跟我想的比较接近，那这个办法有什么可以改进的地方吗？除了延展到其它机器人上面
+既然已经有相机是叫了（类比人眼）那能不能基于视角做出自适应移动？
+那用这个办法岂不是能利用网络视频进行学习知识。但是定位还是依靠模型与delta？？？？</p>
+</blockquote>
+<h1 id="related-work">related work</h1>
+<p>尽管VLA模型取得了巨大进展，但大多数模型依赖于特定的观测空间来预测动作。然而，数据收集过程中环境设置的差异使得直接使用大规模网络数据进行训练变得困难，这限制了其性能。与此同时，当前的作数据集涵盖了广泛的摄像头视角，而现有的VLA方法通常侧重于基于机器人基坐标的动作预测。行动预测与观察坐标之间的差异对政策学习构成重大挑战。</p>
+<h1 id="method">method</h1>
+<p>实现起来简单吗？</p>
+<p>使用lightweight
+300M的VLA模型来测试（DIta）我怎么找不到300M这个版本的模型 checkpoint
+该系统仅用第三人称摄像机的图像和语言指令作为输入，已展现出竞争性能</p>
+<p>CLIP作为text encoder DINOv2处理第三视角图片
+图像特征还通过配备FiLM[58]调节层的Q-Forform[57]进一步选择和调制。 &gt;
+为什么还需要后面这两个</p>
+<p>“Current VLA models typically employ one of two types of action
+spaces for end-effector control: discrete action spaces [2], [1] and
+continuous action spaces [3], [5]. To thoroughly evaluate the
+effectiveness of our proposed approach, we conduct experiments on models
+using both types of action spaces. Based on the baseline architecture,
+we implement a variant specifically designed for discrete action
+prediction or continuous action prediction.” (Zhang et al., 2025, p. 3)
+这篇文章说vla对ee的控制分成两种，离散和连续，我怎么没概念，速速了解一下
+for end-effector control: discrete action spaces [2], [1] and continuous
+action spaces [3], [5] 离散的是Openvla和Rt-1 连续的是Octo和pi0
+这部分看一个综述《面向具身智能的视觉-语言-动作模型动作表征和生成策略综述》</p>
+<p>它给的解释是 离散动作 = 把机器人动作“量化成 token”让 Transformer
+预测，把控制问题 → 转成序列生成（language modeling）问题。因为
+Transformer 和 LLM 最擅长处理 <strong>离散 token
+序列</strong>。缺点是量化损失不可避免。离散方法适合粗粒度动作、多任务通用控制、大规模数据。
+连续动作 =
+直接在连续空间中建模动作的概率分布并生成连续控制量，直接在连续空间建模真实动作分布，用生成式模型（CVAE
+/ Diffusion / Flow Matching）连续方法适合理想策略生成与精细操作</p>
+<p>然后有一个论文FAST，它做的是让自回归 Transformer（离散 token
+方式）也能像连续模型一样解决高精度、高频率的灵巧操作任务。它仍然是
+<strong>离散方法</strong>（tokenization） ，但使离散方法能处理
+<strong>原本只有连续模型能处理的任务</strong></p>
+<p>然后问题来了，既然连续动作这么好为什么不用？连续动作生成模型（例如
+CVAE、Diffusion、Flow Matching）本质上是
+<strong>在连续高维动作空间上学习概率分布</strong>。不太好泛化。
+但是离散+自回归一个优点是很快，第二个是泛化能力更强。</p>
+<p>什么是自回归？逐步生成，非自回归（NonAR）就是模型一次性预测整个序列。</p>
+<p>所以VLA里面如果是离散的，后面基本都跟着自回归。</p>
+<blockquote>
+<p>这篇文章怎么在这两种动作空间上进行实验的？？？</p>
+</blockquote>
+<p>批评了以前的数据集，动作都是和机器人结合的，跟观察空间联系不大，so模型很难从图像里面推理出动作，尤其是对新相机视角。“especially
+for novel camera views with a large variance from the seen camera views
+in the training set” (Zhang et al., 2025, p. 3)</p>
+<p>首先需要将机器人坐标的动作转换到相机坐标系里面。</p>
+<blockquote>
+<p>感觉实现起来很简单啊</p>
+</blockquote>
+<p>特别地，变换矩阵T在不同机器人配置中存在差异。例如，Droid [9]
+拥有1417个不同的摄像机视角，需要模型在内部推断每个视角的正确变换T，以准确预测机器人坐标系中的动作。</p>
+<p>“UV coordinate” (Zhang et al., 2025, p. 4) <strong>UV坐标 +
+相机内参的作用</strong>是针对只知道水杯在图片上的像素
+<code>(u, v)</code>，你需要焦距 f 和内参矩阵 K 才能算出相机坐标
+<code>(Xcam, Ycam, Zcam)</code>。就是传统方法</p>
+<h1 id="experiment">experiment</h1>
+<p>我想知道怎样设计饰演的，zero-shot在其它位置是不是需要calibrate获得相机在世界坐标系下的位置？仿真环境好搞定，那实际呢？对比实验有哪些？
+我想了一下，按照刚才method的方法，在一个真实实验里面，需要用到的有：假定就用机械臂的base做世界坐标系的原点，这样可以减去计算ee，所以要记录的是相机捕获的image，state，cad或者urdf文件来做fk，相机在世界坐标系下的转换矩阵，action（关节值或者ee都行）。这样就能训练和推理？</p>
+<p>预训练采用Droid数据集，该数据集包含从1417个不同第三人称摄像机视角捕捉的机器人作轨迹及其对应的外部参数，提供广泛的视觉视角和运动</p>
+<p>择典型的轻量级VLM结构。 1. 连续，扩散，DiT 2.
+离散，填充零向量以对齐处理语言和图像输入后的动作大小。</p>
+<p>优化细节 1.
+连续：目标是最小化机器人动作（加标准高斯噪声增强）与预测噪声之间的MSE，使用DDPM
+[59]，100个时间步。 2.
+离散：最小化预测离散作用量与真实标签之间的交叉熵损失</p>
+<p>仿真测试：数据集：ManiSkill2</p>
+<p>真机实验： 采集： camera1：固定位置的若干数据
+camera2：轻微移动camera2，若干数据</p>
+<p>微调：</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>模型</th>
+<th>使用数据</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>模型1</strong></td>
+<td>Camera 1 数据 + Droid 预训练模型</td>
+<td>训练在固定视角下，基础模型是预训练好的</td>
+</tr>
+<tr class="even">
+<td><strong>模型2</strong></td>
+<td>Camera 2 数据 + Droid 预训练模型</td>
+<td>训练数据包含轻微视角扰动，提高对视角变化的鲁棒性</td>
+</tr>
+</tbody>
+</table>
+<p>测试</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>模型</th>
+<th>相机</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>模型1</strong></td>
+<td>Camera 1（固定）</td>
+<td>测试在训练相机相同视角下的性能（fixed camera viewpoint）</td>
+</tr>
+<tr class="even">
+<td><strong>模型1</strong></td>
+<td>Camera 3（固定，novel）</td>
+<td>测试 zero-shot 新视角的泛化能力（novel camera viewpoint）</td>
+</tr>
+<tr class="odd">
+<td><strong>模型2</strong></td>
+<td>Camera 2（固定）</td>
+<td>测试在训练中有轻微扰动的相机下的鲁棒性（slight camera
+perturbations）</td>
+</tr>
+</tbody>
+</table>
+<h1 id="可能存在的问题">可能存在的问题</h1>
+<ol type="1">
+<li>多视角相机怎么样？</li>
+<li>极端视角或遮挡场景，不过这个我觉得怪不到这个身上，本来就是个难点，但是可以考虑改进，比如已经换到相机坐标系了，那能不能加上自适应？</li>
+<li>这个转换重点是描述了机械臂尤其是ee的运动，那物体呢？</li>
+</ol>
+<h1 id="实验复现">实验复现</h1>
+<p>参考<a target="_blank" rel="noopener" href="https://github.com/RoboDita/Dita">Dita</a> 1. 代码
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/RoboDita/Dita</span><br><span class="line"><span class="built_in">cd</span> Dita</span><br></pre></td></tr></table></figure> 2. 根据python3.9 and pytorch 2, tensorflow==2.15.0, CUDA
+12.1安装 1. 3.9的python环境 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda create -n dita python==3.9</span><br><span class="line">conda activate dita</span><br></pre></td></tr></table></figure> 2. pytorch2安装
+选择的是2.5.1的 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cu121</span><br></pre></td></tr></table></figure> 3. pytorch2检测 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="built_in">print</span>(torch.__version__)          <span class="comment"># 2.x.x</span></span><br><span class="line"><span class="built_in">print</span>(torch.cuda.is_available())  <span class="comment"># True</span></span><br></pre></td></tr></table></figure> 4.
+tensorflow2.15.0 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install tensorflow==2.15.0</span><br></pre></td></tr></table></figure> 5. 最终安装 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install -v --disable-pip-version-check --no-build-isolation --no-cache-dir -r requirements_base.txt</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">pip install -r requirements_base.txt</span></span><br></pre></td></tr></table></figure> 3.
+下载checkpoint：Diffusion Transformer Policy(Pretrained on
+Droid)，800MB左右 4.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vla/" rel="tag"># vla</a>
+              <a href="/tags/generalization/" rel="tag"># generalization</a>
+              <a href="/tags/camera-space/" rel="tag"># camera-space</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/12/08/RoboKeyGen-Robot-Pose-and-Joint-Angles-Estimation-via-Diffusion-based-3D-Keypoint-Generation/" rel="prev" title="RoboKeyGen: Robot Pose and Joint Angles Estimation via  Diffusion-based 3D Keypoint Generation">
+                  <i class="fa fa-angle-left"></i> RoboKeyGen: Robot Pose and Joint Angles Estimation via  Diffusion-based 3D Keypoint Generation
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">milong26</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
