@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zhon.fun","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="这一篇总算是有多外参的相机了吧！ 或者可以用这个作为关键词 Extrinsic 关注的就是能应付不同相机的泛化性。 这篇文章可以提供不错的泛化性metric和baseline 方法挺简单的就是坐标转换，思路可以学习一下。 利用“空间对齐”带来泛化提升">
+    <meta name="description" content="ee形式的action从机器人坐标系转移到相机坐标系可以提到对相机的泛化性。 也就是利用“空间对齐”带来泛化提升">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy">
 <meta property="og:url" content="http://zhon.fun/2025/12/09/Grounding-Actions-in-Camera-Space-Observation-Centric-Vision-Language-Action-Policy/index.html">
 <meta property="og:site_name" content="没啥标题">
-<meta property="og:description" content="这一篇总算是有多外参的相机了吧！ 或者可以用这个作为关键词 Extrinsic 关注的就是能应付不同相机的泛化性。 这篇文章可以提供不错的泛化性metric和baseline 方法挺简单的就是坐标转换，思路可以学习一下。 利用“空间对齐”带来泛化提升">
+<meta property="og:description" content="ee形式的action从机器人坐标系转移到相机坐标系可以提到对相机的泛化性。 也就是利用“空间对齐”带来泛化提升">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-12-09T14:03:50.000Z">
-<meta property="article:modified_time" content="2025-12-09T14:03:51.001Z">
+<meta property="article:modified_time" content="2025-12-10T12:43:51.067Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="vla">
 <meta property="article:tag" content="generalization">
@@ -195,9 +195,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-12-09 22:03:50 / 修改时间：22:03:51" itemprop="dateCreated datePublished" datetime="2025-12-09T22:03:50+08:00">2025-12-09</time>
+      <time title="创建时间：2025-12-09 22:03:50" itemprop="dateCreated datePublished" datetime="2025-12-09T22:03:50+08:00">2025-12-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-12-10 20:43:51" itemprop="dateModified" datetime="2025-12-10T20:43:51+08:00">2025-12-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -218,12 +224,8 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>这一篇总算是有多外参的相机了吧！</p>
-<p>或者可以用这个作为关键词 <strong>Extrinsic</strong></p>
-<p>关注的就是能应付不同相机的泛化性。</p>
-<p>这篇文章可以提供不错的泛化性metric和baseline</p>
-<p>方法挺简单的就是坐标转换，思路可以学习一下。</p>
-<p>利用“空间对齐”带来泛化提升</p>
+    <div class="post-body" itemprop="articleBody"><p>ee形式的action从机器人坐标系转移到相机坐标系可以提到对相机的泛化性。</p>
+<p>也就是利用“空间对齐”带来泛化提升</p>
 <span id="more"></span>
 <p>代码在<a
 target="_blank" rel="noopener" href="https://github.com/ZTY0213/OC-VLA">OC-VLA</a>，实际是在Dita那个仓库里面</p>
@@ -394,7 +396,12 @@ perturbations）</td>
 选择的是2.5.1的 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cu121</span><br></pre></td></tr></table></figure> 3. pytorch2检测 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="built_in">print</span>(torch.__version__)          <span class="comment"># 2.x.x</span></span><br><span class="line"><span class="built_in">print</span>(torch.cuda.is_available())  <span class="comment"># True</span></span><br></pre></td></tr></table></figure> 4.
 tensorflow2.15.0 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install tensorflow==2.15.0</span><br></pre></td></tr></table></figure> 5. 最终安装 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install -v --disable-pip-version-check --no-build-isolation --no-cache-dir -r requirements_base.txt</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">pip install -r requirements_base.txt</span></span><br></pre></td></tr></table></figure> 3.
 下载checkpoint：Diffusion Transformer Policy(Pretrained on
-Droid)，800MB左右 4.</p>
+Droid)，800MB左右 4. 利用maniskill2准备数据 1. clone代码： <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/haosulab/ManiSkill.git</span><br></pre></td></tr></table></figure>
+2. python环境 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conda create -n mskill python==3.9</span><br><span class="line">conda activate mskill</span><br><span class="line">cd Maniskill</span><br><span class="line">pip install -e .</span><br></pre></td></tr></table></figure> 3.
+换huggingface镜像<code>export HF_ENDPOINT=https://hf-mirror.com</code>
+4. 下载两个文件夹放到dita的文件夹里面 1. assets/ -&gt;
+dita/ManiSkill2/openx_utils/data/assets 2.
+demos/-&gt;ManiSkill2/openx_utils/demos 4.</p>
 
     </div>
 
