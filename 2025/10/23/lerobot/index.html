@@ -28,7 +28,7 @@
 <meta property="og:description" content="Lerobot的使用以及代码教程">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-23T06:41:46.000Z">
-<meta property="article:modified_time" content="2025-12-01T08:38:32.770Z">
+<meta property="article:modified_time" content="2025-12-11T13:42:29.537Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="robot">
 <meta name="twitter:card" content="summary">
@@ -114,7 +114,13 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">2.</span> <span class="nav-text">数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BF%E7%9C%9F"><span class="nav-number">2.1.</span> <span class="nav-text">仿真</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#record%E4%BB%A3%E7%A0%81"><span class="nav-number">2.2.</span> <span class="nav-text">record代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#record_loop%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.1.</span> <span class="nav-text">record_loop函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.3.</span> <span class="nav-text">下载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git-clone%E6%96%B9%E5%BC%8F%E4%B8%8D%E6%80%8E%E4%B9%88%E5%A5%BD%E7%94%A8"><span class="nav-number">2.3.1.</span> <span class="nav-text">git clone方式（不怎么好用）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AE%B9"><span class="nav-number">2.4.</span> <span class="nav-text">内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7"><span class="nav-number">2.5.</span> <span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">2.5.1.</span> <span class="nav-text">可视化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E7%89%88%E6%9C%AC"><span class="nav-number">2.5.2.</span> <span class="nav-text">数据集版本</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83"><span class="nav-number">4.</span> <span class="nav-text">训练</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95"><span class="nav-number">4.1.</span> <span class="nav-text">简单</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A8%E7%90%86"><span class="nav-number">5.</span> <span class="nav-text">推理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#robot_client%E5%92%8Crecord_loop%E5%9C%A8send_action%E4%B8%8A%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">5.1.</span> <span class="nav-text">robot_client和record_loop在send_action上的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#async%E6%8E%A8%E7%90%86"><span class="nav-number">6.</span> <span class="nav-text">async推理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#async-inferece-action-on-cpu"><span class="nav-number">6.1.</span> <span class="nav-text">async inferece action on cpu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inference-on-policy_srever"><span class="nav-number">6.2.</span> <span class="nav-text">inference on policy_srever</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#joint-ee"><span class="nav-number">7.</span> <span class="nav-text">joint-&gt;ee</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#record"><span class="nav-number">7.1.</span> <span class="nav-text">record</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#record%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%A4%84%E7%90%86%E4%B8%8E%E4%BF%9D%E5%AD%98"><span class="nav-number">7.1.1.</span> <span class="nav-text">record数据获取、处理与保存</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#metaworld"><span class="nav-number">8.</span> <span class="nav-text">metaworld</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#action%E8%BD%AC%E6%8D%A2"><span class="nav-number">9.</span> <span class="nav-text">action转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lerobot-ee"><span class="nav-number">10.</span> <span class="nav-text">lerobot-ee</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#record-1"><span class="nav-number">10.1.</span> <span class="nav-text">record</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#evaluate"><span class="nav-number">10.2.</span> <span class="nav-text">evaluate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#predict_action"><span class="nav-number">10.2.1.</span> <span class="nav-text">predict_action</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#local"><span class="nav-number">10.2.2.</span> <span class="nav-text">local</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async"><span class="nav-number">10.2.3.</span> <span class="nav-text">async</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9async"><span class="nav-number">10.2.3.1.</span> <span class="nav-text">修改async</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#async%E6%89%A7%E8%A1%8C"><span class="nav-number">10.2.3.2.</span> <span class="nav-text">async执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C"><span class="nav-number">10.2.3.3.</span> <span class="nav-text">执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E9%97%AE%E9%A2%98"><span class="nav-number">10.2.3.4.</span> <span class="nav-text">时间问题</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#debug%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%87%AA%E5%AD%98"><span class="nav-number">11.</span> <span class="nav-text">debug配置文件自存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">11.1.</span> <span class="nav-text">服务器</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">2.</span> <span class="nav-text">数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BF%E7%9C%9F"><span class="nav-number">2.1.</span> <span class="nav-text">仿真</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#record%E4%BB%A3%E7%A0%81"><span class="nav-number">2.2.</span> <span class="nav-text">record代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#record_loop%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.1.</span> <span class="nav-text">record_loop函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.3.</span> <span class="nav-text">下载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git-clone%E6%96%B9%E5%BC%8F%E4%B8%8D%E6%80%8E%E4%B9%88%E5%A5%BD%E7%94%A8"><span class="nav-number">2.3.1.</span> <span class="nav-text">git clone方式（不怎么好用）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AE%B9"><span class="nav-number">2.4.</span> <span class="nav-text">内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7"><span class="nav-number">2.5.</span> <span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">2.5.1.</span> <span class="nav-text">可视化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E7%89%88%E6%9C%AC"><span class="nav-number">2.5.2.</span> <span class="nav-text">数据集版本</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83"><span class="nav-number">4.</span> <span class="nav-text">训练</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95"><span class="nav-number">4.1.</span> <span class="nav-text">简单</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A8%E7%90%86"><span class="nav-number">5.</span> <span class="nav-text">推理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#robot_client%E5%92%8Crecord_loop%E5%9C%A8send_action%E4%B8%8A%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">5.1.</span> <span class="nav-text">robot_client和record_loop在send_action上的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#async%E6%8E%A8%E7%90%86"><span class="nav-number">6.</span> <span class="nav-text">async推理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#async-inferece-action-on-cpu"><span class="nav-number">6.1.</span> <span class="nav-text">async inferece action on cpu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inference-on-policy_srever"><span class="nav-number">6.2.</span> <span class="nav-text">inference on policy_srever</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#joint-ee"><span class="nav-number">7.</span> <span class="nav-text">joint-&gt;ee</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#record"><span class="nav-number">7.1.</span> <span class="nav-text">record</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#record%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%A4%84%E7%90%86%E4%B8%8E%E4%BF%9D%E5%AD%98"><span class="nav-number">7.1.1.</span> <span class="nav-text">record数据获取、处理与保存</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#metaworld"><span class="nav-number">8.</span> <span class="nav-text">metaworld</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#action%E8%BD%AC%E6%8D%A2"><span class="nav-number">9.</span> <span class="nav-text">action转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lerobot-ee"><span class="nav-number">10.</span> <span class="nav-text">lerobot-ee</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#record-1"><span class="nav-number">10.1.</span> <span class="nav-text">record</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#evaluate"><span class="nav-number">10.2.</span> <span class="nav-text">evaluate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#predict_action"><span class="nav-number">10.2.1.</span> <span class="nav-text">predict_action</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#local"><span class="nav-number">10.2.2.</span> <span class="nav-text">local</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async"><span class="nav-number">10.2.3.</span> <span class="nav-text">async</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9async"><span class="nav-number">10.2.3.1.</span> <span class="nav-text">修改async</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#async%E6%89%A7%E8%A1%8C"><span class="nav-number">10.2.3.2.</span> <span class="nav-text">async执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C"><span class="nav-number">10.2.3.3.</span> <span class="nav-text">执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E9%97%AE%E9%A2%98"><span class="nav-number">10.2.3.4.</span> <span class="nav-text">时间问题</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#debug%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%87%AA%E5%AD%98"><span class="nav-number">11.</span> <span class="nav-text">debug配置文件自存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">11.1.</span> <span class="nav-text">服务器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pipeline"><span class="nav-number">12.</span> <span class="nav-text">pipeline</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#observation_to_transition"><span class="nav-number">12.0.1.</span> <span class="nav-text">2.
+observation_to_transition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#forwardkinematicsjointstoee"><span class="nav-number">12.0.2.</span> <span class="nav-text">3.
+ForwardKinematicsJointsToEE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#observationprocessorstep"><span class="nav-number">12.0.3.</span> <span class="nav-text">4.
+ObservationProcessorStep</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#forwardkinematicsjointstoeeobservation"><span class="nav-number">12.0.4.</span> <span class="nav-text">5.
+ForwardKinematicsJointsToEEObservation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#compute_forward_kinematics_joints_to_ee"><span class="nav-number">12.0.5.</span> <span class="nav-text">6.
+compute_forward_kinematics_joints_to_ee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transition_to_observation"><span class="nav-number">12.0.6.</span> <span class="nav-text">7.
+transition_to_observation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="nav-number">12.0.7.</span> <span class="nav-text">总结数据处理流程</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -201,7 +207,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-01 16:38:32" itemprop="dateModified" datetime="2025-12-01T16:38:32+08:00">2025-12-01</time>
+      <time title="修改时间：2025-12-11 21:42:29" itemprop="dateModified" datetime="2025-12-11T21:42:29+08:00">2025-12-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -647,6 +653,150 @@ robot里面的use_degrees，这个参数是用来告诉 当前新版硬件 API�
 <h1 id="debug配置文件自存">debug配置文件自存</h1>
 <h2 id="服务器">服务器</h2>
 <p>需要训练、async推理 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0.2.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;configurations&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;lerobot_train训练&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;python&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;request&quot;</span><span class="punctuation">:</span> <span class="string">&quot;launch&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;program&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/home/user/miniconda3/envs/lerobot/bin/lerobot-train&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;--policy.path=lerobot/smolvla_base&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;--dataset.repo_id=test1110/merged&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;--batch_size=64&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;--steps=20000&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;--output_dir=outputs/train/joint_action_joint_state&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;--job_name=my_smolvla_training_joint&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;--policy.device=cuda&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;--wandb.enable=false&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;--policy.push_to_hub=false&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;--rename_map=&#123;\&quot;observation.images.side\&quot;:\&quot;observation.images.camera1\&quot;,\&quot;observation.images.wrist\&quot;:\&quot;observation.images.camera2\&quot;&#125;&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="comment">// ,\&quot;joint_action\&quot;:\&quot;action\&quot;,\&quot;action\&quot;:\&quot;ee_action\&quot;,\&quot;action_is_pad\&quot;:\&quot;ee_action_is_pad\&quot;,\&quot;joint_action_is_pad\&quot;:\&quot;action_is_pad\&quot;</span></span><br><span class="line">            <span class="attr">&quot;env&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;CUDA_VISIBLE_DEVICES&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;HF_HUB_OFFLINE&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;console&quot;</span><span class="punctuation">:</span> <span class="string">&quot;integratedTerminal&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;justMyCode&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;python&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/home/user/miniconda3/envs/lerobot/bin/python&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;cwd&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/home/user/working_folder/lerobot&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;server async推理&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;python&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;request&quot;</span><span class="punctuation">:</span> <span class="string">&quot;launch&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;module&quot;</span><span class="punctuation">:</span> <span class="string">&quot;lerobot.async_inference.policy_server&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;--host=10.10.16.18&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;--port=8080&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;--fps=30&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;--inference_latency=0.033&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;--obs_queue_timeout=1&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;env&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;CUDA_VISIBLE_DEVICES&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;HF_HUB_OFFLINE&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;console&quot;</span><span class="punctuation">:</span> <span class="string">&quot;integratedTerminal&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;justMyCode&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;python&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/home/user/miniconda3/envs/lerobot/bin/python&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;cwd&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/home/user/working_folder/lerobot&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="pipeline">pipeline</h1>
+<p>折磨了我很久的代码。 用joint-&gt;ee举例 ### <strong>1.
+DataProcessorPipeline</strong></p>
+<ul>
+<li><p>类似一个“流水线”，把输入数据依次经过多个处理步骤（<code>ProcessorStep</code>）处理。</p></li>
+<li><p>核心函数：</p>
+<ul>
+<li><p><code>__call__(data)</code>：</p>
+<ol type="1">
+<li><p><code>transition = self.to_transition(data)</code> →
+将原始输入（<code>RobotObservation</code>）转成标准化的
+<code>EnvTransition</code> 字典。</p></li>
+<li><p><code>transformed_transition = self._forward(transition)</code> →
+遍历每个 <code>ProcessorStep</code> 对 transition 处理。</p></li>
+<li><p><code>return self.to_output(transformed_transition)</code> →
+将最终 <code>EnvTransition</code> 转回需要的输出格式（在你这就是
+<code>RobotObservation</code>）。</p></li>
+</ol></li>
+<li><p><code>_forward(transition)</code>：</p>
+<ul>
+<li><p>遍历 pipeline 的每个 <code>ProcessorStep</code>。</p></li>
+<li><p>执行前/后 hook（这里没有自定义 hook，所以可以忽略）。</p></li>
+<li><p>每步处理都返回新的 <code>EnvTransition</code>，并覆盖之前的
+transition。</p></li>
+</ul></li>
+</ul></li>
+</ul>
+<hr />
+<h3 id="observation_to_transition"><strong>2.
+observation_to_transition</strong></h3>
+<ul>
+<li>将原始观测（<code>RobotObservation</code>，也就是你的
+<code>raw_observation_state</code>）转换成
+<code>EnvTransition</code>：</li>
+</ul>
+<p><code>&#123;   TransitionKey.OBSERVATION: observation,   TransitionKey.ACTION: None,   TransitionKey.REWARD: 0.0,   TransitionKey.DONE: False,   TransitionKey.TRUNCATED: False,   TransitionKey.INFO: &#123;&#125;,   TransitionKey.COMPLEMENTARY_DATA: &#123;&#125;, &#125;</code></p>
+<ul>
+<li>也就是说，它只是包装了一下原始观测，添加了 action、reward、done
+等默认字段。</li>
+</ul>
+<hr />
+<h3 id="forwardkinematicsjointstoee"><strong>3.
+ForwardKinematicsJointsToEE</strong></h3>
+<ul>
+<li><p>一个 <code>ProcessorStep</code>，负责把 joint 信息转成
+end-effector (EE) 信息。</p></li>
+<li><p><code>__post_init__()</code>：</p>
+<ul>
+<li><p>初始化两个子处理器：</p>
+<ul>
+<li><p><code>ForwardKinematicsJointsToEEAction</code>（处理动作中的
+joint→EE，通常不需要）</p></li>
+<li><p><code>ForwardKinematicsJointsToEEObservation</code>（处理观测中的
+joint→EE）</p></li>
+</ul></li>
+</ul></li>
+<li><p><code>__call__(transition)</code>：</p>
+<ul>
+<li><p>如果 transition 中有 <code>action</code>，处理
+action（这里没有，所以跳过）。</p></li>
+<li><p>如果 transition 中有 <code>observation</code>，调用
+<code>ForwardKinematicsJointsToEEObservation</code> 处理。</p></li>
+</ul></li>
+<li><p><strong>作用</strong>：对 <code>EnvTransition</code> 的
+observation 做 FK 计算，并添加 EE 数据。</p></li>
+</ul>
+<hr />
+<h3 id="observationprocessorstep"><strong>4.
+ObservationProcessorStep</strong></h3>
+<ul>
+<li><p>抽象类，用于专门处理 transition 中的
+<code>OBSERVATION</code>。</p></li>
+<li><p>子类只需要实现 <code>observation()</code> 方法即可。</p></li>
+<li><p><code>__call__(transition)</code>：</p>
+<ol type="1">
+<li><p>复制 transition。</p></li>
+<li><p>调用 <code>self.observation(observation)</code>。</p></li>
+<li><p>将处理后的 observation 放回 transition。</p></li>
+</ol></li>
+</ul>
+<hr />
+<h3 id="forwardkinematicsjointstoeeobservation"><strong>5.
+ForwardKinematicsJointsToEEObservation</strong></h3>
+<ul>
+<li><p><code>ObservationProcessorStep</code> 的具体实现。</p></li>
+<li><p><code>observation(observation)</code>：</p>
+<ul>
+<li>调用 <code>compute_forward_kinematics_joints_to_ee()</code>，把
+joint 信息计算成 EE pose。</li>
+</ul></li>
+<li><p><strong>核心逻辑</strong>：</p></li>
+</ul>
+<p><code>motor_joint_values = [joints[f"&#123;n&#125;.pos"] for n in motor_names] q = np.array(motor_joint_values) t = kinematics.forward_kinematics(q) pos = t[:3, 3] tw = Rotation.from_matrix(t[:3, :3]).as_rotvec() # 删除原 joint 信息，添加 EE 数据 joints["ee.x"] = pos[0] joints["ee.y"] = pos[1] joints["ee.z"] = pos[2] joints["ee.wx"] = tw[0] joints["ee.wy"] = tw[1] joints["ee.wz"] = tw[2] joints["ee.gripper_pos"] = joints["gripper.pos"]</code></p>
+<ul>
+<li>返回修改后的 observation。</li>
+</ul>
+<hr />
+<h3 id="compute_forward_kinematics_joints_to_ee"><strong>6.
+compute_forward_kinematics_joints_to_ee</strong></h3>
+<ul>
+<li><p>真正的 FK 计算逻辑。</p></li>
+<li><p>输入：joint dict, kinematics 对象, motor names</p></li>
+<li><p>输出：包含 EE pose 的 observation dict。</p></li>
+</ul>
+<hr />
+<h3 id="transition_to_observation"><strong>7.
+transition_to_observation</strong></h3>
+<ul>
+<li><p>只取 <code>EnvTransition</code> 中的 <code>OBSERVATION</code>
+部分返回。</p></li>
+<li><p>所以最终
+<code>obs_processed = self.robot_joints_to_ee_pose_processor(raw_observation_state)</code>
+得到的就是原 observation 加上 EE 信息。</p></li>
+</ul>
+<hr />
+<h3 id="总结数据处理流程"><strong>总结数据处理流程</strong></h3>
+<ol type="1">
+<li><p><strong>输入</strong>：<code>raw_observation_state</code>（dict，包含
+joint 信息）。</p></li>
+<li><p><code>observation_to_transition</code> → 包装成
+<code>EnvTransition</code>。</p></li>
+<li><p><code>_forward()</code>：</p>
+<ul>
+<li><p>调用 <code>ForwardKinematicsJointsToEE.__call__()</code>：</p>
+<ul>
+<li><p>调用
+<code>ForwardKinematicsJointsToEEObservation.__call__()</code>：</p>
+<ul>
+<li>调用 <code>observation()</code> →
+<code>compute_forward_kinematics_joints_to_ee()</code> → 计算 EE，修改
+observation。</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><p><code>transition_to_observation</code> → 返回最终
+<code>RobotObservation</code>（包含 EE 数据）。</p></li>
+</ol>
+<p><strong>最终处理结果</strong>：</p>
+<ul>
+<li><p>原来的 joint 数据被移除（如果 motor_name 对应的 joint
+被删除的话）。</p></li>
+<li><p>添加了 EE 的位置和旋转信息：</p>
+<p><code>'ee.x', 'ee.y', 'ee.z', 'ee.wx', 'ee.wy', 'ee.wz', 'ee.gripper_pos'</code></p></li>
+</ul>
 
     </div>
 
