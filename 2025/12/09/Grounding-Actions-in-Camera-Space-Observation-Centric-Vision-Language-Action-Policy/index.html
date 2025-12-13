@@ -28,7 +28,7 @@
 <meta property="og:description" content="ee形式的action从机器人坐标系转移到相机坐标系可以提到对相机的泛化性。 也就是利用“空间对齐”带来泛化提升">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-12-09T14:03:50.000Z">
-<meta property="article:modified_time" content="2025-12-12T06:29:31.561Z">
+<meta property="article:modified_time" content="2025-12-12T08:33:05.843Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="vla">
 <meta property="article:tag" content="generalization">
@@ -203,7 +203,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-12 14:29:31" itemprop="dateModified" datetime="2025-12-12T14:29:31+08:00">2025-12-12</time>
+      <time title="修改时间：2025-12-12 16:33:05" itemprop="dateModified" datetime="2025-12-12T16:33:05+08:00">2025-12-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -396,18 +396,25 @@ perturbations）</td>
 选择的是2.5.1的 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cu121</span><br></pre></td></tr></table></figure> 3. pytorch2检测 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="built_in">print</span>(torch.__version__)          <span class="comment"># 2.x.x</span></span><br><span class="line"><span class="built_in">print</span>(torch.cuda.is_available())  <span class="comment"># True</span></span><br></pre></td></tr></table></figure> 4.
 tensorflow2.15.0 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install tensorflow==2.15.0</span><br></pre></td></tr></table></figure> 5. 安装<a
 href="obsidian://open?vault=lilp&amp;file=load%2Fsource%2F_posts%2Fcuda">cuda</a>，要nvcc
---version有结果 6. 最终安装 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements_calvin.txt --no-build-isolation</span><br></pre></td></tr></table></figure> 3. 下载checkpoint：Diffusion
-Transformer Policy(Pretrained on Droid)，800MB左右 4. 利用<a
+--version有结果 6. 最终安装 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements_calvin.txt --no-build-isolation</span><br></pre></td></tr></table></figure> 7. 有个报错是pyhash的，参考<a
+target="_blank" rel="noopener" href="https://github.com/RoboDita/Dita/issues/25">github
+issue</a>，搜索pyhash，定位到一个解决方案 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install setuptools==57.5.0</span><br></pre></td></tr></table></figure> 3.
+下载checkpoint：Diffusion Transformer Policy(Pretrained on
+Droid)，800MB左右 4. 利用<a
 href="obsidian://open?vault=lilp&amp;file=load%2Fsource%2F_drafts%2Fmaniskill">maniskill2</a>准备数据。
 1. 利用代码生成，huggingface的，需要用镜像 2.
 下载两个文件夹放到dita的文件夹里面，执行mv 要移动的 目标位置 就行 1.
 assets默认位置在 ~/.maniskill/data/assets/ -&gt;
 dita/ManiSkill2/openx_utils/data/assets
 要不直接把data整个文件夹转移过去？ 2. demos在
-~/.maniskill/demo/-&gt;ManiSkill2/openx_utils/demos 3.
-（可选）检查环境装好了没 1. 主要是requirements.txt的torch3d 4.
-在 <code>ManiSkill2/openx_utils/</code> 按照task生成数据 5.
-:~/Dita/ManiSkill2/openx_utils$ sh generate_pickcube.sh</p>
+~/.maniskill/demo/-&gt;ManiSkill2/openx_utils/demos 5.
+在 <code>ManiSkill2/openx_utils/</code> 按照task生成数据 1.
+~/Dita/ManiSkill2/openx_utils$ sh generate_pickcube.sh 2.
+执行的时候遇到报错<code>ModuleNotFoundError: No module named 'petrel_client'</code>
+这个完全不重要，直接用None，所以注释掉import，然后把client=Client那个分支去掉，默认client是None
+3.
+修改.py代码里面的<code>PickCube-v</code>相关的内容，和demos文件夹里面的一样，还有check_ceph_file_exist这个函数直接返回False
+4. 数据集比较新，所以要pop掉一些参数 5. 遇到报错说Shader</p>
 
     </div>
 
