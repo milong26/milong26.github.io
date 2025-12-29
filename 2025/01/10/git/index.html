@@ -28,7 +28,7 @@
 <meta property="og:description" content="git一些问题累积">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-01-10T02:55:21.000Z">
-<meta property="article:modified_time" content="2025-11-13T06:22:30.444Z">
+<meta property="article:modified_time" content="2025-12-25T12:12:07.995Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary">
@@ -203,7 +203,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-13 14:22:30" itemprop="dateModified" datetime="2025-11-13T14:22:30+08:00">2025-11-13</time>
+      <time title="修改时间：2025-12-25 20:12:07" itemprop="dateModified" datetime="2025-12-25T20:12:07+08:00">2025-12-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -394,6 +394,25 @@ pull也没有啊，应该下载完了</li>
 SO-ARM100</p>
 <p>git commit -m "Add SO-ARM100 as submodule"</p>
 <p>现在</p>
+<p>为什么有时候git clone了done了却还是在等待，在等什么？
+如果强行ctrlc，会出现 warning: Clone succeeded, but checkout failed. You
+can inspect what was checked out with 'git status' and retry with 'git
+restore --source=HEAD :/' Exiting because of "interrupt" signal.</p>
+<p>也就是还在checkout阶段被中断，可以'git restore --source=HEAD
+:/'恢复</p>
+<p>它只作用于 本地工作区</p>
+<p>作用对象是你当前终端里所在仓库的 工作目录</p>
+<p>git add . warning: adding embedded git repository: SO-ARM100 hint:
+You've added another git repository inside your current repository.
+hint: Clones of the outer repository will not contain the contents of
+hint: the embedded repository and will not know how to obtain it. hint:
+If you meant to add a submodule, use: hint: hint: git submodule add
+<url> SO-ARM100 hint: hint: If you added this path by mistake, you can
+remove it from the hint: index with: hint: hint: git rm --cached
+SO-ARM100 hint: hint: See "git help submodule" for more information.
+怎么解决： 1. 删除git rm --cached SO-ARM100 2. ls SO-ARM100 确认还在本地
+3. git submodule add https://github.com/TheRobotStudio/SO-ARM100.git
+SO-ARM100</p>
 
     </div>
 

@@ -28,7 +28,7 @@
 <meta property="og:description" content="windows，系统和使用。有linux了怎么能没有windows">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-04-02T07:14:40.000Z">
-<meta property="article:modified_time" content="2025-12-10T05:59:01.401Z">
+<meta property="article:modified_time" content="2025-12-29T09:53:53.553Z">
 <meta property="article:author" content="milong26">
 <meta property="article:tag" content="os">
 <meta property="article:tag" content="windows">
@@ -202,7 +202,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-10 13:59:01" itemprop="dateModified" datetime="2025-12-10T13:59:01+08:00">2025-12-10</time>
+      <time title="修改时间：2025-12-29 17:53:53" itemprop="dateModified" datetime="2025-12-29T17:53:53+08:00">2025-12-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -252,6 +252,25 @@ https://blog.csdn.net/weixin_40381193/article/details/127658235</p>
 <p>分栏之后mathtype公式位置很诡异：https://blog.csdn.net/weixin_46413772/article/details/128548244</p>
 <p>就是设置分隔符，需要算栏宽</p>
 <p>excel冻结首行和首列：</p>
+<p>关闭chrome的自动更新</p>
+<ol type="1">
+<li><strong>停止并禁用 Chrome 更新服务</strong>
+<ul>
+<li>按 <code>Win + R</code> 输入 <code>services.msc</code> 打开服务管理器。</li>
+<li>找到以下服务并逐个右键→<strong>属性</strong>→<strong>停止</strong>→<strong>启动类型设为「禁用」</strong>：
+<ul>
+<li><code>GoogleUpdater InternalService</code></li>
+<li><code>GoogleUpdater Service</code></li>
+</ul></li>
+<li>点击「应用」保存。</li>
+</ul></li>
+<li><strong>禁用 Chrome 更新任务计划程序</strong>
+<ul>
+<li>按 <code>Win + R</code> 输入 <code>taskschd.msc</code> 打开任务计划程序。</li>
+<li>展开路径：<code>任务计划程序库 → GoogleSystem → GoogleUpdater</code>。</li>
+<li><strong>右键禁用</strong>所有与 <code>GoogleUpdate</code> 相关的任务（如 <code>GoogleUpdateTaskMachineCore</code>、<code>GoogleUpdateTaskMachineUA</code>）。</li>
+</ul></li>
+</ol>
 
     </div>
 
