@@ -122,6 +122,189 @@
     </nav>
 </header>
 <main class="main"> 
+
+<article class="first-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">注意力机制
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>注意力机制是transformer的核心，有三个关键的计算QKV
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2024-03-05 16:49:09 +0000 UTC'>March 5, 2024</span></footer>
+  <a class="entry-link" aria-label="post link to 注意力机制" href="https://example.org/post/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">最大似然估计
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>hello
+参考这一篇hehe
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2024-03-03 15:11:54 +0000 UTC'>March 3, 2024</span></footer>
+  <a class="entry-link" aria-label="post link to 最大似然估计" href="https://example.org/post/%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">自注意力机制
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Self-Attention 是 Transformer最核心的思想
+基础 公式 $$ Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})V $$ 其本质是$softmax(XX^T)X$
+XX^T 一个矩阵乘以它自己的转置，会得到什么结果，有什么意义？
+我们知道，矩阵可以看作由一些向量组成，一个矩阵乘以它自己转置的运算，其实可以看成这些向量分别与其他向量计算内积。向量的内积，其几何意义是什么？
+答：表征两个向量的夹角，表征一个向量在另一个向量上的投影
+举例说明：$X = [x_1^T;x_2^T;x_3^T]$，模拟字向量的计算过程 行向量$x_i$分别与自己和其他两个行向量做内积（“早&#34;分别与&#34;上&#34;“好&#34;计算内积），得到了一个新的向量。
+投影的值大，说明两个向量相关度高。
+更进一步，这个向量是词向量，是词在高维空间的数值映射。词向量之间相关度高表示什么？是不是在一定程度上（不是完全）表示，在关注词A的时候，应当给予词B更多的关注？
+矩阵 $XX^T$是一个方阵，我们以行向量的角度理解，里面保存了每个向量与自己和其他向量进行内积运算的结果。 每一行可以看作是每个向量与所有向量的相关度
+softmax $$ softmax(z_i)=\frac{e^{z_i}}{\sum_{c=1}^Ce^{z_c}} $$ 主要干的是归一化的工作，Softmax之后，这些数字的和为1了 为什么要softmax?
+反方观点： 这篇用了线性attention，也就是去掉softmax，文章结论认为去掉softmax是可行的 这一篇也是线性attention 正方观点： attention的本质就是加权求和 softmax之后的数值就是权重 softmax(XX^T)X 从上文的$XX^T$继续看 一个行向量*X的一个列向量，得到： 在新的向量中，每一个维度的数值都是由三个词向量在这一维度的数值加权求和得来的，这个新的行向量就是&#34;早&#34;字词向量经过注意力机制加权求和之后的表示。
+Q,K,T Q K V矩阵都是从X线性变化来的，为了提升模型的拟合能力 sqrt(d_k) 假设Q,K里的元素的均值为0，方差为1，那么$A^T=Q^TK$中元素的均值为0，方差为d. 当d变得很大时，A中的元素的方差也会变得很大，如果 A中的元素方差很大，那么softmax(A)的分布会趋于陡峭(分布的方差大，分布集中在绝对值大的区域)。
+总结一下就是softmax(A)的分布会和d有关。因此A中每一个元素除以 $\sqrt{d_k}$后，方差又变为1。这使得softmax(A)的分布“陡峭”程度与d解耦，从而使得训练过程中梯度值保持稳定。
+最后再补充一点，对self-attention来说，它跟每一个input vector都做attention，所以没有考虑到input sequence的顺序。更通俗来讲，大家可以发现我们前文的计算每一个词向量都与其他词向量计算内积，得到的结果丢失了我们原来文本的顺序信息。对比来说，LSTM是对于文本顺序信息的解释是输出词向量的先后顺序，而我们上文的计算对sequence的顺序这一部分则完全没有提及，你打乱词向量的顺序，得到的结果仍然是相同的。
+这就牵扯到Transformer的位置编码了，具体在transformer里面看。
+代码 不着急写，以后看
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-10-25 21:36:31 +0000 UTC'>October 25, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to 自注意力机制" href="https://example.org/post/%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">字符串匹配
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>kmp算法参考https://zhuanlan.zhihu.com/p/43418549 代码参考
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-22 13:25:51 +0000 UTC'>September 22, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to 字符串匹配" href="https://example.org/post/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">最小生成树
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>满足两点之间有且仅有一条简单路径的结构只有树 且这棵树包含 n 个节点。我们称这棵树为给定的图的生成树，其中总权值最小的生成树，我们称其为最小生成树。 最小生成树关键在避免环
+生成树 定义 一个连通图的生成树是一个极小的连通子图，它包含图中全部的n个顶点，但只有构成一棵树的n-1条边。
+性质 生成树的属性 一个连通图可以有多个生成树； 一个连通图的所有生成树都包含相同的顶点个数和边数； 生成树当中不存在环； 移除生成树中的任意一条边都会导致图的不连通， 生成树的边最少特性； 在生成树中添加一条边会构成环。 对于包含n个顶点的连通图，生成树包含n个顶点和n-1条边； 对于包含n个顶点的无向完全图最多包含$n^{n-2}$颗生成树。 证明$n^{n-2}$： 为什么是n^n-2），一篇里面塞不下:D
+最小生成树 定义 所谓一个带权图的最小生成树，就是原图中边的权值最小的生成树 ，所谓最小是指边的权值之和小于或者等于其它生成树的边的权值之和。
+求解 Kruskal 贪心找边，从小到大加入边
+按边长度排序 从小到大，if加入e之后没有形成环，e加入G&#39; 最后得到G‘ 问题是判断成环，见其它post Prim 加点，把点分成两坨A,B集合，A表示已经成了，B是待选的，要做的事从B里面挑一个点，满足它到A的点里面，有个边距离是最短的 （理解成长三角经济圈画好了，接下来先从周边里挑一个离长三角圈里面的城市最近的，这么想有点奇怪） 关键在怎么从待选里找距离最短的点 思路是用一个点个数大小的数组，没有直接连用∞，否则记录最小值 注意区分已访问过的点 这个为什么不会成环？把点分成两坨了，找的都是新点
+示例与代码 测试数据
+1 6 10 1 2 28 6 5 25 5 7 24 2 7 14 2 3 16 3 4 12 4 7 18 4 5 22 代码
+使用Kruskal算法
+#include&lt;iostream&gt; #include&lt;algorithm&gt; using namespace std; const int maxe = 100; int fa[maxe], n, m, ans = 0; struct edge { int u, v, w; }e[maxe]; bool cmp(edge a, edge b) { return a.w&lt;b.w; } int get(int x)//用处是看它是否成环的，nb { if (fa[x] == x) return x;//x的根为它本身，x就是该集的根 return fa[x] = get(fa[x]);//路径压缩 } int main() { cin &gt;&gt; n &gt;&gt; m; for (int i = 1; i &lt;= n; i&#43;&#43;) fa[i] = i;//初始化 for (int i = 1; i &lt;= m; i&#43;&#43;) { cin &gt;&gt; e[i].u &gt;&gt; e[i].v &gt;&gt; e[i].w; } sort(e &#43; 1, e &#43; 1 &#43; m, cmp);//升序排序 for (int i = 1; i &lt;= m; i&#43;&#43;) { int u = get(e[i].u);//找根 int v = get(e[i].v); if (u == v) continue;//continue 表示终止本次（本轮）循环，进入下一轮循环。判断它是否成环 fa[u] = v; cout &lt;&lt; e[i].u &lt;&lt; &#34; &#34; &lt;&lt; e[i].v &lt;&lt; endl; ans &#43;= e[i].w; } cout &lt;&lt; ans &lt;&lt; endl; return 0; } </p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-15 15:40:34 +0000 UTC'>September 15, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to 最小生成树" href="https://example.org/post/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">重装系统之前和之后我要干什么
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>遇到问题睡大觉× 遇到问题重装√
+之前：
+导出chrome的用户名和密码 导出收藏夹 qq文件 d盘中的文件相关 桌面上可能有的文件残留 单机游戏的存档 重装系统ing
+之后：
+设置一下配色，防止闪瞎 修改桌面布局、卸载掉不用的软件 chrome下载回来 darkreader拓展 佛跳墙 屏蔽广告的拓展和tampermonkey 导入密码和收藏夹 7z、vscode、tim等软件安装和配置 显示器的驱动找intel assiat它会补全 指纹的驱动在这，指纹是这个Goodix GF3208 指纹传感器驱动程序 腾讯的翻译拓展挺好用的，不需要登录，比谷歌快 </p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-05-17 16:49:37 +0000 UTC'>May 17, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to 重装系统之前和之后我要干什么" href="https://example.org/post/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B9%8B%E5%89%8D%E5%92%8C%E4%B9%8B%E5%90%8E%E6%88%91%E8%A6%81%E5%B9%B2%E4%BB%80%E4%B9%88/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">只要饿不死
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>就往死里饿
+下饺子
+包好的 放水煮，沸腾了把饺子下锅 煮到泡沫变多的时候把饺子翻一下防止粘锅 浮上来后关火，焖一段时间 炒菠菜
+洗好了，根太长的就去了 锅里放点油（怕油炸的话可以先不点火 先把菠菜梗那段下锅炒会 再上其它的 炒到瘪了就差不多 </p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-04-25 18:10:02 +0000 UTC'>April 25, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to 只要饿不死" href="https://example.org/post/%E5%8F%AA%E8%A6%81%E9%A5%BF%E4%B8%8D%E6%AD%BB/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">账号
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2021-09-16 17:00:02 +0000 UTC'>September 16, 2021</span></footer>
+  <a class="entry-link" aria-label="post link to 账号" href="https://example.org/post/%E8%B4%A6%E5%8F%B7/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">阻塞系统调用
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2021-05-04 08:08:14 +0000 UTC'>May 4, 2021</span></footer>
+  <a class="entry-link" aria-label="post link to 阻塞系统调用" href="https://example.org/post/%E9%98%BB%E5%A1%9E%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">正则表达式
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>正则表达式
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2021-04-17 21:18:57 +0000 UTC'>April 17, 2021</span></footer>
+  <a class="entry-link" aria-label="post link to 正则表达式" href="https://example.org/post/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="https://example.org/page/2/">Next&nbsp;&nbsp;»
+    </a>
+  </nav>
+</footer>
     </main>
     
 <footer class="footer">
