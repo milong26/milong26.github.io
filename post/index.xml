@@ -13,7 +13,14 @@
       <link>http://localhost:1313/post/my-first-post/</link>
       <pubDate>Mon, 08 Jun 2026 15:22:43 +0800</pubDate>
       <guid>http://localhost:1313/post/my-first-post/</guid>
-      <description></description>
+      <description>&lt;p&gt;hello world&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>英语</title>
+      <link>http://localhost:1313/post/%E8%8B%B1%E8%AF%AD/</link>
+      <pubDate>Wed, 22 Oct 2025 10:43:37 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E8%8B%B1%E8%AF%AD/</guid>
+      <description>&lt;p&gt;虽然已经学了二十多年了但肯定还有不会的&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
