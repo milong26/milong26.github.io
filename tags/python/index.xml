@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>It on 我的博客</title>
-    <link>https://example.com/categories/it/</link>
-    <description>Recent content in It on 我的博客</description>
+    <title>Python on 我的博客</title>
+    <link>https://example.com/tags/python/</link>
+    <description>Recent content in Python on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Mon, 24 Mar 2025 20:59:10 +0000</lastBuildDate>
-    <atom:link href="https://example.com/categories/it/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://example.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>python压缩pdf</title>
       <link>https://example.com/post/python%E5%8E%8B%E7%BC%A9pdf/</link>
       <pubDate>Mon, 24 Mar 2025 20:59:10 +0000</pubDate>
       <guid>https://example.com/post/python%E5%8E%8B%E7%BC%A9pdf/</guid>
       <description>&lt;p&gt;有个需求是压缩pdf，没有wps，又不想泄露源文件，用python写吧。代码是抄了然后改的&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>hugo使用指南</title>
-      <link>https://example.com/post/hugo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/hugo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</guid>
-      <description>&lt;p&gt;hugo配置日志&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

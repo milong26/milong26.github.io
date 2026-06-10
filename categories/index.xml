@@ -16,17 +16,17 @@
       <description></description>
     </item>
     <item>
+      <title>It</title>
+      <link>https://example.com/categories/it/</link>
+      <pubDate>Mon, 24 Mar 2025 20:59:10 +0000</pubDate>
+      <guid>https://example.com/categories/it/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Code</title>
       <link>https://example.com/categories/code/</link>
       <pubDate>Thu, 12 Oct 2023 20:54:21 +0000</pubDate>
       <guid>https://example.com/categories/code/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>It</title>
-      <link>https://example.com/categories/it/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/categories/it/</guid>
       <description></description>
     </item>
   </channel>

@@ -23,6 +23,21 @@
     <loc>https://example.com/post/%E8%8B%B1%E8%AF%AD/</loc>
     <lastmod>2025-10-22T10:43:37+00:00</lastmod>
   </url><url>
+    <loc>https://example.com/categories/it/</loc>
+    <lastmod>2025-03-24T20:59:10+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/pdf/</loc>
+    <lastmod>2025-03-24T20:59:10+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/python/</loc>
+    <lastmod>2025-03-24T20:59:10+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/python%E5%8E%8B%E7%BC%A9pdf/</loc>
+    <lastmod>2025-03-24T20:59:10+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/tool/</loc>
+    <lastmod>2025-03-24T20:59:10+00:00</lastmod>
+  </url><url>
     <loc>https://example.com/categories/code/</loc>
     <lastmod>2023-10-12T20:54:21+00:00</lastmod>
   </url><url>
@@ -36,8 +51,6 @@
     <lastmod>2023-10-12T20:54:21+00:00</lastmod>
   </url><url>
     <loc>https://example.com/post/hugo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</loc>
-  </url><url>
-    <loc>https://example.com/categories/it/</loc>
   </url><url>
     <loc>https://example.com/tags/website/</loc>
   </url>
