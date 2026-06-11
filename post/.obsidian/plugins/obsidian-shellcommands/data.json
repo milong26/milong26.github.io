@@ -80,7 +80,7 @@
           "convert_ansi_code": true
         },
         "stderr": {
-          "handler": "notification",
+          "handler": "status-bar",
           "convert_ansi_code": true
         }
       },
