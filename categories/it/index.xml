@@ -13,7 +13,15 @@
       <link>https://example.com/post/python%E5%8E%8B%E7%BC%A9pdf/</link>
       <pubDate>Mon, 24 Mar 2025 20:59:10 +0000</pubDate>
       <guid>https://example.com/post/python%E5%8E%8B%E7%BC%A9pdf/</guid>
-      <description>&lt;p&gt;有个需求是压缩pdf，没有wps，又不想泄露源文件，用python写吧。代码是抄了然后改的&lt;/p&gt;</description>
+      <description>&lt;p&gt;有个需求是压缩pdf，没有wps，又不想泄露源文件，用python写吧。代码是抄了然后改的
+有时候这个功能还挺好用，什么时候整理成一个exe应用就好了&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>latexocr</title>
+      <link>https://example.com/post/latexocr/</link>
+      <pubDate>Mon, 28 Oct 2024 22:07:18 +0000</pubDate>
+      <guid>https://example.com/post/latexocr/</guid>
+      <description>&lt;p&gt;图片转latex，本地版。需要梯子，也可以搞镜像&lt;/p&gt;</description>
     </item>
     <item>
       <title>hugo使用指南</title>

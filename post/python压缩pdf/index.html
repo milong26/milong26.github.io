@@ -7,7 +7,8 @@
 <meta name="robots" content="index, follow">
 <title>python压缩pdf | 我的博客</title>
 <meta name="keywords" content="python, pdf, tool">
-<meta name="description" content="有个需求是压缩pdf，没有wps，又不想泄露源文件，用python写吧。代码是抄了然后改的">
+<meta name="description" content="有个需求是压缩pdf，没有wps，又不想泄露源文件，用python写吧。代码是抄了然后改的
+有时候这个功能还挺好用，什么时候整理成一个exe应用就好了">
 <meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
 <link rel="canonical" href="https://example.com/post/python%E5%8E%8B%E7%BC%A9pdf/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
@@ -67,7 +68,7 @@
 </script><meta property="og:url" content="https://example.com/post/python%E5%8E%8B%E7%BC%A9pdf/">
   <meta property="og:site_name" content="我的博客">
   <meta property="og:title" content="python压缩pdf">
-  <meta property="og:description" content="有个需求是压缩pdf，没有wps，又不想泄露源文件，用python写吧。代码是抄了然后改的">
+  <meta property="og:description" content="有个需求是压缩pdf，没有wps，又不想泄露源文件，用python写吧。代码是抄了然后改的 有时候这个功能还挺好用，什么时候整理成一个exe应用就好了">
   <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -79,7 +80,7 @@
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="python压缩pdf">
-  <meta name="twitter:description" content="有个需求是压缩pdf，没有wps，又不想泄露源文件，用python写吧。代码是抄了然后改的">
+  <meta name="twitter:description" content="有个需求是压缩pdf，没有wps，又不想泄露源文件，用python写吧。代码是抄了然后改的 有时候这个功能还挺好用，什么时候整理成一个exe应用就好了">
 
 
 <script type="application/ld+json">
@@ -108,12 +109,12 @@
   "@type": "BlogPosting",
   "headline": "python压缩pdf",
   "name": "python压缩pdf",
-  "description": "有个需求是压缩pdf，没有wps，又不想泄露源文件，用python写吧。代码是抄了然后改的\n",
+  "description": "有个需求是压缩pdf，没有wps，又不想泄露源文件，用python写吧。代码是抄了然后改的 有时候这个功能还挺好用，什么时候整理成一个exe应用就好了\n",
   "keywords": [
     "python", "pdf", "tool"
   ],
-  "articleBody": "有个需求是压缩pdf，没有wps，又不想泄露源文件，用python写吧。代码是抄了然后改的\npip install fitz 运行代码 import fitz import os import shutil def covert2pic(zoom): # Create pdf directory if it doesn't exist if not os.path.exists('pdf'): os.makedirs('pdf') for pg in range(totaling): page = doc[pg] zoom = int(zoom) #值越大，分辨率越高，文件越清晰 rotate = int(0) print(page) trans = fitz.Matrix(zoom / 100.0, zoom / 100.0) pm = page.get_pixmap(matrix=trans, alpha=False) lurl='pdf/%s.jpg' % str(pg+1) pm.save(lurl) doc.close() def pic2pdf(obj): doc = fitz.open() for pg in range(totaling): img = 'pdf/%s.jpg' % str(pg+1) imgdoc = fitz.open(img) # 打开图片 pdfbytes = imgdoc.convert_to_pdf() # 使用图片创建单页的 PDF os.remove(img) imgpdf = fitz.open(\"pdf\", pdfbytes) doc.insert_pdf(imgpdf) # 将当前页插入文档 if os.path.exists(obj): # 若文件存在先删除 os.remove(obj) doc.save(obj) # 保存pdf文件 doc.close() def pdfz(sor, obj, zoom): covert2pic(zoom) pic2pdf(obj) if __name__ == \"__main__\": sor = \"5.pdf\" # 需要压缩的PDF文件 obj = \"new\" + sor doc = fitz.open(sor) totaling = doc.page_count zoom = 90 # 清晰度调节，缩放比率 pdfz(sor, obj, zoom) if os.path.exists('pdf'): shutil.rmtree('pdf') 暂时成功了，以后版本升级之后可能有bug吧。不过思路没错\n还差一个指定要多大的功能，就可以自动计算zoom应该多少\n",
-  "wordCount" : "138",
+  "articleBody": "有个需求是压缩pdf，没有wps，又不想泄露源文件，用python写吧。代码是抄了然后改的 有时候这个功能还挺好用，什么时候整理成一个exe应用就好了\npip install fitz 运行代码 import fitz import os import shutil def covert2pic(zoom): # Create pdf directory if it doesn't exist if not os.path.exists('pdf'): os.makedirs('pdf') for pg in range(totaling): page = doc[pg] zoom = int(zoom) #值越大，分辨率越高，文件越清晰 rotate = int(0) print(page) trans = fitz.Matrix(zoom / 100.0, zoom / 100.0) pm = page.get_pixmap(matrix=trans, alpha=False) lurl='pdf/%s.jpg' % str(pg+1) pm.save(lurl) doc.close() def pic2pdf(obj): doc = fitz.open() for pg in range(totaling): img = 'pdf/%s.jpg' % str(pg+1) imgdoc = fitz.open(img) # 打开图片 pdfbytes = imgdoc.convert_to_pdf() # 使用图片创建单页的 PDF os.remove(img) imgpdf = fitz.open(\"pdf\", pdfbytes) doc.insert_pdf(imgpdf) # 将当前页插入文档 if os.path.exists(obj): # 若文件存在先删除 os.remove(obj) doc.save(obj) # 保存pdf文件 doc.close() def pdfz(sor, obj, zoom): covert2pic(zoom) pic2pdf(obj) if __name__ == \"__main__\": sor = \"5.pdf\" # 需要压缩的PDF文件 obj = \"new\" + sor doc = fitz.open(sor) totaling = doc.page_count zoom = 90 # 清晰度调节，缩放比率 pdfz(sor, obj, zoom) if os.path.exists('pdf'): shutil.rmtree('pdf') 暂时成功了，以后版本升级之后可能有bug吧。不过思路没错\n还差一个指定要多大的功能，就可以自动计算zoom应该多少\n",
+  "wordCount" : "139",
   "inLanguage": "en",
   "datePublished": "2025-03-24T20:59:10Z",
   "dateModified": "2025-03-24T20:59:10Z",
@@ -202,7 +203,8 @@
 
 </div>
   </header> 
-  <div class="post-content md-content"><p>有个需求是压缩pdf，没有wps，又不想泄露源文件，用python写吧。代码是抄了然后改的</p>
+  <div class="post-content md-content"><p>有个需求是压缩pdf，没有wps，又不想泄露源文件，用python写吧。代码是抄了然后改的
+有时候这个功能还挺好用，什么时候整理成一个exe应用就好了</p>
 <ol>
 <li>pip install fitz</li>
 <li>运行代码</li>

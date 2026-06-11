@@ -15,5 +15,21 @@
       <guid>https://example.com/post/%E8%8B%B1%E8%AF%AD/</guid>
       <description>&lt;p&gt;虽然已经学了二十多年了但肯定还有不会的&lt;/p&gt;</description>
     </item>
+    <item>
+      <title>watching</title>
+      <link>https://example.com/post/watching/</link>
+      <pubDate>Mon, 24 Mar 2025 20:59:10 +0000</pubDate>
+      <guid>https://example.com/post/watching/</guid>
+      <description>&lt;p&gt;感觉用名字分类不是很好，有别的分类方式吗？
+年份也不太妙。
+想到了我可能需要一个年份历之类的？看看能不能做成数据库形式&lt;/p&gt;
+&lt;p&gt;这一篇有问题&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;列表不太明显&lt;/li&gt;
+&lt;li&gt;标签没显示出来&lt;/li&gt;
+&lt;li&gt;通病，- [ ] 这个符号html和obsidian渲染不一样&lt;/li&gt;
+&lt;li&gt;整体感觉差点儿，这一页要不用特殊页面？&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
   </channel>
 </rss>
