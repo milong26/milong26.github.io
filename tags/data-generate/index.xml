@@ -2,18 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Data-Generate on 我的博客</title>
-    <link>http://localhost:1313/tags/data-generate/</link>
+    <link>https://example.com/tags/data-generate/</link>
     <description>Recent content in Data-Generate on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 24 Nov 2024 20:39:30 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/data-generate/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Nov 2024 19:48:12 +0000</lastBuildDate>
+    <atom:link href="https://example.com/tags/data-generate/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>GR-2: A Generative Video-Language-Action Model with Web-Scale Knowledge for Robot Manipulation</title>
-      <link>http://localhost:1313/post/gr-2-a-generative-video-language-action-model-with-web-scale-knowledge-for-robot-manipulation/</link>
-      <pubDate>Sun, 24 Nov 2024 20:39:30 +0000</pubDate>
-      <guid>http://localhost:1313/post/gr-2-a-generative-video-language-action-model-with-web-scale-knowledge-for-robot-manipulation/</guid>
-      <description>&lt;p&gt;这是啥时候看的论文，我怎么毫无印象(11/100)&lt;/p&gt;</description>
+      <title>Kubric: A scalable dataset generator</title>
+      <link>https://example.com/post/kubric-a-scalable-dataset-generator/</link>
+      <pubDate>Fri, 22 Nov 2024 19:48:12 +0000</pubDate>
+      <guid>https://example.com/post/kubric-a-scalable-dataset-generator/</guid>
+      <description>&lt;p&gt;到了新环境，安排我看的论文，说是了解一下就行。&lt;/p&gt;
+&lt;p&gt;这个是百篇计划(10/100)&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

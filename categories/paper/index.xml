@@ -6,7 +6,31 @@
     <description>Recent content in Paper on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
+    <lastBuildDate>Tue, 09 Dec 2025 22:03:50 +0000</lastBuildDate>
     <atom:link href="https://example.com/categories/paper/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy</title>
+      <link>https://example.com/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/</link>
+      <pubDate>Tue, 09 Dec 2025 22:03:50 +0000</pubDate>
+      <guid>https://example.com/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/</guid>
+      <description>&lt;p&gt;ee形式的action从机器人坐标系转移到相机坐标系可以提到对相机的泛化性。&lt;/p&gt;
+&lt;p&gt;也就是利用“空间对齐”带来泛化提升&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>GR-2: A Generative Video-Language-Action Model with Web-Scale Knowledge for Robot Manipulation</title>
+      <link>https://example.com/post/gr-2-a-generative-video-language-action-model-with-web-scale-knowledge-for-robot-manipulation/</link>
+      <pubDate>Sun, 24 Nov 2024 20:39:30 +0000</pubDate>
+      <guid>https://example.com/post/gr-2-a-generative-video-language-action-model-with-web-scale-knowledge-for-robot-manipulation/</guid>
+      <description>&lt;p&gt;这是啥时候看的论文，我怎么毫无印象(11/100)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Kubric: A scalable dataset generator</title>
+      <link>https://example.com/post/kubric-a-scalable-dataset-generator/</link>
+      <pubDate>Fri, 22 Nov 2024 19:48:12 +0000</pubDate>
+      <guid>https://example.com/post/kubric-a-scalable-dataset-generator/</guid>
+      <description>&lt;p&gt;到了新环境，安排我看的论文，说是了解一下就行。&lt;/p&gt;
+&lt;p&gt;这个是百篇计划(10/100)&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Efficient Data Collection for Robotic Manipulation  via Compositional Generalization</title>
       <link>https://example.com/post/efficient-data-collection-for-robotic-manipulation--via-compositional-generalization/</link>

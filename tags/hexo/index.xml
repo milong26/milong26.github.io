@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Hexo on 我的博客</title>
+    <link>https://example.com/tags/hexo/</link>
+    <description>Recent content in Hexo on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 04 Mar 2024 15:26:28 +0000</lastBuildDate>
+    <atom:link href="https://example.com/tags/hexo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>hexo</title>
+      <link>https://example.com/post/hexo/</link>
+      <pubDate>Mon, 04 Mar 2024 15:26:28 +0000</pubDate>
+      <guid>https://example.com/post/hexo/</guid>
+      <description>&lt;p&gt;hexo+github pages 生成个人网站。不知道hexo我还愿意用几年。&lt;/p&gt;
+&lt;p&gt;估计下次更新就变成使用hugo了，尽管我还没写几篇，等写到100篇的时候换hugo吧&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

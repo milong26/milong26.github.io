@@ -15,5 +15,12 @@
       <guid>https://example.com/post/latexocr/</guid>
       <description>&lt;p&gt;图片转latex，本地版。需要梯子，也可以搞镜像&lt;/p&gt;</description>
     </item>
+    <item>
+      <title>latex</title>
+      <link>https://example.com/post/latex/</link>
+      <pubDate>Tue, 09 Jul 2024 10:19:41 +0000</pubDate>
+      <guid>https://example.com/post/latex/</guid>
+      <description>&lt;p&gt;写英文论文还是用latex比较好&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>

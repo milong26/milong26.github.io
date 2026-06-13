@@ -2,122 +2,150 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on 我的博客</title>
-    <link>http://localhost:1313/tags/</link>
+    <link>https://example.com/tags/</link>
     <description>Recent content in Tags on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 22 Oct 2025 10:43:37 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Dec 2025 22:03:50 +0000</lastBuildDate>
+    <atom:link href="https://example.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Camera-Space</title>
+      <link>https://example.com/tags/camera-space/</link>
+      <pubDate>Tue, 09 Dec 2025 22:03:50 +0000</pubDate>
+      <guid>https://example.com/tags/camera-space/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Generalization</title>
+      <link>https://example.com/tags/generalization/</link>
+      <pubDate>Tue, 09 Dec 2025 22:03:50 +0000</pubDate>
+      <guid>https://example.com/tags/generalization/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Vla</title>
+      <link>https://example.com/tags/vla/</link>
+      <pubDate>Tue, 09 Dec 2025 22:03:50 +0000</pubDate>
+      <guid>https://example.com/tags/vla/</guid>
+      <description></description>
+    </item>
     <item>
       <title>English</title>
-      <link>http://localhost:1313/tags/english/</link>
+      <link>https://example.com/tags/english/</link>
       <pubDate>Wed, 22 Oct 2025 10:43:37 +0000</pubDate>
-      <guid>http://localhost:1313/tags/english/</guid>
+      <guid>https://example.com/tags/english/</guid>
       <description></description>
     </item>
     <item>
       <title>Anime</title>
-      <link>http://localhost:1313/tags/anime/</link>
+      <link>https://example.com/tags/anime/</link>
       <pubDate>Mon, 24 Mar 2025 20:59:10 +0000</pubDate>
-      <guid>http://localhost:1313/tags/anime/</guid>
+      <guid>https://example.com/tags/anime/</guid>
       <description></description>
     </item>
     <item>
       <title>List</title>
-      <link>http://localhost:1313/tags/list/</link>
+      <link>https://example.com/tags/list/</link>
       <pubDate>Mon, 24 Mar 2025 20:59:10 +0000</pubDate>
-      <guid>http://localhost:1313/tags/list/</guid>
+      <guid>https://example.com/tags/list/</guid>
       <description></description>
     </item>
     <item>
       <title>Movie</title>
-      <link>http://localhost:1313/tags/movie/</link>
+      <link>https://example.com/tags/movie/</link>
       <pubDate>Mon, 24 Mar 2025 20:59:10 +0000</pubDate>
-      <guid>http://localhost:1313/tags/movie/</guid>
+      <guid>https://example.com/tags/movie/</guid>
       <description></description>
     </item>
     <item>
       <title>Pdf</title>
-      <link>http://localhost:1313/tags/pdf/</link>
+      <link>https://example.com/tags/pdf/</link>
       <pubDate>Mon, 24 Mar 2025 20:59:10 +0000</pubDate>
-      <guid>http://localhost:1313/tags/pdf/</guid>
+      <guid>https://example.com/tags/pdf/</guid>
       <description></description>
     </item>
     <item>
       <title>Python</title>
-      <link>http://localhost:1313/tags/python/</link>
+      <link>https://example.com/tags/python/</link>
       <pubDate>Mon, 24 Mar 2025 20:59:10 +0000</pubDate>
-      <guid>http://localhost:1313/tags/python/</guid>
+      <guid>https://example.com/tags/python/</guid>
       <description></description>
     </item>
     <item>
       <title>Tool</title>
-      <link>http://localhost:1313/tags/tool/</link>
+      <link>https://example.com/tags/tool/</link>
       <pubDate>Mon, 24 Mar 2025 20:59:10 +0000</pubDate>
-      <guid>http://localhost:1313/tags/tool/</guid>
+      <guid>https://example.com/tags/tool/</guid>
       <description></description>
     </item>
     <item>
       <title>Gym</title>
-      <link>http://localhost:1313/tags/gym/</link>
+      <link>https://example.com/tags/gym/</link>
       <pubDate>Mon, 10 Mar 2025 15:44:23 +0000</pubDate>
-      <guid>http://localhost:1313/tags/gym/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Data-Generate</title>
-      <link>http://localhost:1313/tags/data-generate/</link>
-      <pubDate>Sun, 24 Nov 2024 20:39:30 +0000</pubDate>
-      <guid>http://localhost:1313/tags/data-generate/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Latex</title>
-      <link>http://localhost:1313/tags/latex/</link>
-      <pubDate>Mon, 28 Oct 2024 22:07:18 +0000</pubDate>
-      <guid>http://localhost:1313/tags/latex/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Fsm</title>
-      <link>http://localhost:1313/tags/fsm/</link>
-      <pubDate>Thu, 12 Oct 2023 20:54:21 +0000</pubDate>
-      <guid>http://localhost:1313/tags/fsm/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Gcc</title>
-      <link>http://localhost:1313/tags/gcc/</link>
-      <pubDate>Thu, 12 Oct 2023 20:54:21 +0000</pubDate>
-      <guid>http://localhost:1313/tags/gcc/</guid>
+      <guid>https://example.com/tags/gym/</guid>
       <description></description>
     </item>
     <item>
       <title>Agent</title>
-      <link>http://localhost:1313/tags/agent/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/agent/</guid>
+      <link>https://example.com/tags/agent/</link>
+      <pubDate>Sun, 24 Nov 2024 20:39:30 +0000</pubDate>
+      <guid>https://example.com/tags/agent/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Data-Generate</title>
+      <link>https://example.com/tags/data-generate/</link>
+      <pubDate>Fri, 22 Nov 2024 19:48:12 +0000</pubDate>
+      <guid>https://example.com/tags/data-generate/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Latex</title>
+      <link>https://example.com/tags/latex/</link>
+      <pubDate>Mon, 28 Oct 2024 22:07:18 +0000</pubDate>
+      <guid>https://example.com/tags/latex/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Hexo</title>
+      <link>https://example.com/tags/hexo/</link>
+      <pubDate>Mon, 04 Mar 2024 15:26:28 +0000</pubDate>
+      <guid>https://example.com/tags/hexo/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Fsm</title>
+      <link>https://example.com/tags/fsm/</link>
+      <pubDate>Thu, 12 Oct 2023 20:54:21 +0000</pubDate>
+      <guid>https://example.com/tags/fsm/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Gcc</title>
+      <link>https://example.com/tags/gcc/</link>
+      <pubDate>Thu, 12 Oct 2023 20:54:21 +0000</pubDate>
+      <guid>https://example.com/tags/gcc/</guid>
       <description></description>
     </item>
     <item>
       <title>Data-Collection</title>
-      <link>http://localhost:1313/tags/data-collection/</link>
+      <link>https://example.com/tags/data-collection/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/data-collection/</guid>
+      <guid>https://example.com/tags/data-collection/</guid>
       <description></description>
     </item>
     <item>
       <title>Robot</title>
-      <link>http://localhost:1313/tags/robot/</link>
+      <link>https://example.com/tags/robot/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/robot/</guid>
+      <guid>https://example.com/tags/robot/</guid>
       <description></description>
     </item>
     <item>
       <title>Website</title>
-      <link>http://localhost:1313/tags/website/</link>
+      <link>https://example.com/tags/website/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/website/</guid>
+      <guid>https://example.com/tags/website/</guid>
       <description></description>
     </item>
   </channel>
