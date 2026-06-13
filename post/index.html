@@ -151,6 +151,22 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>ee形式的action从机器人坐标系转移到相机坐标系可以提到对相机的泛化性。
+也就是利用“空间对齐”带来泛化提升
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2025-12-09 22:03:50 +0000 UTC'>December 9, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy" href="https://example.com/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">英语
     </h2>
   </header>
@@ -197,6 +213,52 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Gymnasium-Robotics
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>又来看新环境 Gymnasium-Robotics，看上了它提供的shadown hand
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2025-03-10 15:44:23 +0000 UTC'>March 10, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to Gymnasium-Robotics" href="https://example.com/post/gymnasium-robotics/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">GR-2: A Generative Video-Language-Action Model with Web-Scale Knowledge for Robot Manipulation
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>这是啥时候看的论文，我怎么毫无印象(11/100)
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2024-11-24 20:39:30 +0000 UTC'>November 24, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to GR-2: A Generative Video-Language-Action Model with Web-Scale Knowledge for Robot Manipulation" href="https://example.com/post/gr-2-a-generative-video-language-action-model-with-web-scale-knowledge-for-robot-manipulation/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Kubric: A scalable dataset generator
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>到了新环境，安排我看的论文，说是了解一下就行。
+这个是百篇计划(10/100)
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2024-11-22 19:48:12 +0000 UTC'>November 22, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to Kubric: A scalable dataset generator" href="https://example.com/post/kubric-a-scalable-dataset-generator/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">latexocr
     </h2>
   </header>
@@ -212,49 +274,45 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">用c&#43;&#43;实现电梯自动控制有限状态机
+    <h2 class="entry-hint-parent">latex
     </h2>
   </header>
   <div class="entry-content">
-    <p>课程作业，gcc实现电梯前后感应器的状态转换
-要求 graph TB closed[closed] --&gt;|front| open[open] open --&gt;|neither|closed closed --&gt; |neither,rear,both| closed open --&gt; |rear,front,both| open fsm包含以下：
-状态集合：{closed,open} 输入集合：{neither,rear,both,front} 状态转换：{closed&#43;neither=open这样类似的一共8个状态转换函数} 开整 #include&lt;iostream&gt; #include&lt;random&gt; using namespace std; //门状态 typedef enum { CLOSED, OPEN } State; // 输入 typedef enum { FRONT, REAR, BOTH, NEITHER } Input; class Gate { private: State state; public: //构造函数，初始化 Gate(State initial) { state = initial; } //状态转移 void transition(Input input) { State now = this-&gt;state; if (now == CLOSED) { if (input == REAR || input == NEITHER) { this-&gt;state=CLOSED; } else if (input == FRONT || input == BOTH) { this-&gt;state = OPEN; } } else if ( now == OPEN) { if (input == FRONT || input == REAR || input == BOTH) { this-&gt;state=OPEN; } else if (input == NEITHER) { this-&gt;state=CLOSED; } } } //输出 void print() { State now = this-&gt;state; if (now == CLOSED)cout &lt;&lt; &#34;closed&#34;&lt;&lt;endl; else cout &lt;&lt; &#34;open&#34;&lt;&lt;endl; } }; void printInput(Input input) { switch (input) { case FRONT: cout&lt;&lt;&#34;front &#34;; break; case REAR: cout&lt;&lt;&#34;rear &#34;; break; case BOTH: cout&lt;&lt;&#34;Both &#34;; break; case NEITHER: cout&lt;&lt;&#34;Neither &#34;; break; } } int main() { //初始状态 Gate a(CLOSED); a.print(); for (int i = 0;i &lt; 50;i&#43;&#43;) { //[0,4)随机数 int random = (rand() % 4); Input realinput = Input(random); printInput(realinput); a.transition(realinput); a.print(); } return 0; } </p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2023-10-12 20:54:21 +0000 UTC'>October 12, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 用c&#43;&#43;实现电梯自动控制有限状态机" href="https://example.com/post/%E7%94%A8c&#43;&#43;%E5%AE%9E%E7%8E%B0%E7%94%B5%E6%A2%AF%E8%87%AA%E5%8A%A8%E6%8E%A7%E5%88%B6%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Efficient Data Collection for Robotic Manipulation  via Compositional Generalization
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>为什么要看这篇：感觉跟我想做的有一点像。所以看完这一篇以后我要得到的是：
-这篇能否作为横向对比？ 要对比的话，哪些是有用的？ 这篇论文的结构有没有可参考之处 rank： @INPROCEEDINGS{Gao-RSS-24, AUTHOR = {Jensen Gao AND Annie Xie AND Ted Xiao AND Chelsea Finn AND Dorsa Sadigh}, TITLE = {{Efficient Data Collection for Robotic Manipulation via Compositional Generalization}}, BOOKTITLE = {Proceedings of Robotics: Science and Systems}, YEAR = {2024}, ADDRESS = {Delft, Netherlands}, MONTH = {July}, DOI = {10.15607/RSS.2024.XX.013} } ...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to Efficient Data Collection for Robotic Manipulation  via Compositional Generalization" href="https://example.com/post/efficient-data-collection-for-robotic-manipulation--via-compositional-generalization/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">hugo使用指南
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>hugo配置日志
+    <p>写英文论文还是用latex比较好
 ...</p>
   </div>
   <footer class="entry-footer">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to hugo使用指南" href="https://example.com/post/hugo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/"></a>
+<span title='2024-07-09 10:19:41 +0000 UTC'>July 9, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to latex" href="https://example.com/post/latex/"></a>
 </article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Jacobian矩阵
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>在映射过程中，描述不同函数变量间变化速度的导数非常重要，Jacobian矩阵提供了一种表达局部输出对于输入的敏感度的方法。
+神经网络BP反向传播依赖误差与权重的偏导数关系来训练权重的，神经网络的权重千千万，cost function对哪些权重的变化敏感，无疑那些权重是更重要的，Jacobian矩阵就提供了一个分析神经网络输入-输出行为的数学框架。 当然，Jocobian的应用是极其广泛的，机器学习只不过是冰山一角。
+jacobian矩阵 坐标变换 Jacobian矩阵可被视为是一种组织梯度向量的方法。 梯度向量可以被视为是一种组织偏导数的方法。0 故，Jacobian矩阵可以被视为一个组织偏导数的矩阵。
+多变量的情况下，坐标变换描述的是从(u,v)到(x,y)连续的1对1变换， 此处 (x,y)是自变量，与上面的(u,v)为自变量的函数互为反函数，可见Jacobian可以是双向的， 一般从积分难度较大指向积分较容易的方向。
+公式表示 $$ u=u(x,y);v=v(x,y)\ \Delta u \approx \frac{\partial u}{\partial x}\Delta x&#43;\frac{\partial u}{\partial y}\Delta y\ \Delta v \approx \frac{\partial v}{\partial x}\Delta x&#43;\frac{\partial v}{\partial y}\Delta y $$
+矩阵形式 $$ \begin{bmatrix}\Delta u \ \Delta v\end{bmatrix}\approx {\begin{bmatrix}\frac{\partial u}{\partial x} &amp; \frac{\partial u}{\partial y} \ \frac{\partial v}{\partial x} &amp; \frac{\partial v}{\partial y} \end{bmatrix}}\begin{bmatrix}\Delta x \ \Delta y\end{bmatrix} $$
+定义 $$ {J(x,y)=\begin{bmatrix}\frac{\partial u}{\partial x} &amp; \frac{\partial u}{\partial y} \ \frac{\partial v}{\partial x} &amp; \frac{\partial v}{\partial y} \end{bmatrix}} $$
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2024-04-09 16:34:31 +0000 UTC'>April 9, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to Jacobian矩阵" href="https://example.com/post/jacobian%E7%9F%A9%E9%98%B5/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="https://example.com/post/page/2/">Next&nbsp;&nbsp;»
+    </a>
+  </nav>
+</footer>
     </main>
     
 <footer class="footer">

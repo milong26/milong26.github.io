@@ -108,8 +108,8 @@
   "keywords": [
     "website"
   ],
-  "articleBody": "hugo配置日志\n需求清单\n能联动pages（pages只支持静态吧） 可以有热力图 可以显示公式 有标签和分类 可以obsidian 开搞 参考别人的博客 都是windows环境\n环境配置 hugo 安装 下载v0.156.0release搜索到有windows版本的，最好直接安装extended版本：hugo_extended_withdeploy_windows命名的文件下载 设置环境变量，Path中添加hugo解压后的文件夹（可以访问到hugo.exe的那个路径） hugo version检查有结果了就行\n教程\n使用前的配置 在期望存放的位置\nhugo new site guance 出现Congratulations! Your new Hugo project was created in表示成功 进入文件夹，必须先找到一个主题，用PaperMod吧\ngit init git submodule add https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod 然后修改 hugo.toml：\nbaseURL = \"https://example.com/\" languageCode = \"en-us\" title = \"My Notes\" theme = \"PaperMod\" 重点是改theme\n然后执行hugo就能转到public\nhugo server -D 可以预览\nhugo 可以生成\n将网站文件夹转换为 Git ，要去public文件夹然后git init\n将 Git 本地库关联至远程库。\n已有的md文件复制粘贴到blog/content/posts/ 创建模板（借助obsidian）\n--- title: \"{{title}}\" date: \"{{date}}\" tags: categories: description: summary: cover.image: draft: true --- github 相关 源代码（markdown文件）更新\ngit add . git submodule add https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod pages展览\n创建username.github.io的仓库 源代码上传还比较简单\n但是hugo上传还是麻烦了一点\n还差什么功能\n基本配置：改hugo.toml，参考https://hugo.opendocs.io/getting-started/configuration/，抄了一个https://blog.rzlnb.top/posts/blog/hugo-blog-setup/。必要的时候文件名也可以修改。 页面增加ategory 上ai，爽歪歪 然后调整文章页面的\nobsidian模板 最好还是要有草稿箱的功能 obsidian一键怎么搞 域名配置好 然后把这一篇完善好 然后想要增加功能\nobsidian里面自动上传文档（非必须） obsidian上传public的功能（必须） ",
-  "wordCount" : "113",
+  "articleBody": "hugo配置日志\n需求清单\n能联动pages（pages只支持静态吧） 可以有热力图 可以显示公式 有标签和分类 可以obsidian 开搞 参考别人的博客 都是windows环境\n环境配置 hugo 安装 下载v0.156.0release搜索到有windows版本的，最好直接安装extended版本：hugo_extended_withdeploy_windows命名的文件下载 设置环境变量，Path中添加hugo解压后的文件夹（可以访问到hugo.exe的那个路径） hugo version检查有结果了就行\n教程\n使用前的配置 在期望存放的位置\nhugo new site guance 出现Congratulations! Your new Hugo project was created in表示成功 进入文件夹，必须先找到一个主题，用PaperMod吧\ngit init git submodule add https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod 然后修改 hugo.toml：\nbaseURL = \"https://example.com/\" languageCode = \"en-us\" title = \"My Notes\" theme = \"PaperMod\" 重点是改theme\n然后执行hugo就能转到public\nhugo server -D 可以预览\nhugo 可以生成\n将网站文件夹转换为 Git ，要去public文件夹然后git init\n将 Git 本地库关联至远程库。\n已有的md文件复制粘贴到blog/content/posts/ 创建模板（借助obsidian）\n--- title: \"{{title}}\" date: \"{{date}}\" tags: categories: description: summary: cover.image: draft: true --- github 相关 源代码（markdown文件）更新\ngit add . git submodule add https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod pages展览\n创建username.github.io的仓库 源代码上传还比较简单\n但是hugo上传还是麻烦了一点\n还差什么功能\n基本配置：改hugo.toml，参考https://hugo.opendocs.io/getting-started/configuration/，抄了一个https://blog.rzlnb.top/posts/blog/hugo-blog-setup/。必要的时候文件名也可以修改。 页面增加ategory 上ai，爽歪歪 然后调整文章页面的\nobsidian模板 最好还是要有草稿箱的功能 obsidian一键怎么搞 域名配置好 然后把这一篇完善好 然后想要增加功能\nobsidian里面自动上传文档（非必须） obsidian上传public的功能（必须） 遇到报错\nrender: [en v1.0.0 guest] failed to render pages: render of \"D:/guance/content/post/GR-2-A-Generative-Video-Language-Action-Model-with-Web-Scale-Knowledge-for-Robot-Manipulation.md\" failed: \"D:\\guance\\themes\\PaperMod\\layouts\\baseof.html:16:8\": execute of template failed at ",
+  "wordCount" : "230",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
   "dateModified": "0001-01-01T00:00:00Z",
@@ -278,6 +278,24 @@ git submodule add https://github.com/adityatelange/hugo-PaperMod.git themes/Pape
 <li>obsidian里面自动上传文档（非必须）</li>
 <li>obsidian上传public的功能（必须）</li>
 </ol>
+<p>遇到报错</p>
+<pre tabindex="0"><code> render: [en v1.0.0 guest] failed to render pages: render of &#34;D:/guance/content/post/GR-2-A-Generative-Video-Language-Action-Model-with-Web-Scale-Knowledge-for-Robot-Manipulation.md&#34; failed: &#34;D:\guance\themes\PaperMod\layouts\baseof.html:16:8&#34;: execute of template failed at &lt;partial &#34;head.html&#34; .&gt;: error calling partial: &#34;D:\guance\themes\PaperMod\layouts\_partials\head.html:19:31&#34;: execute of template failed at &lt;.Params.tags&gt;: range can’t iterate over agent
+D:\guance\themes\PaperMod\layouts\baseof.html:16:8:
+
+&lt;head&gt;
+    {{- partial &#34;head.html&#34; . }}
+&lt;/head&gt;
+
+D:\guance\themes\PaperMod\layouts\_partials\head.html:19:31:
+&lt;meta name=&#34;keywords&#34; content=&#34;{{ if .Params.keywords -}}
+    {{- range $i, $e := .Params.keywords }}{{ if $i }}, {{ end }}{{ $e }}{{ end }} {{- else }}
+    {{- range $i, $e := .Params.tags }}{{ if $i }}, {{ end }}{{ $e }}{{ end }} {{- end -}}&#34;&gt;
+{{- end }}
+&lt;meta name=&#34;description&#34; content=&#34;{{- with .Description }}{{ . }}{{- else }}{{- if or .IsPage .IsSection}}
+hugo v0.157.0-7747abbb316b03c8f353fd3be62d5011fa883ee6+extended+withdeploy windows/amd64 BuildDate=2026-02-25T16:38:33Z VendorInfo=gohugoio
+
+Reload Page
+</code></pre><p>是tags的问题</p>
 
   </div>
 

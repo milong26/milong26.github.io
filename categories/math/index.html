@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
-<title>Math | My New Hugo Project</title>
+<meta name="robots" content="index, follow">
+<title>Math | 我的博客</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
-<meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/categories/math/">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
+<link rel="canonical" href="https://example.com/categories/math/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://example.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/categories/math/index.xml" title="rss">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/categories/math/">
+<link rel="alternate" type="application/rss+xml" href="https://example.com/categories/math/index.xml" title="rss">
+<link rel="alternate" hreflang="en" href="https://example.com/categories/math/">
 <noscript>
     <style>
         #theme-toggle,
@@ -65,13 +65,21 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script>
+</script><meta property="og:url" content="https://example.com/categories/math/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="Math">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Math">
+
 </head>
 <body class="list" id="top">
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="My New Hugo Project (Alt + H)">My New Hugo Project</a>
+            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
@@ -96,6 +104,26 @@
             </div>
         </div>
         <ul id="menu" class="menu">
+            <li>
+                <a href="https://example.com/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
@@ -108,23 +136,28 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">最大似然估计
+    <h2 class="entry-hint-parent">Jacobian矩阵
     </h2>
   </header>
   <div class="entry-content">
-    <p>hello
-参考这一篇hehe
+    <p>在映射过程中，描述不同函数变量间变化速度的导数非常重要，Jacobian矩阵提供了一种表达局部输出对于输入的敏感度的方法。
+神经网络BP反向传播依赖误差与权重的偏导数关系来训练权重的，神经网络的权重千千万，cost function对哪些权重的变化敏感，无疑那些权重是更重要的，Jacobian矩阵就提供了一个分析神经网络输入-输出行为的数学框架。 当然，Jocobian的应用是极其广泛的，机器学习只不过是冰山一角。
+jacobian矩阵 坐标变换 Jacobian矩阵可被视为是一种组织梯度向量的方法。 梯度向量可以被视为是一种组织偏导数的方法。0 故，Jacobian矩阵可以被视为一个组织偏导数的矩阵。
+多变量的情况下，坐标变换描述的是从(u,v)到(x,y)连续的1对1变换， 此处 (x,y)是自变量，与上面的(u,v)为自变量的函数互为反函数，可见Jacobian可以是双向的， 一般从积分难度较大指向积分较容易的方向。
+公式表示 $$ u=u(x,y);v=v(x,y)\ \Delta u \approx \frac{\partial u}{\partial x}\Delta x&#43;\frac{\partial u}{\partial y}\Delta y\ \Delta v \approx \frac{\partial v}{\partial x}\Delta x&#43;\frac{\partial v}{\partial y}\Delta y $$
+矩阵形式 $$ \begin{bmatrix}\Delta u \ \Delta v\end{bmatrix}\approx {\begin{bmatrix}\frac{\partial u}{\partial x} &amp; \frac{\partial u}{\partial y} \ \frac{\partial v}{\partial x} &amp; \frac{\partial v}{\partial y} \end{bmatrix}}\begin{bmatrix}\Delta x \ \Delta y\end{bmatrix} $$
+定义 $$ {J(x,y)=\begin{bmatrix}\frac{\partial u}{\partial x} &amp; \frac{\partial u}{\partial y} \ \frac{\partial v}{\partial x} &amp; \frac{\partial v}{\partial y} \end{bmatrix}} $$
 </p>
   </div>
   <footer class="entry-footer">
 
-<span title='2024-03-03 15:11:54 +0000 UTC'>March 3, 2024</span></footer>
-  <a class="entry-link" aria-label="post link to 最大似然估计" href="http://localhost:1313/post/%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/"></a>
+<span title='2024-04-09 16:34:31 +0000 UTC'>April 9, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to Jacobian矩阵" href="https://example.com/post/jacobian%E7%9F%A9%E9%98%B5/"></a>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="http://localhost:1313/">My New Hugo Project</a></span> · 
+        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
 
     
     

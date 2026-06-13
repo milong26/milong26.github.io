@@ -5,19 +5,34 @@
     <loc>https://example.com/</loc>
     <lastmod>2026-06-08T17:18:07+08:00</lastmod>
   </url><url>
+    <loc>https://example.com/tags/camera-space/</loc>
+    <lastmod>2025-12-09T22:03:50+00:00</lastmod>
+  </url><url>
     <loc>https://example.com/categories/</loc>
-    <lastmod>2025-10-22T10:43:37+00:00</lastmod>
+    <lastmod>2025-12-09T22:03:50+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/generalization/</loc>
+    <lastmod>2025-12-09T22:03:50+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/</loc>
+    <lastmod>2025-12-09T22:03:50+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/categories/paper/</loc>
+    <lastmod>2025-12-09T22:03:50+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/</loc>
+    <lastmod>2025-12-09T22:03:50+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/</loc>
+    <lastmod>2025-12-09T22:03:50+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/vla/</loc>
+    <lastmod>2025-12-09T22:03:50+00:00</lastmod>
   </url><url>
     <loc>https://example.com/tags/english/</loc>
     <lastmod>2025-10-22T10:43:37+00:00</lastmod>
   </url><url>
     <loc>https://example.com/categories/life/</loc>
-    <lastmod>2025-10-22T10:43:37+00:00</lastmod>
-  </url><url>
-    <loc>https://example.com/post/</loc>
-    <lastmod>2025-10-22T10:43:37+00:00</lastmod>
-  </url><url>
-    <loc>https://example.com/tags/</loc>
     <lastmod>2025-10-22T10:43:37+00:00</lastmod>
   </url><url>
     <loc>https://example.com/post/%E8%8B%B1%E8%AF%AD/</loc>
@@ -50,11 +65,44 @@
     <loc>https://example.com/post/watching/</loc>
     <lastmod>2025-03-24T20:59:10+00:00</lastmod>
   </url><url>
+    <loc>https://example.com/tags/gym/</loc>
+    <lastmod>2025-03-10T15:44:23+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/gymnasium-robotics/</loc>
+    <lastmod>2025-03-10T15:44:23+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/agent/</loc>
+    <lastmod>2024-11-24T20:39:30+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/gr-2-a-generative-video-language-action-model-with-web-scale-knowledge-for-robot-manipulation/</loc>
+    <lastmod>2024-11-24T20:39:30+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/data-generate/</loc>
+    <lastmod>2024-11-22T19:48:12+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/kubric-a-scalable-dataset-generator/</loc>
+    <lastmod>2024-11-22T19:48:12+00:00</lastmod>
+  </url><url>
     <loc>https://example.com/tags/latex/</loc>
     <lastmod>2024-10-28T22:07:18+00:00</lastmod>
   </url><url>
     <loc>https://example.com/post/latexocr/</loc>
     <lastmod>2024-10-28T22:07:18+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/latex/</loc>
+    <lastmod>2024-07-09T10:19:41+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/jacobian%E7%9F%A9%E9%98%B5/</loc>
+    <lastmod>2024-04-09T16:34:31+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/categories/math/</loc>
+    <lastmod>2024-04-09T16:34:31+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/hexo/</loc>
+    <lastmod>2024-03-04T15:26:28+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/hexo/</loc>
+    <lastmod>2024-03-04T15:26:28+00:00</lastmod>
   </url><url>
     <loc>https://example.com/categories/code/</loc>
     <lastmod>2023-10-12T20:54:21+00:00</lastmod>
@@ -73,8 +121,6 @@
     <loc>https://example.com/post/efficient-data-collection-for-robotic-manipulation--via-compositional-generalization/</loc>
   </url><url>
     <loc>https://example.com/post/hugo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</loc>
-  </url><url>
-    <loc>https://example.com/categories/paper/</loc>
   </url><url>
     <loc>https://example.com/tags/robot/</loc>
   </url><url>
