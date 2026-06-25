@@ -5,29 +5,95 @@
     <loc>https://example.com/</loc>
     <lastmod>2026-06-08T17:18:07+08:00</lastmod>
   </url><url>
-    <loc>https://example.com/tags/camera-space/</loc>
-    <lastmod>2025-12-09T22:03:50+00:00</lastmod>
-  </url><url>
     <loc>https://example.com/categories/</loc>
-    <lastmod>2025-12-09T22:03:50+00:00</lastmod>
+    <lastmod>2026-02-25T17:52:40+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/data-quality-in-imitation-learning/</loc>
+    <lastmod>2026-02-25T17:52:40+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/categories/paper/</loc>
+    <lastmod>2026-02-25T17:52:40+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/</loc>
+    <lastmod>2026-02-25T17:52:40+00:00</lastmod>
   </url><url>
     <loc>https://example.com/tags/generalization/</loc>
+    <lastmod>2026-01-27T14:38:07+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/</loc>
+    <lastmod>2026-01-27T14:38:07+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/validation/</loc>
+    <lastmod>2026-01-27T14:38:07+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/categories/vla/</loc>
+    <lastmod>2026-01-27T14:38:07+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/vla%E9%9C%80%E8%A6%81%E9%AA%8C%E8%AF%81%E5%90%97/</loc>
+    <lastmod>2026-01-27T14:38:07+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/camera-space/</loc>
     <lastmod>2025-12-09T22:03:50+00:00</lastmod>
   </url><url>
     <loc>https://example.com/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/</loc>
     <lastmod>2025-12-09T22:03:50+00:00</lastmod>
   </url><url>
-    <loc>https://example.com/categories/paper/</loc>
-    <lastmod>2025-12-09T22:03:50+00:00</lastmod>
-  </url><url>
-    <loc>https://example.com/post/</loc>
-    <lastmod>2025-12-09T22:03:50+00:00</lastmod>
-  </url><url>
-    <loc>https://example.com/tags/</loc>
-    <lastmod>2025-12-09T22:03:50+00:00</lastmod>
-  </url><url>
     <loc>https://example.com/tags/vla/</loc>
     <lastmod>2025-12-09T22:03:50+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/cross-camera-generalization/</loc>
+    <lastmod>2025-12-08T16:09:53+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/pose-estimation/</loc>
+    <lastmod>2025-12-08T16:09:53+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/</loc>
+    <lastmod>2025-12-08T16:09:53+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/robot/</loc>
+    <lastmod>2025-12-08T16:09:53+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/categories/it/</loc>
+    <lastmod>2025-11-28T11:22:05+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/%E5%90%8C%E6%AD%A5/</loc>
+    <lastmod>2025-11-28T11:22:05+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5/</loc>
+    <lastmod>2025-11-28T11:22:05+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/%E5%BC%82%E6%AD%A5/</loc>
+    <lastmod>2025-11-28T11:22:05+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/foundation-feature-driven-online-end-effector-pose-estimation-a-marker-free-and-learning-free-approach/</loc>
+    <lastmod>2025-11-24T22:03:50+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/ros/</loc>
+    <lastmod>2025-11-13T10:04:05+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/ros/</loc>
+    <lastmod>2025-11-13T10:04:05+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/pure-vision-language-action-vla-models-a-comprehensive-surve/</loc>
+    <lastmod>2025-10-28T15:52:55+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/survey/</loc>
+    <lastmod>2025-10-28T15:52:55+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/control/</loc>
+    <lastmod>2025-10-27T15:33:04+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/categories/robot/</loc>
+    <lastmod>2025-10-27T15:33:04+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/%E6%8E%A7%E5%88%B6/</loc>
+    <lastmod>2025-10-27T15:33:04+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/lerobot/</loc>
+    <lastmod>2025-10-23T14:41:46+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/%E8%91%B5%E8%8A%B1%E5%AE%9D%E5%85%B8%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AB%E8%91%B5%E8%8A%B1%E5%AE%9D%E5%85%B8/</loc>
+    <lastmod>2025-10-22T10:50:57+00:00</lastmod>
   </url><url>
     <loc>https://example.com/tags/english/</loc>
     <lastmod>2025-10-22T10:43:37+00:00</lastmod>
@@ -38,13 +104,127 @@
     <loc>https://example.com/post/%E8%8B%B1%E8%AF%AD/</loc>
     <lastmod>2025-10-22T10:43:37+00:00</lastmod>
   </url><url>
-    <loc>https://example.com/tags/anime/</loc>
-    <lastmod>2025-03-24T20:59:10+00:00</lastmod>
+    <loc>https://example.com/post/pi0/</loc>
+    <lastmod>2025-10-20T16:08:55+00:00</lastmod>
   </url><url>
-    <loc>https://example.com/categories/it/</loc>
-    <lastmod>2025-03-24T20:59:10+00:00</lastmod>
+    <loc>https://example.com/post/pi0.5/</loc>
+    <lastmod>2025-10-20T15:05:54+00:00</lastmod>
   </url><url>
     <loc>https://example.com/tags/list/</loc>
+    <lastmod>2025-10-11T14:20:25+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/%E7%9C%8B%E6%88%BF%E8%A6%81%E7%9C%8B%E4%BB%80%E4%B9%88/</loc>
+    <lastmod>2025-10-11T14:20:25+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/</loc>
+    <lastmod>2025-10-10T18:26:10+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/robotic/</loc>
+    <lastmod>2025-09-29T15:19:42+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</loc>
+    <lastmod>2025-09-29T15:19:42+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/task-reconstruction-and-extrapolation-for-%CF%800-using-text-latent/</loc>
+    <lastmod>2025-09-29T15:17:42+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/overview/</loc>
+    <lastmod>2025-09-29T15:17:34+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/vla/</loc>
+    <lastmod>2025-09-29T15:17:34+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/dropout/</loc>
+    <lastmod>2025-09-28T16:05:41+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/dropout/</loc>
+    <lastmod>2025-09-28T16:05:41+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/categories/ai/</loc>
+    <lastmod>2025-09-19T16:40:21+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/embed/</loc>
+    <lastmod>2025-09-19T16:40:21+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/model-layer/</loc>
+    <lastmod>2025-09-19T16:40:21+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/categories/application/</loc>
+    <lastmod>2025-09-15T22:09:22+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/obsidian/</loc>
+    <lastmod>2025-09-15T22:09:22+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/draw/</loc>
+    <lastmod>2025-09-10T16:18:55+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/visio/</loc>
+    <lastmod>2025-09-10T16:18:55+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/model/</loc>
+    <lastmod>2025-08-20T21:30:13+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%BB%91%E8%AF%9D/</loc>
+    <lastmod>2025-08-20T21:30:13+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/smolvla/</loc>
+    <lastmod>2025-08-17T22:39:53+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/cuda/</loc>
+    <lastmod>2025-08-04T21:22:26+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/cuda/</loc>
+    <lastmod>2025-08-04T21:22:26+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/linux/</loc>
+    <lastmod>2025-08-04T21:22:26+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/wheel/</loc>
+    <lastmod>2025-06-30T19:53:14+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/reading/</loc>
+    <lastmod>2025-06-09T14:24:55+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/%E9%98%85%E8%AF%BB%E5%A4%8D%E5%81%A5/</loc>
+    <lastmod>2025-06-09T14:24:55+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/os/</loc>
+    <lastmod>2025-04-02T15:14:40+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/windows/</loc>
+    <lastmod>2025-04-02T15:14:40+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/windows/</loc>
+    <lastmod>2025-04-02T15:14:40+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/dexterous/</loc>
+    <lastmod>2025-04-01T16:54:39+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/genesis/</loc>
+    <lastmod>2025-04-01T16:54:39+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/%E7%81%B5%E5%B7%A7%E6%89%8B%E6%8A%93%E5%8F%96%E7%A4%BA%E4%BE%8B/</loc>
+    <lastmod>2025-04-01T16:54:39+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/generative/</loc>
+    <lastmod>2025-04-01T15:56:36+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/robogen-towards-unleashing-infinite-data-for-automated-robot-learning-via-generative-simulation/</loc>
+    <lastmod>2025-04-01T15:56:36+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/dataset/</loc>
+    <lastmod>2025-03-26T10:15:30+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/dexgrasp%E7%B1%BB%E6%95%B0%E6%8D%AE%E9%9B%86%E6%94%B6%E9%9B%86/</loc>
+    <lastmod>2025-03-26T10:15:30+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/difftactile-a-physics-based-differentiable-tactile-simulator-for-contact-rich-robotic-manipulation/</loc>
+    <lastmod>2025-03-25T15:08:42+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/tactile/</loc>
+    <lastmod>2025-03-25T15:08:42+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/anime/</loc>
     <lastmod>2025-03-24T20:59:10+00:00</lastmod>
   </url><url>
     <loc>https://example.com/tags/movie/</loc>
@@ -65,11 +245,134 @@
     <loc>https://example.com/post/%E5%A4%A7%E8%B1%A1%E6%97%A0%E5%BD%A2/</loc>
     <lastmod>2025-03-24T20:59:10+00:00</lastmod>
   </url><url>
+    <loc>https://example.com/post/calvin-a-benchmark-for-language-conditioned-policy-learning-for-long-horizon-robot-manipulation-tasks/</loc>
+    <lastmod>2025-03-23T17:22:30+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/video-prediction/</loc>
+    <lastmod>2025-03-23T16:23:09+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/videoworld-exploring-knowledge-learning-from-unlabeled-videos/</loc>
+    <lastmod>2025-03-23T16:23:09+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</loc>
+    <lastmod>2025-03-13T15:59:45+00:00</lastmod>
+  </url><url>
     <loc>https://example.com/tags/gym/</loc>
     <lastmod>2025-03-10T15:44:23+00:00</lastmod>
   </url><url>
     <loc>https://example.com/post/gymnasium-robotics/</loc>
     <lastmod>2025-03-10T15:44:23+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/multi-goal-reinforcement-learning-challenging-robotics-environments-and-request-for-research/</loc>
+    <lastmod>2025-03-07T20:57:09+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/rl/</loc>
+    <lastmod>2025-03-07T20:57:09+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/config/</loc>
+    <lastmod>2025-03-06T15:26:43+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/dexgraspnet/</loc>
+    <lastmod>2025-03-06T15:26:43+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/ubuntu/</loc>
+    <lastmod>2025-03-06T15:26:43+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/mediapipe/</loc>
+    <lastmod>2025-03-06T10:46:08+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/a-comprehensive-survey-of-llm-alignment-techniques-rlhf-rlaif-ppo-dpo-and-more/</loc>
+    <lastmod>2025-03-03T10:20:54+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/alignment/</loc>
+    <lastmod>2025-03-03T10:20:54+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/llm/</loc>
+    <lastmod>2025-03-03T10:20:54+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/aligner/</loc>
+    <lastmod>2025-03-03T10:18:23+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/aligner-efficient-alignment-by-learning-to-correct/</loc>
+    <lastmod>2025-03-03T10:18:23+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/categories/algorithm/</loc>
+    <lastmod>2025-03-03T10:17:31+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/graph/</loc>
+    <lastmod>2025-03-03T10:17:31+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2025-03-03T10:17:31+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/robotic-grasp%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86/</loc>
+    <lastmod>2025-03-03T10:17:03+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/one-shot/</loc>
+    <lastmod>2025-02-27T14:39:26+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/wsl/</loc>
+    <lastmod>2025-02-25T15:11:18+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/linux/</loc>
+    <lastmod>2025-02-21T11:10:22+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/rdt-1b-a-diffusion-foundation-model-for-bimanual-manipulation/</loc>
+    <lastmod>2025-01-15T16:55:49+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/git/</loc>
+    <lastmod>2025-01-10T10:55:21+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/git/</loc>
+    <lastmod>2025-01-10T10:55:21+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/3d/</loc>
+    <lastmod>2025-01-08T10:05:53+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/%E8%BF%90%E5%8A%A8%E5%AD%A6/</loc>
+    <lastmod>2025-01-08T10:05:53+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/zotero/</loc>
+    <lastmod>2025-01-07T17:14:43+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/diary/</loc>
+    <lastmod>2025-01-05T22:25:05+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/%E9%A3%8E%E4%B9%8B%E4%B8%87%E9%87%8C/</loc>
+    <lastmod>2025-01-05T22:25:05+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/app/</loc>
+    <lastmod>2025-01-03T17:15:36+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/clash/</loc>
+    <lastmod>2025-01-03T17:15:36+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/application/</loc>
+    <lastmod>2024-12-19T18:42:06+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/vs-code/</loc>
+    <lastmod>2024-12-19T18:42:06+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/conda/</loc>
+    <lastmod>2024-12-19T18:40:56+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/conda/</loc>
+    <lastmod>2024-12-19T18:40:56+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/genesis%E5%B9%B3%E5%8F%B0/</loc>
+    <lastmod>2024-12-19T14:51:53+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/robosuite%E5%B9%B3%E5%8F%B0/</loc>
+    <lastmod>2024-12-02T14:22:27+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/simulation/</loc>
+    <lastmod>2024-12-02T14:22:27+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/generalizable/</loc>
+    <lastmod>2024-11-25T20:55:43+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/maniskill3-gpu-parallelized-robotics-simulation-and-rendering-for-generalizable-embodied-ai/</loc>
+    <lastmod>2024-11-25T20:55:43+00:00</lastmod>
   </url><url>
     <loc>https://example.com/tags/agent/</loc>
     <lastmod>2024-11-24T20:39:30+00:00</lastmod>
@@ -83,14 +386,101 @@
     <loc>https://example.com/post/kubric-a-scalable-dataset-generator/</loc>
     <lastmod>2024-11-22T19:48:12+00:00</lastmod>
   </url><url>
+    <loc>https://example.com/post/an-emulator-for-fine-tuning-large-language-models-using-small-language-models/</loc>
+    <lastmod>2024-11-04T16:20:53+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/fine-tune/</loc>
+    <lastmod>2024-11-04T16:20:53+00:00</lastmod>
+  </url><url>
     <loc>https://example.com/tags/latex/</loc>
     <lastmod>2024-10-28T22:07:18+00:00</lastmod>
   </url><url>
     <loc>https://example.com/post/latexocr/</loc>
     <lastmod>2024-10-28T22:07:18+00:00</lastmod>
   </url><url>
+    <loc>https://example.com/post/cllms-consistency-large-language-models/</loc>
+    <lastmod>2024-10-22T15:59:04+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/consistency-llm/</loc>
+    <lastmod>2024-10-22T15:59:04+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/amd/</loc>
+    <lastmod>2024-10-17T11:31:18+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/amd%E4%BF%AE%E5%A4%8D/</loc>
+    <lastmod>2024-10-17T11:31:18+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/transformer/</loc>
+    <lastmod>2024-09-13T10:12:29+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/transformer-explainer-interactive-learning-of-text-generative-models/</loc>
+    <lastmod>2024-09-13T10:12:29+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/conf/</loc>
+    <lastmod>2024-09-12T11:34:24+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/nodejs/</loc>
+    <lastmod>2024-09-12T11:34:24+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/nodejs/</loc>
+    <lastmod>2024-09-12T11:34:24+00:00</lastmod>
+  </url><url>
     <loc>https://example.com/post/latex/</loc>
     <lastmod>2024-07-09T10:19:41+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/lisa-layerwise-importance-sampling-for-memory-efficient-large-language-model-fine-tuning/</loc>
+    <lastmod>2024-07-01T11:45:24+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/lora/</loc>
+    <lastmod>2024-07-01T11:45:24+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/sample/</loc>
+    <lastmod>2024-07-01T11:45:24+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/cook/</loc>
+    <lastmod>2024-07-01T10:25:15+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/%E5%BC%80%E4%BC%99/</loc>
+    <lastmod>2024-07-01T10:25:15+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/algorithm/</loc>
+    <lastmod>2024-05-28T17:18:36+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/leetcode/</loc>
+    <lastmod>2024-05-28T17:18:36+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/%E4%B8%B2/</loc>
+    <lastmod>2024-05-28T17:18:36+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/paper-reading/</loc>
+    <lastmod>2024-05-21T11:22:52+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/repo/</loc>
+    <lastmod>2024-05-21T11:22:52+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/flexgen-high-throughput-generative-inference-of-large-language-models-with-a-single-gpu/</loc>
+    <lastmod>2024-05-21T10:37:15+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/chian-of-thought/</loc>
+    <lastmod>2024-04-17T11:30:14+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/%E6%80%9D%E7%BB%B4%E9%93%BE/</loc>
+    <lastmod>2024-04-17T11:30:14+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/chain-of-thought-prompting-elicits-reasoning-in-large-language-models/</loc>
+    <lastmod>2024-04-16T21:39:51+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/cot/</loc>
+    <lastmod>2024-04-16T21:39:51+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/prompt/</loc>
+    <lastmod>2024-04-16T21:39:51+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/code/</loc>
+    <lastmod>2024-04-09T16:37:52+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/leetcode%E8%82%9D%E6%B4%BB/</loc>
+    <lastmod>2024-04-09T16:37:52+00:00</lastmod>
   </url><url>
     <loc>https://example.com/post/jacobian%E7%9F%A9%E9%98%B5/</loc>
     <lastmod>2024-04-09T16:34:31+00:00</lastmod>
@@ -98,11 +488,50 @@
     <loc>https://example.com/categories/math/</loc>
     <lastmod>2024-04-09T16:34:31+00:00</lastmod>
   </url><url>
+    <loc>https://example.com/tags/optimization/</loc>
+    <lastmod>2024-04-02T20:14:43+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/%E5%B1%80%E9%83%A8%E6%9C%80%E4%BC%98%E5%92%8C%E9%9E%8D%E7%82%B9/</loc>
+    <lastmod>2024-04-02T20:14:43+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/tinyllm-learning-a-small-student-from-multiple-large-language-models/</loc>
+    <lastmod>2024-03-24T20:41:50+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/peft/</loc>
+    <lastmod>2024-03-18T16:16:31+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/towards-a-unified-view-of-parameter-efficient-transfer-learning/</loc>
+    <lastmod>2024-03-18T16:16:31+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/softmax/</loc>
+    <lastmod>2024-03-06T16:37:12+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/softmax/</loc>
+    <lastmod>2024-03-06T16:37:12+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/transformer/</loc>
+    <lastmod>2024-03-05T21:17:53+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/attention/</loc>
+    <lastmod>2024-03-05T16:49:09+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</loc>
+    <lastmod>2024-03-05T16:49:09+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/%E7%BC%96%E7%A0%81%E5%99%A8%E5%92%8C%E8%A7%A3%E7%A0%81%E5%99%A8/</loc>
+    <lastmod>2024-03-04T16:36:10+00:00</lastmod>
+  </url><url>
     <loc>https://example.com/post/hexo/</loc>
     <lastmod>2024-03-04T15:26:28+00:00</lastmod>
   </url><url>
     <loc>https://example.com/tags/hexo/</loc>
     <lastmod>2024-03-04T15:26:28+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/</loc>
+    <lastmod>2023-11-24T17:10:38+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/full-parameterwww/</loc>
+    <lastmod>2023-11-24T17:10:38+00:00</lastmod>
   </url><url>
     <loc>https://example.com/categories/code/</loc>
     <lastmod>2023-10-12T20:54:21+00:00</lastmod>
@@ -116,14 +545,205 @@
     <loc>https://example.com/post/%E7%94%A8c&#43;&#43;%E5%AE%9E%E7%8E%B0%E7%94%B5%E6%A2%AF%E8%87%AA%E5%8A%A8%E6%8E%A7%E5%88%B6%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA/</loc>
     <lastmod>2023-10-12T20:54:21+00:00</lastmod>
   </url><url>
+    <loc>https://example.com/tags/mark/</loc>
+    <lastmod>2023-03-06T15:53:11+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/%E9%A9%AC%E4%BA%86%E5%B0%B1%E6%98%AF%E5%BF%98%E4%BA%86/</loc>
+    <lastmod>2023-03-06T15:53:11+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/freeadversarialtraining/</loc>
+    <lastmod>2022-04-16T16:32:50+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/analysis_v2/</loc>
+  </url><url>
+    <loc>https://example.com/post/rlinf/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E5%BF%83%E7%90%86/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E6%9C%AA%E5%91%BD%E5%90%8D/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E6%B8%85%E7%90%86/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E6%B8%85%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E7%89%A9%E6%96%BD%E4%BA%8E%E4%BA%BA/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E6%97%A5%E8%AE%B02026/</loc>
+  </url><url>
+    <loc>https://example.com/tags/accelrate/</loc>
+  </url><url>
+    <loc>https://example.com/tags/action/</loc>
+  </url><url>
+    <loc>https://example.com/post/action-space/</loc>
+  </url><url>
+    <loc>https://example.com/post/affordance%E6%A8%A1%E5%9E%8B/</loc>
+  </url><url>
+    <loc>https://example.com/tags/benchmark/</loc>
+  </url><url>
+    <loc>https://example.com/post/breadwinner%E7%9A%84%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/</loc>
+  </url><url>
+    <loc>https://example.com/post/calibration/</loc>
+  </url><url>
+    <loc>https://example.com/tags/calibration/</loc>
+  </url><url>
+    <loc>https://example.com/tags/camera/</loc>
+  </url><url>
+    <loc>https://example.com/tags/chain-of-thought/</loc>
+  </url><url>
+    <loc>https://example.com/post/cot-vla-visual-chain-of-thought-reasoning-for-vision-language-action-models/</loc>
+  </url><url>
+    <loc>https://example.com/tags/daatset/</loc>
+  </url><url>
+    <loc>https://example.com/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/</loc>
+  </url><url>
     <loc>https://example.com/tags/data-collection/</loc>
+  </url><url>
+    <loc>https://example.com/post/dexhand/</loc>
+  </url><url>
+    <loc>https://example.com/tags/diffusion/</loc>
+  </url><url>
+    <loc>https://example.com/post/diffusion-transformer/</loc>
   </url><url>
     <loc>https://example.com/post/efficient-data-collection-for-robotic-manipulation--via-compositional-generalization/</loc>
   </url><url>
+    <loc>https://example.com/tags/end-effector/</loc>
+  </url><url>
+    <loc>https://example.com/tags/end-to-end/</loc>
+  </url><url>
+    <loc>https://example.com/post/evaluating-uncertainty-and-quality-of-visual-language-action-enabled-robots/</loc>
+  </url><url>
+    <loc>https://example.com/post/fast-efficient-action-tokenization-for-vision-language-action-models/</loc>
+  </url><url>
+    <loc>https://example.com/tags/file-format/</loc>
+  </url><url>
+    <loc>https://example.com/post/flow-matching/</loc>
+  </url><url>
+    <loc>https://example.com/post/genesis-%E5%B9%B3%E5%8F%B0/</loc>
+  </url><url>
+    <loc>https://example.com/post/grasp-as-you-say-language-guided-dexterous-grasp-generation/</loc>
+  </url><url>
+    <loc>https://example.com/post/huggingface/</loc>
+  </url><url>
     <loc>https://example.com/post/hugo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</loc>
   </url><url>
-    <loc>https://example.com/tags/robot/</loc>
+    <loc>https://example.com/tags/interpolation/</loc>
+  </url><url>
+    <loc>https://example.com/tags/kinemetrics/</loc>
+  </url><url>
+    <loc>https://example.com/post/language-conditioned-imitation-learning-with-base-skill-priors-under-unstructured-data/</loc>
+  </url><url>
+    <loc>https://example.com/post/language-guided-dexterous-functional-grasping-by-llm-generated-grasp-functionality-and-synergy-for-humanoid-manipulation/</loc>
+  </url><url>
+    <loc>https://example.com/tags/large-moodel/</loc>
+  </url><url>
+    <loc>https://example.com/tags/lightweight/</loc>
+  </url><url>
+    <loc>https://example.com/post/maniskill/</loc>
+  </url><url>
+    <loc>https://example.com/post/mujoco/</loc>
+  </url><url>
+    <loc>https://example.com/tags/mujoco/</loc>
+  </url><url>
+    <loc>https://example.com/tags/multi-gpu/</loc>
+  </url><url>
+    <loc>https://example.com/post/onnx/</loc>
+  </url><url>
+    <loc>https://example.com/post/paligemma/</loc>
+  </url><url>
+    <loc>https://example.com/tags/pi0/</loc>
+  </url><url>
+    <loc>https://example.com/tags/pip/</loc>
+  </url><url>
+    <loc>https://example.com/post/pip%E5%AE%89%E8%A3%85%E4%BA%A7%E7%94%9F%E7%9A%84%E9%9A%94%E7%A6%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98/</loc>
+  </url><url>
+    <loc>https://example.com/post/placo%E4%B8%8Emplib/</loc>
+  </url><url>
+    <loc>https://example.com/post/pose-estimation/</loc>
+  </url><url>
+    <loc>https://example.com/post/python/</loc>
+  </url><url>
+    <loc>https://example.com/post/python%E6%A8%A1%E5%9D%97/</loc>
+  </url><url>
+    <loc>https://example.com/post/pytorch/</loc>
+  </url><url>
+    <loc>https://example.com/tags/pytorch/</loc>
+  </url><url>
+    <loc>https://example.com/post/sim2real/</loc>
+  </url><url>
+    <loc>https://example.com/post/simple-a-visuotactile-method-learned-in-simulation-to-precisely-pick-localize-regrasp-and-place-objects/</loc>
+  </url><url>
+    <loc>https://example.com/tags/skill/</loc>
+  </url><url>
+    <loc>https://example.com/tags/structure/</loc>
+  </url><url>
+    <loc>https://example.com/tags/tokenizer/</loc>
+  </url><url>
+    <loc>https://example.com/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/</loc>
+  </url><url>
+    <loc>https://example.com/post/vla-os-structuring-and-dissecting-planning-representations-and-paradigms-in-vision-language-action-models/</loc>
+  </url><url>
+    <loc>https://example.com/post/vla%E4%BB%AC/</loc>
+  </url><url>
+    <loc>https://example.com/post/vla%E6%95%B0%E6%8D%AE%E9%9B%86/</loc>
+  </url><url>
+    <loc>https://example.com/post/vla%E6%B3%9B%E5%8C%96-%E5%A4%9A%E5%8F%98%E7%9B%B8%E6%9C%BA%E8%A7%86%E8%A7%92/</loc>
+  </url><url>
+    <loc>https://example.com/post/vla%E7%BB%BC%E8%BF%B0%E4%BB%AC/</loc>
+  </url><url>
+    <loc>https://example.com/post/vla%E9%87%8C%E9%9D%A2%E7%9A%84%E6%8F%92%E5%80%BC/</loc>
+  </url><url>
+    <loc>https://example.com/post/wandb/</loc>
   </url><url>
     <loc>https://example.com/tags/website/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BC%9A%E5%86%99%E5%87%BA%E5%B1%8E%E5%B1%B1%E4%BB%A3%E7%A0%81/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E5%8F%A3%E8%9C%9C%E8%85%B9%E5%89%91/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E5%A4%9Agpu%E7%9A%84acclerate/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E7%B2%BE%E5%8A%9B/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E5%AE%89%E5%85%A8%E6%8A%93%E5%8F%96%E6%80%9D%E8%B7%AF/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E5%AE%89%E5%8D%93/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E5%BC%82%E6%9E%84/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E5%BD%92%E4%B8%80%E5%8C%96/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E6%8B%93%E6%89%91/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E6%9D%A1%E4%BB%B6transformer/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E6%B3%A2%E7%BA%B9%E5%91%BC%E5%90%B8%E7%AC%91/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E7%94%B5%E8%A7%86%E4%B8%AA%E6%80%A7%E5%8C%96/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E7%A7%9F%E6%88%BF%E6%8A%80%E5%B7%A7/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E7%AB%AF%E5%88%B0%E7%AB%AF/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E8%83%BD%E5%90%A6%E8%87%AA%E6%84%88/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E8%A2%AB%E7%8E%A9%E5%9D%8F%E7%9A%84%E9%AD%94%E6%B3%95%E5%B0%91%E5%B9%B4%E9%A2%98%E6%9D%90/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E8%A5%BF%E7%8F%AD%E7%89%99%E8%AF%AD/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E8%A7%86%E8%A7%92%E9%87%8D%E5%BB%BA/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E8%A7%A3%E8%AF%BBsmolvla%E4%BB%A3%E7%A0%81/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E8%BD%BB%E9%87%8F%E5%8C%96vla/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E8%BF%90%E5%8A%A8%E7%B1%BB%E5%8A%A8%E7%94%BB%E7%82%B9%E8%AF%84/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E9%AA%A8%E7%9B%86%E5%89%8D%E5%80%BE/</loc>
+  </url><url>
+    <loc>https://example.com/post/%E9%AD%94%E6%B3%95%E4%B8%96%E7%95%8C%E8%A7%82%E4%B8%8B%E7%94%9F%E4%BA%A7%E5%8A%9B%E4%BC%9A%E5%8F%91%E5%B1%95%E5%90%97/</loc>
   </url>
 </urlset>

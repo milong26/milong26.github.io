@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>TinyVLA: Toward Fast, Data-Efficient Vision-Language-Action Models for Robotic Manipulation | 我的博客</title>
+<meta name="keywords" content="vla, robotic">
+<meta name="description" content="我要看这篇文章能否复现">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
+<link rel="canonical" href="https://example.com/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://example.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://example.com/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://example.com/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="TinyVLA: Toward Fast, Data-Efficient Vision-Language-Action Models for Robotic Manipulation">
+  <meta property="og:description" content="我要看这篇文章能否复现">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-09-29T15:19:42+00:00">
+    <meta property="article:modified_time" content="2025-09-29T15:19:42+00:00">
+    <meta property="article:tag" content="Vla">
+    <meta property="article:tag" content="Robotic">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="TinyVLA: Toward Fast, Data-Efficient Vision-Language-Action Models for Robotic Manipulation">
+  <meta name="twitter:description" content="我要看这篇文章能否复现">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://example.com/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "TinyVLA: Toward Fast, Data-Efficient Vision-Language-Action Models for Robotic Manipulation",
+      "item": "https://example.com/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "TinyVLA: Toward Fast, Data-Efficient Vision-Language-Action Models for Robotic Manipulation",
+  "name": "TinyVLA: Toward Fast, Data-Efficient Vision-Language-Action Models for Robotic Manipulation",
+  "description": "我要看这篇文章能否复现\n",
+  "keywords": [
+    "vla", "robotic"
+  ],
+  "articleBody": "我要看这篇文章能否复现\n论文 实验 模拟基准测试：我们在 MetaWorld 上评估我们的方法。MetaWorld [36] 中的 50 个任务可以分为多个级别 [37]，即简单、中等、困难和非常困难。 真实的机器人设置：TinyVLA 既在使用使用 Franka Panda 7Dof 机器人手臂的单臂设置上进行评估，也可以在使用两个 UR5 机械臂的双手动设置上进行评估，如图 3 所示。单臂场景通过固定在机器人两侧的两个外部 ZED 2 立体摄像头感知。双手动机器人的场景由手腕上的两个摄像头捕捉，顶部还有一个额外的摄像头。这些相机是 Realsense D435i。 任务：在单臂设置中，有五个任务：1） 关闭抽屉 （CloseDrawer），2） 将粉红色立方体堆叠在蓝色立方体的顶部 （StackCubes），3） 打开盒子的盖子 （OpenBox），4） 将网球放入球盒，以及 5） 直立翻倒的杯子 （FlipMug）。在双手动人实验中，我们设置了三个涉及两只手臂合作的任务：1） 将面包转移到盘子上 （TransferBread），2） 拉开袋子的拉链并将网球放入其中 （PlaceTennisBag），以及 3） 将立方体堆叠在盘子上 （StackCubes）。值得注意的是，任务的动作空间差异很大。例如，翻转杯需要机器人进行大范围的旋转才能将夹持器横向插入杯中，这与堆垛立方体完全不同，后者是拾取和放置型的。跨度同一任务中不同轨迹的长度也明显不同，例如，堆栈立方体轨迹的长度范围为 100 到 300。这为 TinyVLA 在学习执行这些任务方面带来了更多挑战。 数据收集：我们通过远程作收集数据集。我们记录来自两个摄像头视图的 RGB 流和机器人状态，例如整个机器人控制过程中的关节位置。我们将机器人夹持器的宽度记录为 0 到 1 之间的值，其中 0 表示完全关闭，1 表示完全打开。TinyVLA 预测 7 维动作，包括位置 （x， y， z）、旋转 （roll, pitch, yaw） 和 （gripper_width）。对于所有任务，除了 remove the lid of the box 任务外，我们不会添加额外的干扰项，以便更好地评估模型对干扰项的泛化能力。我们总共为每个任务收集了 100 个轨迹，以平衡所有 5 个任务之间的数据分布。 可以看出来实验的train data需要自己收集，包括RGB 流和机器人状态，输出预测的7维动作\nfreejoint的qpos一共有七个数，其中，qpos[02]是freejoint自身坐标系原点在世界坐标系的位置，qpos[36]是自身坐标系相对于世界坐标系的四元数；qvel一共有六个数，其中，qvel[02]是freejoint速度在世界坐标系下的表示，而qvel[35]是freejoint角速度在自身坐标系下的表示\n实验 按照tinavla github readme的install安装，conda创建tinyvla环境\ndata preparation\nrlds_to_h5py.py将rlds的数据转换为h5py，rlds数据是它给的吗？然后h5py是要用的。这个py应该需要修改文件位置，cfg 必须在constants.py中添加一个条目来指定数据的路径，不知道有什么路径可以填 data需要自己找\nh5py格式，结构： # h5 data structure root |-action (100,10) |-language_raw (1,) |-observations |-images # multi-view |-left (100,480,640,3) |-right (100,480,640,3) |-wrist (100,480,640,3) |-joint_positions (100,7) |-qpos (100,7) |-qvel (100,7) 之前是rlds的也行 一定要aloha吗？因为aloha scripts。但是我现在不用训练，可以看别的，得搞清楚它这个模型的输出是什么 仿真环境用的MetaWorld ，实验中做了单臂 Franka 和双手 UR5 data来源\nact++有没有可以用的示例data public_mobile_aloha_datasets 训练要收集的数据和维度对所有机器人都通用？\n所以训练数据里面不包含物体的位置，quat等，只有机器人的。\naction，observation的qpos，vel，joint_positions是什么，为什么是这个维度？可以看act++\nThe bimanual actions are formulated as target joint positions aarms ∈ R14 which includes two continuous gripper actions, and the base actions are formulated as target base linear and angular velocities abase ∈ R2. oi is the observation consisting of two wrist camera RGB observations, one egocentric top camera RGB observation mounted between the arms, and joint positions of the arms, and L is the imitation loss function. action里面是目标的关节位置，qpos是实时关节位置 那action和qpos咋收集的：act++这篇里面用模仿学习，真人手和实际机械臂运动带来的差异 什么平台，能不能把数据转换成genesis的世界坐标表示？\nopen-source\neval_real_franka的pred_action为什么是10维，不管，反正最后合成6D位姿+夹爪\naloha执行动作 aloha双机械臂模型 act++的assets，但是不知道show哪个比较好，好了这么复杂的xml genesis还没能显示 ",
+  "wordCount" : "211",
+  "inLanguage": "en",
+  "datePublished": "2025-09-29T15:19:42Z",
+  "dateModified": "2025-09-29T15:19:42Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://example.com/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      TinyVLA: Toward Fast, Data-Efficient Vision-Language-Action Models for Robotic Manipulation
+    </h1>
+    <div class="post-meta">
+
+<span title='2025-09-29 15:19:42 +0000 UTC'>September 29, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>我要看这篇文章能否复现</p>
+<h1 id="论文">论文<a hidden class="anchor" aria-hidden="true" href="#论文">#</a></h1>
+<h2 id="实验">实验<a hidden class="anchor" aria-hidden="true" href="#实验">#</a></h2>
+<ol>
+<li>模拟基准测试：我们在 MetaWorld 上评估我们的方法。MetaWorld [36] 中的 50 个任务可以分为多个级别 [37]，即简单、中等、困难和非常困难。</li>
+<li>真实的机器人设置：TinyVLA 既在使用使用 Franka Panda 7Dof 机器人手臂的单臂设置上进行评估，也可以在使用两个 UR5 机械臂的双手动设置上进行评估，如图 3 所示。单臂场景通过固定在机器人两侧的两个外部 ZED 2 立体摄像头感知。双手动机器人的场景由手腕上的两个摄像头捕捉，顶部还有一个额外的摄像头。这些相机是 Realsense D435i。</li>
+<li>任务：在单臂设置中，有五个任务：1） 关闭抽屉 （CloseDrawer），2） 将粉红色立方体堆叠在蓝色立方体的顶部 （StackCubes），3） 打开盒子的盖子 （OpenBox），4） 将网球放入球盒，以及 5） 直立翻倒的杯子 （FlipMug）。在双手动人实验中，我们设置了三个涉及两只手臂合作的任务：1） 将面包转移到盘子上 （TransferBread），2） 拉开袋子的拉链并将网球放入其中 （PlaceTennisBag），以及 3） 将立方体堆叠在盘子上 （StackCubes）。值得注意的是，任务的动作空间差异很大。例如，翻转杯需要机器人进行大范围的旋转才能将夹持器横向插入杯中，这与堆垛立方体完全不同，后者是拾取和放置型的。跨度同一任务中不同轨迹的长度也明显不同，例如，堆栈立方体轨迹的长度范围为 100 到 300。这为 TinyVLA 在学习执行这些任务方面带来了更多挑战。</li>
+<li>数据收集：我们通过远程作收集数据集。我们记录来自两个摄像头视图的 RGB 流和机器人状态，例如整个机器人控制过程中的关节位置。我们将机器人夹持器的宽度记录为 0 到 1 之间的值，其中 0 表示完全关闭，1 表示完全打开。TinyVLA 预测 7 维动作，包括位置 （x， y， z）、旋转 （roll, pitch, yaw） 和 （gripper_width）。对于所有任务，除了 remove the lid of the box 任务外，我们不会添加额外的干扰项，以便更好地评估模型对干扰项的泛化能力。我们总共为每个任务收集了 100 个轨迹，以平衡所有 5 个任务之间的数据分布。</li>
+</ol>
+<p>可以看出来实验的train data需要自己收集，包括RGB 流和机器人状态，输出预测的7维动作</p>
+<p>freejoint的qpos一共有七个数，其中，qpos[0<del>2]是freejoint自身坐标系原点在世界坐标系的位置，qpos[3</del>6]是自身坐标系相对于世界坐标系的四元数；qvel一共有六个数，其中，qvel[0<del>2]是freejoint速度在世界坐标系下的表示，而qvel[3</del>5]是freejoint角速度在自身坐标系下的表示</p>
+<h1 id="实验-1">实验<a hidden class="anchor" aria-hidden="true" href="#实验-1">#</a></h1>
+<ol>
+<li>
+<p>按照<a href="https://github.com/liyaxuanliyaxuan/TinyVLA">tinavla github</a> readme的install安装，conda创建<code>tinyvla</code>环境</p>
+</li>
+<li>
+<p>data preparation</p>
+<ol>
+<li><code>rlds_to_h5py.py</code>将rlds的数据转换为h5py，rlds数据是它给的吗？然后h5py是要用的。这个py应该需要修改文件位置，cfg</li>
+<li>必须在<code>constants.py</code>中添加一个条目来指定数据的路径，不知道有什么路径可以填</li>
+</ol>
+</li>
+<li>
+<p>data需要自己找</p>
+<ol>
+<li>h5py格式，结构：</li>
+</ol>
+<pre tabindex="0"><code> # h5 data structure
+ root
+   |-action (100,10)
+   |-language_raw (1,)
+   |-observations
+       |-images # multi-view
+           |-left (100,480,640,3)
+           |-right (100,480,640,3)
+           |-wrist (100,480,640,3)
+       |-joint_positions (100,7)
+       |-qpos (100,7)
+       |-qvel (100,7)
+</code></pre><ol start="2">
+<li>之前是rlds的也行</li>
+<li>一定要aloha吗？因为aloha scripts。但是我现在不用训练，可以看别的，得搞清楚它这个模型的输出是什么</li>
+<li>仿真环境用的MetaWorld ，实验中做了单臂 Franka 和双手 UR5</li>
+</ol>
+</li>
+<li>
+<p>data来源</p>
+<ol>
+<li>act++有没有可以用的示例data</li>
+<li>public_mobile_aloha_datasets</li>
+</ol>
+</li>
+<li>
+<p>训练要收集的数据和维度对所有机器人都通用？</p>
+</li>
+<li>
+<p>所以训练数据里面不包含物体的位置，quat等，只有机器人的。</p>
+</li>
+<li>
+<p>action，observation的qpos，vel，joint_positions是什么，为什么是这个维度？可以看act++</p>
+<ol>
+<li>The bimanual actions are formulated as target joint positions aarms ∈ R14 which includes two continuous gripper actions, and the base actions are formulated as target base linear and angular velocities abase ∈ R2.</li>
+<li>oi is the observation consisting of two wrist camera RGB observations, one egocentric top camera RGB observation mounted between the arms, and joint positions of the arms, and L is the imitation loss function.</li>
+<li>action里面是目标的关节位置，qpos是实时关节位置</li>
+<li>那action和qpos咋收集的：act++这篇里面用模仿学习，真人手和实际机械臂运动带来的差异</li>
+</ol>
+</li>
+<li>
+<p>什么平台，能不能把数据转换成genesis的世界坐标表示？</p>
+</li>
+<li>
+<p>open-source</p>
+</li>
+<li>
+<p>eval_real_franka的pred_action为什么是10维，不管，反正最后合成6D位姿+夹爪</p>
+</li>
+</ol>
+<h1 id="aloha执行动作">aloha执行动作<a hidden class="anchor" aria-hidden="true" href="#aloha执行动作">#</a></h1>
+<ol>
+<li>aloha双机械臂模型
+<ol>
+<li>act++的assets，但是不知道show哪个比较好，好了这么复杂的xml genesis还没能显示</li>
+</ol>
+</li>
+</ol>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://example.com/tags/vla/">Vla</a></li>
+      <li><a href="https://example.com/tags/robotic/">Robotic</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

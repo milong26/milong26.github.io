@@ -1,0 +1,9 @@
+{
+  "id": "auto-template",
+  "name": "Auto Template",
+  "version": "0.0.1",
+  "minAppVersion": "0.15.0",
+  "description": "Auto apply template on new file",
+  "author": "you",
+  "main": "main.js"
+}

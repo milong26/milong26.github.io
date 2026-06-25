@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>maniskill | 我的博客</title>
+<meta name="keywords" content="benchmark">
+<meta name="description" content="以前经常看见的一个baseline？环境？基于gym
+可以headless运行，但是需要vulkan">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
+<link rel="canonical" href="https://example.com/post/maniskill/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://example.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://example.com/post/maniskill/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://example.com/post/maniskill/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="maniskill">
+  <meta property="og:description" content="以前经常看见的一个baseline？环境？基于gym
+可以headless运行，但是需要vulkan">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:tag" content="Benchmark">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="maniskill">
+  <meta name="twitter:description" content="以前经常看见的一个baseline？环境？基于gym
+可以headless运行，但是需要vulkan">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://example.com/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "maniskill",
+      "item": "https://example.com/post/maniskill/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "maniskill",
+  "name": "maniskill",
+  "description": "以前经常看见的一个baseline？环境？基于gym\n可以headless运行，但是需要vulkan\n",
+  "keywords": [
+    "benchmark"
+  ],
+  "articleBody": "以前经常看见的一个baseline？环境？基于gym\n可以headless运行，但是需要vulkan\n现在有两个版本，直接点进去已经是maniskill3了，对应的数据集是-v1的，maniskill2是以前的稳定版，对应-v0的数据集。\nmaniskill2 稳定版，但是比较早，参考\n安装 git clone https://github.com/haosulab/ManiSkill.git git checkout v0.5.3 git status 如果显示HEAD detached at v0.5.3 nothing to commit, working tree clean就正常 配置环境也挺简单的\nconda create -n mskill python==3.10 pip install -e . 下载 直接手动修改代码里面huggingface.co变成hf-mirror.com\npython -m mani_skill2.utils.download_asset \"PickCube-v0\" 看huggingface的数据集haosulab/ManiSkill2 的文件夹，也可以直接下载righd\nmaniskill3 教程\n安装 下载代码 git clone git@github.com:haosulab/ManiSkill.git 环境 conda create -n mskill python==3.10 pip install -e . 测试代码\nimport os import gymnasium as gym import mani_skill.envs import torch import cv2 os.environ[\"CUDA_VISIBLE_DEVICES\"] = \"0\" # 创建图片保存目录 os.makedirs(\"images\", exist_ok=True) # 创建环境 env = gym.make( \"PickCube-v1\", num_envs=1, obs_mode=\"state\", control_mode=\"pd_ee_delta_pose\", render_mode=\"rgb_array\" # 获取渲染图像 ) obs, _ = env.reset(seed=0) done = False frame_id = 0 while not done: action = env.action_space.sample() obs, reward, terminated, truncated, info = env.step(action) done = terminated or truncated # 获取渲染帧 frame = env.render() # torch.Tensor: [1, H, W, 3] # 去掉 batch 维度并转成 numpy if isinstance(frame, torch.Tensor): frame = frame.squeeze(0).cpu().numpy() # OpenCV 保存图片，注意 RGB -\u003e BGR cv2.imwrite(f\"images/frame_{frame_id:03d}.png\", cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)) frame_id += 1 env.close() print(f\"图片已保存到 images/ 文件夹，总帧数: {frame_id}\") 这样最开始的测试就ok了 python -m mani_skill.examples.benchmarking.gpu_sim –num-envs=64 –save-video 用--save_video这个关键字就能保存视频了,danshi 64会比较慢，效果是8x8的=64个并行的环境 看gpu_sim.py这个代码，我想知道：\n相机位置可以设定吗， 好像是场景设置好的，这个代码里面还没有改，camera章说不定有 policy/action从哪个接口接入，不知道 什么时候停止，根据done来 能否保存其他数据（现在只有图片） 下载数据集demo和asset，用PickCube-v1吧\n改代码，就是snapshot_download调用的时候加上max_workers=2和\nif data_source.url and \"huggingface.co\" in data_source.url: data_source.url = data_source.url.replace(\"huggingface.co\", \"hf-mirror.com\") print(f\"Downloading {data_source.url}\") 然后指令\npython -m mani_skill.utils.download_asset \"PickCube-v1\" 下载到 /home/user/.maniskill/data/scene_datasets/replica_cad_dataset 这个文件夹里面了 提示说已经有文件夹了，是否删除？ n 是否继续下载？ y\n下载以后怎么用？\nrobot的种类可以搜\"robot.json\"这个文件 base agent只支持 control_mode ‘pd_joint_delta_pos’, ‘pd_joint_pos’, ‘pd_joint_target_delta_pos’ obs_mode = “rgb+depth+segmentation” #@param can be one of [‘pointcloud’, ‘rgb+depth+segmentation’, ‘state_dict’, ‘state’] reward_mode = “dense” #@param can be one of [‘sparse’, ‘dense’]\n等下载完以后测试 CUDA_VISIBLE_DEVICES=0 python -m mani_skill.examples.demo_random_action -e “ReplicaCAD_SceneManipulation-v1” –render-mode=“rgb_array” –shader=“rt-fast” –record_dir=“videos/” 好高级 shader好牛，画面一下子高级起来了\n为什么我下载的是ReplicaCAD，但是还有ReplicaCAD_SceneManipulation-v1这个env id？好吧\n然后除了random action还有别的吗？这个代码里面是没有了\nmotion plan相关的服务器跑不了，说是resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown warnings.warn(‘resource_tracker: There appear to be %d ’ 解决不了就不解决了\n然后看demo的下载，还是要改代码\n所以asset相当于场景 demo相当于轨迹？\n下载demo StackCube-v1 python -m mani_skill.utils.download_demo “StackCube-v1” 下载对应的asset？不知道什么asset replay trajectory 卡住没关系，是因为要replay的太多了，设置count=1就能很快结束，视频文件在h5文件的位置 CUDA_VISIBLE_DEVICES=0 python -m mani_skill.trajectory.replay_trajectory –traj-path ~/.maniskill/demos/StackCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.h5 –save-video –count 1\nhttps://maniskill.readthedocs.io/en/latest/user_guide/learning_from_demos/setup.html 看这个说明 setup里面说gymnasium\u003e=0.29.1但是不能用大于1的版本，见 https://github.com/haosulab/ManiSkill/issues/1366 还是老老实实用0.29.1吧 居然还有个convert_to_lerobot，看一下它的state和action怎么获取的，怎么都是h5里面的到的 差不多搞懂了， 代码里面是怎么做的 下载asset的代码要改哪里 ```python def download( data_source: assets.DataSource, verbose=True, non_interactive=True, ): \"\"\"download a given data source\"\"\" output_dir = Path(data_source.output_dir) # Create output directory if not output_dir.exists(): if non_interactive or prompt_yes_no(f\"{output_dir} does not exist. Create?\"): output_dir.mkdir(parents=True) else: return target_path = data_source.target_path if target_path is None: target_path = data_source.url.split(\"/\")[-1] output_path = output_dir / target_path output_dir = osp.dirname(output_path) # Clean up existing files # if output_path.exists(): # if non_interactive or prompt_yes_no(f\"{output_path} exists. Remove?\"): # if output_path.is_dir(): # shutil.rmtree(output_path) # else: # output_path.unlink() # else: # if non_interactive or prompt_yes_no(\"Continue downloading?\"): # pass # else: # print(f\"Skip existing: {output_path}\") # return output_path if output_path.exists(): print(f\"Skip existing: {output_path}\") return output_path output_path.mkdir(parents=True, exist_ok=True) if data_source.hf_repo_id is not None: download_from_hf_datasets(data_source) return Path(output_dir).mkdir(parents=True, exist_ok=True) if data_source.hf_repo_id is not None: download_from_hf_datasets(data_source) return # Download files to temporary location try: if verbose: # 更改url # 替换 huggingface 主站为镜像站 if data_source.url and \"huggingface.co\" in data_source.url: data_source.url = data_source.url.replace(\"huggingface.co\", \"hf-mirror.com\") print(f\"Downloading {data_source.url}\") pbar = tqdm(unit=\"iB\", unit_scale=True, unit_divisor=1024) 并且max_workers改小一点，默认貌似是8\n然后demos python -m mani_skill.utils.download_demo all 也要改一下代码吧 直接改main\nif verbose: print( f\"Downloading demonstrations to {osp.abspath(output_dir)} - {i+1}/{len(uids)}, {uid}\" ) # 修改url，增加这两行 if meta.raw_dataset_url and \"huggingface.co\" in meta.raw_dataset_url: meta.raw_dataset_url = meta.raw_dataset_url.replace(\"huggingface.co\", \"hf-mirror.com\") local_path = download_file( output_dir, meta.raw_dataset_url, ) 这下就下载完了\nassets默认位置在 ~/.maniskill/data/assets demos在 ~/.maniskill/demos\nms3数据变成lerobot并train 环境准备 下载数据集 转换成lerobot 环境 Before using the converter, install the required dependencies:\npip install pyarrow 数据集 下载哪个？ms3有没有lerobot的？\npython -m mani_skill.utils.download_demo \"PickCube-v1\" demos默认在 ~/.maniskill/demos 换默认位置 echo ’export MS_ASSET_DIR=/data/zhonglinye/msdata’ » ~/.bashrc source ~/.bashrc\n下载以后要replay，不然没有图像数据\npython -m mani_skill.trajectory.replay_trajectory –traj-path /data/zhonglinye/msdata/demos/PickCube-v1/motionplanning/trajectory.h5 -o rgbd –save_traj –save_video –video_fps 30\n最后的save_video其实不需要……因为lerobot也没法读取\n分析一下最后的数据集有什么内容以及从什么形式转换到什么形式，反转的话要做什么？\naction没有变化\n数据集转换 python -m mani_skill.trajectory.convert_to_lerobot –traj-path /data/zhonglinye/msdata/demos/PickCube-v1/motionplanning/trajectory.rgbd.pd_joint_pos.physx_cpu.h5 –output-dir lerobot_dataset –chunks-size 50\n用lerobot训练 CUDA_VISIBLE_DEVICES=1 HF_HUB_OFFLINE=1 lerobot-train –dataset.repo_id=mspickup/split_x –dataset.root=/data/zhonglinye/hfdata/huggingface/lerobot/mspickup/split_x –policy.type=smolvla –output_dir=/data/zhonglinye/msleoutput/split_x –job_name=maniskill3_pickcube_smolvla_pure_x –policy.device=cuda –policy.push_to_hub=false –wandb.enable=true –steps=26000 –batch_size=32 这一个batch_size只有8\n再尝试一个batch_size大一点的\n训练出来的模型怎么接入maniskill进行推理？\n用lerobot框架推理，还是直接加载模型文件？用manniskill作为baseline的话应该还是用maniskill作为主要骨架吧？想办法引入模型加载才对 确认模型 输入 内容 格式：gym转换到lerobot数据集做的一些事 输出 输出反过来转换到gym格式 加载 模型本体是哪个 preprocessor和postprocessor 流程 创建环境 加载模型 加载preprocessor和postprocessor 得到observation并转换到lerobot需要的分辨率 observation-\u003epreprocessor_obs preprocessor_obs-\u003emodel-\u003eaction action-\u003epostprocessor_action postprocessor_action-\u003egym-\u003enew observation 统计成功率 在这之前，需要了解observation(image和state)以及action如何得到？ obs_mode设置不同可以得到图片和state嘛？\n主要观测模式详解\n状态字典模式(state_dict) 这是一种特权观测模式，提供精确的环境内部状态信息，特别适合算法开发初期或需要精确状态信息的场景。 核心组成：\nagent：机器人本体感知信息 qpos：关节位置(nq自由度) qvel：关节速度 controller：控制器状态(通常为空字典) extra：任务特定信息(如目标位置、末端执行器位置等) 技术特点：\n提供精确的物体位姿等特权信息 不支持软体任务 数据结构为非扁平化字典 2. 状态模式(state) 这是state_dict的扁平化版本，观测空间为gym.spaces.Box，更适合某些需要一维输入的标准强化学习算法。\n传感器数据模式(sensor_data) 此模式提供原始传感器数据，特别适合研究基于原始感知的机器人控制。 核心组成：\nsensor_data：传感器采集的原始数据 相机数据(使用minimal着色器时)： Color：[H,W,4]的RGB+Alpha值(uint8) PositionSegmentation：[H,W,4]的位置和分割信息(int16) sensor_param：传感器参数 相机参数： cam2world_gl：相机到世界坐标系的变换矩阵(OpenGL/Blender约定) extrinsic_cv：相机外参(OpenCV约定) intrinsic_cv：相机内参(OpenCV约定) 4. 视觉组合模式(rgb+depth+segmentation) ManiSkill支持多种视觉数据的灵活组合，包括：\nrgb：RGB图像 depth：深度图 segmentation：语义分割图 任意组合如rgb+depth、rgb+segmentation等 数据特点：\nrgb：[H,W,3]的RGB图像(uint8) depth：[H,W,1]的深度图(int16/uint16)，单位为毫米 segmentation：[H,W,1]的分割图(int16/uint16) 注意事项：\n数据未归一化，使用时需自行缩放 不同组合可节省内存和GPU带宽 5. 点云模式(pointcloud) 此模式将多相机数据融合为统一的点云表示。\n数据结构：\nxyzw：[N,4]的点云坐标(世界坐标系，齐次表示) rgb：[N,3]的点云颜色(uint8) segmentation：[N,1]的点云分割信息(int16/uint16) 技术特点：\nw=0表示无限远点(超出相机远平面) 点云信息量不超过原始RGB-D图像 分割数据详解 ManiSkill为场景中的物体自动分配分割ID，可通过segmentation_id_map查询：\n示例：查询分割ID映射关系 for obj_id, obj in sorted(env.unwrapped.segmentation_id_map.items()): if isinstance(obj, Actor): print(f\"{obj_id}: Actor, name - {obj.name}\") elif isinstance(obj, Link): print(f\"{obj_id}: Link, name - {obj.name}\") python 运行 关键点：\nID 0表示远处背景 支持按名称筛选特定物体 实际应用建议 算法开发阶段：建议从state_dict或state模式开始，利用特权信息快速验证算法有效性。\n感知研究：使用视觉组合模式时，注意不同着色器提供的纹理差异，选择适合的观测组合。\n点云处理：点云模式适合3D感知算法研究，但需注意点云密度和噪声特性。\n性能优化：根据实际需求选择必要的观测数据，避免不必要的数据传输和处理开销。\n当我设置obs_mode=state_dict的时候，返回 {‘agent’: {‘qpos’: tensor(), ‘qvel’: tensor([[0., 0., 0., 0., 0., 0., 0., 0., 0.]])}, ’extra’: {‘is_grasped’: tensor([False]), ’tcp_pose’: tensor([[ 0.0123, 0.0380, 0.1822, -0.0177, 0.9998, 0.0043, 0.0080]]), ‘goal_pos’: tensor([[ 0.0268, -0.0020, 0.2889]]), ‘obj_pose’: tensor([[-7.4868e-04, 5.3644e-02, 2.0000e-02, 5.6876e-01, 0.0000e+00, 0.0000e+00, 8.2250e-01]]), ’tcp_to_obj_pos’: tensor([[-0.0130, 0.0156, -0.1622]]), ‘obj_to_goal_pos’: tensor([[ 0.0276, -0.0556, 0.2689]])}} 然后没有图片，想办法得到图片\ntask name是什么？我擦居然就是PIckCube-v1吗 检查到底哪里出现了问题。检查同样的位置，同样的action是否有用\n找到和测试，比如seed=1对应的demo，有吗？哪怕找不到，只要有动作也可以把 ok 确认了是seed，那replay生成seed=0的video，并导出state和action 现在道路通了，我要做的是\nreplay生成更高质量的数据集 重新train，batchsize和step多一点 测试多个checkpoint的结果（反正仿真随便搞） 用什么render-mode和shaft?\nreplay_trajectory.py里面的render_mode只跟保存视频有关。重要的跟轨迹有关的是obs_mode_: Target observation mode to record in the trajectory. See https://maniskill.readthedocs.io/en/latest/user_guide/concepts/observation.html for a full list of supported observation modes.\nobs-mode和render-mode有什么区别？obs比较重要，render-mode就是保存视频和human可视化的，不重要\nrender-mode: sensors render-mode默认用的是什么？\n–save-video用的是什么视角？跟render-mode一致。\n定制摄像头https://maniskill.readthedocs.io/en/latest/user_guide/concepts/sensors.html\n那我选择的基础mode应该是rgb，但是我要改相机位置\nsave-video默认使用的相机位置是？\n修改了代码：pick_cube.py里面注释掉了hidden_objects 修改了revert_to_lerobot里面的task python -m mani_skill.trajectory.replay_trajectory –traj-path /data/zhonglinye/msdata/demos/PickCube-v1/motionplanning/trajectory.h5 –save-traj –obs-mode rgb –shader rt 生成 然后转成lerobot格式的 python -m mani_skill.trajectory.convert_to_lerobot –traj-path /data/zhonglinye/msdata/demos/PickCube-v1/motionplanning/trajectory.rgb.pd_joint_pos.physx_cpu.h5 –output-dir beautiful_lerobot –chunks-size 50\npython -m lerobot.scripts.lerobot_edit_dataset --repo_id mspickup/split --root /data/zhonglinye/code/ManiSkill/beautiful_lerobot --operation.type split_overlapping --operation.splits '{\"one\": 0.1, \"two\": 0.2, \"three\": 0.3, \"four\": 0.4, \"fifth\": 0.5, \"six\": 0.6, \"seven\": 0.7, \"eight\": 0.8, \"nine\": 0.9, \"ten\": 1.0}' 接下来的问题，怎么训练？ 我想依次训练这几个，怎么做？\n把pickcube里面的hidden_objects代码还原，也就是最后保存的视频不要有绿点\n重新生成，并且用gpu，输出结果保存到日志 CUDA_VISIBLE_DEVICES=0 python -m mani_skill.trajectory.replay_trajectory \\ –traj-path /data/zhonglinye/msdata/demos/PickCube-v1/motionplanning/trajectory.h5 -o rgb –save_traj –video_fps 30 –sim_backend cuda –shader rt\n不行，用gpu太慢了，因为gpu不适合做这个 然后convert_to_lerobot ```shell python -m mani_skill.trajectory.convert_to_lerobot \\ --traj-path /data/zhonglinye/msdata/demos/PickCube-v1/motionplanning/trajectory.rgb.pd_joint_pos.physx_cpu.h5 \\ --output-dir /data/zhonglinye/lerobotdata/mspickcube \\ --chunks-size 50 训练\nCUDA_VISIBLE_DEVICES=1 HF_HUB_OFFLINE=1 lerobot-train \\ --dataset.repo_id=mspickup/mspickcube \\ --dataset.root=/data/zhonglinye/lerobotdata/mspickcube \\ --policy.type=smolvla \\ --output_dir=/data/zhonglinye/msleoutput/smolvla_mspickcube_all \\ --job_name=mspickup_smolvla_all \\ --policy.device=cuda \\ --policy.push_to_hub=false \\ --wandb.enable=true \\ --steps=30000 \\ --batch_size=128 batch_size改大一点看效果怎么样\n",
+  "wordCount" : "877",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/post/maniskill/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://example.com/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      maniskill
+    </h1>
+    <div class="post-meta">
+
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>以前经常看见的一个baseline？环境？基于gym</p>
+<p>可以headless运行，但是需要vulkan</p>
+<p>现在有两个版本，直接点进去已经是maniskill3了，对应的数据集是-v1的，maniskill2是以前的稳定版，对应-v0的数据集。</p>
+<h1 id="maniskill2">maniskill2<a hidden class="anchor" aria-hidden="true" href="#maniskill2">#</a></h1>
+<p>稳定版，但是比较早，<a href="https://github.com/haosulab/ManiSkill/tree/v0.5.3">参考</a></p>
+<h2 id="安装">安装<a hidden class="anchor" aria-hidden="true" href="#安装">#</a></h2>
+<ol>
+<li>git clone <a href="https://github.com/haosulab/ManiSkill.git">https://github.com/haosulab/ManiSkill.git</a></li>
+<li>git checkout v0.5.3</li>
+<li>git status 如果显示HEAD detached at v0.5.3
+nothing to commit, working tree clean就正常</li>
+</ol>
+<p>配置环境也挺简单的</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>conda create -n mskill python<span style="color:#f92672">==</span>3.10
+</span></span><span style="display:flex;"><span>pip install -e .
+</span></span></code></pre></div><h2 id="下载">下载<a hidden class="anchor" aria-hidden="true" href="#下载">#</a></h2>
+<p>直接手动修改代码里面huggingface.co变成hf-mirror.com</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python -m mani_skill2.utils.download_asset <span style="color:#e6db74">&#34;PickCube-v0&#34;</span>
+</span></span></code></pre></div><p>看<a href="https://huggingface.co/datasets/haosulab/ManiSkill2">huggingface的数据集haosulab/ManiSkill2</a> 的文件夹，也可以直接下载righd</p>
+<h1 id="maniskill3">maniskill3<a hidden class="anchor" aria-hidden="true" href="#maniskill3">#</a></h1>
+<p><a href="https://maniskill.readthedocs.io/en/latest/user_guide/index.html">教程</a></p>
+<h2 id="安装-1">安装<a hidden class="anchor" aria-hidden="true" href="#安装-1">#</a></h2>
+<ol>
+<li>下载代码
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git clone git@github.com:haosulab/ManiSkill.git
+</span></span></code></pre></div></li>
+<li>环境
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>conda create -n mskill python<span style="color:#f92672">==</span>3.10
+</span></span><span style="display:flex;"><span>pip install -e .
+</span></span></code></pre></div></li>
+</ol>
+<p>测试代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> gymnasium <span style="color:#66d9ef">as</span> gym
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> mani_skill.envs
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> torch
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> cv2
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#34;CUDA_VISIBLE_DEVICES&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 创建图片保存目录</span>
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>makedirs(<span style="color:#e6db74">&#34;images&#34;</span>, exist_ok<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 创建环境</span>
+</span></span><span style="display:flex;"><span>env <span style="color:#f92672">=</span> gym<span style="color:#f92672">.</span>make(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;PickCube-v1&#34;</span>,
+</span></span><span style="display:flex;"><span>    num_envs<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    obs_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;state&#34;</span>,
+</span></span><span style="display:flex;"><span>    control_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;pd_ee_delta_pose&#34;</span>,
+</span></span><span style="display:flex;"><span>    render_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;rgb_array&#34;</span>  <span style="color:#75715e"># 获取渲染图像</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>obs, _ <span style="color:#f92672">=</span> env<span style="color:#f92672">.</span>reset(seed<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>done <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>frame_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#f92672">not</span> done:
+</span></span><span style="display:flex;"><span>    action <span style="color:#f92672">=</span> env<span style="color:#f92672">.</span>action_space<span style="color:#f92672">.</span>sample()
+</span></span><span style="display:flex;"><span>    obs, reward, terminated, truncated, info <span style="color:#f92672">=</span> env<span style="color:#f92672">.</span>step(action)
+</span></span><span style="display:flex;"><span>    done <span style="color:#f92672">=</span> terminated <span style="color:#f92672">or</span> truncated
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 获取渲染帧</span>
+</span></span><span style="display:flex;"><span>    frame <span style="color:#f92672">=</span> env<span style="color:#f92672">.</span>render()  <span style="color:#75715e"># torch.Tensor: [1, H, W, 3]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 去掉 batch 维度并转成 numpy</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> isinstance(frame, torch<span style="color:#f92672">.</span>Tensor):
+</span></span><span style="display:flex;"><span>        frame <span style="color:#f92672">=</span> frame<span style="color:#f92672">.</span>squeeze(<span style="color:#ae81ff">0</span>)<span style="color:#f92672">.</span>cpu()<span style="color:#f92672">.</span>numpy()
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># OpenCV 保存图片，注意 RGB -&gt; BGR</span>
+</span></span><span style="display:flex;"><span>    cv2<span style="color:#f92672">.</span>imwrite(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;images/frame_</span><span style="color:#e6db74">{</span>frame_id<span style="color:#e6db74">:</span><span style="color:#e6db74">03d</span><span style="color:#e6db74">}</span><span style="color:#e6db74">.png&#34;</span>, cv2<span style="color:#f92672">.</span>cvtColor(frame, cv2<span style="color:#f92672">.</span>COLOR_RGB2BGR))
+</span></span><span style="display:flex;"><span>    frame_id <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>env<span style="color:#f92672">.</span>close()
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;图片已保存到 images/ 文件夹，总帧数: </span><span style="color:#e6db74">{</span>frame_id<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><p>这样最开始的测试就ok了
+python -m mani_skill.examples.benchmarking.gpu_sim &ndash;num-envs=64 &ndash;save-video
+用<code>--save_video</code>这个关键字就能保存视频了,danshi 64会比较慢，效果是8x8的=64个并行的环境
+看<code>gpu_sim.py</code>这个代码，我想知道：</p>
+<ol>
+<li>相机位置可以设定吗， 好像是场景设置好的，这个代码里面还没有改，camera章说不定有</li>
+<li>policy/action从哪个接口接入，不知道</li>
+<li>什么时候停止，根据done来</li>
+<li>能否保存其他数据（现在只有图片）</li>
+</ol>
+<p>下载数据集demo和asset，用<a href="https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/tree/main/demos/PickCube-v1">PickCube-v1</a>吧</p>
+<p>改代码，就是snapshot_download调用的时候加上<code>max_workers=2</code>和</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> data_source<span style="color:#f92672">.</span>url <span style="color:#f92672">and</span> <span style="color:#e6db74">&#34;huggingface.co&#34;</span> <span style="color:#f92672">in</span> data_source<span style="color:#f92672">.</span>url:
+</span></span><span style="display:flex;"><span>                data_source<span style="color:#f92672">.</span>url <span style="color:#f92672">=</span> data_source<span style="color:#f92672">.</span>url<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;huggingface.co&#34;</span>, <span style="color:#e6db74">&#34;hf-mirror.com&#34;</span>)
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Downloading </span><span style="color:#e6db74">{</span>data_source<span style="color:#f92672">.</span>url<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><p>然后指令</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python -m mani_skill.utils.download_asset <span style="color:#e6db74">&#34;PickCube-v1&#34;</span>
+</span></span></code></pre></div><p>下载到
+/home/user/.maniskill/data/scene_datasets/replica_cad_dataset
+这个文件夹里面了
+提示说已经有文件夹了，是否删除？ n
+是否继续下载？ y</p>
+<p>下载以后怎么用？</p>
+<p>robot的种类可以搜&quot;robot.json&quot;这个文件
+base agent只支持 control_mode   &lsquo;pd_joint_delta_pos&rsquo;, &lsquo;pd_joint_pos&rsquo;, &lsquo;pd_joint_target_delta_pos&rsquo;
+obs_mode = &ldquo;rgb+depth+segmentation&rdquo; #@param can be one of [&lsquo;pointcloud&rsquo;, &lsquo;rgb+depth+segmentation&rsquo;, &lsquo;state_dict&rsquo;, &lsquo;state&rsquo;]
+reward_mode = &ldquo;dense&rdquo; #@param can be one of [&lsquo;sparse&rsquo;, &lsquo;dense&rsquo;]</p>
+<p>等下载完以后测试
+CUDA_VISIBLE_DEVICES=0 python -m mani_skill.examples.demo_random_action -e &ldquo;ReplicaCAD_SceneManipulation-v1&rdquo; <br>
+&ndash;render-mode=&ldquo;rgb_array&rdquo; &ndash;shader=&ldquo;rt-fast&rdquo;  &ndash;record_dir=&ldquo;videos/&rdquo;
+好高级 shader好牛，画面一下子高级起来了</p>
+<p>为什么我下载的是ReplicaCAD，但是还有ReplicaCAD_SceneManipulation-v1这个env id？好吧</p>
+<p>然后除了random action还有别的吗？这个代码里面是没有了</p>
+<p>motion plan相关的服务器跑不了，说是resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown warnings.warn(&lsquo;resource_tracker: There appear to be %d &rsquo; 解决不了就不解决了</p>
+<p>然后看demo的下载，还是要改代码</p>
+<p>所以asset相当于场景
+demo相当于轨迹？</p>
+<ol>
+<li>下载demo  <a href="https://huggingface.co/datasets/haosulab/ManiSkill_Demonstrations/tree/main/demos/StackCube-v1">StackCube-v1</a>  python -m mani_skill.utils.download_demo &ldquo;StackCube-v1&rdquo;</li>
+<li>下载对应的asset？不知道什么asset</li>
+<li>replay trajectory  卡住没关系，是因为要replay的太多了，设置count=1就能很快结束，视频文件在h5文件的位置
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"></code></pre></div></li>
+</ol>
+<p>CUDA_VISIBLE_DEVICES=0 python -m mani_skill.trajectory.replay_trajectory &ndash;traj-path ~/.maniskill/demos/StackCube-v1/rl/trajectory.none.pd_joint_delta_pos.physx_cuda.h5 &ndash;save-video &ndash;count 1</p>
+<pre tabindex="0"><code>
+
+
+https://maniskill.readthedocs.io/en/latest/user_guide/learning_from_demos/setup.html 看这个说明
+
+setup里面说gymnasium&gt;=0.29.1但是不能用大于1的版本，见 https://github.com/haosulab/ManiSkill/issues/1366
+还是老老实实用0.29.1吧
+
+居然还有个convert_to_lerobot，看一下它的state和action怎么获取的，怎么都是h5里面的到的
+
+差不多搞懂了，
+
+
+
+代码里面是怎么做的
+下载asset的代码要改哪里
+```python
+def download(
+ data_source: assets.DataSource,
+ verbose=True,
+ non_interactive=True,
+):
+ &#34;&#34;&#34;download a given data source&#34;&#34;&#34;
+ output_dir = Path(data_source.output_dir)
+ # Create output directory
+ if not output_dir.exists():
+     if non_interactive or prompt_yes_no(f&#34;{output_dir} does not exist. Create?&#34;):
+         output_dir.mkdir(parents=True)
+     else:
+         return
+ target_path = data_source.target_path
+ if target_path is None:
+     target_path = data_source.url.split(&#34;/&#34;)[-1]
+ output_path = output_dir / target_path
+ output_dir = osp.dirname(output_path)
+
+ # Clean up existing files
+ # if output_path.exists():
+ #     if non_interactive or prompt_yes_no(f&#34;{output_path} exists. Remove?&#34;):
+ #         if output_path.is_dir():
+ #             shutil.rmtree(output_path)
+ #         else:
+ #             output_path.unlink()
+ #     else:
+ #     if non_interactive or prompt_yes_no(&#34;Continue downloading?&#34;):
+ #         pass
+ #     else:
+ #         print(f&#34;Skip existing: {output_path}&#34;)
+ #         return output_path
+ if output_path.exists():
+     print(f&#34;Skip existing: {output_path}&#34;)
+     return output_path
+
+ output_path.mkdir(parents=True, exist_ok=True)
+ if data_source.hf_repo_id is not None:
+     download_from_hf_datasets(data_source)
+     return
+
+ Path(output_dir).mkdir(parents=True, exist_ok=True)
+ if data_source.hf_repo_id is not None:
+     download_from_hf_datasets(data_source)
+     return
+
+ # Download files to temporary location
+ try:
+     if verbose:
+         # 更改url
+         # 替换 huggingface 主站为镜像站
+         if data_source.url and &#34;huggingface.co&#34; in data_source.url:
+             data_source.url = data_source.url.replace(&#34;huggingface.co&#34;, &#34;hf-mirror.com&#34;)
+         print(f&#34;Downloading {data_source.url}&#34;)
+         pbar = tqdm(unit=&#34;iB&#34;, unit_scale=True, unit_divisor=1024)
+</code></pre><p>并且max_workers改小一点，默认貌似是8</p>
+<p>然后demos
+<code>python -m mani_skill.utils.download_demo all</code>
+也要改一下代码吧
+直接改main</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> verbose:
+</span></span><span style="display:flex;"><span>            print(
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Downloading demonstrations to </span><span style="color:#e6db74">{</span>osp<span style="color:#f92672">.</span>abspath(output_dir)<span style="color:#e6db74">}</span><span style="color:#e6db74"> - </span><span style="color:#e6db74">{</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span><span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{</span>len(uids)<span style="color:#e6db74">}</span><span style="color:#e6db74">, </span><span style="color:#e6db74">{</span>uid<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>            )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 修改url，增加这两行</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> meta<span style="color:#f92672">.</span>raw_dataset_url <span style="color:#f92672">and</span> <span style="color:#e6db74">&#34;huggingface.co&#34;</span> <span style="color:#f92672">in</span> meta<span style="color:#f92672">.</span>raw_dataset_url:
+</span></span><span style="display:flex;"><span>            meta<span style="color:#f92672">.</span>raw_dataset_url <span style="color:#f92672">=</span> meta<span style="color:#f92672">.</span>raw_dataset_url<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;huggingface.co&#34;</span>, <span style="color:#e6db74">&#34;hf-mirror.com&#34;</span>)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        local_path <span style="color:#f92672">=</span> download_file(
+</span></span><span style="display:flex;"><span>            output_dir,
+</span></span><span style="display:flex;"><span>            meta<span style="color:#f92672">.</span>raw_dataset_url,
+</span></span><span style="display:flex;"><span>        )
+</span></span></code></pre></div><p>这下就下载完了</p>
+<p>assets默认位置在 ~/.maniskill/data/assets
+demos在 ~/.maniskill/demos</p>
+<h2 id="ms3数据变成lerobot并train">ms3数据变成lerobot并train<a hidden class="anchor" aria-hidden="true" href="#ms3数据变成lerobot并train">#</a></h2>
+<ol>
+<li>环境准备</li>
+<li>下载数据集</li>
+<li>转换成lerobot</li>
+</ol>
+<h3 id="环境">环境<a hidden class="anchor" aria-hidden="true" href="#环境">#</a></h3>
+<p>Before using the converter, install the required dependencies:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install pyarrow
+</span></span></code></pre></div><h3 id="数据集">数据集<a hidden class="anchor" aria-hidden="true" href="#数据集">#</a></h3>
+<p>下载哪个？ms3有没有lerobot的？</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python -m mani_skill.utils.download_demo <span style="color:#e6db74">&#34;PickCube-v1&#34;</span>
+</span></span></code></pre></div><p>demos默认在 ~/.maniskill/demos
+换默认位置
+echo &rsquo;export MS_ASSET_DIR=/data/zhonglinye/msdata&rsquo; &raquo; ~/.bashrc
+source ~/.bashrc</p>
+<p>下载以后要replay，不然没有图像数据</p>
+<p>python -m mani_skill.trajectory.replay_trajectory <br>
+&ndash;traj-path /data/zhonglinye/msdata/demos/PickCube-v1/motionplanning/trajectory.h5 <br>
+-o rgbd <br>
+&ndash;save_traj <br>
+&ndash;save_video <br>
+&ndash;video_fps 30</p>
+<p>最后的save_video其实不需要……因为lerobot也没法读取</p>
+<p>分析一下最后的数据集有什么内容以及从什么形式转换到什么形式，反转的话要做什么？</p>
+<p>action没有变化</p>
+<h3 id="数据集转换">数据集转换<a hidden class="anchor" aria-hidden="true" href="#数据集转换">#</a></h3>
+<p>python -m mani_skill.trajectory.convert_to_lerobot <br>
+&ndash;traj-path /data/zhonglinye/msdata/demos/PickCube-v1/motionplanning/trajectory.rgbd.pd_joint_pos.physx_cpu.h5 <br>
+&ndash;output-dir lerobot_dataset <br>
+&ndash;chunks-size 50</p>
+<h2 id="用lerobot训练">用lerobot训练<a hidden class="anchor" aria-hidden="true" href="#用lerobot训练">#</a></h2>
+<p>CUDA_VISIBLE_DEVICES=1 HF_HUB_OFFLINE=1 lerobot-train <br>
+&ndash;dataset.repo_id=mspickup/split_x <br>
+&ndash;dataset.root=/data/zhonglinye/hfdata/huggingface/lerobot/mspickup/split_x <br>
+&ndash;policy.type=smolvla <br>
+&ndash;output_dir=/data/zhonglinye/msleoutput/split_x <br>
+&ndash;job_name=maniskill3_pickcube_smolvla_pure_x <br>
+&ndash;policy.device=cuda <br>
+&ndash;policy.push_to_hub=false <br>
+&ndash;wandb.enable=true <br>
+&ndash;steps=26000 <br>
+&ndash;batch_size=32
+这一个batch_size只有8</p>
+<p>再尝试一个batch_size大一点的</p>
+<p>训练出来的模型怎么接入maniskill进行推理？</p>
+<ol>
+<li>用lerobot框架推理，还是直接加载模型文件？用manniskill作为baseline的话应该还是用maniskill作为主要骨架吧？想办法引入模型加载才对</li>
+<li>确认模型
+<ol>
+<li>输入
+<ol>
+<li>内容</li>
+<li>格式：gym转换到lerobot数据集做的一些事</li>
+</ol>
+</li>
+<li>输出
+<ol>
+<li>输出反过来转换到gym格式</li>
+</ol>
+</li>
+<li>加载
+<ol>
+<li>模型本体是哪个</li>
+<li>preprocessor和postprocessor</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>流程
+<ol>
+<li>创建环境</li>
+<li>加载模型</li>
+<li>加载preprocessor和postprocessor</li>
+<li>得到observation并转换到lerobot需要的分辨率</li>
+<li>observation-&gt;preprocessor_obs</li>
+<li>preprocessor_obs-&gt;model-&gt;action</li>
+<li>action-&gt;postprocessor_action</li>
+<li>postprocessor_action-&gt;gym-&gt;new observation</li>
+<li>统计成功率</li>
+</ol>
+</li>
+</ol>
+<p>在这之前，需要了解observation(image和state)以及action如何得到？
+obs_mode设置不同可以得到图片和state嘛？</p>
+<p>主要观测模式详解</p>
+<ol>
+<li>状态字典模式(state_dict)
+这是一种特权观测模式，提供精确的环境内部状态信息，特别适合算法开发初期或需要精确状态信息的场景。</li>
+</ol>
+<p>核心组成：</p>
+<p>agent：机器人本体感知信息
+qpos：关节位置(nq自由度)
+qvel：关节速度
+controller：控制器状态(通常为空字典)
+extra：任务特定信息(如目标位置、末端执行器位置等)
+技术特点：</p>
+<p>提供精确的物体位姿等特权信息
+不支持软体任务
+数据结构为非扁平化字典
+2. 状态模式(state)
+这是state_dict的扁平化版本，观测空间为gym.spaces.Box，更适合某些需要一维输入的标准强化学习算法。</p>
+<ol start="3">
+<li>传感器数据模式(sensor_data)
+此模式提供原始传感器数据，特别适合研究基于原始感知的机器人控制。</li>
+</ol>
+<p>核心组成：</p>
+<p>sensor_data：传感器采集的原始数据
+相机数据(使用minimal着色器时)：
+Color：[H,W,4]的RGB+Alpha值(uint8)
+PositionSegmentation：[H,W,4]的位置和分割信息(int16)
+sensor_param：传感器参数
+相机参数：
+cam2world_gl：相机到世界坐标系的变换矩阵(OpenGL/Blender约定)
+extrinsic_cv：相机外参(OpenCV约定)
+intrinsic_cv：相机内参(OpenCV约定)
+4. 视觉组合模式(rgb+depth+segmentation)
+ManiSkill支持多种视觉数据的灵活组合，包括：</p>
+<p>rgb：RGB图像
+depth：深度图
+segmentation：语义分割图
+任意组合如rgb+depth、rgb+segmentation等
+数据特点：</p>
+<p>rgb：[H,W,3]的RGB图像(uint8)
+depth：[H,W,1]的深度图(int16/uint16)，单位为毫米
+segmentation：[H,W,1]的分割图(int16/uint16)
+注意事项：</p>
+<p>数据未归一化，使用时需自行缩放
+不同组合可节省内存和GPU带宽
+5. 点云模式(pointcloud)
+此模式将多相机数据融合为统一的点云表示。</p>
+<p>数据结构：</p>
+<p>xyzw：[N,4]的点云坐标(世界坐标系，齐次表示)
+rgb：[N,3]的点云颜色(uint8)
+segmentation：[N,1]的点云分割信息(int16/uint16)
+技术特点：</p>
+<p>w=0表示无限远点(超出相机远平面)
+点云信息量不超过原始RGB-D图像
+分割数据详解
+ManiSkill为场景中的物体自动分配分割ID，可通过segmentation_id_map查询：</p>
+<h1 id="示例查询分割id映射关系">示例：查询分割ID映射关系<a hidden class="anchor" aria-hidden="true" href="#示例查询分割id映射关系">#</a></h1>
+<p>for obj_id, obj in sorted(env.unwrapped.segmentation_id_map.items()):
+if isinstance(obj, Actor):
+print(f&quot;{obj_id}: Actor, name - {obj.name}&quot;)
+elif isinstance(obj, Link):
+print(f&quot;{obj_id}: Link, name - {obj.name}&quot;)
+python
+运行
+关键点：</p>
+<p>ID 0表示远处背景
+支持按名称筛选特定物体
+实际应用建议
+算法开发阶段：建议从state_dict或state模式开始，利用特权信息快速验证算法有效性。</p>
+<p>感知研究：使用视觉组合模式时，注意不同着色器提供的纹理差异，选择适合的观测组合。</p>
+<p>点云处理：点云模式适合3D感知算法研究，但需注意点云密度和噪声特性。</p>
+<p>性能优化：根据实际需求选择必要的观测数据，避免不必要的数据传输和处理开销。</p>
+<p>当我设置obs_mode=state_dict的时候，返回
+{&lsquo;agent&rsquo;: {&lsquo;qpos&rsquo;: tensor(), &lsquo;qvel&rsquo;: tensor([[0., 0., 0., 0., 0., 0., 0., 0., 0.]])}, &rsquo;extra&rsquo;: {&lsquo;is_grasped&rsquo;: tensor([False]), &rsquo;tcp_pose&rsquo;: tensor([[ 0.0123,  0.0380,  0.1822, -0.0177,  0.9998,  0.0043,  0.0080]]), &lsquo;goal_pos&rsquo;: tensor([[ 0.0268, -0.0020,  0.2889]]), &lsquo;obj_pose&rsquo;: tensor([[-7.4868e-04,  5.3644e-02,  2.0000e-02,  5.6876e-01,  0.0000e+00,
+0.0000e+00,  8.2250e-01]]), &rsquo;tcp_to_obj_pos&rsquo;: tensor([[-0.0130,  0.0156, -0.1622]]), &lsquo;obj_to_goal_pos&rsquo;: tensor([[ 0.0276, -0.0556,  0.2689]])}}
+然后没有图片，想办法得到图片</p>
+<p>task name是什么？我擦居然就是PIckCube-v1吗
+检查到底哪里出现了问题。检查同样的位置，同样的action是否有用</p>
+<ol>
+<li>找到和测试，比如seed=1对应的demo，有吗？哪怕找不到，只要有动作也可以把</li>
+<li>ok 确认了是seed，那replay生成seed=0的video，并导出state和action</li>
+</ol>
+<p>现在道路通了，我要做的是</p>
+<ol>
+<li>replay生成更高质量的数据集</li>
+<li>重新train，batchsize和step多一点</li>
+<li>测试多个checkpoint的结果（反正仿真随便搞）</li>
+</ol>
+<p>用什么render-mode和shaft?</p>
+<p>replay_trajectory.py里面的render_mode只跟保存视频有关。重要的跟轨迹有关的是obs_mode_: 
+Target observation mode to record in the trajectory. See <a href="https://maniskill.readthedocs.io/en/latest/user_guide/concepts/observation.html">https://maniskill.readthedocs.io/en/latest/user_guide/concepts/observation.html</a> for a full list of supported observation modes.</p>
+<p>obs-mode和render-mode有什么区别？obs比较重要，render-mode就是保存视频和human可视化的，不重要</p>
+<p>render-mode: sensors
+render-mode默认用的是什么？</p>
+<p>&ndash;save-video用的是什么视角？跟render-mode一致。</p>
+<p>定制摄像头https://maniskill.readthedocs.io/en/latest/user_guide/concepts/sensors.html</p>
+<p>那我选择的基础mode应该是rgb，但是我要改相机位置</p>
+<p>save-video默认使用的相机位置是？</p>
+<p>修改了代码：pick_cube.py里面注释掉了hidden_objects
+修改了revert_to_lerobot里面的task
+python -m mani_skill.trajectory.replay_trajectory &ndash;traj-path /data/zhonglinye/msdata/demos/PickCube-v1/motionplanning/trajectory.h5 &ndash;save-traj &ndash;obs-mode rgb &ndash;shader rt
+生成
+然后转成lerobot格式的
+python -m mani_skill.trajectory.convert_to_lerobot <br>
+&ndash;traj-path /data/zhonglinye/msdata/demos/PickCube-v1/motionplanning/trajectory.rgb.pd_joint_pos.physx_cpu.h5 <br>
+&ndash;output-dir beautiful_lerobot <br>
+&ndash;chunks-size 50</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python -m lerobot.scripts.lerobot_edit_dataset     --repo_id mspickup/split     --root /data/zhonglinye/code/ManiSkill/beautiful_lerobot     --operation.type split_overlapping     --operation.splits <span style="color:#e6db74">&#39;{&#34;one&#34;: 0.1, &#34;two&#34;: 0.2, &#34;three&#34;: 0.3, &#34;four&#34;: 0.4, &#34;fifth&#34;: 0.5, &#34;six&#34;: 0.6, &#34;seven&#34;: 0.7, &#34;eight&#34;: 0.8, &#34;nine&#34;: 0.9, &#34;ten&#34;: 1.0}&#39;</span>
+</span></span></code></pre></div><p>接下来的问题，怎么训练？
+我想依次训练这几个，怎么做？</p>
+<p>把pickcube里面的hidden_objects代码还原，也就是最后保存的视频不要有绿点</p>
+<ol>
+<li>重新生成，并且用gpu，输出结果保存到日志
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>CUDA_VISIBLE_DEVICES<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> python -m mani_skill.trajectory.replay_trajectory <span style="color:#ae81ff">\
+</span></span></span></code></pre></div></li>
+</ol>
+<p>&ndash;traj-path /data/zhonglinye/msdata/demos/PickCube-v1/motionplanning/trajectory.h5 <br>
+-o rgb <br>
+&ndash;save_traj <br>
+&ndash;video_fps 30 <br>
+&ndash;sim_backend cuda <br>
+&ndash;shader rt</p>
+<pre tabindex="0"><code>不行，用gpu太慢了，因为gpu不适合做这个
+然后convert_to_lerobot
+```shell
+python -m mani_skill.trajectory.convert_to_lerobot \
+--traj-path /data/zhonglinye/msdata/demos/PickCube-v1/motionplanning/trajectory.rgb.pd_joint_pos.physx_cpu.h5 \
+--output-dir /data/zhonglinye/lerobotdata/mspickcube \
+--chunks-size 50 
+</code></pre><p>训练</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>CUDA_VISIBLE_DEVICES<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> HF_HUB_OFFLINE<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> lerobot-train <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --dataset.repo_id<span style="color:#f92672">=</span>mspickup/mspickcube <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --dataset.root<span style="color:#f92672">=</span>/data/zhonglinye/lerobotdata/mspickcube <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --policy.type<span style="color:#f92672">=</span>smolvla <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --output_dir<span style="color:#f92672">=</span>/data/zhonglinye/msleoutput/smolvla_mspickcube_all <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --job_name<span style="color:#f92672">=</span>mspickup_smolvla_all <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --policy.device<span style="color:#f92672">=</span>cuda <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --policy.push_to_hub<span style="color:#f92672">=</span>false <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --wandb.enable<span style="color:#f92672">=</span>true <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --steps<span style="color:#f92672">=</span><span style="color:#ae81ff">30000</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">128</span>
+</span></span></code></pre></div><p>batch_size改大一点看效果怎么样</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://example.com/tags/benchmark/">Benchmark</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

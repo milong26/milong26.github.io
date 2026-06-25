@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Linux on 我的博客</title>
+    <link>https://example.com/tags/linux/</link>
+    <description>Recent content in Linux on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 04 Aug 2025 21:22:26 +0000</lastBuildDate>
+    <atom:link href="https://example.com/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>cuda</title>
+      <link>https://example.com/post/cuda/</link>
+      <pubDate>Mon, 04 Aug 2025 21:22:26 +0000</pubDate>
+      <guid>https://example.com/post/cuda/</guid>
+      <description>&lt;p&gt;不过cuda和cuda toolkit之间的区别还挺大的，一般nvidia-smi能有输出的话就不用管了，一些特殊的依赖才必须nvcc。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>wsl</title>
+      <link>https://example.com/post/wsl/</link>
+      <pubDate>Tue, 25 Feb 2025 15:11:18 +0000</pubDate>
+      <guid>https://example.com/post/wsl/</guid>
+      <description>&lt;p&gt;windows上能用linux子系统&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>linux</title>
+      <link>https://example.com/post/linux/</link>
+      <pubDate>Fri, 21 Feb 2025 11:10:22 +0000</pubDate>
+      <guid>https://example.com/post/linux/</guid>
+      <description>&lt;p&gt;linux一些常用指令&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>DIFFTACTILE: A PHYSICS-BASED DIFFERENTIABLE  TACTILE SIMULATOR FOR CONTACT-RICH ROBOTIC  MANIPULATION | 我的博客</title>
+<meta name="keywords" content="tactile">
+<meta name="description" content="2夹，tactile，精细操作(其实也就4种)。(19/100)">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
+<link rel="canonical" href="https://example.com/post/difftactile-a-physics-based-differentiable-tactile-simulator-for-contact-rich-robotic-manipulation/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://example.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://example.com/post/difftactile-a-physics-based-differentiable-tactile-simulator-for-contact-rich-robotic-manipulation/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://example.com/post/difftactile-a-physics-based-differentiable-tactile-simulator-for-contact-rich-robotic-manipulation/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="DIFFTACTILE: A PHYSICS-BASED DIFFERENTIABLE  TACTILE SIMULATOR FOR CONTACT-RICH ROBOTIC  MANIPULATION">
+  <meta property="og:description" content="2夹，tactile，精细操作(其实也就4种)。(19/100)">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-03-25T15:08:42+00:00">
+    <meta property="article:modified_time" content="2025-03-25T15:08:42+00:00">
+    <meta property="article:tag" content="Tactile">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="DIFFTACTILE: A PHYSICS-BASED DIFFERENTIABLE  TACTILE SIMULATOR FOR CONTACT-RICH ROBOTIC  MANIPULATION">
+  <meta name="twitter:description" content="2夹，tactile，精细操作(其实也就4种)。(19/100)">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://example.com/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "DIFFTACTILE: A PHYSICS-BASED DIFFERENTIABLE  TACTILE SIMULATOR FOR CONTACT-RICH ROBOTIC  MANIPULATION",
+      "item": "https://example.com/post/difftactile-a-physics-based-differentiable-tactile-simulator-for-contact-rich-robotic-manipulation/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "DIFFTACTILE: A PHYSICS-BASED DIFFERENTIABLE  TACTILE SIMULATOR FOR CONTACT-RICH ROBOTIC  MANIPULATION",
+  "name": "DIFFTACTILE: A PHYSICS-BASED DIFFERENTIABLE  TACTILE SIMULATOR FOR CONTACT-RICH ROBOTIC  MANIPULATION",
+  "description": "2夹，tactile，精细操作(其实也就4种)。(19/100)\n",
+  "keywords": [
+    "tactile"
+  ],
+  "articleBody": "2夹，tactile，精细操作(其实也就4种)。(19/100)\n阅读之前的问题\n这个平台能将触觉传感器显示到什么程度 有没有force/torque相关的显示》好像没有力传感器 给一个物体施加力，它能感受到吗》 多材质模拟器🆗，材质会表现成什么样，传感器接收到什么效果 这个项目有完成什么任务，how to no need 了解具体怎么实现这个的，只要知道怎么用，是否满足我的需求？\n触觉反馈什么样 可以微分，这是什么概念 这篇论文(对我来说)重点从4开始的 有两组任务，触觉感应可以实现更安全、更具适应性的抓取，以处理水果等易碎物体。（哇） 四要素 State 每个触觉传感器都表示为具有 N 个节点和 M 个四面体元素的 FEM 实体。 每个节点都是6D vector=(3 for position,3 for velocity) 每个元素联系从元素到其关联的四个节点的 4D 索引映射 基于 MPM 和基于 PBD 的对象都用粒子表示，同样，每个粒子 oi 也有一个 6D 状态向量 oi（t） = {pi（t）， vi（t）}。 Observation 我们为每个仿真步骤 t 定义了两种类型的观察，即状态观察和触觉观察。 状态观察包括触觉传感器和物体的位姿 Ts（t）、To（t） 以及每个节点或粒子的状态 si（t）、oi（t）。 对于触觉观察，我们可以将传感器的表面三角形网格输出为变形图、传感器的表面力分布或聚合的三轴力矢量。 action 在每个时间步 t 处，从控制器查询末端执行器（触觉传感器或带有运动链的夹爪到触觉传感器）的动作，表示为速度矢量 vs（t） = {∆Rs（t）， ∆ts（t）}，以更新 FEM 节点的速度。 reward/loss 分为状态奖励和触觉奖励 4.5节grasping可能符合我的需求 我们评估了我们的模拟器在抓取具有各种对象属性（包括不同形状、大小、重量和材料属性）的物体方面的作用。如图 2 所示，我们从 EGAD数据集中选择了四个具有不同形状复杂性的物体，并为每个物体分配了两种不同的材料属性，即弹性和弹塑性。 EGAD是什么数据集? 用于机器人操作的多样性和再现性的进化抓取分析数据集。貌似没有强调灵巧手，一时半会儿看不出来里面有什么， 图2的tactile view表示什么??? 3.3 OPTICAL SIMULATION里面的 输入为表面法线和视角方向，输出为RGB像素值 用数据驱动的方法重建基于视觉的触觉传感器对接触的光学响应。​Tactile View 是触觉传感器物理变形的可视化表征，通过高保真光学模拟生成，为机器人提供接触几何、力学特性等密集反馈。 一句话解释就是用二维的RGB值表示处决信息 我们的目标是通过基于梯度的轨迹优化来稳定、自适应地抓取物体，以避免滑倒和损坏物体。在这里，我们使用两个触觉传感器作为指尖，并将它们安装在一个平行的钳口夹持器上。在每个轨迹中，抓手首先抓住物体，然后抬起它。根据我们的目标，我们定义了三种类型的损失目标 位置损失 Lpos：我们设定了一个 3D 目标位置，以便在lift后到达; 变形损失 Ldeform：我们的目标是利用物体的符号距离场和当前物体与目标物体之间质量分布的 L1 距离来惩罚变形，从而在抓取过程中保持物体的形状the L1 distance of the mass distribution between the current object and the target one 变形损失有两个：1是物体的sign distance field(SDF);2是 当前物体与目标物体之间的mass distribution的L1距离 只用第一个不够？（1只能看形状，2考虑内部） 滑移损失 Lslip：我们利用在指尖和物体之间检测到的剪切力来惩罚抓取过程中的滑移。 slip是什么？摩擦力不足 剪切力(shear force) 我们根据三个指标评估有或没有触觉反馈的抓取情况。我们对这两种类型的对象都使用 Lpos，并且我们只对弹塑性对象使用 Ldeform。此外，我们测量物体相对于传感器的两组物体的滑移距离，滑移距离表示为 Dslip。我们在表 4 中表明，触觉反馈大大提高了抓取质量。 elastoplastic 这个属性怎么附加到物体上的 怎么根据触觉反馈进行抓取来着，我怎么好想没看过 用触觉做操作是不是就用那个tactile view？ 怎么给object设定材质的？ 最终从这篇文章get到的\n3.3节用图像表示传感器信息（虽然我没看懂怎么转换的） deform的loss设计：用到SDF和mass distribution 想做细微的操作离不开触觉传感器吧，只用视觉没法做-.- 但是传感器精度又很重要 ",
+  "wordCount" : "136",
+  "inLanguage": "en",
+  "datePublished": "2025-03-25T15:08:42Z",
+  "dateModified": "2025-03-25T15:08:42Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/post/difftactile-a-physics-based-differentiable-tactile-simulator-for-contact-rich-robotic-manipulation/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://example.com/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      DIFFTACTILE: A PHYSICS-BASED DIFFERENTIABLE  TACTILE SIMULATOR FOR CONTACT-RICH ROBOTIC  MANIPULATION
+    </h1>
+    <div class="post-meta">
+
+<span title='2025-03-25 15:08:42 +0000 UTC'>March 25, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>2夹，tactile，精细操作(其实也就4种)。(19/100)</p>
+<p>阅读之前的问题</p>
+<ol>
+<li>这个平台能将触觉传感器显示到什么程度</li>
+<li>有没有force/torque相关的显示》好像没有力传感器</li>
+<li>给一个物体施加力，它能感受到吗》</li>
+<li>多材质模拟器🆗，材质会表现成什么样，传感器接收到什么效果</li>
+<li>这个项目有完成什么任务，how to</li>
+</ol>
+<p>no need 了解具体怎么实现这个的，只要知道怎么用，是否满足我的需求？</p>
+<ol>
+<li>触觉反馈什么样</li>
+<li>可以微分，这是什么概念</li>
+<li>这篇论文(对我来说)重点从4开始的</li>
+<li>有两组任务，触觉感应可以实现更安全、更具适应性的抓取，以处理水果等易碎物体。（哇）</li>
+<li>四要素
+<ol>
+<li>State
+<ol>
+<li>每个触觉传感器都表示为具有 N 个节点和 M 个四面体元素的 FEM 实体。
+<ol>
+<li>每个节点都是6D vector=(3 for position,3 for velocity)</li>
+<li>每个元素联系从元素到其关联的四个节点的 4D 索引映射</li>
+</ol>
+</li>
+<li>基于 MPM 和基于 PBD 的对象都用粒子表示，同样，每个粒子 oi 也有一个 6D 状态向量 oi（t） = {pi（t）， vi（t）}。</li>
+</ol>
+</li>
+<li>Observation
+<ol>
+<li>我们为每个仿真步骤 t 定义了两种类型的观察，即状态观察和触觉观察。</li>
+<li>状态观察包括触觉传感器和物体的位姿 Ts（t）、To（t） 以及每个节点或粒子的状态 si（t）、oi（t）。</li>
+<li>对于触觉观察，我们可以将传感器的表面三角形网格输出为变形图、传感器的表面力分布或聚合的三轴力矢量。</li>
+</ol>
+</li>
+<li>action
+<ol>
+<li>在每个时间步 t 处，从控制器查询末端执行器（触觉传感器或带有运动链的夹爪到触觉传感器）的动作，表示为速度矢量 vs（t） = {∆Rs（t）， ∆ts（t）}，以更新 FEM 节点的速度。</li>
+</ol>
+</li>
+<li>reward/loss
+<ol>
+<li>分为状态奖励和触觉奖励</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>4.5节grasping可能符合我的需求
+<ol>
+<li>我们评估了我们的模拟器在抓取具有各种对象属性（包括不同形状、大小、重量和材料属性）的物体方面的作用。如图 2 所示，我们从 EGAD数据集中选择了四个具有不同形状复杂性的物体，并为每个物体分配了两种不同的材料属性，即弹性和弹塑性。
+<ol>
+<li>EGAD是什么数据集? 用于机器人操作的多样性和再现性的进化抓取分析数据集。貌似没有强调灵巧手，一时半会儿看不出来里面有什么，</li>
+<li>图2的tactile view表示什么???
+<ol>
+<li>3.3 OPTICAL SIMULATION里面的</li>
+<li>输入为表面法线和视角方向，输出为RGB像素值</li>
+<li>用数据驱动的方法重建基于视觉的触觉传感器对接触的光学响应。​Tactile View 是触觉传感器物理变形的可视化表征，通过高保真光学模拟生成，为机器人提供接触几何、力学特性等密集反馈。</li>
+<li>一句话解释就是用二维的RGB值表示处决信息</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>我们的目标是通过基于梯度的轨迹优化来稳定、自适应地抓取物体，以避免滑倒和损坏物体。在这里，我们使用两个触觉传感器作为指尖，并将它们安装在一个平行的钳口夹持器上。在每个轨迹中，抓手首先抓住物体，然后抬起它。根据我们的目标，我们定义了三种类型的损失目标
+<ol>
+<li>位置损失 Lpos：我们设定了一个 3D 目标位置，以便在lift后到达;</li>
+<li>变形损失 Ldeform：我们的目标是利用物体的符号距离场和当前物体与目标物体之间质量分布的 L1 距离来惩罚变形，从而在抓取过程中保持物体的形状the L1 distance of the mass distribution between the current object and the target one
+<ol>
+<li>变形损失有两个：1是物体的sign distance field(SDF);2是 当前物体与目标物体之间的mass distribution的L1距离</li>
+<li>只用第一个不够？（1只能看形状，2考虑内部）</li>
+</ol>
+</li>
+<li>滑移损失 Lslip：我们利用在指尖和物体之间检测到的剪切力来惩罚抓取过程中的滑移。
+<ol>
+<li>slip是什么？摩擦力不足</li>
+<li>剪切力(shear force)</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>我们根据三个指标评估有或没有触觉反馈的抓取情况。我们对这两种类型的对象都使用 Lpos，并且我们只对弹塑性对象使用 Ldeform。此外，我们测量物体相对于传感器的两组物体的滑移距离，滑移距离表示为 Dslip。我们在表 4 中表明，触觉反馈大大提高了抓取质量。
+<ol>
+<li>elastoplastic 这个属性怎么附加到物体上的</li>
+<li>怎么根据触觉反馈进行抓取来着，我怎么好想没看过</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>用触觉做操作是不是就用那个tactile view？</li>
+<li>怎么给object设定材质的？</li>
+</ol>
+<p>最终从这篇文章get到的</p>
+<ol>
+<li>3.3节用图像表示传感器信息（虽然我没看懂怎么转换的）</li>
+<li>deform的loss设计：用到SDF和mass distribution</li>
+<li>想做细微的操作离不开触觉传感器吧，只用视觉没法做-.- 但是传感器精度又很重要</li>
+</ol>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://example.com/tags/tactile/">Tactile</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

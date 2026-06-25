@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Leetcode on 我的博客</title>
+    <link>https://example.com/tags/leetcode/</link>
+    <description>Recent content in Leetcode on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 28 May 2024 17:18:36 +0000</lastBuildDate>
+    <atom:link href="https://example.com/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>串</title>
+      <link>https://example.com/post/%E4%B8%B2/</link>
+      <pubDate>Tue, 28 May 2024 17:18:36 +0000</pubDate>
+      <guid>https://example.com/post/%E4%B8%B2/</guid>
+      <description>&lt;p&gt;串相关的算法题整理&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>leetcode肝活</title>
+      <link>https://example.com/post/leetcode%E8%82%9D%E6%B4%BB/</link>
+      <pubDate>Tue, 09 Apr 2024 16:37:52 +0000</pubDate>
+      <guid>https://example.com/post/leetcode%E8%82%9D%E6%B4%BB/</guid>
+      <description>&lt;p&gt;leetcode刷题日志，哪天有空哪天刷&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

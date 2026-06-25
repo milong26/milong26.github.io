@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Overview on 我的博客</title>
+    <link>https://example.com/tags/overview/</link>
+    <description>Recent content in Overview on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 29 Sep 2025 15:17:34 +0000</lastBuildDate>
+    <atom:link href="https://example.com/tags/overview/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>vla</title>
+      <link>https://example.com/post/vla/</link>
+      <pubDate>Mon, 29 Sep 2025 15:17:34 +0000</pubDate>
+      <guid>https://example.com/post/vla/</guid>
+      <description>&lt;p&gt;直觉告诉我这肯定是一大坨一直写不完的东西。&lt;/p&gt;
+&lt;p&gt;我对vla的畅想：
+用户输入自然语言文本，机器人自己准确执行操作
+那整个系统里面，用户输入文本，机器人得理解（结合vlm），视觉感知，
+准确动作就要有 空间理解？&lt;/p&gt;
+&lt;p&gt;一个教程https://zsc.github.io/vla_tutorial/html/index.html，内容一般，但是结构不错，可能是ai生成的？&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

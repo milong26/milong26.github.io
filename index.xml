@@ -6,8 +6,29 @@
     <description>Recent content on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 09 Dec 2025 22:03:50 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 25 Feb 2026 17:52:40 +0000</lastBuildDate>
     <atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data Quality in Imitation Learning</title>
+      <link>https://example.com/post/data-quality-in-imitation-learning/</link>
+      <pubDate>Wed, 25 Feb 2026 17:52:40 +0000</pubDate>
+      <guid>https://example.com/post/data-quality-in-imitation-learning/</guid>
+      <description>&lt;p&gt;开年第一篇论文，讲模仿学习中的数据质量
+我想从这篇论文中得到的信息：
+数据质量怎么评估，只能训练吗？
+有什么办法可以增加数据质量，采集和算法层面？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>VLA需要验证吗</title>
+      <link>https://example.com/post/vla%E9%9C%80%E8%A6%81%E9%AA%8C%E8%AF%81%E5%90%97/</link>
+      <pubDate>Tue, 27 Jan 2026 14:38:07 +0000</pubDate>
+      <guid>https://example.com/post/vla%E9%9C%80%E8%A6%81%E9%AA%8C%E8%AF%81%E5%90%97/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://hf-mirror.com/blog/m1b/validation-loss-robotics&#34;&gt;Is using a validation set useful for end-to-end learning in robotics?&lt;/a&gt; huggingface上的一篇文章解释了，回答了我长久以来的一个问题&lt;/p&gt;
+&lt;p&gt;并且Lerobot之前有人实现过验证但是最终没有合并 &lt;a href=&#34;https://github.com/huggingface/lerobot/issues/250&#34;&gt;#250&lt;/a&gt;  &lt;a href=&#34;https://github.com/huggingface/lerobot/pull/283&#34;&gt;#283&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 多任务，验证有用吗？&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
     <item>
       <title>Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy</title>
       <link>https://example.com/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/</link>
@@ -17,11 +38,258 @@
 &lt;p&gt;也就是利用“空间对齐”带来泛化提升&lt;/p&gt;</description>
     </item>
     <item>
+      <title>RoboKeyGen: Robot Pose and Joint Angles Estimation via  Diffusion-based 3D Keypoint Generation</title>
+      <link>https://example.com/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/</link>
+      <pubDate>Mon, 08 Dec 2025 16:09:53 +0000</pubDate>
+      <guid>https://example.com/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/</guid>
+      <description>&lt;p&gt;这篇文章用的英文单词好拗口，但是写得挺清晰的，还挺喜欢&lt;/p&gt;
+&lt;p&gt;解决什么问题？pose estimation，以前的要么慢，要么不够精确。这篇文章首先检测2d关键点，然后cross-camera（用内参计算）规范化，然后扩散模型生成3d（相机坐标），然后MLP推理出joint angle，用fk算出eepose等。
+对我有什么启发？相机的归一化能不能拓展到外参？Intrinsic-&amp;gt;Extrinsic&lt;/p&gt;
+&lt;p&gt;并不是VLA！只是传统的视觉&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>同步和异步</title>
+      <link>https://example.com/post/%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5/</link>
+      <pubDate>Fri, 28 Nov 2025 11:22:05 +0000</pubDate>
+      <guid>https://example.com/post/%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5/</guid>
+      <description>&lt;p&gt;写代码的时候看到但是想不起来，死脑快动，好吧原来我当时学java的时候就没听进去，只能补课了。真的是java吗，怎么操作系统也有，哲学家就餐问题……&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Foundation Feature-Driven Online End-Effector Pose Estimation: A Marker-Free and Learning-Free Approach</title>
+      <link>https://example.com/post/foundation-feature-driven-online-end-effector-pose-estimation-a-marker-free-and-learning-free-approach/</link>
+      <pubDate>Mon, 24 Nov 2025 22:03:50 +0000</pubDate>
+      <guid>https://example.com/post/foundation-feature-driven-online-end-effector-pose-estimation-a-marker-free-and-learning-free-approach/</guid>
+      <description>&lt;p&gt;看标题后产生的疑问：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;为什么需要估计ee姿态？&lt;/li&gt;
+&lt;li&gt;估计完的姿态是以什么形式，相对？&lt;/li&gt;
+&lt;li&gt;相机位置改变了吗？&lt;/li&gt;
+&lt;li&gt;对vla有没有好处？&lt;/li&gt;
+&lt;li&gt;对我想实现的目标：真正机械臂泛化有没有用？&lt;/li&gt;
+&lt;li&gt;能做到什么程度？在线机器人自标定&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    <item>
+      <title>ros</title>
+      <link>https://example.com/post/ros/</link>
+      <pubDate>Thu, 13 Nov 2025 10:04:05 +0000</pubDate>
+      <guid>https://example.com/post/ros/</guid>
+      <description>&lt;p&gt;原来是一个系统集成的框架，和Lerobot相比它侧重于真实场景的“系统”。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Pure Vision Language Action (VLA) Models:  A Comprehensive Survey</title>
+      <link>https://example.com/post/pure-vision-language-action-vla-models-a-comprehensive-surve/</link>
+      <pubDate>Tue, 28 Oct 2025 15:52:55 +0000</pubDate>
+      <guid>https://example.com/post/pure-vision-language-action-vla-models-a-comprehensive-surve/</guid>
+      <description>&lt;p&gt;比较新的综述，2025年9月25日发的&lt;/p&gt;
+&lt;p&gt;写了不整理相当于没写。&lt;/p&gt;
+&lt;p&gt;这篇文章里面好多分类错误的东西:P，别全信，可以提供思路&lt;/p&gt;
+&lt;p&gt;ok没读完也不许再看了，现在没空&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>控制</title>
+      <link>https://example.com/post/%E6%8E%A7%E5%88%B6/</link>
+      <pubDate>Mon, 27 Oct 2025 15:33:04 +0000</pubDate>
+      <guid>https://example.com/post/%E6%8E%A7%E5%88%B6/</guid>
+      <description>&lt;p&gt;补一点&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>lerobot</title>
+      <link>https://example.com/post/lerobot/</link>
+      <pubDate>Thu, 23 Oct 2025 14:41:46 +0000</pubDate>
+      <guid>https://example.com/post/lerobot/</guid>
+      <description>&lt;p&gt;Lerobot的使用以及代码教程&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>研究修炼指南</title>
+      <link>https://example.com/post/%E8%91%B5%E8%8A%B1%E5%AE%9D%E5%85%B8%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AB%E8%91%B5%E8%8A%B1%E5%AE%9D%E5%85%B8/</link>
+      <pubDate>Wed, 22 Oct 2025 10:50:57 +0000</pubDate>
+      <guid>https://example.com/post/%E8%91%B5%E8%8A%B1%E5%AE%9D%E5%85%B8%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AB%E8%91%B5%E8%8A%B1%E5%AE%9D%E5%85%B8/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>英语</title>
       <link>https://example.com/post/%E8%8B%B1%E8%AF%AD/</link>
       <pubDate>Wed, 22 Oct 2025 10:43:37 +0000</pubDate>
       <guid>https://example.com/post/%E8%8B%B1%E8%AF%AD/</guid>
       <description>&lt;p&gt;虽然已经学了二十多年了但肯定还有不会的&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>pi0</title>
+      <link>https://example.com/post/pi0/</link>
+      <pubDate>Mon, 20 Oct 2025 16:08:55 +0000</pubDate>
+      <guid>https://example.com/post/pi0/</guid>
+      <description>&lt;p&gt;好方法，一直没看，2025/10/20上午2小时，下午1小时看完论文主要结构，测试没仔细看，代码也没看，主要是我想先比较一下pi0和pi0.5。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>pi0.5</title>
+      <link>https://example.com/post/pi0.5/</link>
+      <pubDate>Mon, 20 Oct 2025 15:05:54 +0000</pubDate>
+      <guid>https://example.com/post/pi0.5/</guid>
+      <description>&lt;p&gt;pi0.5也开源了，看一下原文&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>看房要看什么</title>
+      <link>https://example.com/post/%E7%9C%8B%E6%88%BF%E8%A6%81%E7%9C%8B%E4%BB%80%E4%B9%88/</link>
+      <pubDate>Sat, 11 Oct 2025 14:20:25 +0000</pubDate>
+      <guid>https://example.com/post/%E7%9C%8B%E6%88%BF%E8%A6%81%E7%9C%8B%E4%BB%80%E4%B9%88/</guid>
+      <description>&lt;p&gt;列举下来&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>具身智能</title>
+      <link>https://example.com/post/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/</link>
+      <pubDate>Fri, 10 Oct 2025 18:26:10 +0000</pubDate>
+      <guid>https://example.com/post/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/</guid>
+      <description>&lt;p&gt;它跟vla啥关系啊，怎么感觉哪哪都能听到这个词语&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>TinyVLA: Toward Fast, Data-Efficient Vision-Language-Action Models for Robotic Manipulation</title>
+      <link>https://example.com/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</link>
+      <pubDate>Mon, 29 Sep 2025 15:19:42 +0000</pubDate>
+      <guid>https://example.com/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</guid>
+      <description>&lt;p&gt;我要看这篇文章能否复现&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Task Reconstruction and Extrapolation for π0 using Text Latent</title>
+      <link>https://example.com/post/task-reconstruction-and-extrapolation-for-%CF%800-using-text-latent/</link>
+      <pubDate>Mon, 29 Sep 2025 15:17:42 +0000</pubDate>
+      <guid>https://example.com/post/task-reconstruction-and-extrapolation-for-%CF%800-using-text-latent/</guid>
+      <description>&lt;p&gt;好久没看论文了，复建复建&lt;/p&gt;
+&lt;p&gt;在看这篇论文之前，第一想法
+extrapolation，相比interpolation
+文本处理
+做泛化性的
+模型是pi0&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>vla</title>
+      <link>https://example.com/post/vla/</link>
+      <pubDate>Mon, 29 Sep 2025 15:17:34 +0000</pubDate>
+      <guid>https://example.com/post/vla/</guid>
+      <description>&lt;p&gt;直觉告诉我这肯定是一大坨一直写不完的东西。&lt;/p&gt;
+&lt;p&gt;我对vla的畅想：
+用户输入自然语言文本，机器人自己准确执行操作
+那整个系统里面，用户输入文本，机器人得理解（结合vlm），视觉感知，
+准确动作就要有 空间理解？&lt;/p&gt;
+&lt;p&gt;一个教程https://zsc.github.io/vla_tutorial/html/index.html，内容一般，但是结构不错，可能是ai生成的？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>dropout</title>
+      <link>https://example.com/post/dropout/</link>
+      <pubDate>Sun, 28 Sep 2025 16:05:41 +0000</pubDate>
+      <guid>https://example.com/post/dropout/</guid>
+      <description>&lt;p&gt;以前没好好学的现在孽力回馈了。&lt;/p&gt;
+&lt;p&gt;搜了一下dropout居然算深度学习，深度学习是神经网络里面的？&lt;/p&gt;
+&lt;p&gt;嗯原来是一种skill :D&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>embed</title>
+      <link>https://example.com/post/embed/</link>
+      <pubDate>Fri, 19 Sep 2025 16:40:21 +0000</pubDate>
+      <guid>https://example.com/post/embed/</guid>
+      <description>&lt;p&gt;这个词语太抽象了，学习一下&lt;/p&gt;
+&lt;p&gt;原来说白了就是投影……&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>obsidian</title>
+      <link>https://example.com/post/obsidian/</link>
+      <pubDate>Mon, 15 Sep 2025 22:09:22 +0000</pubDate>
+      <guid>https://example.com/post/obsidian/</guid>
+      <description>&lt;p&gt;现在才发现如此好用的软件，用用用&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>visio</title>
+      <link>https://example.com/post/visio/</link>
+      <pubDate>Wed, 10 Sep 2025 16:18:55 +0000</pubDate>
+      <guid>https://example.com/post/visio/</guid>
+      <description>&lt;p&gt;画图用的&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>模型训练黑话</title>
+      <link>https://example.com/post/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%BB%91%E8%AF%9D/</link>
+      <pubDate>Wed, 20 Aug 2025 21:30:13 +0000</pubDate>
+      <guid>https://example.com/post/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%BB%91%E8%AF%9D/</guid>
+      <description>&lt;p&gt;先写着，以后有空再整理&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>smolvla</title>
+      <link>https://example.com/post/smolvla/</link>
+      <pubDate>Sun, 17 Aug 2025 22:39:53 +0000</pubDate>
+      <guid>https://example.com/post/smolvla/</guid>
+      <description>&lt;p&gt;主要是代码理解和修改&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>cuda</title>
+      <link>https://example.com/post/cuda/</link>
+      <pubDate>Mon, 04 Aug 2025 21:22:26 +0000</pubDate>
+      <guid>https://example.com/post/cuda/</guid>
+      <description>&lt;p&gt;不过cuda和cuda toolkit之间的区别还挺大的，一般nvidia-smi能有输出的话就不用管了，一些特殊的依赖才必须nvcc。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>wheel</title>
+      <link>https://example.com/post/wheel/</link>
+      <pubDate>Mon, 30 Jun 2025 19:53:14 +0000</pubDate>
+      <guid>https://example.com/post/wheel/</guid>
+      <description>&lt;p&gt;&amp;ldquo;Build the wheels from source&amp;rdquo; 的意思是 从源代码构建 .whl 文件，然后再进行安装，而不是直接使用已经编译好的 .whl 文件。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>阅读复健</title>
+      <link>https://example.com/post/%E9%98%85%E8%AF%BB%E5%A4%8D%E5%81%A5/</link>
+      <pubDate>Mon, 09 Jun 2025 14:24:55 +0000</pubDate>
+      <guid>https://example.com/post/%E9%98%85%E8%AF%BB%E5%A4%8D%E5%81%A5/</guid>
+      <description>&lt;p&gt;上次看文学书还是在高中？（or电子小说）&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>windows</title>
+      <link>https://example.com/post/windows/</link>
+      <pubDate>Wed, 02 Apr 2025 15:14:40 +0000</pubDate>
+      <guid>https://example.com/post/windows/</guid>
+      <description>&lt;p&gt;windows，系统和使用。有linux了怎么能没有windows&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>灵巧手抓取示例</title>
+      <link>https://example.com/post/%E7%81%B5%E5%B7%A7%E6%89%8B%E6%8A%93%E5%8F%96%E7%A4%BA%E4%BE%8B/</link>
+      <pubDate>Tue, 01 Apr 2025 16:54:39 +0000</pubDate>
+      <guid>https://example.com/post/%E7%81%B5%E5%B7%A7%E6%89%8B%E6%8A%93%E5%8F%96%E7%A4%BA%E4%BE%8B/</guid>
+      <description>&lt;p&gt;要求：灵巧手（手臂尽可能简单）抓取不同摩擦力的常见物体（能抓到就行，不需要用模型）&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>RoboGen: Towards Unleashing Infinite Data for  Automated Robot Learning via Generative Simulation</title>
+      <link>https://example.com/post/robogen-towards-unleashing-infinite-data-for-automated-robot-learning-via-generative-simulation/</link>
+      <pubDate>Tue, 01 Apr 2025 15:56:36 +0000</pubDate>
+      <guid>https://example.com/post/robogen-towards-unleashing-infinite-data-for-automated-robot-learning-via-generative-simulation/</guid>
+      <description>&lt;p&gt;看上去是那种一句话生成仿真环境的。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;一句话-&amp;gt;llm生成代码？assets还是得自己搞吧-&amp;gt;传到环境里面这个流程？
+&lt;ol&gt;
+&lt;li&gt;基本流程是propose-generate-learn&lt;/li&gt;
+&lt;li&gt;不是直接生成代码，与最近采用大型语言模型等基础模型直接产生策略或低级行动的努力相比，robogen只提取完全属于这些模型的能力和模式的信息——对象语义、对象可供性、关于哪些任务值得学习的常识性知识等。不过我也不知道这个指什么&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;用的什么环境，issac gym吗，居然是genesis&lt;/li&gt;
+&lt;li&gt;asset有没有好用的数据库 里面提到几个，还有图片生成mesh的，没有考虑collision吗
+&lt;ol&gt;
+&lt;li&gt;放置asset的时候，RoboGen 指示 GPT-4 以无碰撞的方式放置对象：当 LLM 生成对象的初始姿势时，我们会提示它利用其基本的空间理解，并尝试将对象放置在不同的位置。我们将其用作初始化，并检查初始场景配置中的潜在冲突。对于两个对象之间检测到的任何碰撞，我们识别接触对象的碰撞节点，并沿碰撞法线的相反方向推开它们的质心以解决碰撞。&lt;/li&gt;
+&lt;li&gt;collision-free 动作基元与运动规划相结合，在解决任务时更可靠，例如通过无碰撞路径接近目标对象&lt;/li&gt;
+&lt;li&gt;看起来论文里面涉及到collision的就这些了，那collision属性不考虑了？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;看样子是2finger机器人，什么模型抓取的，视觉？ 居然是吸盘式的&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    <item>
+      <title>dexgrasp类数据集收集</title>
+      <link>https://example.com/post/dexgrasp%E7%B1%BB%E6%95%B0%E6%8D%AE%E9%9B%86%E6%94%B6%E9%9B%86/</link>
+      <pubDate>Wed, 26 Mar 2025 10:15:30 +0000</pubDate>
+      <guid>https://example.com/post/dexgrasp%E7%B1%BB%E6%95%B0%E6%8D%AE%E9%9B%86%E6%94%B6%E9%9B%86/</guid>
+      <description>&lt;p&gt;收集的一些数据集&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>DIFFTACTILE: A PHYSICS-BASED DIFFERENTIABLE  TACTILE SIMULATOR FOR CONTACT-RICH ROBOTIC  MANIPULATION</title>
+      <link>https://example.com/post/difftactile-a-physics-based-differentiable-tactile-simulator-for-contact-rich-robotic-manipulation/</link>
+      <pubDate>Tue, 25 Mar 2025 15:08:42 +0000</pubDate>
+      <guid>https://example.com/post/difftactile-a-physics-based-differentiable-tactile-simulator-for-contact-rich-robotic-manipulation/</guid>
+      <description>&lt;p&gt;2夹，tactile，精细操作(其实也就4种)。(19/100)&lt;/p&gt;</description>
     </item>
     <item>
       <title>python压缩pdf</title>
@@ -48,11 +316,195 @@
 &lt;/ol&gt;</description>
     </item>
     <item>
+      <title>CALVIN: A Benchmark for Language-Conditioned  Policy Learning for Long-Horizon Robot  Manipulation Tasks</title>
+      <link>https://example.com/post/calvin-a-benchmark-for-language-conditioned-policy-learning-for-long-horizon-robot-manipulation-tasks/</link>
+      <pubDate>Sun, 23 Mar 2025 17:22:30 +0000</pubDate>
+      <guid>https://example.com/post/calvin-a-benchmark-for-language-conditioned-policy-learning-for-long-horizon-robot-manipulation-tasks/</guid>
+      <description>&lt;p&gt;来不及自己看了，量子速读，发动！&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>VideoWorld: Exploring Knowledge Learning from Unlabeled Videos</title>
+      <link>https://example.com/post/videoworld-exploring-knowledge-learning-from-unlabeled-videos/</link>
+      <pubDate>Sun, 23 Mar 2025 16:23:09 +0000</pubDate>
+      <guid>https://example.com/post/videoworld-exploring-knowledge-learning-from-unlabeled-videos/</guid>
+      <description>&lt;p&gt;做的是从视频数据中获得action的工作。(17/100)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Generative Artificial Intelligence in Robotic Manipulation: A Survey</title>
+      <link>https://example.com/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</link>
+      <pubDate>Thu, 13 Mar 2025 15:59:45 +0000</pubDate>
+      <guid>https://example.com/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</guid>
+      <description>&lt;p&gt;(16/100)&lt;/p&gt;
+&lt;p&gt;what i want to get&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;了解其所描述的通用机器人操作是否和我想的一样：qpos of robot&lt;/li&gt;
+&lt;li&gt;找里面有没有我想要的数据集：text-guided robotic video task&lt;/li&gt;
+&lt;li&gt;只要看dexterous部分&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    <item>
       <title>Gymnasium-Robotics</title>
       <link>https://example.com/post/gymnasium-robotics/</link>
       <pubDate>Mon, 10 Mar 2025 15:44:23 +0000</pubDate>
       <guid>https://example.com/post/gymnasium-robotics/</guid>
       <description>&lt;p&gt;又来看新环境 Gymnasium-Robotics，看上了它提供的shadown hand&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Multi-Goal Reinforcement Learning: Challenging Robotics Environments and Request for Research</title>
+      <link>https://example.com/post/multi-goal-reinforcement-learning-challenging-robotics-environments-and-request-for-research/</link>
+      <pubDate>Fri, 07 Mar 2025 20:57:09 +0000</pubDate>
+      <guid>https://example.com/post/multi-goal-reinforcement-learning-challenging-robotics-environments-and-request-for-research/</guid>
+      <description>&lt;p&gt;好久没看论文了orz，这篇是从 &lt;a href=&#34;https://robotics.farama.org/envs/shadow_dexterous_hand/reach/&#34;&gt;gymnasium-robotics关于shadow hand的操作&lt;/a&gt;里翻出来的。借助gymm这个平台给单个灵巧手做强化学习。&lt;/p&gt;
+&lt;p&gt;(15/100)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>DexGraspNet</title>
+      <link>https://example.com/post/dexgraspnet/</link>
+      <pubDate>Thu, 06 Mar 2025 15:26:43 +0000</pubDate>
+      <guid>https://example.com/post/dexgraspnet/</guid>
+      <description>&lt;p&gt;DexGraspNet，灵巧抓取数据集，我需要用它的数据辅助我的机械臂面对物体生成抓取姿态(dof)然后配置torchSDF的时候失败&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>mediapipe</title>
+      <link>https://example.com/post/mediapipe/</link>
+      <pubDate>Thu, 06 Mar 2025 10:46:08 +0000</pubDate>
+      <guid>https://example.com/post/mediapipe/</guid>
+      <description>&lt;p&gt;midiapipe是一个实时计算机视觉框架&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>A Comprehensive Survey of LLM Alignment Techniques: RLHF, RLAIF, PPO, DPO and More</title>
+      <link>https://example.com/post/a-comprehensive-survey-of-llm-alignment-techniques-rlhf-rlaif-ppo-dpo-and-more/</link>
+      <pubDate>Mon, 03 Mar 2025 10:20:54 +0000</pubDate>
+      <guid>https://example.com/post/a-comprehensive-survey-of-llm-alignment-techniques-rlhf-rlaif-ppo-dpo-and-more/</guid>
+      <description>&lt;p&gt;时过境迁，当时怎么看的已经忘记了。现在我的问题变成了：什么是llm的对齐？vlm也有对齐吗？怎样实现对齐的？从这篇文章出发的话，我应该怎么做
+重看论文(1)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Aligner: Efficient Alignment by Learning to Correct</title>
+      <link>https://example.com/post/aligner-efficient-alignment-by-learning-to-correct/</link>
+      <pubDate>Mon, 03 Mar 2025 10:18:23 +0000</pubDate>
+      <guid>https://example.com/post/aligner-efficient-alignment-by-learning-to-correct/</guid>
+      <description>&lt;p&gt;以前看论文的方式好糟糕，看完以后完全没印象，一句话形容：对预训练的llm微调对齐，利用通过小模型学习偏好与不偏好答案之间的纠正残差&lt;/p&gt;
+&lt;p&gt;所以LLM的方向实际上就两种：微调和压缩？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>最短路径问题</title>
+      <link>https://example.com/post/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Mon, 03 Mar 2025 10:17:31 +0000</pubDate>
+      <guid>https://example.com/post/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</guid>
+      <description>&lt;p&gt;图论，求两点之间的最短路径&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我记得一共有3种算法： Bellman-Ford algorithm、、
+总结一下然后找个例题，用c++写一遍
+希望这一篇不会鸽了
+好像有向图和无向图有一点不一样&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>robotic grasp相关文献整理</title>
+      <link>https://example.com/post/robotic-grasp%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86/</link>
+      <pubDate>Mon, 03 Mar 2025 10:17:03 +0000</pubDate>
+      <guid>https://example.com/post/robotic-grasp%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86/</guid>
+      <description>&lt;p&gt;开始看文献了，2025/2/24-2025/3/2。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>one-shot</title>
+      <link>https://example.com/post/one-shot/</link>
+      <pubDate>Thu, 27 Feb 2025 14:39:26 +0000</pubDate>
+      <guid>https://example.com/post/one-shot/</guid>
+      <description>&lt;p&gt;看论文看到了但没懂表示什么&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>wsl</title>
+      <link>https://example.com/post/wsl/</link>
+      <pubDate>Tue, 25 Feb 2025 15:11:18 +0000</pubDate>
+      <guid>https://example.com/post/wsl/</guid>
+      <description>&lt;p&gt;windows上能用linux子系统&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>linux</title>
+      <link>https://example.com/post/linux/</link>
+      <pubDate>Fri, 21 Feb 2025 11:10:22 +0000</pubDate>
+      <guid>https://example.com/post/linux/</guid>
+      <description>&lt;p&gt;linux一些常用指令&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>RDT-1B: A DIFFUSION FOUNDATION MODEL FOR  BIMANUAL MANIPULATION</title>
+      <link>https://example.com/post/rdt-1b-a-diffusion-foundation-model-for-bimanual-manipulation/</link>
+      <pubDate>Wed, 15 Jan 2025 16:55:49 +0000</pubDate>
+      <guid>https://example.com/post/rdt-1b-a-diffusion-foundation-model-for-bimanual-manipulation/</guid>
+      <description>&lt;p&gt;RDT-1B: A DIFFUSION FOUNDATION MODEL FOR  BIMANUAL MANIPULATION。双臂机器人操作，扩散模型&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>git</title>
+      <link>https://example.com/post/git/</link>
+      <pubDate>Fri, 10 Jan 2025 10:55:21 +0000</pubDate>
+      <guid>https://example.com/post/git/</guid>
+      <description>&lt;p&gt;常用工具git，虽然网络是阻挠我是用的最大问题&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>运动学</title>
+      <link>https://example.com/post/%E8%BF%90%E5%8A%A8%E5%AD%A6/</link>
+      <pubDate>Wed, 08 Jan 2025 10:05:53 +0000</pubDate>
+      <guid>https://example.com/post/%E8%BF%90%E5%8A%A8%E5%AD%A6/</guid>
+      <description>&lt;p&gt;kinematics，包括正向与逆向。用于joint-space和end-effector Cartesian-space的转换&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>zotero</title>
+      <link>https://example.com/post/zotero/</link>
+      <pubDate>Tue, 07 Jan 2025 17:14:43 +0000</pubDate>
+      <guid>https://example.com/post/zotero/</guid>
+      <description>&lt;p&gt;zotero文献管理&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>风之万里</title>
+      <link>https://example.com/post/%E9%A3%8E%E4%B9%8B%E4%B8%87%E9%87%8C/</link>
+      <pubDate>Sun, 05 Jan 2025 22:25:05 +0000</pubDate>
+      <guid>https://example.com/post/%E9%A3%8E%E4%B9%8B%E4%B8%87%E9%87%8C/</guid>
+      <description>&lt;p&gt;刚看完十二国记，名字取自那里。留存作为我在这儿学习的记录.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>clash</title>
+      <link>https://example.com/post/clash/</link>
+      <pubDate>Fri, 03 Jan 2025 17:15:36 +0000</pubDate>
+      <guid>https://example.com/post/clash/</guid>
+      <description>&lt;p&gt;clash安装和配置&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>VS code</title>
+      <link>https://example.com/post/vs-code/</link>
+      <pubDate>Thu, 19 Dec 2024 18:42:06 +0000</pubDate>
+      <guid>https://example.com/post/vs-code/</guid>
+      <description>&lt;p&gt;Visual studio Code&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>conda</title>
+      <link>https://example.com/post/conda/</link>
+      <pubDate>Thu, 19 Dec 2024 18:40:56 +0000</pubDate>
+      <guid>https://example.com/post/conda/</guid>
+      <description>&lt;p&gt;conda。管理python环境的，很好用&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>genesis平台</title>
+      <link>https://example.com/post/genesis%E5%B9%B3%E5%8F%B0/</link>
+      <pubDate>Thu, 19 Dec 2024 14:51:53 +0000</pubDate>
+      <guid>https://example.com/post/genesis%E5%B9%B3%E5%8F%B0/</guid>
+      <description>&lt;p&gt;一个比robosuite更简洁的物理平台，专为通用机器人/人工智能/物理AI应用而设计。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>robosuite平台</title>
+      <link>https://example.com/post/robosuite%E5%B9%B3%E5%8F%B0/</link>
+      <pubDate>Mon, 02 Dec 2024 14:22:27 +0000</pubDate>
+      <guid>https://example.com/post/robosuite%E5%B9%B3%E5%8F%B0/</guid>
+      <description>&lt;p&gt;机器人模拟平台robosuite ，最后还是不用了。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>MANISKILL3: GPU PARALLELIZED ROBOTICS  SIMULATION AND RENDERING FOR  GENERALIZABLE EMBODIED AI</title>
+      <link>https://example.com/post/maniskill3-gpu-parallelized-robotics-simulation-and-rendering-for-generalizable-embodied-ai/</link>
+      <pubDate>Mon, 25 Nov 2024 20:55:43 +0000</pubDate>
+      <guid>https://example.com/post/maniskill3-gpu-parallelized-robotics-simulation-and-rendering-for-generalizable-embodied-ai/</guid>
+      <description>&lt;p&gt;一个机器人模拟平台的论文&lt;/p&gt;
+&lt;p&gt;paper(12/100)&lt;/p&gt;</description>
     </item>
     <item>
       <title>GR-2: A Generative Video-Language-Action Model with Web-Scale Knowledge for Robot Manipulation</title>
@@ -70,6 +522,13 @@
 &lt;p&gt;这个是百篇计划(10/100)&lt;/p&gt;</description>
     </item>
     <item>
+      <title>AN EMULATOR FOR FINE-TUNING LARGE LANGUAGE  MODELS USING SMALL LANGUAGE MODELS</title>
+      <link>https://example.com/post/an-emulator-for-fine-tuning-large-language-models-using-small-language-models/</link>
+      <pubDate>Mon, 04 Nov 2024 16:20:53 +0000</pubDate>
+      <guid>https://example.com/post/an-emulator-for-fine-tuning-large-language-models-using-small-language-models/</guid>
+      <description>&lt;p&gt;百篇paper计划(9/100)，用小模型微调大模型。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>latexocr</title>
       <link>https://example.com/post/latexocr/</link>
       <pubDate>Mon, 28 Oct 2024 22:07:18 +0000</pubDate>
@@ -77,11 +536,102 @@
       <description>&lt;p&gt;图片转latex，本地版。需要梯子，也可以搞镜像&lt;/p&gt;</description>
     </item>
     <item>
+      <title>CLLMs: Consistency Large Language Models</title>
+      <link>https://example.com/post/cllms-consistency-large-language-models/</link>
+      <pubDate>Tue, 22 Oct 2024 15:59:04 +0000</pubDate>
+      <guid>https://example.com/post/cllms-consistency-large-language-models/</guid>
+      <description>&lt;p&gt;百篇paper计划(8/100)，关于持续性，不知道对我有没有启发，先看看吧。&lt;/p&gt;
+&lt;p&gt;这一篇的实验要求比较高，不精读了，看思想。它有个前提是jacobi方法，没这个基础的话看不太懂。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AMD修复</title>
+      <link>https://example.com/post/amd%E4%BF%AE%E5%A4%8D/</link>
+      <pubDate>Thu, 17 Oct 2024 11:31:18 +0000</pubDate>
+      <guid>https://example.com/post/amd%E4%BF%AE%E5%A4%8D/</guid>
+      <description>&lt;p&gt;想装cuda所以尝试看看电脑上到底有没有NVIDIA&lt;/p&gt;
+&lt;p&gt;平时用不到这个，以后有需要再整理吧。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>TRANSFORMER EXPLAINER: Interactive Learning of Text-Generative Models</title>
+      <link>https://example.com/post/transformer-explainer-interactive-learning-of-text-generative-models/</link>
+      <pubDate>Fri, 13 Sep 2024 10:12:29 +0000</pubDate>
+      <guid>https://example.com/post/transformer-explainer-interactive-learning-of-text-generative-models/</guid>
+      <description>&lt;p&gt;百篇paper计划(7/100)，很短，才2页，重点在code和其project，理解transformer。论文是没啥创新点了，写得也比较拉，看看项目吧。&lt;/p&gt;
+&lt;p&gt;这一篇写完啦！^^&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>nodejs</title>
+      <link>https://example.com/post/nodejs/</link>
+      <pubDate>Thu, 12 Sep 2024 11:34:24 +0000</pubDate>
+      <guid>https://example.com/post/nodejs/</guid>
+      <description>&lt;p&gt;安装、配置、更新nodejs的流程&lt;/p&gt;
+&lt;p&gt;但是我现在更新不了……重新配置一遍算了&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>latex</title>
       <link>https://example.com/post/latex/</link>
       <pubDate>Tue, 09 Jul 2024 10:19:41 +0000</pubDate>
       <guid>https://example.com/post/latex/</guid>
       <description>&lt;p&gt;写英文论文还是用latex比较好&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>LISA: Layerwise Importance Sampling for Memory-Efficient Large Language Model Fine-Tuning</title>
+      <link>https://example.com/post/lisa-layerwise-importance-sampling-for-memory-efficient-large-language-model-fine-tuning/</link>
+      <pubDate>Mon, 01 Jul 2024 11:45:24 +0000</pubDate>
+      <guid>https://example.com/post/lisa-layerwise-importance-sampling-for-memory-efficient-large-language-model-fine-tuning/</guid>
+      <description>&lt;p&gt;百篇paper计划(6/100)，好像是LoRA的改进，随便找的，而且这篇还没投会议呢。&lt;/p&gt;
+&lt;p&gt;这一篇也是微调，改lora&lt;/p&gt;
+&lt;p&gt;我以前看论文居然这么龟毛orz我的百篇paper计划创业未半而中道崩殂啊&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>开伙</title>
+      <link>https://example.com/post/%E5%BC%80%E4%BC%99/</link>
+      <pubDate>Mon, 01 Jul 2024 10:25:15 +0000</pubDate>
+      <guid>https://example.com/post/%E5%BC%80%E4%BC%99/</guid>
+      <description>&lt;p&gt;关于在家里做饭的备忘录&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>串</title>
+      <link>https://example.com/post/%E4%B8%B2/</link>
+      <pubDate>Tue, 28 May 2024 17:18:36 +0000</pubDate>
+      <guid>https://example.com/post/%E4%B8%B2/</guid>
+      <description>&lt;p&gt;串相关的算法题整理&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>paper reading</title>
+      <link>https://example.com/post/paper-reading/</link>
+      <pubDate>Tue, 21 May 2024 11:22:52 +0000</pubDate>
+      <guid>https://example.com/post/paper-reading/</guid>
+      <description>&lt;p&gt;把看过的论文做一个总结，防止我忘掉&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>FlexGen: high-throughput generative inference of large language models with a single GPU</title>
+      <link>https://example.com/post/flexgen-high-throughput-generative-inference-of-large-language-models-with-a-single-gpu/</link>
+      <pubDate>Tue, 21 May 2024 10:37:15 +0000</pubDate>
+      <guid>https://example.com/post/flexgen-high-throughput-generative-inference-of-large-language-models-with-a-single-gpu/</guid>
+      <description>&lt;p&gt;推理llm里面搞卸载的。百篇阅读计划(5/100)。看到和以前有点相关联的地方了，卸载和内存优化都是偏系统的。&lt;/p&gt;
+&lt;p&gt;因为大的背景过于重复了，以后论文注解只记录小的背景了。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>思维链</title>
+      <link>https://example.com/post/%E6%80%9D%E7%BB%B4%E9%93%BE/</link>
+      <pubDate>Wed, 17 Apr 2024 11:30:14 +0000</pubDate>
+      <guid>https://example.com/post/%E6%80%9D%E7%BB%B4%E9%93%BE/</guid>
+      <description>&lt;p&gt;思维链针对的是大模型搞推理问题，让它直接从直接输出一个结果变成写推理过程+结果的形式。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</title>
+      <link>https://example.com/post/chain-of-thought-prompting-elicits-reasoning-in-large-language-models/</link>
+      <pubDate>Tue, 16 Apr 2024 21:39:51 +0000</pubDate>
+      <guid>https://example.com/post/chain-of-thought-prompting-elicits-reasoning-in-large-language-models/</guid>
+      <description>&lt;p&gt;思维链论文阅读，百篇paper计划(4/100)，思维链这个技术还是prompt这个部分里面的，所以这篇论文还是算prompt&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>leetcode肝活</title>
+      <link>https://example.com/post/leetcode%E8%82%9D%E6%B4%BB/</link>
+      <pubDate>Tue, 09 Apr 2024 16:37:52 +0000</pubDate>
+      <guid>https://example.com/post/leetcode%E8%82%9D%E6%B4%BB/</guid>
+      <description>&lt;p&gt;leetcode刷题日志，哪天有空哪天刷&lt;/p&gt;</description>
     </item>
     <item>
       <title>Jacobian矩阵</title>
@@ -114,12 +664,327 @@ $$&lt;/p&gt;
 $$&lt;/p&gt;</description>
     </item>
     <item>
+      <title>局部最优和鞍点</title>
+      <link>https://example.com/post/%E5%B1%80%E9%83%A8%E6%9C%80%E4%BC%98%E5%92%8C%E9%9E%8D%E7%82%B9/</link>
+      <pubDate>Tue, 02 Apr 2024 20:14:43 +0000</pubDate>
+      <guid>https://example.com/post/%E5%B1%80%E9%83%A8%E6%9C%80%E4%BC%98%E5%92%8C%E9%9E%8D%E7%82%B9/</guid>
+      <description>&lt;p&gt;局部最优和鞍点都是处在grandient为0的位置，首先是找到这个位置，然后判断它是局部最优还是鞍点，利用海森矩阵从数学公式上就能判定。最后为了让损失函数更新能逃离鞍点，可以用海森矩阵或者动量两种方法。&lt;/p&gt;
+&lt;p&gt;太长不看版：&lt;strong&gt;文章总结&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;从gradient=0找到critical point的点
+令gradent=0，就是求loss对参数的微分&lt;/li&gt;
+&lt;li&gt;利用海森矩阵判断这个点是局部最优（最大、最小）还是鞍点：
+求海森矩阵的特征值，当有正有负的时候就是鞍点。&lt;/li&gt;
+&lt;li&gt;逃出鞍点：
+&lt;ul&gt;
+&lt;li&gt;海森矩阵&lt;/li&gt;
+&lt;li&gt;动量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;critical-point&#34;&gt;critical point&lt;/h1&gt;
+&lt;p&gt;也就是gradient=0时有几种情况&lt;/p&gt;
+&lt;h2 id=&#34;局部最小值local-minima&#34;&gt;局部最小值（local minima）&lt;/h2&gt;
+&lt;p&gt;如果是卡在local minima,那可能就没有路可以走了，因为四周都比较高，你现在所在的位置已经是最低的点，loss最低的点了，往四周走 loss都会比较高，你会不知道怎么走到其他地方去。&lt;/p&gt;
+&lt;h2 id=&#34;鞍点saddle-point&#34;&gt;鞍点（saddle point）&lt;/h2&gt;
+&lt;p&gt;如图可看出，左右是比红点高，前后比红点低，红点既不是local minima,也不是local maxima的地方。如果是卡在saddle point，saddle point旁边还是有其他路可以让你的loss更低的，你只要逃离saddle point，你就有可能让你的loss更低。
+&lt;img alt=&#34;鞍点&#34; loading=&#34;lazy&#34; src=&#34;https://ooo.0x0.ooo/2024/04/03/OmWQFM.png&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;判断&#34;&gt;判断&lt;/h1&gt;
+&lt;p&gt;怎么知道critical point的类型，到底是local minima,还是saddle point？
+对$L(\theta)$ 进行泰勒展开：$\theta&amp;rsquo;$在$\theta$附近。
+$$
+L(\theta)\approx L(\theta&amp;rsquo;)+(\theta-\theta&amp;rsquo;)^Tg+\frac{1}{2}(\theta-\theta&amp;rsquo;)^TH(\theta-\theta&amp;rsquo;)
+$$&lt;/p&gt;
+&lt;p&gt;对公式相加的每一项分析：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;表示当$\theta&amp;rsquo;$离$\theta$很近的时候，L近似相等&lt;/li&gt;
+&lt;li&gt;g就是梯度Gradient。这个gradient会弥补θ跟θ′的差距，虽然我们刚才说θ跟θ′很接近，但它们之间还是有一定的差距。&lt;/li&gt;
+&lt;li&gt;第三项跟Hessian(海森)矩阵有关。这个H就是海森矩阵。第三项会再弥补θ跟θ′的差距。H里面放的是参数对L的二次微分。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;当走到一个critical point，也就是说gradient为0，所以g这AAAAAAAA一项就可以去掉了。这时候的L(θ) ≈ L(θ′) + 第三项。&lt;/p&gt;
+&lt;p&gt;我们可以第三项来判断，在θ′附近的error surface（误差曲面），到底长什么样。知道error surface，我们就可以判断θ′是属于局部最小值点还是鞍点。&lt;/p&gt;
+&lt;p&gt;为了符号方便起见,我们把(θ−θ′)用v这个向量来表示。所以公式可以写成：
+$$
+L(\theta)\approx L(\theta&amp;rsquo;)+\frac{1}{2}v^THv
+$$&lt;/p&gt;
+&lt;p&gt;对每个v来说，当$v^THv&amp;gt;0$时，$L(\theta)&amp;gt;L(\theta&amp;rsquo;)$ 局部最小，也就是此时H是正定矩阵=特征值都是正数。&lt;/p&gt;
+&lt;p&gt;相反的，当$v^THv&amp;lt;0$时，$L(\theta)&amp;lt;L(\theta&amp;rsquo;)$ 局部最大，也就是此时H特征值都是负数。&lt;/p&gt;
+&lt;p&gt;特征值有正有负就表示它是鞍点。&lt;/p&gt;
+&lt;h1 id=&#34;逃离鞍点&#34;&gt;逃离鞍点&lt;/h1&gt;
+&lt;h2 id=&#34;海森矩阵&#34;&gt;海森矩阵&lt;/h2&gt;
+&lt;p&gt;由线性代数的知识：A为矩阵，α为特征向量，λ为特征值。有Aα=λα。我们假设u是H的特征向量，λ是u的特征值。所以有：
+$$
+u^THu=u^T(\lambda u)=\lambda ||u||^2
+$$&lt;/p&gt;
+&lt;p&gt;又由鞍点的特征值有正有负，所以存在特征值λ使得λ‖u‖²&amp;lt;0，所以$u^THu$小于0，也就是$L(\theta)&amp;lt;L(\theta&amp;rsquo;)$。即假设$\theta-\theta&amp;rsquo;=u$，你在$\theta&amp;rsquo;$的位置加上u，沿着u的方向做update得到θ，你就可以让loss变小。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;对于saddle point，我们只需要找出特征值λ小于0的点，再找出它对应的特征向量u，用$u+\theta&amp;rsquo;$，就可以找到一个新的点，这个点的loss比原来低&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>TinyLLM: Learning a Small Student from Multiple Large Language Models</title>
+      <link>https://example.com/post/tinyllm-learning-a-small-student-from-multiple-large-language-models/</link>
+      <pubDate>Sun, 24 Mar 2024 20:41:50 +0000</pubDate>
+      <guid>https://example.com/post/tinyllm-learning-a-small-student-from-multiple-large-language-models/</guid>
+      <description>&lt;p&gt;小样本llm论文阅读，百篇paper计划(3/100)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Towards A Unified View Of Parameter-Efficient Transfer Learning</title>
+      <link>https://example.com/post/towards-a-unified-view-of-parameter-efficient-transfer-learning/</link>
+      <pubDate>Mon, 18 Mar 2024 16:16:31 +0000</pubDate>
+      <guid>https://example.com/post/towards-a-unified-view-of-parameter-efficient-transfer-learning/</guid>
+      <description>&lt;p&gt;高效参数微调的综述类论文阅读&lt;/p&gt;
+&lt;p&gt;百篇paper计划(2/100)，对【高效参数】迁移学习的总结。&lt;/p&gt;
+&lt;p&gt;由于我也不怎么会选论文，就按照会议选了这篇比较近的(ps现在是2024年初)。光从标题看，这一篇应该是综述，正好我补一下几个经典的高效参数方法。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;论文标题：Towards a Unified View of Parameter-Efficient Transfer Learning&lt;/li&gt;
+&lt;li&gt;arxiv地址：&lt;a href=&#34;https://arxiv.org/abs/2110.04366&#34;&gt;链接&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;code：&lt;a href=&#34;https://github.com/jxhe/unify-parameter-efficient-tuning&#34;&gt;github&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;rank: ICLR 2022 (spotlight presentation)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;abstract&#34;&gt;abstract&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;大背景：
+在&lt;strong&gt;下游任务&lt;/strong&gt;上&lt;strong&gt;微调&lt;/strong&gt;大规模的、预训练的模型 在&lt;strong&gt;NLP&lt;/strong&gt;领域里面用得很多。但是传统方法&lt;strong&gt;全参数微调&lt;/strong&gt;，当模型参数和任务个数增加时变得很难搞。&lt;/li&gt;
+&lt;li&gt;小背景（现在工作）：
+高效参数迁移学习(parameter-efficient transfer learning)方法只微调小规模参数，但是几种方法之间缺少系统的联系&lt;/li&gt;
+&lt;li&gt;贡献
+分析了几种最先进的高效参数迁移学习方案，给出一个统一的框架。&lt;/li&gt;
+&lt;li&gt;具体：
+将这几种方法概括为修改预训练模型中特定的&lt;strong&gt;隐藏状态&lt;/strong&gt;，并定义一组设计维度来总括性地设计方法。
+通过跨机器翻译、文本摘要、语言理解和文本分类基准的综合实证研究，我们利用统一的观点来识别以前方法中的重要设计选择。&lt;/li&gt;
+&lt;li&gt;实验：
+统一框架实现了设计元素在不同方法之间的迁移，因此我们能够实例化新的参数高效的微调方法，这些方法比以前的方法调整更少的参数，同时更有效，在所有四个任务上都能获得与所有参数微调相当的结果。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;introduction&#34;&gt;introduction&lt;/h1&gt;
+&lt;h2 id=&#34;大背景&#34;&gt;大背景&lt;/h2&gt;
+&lt;p&gt;在预训练的语言模型PLMs基础上进行迁移学习在NLP领域比较流行。
+为什么不要全参数微调：模型越来越大+需要对每个任务都微调。&lt;/p&gt;
+&lt;h2 id=&#34;小背景&#34;&gt;小背景&lt;/h2&gt;
+&lt;p&gt;一些方法更新小部分参数，让大部分参数不变。&lt;/p&gt;
+&lt;h3 id=&#34;adapter-tuning&#34;&gt;adapter tuning&lt;/h3&gt;
+&lt;p&gt;在预训练网络每层中插入一些小的神经模块&lt;strong&gt;adapters&lt;/strong&gt;
+微调时只训练adapters&lt;/p&gt;
+&lt;h3 id=&#34;prefix-tuning-和-prompt-tuning&#34;&gt;prefix tuning 和 prompt tuning&lt;/h3&gt;
+&lt;p&gt;从 通过文本提示控制PLM的提示方法(prompting methods that control PLMs through textual prompts) 出发，给输入或者隐含层预置了一个额外的可调前缀标记l，并且在下游任务中预训练时，只训练这些soft prompt
+(这个soft prompt应该是刚刚预置的可调标记)&lt;/p&gt;
+&lt;h3 id=&#34;loralow-rank-matrices-to-approximate-parameter-updates&#34;&gt;LoRA（low-rank matrices to approximate parameter updates）&lt;/h3&gt;
+&lt;p&gt;学习&lt;strong&gt;低秩矩阵&lt;/strong&gt;来近似参数更新。&lt;/p&gt;
+&lt;h3 id=&#34;总结&#34;&gt;总结&lt;/h3&gt;
+&lt;p&gt;这些方法在不同的任务集上表现出与全微调相当的性能，通常通过更新不到1%的原始模型参数来实现。
+除了节省参数外，高效参数的调整使其能够快速适应新任务而不会遗忘。并且在分布外评估(out-of-distribution evaluation)中表现出优异的健壮性。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>softmax</title>
+      <link>https://example.com/post/softmax/</link>
+      <pubDate>Wed, 06 Mar 2024 16:37:12 +0000</pubDate>
+      <guid>https://example.com/post/softmax/</guid>
+      <description>&lt;p&gt;之前学的时候把softmax当作在公式里的点缀，现在来研究一下整个函数&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>transformer</title>
+      <link>https://example.com/post/transformer/</link>
+      <pubDate>Tue, 05 Mar 2024 21:17:53 +0000</pubDate>
+      <guid>https://example.com/post/transformer/</guid>
+      <description>&lt;p&gt;Transformer是一个利用注意力机制来提高模型训练速度的神经网络架构。&lt;/p&gt;
+&lt;p&gt;#文本生成的架构 这一部分确定完成了，其它部分未完全完成，以后有空再补&lt;/p&gt;
+&lt;p&gt;唯一的问题：那个贼大的框架图每一步怎么走的？&lt;/p&gt;
+&lt;h1 id=&#34;前提&#34;&gt;前提&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;&#34;&gt;编码器+解码器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;&#34;&gt;自注意力&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;解析&#34;&gt;解析&lt;/h1&gt;
+&lt;p&gt;image 一个盒子，以文本翻译为例，输入中文句子，输出英文句子。&lt;/p&gt;
+&lt;h2 id=&#34;解码器和编码器&#34;&gt;解码器和编码器&lt;/h2&gt;
+&lt;p&gt;这个盒子有两部分：解码器和编码器。
+编码器之间：每一个的小编码器的输入是前一个小编码器的输出，而每一个小解码器的输入不光是它的前一个解码器的输出，还包括了整个编码部分的输出。
+解析编码器：自注意力+前馈神经网络
+解析解码器：同样的，在decoder中使用的也是同样的结构。也是首先对输出（machine learning）计算自注意力得分，不同的地方在于，进行过自注意力机制后，将self-attention的输出再与Decoders模块的输出计算一遍注意力机制得分&lt;/p&gt;
+&lt;h2 id=&#34;残差神经网络&#34;&gt;残差神经网络&lt;/h2&gt;
+&lt;p&gt;为了解决梯度消失的问题，在Encoders和Decoder中都是用了残差神经网络的结构&lt;/p&gt;
+&lt;h2 id=&#34;softmax&#34;&gt;softmax&lt;/h2&gt;
+&lt;p&gt;回归最初的问题，将“机器学习”翻译成“machine learing”，解码器输出本来是一个浮点型的向量，怎么转化成“machine learing”这两个词呢？&lt;/p&gt;
+&lt;p&gt;最后的线性层接上一个softmax，其中线性层是一个简单的全连接神经网络，它将解码器产生的向量投影到一个更高维度的向量（logits）上，假设我们模型的词汇表是10000个词，那么logits就有10000个维度，每个维度对应一个惟一的词的得分。之后的softmax层将这些分数转换为概率。选择概率最大的维度，并对应地生成与之关联的单词作为此时间步的输出就是最终的输出&lt;/p&gt;
+&lt;h2 id=&#34;位置编码&#34;&gt;位置编码&lt;/h2&gt;
+&lt;p&gt;把词向量输入变成携带位置信息的输入：&lt;/p&gt;
+&lt;p&gt;我们可以给每个词向量加上一个有顺序特征的向量，发现sin和cos函数能够很好的表达这种特征，所以通常位置向量用以下公式来表示：
+$$
+PE (pos,2i)= sin(\frac{pos}{10000^{2i/d_{model}}}) \
+PE (pos,2i+ 1)= cos(\frac{pos}{10000^{2i/d_{model}}})
+$$&lt;/p&gt;
+&lt;h1 id=&#34;结构&#34;&gt;结构&lt;/h1&gt;
+&lt;p&gt;&lt;img alt=&#34;transformer结构图&#34; loading=&#34;lazy&#34; src=&#34;https://ooo.0x0.ooo/2024/03/05/Oy0VHp.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Transformer 的内部结构图，左侧为 Encoder block，右侧为 Decoder block。
+红色圈中的部分为 Multi-Head Attention，可以看到 Encoder block 包含一个 Multi-Head Attention，而 Decoder block 包含两个 Multi-Head Attention (其中有一个用到 Masked)。&lt;/p&gt;
+&lt;p&gt;Multi-Head Attention 上方还包括一个 Add &amp;amp; Norm 层，Add 表示残差连接 (Residual Connection) 用于防止网络退化，Norm 表示 Layer Normalization，用于对每一层的激活值进行归一化。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>注意力机制</title>
+      <link>https://example.com/post/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</link>
+      <pubDate>Tue, 05 Mar 2024 16:49:09 +0000</pubDate>
+      <guid>https://example.com/post/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</guid>
+      <description>&lt;p&gt;注意力机制是transformer的核心，有三个关键的计算QKV&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>编码器和解码器</title>
+      <link>https://example.com/post/%E7%BC%96%E7%A0%81%E5%99%A8%E5%92%8C%E8%A7%A3%E7%A0%81%E5%99%A8/</link>
+      <pubDate>Mon, 04 Mar 2024 16:36:10 +0000</pubDate>
+      <guid>https://example.com/post/%E7%BC%96%E7%A0%81%E5%99%A8%E5%92%8C%E8%A7%A3%E7%A0%81%E5%99%A8/</guid>
+      <description>&lt;p&gt;写完之后发现编码器和解码器这个框架不是很麻烦，就是一种思想，但是要扯上transformer就很麻烦orz。&lt;/p&gt;
+&lt;p&gt;一句话总结一下：编码器是可变-&amp;gt;固定，解码器是固定-&amp;gt;可变&lt;/p&gt;
+&lt;p&gt;encoder-decoder是seq2seq的一种实现，是深度学习中常见的模型框架。&lt;/p&gt;
+&lt;h1 id=&#34;定义&#34;&gt;定义&lt;/h1&gt;
+&lt;p&gt;Encoder将&lt;strong&gt;可变长度&lt;/strong&gt;的输入序列编码成一个&lt;strong&gt;固定长度&lt;/strong&gt;的向量；
+Decoder将&lt;strong&gt;固定长度&lt;/strong&gt;的向量解码成一个&lt;strong&gt;可变长度&lt;/strong&gt;的输出序列；
+Encoder-Decoder阶段的编码与解码的方式可以是CNN、RNN、LSTM、GRU等
+（所以encoder和decoder中间的向量长度是固定的，这也是它的一个缺陷）&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;为什么是缺陷，长度固定的+缺点体现在哪里&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;rnn的编码器解码器&#34;&gt;RNN的编码器解码器&lt;/h1&gt;
+&lt;p&gt;&lt;img alt=&#34;编码器和解码器&#34; loading=&#34;lazy&#34; src=&#34;https://ooo.0x0.ooo/2024/03/04/OytU4r.png&#34;&gt;
+该结构来自论文Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation
+RNN编码-解码器 ，该模型包含两个RNN，分别位于编码器和解码器中。
+编码器中的RNN负责将变长的输入序列映射到一个固定长度的向量中，解码器中的RNN则负责将向量映射到一个变长的输出序列中。
+定性的来讲，这个模型可以学习语言短语的有意义的的语义和句法表示。&lt;/p&gt;
+&lt;h3 id=&#34;编码器&#34;&gt;编码器&lt;/h3&gt;
+&lt;p&gt;编码器部分的隐藏层状态用 $h_t$表示，隐含层更新公式为
+$$
+h_t=f(h_{t-1},x_t)
+$$
+f是一个函数，可以是简单的sigmoid，也可以是复杂的LSTM，上文提到的论文里面用的是GRU
+C 是中间语义表示，可以是h总和也可以是最后一个h，看用的什么方法。这里描述的是用RNN，RNN的信息会流到最后，所以这篇paper里用的是最后一个h&lt;/p&gt;
+&lt;h3 id=&#34;解码器&#34;&gt;解码器&lt;/h3&gt;
+&lt;p&gt;解码器的隐含层更新为
+$$
+s_t=g(s_{t-1},y_{t-1},c)
+$$
+最后模型的输出预测为
+$$
+P(y_t|y_{t-1},y_{t-2},&amp;hellip;y_1,c)=g(s_t,y_{t-1},c)
+$$&lt;/p&gt;
+&lt;h3 id=&#34;训练&#34;&gt;训练&lt;/h3&gt;
+&lt;p&gt;对解码阶段每个时间步骤i，解码器输出$y_i$的条件概率为$P(y_i|y_1&amp;hellip;y_{i-1},c)$，输出序列的联合概率函数为
+$$
+P(y_1,&amp;hellip;y_{T&amp;rsquo;}|x_1,&amp;hellip;x_T)=\prod_{i=1}^{T&amp;rsquo;}P(y_i|y_1&amp;hellip;y_{i-1},c)
+$$&lt;/p&gt;
+&lt;p&gt;想要最大化输出序列的联合概率，根据最大似然估计&lt;/p&gt;
+&lt;p&gt;$$
+max_\theta \frac{1}{N} \sum_{n=1}^N logp_\theta(y_n|x_n)
+$$&lt;/p&gt;
+&lt;h1 id=&#34;引入注意力&#34;&gt;引入注意力&lt;/h1&gt;
+&lt;p&gt;在普通的编码器-解码器模型中，有一个很大的局限性。那就是上下文变量对于 Decoding 阶段每个时间步都是一样的，这可能是模型性能的一个瓶颈。&lt;/p&gt;
+&lt;p&gt;我们希望不同时间步的解码能够依赖于与之更相关的上下文信息，换句话说，Decoding 往往并不需要整个输入序列的信息，而是要有所侧重。于是，Bengio 团队的 Bahdanau 在 2014年首次在编码器-解码器模型中引入了注意力机制 (Attention Mechanism)&lt;/p&gt;
+&lt;p&gt;具体做法：
+在解码器过程中，在时间步i，将c泛化为$c_i$
+注意力机制的目标是让解码器在每一时间步对输入序列中不同时间步编码的信息分配不同的注意力。那么体现在上下文变量中， $c_i$就是 Encoder 中不同时间步的隐藏状态的加权平均。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>hexo</title>
       <link>https://example.com/post/hexo/</link>
       <pubDate>Mon, 04 Mar 2024 15:26:28 +0000</pubDate>
       <guid>https://example.com/post/hexo/</guid>
       <description>&lt;p&gt;hexo+github pages 生成个人网站。不知道hexo我还愿意用几年。&lt;/p&gt;
 &lt;p&gt;估计下次更新就变成使用hugo了，尽管我还没写几篇，等写到100篇的时候换hugo吧&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>FULL PARAMETER FINE-TUNING FOR LARGE LANGUAGE MODELS WITH LIMITED RESOURCES</title>
+      <link>https://example.com/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/</link>
+      <pubDate>Fri, 24 Nov 2023 17:10:38 +0000</pubDate>
+      <guid>https://example.com/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/</guid>
+      <description>&lt;p&gt;百篇paper计划(1/100)，推荐阅读的，没有选择趋向。内容是：用有限的资源（主要是内存）进行全参数大模型微调，研究重点集中在微调部分，做的是内存优化的工作。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;论文标题：Full Parameter Fine-tuning for Large Language Models with Limited Resources&lt;/li&gt;
+&lt;li&gt;arxiv地址：&lt;a href=&#34;https://arxiv.org/abs/2306.09782&#34;&gt;链接&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;code：&lt;a href=&#34;https://github.com/OpenLMLab/LOMO&#34;&gt;github&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;abstract&#34;&gt;abstract&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;背景：LLMs给NLP问题带来了革命性变化，but需要大量GPU资源&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;已有：高效参数微调（PEFT），没有彻底解决
+&lt;a href=&#34;%E9%AB%98%E6%95%88%E5%8F%82%E6%95%B0%E5%BE%AE%E8%B0%83.md&#34;&gt;PEFT参考文档&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;parameter-efficient fine-tuning vs full-parameter fine-tune&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创新：提出了新的优化器 LOw-Memory-Optimization
+内容：在一个步骤融合了梯度计算和参数更新&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;怎么融合(fuse)？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;效果：和标准方法（DeepSpeed解决方案）相比，我们将内存使用量减少到10.8%。
+因此，我们的方法可以在一台拥有8×RTX 3090的机器上对65B模型进行全参数微调，每台机器都有24GB内存&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;introduction&#34;&gt;introduction&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;感觉就是把摘要扩写了一遍&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;背景：LLMs 厉害，但是要钱。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;目前：有效参数微调方法
+比如：LoRA,Prefix-tuning
+但是：没有全参数的&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;解决问题：我们要找个办法实现全参数微调&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;干了啥&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;分析LLMs里面内存使用的四个主要方面：
+激活，优化器状态，梯度张量和参数&lt;/li&gt;
+&lt;li&gt;从三个方面优化了训练过程：
+&lt;ul&gt;
+&lt;li&gt;SGD-优化器：由于SGD不存储任何中间状态，可以删除整个优化器状态部分&lt;a href=&#34;SGD.md&#34;&gt;SGD是什么&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;LOMO把梯度tensor的内存使用降到了O(1)&lt;/li&gt;
+&lt;li&gt;为了稳定使用混合精度训练：集成梯度归一化和损失缩放，并将某些计算过渡到全精度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;结果
+内存使用量等于参数使用量加上激活量和最大梯度张量。&lt;/p&gt;
+&lt;p&gt;分析了：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;内存和吞吐量&lt;/li&gt;
+&lt;li&gt;下游表现&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;贡献&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;SGD&lt;/li&gt;
+&lt;li&gt;LOMO&lt;/li&gt;
+&lt;li&gt;验证&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;related-work&#34;&gt;related work&lt;/h1&gt;
+&lt;p&gt;都是节省内存的技术&lt;/p&gt;
+&lt;h2 id=&#34;activation-checkpointing&#34;&gt;Activation Checkpointing&lt;/h2&gt;
+&lt;p&gt;计算图中策略性地选择的检查点节点的激活变量在正向阶段后保留在内存中，而其余节点的激活变量在梯度计算时最多重新计算一次。激活内存可以降低原始内存使用量的平方根，代价是需要多一次正向传递。
+在前向传播过程中，有选择性的丢弃一些产生的中间激活值，当反向传播需要使用这些激活值时，再依据上一个保存的激活值来计算出这些需要的激活值来帮助完成反向传播。这样一来，便可以大大减少训练过程中所需要的存储空间。&lt;/p&gt;
+&lt;h2 id=&#34;mixed-precision-training&#34;&gt;Mixed-Precision Training&lt;/h2&gt;
+&lt;p&gt;混合精度，32位浮点数和16位浮点数混合使用&lt;/p&gt;
+&lt;h2 id=&#34;heterogeneous-training-system&#34;&gt;Heterogeneous Training System&lt;/h2&gt;
+&lt;p&gt;通过利用异构内存（如CPU和NVMe内存）来减少GPU内存消耗&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;但是怎么做？？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;method&#34;&gt;method&lt;/h1&gt;
+&lt;h2 id=&#34;优化器&#34;&gt;优化器&lt;/h2&gt;
+&lt;p&gt;adam和SGD比起来哪里不好了！
+参考https://blog.csdn.net/S20144144/article/details/103417502&lt;/p&gt;</description>
     </item>
     <item>
       <title>用c&#43;&#43;实现电梯自动控制有限状态机</title>
@@ -227,6 +1092,229 @@ $$&lt;/p&gt;</description>
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>马了就是忘了</title>
+      <link>https://example.com/post/%E9%A9%AC%E4%BA%86%E5%B0%B1%E6%98%AF%E5%BF%98%E4%BA%86/</link>
+      <pubDate>Mon, 06 Mar 2023 15:53:11 +0000</pubDate>
+      <guid>https://example.com/post/%E9%A9%AC%E4%BA%86%E5%B0%B1%E6%98%AF%E5%BF%98%E4%BA%86/</guid>
+      <description>&lt;p&gt;放了一下暂时没用到的东西&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>FreeAdversarialTraining</title>
+      <link>https://example.com/post/freeadversarialtraining/</link>
+      <pubDate>Sat, 16 Apr 2022 16:32:50 +0000</pubDate>
+      <guid>https://example.com/post/freeadversarialtraining/</guid>
+      <description>&lt;p&gt;以前写毕设学的，留个纪念。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://example.com/post/analysis_v2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/analysis_v2/</guid>
+      <description>&lt;h1 id=&#34;创新点与结果分析&#34;&gt;创新点与结果分析&lt;/h1&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;big创新点一基于状态信息覆盖sic的示范数据分析框架&#34;&gt;【Big】创新点一：基于状态信息覆盖（SIC）的示范数据分析框架&lt;/h2&gt;
+&lt;h3 id=&#34;核心问题&#34;&gt;核心问题&lt;/h3&gt;
+&lt;p&gt;轻量化 VLA 的下游微调数据采集面临一个实践难题：不同的位置-姿态采集配置与重复次数组合，会导致模型获得截然不同的泛化能力，但评估代价极高。现有主动学习方法（FPS、k-center）只能解决&amp;quot;覆盖哪些状态&amp;quot;，无法解决&amp;quot;有限预算下重复次数如何分配&amp;quot;这一同等重要的问题。SIC 框架正是为此而设计的。&lt;/p&gt;
+&lt;h3 id=&#34;方法&#34;&gt;方法&lt;/h3&gt;
+&lt;p&gt;将数据质量评估转化为&lt;strong&gt;冻结 VLM 嵌入空间中的覆盖密度问题&lt;/strong&gt;。以最小全覆盖集 $B_0$ 构建锚点参考系，锚点由&lt;strong&gt;全局首帧嵌入&lt;/strong&gt;（刻画初始位置姿态）与&lt;strong&gt;腕部中段均值嵌入&lt;/strong&gt;（刻画操作动态）双视角互补表示。&lt;/p&gt;
+&lt;p&gt;SIC 函数融合三个机制：&lt;/p&gt;
+&lt;p&gt;$$\text{SIC}(\mathcal{D}) = \sum_{a \in \mathcal{A}} \frac{\sigma_\text{global}(a,\mathcal{D})}{1+\sigma_\text{global}} + \lambda \cdot \sum_{a \in \mathcal{A}} \frac{\sigma_\text{wrist}(a,\mathcal{D})}{1+\sigma_\text{wrist}}$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Laplacian 空间接近度&lt;/strong&gt;：带宽由最近邻距离自适应确定，无额外超参数；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;对数次数软化权重&lt;/strong&gt; $\tau(t) = \alpha \log\frac{t+1}{t}$：对重复采集的边际贡献建模，使 SIC 能感知重复次数的合理性；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;锚点级饱和变换&lt;/strong&gt;：将已充分覆盖区域的边际收益压至趋零，为贪心算法提供理论保障（SIC 具有单调性与边际递减性）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在 SIC 的基础上，以 $B_0$ 为起点运行&lt;strong&gt;前向贪心规划&lt;/strong&gt;，每步追加边际增益最大的配置，输出&amp;quot;位置-姿态-次数&amp;quot;采集清单。&lt;/p&gt;
+&lt;h3 id=&#34;关键结果&#34;&gt;关键结果&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;📊 &lt;strong&gt;图示参考&lt;/strong&gt;：&lt;code&gt;fig:ch3_siv_scatter&lt;/code&gt;——SIC 分数与真实任务成功率散点图（Spearman &lt;strong&gt;ρ=0.8336，p=0.0008&lt;/strong&gt;），正相关趋势清晰；留一法检验 ρ 均值 0.8292，最差 0.7836，结论稳健。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;📊 &lt;strong&gt;图示参考&lt;/strong&gt;：&lt;code&gt;fig:ch3_greedy_curve&lt;/code&gt; + &lt;code&gt;fig:ch3_heatmap&lt;/code&gt;——贪心迭代 SIC 增长曲线与最终采集方案热力图，呈现非均匀异构分配：高信息量配置获得 3-4 次，已饱和区域仅保留 1 次。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;144 集预算下核心对比：&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;策略&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;SR (%)&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;最小覆盖基线 $B_0$（72 集）&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;78±0.7&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;均匀双倍 / FPS / k-center（均为 144 集）&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;84±0.4&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;固定结构最优（B144-diagonal）&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;86±1.3&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;SIC 引导（本文，144 集）&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;strong&gt;93±1.0&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;全量数据（288 集）&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;96±1.2&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;FPS 和 k-center 在 $B_0$ 已全覆盖的条件下均退化为均匀分配，说明传统空间采样方法对重复次数分配问题完全无效。SIC 引导方案以 &lt;strong&gt;50% 的数据量将性能差距控制在 3 个百分点内&lt;/strong&gt;。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://example.com/post/rlinf/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/rlinf/</guid>
+      <description>&lt;p&gt;git clone &lt;a href=&#34;mailto:git@github.com&#34;&gt;git@github.com&lt;/a&gt;:RLinf/RLinf.git
+文档里面只写了venv安装，那conda环境怎么搞？
+conda create -n rlinf python=3.11
+conda activate rlinf&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://example.com/post/%E5%BF%83%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E5%BF%83%E7%90%86/</guid>
+      <description>&lt;p&gt;做一件事时要完全专注于当下，不同时想着其他任务，切换到下一件事时也尽量让情绪和思维归零，不带着上一件事的干扰。为了帮助实现这种切换，可以利用物理环境或工具的变化，比如换地点、换设备、换软件，甚至用不同空间来区分不同任务，从而给大脑明确的“结束与开始”的信号。同时，建议将脑力和体力任务交替安排，避免连续高消耗，从而减少疲劳感。整体想表达的是，通过人为设计“切换机制”，让注意力更集中、内耗更少，使多任务生活变得更可持续，而不是同时分心处理多件事。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://example.com/post/%E6%9C%AA%E5%91%BD%E5%90%8D/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E6%9C%AA%E5%91%BD%E5%90%8D/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://example.com/post/%E6%B8%85%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E6%B8%85%E7%90%86/</guid>
+      <description>&lt;p&gt;2026年6月7日大清理：&lt;/p&gt;
+&lt;p&gt;BIlibili历史记录：网页版关闭保存历史记录的功能。
+app端历史记录已清除。
+还留下若干收藏夹，稍后再看。这一波清理干净之前不再增加
+一周内清理干净
+手机端缓存视频若干
+ipad端缓存视频活干
+长毛象上面的收藏稍微清理了一些，还是有很多。
+难受啊，怎么会有这么多马了的。
+看看能不能把“马了就是忘了”那里做一个单独的工具箱页面&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://example.com/post/%E6%B8%85%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E6%B8%85%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+      <description>&lt;p&gt;ZLY@3090#
+查看磁盘占用情况&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;主要的home&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;du -sh ~/* &lt;del&gt;/.??* 2&amp;gt;/dev/null | sort -hr
+主要是&lt;/del&gt;/.cache这个文件夹，可以过段时间再删&lt;/p&gt;
+&lt;p&gt;然后是主要的工作文件夹
+/data/zhonglinye
+du -sh /data/zhonglinye 2&amp;gt;/dev/null 查看总占用，但是没啥用
+du -sh /data/zhonglinye/* 2&amp;gt;/dev/null 查看一级子目录，有用
+du -ah /data/zhonglinye 2&amp;gt;/dev/null | sort -rh | head -20 查看前20个最大文件和目录&lt;/p&gt;
+&lt;p&gt;好像差不多了，以后再看lerobot的还有hfdata，太乱了看不懂&lt;/p&gt;
+&lt;p&gt;cd ~
+du -sh ~/* ~/.??* 2&amp;gt;/dev/null | sort -hr
+感觉.cache文件夹过大了，删掉
+然后是/data/zhonglinye&lt;/p&gt;
+&lt;p&gt;du -sh /data/zhonglinye/* 2&amp;gt;/dev/null
+wandb文件夹可以清空
+然后hfdata 和code太大了
+cache里面主要是pip的，等我安装完再删除
+code和hfdata比较大
+du -sh /data/zhonglinye/hfdata/* 2&amp;gt;/dev/null
+主要是datasets文件夹很大，但我又不知道哪些数据重要orz
+还有hub，huggingface，lerobot这几个文件夹比较大。
+那把自己采集的数据集做一个存档吧
+之前的数据都上传到哪里了？
+/data/zhonglinye/hfdata/huggingface/lerobot
+其他的都是后来下载的，不用管&lt;/p&gt;
+&lt;p&gt;&amp;hellip;/hfdata/huggingface$ tar -czvf lerobot.tar.gz lerobot
+打包需要一点时间，压缩以后还15.72G，等下载到windows以后就把hfdata里面的内容清理掉&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://example.com/post/%E7%89%A9%E6%96%BD%E4%BA%8E%E4%BA%BA/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E7%89%A9%E6%96%BD%E4%BA%8E%E4%BA%BA/</guid>
+      <description>&lt;p&gt;2026年6月24日20元购入小米无线键鼠套装3，蓝牙，需要5号电池，鼠标和键盘都需要。usb-A连接器不能乱丢。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>_日记2026</title>
+      <link>https://example.com/post/%E6%97%A5%E8%AE%B02026/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E6%97%A5%E8%AE%B02026/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>action space</title>
+      <link>https://example.com/post/action-space/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/action-space/</guid>
+      <description>&lt;p&gt;joint-level与end-effector-Cartesian-level&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>affordance模型</title>
+      <link>https://example.com/post/affordance%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/affordance%E6%A8%A1%E5%9E%8B/</guid>
+      <description>&lt;p&gt;看论文看到一个概念 functional affordance model,一开始还以为是affordable（给得起的）还在想这论文这么节俭，后面才发现是一个专有概念orz&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>breadwinner的日常生活</title>
+      <link>https://example.com/post/breadwinner%E7%9A%84%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/breadwinner%E7%9A%84%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/</guid>
+      <description>&lt;p&gt;这一组是已经上班了的主角们&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>calibration</title>
+      <link>https://example.com/post/calibration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/calibration/</guid>
+      <description>&lt;p&gt;校准，有点硬件的活。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CoT-VLA: Visual Chain-of-Thought Reasoning for  Vision-Language-Action Models</title>
+      <link>https://example.com/post/cot-vla-visual-chain-of-thought-reasoning-for-vision-language-action-models/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/cot-vla-visual-chain-of-thought-reasoning-for-vision-language-action-models/</guid>
+      <description>&lt;p&gt;怎么感觉这又是个插值？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Data Scaling Laws for Imitation Learning-Based End-to-End Autonomous Driving</title>
+      <link>https://example.com/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/</guid>
+      <description>&lt;p&gt;14:21:30开始，这篇论文只能看20分钟
+快速了解：
+这篇论文是否可以扩展到vla方面？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>dexhand</title>
+      <link>https://example.com/post/dexhand/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/dexhand/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>diffusion transformer</title>
+      <link>https://example.com/post/diffusion-transformer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/diffusion-transformer/</guid>
+      <description>&lt;p&gt;想学习，但没找到好的教程，学的时候复盘一下diffusion,transformer和DiT是用来干啥的吧。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Efficient Data Collection for Robotic Manipulation  via Compositional Generalization</title>
       <link>https://example.com/post/efficient-data-collection-for-robotic-manipulation--via-compositional-generalization/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -250,11 +1338,420 @@ $$&lt;/p&gt;</description>
 &lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     <item>
+      <title>Evaluating Uncertainty and Quality of Visual Language Action-enabled Robots</title>
+      <link>https://example.com/post/evaluating-uncertainty-and-quality-of-visual-language-action-enabled-robots/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/evaluating-uncertainty-and-quality-of-visual-language-action-enabled-robots/</guid>
+      <description>&lt;p&gt;VLA模型将视觉观察（如图像或视频帧）和文本指令编码到共享的嵌入空间中，并从该空间生成结构化的动作序列。这种方法使VLA模型能在场景上下文中解读诸如“拿起苹果”之类的指令，它们必须使用视觉注意力机制解决对象引用的歧义，并将指令转换为精确的物理运动序列。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>FAST:Efficient Action Tokenization for  Vision-Language-Action Models</title>
+      <link>https://example.com/post/fast-efficient-action-tokenization-for-vision-language-action-models/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/fast-efficient-action-tokenization-for-vision-language-action-models/</guid>
+      <description>&lt;p&gt;pi0.5的时候用到这个方法：post-train里面用这个方法，说是因为这个论文发现了用离散的token训练更快。有点好奇是怎么把动作给离散化的，又不能分词，既然它能离散化的话，那图像也能离散化吗？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>flow matching</title>
+      <link>https://example.com/post/flow-matching/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/flow-matching/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>genesis平台</title>
+      <link>https://example.com/post/genesis-%E5%B9%B3%E5%8F%B0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/genesis-%E5%B9%B3%E5%8F%B0/</guid>
+      <description>&lt;p&gt;新物理平台https://genesis-world.readthedocs.io/en/latest/&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Grasp as You Say: Language-guided Dexterous Grasp Generation</title>
+      <link>https://example.com/post/grasp-as-you-say-language-guided-dexterous-grasp-generation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/grasp-as-you-say-language-guided-dexterous-grasp-generation/</guid>
+      <description>&lt;p&gt;what i want to get from this:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;怎么实现语言指导机器人抓取的？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;感觉这篇论文挺有意思的，争取3/11能看完&lt;/p&gt;
+&lt;p&gt;参考阅读https://mp.weixin.qq.com/s/vxOl-P1Xxn8-9g_FkC1hDg&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>huggingface</title>
+      <link>https://example.com/post/huggingface/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/huggingface/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>hugo使用指南</title>
       <link>https://example.com/post/hugo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://example.com/post/hugo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</guid>
       <description>&lt;p&gt;hugo配置日志&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Language-Conditioned Imitation Learning with Base Skill Priors under Unstructured Data</title>
+      <link>https://example.com/post/language-conditioned-imitation-learning-with-base-skill-priors-under-unstructured-data/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/language-conditioned-imitation-learning-with-base-skill-priors-under-unstructured-data/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Language-Guided Dexterous Functional Grasping by LLM Generated Grasp Functionality and Synergy for Humanoid Manipulation</title>
+      <link>https://example.com/post/language-guided-dexterous-functional-grasping-by-llm-generated-grasp-functionality-and-synergy-for-humanoid-manipulation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/language-guided-dexterous-functional-grasping-by-llm-generated-grasp-functionality-and-synergy-for-humanoid-manipulation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>maniskill</title>
+      <link>https://example.com/post/maniskill/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/maniskill/</guid>
+      <description>&lt;p&gt;以前经常看见的一个baseline？环境？基于gym&lt;/p&gt;
+&lt;p&gt;可以headless运行，但是需要vulkan&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>mujoco</title>
+      <link>https://example.com/post/mujoco/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/mujoco/</guid>
+      <description>&lt;p&gt;物理引擎。虽然genesis不用装，但是gym还要，装着试试&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>onnx</title>
+      <link>https://example.com/post/onnx/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/onnx/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>PaliGemma</title>
+      <link>https://example.com/post/paligemma/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/paligemma/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>pip安装产生的隔离环境问题</title>
+      <link>https://example.com/post/pip%E5%AE%89%E8%A3%85%E4%BA%A7%E7%94%9F%E7%9A%84%E9%9A%94%E7%A6%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/pip%E5%AE%89%E8%A3%85%E4%BA%A7%E7%94%9F%E7%9A%84%E9%9A%94%E7%A6%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98/</guid>
+      <description>&lt;p&gt;conda创建了一个环境，已经安装了pytorch，import torch也正常
+但是pip install torch3d这种的时候，报错说no module named torch&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>placo与mplib</title>
+      <link>https://example.com/post/placo%E4%B8%8Emplib/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/placo%E4%B8%8Emplib/</guid>
+      <description>&lt;p&gt;运动学相关内容，穷寇莫追，不要了解太多，只需要了解：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; placo和mplib分别是什么层级的东西？&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; lerobot为什么选择placo&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 在计算逆解方面，placo比mplib差吗？&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 如果要换mplib，代码要改多少&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>pose estimation</title>
+      <link>https://example.com/post/pose-estimation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/pose-estimation/</guid>
+      <description>&lt;p&gt;感觉对VLA挺重要，尤其是camera pose estimation&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>python</title>
+      <link>https://example.com/post/python/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>python模块</title>
+      <link>https://example.com/post/python%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/python%E6%A8%A1%E5%9D%97/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>pytorch</title>
+      <link>https://example.com/post/pytorch/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/pytorch/</guid>
+      <description>&lt;p&gt;pytorch好多内容orz&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>sim2real</title>
+      <link>https://example.com/post/sim2real/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/sim2real/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>simPLE: a visuotactile method learned in simulation  to precisely pick, localize, regrasp, and place objects</title>
+      <link>https://example.com/post/simple-a-visuotactile-method-learned-in-simulation-to-precisely-pick-localize-regrasp-and-place-objects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/simple-a-visuotactile-method-learned-in-simulation-to-precisely-pick-localize-regrasp-and-place-objects/</guid>
+      <description>&lt;p&gt;在仿真中学到的视觉触觉方法&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vision-Language-Action Models for Robotics: A Review Towards Real-World Applications</title>
+      <link>https://example.com/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/</guid>
+      <description>&lt;p&gt;一篇综述
+2025-11-06 16:15:25 开始看&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 看完 (@2026-04-06 02:33)
+希望从这篇综述中得到：一个综述应该从什么视角看vla，以及重点关注vla的泛化性和精确性的trade-off。vla的目标是什么？轻量？泛化？精确？还是什么？
+Q:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;一个综述应该从怎样的视角？&lt;/li&gt;
+&lt;li&gt;vla的目标、定义、来源、和别的模型的区分&lt;/li&gt;
+&lt;li&gt;技术层面的问题：核心架构、挑战、风险、目前的算法怎样应对&lt;/li&gt;
+&lt;li&gt;实际应用与如何评估&lt;/li&gt;
+&lt;li&gt;如果我自己来，能搞出什么东西？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;2025-11-06 17:16:47 确定好问题，可以开始看了&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>VLA-OS: Structuring and Dissecting Planning Representations and Paradigms in Vision-Language-Action Models</title>
+      <link>https://example.com/post/vla-os-structuring-and-dissecting-planning-representations-and-paradigms-in-vision-language-action-models/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/vla-os-structuring-and-dissecting-planning-representations-and-paradigms-in-vision-language-action-models/</guid>
+      <description>&lt;p&gt;看起来还不错，没有正式发表&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>VLA们</title>
+      <link>https://example.com/post/vla%E4%BB%AC/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/vla%E4%BB%AC/</guid>
+      <description>&lt;p&gt;还是很混沌，多看论文吧&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>vla数据集</title>
+      <link>https://example.com/post/vla%E6%95%B0%E6%8D%AE%E9%9B%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/vla%E6%95%B0%E6%8D%AE%E9%9B%86/</guid>
+      <description>&lt;p&gt;看论文的时候一些数据集记录下来&lt;/p&gt;
+&lt;p&gt;有个问题：vla为啥还能有benchmark，不都是本地部署吗？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>vla泛化-多变相机视角</title>
+      <link>https://example.com/post/vla%E6%B3%9B%E5%8C%96-%E5%A4%9A%E5%8F%98%E7%9B%B8%E6%9C%BA%E8%A7%86%E8%A7%92/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/vla%E6%B3%9B%E5%8C%96-%E5%A4%9A%E5%8F%98%E7%9B%B8%E6%9C%BA%E8%A7%86%E8%A7%92/</guid>
+      <description>&lt;p&gt;当作研究记录。希望能早点确定下来。
+目标是：同一机械臂同一场景下更改相机位置仍然能zero-shot使用某一相机视角采集+微调后的模型
+说好听一点：在固定场景中实现机械臂策略对相机位置变化的零样本鲁棒性的研究？通过学习视角不变的视觉表征实现机器人操作策略的跨相机泛化&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>vla综述们</title>
+      <link>https://example.com/post/vla%E7%BB%BC%E8%BF%B0%E4%BB%AC/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/vla%E7%BB%BC%E8%BF%B0%E4%BB%AC/</guid>
+      <description>&lt;p&gt;若干综述的集合，看就完事&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>vla里面的插值</title>
+      <link>https://example.com/post/vla%E9%87%8C%E9%9D%A2%E7%9A%84%E6%8F%92%E5%80%BC/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/vla%E9%87%8C%E9%9D%A2%E7%9A%84%E6%8F%92%E5%80%BC/</guid>
+      <description>&lt;p&gt;最近见到的有点多，搞一个看看&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>wandb</title>
+      <link>https://example.com/post/wandb/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/wandb/</guid>
+      <description>&lt;p&gt;好用的，但是主要墙了所以我要保存到本地然后上传&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>为什么我会写出屎山代码</title>
+      <link>https://example.com/post/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BC%9A%E5%86%99%E5%87%BA%E5%B1%8E%E5%B1%B1%E4%BB%A3%E7%A0%81/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BC%9A%E5%86%99%E5%87%BA%E5%B1%8E%E5%B1%B1%E4%BB%A3%E7%A0%81/</guid>
+      <description>&lt;p&gt;导模块导得头疼，连续必可导，可导不一定连续&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>口蜜腹剑</title>
+      <link>https://example.com/post/%E5%8F%A3%E8%9C%9C%E8%85%B9%E5%89%91/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E5%8F%A3%E8%9C%9C%E8%85%B9%E5%89%91/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>多gpu的accelerate</title>
+      <link>https://example.com/post/%E5%A4%9Agpu%E7%9A%84acclerate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E5%A4%9Agpu%E7%9A%84acclerate/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>如何提高精力</title>
+      <link>https://example.com/post/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E7%B2%BE%E5%8A%9B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E7%B2%BE%E5%8A%9B/</guid>
+      <description>&lt;p&gt;2025年2月说得最多的词汇是困，确实。每天吃完晚饭就没精力继续学，有ddl还好，但我自己的ddl欲望都不高。于是3月打算改进。&lt;/p&gt;
+&lt;p&gt;这一篇初稿要在5月15日之前完成完成&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>安全抓取思路</title>
+      <link>https://example.com/post/%E5%AE%89%E5%85%A8%E6%8A%93%E5%8F%96%E6%80%9D%E8%B7%AF/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E5%AE%89%E5%85%A8%E6%8A%93%E5%8F%96%E6%80%9D%E8%B7%AF/</guid>
+      <description>&lt;p&gt;要求：对不同材料的柔体（比如布料）或者比较脆弱的刚体（鸡蛋）操作，保证抓取的安全，稳定，考虑力 force。VLA+物体摩擦系数提示&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>安卓</title>
+      <link>https://example.com/post/%E5%AE%89%E5%8D%93/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E5%AE%89%E5%8D%93/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>异构</title>
+      <link>https://example.com/post/%E5%BC%82%E6%9E%84/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E5%BC%82%E6%9E%84/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>归一化</title>
+      <link>https://example.com/post/%E5%BD%92%E4%B8%80%E5%8C%96/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E5%BD%92%E4%B8%80%E5%8C%96/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>拓扑</title>
+      <link>https://example.com/post/%E6%8B%93%E6%89%91/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E6%8B%93%E6%89%91/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>条件transformer</title>
+      <link>https://example.com/post/%E6%9D%A1%E4%BB%B6transformer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E6%9D%A1%E4%BB%B6transformer/</guid>
+      <description>&lt;p&gt;什么是条件transformer？它能做到什么？什么情况下使用它？怎么样能看出来这是一个条件transformer？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 整理文本&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 有哪些经典的实际上就是条件transformer&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 和最基本的transformer对比&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>波纹呼吸（笑）</title>
+      <link>https://example.com/post/%E6%B3%A2%E7%BA%B9%E5%91%BC%E5%90%B8%E7%AC%91/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E6%B3%A2%E7%BA%B9%E5%91%BC%E5%90%B8%E7%AC%91/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>电视个性化</title>
+      <link>https://example.com/post/%E7%94%B5%E8%A7%86%E4%B8%AA%E6%80%A7%E5%8C%96/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E7%94%B5%E8%A7%86%E4%B8%AA%E6%80%A7%E5%8C%96/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>相机标定</title>
+      <link>https://example.com/post/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>租房技巧</title>
+      <link>https://example.com/post/%E7%A7%9F%E6%88%BF%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E7%A7%9F%E6%88%BF%E6%8A%80%E5%B7%A7/</guid>
+      <description>&lt;p&gt;从各种地方扒拉过来的信息&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>端到端</title>
+      <link>https://example.com/post/%E7%AB%AF%E5%88%B0%E7%AB%AF/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E7%AB%AF%E5%88%B0%E7%AB%AF/</guid>
+      <description>&lt;p&gt;smolvla:SmolVLA is trained end-to-end on fewer than 30k episodes&lt;/p&gt;
+&lt;p&gt;“端到端训练”（End-to-End Training）是机器学习和深度学习中一种训练方式，它的核心思想是：将整个任务建模为一个统一的系统，并直接从输入到输出进行优化。整个模型从头到尾一次性训练，而不是将任务拆解成多个独立的子模块分别训练。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>能否自愈</title>
+      <link>https://example.com/post/%E8%83%BD%E5%90%A6%E8%87%AA%E6%84%88/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E8%83%BD%E5%90%A6%E8%87%AA%E6%84%88/</guid>
+      <description>&lt;p&gt;生病自理简述&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>被玩坏的魔法少年题材</title>
+      <link>https://example.com/post/%E8%A2%AB%E7%8E%A9%E5%9D%8F%E7%9A%84%E9%AD%94%E6%B3%95%E5%B0%91%E5%B9%B4%E9%A2%98%E6%9D%90/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E8%A2%AB%E7%8E%A9%E5%9D%8F%E7%9A%84%E9%AD%94%E6%B3%95%E5%B0%91%E5%B9%B4%E9%A2%98%E6%9D%90/</guid>
+      <description>&lt;p&gt;记录看过的魔法少年题材的作品&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>西班牙语</title>
+      <link>https://example.com/post/%E8%A5%BF%E7%8F%AD%E7%89%99%E8%AF%AD/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E8%A5%BF%E7%8F%AD%E7%89%99%E8%AF%AD/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>视角重建</title>
+      <link>https://example.com/post/%E8%A7%86%E8%A7%92%E9%87%8D%E5%BB%BA/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E8%A7%86%E8%A7%92%E9%87%8D%E5%BB%BA/</guid>
+      <description>&lt;p&gt;试错过程&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>解读smolvla代码</title>
+      <link>https://example.com/post/%E8%A7%A3%E8%AF%BBsmolvla%E4%BB%A3%E7%A0%81/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E8%A7%A3%E8%AF%BBsmolvla%E4%BB%A3%E7%A0%81/</guid>
+      <description>&lt;p&gt;一个比较小的模型smovla，但里面涉及的还挺多，当扫盲&lt;/p&gt;
+&lt;p&gt;看代码不能看单词的含义而是看整体结构orz&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>轻量化vla</title>
+      <link>https://example.com/post/%E8%BD%BB%E9%87%8F%E5%8C%96vla/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E8%BD%BB%E9%87%8F%E5%8C%96vla/</guid>
+      <description>&lt;p&gt;感觉这方面论文挺少的&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>运动类动画点评</title>
+      <link>https://example.com/post/%E8%BF%90%E5%8A%A8%E7%B1%BB%E5%8A%A8%E7%94%BB%E7%82%B9%E8%AF%84/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E8%BF%90%E5%8A%A8%E7%B1%BB%E5%8A%A8%E7%94%BB%E7%82%B9%E8%AF%84/</guid>
+      <description>&lt;p&gt;给之前看过的动画做个总结&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>逆运动学</title>
+      <link>https://example.com/post/%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>骨盆前倾</title>
+      <link>https://example.com/post/%E9%AA%A8%E7%9B%86%E5%89%8D%E5%80%BE/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E9%AA%A8%E7%9B%86%E5%89%8D%E5%80%BE/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>魔法世界观下生产力会发展吗</title>
+      <link>https://example.com/post/%E9%AD%94%E6%B3%95%E4%B8%96%E7%95%8C%E8%A7%82%E4%B8%8B%E7%94%9F%E4%BA%A7%E5%8A%9B%E4%BC%9A%E5%8F%91%E5%B1%95%E5%90%97/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E9%AD%94%E6%B3%95%E4%B8%96%E7%95%8C%E8%A7%82%E4%B8%8B%E7%94%9F%E4%BA%A7%E5%8A%9B%E4%BC%9A%E5%8F%91%E5%B1%95%E5%90%97/</guid>
+      <description>&lt;p&gt;看异世界类型的动画看多了脑子里冒出来的诡异想法，异世界为什么大多都是封建君主专制？按道理说生产力足够了+思想变革会促进革命拜托封建专制那动画里面的魔法世界观为什么没有。说道理，革命的必要条件是什么，既然有魔法世界观了生产力会得到相应的发展吗&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

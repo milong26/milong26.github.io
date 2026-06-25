@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>placo与mplib | 我的博客</title>
+<meta name="keywords" content="">
+<meta name="description" content="运动学相关内容，穷寇莫追，不要了解太多，只需要了解：
+
+ placo和mplib分别是什么层级的东西？
+ lerobot为什么选择placo
+ 在计算逆解方面，placo比mplib差吗？
+ 如果要换mplib，代码要改多少
+">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
+<link rel="canonical" href="https://example.com/post/placo%E4%B8%8Emplib/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://example.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://example.com/post/placo%E4%B8%8Emplib/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://example.com/post/placo%E4%B8%8Emplib/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="placo与mplib">
+  <meta property="og:description" content="运动学相关内容，穷寇莫追，不要了解太多，只需要了解：
+placo和mplib分别是什么层级的东西？ lerobot为什么选择placo 在计算逆解方面，placo比mplib差吗？ 如果要换mplib，代码要改多少">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="placo与mplib">
+  <meta name="twitter:description" content="运动学相关内容，穷寇莫追，不要了解太多，只需要了解：
+placo和mplib分别是什么层级的东西？ lerobot为什么选择placo 在计算逆解方面，placo比mplib差吗？ 如果要换mplib，代码要改多少">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://example.com/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "placo与mplib",
+      "item": "https://example.com/post/placo%E4%B8%8Emplib/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "placo与mplib",
+  "name": "placo与mplib",
+  "description": "运动学相关内容，穷寇莫追，不要了解太多，只需要了解：\nplaco和mplib分别是什么层级的东西？ lerobot为什么选择placo 在计算逆解方面，placo比mplib差吗？ 如果要换mplib，代码要改多少 ",
+  "keywords": [
+    
+  ],
+  "articleBody": "运动学相关内容，穷寇莫追，不要了解太多，只需要了解：\nplaco和mplib分别是什么层级的东西？ lerobot为什么选择placo 在计算逆解方面，placo比mplib差吗？ 如果要换mplib，代码要改多少 placo文档 mplib文档\n特性 Placo MPlib 主要功能 机器人任务空间逆运动学 (IK) / 逆动力学 (ID) 及运动规划接口 轻量级运动规划库，包含 IK 支持，但更偏向路径规划和碰撞避让 依赖库 Pinocchio（高性能动力学）、eiquadprog（QP 求解器） Pinocchio 或 KDL（动力学）、OMPL（运动规划）、FCL/CCD（碰撞检测） 层级关系 高级 IK/ID API（封装了 Pinocchio + QP 优化） 高级运动规划 API，内部可调用 Pinocchio/KDL 做 IK，主要针对路径规划 系统依赖 独立 C++ 库 + Python 绑定，可嵌入控制系统 C++ 核心库 (libmp.a) + Python 绑定 (pymp.so)，可在模拟器（Sapien/MuJoCo）中直接使用 典型用途 需要任务空间约束 IK/ID、整机控制、MPC、强化学习 快速实现机器人路径规划、抓取、避障、可在 Python 中实验 Placo 更偏向 控制层/IK求解器层，MPlib 更偏向 运动规划/路径规划层。 在 IK 方面，MPlib 会调用 Pinocchio/KDL，但没有像 Placo 那样提供丰富的任务空间约束和正则化选项。 在ik方面：\n维度 Placo MPlib IK 精度与约束 高，可加权约束和正则化 中，主要依赖底层 Pinocchio/KDL 奇异点处理 有办法通过正则化/优化缓解 无内置处理，需要自己实现 关节翻转 / 临界值 可以通过任务空间约束和正则化缓解 可能出现翻转，需要路径规划或后处理 性能 高性能，专为 IK/ID 设计 高性能，但 IK 是规划的一部分，功能不如 Placo 完整 所以最后还是用placo，参考它的文档写约束。还要找到lerobot里面是怎么写的\n找到lerobot里面placo相关的代码 src/lerobot/model/kinematics.py 这个文件里面的 其实就是参考https://placo.readthedocs.io/en/latest/kinematics/getting_started.html 这个教程来的 但是有个问题，placo默认的orientation 权重是1但是lerobot代码里面写的是0.01，不知道要不要改\norientation_weight: float = 0.01 代码里面完全没有用约束什么的，那它默认解算代码有没有什么约束？好像也没有，那它用什么方法解算的？好像不重要，先不管。默认L2约束？\n我的需求是：主臂给连续的action，从臂不会极大翻转\n需要关注的文档：placo文档如过江之鲫我只取一瓢\nRegularization：缺少正则化导致 IK 解跳到另一个等效姿态分支。 怎么加？solver 有哪些正则化？优点缺点？默认的是哪一个？ 正则化在sovler计算ik的时候起到一个什么作用？本来ik是一个欠约束问题，Regularization 的数学作用是向求解器加了一个轻微的惩罚项，对关节变化量 $\\Delta q$ 做轻微惩罚。默认使用的是L2正则化，惩罚系数非常小，求解器的主要目标仍然是 末端任务精度 名称 效果（作用） 优点 缺点 典型使用场景 默认 L2 正则化（Always on） 最小化 ‖Δq‖²，使解尽量接近当前关节配置 免费、自动、有助避免跳变 默认权重很小，无法避免严重翻转 所有 IK 求解中自动存在，但不能单独依赖 Custom L2 RegularizationTask 强化“不要远离上一姿态”，对所有关节均匀抑制大变化 最有效的防跳变方式；越大越稳定 太大会导致目标追踪滞后 防止 IK 解翻到另外一个分支） Posture Regularization (JointsTask) 让关节更靠近“某个姿态”（通常是零位或中性位） 防止解漂到奇怪的姿态区域 如果参考姿态不合理，可能引导到错误区域 解决冗余手臂漂移、靠近某个全局参考姿态 Kinetic Energy Regularization 最小化(1/2) q̇ᵀ M q̇，抑制高加速度 控制动态、抑制抖动、避免瞬间翻转 依赖 dt，对静态 IK 效果小 时间连续轨迹中保持平滑、避免短时间抖动 Manipulability Regularization 增大可操作度，避免进入奇异点 优化姿态质量、降低奇异点不稳定性 不能单独解决翻转，只改善奇异点附近行为 接近奇异点时增强稳定性（但不会防跳变） 选择L2了先，不知道要做到什么程度 Tasks and constraints 里面Scaled / Soft / Hard priorities暂时不重要，因为默认设置的还是soft scaled的方向一致是什么效果？要不要试试？ Manipulability regularization（可操作度正则化）避免进入奇异点姿势 Joint limits / velocity limits 启用 velocity limit（抑制瞬时跳到另一个解） ok确定了接下来要做实验验证3个，用teleoperate，要比较采集的精度和是否翻转\n启用velocity limit的效果对比 选择哪个正则化方案 task用哪种约束，scaled还是soft ",
+  "wordCount" : "200",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/post/placo%E4%B8%8Emplib/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://example.com/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      placo与mplib
+    </h1>
+    <div class="post-meta">
+
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>运动学相关内容，穷寇莫追，不要了解太多，只需要了解：</p>
+<ul>
+<li><input disabled="" type="checkbox"> placo和mplib分别是什么层级的东西？</li>
+<li><input disabled="" type="checkbox"> lerobot为什么选择placo</li>
+<li><input disabled="" type="checkbox"> 在计算逆解方面，placo比mplib差吗？</li>
+<li><input disabled="" type="checkbox"> 如果要换mplib，代码要改多少</li>
+</ul>
+<p><a href="https://placo.readthedocs.io/en/latest/">placo文档</a>
+<a href="https://motion-planning-lib.readthedocs.io/stable/">mplib文档</a></p>
+<table>
+  <thead>
+      <tr>
+          <th>特性</th>
+          <th><strong>Placo</strong></th>
+          <th><strong>MPlib</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>主要功能</strong></td>
+          <td>机器人任务空间逆运动学 (IK) / 逆动力学 (ID) 及运动规划接口</td>
+          <td>轻量级运动规划库，包含 IK 支持，但更偏向路径规划和碰撞避让</td>
+      </tr>
+      <tr>
+          <td><strong>依赖库</strong></td>
+          <td>Pinocchio（高性能动力学）、eiquadprog（QP 求解器）</td>
+          <td>Pinocchio 或 KDL（动力学）、OMPL（运动规划）、FCL/CCD（碰撞检测）</td>
+      </tr>
+      <tr>
+          <td><strong>层级关系</strong></td>
+          <td>高级 IK/ID API（封装了 Pinocchio + QP 优化）</td>
+          <td>高级运动规划 API，内部可调用 Pinocchio/KDL 做 IK，主要针对路径规划</td>
+      </tr>
+      <tr>
+          <td><strong>系统依赖</strong></td>
+          <td>独立 C++ 库 + Python 绑定，可嵌入控制系统</td>
+          <td>C++ 核心库 (libmp.a) + Python 绑定 (pymp.so)，可在模拟器（Sapien/MuJoCo）中直接使用</td>
+      </tr>
+      <tr>
+          <td><strong>典型用途</strong></td>
+          <td>需要任务空间约束 IK/ID、整机控制、MPC、强化学习</td>
+          <td>快速实现机器人路径规划、抓取、避障、可在 Python 中实验</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>Placo 更偏向 <strong>控制层/IK求解器层</strong>，MPlib 更偏向 <strong>运动规划/路径规划层</strong>。</li>
+<li>在 IK 方面，MPlib 会调用 Pinocchio/KDL，但没有像 Placo 那样提供丰富的任务空间约束和正则化选项。</li>
+</ul>
+<p>在ik方面：</p>
+<table>
+  <thead>
+      <tr>
+          <th>维度</th>
+          <th>Placo</th>
+          <th>MPlib</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>IK 精度与约束</td>
+          <td>高，可加权约束和正则化</td>
+          <td>中，主要依赖底层 Pinocchio/KDL</td>
+      </tr>
+      <tr>
+          <td>奇异点处理</td>
+          <td>有办法通过正则化/优化缓解</td>
+          <td>无内置处理，需要自己实现</td>
+      </tr>
+      <tr>
+          <td>关节翻转 / 临界值</td>
+          <td>可以通过任务空间约束和正则化缓解</td>
+          <td>可能出现翻转，需要路径规划或后处理</td>
+      </tr>
+      <tr>
+          <td>性能</td>
+          <td>高性能，专为 IK/ID 设计</td>
+          <td>高性能，但 IK 是规划的一部分，功能不如 Placo 完整</td>
+      </tr>
+  </tbody>
+</table>
+<p>所以最后还是用placo，参考它的文档写约束。还要找到lerobot里面是怎么写的</p>
+<ol>
+<li>找到lerobot里面placo相关的代码</li>
+</ol>
+<p>src/lerobot/model/kinematics.py 这个文件里面的
+其实就是参考https://placo.readthedocs.io/en/latest/kinematics/getting_started.html
+这个教程来的
+但是有个问题，placo默认的orientation 权重是1但是lerobot代码里面写的是0.01，不知道要不要改</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>orientation_weight: float <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.01</span>
+</span></span></code></pre></div><p>代码里面完全没有用约束什么的，那它默认解算代码有没有什么约束？好像也没有，那它用什么方法解算的？好像不重要，先不管。默认L2约束？</p>
+<p>我的需求是：主臂给连续的action，从臂不会极大翻转</p>
+<p>需要关注的文档：placo文档如过江之鲫我只取一瓢</p>
+<ol>
+<li>Regularization：<strong>缺少正则化导致 IK 解跳到另一个等效姿态分支</strong>。
+<ol>
+<li>怎么加？solver</li>
+<li>有哪些正则化？优点缺点？默认的是哪一个？</li>
+<li>正则化在sovler计算ik的时候起到一个什么作用？本来ik是一个欠约束问题，Regularization 的数学作用是向求解器加了一个轻微的惩罚项，对关节变化量 $\Delta q$ 做轻微惩罚。默认使用的是L2正则化，惩罚系数非常小，求解器的主要目标仍然是 <strong>末端任务精度</strong></li>
+</ol>
+</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>名称</th>
+          <th>效果（作用）</th>
+          <th>优点</th>
+          <th>缺点</th>
+          <th>典型使用场景</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>默认 L2 正则化</strong>（Always on）</td>
+          <td>最小化 ‖Δq‖²，使解尽量接近当前关节配置</td>
+          <td>免费、自动、有助避免跳变</td>
+          <td>默认权重很小，无法避免严重翻转</td>
+          <td>所有 IK 求解中自动存在，但不能单独依赖</td>
+      </tr>
+      <tr>
+          <td><strong>Custom L2 RegularizationTask</strong></td>
+          <td>强化“不要远离上一姿态”，对所有关节均匀抑制大变化</td>
+          <td>最有效的防跳变方式；越大越稳定</td>
+          <td>太大会导致目标追踪滞后</td>
+          <td><strong>防止 IK 解翻到另外一个分支）</strong></td>
+      </tr>
+      <tr>
+          <td><strong>Posture Regularization (JointsTask)</strong></td>
+          <td>让关节更靠近“某个姿态”（通常是零位或中性位）</td>
+          <td>防止解漂到奇怪的姿态区域</td>
+          <td>如果参考姿态不合理，可能引导到错误区域</td>
+          <td>解决冗余手臂漂移、靠近某个全局参考姿态</td>
+      </tr>
+      <tr>
+          <td><strong>Kinetic Energy Regularization</strong></td>
+          <td>最小化(1/2) q̇ᵀ M q̇，抑制高加速度</td>
+          <td>控制动态、抑制抖动、避免瞬间翻转</td>
+          <td>依赖 dt，对静态 IK 效果小</td>
+          <td>时间连续轨迹中保持平滑、避免短时间抖动</td>
+      </tr>
+      <tr>
+          <td><strong>Manipulability Regularization</strong></td>
+          <td>增大可操作度，避免进入奇异点</td>
+          <td>优化姿态质量、降低奇异点不稳定性</td>
+          <td>不能单独解决翻转，只改善奇异点附近行为</td>
+          <td><strong>接近奇异点时增强稳定性</strong>（但不会防跳变）</td>
+      </tr>
+      <tr>
+          <td>选择L2了先，不知道要做到什么程度</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<ol start="2">
+<li>Tasks and constraints 里面Scaled / Soft / Hard priorities暂时不重要，因为默认设置的还是soft
+<ol>
+<li>scaled的方向一致是什么效果？要不要试试？</li>
+</ol>
+</li>
+<li>Manipulability regularization（可操作度正则化）避免进入奇异点姿势</li>
+<li>Joint limits / velocity limits
+<ol>
+<li><strong>启用 velocity limit</strong>（抑制瞬时跳到另一个解）</li>
+</ol>
+</li>
+</ol>
+<p>ok确定了接下来要做实验验证3个，用teleoperate，要比较采集的精度和是否翻转</p>
+<ol>
+<li>启用velocity limit的效果对比</li>
+<li>选择哪个正则化方案</li>
+<li>task用哪种约束，scaled还是soft</li>
+</ol>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

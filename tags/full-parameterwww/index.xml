@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Full Parameterwww on 我的博客</title>
+    <link>https://example.com/tags/full-parameterwww/</link>
+    <description>Recent content in Full Parameterwww on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 24 Nov 2023 17:10:38 +0000</lastBuildDate>
+    <atom:link href="https://example.com/tags/full-parameterwww/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>FULL PARAMETER FINE-TUNING FOR LARGE LANGUAGE MODELS WITH LIMITED RESOURCES</title>
+      <link>https://example.com/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/</link>
+      <pubDate>Fri, 24 Nov 2023 17:10:38 +0000</pubDate>
+      <guid>https://example.com/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/</guid>
+      <description>&lt;p&gt;百篇paper计划(1/100)，推荐阅读的，没有选择趋向。内容是：用有限的资源（主要是内存）进行全参数大模型微调，研究重点集中在微调部分，做的是内存优化的工作。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;论文标题：Full Parameter Fine-tuning for Large Language Models with Limited Resources&lt;/li&gt;
+&lt;li&gt;arxiv地址：&lt;a href=&#34;https://arxiv.org/abs/2306.09782&#34;&gt;链接&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;code：&lt;a href=&#34;https://github.com/OpenLMLab/LOMO&#34;&gt;github&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;abstract&#34;&gt;abstract&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;背景：LLMs给NLP问题带来了革命性变化，but需要大量GPU资源&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;已有：高效参数微调（PEFT），没有彻底解决
+&lt;a href=&#34;%E9%AB%98%E6%95%88%E5%8F%82%E6%95%B0%E5%BE%AE%E8%B0%83.md&#34;&gt;PEFT参考文档&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;parameter-efficient fine-tuning vs full-parameter fine-tune&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创新：提出了新的优化器 LOw-Memory-Optimization
+内容：在一个步骤融合了梯度计算和参数更新&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;怎么融合(fuse)？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;效果：和标准方法（DeepSpeed解决方案）相比，我们将内存使用量减少到10.8%。
+因此，我们的方法可以在一台拥有8×RTX 3090的机器上对65B模型进行全参数微调，每台机器都有24GB内存&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;introduction&#34;&gt;introduction&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;感觉就是把摘要扩写了一遍&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;背景：LLMs 厉害，但是要钱。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;目前：有效参数微调方法
+比如：LoRA,Prefix-tuning
+但是：没有全参数的&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;解决问题：我们要找个办法实现全参数微调&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;干了啥&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;分析LLMs里面内存使用的四个主要方面：
+激活，优化器状态，梯度张量和参数&lt;/li&gt;
+&lt;li&gt;从三个方面优化了训练过程：
+&lt;ul&gt;
+&lt;li&gt;SGD-优化器：由于SGD不存储任何中间状态，可以删除整个优化器状态部分&lt;a href=&#34;SGD.md&#34;&gt;SGD是什么&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;LOMO把梯度tensor的内存使用降到了O(1)&lt;/li&gt;
+&lt;li&gt;为了稳定使用混合精度训练：集成梯度归一化和损失缩放，并将某些计算过渡到全精度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;结果
+内存使用量等于参数使用量加上激活量和最大梯度张量。&lt;/p&gt;
+&lt;p&gt;分析了：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;内存和吞吐量&lt;/li&gt;
+&lt;li&gt;下游表现&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;贡献&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;SGD&lt;/li&gt;
+&lt;li&gt;LOMO&lt;/li&gt;
+&lt;li&gt;验证&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;related-work&#34;&gt;related work&lt;/h1&gt;
+&lt;p&gt;都是节省内存的技术&lt;/p&gt;
+&lt;h2 id=&#34;activation-checkpointing&#34;&gt;Activation Checkpointing&lt;/h2&gt;
+&lt;p&gt;计算图中策略性地选择的检查点节点的激活变量在正向阶段后保留在内存中，而其余节点的激活变量在梯度计算时最多重新计算一次。激活内存可以降低原始内存使用量的平方根，代价是需要多一次正向传递。
+在前向传播过程中，有选择性的丢弃一些产生的中间激活值，当反向传播需要使用这些激活值时，再依据上一个保存的激活值来计算出这些需要的激活值来帮助完成反向传播。这样一来，便可以大大减少训练过程中所需要的存储空间。&lt;/p&gt;
+&lt;h2 id=&#34;mixed-precision-training&#34;&gt;Mixed-Precision Training&lt;/h2&gt;
+&lt;p&gt;混合精度，32位浮点数和16位浮点数混合使用&lt;/p&gt;
+&lt;h2 id=&#34;heterogeneous-training-system&#34;&gt;Heterogeneous Training System&lt;/h2&gt;
+&lt;p&gt;通过利用异构内存（如CPU和NVMe内存）来减少GPU内存消耗&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;但是怎么做？？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;method&#34;&gt;method&lt;/h1&gt;
+&lt;h2 id=&#34;优化器&#34;&gt;优化器&lt;/h2&gt;
+&lt;p&gt;adam和SGD比起来哪里不好了！
+参考https://blog.csdn.net/S20144144/article/details/103417502&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

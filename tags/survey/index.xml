@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Survey on 我的博客</title>
+    <link>https://example.com/tags/survey/</link>
+    <description>Recent content in Survey on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 28 Oct 2025 15:52:55 +0000</lastBuildDate>
+    <atom:link href="https://example.com/tags/survey/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pure Vision Language Action (VLA) Models:  A Comprehensive Survey</title>
+      <link>https://example.com/post/pure-vision-language-action-vla-models-a-comprehensive-surve/</link>
+      <pubDate>Tue, 28 Oct 2025 15:52:55 +0000</pubDate>
+      <guid>https://example.com/post/pure-vision-language-action-vla-models-a-comprehensive-surve/</guid>
+      <description>&lt;p&gt;比较新的综述，2025年9月25日发的&lt;/p&gt;
+&lt;p&gt;写了不整理相当于没写。&lt;/p&gt;
+&lt;p&gt;这篇文章里面好多分类错误的东西:P，别全信，可以提供思路&lt;/p&gt;
+&lt;p&gt;ok没读完也不许再看了，现在没空&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Generative Artificial Intelligence in Robotic Manipulation: A Survey</title>
+      <link>https://example.com/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</link>
+      <pubDate>Thu, 13 Mar 2025 15:59:45 +0000</pubDate>
+      <guid>https://example.com/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</guid>
+      <description>&lt;p&gt;(16/100)&lt;/p&gt;
+&lt;p&gt;what i want to get&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;了解其所描述的通用机器人操作是否和我想的一样：qpos of robot&lt;/li&gt;
+&lt;li&gt;找里面有没有我想要的数据集：text-guided robotic video task&lt;/li&gt;
+&lt;li&gt;只要看dexterous部分&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    <item>
+      <title>Vision-Language-Action Models for Robotics: A Review Towards Real-World Applications</title>
+      <link>https://example.com/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/</guid>
+      <description>&lt;p&gt;一篇综述
+2025-11-06 16:15:25 开始看&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 看完 (@2026-04-06 02:33)
+希望从这篇综述中得到：一个综述应该从什么视角看vla，以及重点关注vla的泛化性和精确性的trade-off。vla的目标是什么？轻量？泛化？精确？还是什么？
+Q:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;一个综述应该从怎样的视角？&lt;/li&gt;
+&lt;li&gt;vla的目标、定义、来源、和别的模型的区分&lt;/li&gt;
+&lt;li&gt;技术层面的问题：核心架构、挑战、风险、目前的算法怎样应对&lt;/li&gt;
+&lt;li&gt;实际应用与如何评估&lt;/li&gt;
+&lt;li&gt;如果我自己来，能搞出什么东西？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;2025-11-06 17:16:47 确定好问题，可以开始看了&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>VLA们</title>
+      <link>https://example.com/post/vla%E4%BB%AC/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/vla%E4%BB%AC/</guid>
+      <description>&lt;p&gt;还是很混沌，多看论文吧&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>vla综述们</title>
+      <link>https://example.com/post/vla%E7%BB%BC%E8%BF%B0%E4%BB%AC/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/vla%E7%BB%BC%E8%BF%B0%E4%BB%AC/</guid>
+      <description>&lt;p&gt;若干综述的集合，看就完事&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

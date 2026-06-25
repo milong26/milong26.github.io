@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Consistency Llm on 我的博客</title>
+    <link>https://example.com/tags/consistency-llm/</link>
+    <description>Recent content in Consistency Llm on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 22 Oct 2024 15:59:04 +0000</lastBuildDate>
+    <atom:link href="https://example.com/tags/consistency-llm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CLLMs: Consistency Large Language Models</title>
+      <link>https://example.com/post/cllms-consistency-large-language-models/</link>
+      <pubDate>Tue, 22 Oct 2024 15:59:04 +0000</pubDate>
+      <guid>https://example.com/post/cllms-consistency-large-language-models/</guid>
+      <description>&lt;p&gt;百篇paper计划(8/100)，关于持续性，不知道对我有没有启发，先看看吧。&lt;/p&gt;
+&lt;p&gt;这一篇的实验要求比较高，不精读了，看思想。它有个前提是jacobi方法，没这个基础的话看不太懂。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

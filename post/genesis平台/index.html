@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>genesis平台 | 我的博客</title>
+<meta name="keywords" content="robotic">
+<meta name="description" content="一个比robosuite更简洁的物理平台，专为通用机器人/人工智能/物理AI应用而设计。">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
+<link rel="canonical" href="https://example.com/post/genesis%E5%B9%B3%E5%8F%B0/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://example.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://example.com/post/genesis%E5%B9%B3%E5%8F%B0/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://example.com/post/genesis%E5%B9%B3%E5%8F%B0/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="genesis平台">
+  <meta property="og:description" content="一个比robosuite更简洁的物理平台，专为通用机器人/人工智能/物理AI应用而设计。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-12-19T14:51:53+00:00">
+    <meta property="article:modified_time" content="2024-12-19T14:51:53+00:00">
+    <meta property="article:tag" content="Robotic">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="genesis平台">
+  <meta name="twitter:description" content="一个比robosuite更简洁的物理平台，专为通用机器人/人工智能/物理AI应用而设计。">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://example.com/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "genesis平台",
+      "item": "https://example.com/post/genesis%E5%B9%B3%E5%8F%B0/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "genesis平台",
+  "name": "genesis平台",
+  "description": "一个比robosuite更简洁的物理平台，专为通用机器人/人工智能/物理AI应用而设计。\n",
+  "keywords": [
+    "robotic"
+  ],
+  "articleBody": "一个比robosuite更简洁的物理平台，专为通用机器人/人工智能/物理AI应用而设计。\n教程\ninstall 安装相关软件 anaconda3 git 需求： Python: 3.9+ 所以我conda create -n genesis python==3.10 OS: Linux (recommended) / MacOS / Windows 但windows不太方便。 ~~pip install genesis-world ~~ 因为这个项目还在即时更新，建议用github clone方式安装 git clone https://github.com/Genesis-Embodied-AI/Genesis.git 进入Genesis目录，pip install -e . export PYTHONPATH=~/work/Genesis 这个是修改python路径的，不是永久的。 如果需要经常使用的话 vim ~/.bashrc 加入export PYTHONPATH=~/Genesis:$PYTHONPATH保存 在work里创建一个文件夹写代码。可以调用Genesis下面的genesis 检查cudanvidia-smi 安装pytorch 我检查到cuda版本是11.6，就下载的pip3 install torch torchvision torchaudio –index-url https://download.pytorch.org/whl/cu118。可能以后要改 以上就是最基础的安装，还有一些额外的根据需求安装即可 更新：因为genesis还在更新中，偶尔需要更新 python -m pip install --upgrade pip pip install --upgrade 包名称 在Genesis里git pull 设置显示器 https://blog.csdn.net/Stone_hello/article/details/120041495 https://www.cnblogs.com/SkyXZ/p/18687026 基础使用 开始 import genesis as gs # 初始化 gs.init( seed = None, precision = '32', debug = False, eps = 1e-12, logging_level = 'warning', # logging_level = None, backend = gs.cpu, theme = 'light', logger_verbose_time = False ) # 场景包装一个模拟器对象（处理所有底层物理解算器）和一个可视化工具对象 scene = gs.Scene( sim_options=gs.options.SimOptions( dt=0.01, gravity=(0, 0, 0.0), ), show_viewer=True, # camera_fov viewer_options = gs.options.ViewerOptions( res = (1280, 960), camera_pos = (3.5, 0.0, 2.5), camera_lookat = (0.0, 0.0, 0.5), camera_fov = 40, max_FPS = 60, ), vis_options = gs.options.VisOptions( show_world_frame = True, # visualize the coordinate frame of `world` at its origin world_frame_size = 1.0, # length of the world frame in meter show_link_frame = False, # do not visualize coordinate frames of entity links show_cameras = False, # do not visualize mesh and frustum of the cameras added plane_reflection = True, # turn on plane reflection ambient_light = (0.1, 0.1, 0.1), # ambient light setting ), renderer = gs.renderers.Rasterizer(), # using rasterizer for camera rendering ) # load object # 在创建变形时，您还可以指定其位置、方向、大小等。对于方向，变形接受eXtreme（scipy外部x-y-z约定）或quat（w-x-y-z约定）。 plane = scene.add_entity( gs.morphs.Plane() ) franka = scene.add_entity( gs.morphs.MJCF( file = 'xml/franka_emika_panda/panda.xml', pos = (0, 0, 0), euler = (0, 0, 45), # we follow scipy's extrinsic x-y-z rotation convention, in degrees, # # quat = (1.0, 0.0, 0.0, 0.0), # we use w-x-y-z convention for quaternions, scale = 1, ), ) scene.build() # 运行多久全看这个range？没有自己退出的功能？ for i in range(100000): scene.step() 分析\n导入genesis并初始化 创建场景Scene：一个场景包含一个simulator对象，处理所有底层物理求解器，以及一个visualizer对象，管理与可视化相关的概念。创建场景时，可以配置各种物理求解器参数。 将对象加载到场景中，所有对象和机器人都表示为Entity，Genesis设计为完全面向对象：用scene.add_entity 构建场景并开始模拟：scene.build() 和 step 可视化 设置相机参数\nimport genesis as gs gs.init(backend=gs.cpu) scene = gs.Scene( show_viewer = True, viewer_options = gs.options.ViewerOptions( res = (1280, 960), camera_pos = (3.5, 0.0, 2.5), camera_lookat = (0.0, 0.0, 0.5), camera_fov = 40, max_FPS = 60, ), vis_options = gs.options.VisOptions( show_world_frame = True, world_frame_size = 1.0, show_link_frame = False, show_cameras = False, plane_reflection = True, ambient_light = (0.1, 0.1, 0.1), ), renderer=gs.renderers.Rasterizer(), ) plane = scene.add_entity( gs.morphs.Plane(), ) franka = scene.add_entity( gs.morphs.MJCF(file='xml/franka_emika_panda/panda.xml'), ) cam = scene.add_camera( res = (640, 480), pos = (3.5, 0.0, 2.5), lookat = (0, 0, 0.5), fov = 30, GUI = False, ) scene.build() # 渲染rgb、深度、分割掩码和法线图 # rgb, depth, segmentation, normal = cam.render(rgb=True, depth=True, segmentation=True, normal=True) cam.start_recording() import numpy as np for i in range(120): scene.step() cam.set_pose( pos = (3.0 * np.sin(i / 60), 3.0 * np.cos(i / 60), 2.5), lookat = (0, 0, 0.5), ) cam.render() cam.stop_recording(save_to_filename='video.mp4', fps=60) 控制robot import numpy as np import genesis as gs ########################## 初始化 ########################## gs.init(backend=gs.cpu) ########################## 创建场景 ########################## scene = gs.Scene( viewer_options = gs.options.ViewerOptions( camera_pos = (0, -3.5, 2.5), camera_lookat = (0.0, 0.0, 0.5), camera_fov = 30, res = (960, 640), max_FPS = 60, ), sim_options = gs.options.SimOptions( dt = 0.01, ), show_viewer = True, ) ########################## 实体 ########################## plane = scene.add_entity( gs.morphs.Plane(), ) franka = scene.add_entity( gs.morphs.MJCF( file = 'xml/franka_emika_panda/panda.xml', ), ) ########################## 构建 ########################## scene.build() jnt_names = [ 'joint1', 'joint2', 'joint3', 'joint4', 'joint5', 'joint6', 'joint7', 'finger_joint1', 'finger_joint2', ] dofs_idx = [franka.get_joint(name).dof_idx_local for name in jnt_names] ############ 可选：设置控制增益 ############ # 设置位置增益 franka.set_dofs_kp( kp = np.array([4500, 4500, 3500, 3500, 2000, 2000, 2000, 100, 100]), dofs_idx_local = dofs_idx, ) # 设置速度增益 franka.set_dofs_kv( kv = np.array([450, 450, 350, 350, 200, 200, 200, 10, 10]), dofs_idx_local = dofs_idx, ) # 设置安全的力范围 franka.set_dofs_force_range( lower = np.array([-87, -87, -87, -87, -12, -12, -12, -100, -100]), upper = np.array([ 87, 87, 87, 87, 12, 12, 12, 100, 100]), dofs_idx_local = dofs_idx, ) # 硬重置 for i in range(150): if i \u003c 50: franka.set_dofs_position(np.array([1, 1, 0, 0, 0, 0, 0, 0.04, 0.04]), dofs_idx) elif i \u003c 100: franka.set_dofs_position(np.array([-1, 0.8, 1, -2, 1, 0.5, -0.5, 0.04, 0.04]), dofs_idx) else: franka.set_dofs_position(np.array([0, 0, 0, 0, 0, 0, 0, 0, 0]), dofs_idx) scene.step() # PD控制 for i in range(1250): if i == 0: franka.control_dofs_position( np.array([1, 1, 0, 0, 0, 0, 0, 0.04, 0.04]), dofs_idx, ) elif i == 250: franka.control_dofs_position( np.array([-1, 0.8, 1, -2, 1, 0.5, -0.5, 0.04, 0.04]), dofs_idx, ) elif i == 500: franka.control_dofs_position( np.array([0, 0, 0, 0, 0, 0, 0, 0, 0]), dofs_idx, ) elif i == 750: # 用速度控制第一个自由度，其余的用位置控制 franka.control_dofs_position( np.array([0, 0, 0, 0, 0, 0, 0, 0, 0])[1:], dofs_idx[1:], ) franka.control_dofs_velocity( np.array([1.0, 0, 0, 0, 0, 0, 0, 0, 0])[:1], dofs_idx[:1], ) elif i == 1000: franka.control_dofs_force( np.array([0, 0, 0, 0, 0, 0, 0, 0, 0]), dofs_idx, ) # 这是根据给定控制命令计算的控制力 # 如果使用力控制，它与给定的控制命令相同 print('控制力:', franka.get_dofs_control_force(dofs_idx)) # 这是自由度实际经历的力 print('内部力:', franka.get_dofs_force(dofs_idx)) scene.step() 从第0步到第500步，我们使用位置控制来控制所有自由度，并依次将机器人移动到3个目标位置。注意，对于control_*API，一旦设置了目标值，它将被内部存储，你不需要在接下来的步骤中重复发送命令，只要你的目标保持不变。 在第750步，我们展示了可以对不同的自由度进行混合控制：对于第一个自由度（自由度0），我们发送一个速度命令，而其余的仍然遵循位置控制命令。 在第1000步，我们切换到扭矩（力）控制，并向所有自由度发送一个零力命令，机器人将再次因重力而掉落到地面。 逆运动学与运动规划 如何在Genesis中使用逆运动学（IK）和运动规划，并执行一个简单的抓取任务。\npython\r\"\"\"\r创建一个场景，加载你喜欢的机械臂和一个小立方体，构建场景，然后设置控制增益：\r\"\"\"\rimport numpy as np\rimport genesis as gs\r########################## 初始化 ##########################\rgs.init(backend=gs.cpu,theme='light')\r########################## 创建场景 ##########################\rscene = gs.Scene(\rviewer_options = gs.options.ViewerOptions(\rcamera_pos = (3, -1, 1.5),\rcamera_lookat = (0.0, 0.0, 0.5),\rcamera_fov = 30,\rmax_FPS = 60,\r),\rsim_options = gs.options.SimOptions(\rdt = 0.01,\rsubsteps = 4, # 为了更稳定的抓取接触\r),\rshow_viewer = True,\r)\r########################## 实体 ##########################\rplane = scene.add_entity(\rgs.morphs.Plane(),\r)\rcube = scene.add_entity(\rgs.morphs.Box(\rsize = (0.04, 0.04, 0.04),\rpos = (0.65, 0.0, 0.02),\r)\r)\rfranka = scene.add_entity(\rgs.morphs.MJCF(file='xml/franka_emika_panda/panda.xml'),\r)\r########################## 构建 ##########################\rscene.build()\rmotors_dof = np.arange(7)\rfingers_dof = np.arange(7, 9)\r# 设置控制增益\r# 注意：以下值是为实现Franka最佳行为而调整的\r# 通常，每个新机器人都会有一组不同的参数。\r# 有时高质量的URDF或XML文件也会提供这些参数，并会被解析。\rfranka.set_dofs_kp(\rnp.array([4500, 4500, 3500, 3500, 2000, 2000, 2000, 100, 100]),\r)\rfranka.set_dofs_kv(\rnp.array([450, 450, 350, 350, 200, 200, 200, 10, 10]),\r)\rfranka.set_dofs_force_range(\rnp.array([-87, -87, -87, -87, -12, -12, -12, -100, -100]),\rnp.array([ 87, 87, 87, 87, 12, 12, 12, 100, 100]),\r)\r\"\"\"\r接下来，让我们将机器人的末端执行器移动到预抓取姿态。这分两步完成：\r使用IK求解给定目标末端执行器姿态的关节位置\r使用运动规划器到达目标位置\rGenesis中的运动规划使用OMPL库。你可以按照安装页面中的说明进行安装。\r在Genesis中，IK和运动规划非常简单：每个都可以通过一个函数调用完成。\r\"\"\"\r# 获取末端执行器链接\rend_effector = franka.get_link('hand')\r# 移动到预抓取姿态\rqpos = franka.inverse_kinematics(\rlink = end_effector,\rpos = np.array([0.65, 0.0, 0.25]),\rquat = np.array([0, 1, 0, 0]),\r)\r# 夹爪打开位置\rqpos[-2:] = 0.04\rpath = franka.plan_path(\rqpos_goal = qpos,\rnum_waypoints = 200, # 2秒持续时间\r)\r# 执行规划路径\rfor waypoint in path:\rfranka.control_dofs_position(waypoint)\rscene.step()\r# 让机器人到达最后一个路径点\rfor i in range(100):\rscene.step()\r\"\"\"\r如你所见，IK求解和运动规划都是机器人实体的两个集成方法。对于IK求解，你只需告诉机器人的IK求解器哪个链接是末端执行器，并指定目标姿态。然后，你告诉运动规划器目标关节位置（qpos），它会返回一个规划和平滑的路径点列表。注意，在我们执行路径后，我们让控制器再运行100步。这是因为我们使用的是PD控制器，目标位置和当前实际位置之间会有一个差距。因此，我们让控制器多运行一段时间，以便机器人能够到达规划轨迹的最后一个路径点。\r接下来，我们将机器人夹爪向下移动，抓取立方体并将其抬起：\r\"\"\"\r# 到达\rqpos = franka.inverse_kinematics(\rlink = end_effector,\rpos = np.array([0.65, 0.0, 0.135]),\rquat = np.array([0, 1, 0, 0]),\r)\rfranka.control_dofs_position(qpos[:-2], motors_dof)\rfor i in range(100):\rscene.step()\r# 抓取\rfranka.control_dofs_position(qpos[:-2], motors_dof)\rfranka.control_dofs_force(np.array([-1, -1]), fingers_dof)\rfor i in range(100):\rscene.step()\r# 抬起\rqpos = franka.inverse_kinematics(\rlink=end_effector,\rpos=np.array([0.65, 0.0, 0.3]),\rquat=np.array([0, 1, 0, 0]),\r)\rfranka.control_dofs_position(qpos[:-2], motors_dof)\rfor i in range(200):\rscene.step() 调试 pip install ipython 有bug,终止交易.等作者改\nentity 物体模型 内部模型 xml(MJCF) 根据代码\nfranka = scene.add_entity( gs.morphs.MJCF( file = 'xml/franka_emika_panda/panda.xml', pos = (0, 0, 0), euler = (0, 0, 45), # we follow scipy's extrinsic x-y-z rotation convention, in degrees, # # quat = (1.0, 0.0, 0.0, 0.0), # we use w-x-y-z convention for quaternions, scale = 1, ), ) 利用file参数从xml/导入，xml从当时安装genesis的env中找。以linux为例，这个项目的xml文件在work/Genesis/genesis/assets/xml里面\n除了franka_emika_panda，还有另外几个，而且panda也有好几个选项。从外部导入文件没有fixed，就设置重力为0，在Scene初始化的时候\nsim_options=gs.options.SimOptions( gravity=(0,0,0) ) franka_emika_panda 是MJCF格式的 hand.xml 就一个夹持头 panda_no_tendon.xml 没有腱，这是什么？ scene.xml 和之前的panda有区别吗 franka_sim ball.xml 啥都没 bi-franka_panda.xml frank_panda.xml franka_panda_teleop.xml franka_panda_test_convex.xml universal_robots_ur5e ur5e.xml 没有hand。。 其它 ant.xml 也是什么都没有 ant_grasp_ball.xml 有一个球 ant_grasp_ground.xml 也没东西 one_tet.xml 无 thin_box.xml 无 three_joint_link.xml 有个东西 two_box.xml 还是没东西 two_skeleton.xml 我去，什么东西跳过去了 urdf assets文件夹里面还有其它形式的。都尝试尝试\n尝试了下示例代码，有点困难\n外部导入 文件格式 xml 可以从形状原语shape primitives, meshes, URDF, MJCF, Terrain, or soft robot description files、网格、URDF、MJCF、地形或软体机器人描述文件中实例化Genesis实体。 待续，我尝试从mujoco提供的模型示例导入，失败 加入contype=\"0\" conaffinity=\"0\" 在xml 的中 可能有用吧 操作 操作流程不复杂，给pos和quat让它自计算ik就行。但问题是pos和quat可能会越界，不知道这个怎么解决。我本来想用gs view给的上下限倒推pos的，但是很奇怪它给的get_pos的返回的都不是我想要的值。\n控制的基本流程 场景搭建 地面 机械臂 目标物体 定义机械臂的关节索引和控制器参数（限制） ik求解关节角度、规划运动路径、执行，最好在这里同时打开hand，就是设置qpos[:-2]最后两位的值 qpos = franka.inverse_kinematics( link = end_effector, pos = np.array([0.65, 0.0, 0.25]), quat = np.array([0, 1, 0, 0]), ) # 规划运动路径 path = franka.plan_path( qpos_goal = qpos, num_waypoints = 200, # 2秒时长 ) # 执行规划路径 for waypoint in path: franka.control_dofs_position(waypoint) scene.step() # 等待到达最后一个路径点 for i in range(100): scene.step() ik求解向下移动到位置 抓取 怎么链接到对应关节 总结一下：要翻xml文件。\nfranka_emika_panda的panda joint(关节)和dof(自由度)是两个相关概念。\n以Franka机械臂为例,它的手臂有7个旋转关节,夹爪有2个平移关节,每个关节有1个自由度,总共9个自由度。更一般地,像自由关节(6自由度)或球形关节(3自由度)这样的关节有多个自由度。\nfranka_sim/bi-franka_panda 不知道它几个关节几个自由度：genesis内部的可以用gs view 'xml/franka_sim/bi-franka_panda.xml'查看 现在知道它有7*2个panda joint dof 和2*2个finger joint dof，一共18个，然后panda joint部分是第1、3、5、7、9、11、13对应单臂，另外一半对应双臂。15、16对应单臂的夹爪。 好了现在开始改ikmp部分的代码。 可视化，加载双臂机器人、物体、平面 移动机械臂关节到物体上方 向下移动机械臂 抓取 让robot保持静止 获取各joint的初始状态 set joint状态 staticqpos=franka.get_qpos() for i in range(1200): franka.set_qpos(staticqpos) scene.step() 让动作更加平缓 之前写的动作变化太大了，看到benchmark\n录像 linux安装播放器\n",
+  "wordCount" : "1260",
+  "inLanguage": "en",
+  "datePublished": "2024-12-19T14:51:53Z",
+  "dateModified": "2024-12-19T14:51:53Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/post/genesis%E5%B9%B3%E5%8F%B0/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://example.com/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      genesis平台
+    </h1>
+    <div class="post-meta">
+
+<span title='2024-12-19 14:51:53 +0000 UTC'>December 19, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>一个比robosuite更简洁的物理平台，专为通用机器人/人工智能/物理AI应用而设计。</p>
+<p><a href="https://genesis-world.readthedocs.io/en/latest/index.html">教程</a></p>
+<h1 id="install">install<a hidden class="anchor" aria-hidden="true" href="#install">#</a></h1>
+<ol>
+<li>安装相关软件
+<ol>
+<li>anaconda3</li>
+<li>git</li>
+</ol>
+</li>
+<li>需求：
+<ol>
+<li>Python: 3.9+ 所以我<code>conda create -n genesis python==3.10</code></li>
+<li>OS: Linux (recommended) / MacOS / Windows 但windows不太方便。</li>
+</ol>
+</li>
+<li>~~<code>pip install genesis-world</code> ~~ 因为这个项目还在即时更新，建议用github clone方式安装
+<ol>
+<li><code> git clone https://github.com/Genesis-Embodied-AI/Genesis.git</code></li>
+<li>进入Genesis目录，<code>pip install -e .</code></li>
+<li><code>export PYTHONPATH=~/work/Genesis</code> 这个是修改python路径的，不是永久的。</li>
+<li>如果需要经常使用的话
+<ol>
+<li><code>vim ~/.bashrc</code></li>
+<li>加入<code>export PYTHONPATH=~/Genesis:$PYTHONPATH</code>保存</li>
+</ol>
+</li>
+<li>在work里创建一个文件夹写代码。可以调用Genesis下面的genesis</li>
+</ol>
+</li>
+<li>检查cuda<code>nvidia-smi</code></li>
+<li>安装<a href="https://pytorch.org/get-started/locally/">pytorch</a>
+<ol>
+<li>我检查到cuda版本是11.6，就下载的pip3 install torch torchvision torchaudio &ndash;index-url <a href="https://download.pytorch.org/whl/cu118">https://download.pytorch.org/whl/cu118</a>。可能以后要改</li>
+</ol>
+</li>
+<li>以上就是最基础的安装，还有一些额外的根据需求安装即可</li>
+<li>更新：因为genesis还在更新中，偶尔需要更新
+<ol>
+<li><del><code>python -m pip install --upgrade pip</code></del></li>
+<li><del><code>pip install --upgrade 包名称</code></del></li>
+<li>在Genesis里<code>git pull</code></li>
+</ol>
+</li>
+<li>设置显示器
+<ol>
+<li><a href="https://blog.csdn.net/Stone_hello/article/details/120041495">https://blog.csdn.net/Stone_hello/article/details/120041495</a></li>
+<li><a href="https://www.cnblogs.com/SkyXZ/p/18687026">https://www.cnblogs.com/SkyXZ/p/18687026</a></li>
+</ol>
+</li>
+</ol>
+<h1 id="基础使用">基础使用<a hidden class="anchor" aria-hidden="true" href="#基础使用">#</a></h1>
+<h2 id="开始">开始<a hidden class="anchor" aria-hidden="true" href="#开始">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> genesis <span style="color:#66d9ef">as</span> gs
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 初始化</span>
+</span></span><span style="display:flex;"><span>gs<span style="color:#f92672">.</span>init(
+</span></span><span style="display:flex;"><span>    seed                <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>,
+</span></span><span style="display:flex;"><span>    precision           <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;32&#39;</span>,
+</span></span><span style="display:flex;"><span>    debug               <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>    eps                 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e-12</span>,
+</span></span><span style="display:flex;"><span>    logging_level       <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;warning&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># logging_level       = None,</span>
+</span></span><span style="display:flex;"><span>    backend             <span style="color:#f92672">=</span> gs<span style="color:#f92672">.</span>cpu,
+</span></span><span style="display:flex;"><span>    theme               <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;light&#39;</span>,
+</span></span><span style="display:flex;"><span>    logger_verbose_time <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 场景包装一个模拟器对象（处理所有底层物理解算器）和一个可视化工具对象</span>
+</span></span><span style="display:flex;"><span>scene <span style="color:#f92672">=</span> gs<span style="color:#f92672">.</span>Scene(
+</span></span><span style="display:flex;"><span>    sim_options<span style="color:#f92672">=</span>gs<span style="color:#f92672">.</span>options<span style="color:#f92672">.</span>SimOptions(
+</span></span><span style="display:flex;"><span>        dt<span style="color:#f92672">=</span><span style="color:#ae81ff">0.01</span>,
+</span></span><span style="display:flex;"><span>        gravity<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0.0</span>),
+</span></span><span style="display:flex;"><span>    ),
+</span></span><span style="display:flex;"><span>    show_viewer<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># camera_fov</span>
+</span></span><span style="display:flex;"><span>    viewer_options <span style="color:#f92672">=</span> gs<span style="color:#f92672">.</span>options<span style="color:#f92672">.</span>ViewerOptions(
+</span></span><span style="display:flex;"><span>        res           <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1280</span>, <span style="color:#ae81ff">960</span>),
+</span></span><span style="display:flex;"><span>        camera_pos    <span style="color:#f92672">=</span> (<span style="color:#ae81ff">3.5</span>, <span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">2.5</span>),
+</span></span><span style="display:flex;"><span>        camera_lookat <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.5</span>),
+</span></span><span style="display:flex;"><span>        camera_fov    <span style="color:#f92672">=</span> <span style="color:#ae81ff">40</span>,
+</span></span><span style="display:flex;"><span>        max_FPS       <span style="color:#f92672">=</span> <span style="color:#ae81ff">60</span>,
+</span></span><span style="display:flex;"><span>    ),
+</span></span><span style="display:flex;"><span>    vis_options <span style="color:#f92672">=</span> gs<span style="color:#f92672">.</span>options<span style="color:#f92672">.</span>VisOptions(
+</span></span><span style="display:flex;"><span>        show_world_frame <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>, <span style="color:#75715e"># visualize the coordinate frame of `world` at its origin</span>
+</span></span><span style="display:flex;"><span>        world_frame_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>, <span style="color:#75715e"># length of the world frame in meter</span>
+</span></span><span style="display:flex;"><span>        show_link_frame  <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>, <span style="color:#75715e"># do not visualize coordinate frames of entity links</span>
+</span></span><span style="display:flex;"><span>        show_cameras     <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>, <span style="color:#75715e"># do not visualize mesh and frustum of the cameras added</span>
+</span></span><span style="display:flex;"><span>        plane_reflection <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>, <span style="color:#75715e"># turn on plane reflection</span>
+</span></span><span style="display:flex;"><span>        ambient_light    <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.1</span>), <span style="color:#75715e"># ambient light setting</span>
+</span></span><span style="display:flex;"><span>    ),
+</span></span><span style="display:flex;"><span>    renderer <span style="color:#f92672">=</span> gs<span style="color:#f92672">.</span>renderers<span style="color:#f92672">.</span>Rasterizer(), <span style="color:#75715e"># using rasterizer for camera rendering</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># load object</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 在创建变形时，您还可以指定其位置、方向、大小等。对于方向，变形接受eXtreme（scipy外部x-y-z约定）或quat（w-x-y-z约定）。</span>
+</span></span><span style="display:flex;"><span>plane <span style="color:#f92672">=</span> scene<span style="color:#f92672">.</span>add_entity(
+</span></span><span style="display:flex;"><span>    gs<span style="color:#f92672">.</span>morphs<span style="color:#f92672">.</span>Plane()
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>franka <span style="color:#f92672">=</span> scene<span style="color:#f92672">.</span>add_entity(
+</span></span><span style="display:flex;"><span>    gs<span style="color:#f92672">.</span>morphs<span style="color:#f92672">.</span>MJCF(
+</span></span><span style="display:flex;"><span>        file  <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;xml/franka_emika_panda/panda.xml&#39;</span>,
+</span></span><span style="display:flex;"><span>        pos   <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>        euler <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">45</span>), <span style="color:#75715e"># we follow scipy&#39;s extrinsic x-y-z rotation convention, in degrees,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#     # quat  = (1.0, 0.0, 0.0, 0.0), # we use w-x-y-z convention for quaternions,</span>
+</span></span><span style="display:flex;"><span>        scale <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    ),
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>scene<span style="color:#f92672">.</span>build()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 运行多久全看这个range？没有自己退出的功能？</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">100000</span>):
+</span></span><span style="display:flex;"><span>    scene<span style="color:#f92672">.</span>step()
+</span></span></code></pre></div><p>分析</p>
+<ol>
+<li>导入genesis并初始化</li>
+<li>创建场景Scene：一个场景包含一个simulator对象，处理所有底层物理求解器，以及一个visualizer对象，管理与可视化相关的概念。创建场景时，可以配置各种物理求解器参数。</li>
+<li>将对象加载到场景中，所有对象和机器人都表示为Entity，Genesis设计为完全面向对象：用scene.add_entity</li>
+<li>构建场景并开始模拟：scene.build() 和 step</li>
+</ol>
+<h2 id="可视化">可视化<a hidden class="anchor" aria-hidden="true" href="#可视化">#</a></h2>
+<p>设置相机参数</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> genesis <span style="color:#66d9ef">as</span> gs
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>gs<span style="color:#f92672">.</span>init(backend<span style="color:#f92672">=</span>gs<span style="color:#f92672">.</span>cpu)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>scene <span style="color:#f92672">=</span> gs<span style="color:#f92672">.</span>Scene(
+</span></span><span style="display:flex;"><span>    show_viewer <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>    viewer_options <span style="color:#f92672">=</span> gs<span style="color:#f92672">.</span>options<span style="color:#f92672">.</span>ViewerOptions(
+</span></span><span style="display:flex;"><span>        res           <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1280</span>, <span style="color:#ae81ff">960</span>),
+</span></span><span style="display:flex;"><span>        camera_pos    <span style="color:#f92672">=</span> (<span style="color:#ae81ff">3.5</span>, <span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">2.5</span>),
+</span></span><span style="display:flex;"><span>        camera_lookat <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.5</span>),
+</span></span><span style="display:flex;"><span>        camera_fov    <span style="color:#f92672">=</span> <span style="color:#ae81ff">40</span>,
+</span></span><span style="display:flex;"><span>        max_FPS       <span style="color:#f92672">=</span> <span style="color:#ae81ff">60</span>,
+</span></span><span style="display:flex;"><span>    ),
+</span></span><span style="display:flex;"><span>    vis_options <span style="color:#f92672">=</span> gs<span style="color:#f92672">.</span>options<span style="color:#f92672">.</span>VisOptions(
+</span></span><span style="display:flex;"><span>        show_world_frame <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>        world_frame_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>,
+</span></span><span style="display:flex;"><span>        show_link_frame  <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>        show_cameras     <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>        plane_reflection <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>        ambient_light    <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.1</span>),
+</span></span><span style="display:flex;"><span>    ),
+</span></span><span style="display:flex;"><span>    renderer<span style="color:#f92672">=</span>gs<span style="color:#f92672">.</span>renderers<span style="color:#f92672">.</span>Rasterizer(),
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plane <span style="color:#f92672">=</span> scene<span style="color:#f92672">.</span>add_entity(
+</span></span><span style="display:flex;"><span>    gs<span style="color:#f92672">.</span>morphs<span style="color:#f92672">.</span>Plane(),
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>franka <span style="color:#f92672">=</span> scene<span style="color:#f92672">.</span>add_entity(
+</span></span><span style="display:flex;"><span>    gs<span style="color:#f92672">.</span>morphs<span style="color:#f92672">.</span>MJCF(file<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;xml/franka_emika_panda/panda.xml&#39;</span>),
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cam <span style="color:#f92672">=</span> scene<span style="color:#f92672">.</span>add_camera(
+</span></span><span style="display:flex;"><span>    res    <span style="color:#f92672">=</span> (<span style="color:#ae81ff">640</span>, <span style="color:#ae81ff">480</span>),
+</span></span><span style="display:flex;"><span>    pos    <span style="color:#f92672">=</span> (<span style="color:#ae81ff">3.5</span>, <span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">2.5</span>),
+</span></span><span style="display:flex;"><span>    lookat <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0.5</span>),
+</span></span><span style="display:flex;"><span>    fov    <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>,
+</span></span><span style="display:flex;"><span>    GUI    <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>scene<span style="color:#f92672">.</span>build()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 渲染rgb、深度、分割掩码和法线图</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># rgb, depth, segmentation, normal = cam.render(rgb=True, depth=True, segmentation=True, normal=True)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cam<span style="color:#f92672">.</span>start_recording()
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">120</span>):
+</span></span><span style="display:flex;"><span>    scene<span style="color:#f92672">.</span>step()
+</span></span><span style="display:flex;"><span>    cam<span style="color:#f92672">.</span>set_pose(
+</span></span><span style="display:flex;"><span>        pos    <span style="color:#f92672">=</span> (<span style="color:#ae81ff">3.0</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>sin(i <span style="color:#f92672">/</span> <span style="color:#ae81ff">60</span>), <span style="color:#ae81ff">3.0</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>cos(i <span style="color:#f92672">/</span> <span style="color:#ae81ff">60</span>), <span style="color:#ae81ff">2.5</span>),
+</span></span><span style="display:flex;"><span>        lookat <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0.5</span>),
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    cam<span style="color:#f92672">.</span>render()
+</span></span><span style="display:flex;"><span>cam<span style="color:#f92672">.</span>stop_recording(save_to_filename<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;video.mp4&#39;</span>, fps<span style="color:#f92672">=</span><span style="color:#ae81ff">60</span>)
+</span></span></code></pre></div><h2 id="控制robot">控制robot<a hidden class="anchor" aria-hidden="true" href="#控制robot">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> genesis <span style="color:#66d9ef">as</span> gs
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">########################## 初始化 ##########################</span>
+</span></span><span style="display:flex;"><span>gs<span style="color:#f92672">.</span>init(backend<span style="color:#f92672">=</span>gs<span style="color:#f92672">.</span>cpu)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">########################## 创建场景 ##########################</span>
+</span></span><span style="display:flex;"><span>scene <span style="color:#f92672">=</span> gs<span style="color:#f92672">.</span>Scene(
+</span></span><span style="display:flex;"><span>    viewer_options <span style="color:#f92672">=</span> gs<span style="color:#f92672">.</span>options<span style="color:#f92672">.</span>ViewerOptions(
+</span></span><span style="display:flex;"><span>        camera_pos    <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">3.5</span>, <span style="color:#ae81ff">2.5</span>),
+</span></span><span style="display:flex;"><span>        camera_lookat <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.5</span>),
+</span></span><span style="display:flex;"><span>        camera_fov    <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>,
+</span></span><span style="display:flex;"><span>        res           <span style="color:#f92672">=</span> (<span style="color:#ae81ff">960</span>, <span style="color:#ae81ff">640</span>),
+</span></span><span style="display:flex;"><span>        max_FPS       <span style="color:#f92672">=</span> <span style="color:#ae81ff">60</span>,
+</span></span><span style="display:flex;"><span>    ),
+</span></span><span style="display:flex;"><span>    sim_options <span style="color:#f92672">=</span> gs<span style="color:#f92672">.</span>options<span style="color:#f92672">.</span>SimOptions(
+</span></span><span style="display:flex;"><span>        dt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.01</span>,
+</span></span><span style="display:flex;"><span>    ),
+</span></span><span style="display:flex;"><span>    show_viewer <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">########################## 实体 ##########################</span>
+</span></span><span style="display:flex;"><span>plane <span style="color:#f92672">=</span> scene<span style="color:#f92672">.</span>add_entity(
+</span></span><span style="display:flex;"><span>    gs<span style="color:#f92672">.</span>morphs<span style="color:#f92672">.</span>Plane(),
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>franka <span style="color:#f92672">=</span> scene<span style="color:#f92672">.</span>add_entity(
+</span></span><span style="display:flex;"><span>    gs<span style="color:#f92672">.</span>morphs<span style="color:#f92672">.</span>MJCF(
+</span></span><span style="display:flex;"><span>        file  <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;xml/franka_emika_panda/panda.xml&#39;</span>,
+</span></span><span style="display:flex;"><span>    ),
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">########################## 构建 ##########################</span>
+</span></span><span style="display:flex;"><span>scene<span style="color:#f92672">.</span>build()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>jnt_names <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;joint1&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;joint2&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;joint3&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;joint4&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;joint5&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;joint6&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;joint7&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;finger_joint1&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;finger_joint2&#39;</span>,
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>dofs_idx <span style="color:#f92672">=</span> [franka<span style="color:#f92672">.</span>get_joint(name)<span style="color:#f92672">.</span>dof_idx_local <span style="color:#66d9ef">for</span> name <span style="color:#f92672">in</span> jnt_names]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">############ 可选：设置控制增益 ############</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 设置位置增益</span>
+</span></span><span style="display:flex;"><span>franka<span style="color:#f92672">.</span>set_dofs_kp(
+</span></span><span style="display:flex;"><span>    kp             <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">4500</span>, <span style="color:#ae81ff">4500</span>, <span style="color:#ae81ff">3500</span>, <span style="color:#ae81ff">3500</span>, <span style="color:#ae81ff">2000</span>, <span style="color:#ae81ff">2000</span>, <span style="color:#ae81ff">2000</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">100</span>]),
+</span></span><span style="display:flex;"><span>    dofs_idx_local <span style="color:#f92672">=</span> dofs_idx,
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 设置速度增益</span>
+</span></span><span style="display:flex;"><span>franka<span style="color:#f92672">.</span>set_dofs_kv(
+</span></span><span style="display:flex;"><span>    kv             <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">450</span>, <span style="color:#ae81ff">450</span>, <span style="color:#ae81ff">350</span>, <span style="color:#ae81ff">350</span>, <span style="color:#ae81ff">200</span>, <span style="color:#ae81ff">200</span>, <span style="color:#ae81ff">200</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>]),
+</span></span><span style="display:flex;"><span>    dofs_idx_local <span style="color:#f92672">=</span> dofs_idx,
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 设置安全的力范围</span>
+</span></span><span style="display:flex;"><span>franka<span style="color:#f92672">.</span>set_dofs_force_range(
+</span></span><span style="display:flex;"><span>    lower          <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#f92672">-</span><span style="color:#ae81ff">87</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">87</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">87</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">87</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">12</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">12</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">12</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">100</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">100</span>]),
+</span></span><span style="display:flex;"><span>    upper          <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([ <span style="color:#ae81ff">87</span>,  <span style="color:#ae81ff">87</span>,  <span style="color:#ae81ff">87</span>,  <span style="color:#ae81ff">87</span>,  <span style="color:#ae81ff">12</span>,  <span style="color:#ae81ff">12</span>,  <span style="color:#ae81ff">12</span>,  <span style="color:#ae81ff">100</span>,  <span style="color:#ae81ff">100</span>]),
+</span></span><span style="display:flex;"><span>    dofs_idx_local <span style="color:#f92672">=</span> dofs_idx,
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 硬重置</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">150</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">50</span>:
+</span></span><span style="display:flex;"><span>        franka<span style="color:#f92672">.</span>set_dofs_position(np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0.04</span>, <span style="color:#ae81ff">0.04</span>]), dofs_idx)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">100</span>:
+</span></span><span style="display:flex;"><span>        franka<span style="color:#f92672">.</span>set_dofs_position(np<span style="color:#f92672">.</span>array([<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0.8</span>, <span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0.5</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">0.04</span>, <span style="color:#ae81ff">0.04</span>]), dofs_idx)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        franka<span style="color:#f92672">.</span>set_dofs_position(np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>]), dofs_idx)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    scene<span style="color:#f92672">.</span>step()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># PD控制</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1250</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        franka<span style="color:#f92672">.</span>control_dofs_position(
+</span></span><span style="display:flex;"><span>            np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0.04</span>, <span style="color:#ae81ff">0.04</span>]),
+</span></span><span style="display:flex;"><span>            dofs_idx,
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">250</span>:
+</span></span><span style="display:flex;"><span>        franka<span style="color:#f92672">.</span>control_dofs_position(
+</span></span><span style="display:flex;"><span>            np<span style="color:#f92672">.</span>array([<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0.8</span>, <span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0.5</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">0.04</span>, <span style="color:#ae81ff">0.04</span>]),
+</span></span><span style="display:flex;"><span>            dofs_idx,
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">500</span>:
+</span></span><span style="display:flex;"><span>        franka<span style="color:#f92672">.</span>control_dofs_position(
+</span></span><span style="display:flex;"><span>            np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>]),
+</span></span><span style="display:flex;"><span>            dofs_idx,
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">750</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 用速度控制第一个自由度，其余的用位置控制</span>
+</span></span><span style="display:flex;"><span>        franka<span style="color:#f92672">.</span>control_dofs_position(
+</span></span><span style="display:flex;"><span>            np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>])[<span style="color:#ae81ff">1</span>:],
+</span></span><span style="display:flex;"><span>            dofs_idx[<span style="color:#ae81ff">1</span>:],
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>        franka<span style="color:#f92672">.</span>control_dofs_velocity(
+</span></span><span style="display:flex;"><span>            np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1.0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>])[:<span style="color:#ae81ff">1</span>],
+</span></span><span style="display:flex;"><span>            dofs_idx[:<span style="color:#ae81ff">1</span>],
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">1000</span>:
+</span></span><span style="display:flex;"><span>        franka<span style="color:#f92672">.</span>control_dofs_force(
+</span></span><span style="display:flex;"><span>            np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>]),
+</span></span><span style="display:flex;"><span>            dofs_idx,
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 这是根据给定控制命令计算的控制力</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 如果使用力控制，它与给定的控制命令相同</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;控制力:&#39;</span>, franka<span style="color:#f92672">.</span>get_dofs_control_force(dofs_idx))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 这是自由度实际经历的力</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;内部力:&#39;</span>, franka<span style="color:#f92672">.</span>get_dofs_force(dofs_idx))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    scene<span style="color:#f92672">.</span>step()
+</span></span></code></pre></div><ol>
+<li>从第0步到第500步，我们使用位置控制来控制所有自由度，并依次将机器人移动到3个目标位置。注意，对于control_*API，一旦设置了目标值，它将被内部存储，你不需要在接下来的步骤中重复发送命令，只要你的目标保持不变。</li>
+<li>在第750步，我们展示了可以对不同的自由度进行混合控制：对于第一个自由度（自由度0），我们发送一个速度命令，而其余的仍然遵循位置控制命令。</li>
+<li>在第1000步，我们切换到扭矩（力）控制，并向所有自由度发送一个零力命令，机器人将再次因重力而掉落到地面。</li>
+</ol>
+<h2 id="逆运动学与运动规划">逆运动学与运动规划<a hidden class="anchor" aria-hidden="true" href="#逆运动学与运动规划">#</a></h2>
+<p>如何在Genesis中使用逆运动学（IK）和运动规划，并执行一个简单的抓取任务。</p>
+<pre tabindex="0"><code>python
+&#34;&#34;&#34;
+创建一个场景，加载你喜欢的机械臂和一个小立方体，构建场景，然后设置控制增益：
+&#34;&#34;&#34;
+import numpy as np
+import genesis as gs
+
+########################## 初始化 ##########################
+gs.init(backend=gs.cpu,theme=&#39;light&#39;)
+
+########################## 创建场景 ##########################
+scene = gs.Scene(
+    viewer_options = gs.options.ViewerOptions(
+        camera_pos    = (3, -1, 1.5),
+        camera_lookat = (0.0, 0.0, 0.5),
+        camera_fov    = 30,
+        max_FPS       = 60,
+    ),
+    sim_options = gs.options.SimOptions(
+        dt = 0.01,
+        substeps = 4, # 为了更稳定的抓取接触
+    ),
+    show_viewer = True,
+)
+
+########################## 实体 ##########################
+plane = scene.add_entity(
+    gs.morphs.Plane(),
+)
+cube = scene.add_entity(
+    gs.morphs.Box(
+        size = (0.04, 0.04, 0.04),
+        pos  = (0.65, 0.0, 0.02),
+    )
+)
+franka = scene.add_entity(
+    gs.morphs.MJCF(file=&#39;xml/franka_emika_panda/panda.xml&#39;),
+)
+########################## 构建 ##########################
+scene.build()
+
+motors_dof = np.arange(7)
+fingers_dof = np.arange(7, 9)
+
+# 设置控制增益
+# 注意：以下值是为实现Franka最佳行为而调整的
+# 通常，每个新机器人都会有一组不同的参数。
+# 有时高质量的URDF或XML文件也会提供这些参数，并会被解析。
+franka.set_dofs_kp(
+    np.array([4500, 4500, 3500, 3500, 2000, 2000, 2000, 100, 100]),
+)
+franka.set_dofs_kv(
+    np.array([450, 450, 350, 350, 200, 200, 200, 10, 10]),
+)
+franka.set_dofs_force_range(
+    np.array([-87, -87, -87, -87, -12, -12, -12, -100, -100]),
+    np.array([ 87,  87,  87,  87,  12,  12,  12,  100,  100]),
+)
+&#34;&#34;&#34;
+接下来，让我们将机器人的末端执行器移动到预抓取姿态。这分两步完成：
+
+    使用IK求解给定目标末端执行器姿态的关节位置
+
+    使用运动规划器到达目标位置
+
+Genesis中的运动规划使用OMPL库。你可以按照安装页面中的说明进行安装。
+
+在Genesis中，IK和运动规划非常简单：每个都可以通过一个函数调用完成。
+&#34;&#34;&#34;
+
+# 获取末端执行器链接
+end_effector = franka.get_link(&#39;hand&#39;)
+
+# 移动到预抓取姿态
+qpos = franka.inverse_kinematics(
+    link = end_effector,
+    pos  = np.array([0.65, 0.0, 0.25]),
+    quat = np.array([0, 1, 0, 0]),
+)
+# 夹爪打开位置
+qpos[-2:] = 0.04
+path = franka.plan_path(
+    qpos_goal     = qpos,
+    num_waypoints = 200, # 2秒持续时间
+)
+# 执行规划路径
+for waypoint in path:
+    franka.control_dofs_position(waypoint)
+    scene.step()
+
+# 让机器人到达最后一个路径点
+for i in range(100):
+    scene.step()
+
+&#34;&#34;&#34;
+如你所见，IK求解和运动规划都是机器人实体的两个集成方法。对于IK求解，你只需告诉机器人的IK求解器哪个链接是末端执行器，并指定目标姿态。然后，你告诉运动规划器目标关节位置（qpos），它会返回一个规划和平滑的路径点列表。注意，在我们执行路径后，我们让控制器再运行100步。这是因为我们使用的是PD控制器，目标位置和当前实际位置之间会有一个差距。因此，我们让控制器多运行一段时间，以便机器人能够到达规划轨迹的最后一个路径点。
+
+接下来，我们将机器人夹爪向下移动，抓取立方体并将其抬起：
+&#34;&#34;&#34;
+# 到达
+qpos = franka.inverse_kinematics(
+    link = end_effector,
+    pos  = np.array([0.65, 0.0, 0.135]),
+    quat = np.array([0, 1, 0, 0]),
+)
+franka.control_dofs_position(qpos[:-2], motors_dof)
+for i in range(100):
+    scene.step()
+
+# 抓取
+franka.control_dofs_position(qpos[:-2], motors_dof)
+franka.control_dofs_force(np.array([-1, -1]), fingers_dof)
+
+for i in range(100):
+    scene.step()
+
+# 抬起
+qpos = franka.inverse_kinematics(
+    link=end_effector,
+    pos=np.array([0.65, 0.0, 0.3]),
+    quat=np.array([0, 1, 0, 0]),
+)
+franka.control_dofs_position(qpos[:-2], motors_dof)
+for i in range(200):
+    scene.step()
+</code></pre><h2 id="调试">调试<a hidden class="anchor" aria-hidden="true" href="#调试">#</a></h2>
+<ol>
+<li><code>pip install ipython</code></li>
+</ol>
+<p>有bug,终止交易.等作者改</p>
+<h1 id="entity">entity<a hidden class="anchor" aria-hidden="true" href="#entity">#</a></h1>
+<h2 id="物体模型">物体模型<a hidden class="anchor" aria-hidden="true" href="#物体模型">#</a></h2>
+<h3 id="内部模型">内部模型<a hidden class="anchor" aria-hidden="true" href="#内部模型">#</a></h3>
+<h4 id="xmlmjcf">xml(MJCF)<a hidden class="anchor" aria-hidden="true" href="#xmlmjcf">#</a></h4>
+<p>根据代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>franka <span style="color:#f92672">=</span> scene<span style="color:#f92672">.</span>add_entity(
+</span></span><span style="display:flex;"><span>    gs<span style="color:#f92672">.</span>morphs<span style="color:#f92672">.</span>MJCF(
+</span></span><span style="display:flex;"><span>        file  <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;xml/franka_emika_panda/panda.xml&#39;</span>,
+</span></span><span style="display:flex;"><span>        pos   <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>        euler <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">45</span>), <span style="color:#75715e"># we follow scipy&#39;s extrinsic x-y-z rotation convention, in degrees,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#     # quat  = (1.0, 0.0, 0.0, 0.0), # we use w-x-y-z convention for quaternions,</span>
+</span></span><span style="display:flex;"><span>        scale <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    ),
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>利用<code>file</code>参数从<code>xml/</code>导入，xml从当时安装genesis的env中找。以linux为例，这个项目的xml文件在<code>work/Genesis/genesis/assets/xml</code>里面</p>
+<p>除了franka_emika_panda，还有另外几个，而且panda也有好几个选项。从外部导入文件没有fixed，就设置重力为0，在Scene初始化的时候</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>    sim_options<span style="color:#f92672">=</span>gs<span style="color:#f92672">.</span>options<span style="color:#f92672">.</span>SimOptions(
+</span></span><span style="display:flex;"><span>        gravity<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    )
+</span></span></code></pre></div><ol>
+<li>franka_emika_panda 是MJCF格式的
+<ol>
+<li>hand.xml 就一个夹持头</li>
+<li>panda_no_tendon.xml 没有腱，这是什么？</li>
+<li>scene.xml 和之前的panda有区别吗</li>
+</ol>
+</li>
+<li>franka_sim
+<ol>
+<li>ball.xml 啥都没</li>
+<li>bi-franka_panda.xml</li>
+<li>frank_panda.xml</li>
+<li>franka_panda_teleop.xml</li>
+<li>franka_panda_test_convex.xml</li>
+</ol>
+</li>
+<li>universal_robots_ur5e
+<ol>
+<li>ur5e.xml 没有hand。。</li>
+</ol>
+</li>
+<li>其它
+<ol>
+<li>ant.xml 也是什么都没有</li>
+<li>ant_grasp_ball.xml 有一个球</li>
+<li>ant_grasp_ground.xml 也没东西</li>
+<li>one_tet.xml 无</li>
+<li>thin_box.xml 无</li>
+<li>three_joint_link.xml 有个东西</li>
+<li>two_box.xml 还是没东西</li>
+<li>two_skeleton.xml 我去，什么东西跳过去了</li>
+</ol>
+</li>
+</ol>
+<h4 id="urdf">urdf<a hidden class="anchor" aria-hidden="true" href="#urdf">#</a></h4>
+<p>assets文件夹里面还有其它形式的。都尝试尝试</p>
+<p>尝试了下示例代码，有点困难</p>
+<h3 id="外部导入">外部导入<a hidden class="anchor" aria-hidden="true" href="#外部导入">#</a></h3>
+<ol>
+<li>文件格式 xml</li>
+<li>可以从形状原语shape primitives, meshes, URDF, MJCF, Terrain, or soft robot description files、网格、URDF、MJCF、地形或软体机器人描述文件中实例化Genesis实体。</li>
+<li>待续，我尝试从mujoco提供的模型示例导入，失败</li>
+<li>加入<code>contype=&quot;0&quot; conaffinity=&quot;0&quot;</code> 在xml 的&lt;geom&gt;中 可能有用吧</li>
+</ol>
+<h1 id="操作">操作<a hidden class="anchor" aria-hidden="true" href="#操作">#</a></h1>
+<p>操作流程不复杂，给pos和quat让它自计算ik就行。但问题是pos和quat可能会越界，不知道这个怎么解决。我本来想用gs view给的上下限倒推pos的，但是很奇怪它给的get_pos的返回的都不是我想要的值。</p>
+<h2 id="控制的基本流程">控制的基本流程<a hidden class="anchor" aria-hidden="true" href="#控制的基本流程">#</a></h2>
+<ol>
+<li>场景搭建
+<ol>
+<li>地面</li>
+<li>机械臂</li>
+<li>目标物体</li>
+</ol>
+</li>
+<li>定义机械臂的关节索引和控制器参数（限制）</li>
+<li>ik求解关节角度、规划运动路径、执行，最好在这里同时打开hand，就是设置qpos[:-2]最后两位的值
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>qpos <span style="color:#f92672">=</span> franka<span style="color:#f92672">.</span>inverse_kinematics(
+</span></span><span style="display:flex;"><span> link <span style="color:#f92672">=</span> end_effector,
+</span></span><span style="display:flex;"><span> pos  <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0.65</span>, <span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.25</span>]),
+</span></span><span style="display:flex;"><span> quat <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>]),
+</span></span><span style="display:flex;"><span> )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e"># 规划运动路径</span>
+</span></span><span style="display:flex;"><span> path <span style="color:#f92672">=</span> franka<span style="color:#f92672">.</span>plan_path(
+</span></span><span style="display:flex;"><span>     qpos_goal     <span style="color:#f92672">=</span> qpos,
+</span></span><span style="display:flex;"><span>     num_waypoints <span style="color:#f92672">=</span> <span style="color:#ae81ff">200</span>, <span style="color:#75715e"># 2秒时长</span>
+</span></span><span style="display:flex;"><span> )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e"># 执行规划路径</span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">for</span> waypoint <span style="color:#f92672">in</span> path:
+</span></span><span style="display:flex;"><span>     franka<span style="color:#f92672">.</span>control_dofs_position(waypoint)
+</span></span><span style="display:flex;"><span>     scene<span style="color:#f92672">.</span>step()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e"># 等待到达最后一个路径点</span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">100</span>):
+</span></span><span style="display:flex;"><span>     scene<span style="color:#f92672">.</span>step()
+</span></span></code></pre></div></li>
+<li>ik求解向下移动到位置</li>
+<li>抓取</li>
+</ol>
+<h2 id="怎么链接到对应关节">怎么链接到对应关节<a hidden class="anchor" aria-hidden="true" href="#怎么链接到对应关节">#</a></h2>
+<p>总结一下：要翻xml文件。</p>
+<h3 id="franka_emika_panda的panda">franka_emika_panda的panda<a hidden class="anchor" aria-hidden="true" href="#franka_emika_panda的panda">#</a></h3>
+<p>joint(关节)和dof(自由度)是两个相关概念。</p>
+<p>以Franka机械臂为例,它的手臂有7个旋转关节,夹爪有2个平移关节,每个关节有1个自由度,总共9个自由度。更一般地,像自由关节(6自由度)或球形关节(3自由度)这样的关节有多个自由度。</p>
+<h3 id="franka_simbi-franka_panda">franka_sim/bi-franka_panda<a hidden class="anchor" aria-hidden="true" href="#franka_simbi-franka_panda">#</a></h3>
+<ol>
+<li>不知道它几个关节几个自由度：genesis内部的可以用<code>gs view 'xml/franka_sim/bi-franka_panda.xml'</code>查看</li>
+<li>现在知道它有7*2个panda joint dof 和2*2个finger joint dof，一共18个，然后panda joint部分是第1、3、5、7、9、11、13对应单臂，另外一半对应双臂。15、16对应单臂的夹爪。</li>
+<li>好了现在开始改ikmp部分的代码。
+<ol>
+<li>可视化，加载双臂机器人、物体、平面</li>
+<li>移动机械臂关节到物体上方</li>
+<li>向下移动机械臂</li>
+<li>抓取</li>
+</ol>
+</li>
+</ol>
+<h2 id="让robot保持静止">让robot保持静止<a hidden class="anchor" aria-hidden="true" href="#让robot保持静止">#</a></h2>
+<ol>
+<li>获取各joint的初始状态</li>
+<li>set joint状态</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>staticqpos<span style="color:#f92672">=</span>franka<span style="color:#f92672">.</span>get_qpos()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1200</span>):
+</span></span><span style="display:flex;"><span>    franka<span style="color:#f92672">.</span>set_qpos(staticqpos)
+</span></span><span style="display:flex;"><span>    scene<span style="color:#f92672">.</span>step()
+</span></span></code></pre></div><h2 id="让动作更加平缓">让动作更加平缓<a hidden class="anchor" aria-hidden="true" href="#让动作更加平缓">#</a></h2>
+<p>之前写的动作变化太大了，看到<a href="https://github.com/zhouxian/genesis-speed-benchmark">benchmark</a></p>
+<h1 id="录像">录像<a hidden class="anchor" aria-hidden="true" href="#录像">#</a></h1>
+<p><a href="https://blog.csdn.net/qq_41251963/article/details/109676345">linux安装播放器</a></p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://example.com/tags/robotic/">Robotic</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

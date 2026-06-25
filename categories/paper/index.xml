@@ -6,8 +6,18 @@
     <description>Recent content in Paper on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 09 Dec 2025 22:03:50 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 25 Feb 2026 17:52:40 +0000</lastBuildDate>
     <atom:link href="https://example.com/categories/paper/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data Quality in Imitation Learning</title>
+      <link>https://example.com/post/data-quality-in-imitation-learning/</link>
+      <pubDate>Wed, 25 Feb 2026 17:52:40 +0000</pubDate>
+      <guid>https://example.com/post/data-quality-in-imitation-learning/</guid>
+      <description>&lt;p&gt;开年第一篇论文，讲模仿学习中的数据质量
+我想从这篇论文中得到的信息：
+数据质量怎么评估，只能训练吗？
+有什么办法可以增加数据质量，采集和算法层面？&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy</title>
       <link>https://example.com/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/</link>
@@ -15,6 +25,166 @@
       <guid>https://example.com/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/</guid>
       <description>&lt;p&gt;ee形式的action从机器人坐标系转移到相机坐标系可以提到对相机的泛化性。&lt;/p&gt;
 &lt;p&gt;也就是利用“空间对齐”带来泛化提升&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>RoboKeyGen: Robot Pose and Joint Angles Estimation via  Diffusion-based 3D Keypoint Generation</title>
+      <link>https://example.com/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/</link>
+      <pubDate>Mon, 08 Dec 2025 16:09:53 +0000</pubDate>
+      <guid>https://example.com/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/</guid>
+      <description>&lt;p&gt;这篇文章用的英文单词好拗口，但是写得挺清晰的，还挺喜欢&lt;/p&gt;
+&lt;p&gt;解决什么问题？pose estimation，以前的要么慢，要么不够精确。这篇文章首先检测2d关键点，然后cross-camera（用内参计算）规范化，然后扩散模型生成3d（相机坐标），然后MLP推理出joint angle，用fk算出eepose等。
+对我有什么启发？相机的归一化能不能拓展到外参？Intrinsic-&amp;gt;Extrinsic&lt;/p&gt;
+&lt;p&gt;并不是VLA！只是传统的视觉&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Foundation Feature-Driven Online End-Effector Pose Estimation: A Marker-Free and Learning-Free Approach</title>
+      <link>https://example.com/post/foundation-feature-driven-online-end-effector-pose-estimation-a-marker-free-and-learning-free-approach/</link>
+      <pubDate>Mon, 24 Nov 2025 22:03:50 +0000</pubDate>
+      <guid>https://example.com/post/foundation-feature-driven-online-end-effector-pose-estimation-a-marker-free-and-learning-free-approach/</guid>
+      <description>&lt;p&gt;看标题后产生的疑问：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;为什么需要估计ee姿态？&lt;/li&gt;
+&lt;li&gt;估计完的姿态是以什么形式，相对？&lt;/li&gt;
+&lt;li&gt;相机位置改变了吗？&lt;/li&gt;
+&lt;li&gt;对vla有没有好处？&lt;/li&gt;
+&lt;li&gt;对我想实现的目标：真正机械臂泛化有没有用？&lt;/li&gt;
+&lt;li&gt;能做到什么程度？在线机器人自标定&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    <item>
+      <title>Pure Vision Language Action (VLA) Models:  A Comprehensive Survey</title>
+      <link>https://example.com/post/pure-vision-language-action-vla-models-a-comprehensive-surve/</link>
+      <pubDate>Tue, 28 Oct 2025 15:52:55 +0000</pubDate>
+      <guid>https://example.com/post/pure-vision-language-action-vla-models-a-comprehensive-surve/</guid>
+      <description>&lt;p&gt;比较新的综述，2025年9月25日发的&lt;/p&gt;
+&lt;p&gt;写了不整理相当于没写。&lt;/p&gt;
+&lt;p&gt;这篇文章里面好多分类错误的东西:P，别全信，可以提供思路&lt;/p&gt;
+&lt;p&gt;ok没读完也不许再看了，现在没空&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>pi0</title>
+      <link>https://example.com/post/pi0/</link>
+      <pubDate>Mon, 20 Oct 2025 16:08:55 +0000</pubDate>
+      <guid>https://example.com/post/pi0/</guid>
+      <description>&lt;p&gt;好方法，一直没看，2025/10/20上午2小时，下午1小时看完论文主要结构，测试没仔细看，代码也没看，主要是我想先比较一下pi0和pi0.5。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>pi0.5</title>
+      <link>https://example.com/post/pi0.5/</link>
+      <pubDate>Mon, 20 Oct 2025 15:05:54 +0000</pubDate>
+      <guid>https://example.com/post/pi0.5/</guid>
+      <description>&lt;p&gt;pi0.5也开源了，看一下原文&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>TinyVLA: Toward Fast, Data-Efficient Vision-Language-Action Models for Robotic Manipulation</title>
+      <link>https://example.com/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</link>
+      <pubDate>Mon, 29 Sep 2025 15:19:42 +0000</pubDate>
+      <guid>https://example.com/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</guid>
+      <description>&lt;p&gt;我要看这篇文章能否复现&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>smolvla</title>
+      <link>https://example.com/post/smolvla/</link>
+      <pubDate>Sun, 17 Aug 2025 22:39:53 +0000</pubDate>
+      <guid>https://example.com/post/smolvla/</guid>
+      <description>&lt;p&gt;主要是代码理解和修改&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>RoboGen: Towards Unleashing Infinite Data for  Automated Robot Learning via Generative Simulation</title>
+      <link>https://example.com/post/robogen-towards-unleashing-infinite-data-for-automated-robot-learning-via-generative-simulation/</link>
+      <pubDate>Tue, 01 Apr 2025 15:56:36 +0000</pubDate>
+      <guid>https://example.com/post/robogen-towards-unleashing-infinite-data-for-automated-robot-learning-via-generative-simulation/</guid>
+      <description>&lt;p&gt;看上去是那种一句话生成仿真环境的。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;一句话-&amp;gt;llm生成代码？assets还是得自己搞吧-&amp;gt;传到环境里面这个流程？
+&lt;ol&gt;
+&lt;li&gt;基本流程是propose-generate-learn&lt;/li&gt;
+&lt;li&gt;不是直接生成代码，与最近采用大型语言模型等基础模型直接产生策略或低级行动的努力相比，robogen只提取完全属于这些模型的能力和模式的信息——对象语义、对象可供性、关于哪些任务值得学习的常识性知识等。不过我也不知道这个指什么&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;用的什么环境，issac gym吗，居然是genesis&lt;/li&gt;
+&lt;li&gt;asset有没有好用的数据库 里面提到几个，还有图片生成mesh的，没有考虑collision吗
+&lt;ol&gt;
+&lt;li&gt;放置asset的时候，RoboGen 指示 GPT-4 以无碰撞的方式放置对象：当 LLM 生成对象的初始姿势时，我们会提示它利用其基本的空间理解，并尝试将对象放置在不同的位置。我们将其用作初始化，并检查初始场景配置中的潜在冲突。对于两个对象之间检测到的任何碰撞，我们识别接触对象的碰撞节点，并沿碰撞法线的相反方向推开它们的质心以解决碰撞。&lt;/li&gt;
+&lt;li&gt;collision-free 动作基元与运动规划相结合，在解决任务时更可靠，例如通过无碰撞路径接近目标对象&lt;/li&gt;
+&lt;li&gt;看起来论文里面涉及到collision的就这些了，那collision属性不考虑了？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;看样子是2finger机器人，什么模型抓取的，视觉？ 居然是吸盘式的&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    <item>
+      <title>DIFFTACTILE: A PHYSICS-BASED DIFFERENTIABLE  TACTILE SIMULATOR FOR CONTACT-RICH ROBOTIC  MANIPULATION</title>
+      <link>https://example.com/post/difftactile-a-physics-based-differentiable-tactile-simulator-for-contact-rich-robotic-manipulation/</link>
+      <pubDate>Tue, 25 Mar 2025 15:08:42 +0000</pubDate>
+      <guid>https://example.com/post/difftactile-a-physics-based-differentiable-tactile-simulator-for-contact-rich-robotic-manipulation/</guid>
+      <description>&lt;p&gt;2夹，tactile，精细操作(其实也就4种)。(19/100)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CALVIN: A Benchmark for Language-Conditioned  Policy Learning for Long-Horizon Robot  Manipulation Tasks</title>
+      <link>https://example.com/post/calvin-a-benchmark-for-language-conditioned-policy-learning-for-long-horizon-robot-manipulation-tasks/</link>
+      <pubDate>Sun, 23 Mar 2025 17:22:30 +0000</pubDate>
+      <guid>https://example.com/post/calvin-a-benchmark-for-language-conditioned-policy-learning-for-long-horizon-robot-manipulation-tasks/</guid>
+      <description>&lt;p&gt;来不及自己看了，量子速读，发动！&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>VideoWorld: Exploring Knowledge Learning from Unlabeled Videos</title>
+      <link>https://example.com/post/videoworld-exploring-knowledge-learning-from-unlabeled-videos/</link>
+      <pubDate>Sun, 23 Mar 2025 16:23:09 +0000</pubDate>
+      <guid>https://example.com/post/videoworld-exploring-knowledge-learning-from-unlabeled-videos/</guid>
+      <description>&lt;p&gt;做的是从视频数据中获得action的工作。(17/100)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Generative Artificial Intelligence in Robotic Manipulation: A Survey</title>
+      <link>https://example.com/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</link>
+      <pubDate>Thu, 13 Mar 2025 15:59:45 +0000</pubDate>
+      <guid>https://example.com/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</guid>
+      <description>&lt;p&gt;(16/100)&lt;/p&gt;
+&lt;p&gt;what i want to get&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;了解其所描述的通用机器人操作是否和我想的一样：qpos of robot&lt;/li&gt;
+&lt;li&gt;找里面有没有我想要的数据集：text-guided robotic video task&lt;/li&gt;
+&lt;li&gt;只要看dexterous部分&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    <item>
+      <title>Multi-Goal Reinforcement Learning: Challenging Robotics Environments and Request for Research</title>
+      <link>https://example.com/post/multi-goal-reinforcement-learning-challenging-robotics-environments-and-request-for-research/</link>
+      <pubDate>Fri, 07 Mar 2025 20:57:09 +0000</pubDate>
+      <guid>https://example.com/post/multi-goal-reinforcement-learning-challenging-robotics-environments-and-request-for-research/</guid>
+      <description>&lt;p&gt;好久没看论文了orz，这篇是从 &lt;a href=&#34;https://robotics.farama.org/envs/shadow_dexterous_hand/reach/&#34;&gt;gymnasium-robotics关于shadow hand的操作&lt;/a&gt;里翻出来的。借助gymm这个平台给单个灵巧手做强化学习。&lt;/p&gt;
+&lt;p&gt;(15/100)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>A Comprehensive Survey of LLM Alignment Techniques: RLHF, RLAIF, PPO, DPO and More</title>
+      <link>https://example.com/post/a-comprehensive-survey-of-llm-alignment-techniques-rlhf-rlaif-ppo-dpo-and-more/</link>
+      <pubDate>Mon, 03 Mar 2025 10:20:54 +0000</pubDate>
+      <guid>https://example.com/post/a-comprehensive-survey-of-llm-alignment-techniques-rlhf-rlaif-ppo-dpo-and-more/</guid>
+      <description>&lt;p&gt;时过境迁，当时怎么看的已经忘记了。现在我的问题变成了：什么是llm的对齐？vlm也有对齐吗？怎样实现对齐的？从这篇文章出发的话，我应该怎么做
+重看论文(1)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Aligner: Efficient Alignment by Learning to Correct</title>
+      <link>https://example.com/post/aligner-efficient-alignment-by-learning-to-correct/</link>
+      <pubDate>Mon, 03 Mar 2025 10:18:23 +0000</pubDate>
+      <guid>https://example.com/post/aligner-efficient-alignment-by-learning-to-correct/</guid>
+      <description>&lt;p&gt;以前看论文的方式好糟糕，看完以后完全没印象，一句话形容：对预训练的llm微调对齐，利用通过小模型学习偏好与不偏好答案之间的纠正残差&lt;/p&gt;
+&lt;p&gt;所以LLM的方向实际上就两种：微调和压缩？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>robotic grasp相关文献整理</title>
+      <link>https://example.com/post/robotic-grasp%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86/</link>
+      <pubDate>Mon, 03 Mar 2025 10:17:03 +0000</pubDate>
+      <guid>https://example.com/post/robotic-grasp%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86/</guid>
+      <description>&lt;p&gt;开始看文献了，2025/2/24-2025/3/2。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>MANISKILL3: GPU PARALLELIZED ROBOTICS  SIMULATION AND RENDERING FOR  GENERALIZABLE EMBODIED AI</title>
+      <link>https://example.com/post/maniskill3-gpu-parallelized-robotics-simulation-and-rendering-for-generalizable-embodied-ai/</link>
+      <pubDate>Mon, 25 Nov 2024 20:55:43 +0000</pubDate>
+      <guid>https://example.com/post/maniskill3-gpu-parallelized-robotics-simulation-and-rendering-for-generalizable-embodied-ai/</guid>
+      <description>&lt;p&gt;一个机器人模拟平台的论文&lt;/p&gt;
+&lt;p&gt;paper(12/100)&lt;/p&gt;</description>
     </item>
     <item>
       <title>GR-2: A Generative Video-Language-Action Model with Web-Scale Knowledge for Robot Manipulation</title>
@@ -30,6 +200,229 @@
       <guid>https://example.com/post/kubric-a-scalable-dataset-generator/</guid>
       <description>&lt;p&gt;到了新环境，安排我看的论文，说是了解一下就行。&lt;/p&gt;
 &lt;p&gt;这个是百篇计划(10/100)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AN EMULATOR FOR FINE-TUNING LARGE LANGUAGE  MODELS USING SMALL LANGUAGE MODELS</title>
+      <link>https://example.com/post/an-emulator-for-fine-tuning-large-language-models-using-small-language-models/</link>
+      <pubDate>Mon, 04 Nov 2024 16:20:53 +0000</pubDate>
+      <guid>https://example.com/post/an-emulator-for-fine-tuning-large-language-models-using-small-language-models/</guid>
+      <description>&lt;p&gt;百篇paper计划(9/100)，用小模型微调大模型。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CLLMs: Consistency Large Language Models</title>
+      <link>https://example.com/post/cllms-consistency-large-language-models/</link>
+      <pubDate>Tue, 22 Oct 2024 15:59:04 +0000</pubDate>
+      <guid>https://example.com/post/cllms-consistency-large-language-models/</guid>
+      <description>&lt;p&gt;百篇paper计划(8/100)，关于持续性，不知道对我有没有启发，先看看吧。&lt;/p&gt;
+&lt;p&gt;这一篇的实验要求比较高，不精读了，看思想。它有个前提是jacobi方法，没这个基础的话看不太懂。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>TRANSFORMER EXPLAINER: Interactive Learning of Text-Generative Models</title>
+      <link>https://example.com/post/transformer-explainer-interactive-learning-of-text-generative-models/</link>
+      <pubDate>Fri, 13 Sep 2024 10:12:29 +0000</pubDate>
+      <guid>https://example.com/post/transformer-explainer-interactive-learning-of-text-generative-models/</guid>
+      <description>&lt;p&gt;百篇paper计划(7/100)，很短，才2页，重点在code和其project，理解transformer。论文是没啥创新点了，写得也比较拉，看看项目吧。&lt;/p&gt;
+&lt;p&gt;这一篇写完啦！^^&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>LISA: Layerwise Importance Sampling for Memory-Efficient Large Language Model Fine-Tuning</title>
+      <link>https://example.com/post/lisa-layerwise-importance-sampling-for-memory-efficient-large-language-model-fine-tuning/</link>
+      <pubDate>Mon, 01 Jul 2024 11:45:24 +0000</pubDate>
+      <guid>https://example.com/post/lisa-layerwise-importance-sampling-for-memory-efficient-large-language-model-fine-tuning/</guid>
+      <description>&lt;p&gt;百篇paper计划(6/100)，好像是LoRA的改进，随便找的，而且这篇还没投会议呢。&lt;/p&gt;
+&lt;p&gt;这一篇也是微调，改lora&lt;/p&gt;
+&lt;p&gt;我以前看论文居然这么龟毛orz我的百篇paper计划创业未半而中道崩殂啊&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>paper reading</title>
+      <link>https://example.com/post/paper-reading/</link>
+      <pubDate>Tue, 21 May 2024 11:22:52 +0000</pubDate>
+      <guid>https://example.com/post/paper-reading/</guid>
+      <description>&lt;p&gt;把看过的论文做一个总结，防止我忘掉&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>FlexGen: high-throughput generative inference of large language models with a single GPU</title>
+      <link>https://example.com/post/flexgen-high-throughput-generative-inference-of-large-language-models-with-a-single-gpu/</link>
+      <pubDate>Tue, 21 May 2024 10:37:15 +0000</pubDate>
+      <guid>https://example.com/post/flexgen-high-throughput-generative-inference-of-large-language-models-with-a-single-gpu/</guid>
+      <description>&lt;p&gt;推理llm里面搞卸载的。百篇阅读计划(5/100)。看到和以前有点相关联的地方了，卸载和内存优化都是偏系统的。&lt;/p&gt;
+&lt;p&gt;因为大的背景过于重复了，以后论文注解只记录小的背景了。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</title>
+      <link>https://example.com/post/chain-of-thought-prompting-elicits-reasoning-in-large-language-models/</link>
+      <pubDate>Tue, 16 Apr 2024 21:39:51 +0000</pubDate>
+      <guid>https://example.com/post/chain-of-thought-prompting-elicits-reasoning-in-large-language-models/</guid>
+      <description>&lt;p&gt;思维链论文阅读，百篇paper计划(4/100)，思维链这个技术还是prompt这个部分里面的，所以这篇论文还是算prompt&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>TinyLLM: Learning a Small Student from Multiple Large Language Models</title>
+      <link>https://example.com/post/tinyllm-learning-a-small-student-from-multiple-large-language-models/</link>
+      <pubDate>Sun, 24 Mar 2024 20:41:50 +0000</pubDate>
+      <guid>https://example.com/post/tinyllm-learning-a-small-student-from-multiple-large-language-models/</guid>
+      <description>&lt;p&gt;小样本llm论文阅读，百篇paper计划(3/100)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Towards A Unified View Of Parameter-Efficient Transfer Learning</title>
+      <link>https://example.com/post/towards-a-unified-view-of-parameter-efficient-transfer-learning/</link>
+      <pubDate>Mon, 18 Mar 2024 16:16:31 +0000</pubDate>
+      <guid>https://example.com/post/towards-a-unified-view-of-parameter-efficient-transfer-learning/</guid>
+      <description>&lt;p&gt;高效参数微调的综述类论文阅读&lt;/p&gt;
+&lt;p&gt;百篇paper计划(2/100)，对【高效参数】迁移学习的总结。&lt;/p&gt;
+&lt;p&gt;由于我也不怎么会选论文，就按照会议选了这篇比较近的(ps现在是2024年初)。光从标题看，这一篇应该是综述，正好我补一下几个经典的高效参数方法。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;论文标题：Towards a Unified View of Parameter-Efficient Transfer Learning&lt;/li&gt;
+&lt;li&gt;arxiv地址：&lt;a href=&#34;https://arxiv.org/abs/2110.04366&#34;&gt;链接&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;code：&lt;a href=&#34;https://github.com/jxhe/unify-parameter-efficient-tuning&#34;&gt;github&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;rank: ICLR 2022 (spotlight presentation)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;abstract&#34;&gt;abstract&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;大背景：
+在&lt;strong&gt;下游任务&lt;/strong&gt;上&lt;strong&gt;微调&lt;/strong&gt;大规模的、预训练的模型 在&lt;strong&gt;NLP&lt;/strong&gt;领域里面用得很多。但是传统方法&lt;strong&gt;全参数微调&lt;/strong&gt;，当模型参数和任务个数增加时变得很难搞。&lt;/li&gt;
+&lt;li&gt;小背景（现在工作）：
+高效参数迁移学习(parameter-efficient transfer learning)方法只微调小规模参数，但是几种方法之间缺少系统的联系&lt;/li&gt;
+&lt;li&gt;贡献
+分析了几种最先进的高效参数迁移学习方案，给出一个统一的框架。&lt;/li&gt;
+&lt;li&gt;具体：
+将这几种方法概括为修改预训练模型中特定的&lt;strong&gt;隐藏状态&lt;/strong&gt;，并定义一组设计维度来总括性地设计方法。
+通过跨机器翻译、文本摘要、语言理解和文本分类基准的综合实证研究，我们利用统一的观点来识别以前方法中的重要设计选择。&lt;/li&gt;
+&lt;li&gt;实验：
+统一框架实现了设计元素在不同方法之间的迁移，因此我们能够实例化新的参数高效的微调方法，这些方法比以前的方法调整更少的参数，同时更有效，在所有四个任务上都能获得与所有参数微调相当的结果。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;introduction&#34;&gt;introduction&lt;/h1&gt;
+&lt;h2 id=&#34;大背景&#34;&gt;大背景&lt;/h2&gt;
+&lt;p&gt;在预训练的语言模型PLMs基础上进行迁移学习在NLP领域比较流行。
+为什么不要全参数微调：模型越来越大+需要对每个任务都微调。&lt;/p&gt;
+&lt;h2 id=&#34;小背景&#34;&gt;小背景&lt;/h2&gt;
+&lt;p&gt;一些方法更新小部分参数，让大部分参数不变。&lt;/p&gt;
+&lt;h3 id=&#34;adapter-tuning&#34;&gt;adapter tuning&lt;/h3&gt;
+&lt;p&gt;在预训练网络每层中插入一些小的神经模块&lt;strong&gt;adapters&lt;/strong&gt;
+微调时只训练adapters&lt;/p&gt;
+&lt;h3 id=&#34;prefix-tuning-和-prompt-tuning&#34;&gt;prefix tuning 和 prompt tuning&lt;/h3&gt;
+&lt;p&gt;从 通过文本提示控制PLM的提示方法(prompting methods that control PLMs through textual prompts) 出发，给输入或者隐含层预置了一个额外的可调前缀标记l，并且在下游任务中预训练时，只训练这些soft prompt
+(这个soft prompt应该是刚刚预置的可调标记)&lt;/p&gt;
+&lt;h3 id=&#34;loralow-rank-matrices-to-approximate-parameter-updates&#34;&gt;LoRA（low-rank matrices to approximate parameter updates）&lt;/h3&gt;
+&lt;p&gt;学习&lt;strong&gt;低秩矩阵&lt;/strong&gt;来近似参数更新。&lt;/p&gt;
+&lt;h3 id=&#34;总结&#34;&gt;总结&lt;/h3&gt;
+&lt;p&gt;这些方法在不同的任务集上表现出与全微调相当的性能，通常通过更新不到1%的原始模型参数来实现。
+除了节省参数外，高效参数的调整使其能够快速适应新任务而不会遗忘。并且在分布外评估(out-of-distribution evaluation)中表现出优异的健壮性。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>FULL PARAMETER FINE-TUNING FOR LARGE LANGUAGE MODELS WITH LIMITED RESOURCES</title>
+      <link>https://example.com/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/</link>
+      <pubDate>Fri, 24 Nov 2023 17:10:38 +0000</pubDate>
+      <guid>https://example.com/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/</guid>
+      <description>&lt;p&gt;百篇paper计划(1/100)，推荐阅读的，没有选择趋向。内容是：用有限的资源（主要是内存）进行全参数大模型微调，研究重点集中在微调部分，做的是内存优化的工作。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;论文标题：Full Parameter Fine-tuning for Large Language Models with Limited Resources&lt;/li&gt;
+&lt;li&gt;arxiv地址：&lt;a href=&#34;https://arxiv.org/abs/2306.09782&#34;&gt;链接&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;code：&lt;a href=&#34;https://github.com/OpenLMLab/LOMO&#34;&gt;github&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;abstract&#34;&gt;abstract&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;背景：LLMs给NLP问题带来了革命性变化，but需要大量GPU资源&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;已有：高效参数微调（PEFT），没有彻底解决
+&lt;a href=&#34;%E9%AB%98%E6%95%88%E5%8F%82%E6%95%B0%E5%BE%AE%E8%B0%83.md&#34;&gt;PEFT参考文档&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;parameter-efficient fine-tuning vs full-parameter fine-tune&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创新：提出了新的优化器 LOw-Memory-Optimization
+内容：在一个步骤融合了梯度计算和参数更新&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;怎么融合(fuse)？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;效果：和标准方法（DeepSpeed解决方案）相比，我们将内存使用量减少到10.8%。
+因此，我们的方法可以在一台拥有8×RTX 3090的机器上对65B模型进行全参数微调，每台机器都有24GB内存&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;introduction&#34;&gt;introduction&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;感觉就是把摘要扩写了一遍&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;背景：LLMs 厉害，但是要钱。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;目前：有效参数微调方法
+比如：LoRA,Prefix-tuning
+但是：没有全参数的&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;解决问题：我们要找个办法实现全参数微调&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;干了啥&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;分析LLMs里面内存使用的四个主要方面：
+激活，优化器状态，梯度张量和参数&lt;/li&gt;
+&lt;li&gt;从三个方面优化了训练过程：
+&lt;ul&gt;
+&lt;li&gt;SGD-优化器：由于SGD不存储任何中间状态，可以删除整个优化器状态部分&lt;a href=&#34;SGD.md&#34;&gt;SGD是什么&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;LOMO把梯度tensor的内存使用降到了O(1)&lt;/li&gt;
+&lt;li&gt;为了稳定使用混合精度训练：集成梯度归一化和损失缩放，并将某些计算过渡到全精度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;结果
+内存使用量等于参数使用量加上激活量和最大梯度张量。&lt;/p&gt;
+&lt;p&gt;分析了：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;内存和吞吐量&lt;/li&gt;
+&lt;li&gt;下游表现&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;贡献&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;SGD&lt;/li&gt;
+&lt;li&gt;LOMO&lt;/li&gt;
+&lt;li&gt;验证&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;related-work&#34;&gt;related work&lt;/h1&gt;
+&lt;p&gt;都是节省内存的技术&lt;/p&gt;
+&lt;h2 id=&#34;activation-checkpointing&#34;&gt;Activation Checkpointing&lt;/h2&gt;
+&lt;p&gt;计算图中策略性地选择的检查点节点的激活变量在正向阶段后保留在内存中，而其余节点的激活变量在梯度计算时最多重新计算一次。激活内存可以降低原始内存使用量的平方根，代价是需要多一次正向传递。
+在前向传播过程中，有选择性的丢弃一些产生的中间激活值，当反向传播需要使用这些激活值时，再依据上一个保存的激活值来计算出这些需要的激活值来帮助完成反向传播。这样一来，便可以大大减少训练过程中所需要的存储空间。&lt;/p&gt;
+&lt;h2 id=&#34;mixed-precision-training&#34;&gt;Mixed-Precision Training&lt;/h2&gt;
+&lt;p&gt;混合精度，32位浮点数和16位浮点数混合使用&lt;/p&gt;
+&lt;h2 id=&#34;heterogeneous-training-system&#34;&gt;Heterogeneous Training System&lt;/h2&gt;
+&lt;p&gt;通过利用异构内存（如CPU和NVMe内存）来减少GPU内存消耗&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;但是怎么做？？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;method&#34;&gt;method&lt;/h1&gt;
+&lt;h2 id=&#34;优化器&#34;&gt;优化器&lt;/h2&gt;
+&lt;p&gt;adam和SGD比起来哪里不好了！
+参考https://blog.csdn.net/S20144144/article/details/103417502&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CoT-VLA: Visual Chain-of-Thought Reasoning for  Vision-Language-Action Models</title>
+      <link>https://example.com/post/cot-vla-visual-chain-of-thought-reasoning-for-vision-language-action-models/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/cot-vla-visual-chain-of-thought-reasoning-for-vision-language-action-models/</guid>
+      <description>&lt;p&gt;怎么感觉这又是个插值？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Data Scaling Laws for Imitation Learning-Based End-to-End Autonomous Driving</title>
+      <link>https://example.com/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/</guid>
+      <description>&lt;p&gt;14:21:30开始，这篇论文只能看20分钟
+快速了解：
+这篇论文是否可以扩展到vla方面？&lt;/p&gt;</description>
     </item>
     <item>
       <title>Efficient Data Collection for Robotic Manipulation  via Compositional Generalization</title>
@@ -53,6 +446,62 @@
     DOI       = {10.15607/RSS.2024.XX.013} 
 }
 &lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    <item>
+      <title>FAST:Efficient Action Tokenization for  Vision-Language-Action Models</title>
+      <link>https://example.com/post/fast-efficient-action-tokenization-for-vision-language-action-models/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/fast-efficient-action-tokenization-for-vision-language-action-models/</guid>
+      <description>&lt;p&gt;pi0.5的时候用到这个方法：post-train里面用这个方法，说是因为这个论文发现了用离散的token训练更快。有点好奇是怎么把动作给离散化的，又不能分词，既然它能离散化的话，那图像也能离散化吗？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>simPLE: a visuotactile method learned in simulation  to precisely pick, localize, regrasp, and place objects</title>
+      <link>https://example.com/post/simple-a-visuotactile-method-learned-in-simulation-to-precisely-pick-localize-regrasp-and-place-objects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/simple-a-visuotactile-method-learned-in-simulation-to-precisely-pick-localize-regrasp-and-place-objects/</guid>
+      <description>&lt;p&gt;在仿真中学到的视觉触觉方法&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vision-Language-Action Models for Robotics: A Review Towards Real-World Applications</title>
+      <link>https://example.com/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/</guid>
+      <description>&lt;p&gt;一篇综述
+2025-11-06 16:15:25 开始看&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 看完 (@2026-04-06 02:33)
+希望从这篇综述中得到：一个综述应该从什么视角看vla，以及重点关注vla的泛化性和精确性的trade-off。vla的目标是什么？轻量？泛化？精确？还是什么？
+Q:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;一个综述应该从怎样的视角？&lt;/li&gt;
+&lt;li&gt;vla的目标、定义、来源、和别的模型的区分&lt;/li&gt;
+&lt;li&gt;技术层面的问题：核心架构、挑战、风险、目前的算法怎样应对&lt;/li&gt;
+&lt;li&gt;实际应用与如何评估&lt;/li&gt;
+&lt;li&gt;如果我自己来，能搞出什么东西？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;2025-11-06 17:16:47 确定好问题，可以开始看了&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>VLA-OS: Structuring and Dissecting Planning Representations and Paradigms in Vision-Language-Action Models</title>
+      <link>https://example.com/post/vla-os-structuring-and-dissecting-planning-representations-and-paradigms-in-vision-language-action-models/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/vla-os-structuring-and-dissecting-planning-representations-and-paradigms-in-vision-language-action-models/</guid>
+      <description>&lt;p&gt;看起来还不错，没有正式发表&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>vla综述们</title>
+      <link>https://example.com/post/vla%E7%BB%BC%E8%BF%B0%E4%BB%AC/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/vla%E7%BB%BC%E8%BF%B0%E4%BB%AC/</guid>
+      <description>&lt;p&gt;若干综述的集合，看就完事&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>安全抓取思路</title>
+      <link>https://example.com/post/%E5%AE%89%E5%85%A8%E6%8A%93%E5%8F%96%E6%80%9D%E8%B7%AF/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E5%AE%89%E5%85%A8%E6%8A%93%E5%8F%96%E6%80%9D%E8%B7%AF/</guid>
+      <description>&lt;p&gt;要求：对不同材料的柔体（比如布料）或者比较脆弱的刚体（鸡蛋）操作，保证抓取的安全，稳定，考虑力 force。VLA+物体摩擦系数提示&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>灵巧手抓取示例 | 我的博客</title>
+<meta name="keywords" content="dexterous, genesis">
+<meta name="description" content="要求：灵巧手（手臂尽可能简单）抓取不同摩擦力的常见物体（能抓到就行，不需要用模型）">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
+<link rel="canonical" href="https://example.com/post/%E7%81%B5%E5%B7%A7%E6%89%8B%E6%8A%93%E5%8F%96%E7%A4%BA%E4%BE%8B/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://example.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://example.com/post/%E7%81%B5%E5%B7%A7%E6%89%8B%E6%8A%93%E5%8F%96%E7%A4%BA%E4%BE%8B/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://example.com/post/%E7%81%B5%E5%B7%A7%E6%89%8B%E6%8A%93%E5%8F%96%E7%A4%BA%E4%BE%8B/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="灵巧手抓取示例">
+  <meta property="og:description" content="要求：灵巧手（手臂尽可能简单）抓取不同摩擦力的常见物体（能抓到就行，不需要用模型）">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-04-01T16:54:39+00:00">
+    <meta property="article:modified_time" content="2025-04-01T16:54:39+00:00">
+    <meta property="article:tag" content="Dexterous">
+    <meta property="article:tag" content="Genesis">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="灵巧手抓取示例">
+  <meta name="twitter:description" content="要求：灵巧手（手臂尽可能简单）抓取不同摩擦力的常见物体（能抓到就行，不需要用模型）">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://example.com/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "灵巧手抓取示例",
+      "item": "https://example.com/post/%E7%81%B5%E5%B7%A7%E6%89%8B%E6%8A%93%E5%8F%96%E7%A4%BA%E4%BE%8B/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "灵巧手抓取示例",
+  "name": "灵巧手抓取示例",
+  "description": "要求：灵巧手（手臂尽可能简单）抓取不同摩擦力的常见物体（能抓到就行，不需要用模型）\n",
+  "keywords": [
+    "dexterous", "genesis"
+  ],
+  "articleBody": "要求：灵巧手（手臂尽可能简单）抓取不同摩擦力的常见物体（能抓到就行，不需要用模型）\n环境 基础安装 git(为了及时更新genesis) git clone https://github.com/Genesis-Embodied-AI/Genesis.git 为了方便import genesis，在~/.bashrc里面加入 export PYTHONPATH=/data/zly/Genesis:$PYTHONPATH conda Python: 3.9+，conda create -n genesis python==3.10 torch：nvidia-smi查出来最高12.0。pip3 install torch torchvision torchaudio –index-url https://download.pytorch.org/whl/cu118 在Gnesis文件夹里面 pip install -e . 可选安装 ompl：不知道能不能用:( pip debug –verbose 查看支持的cp版本： cp310-cp310-manylinux_2_27_x86_64。表示这个系统glibc2.27。但是提供的只有2.28+的\n算了，安装ompl一堆问题，运动规划库而以，懒得搞了 方案1：重新编译 Boost 1.58 or higher\nboost各版本下载 准备用1.60 下载.tar.gz tar -xvzf boost_1_70_0.tar.gz 放在/application/boost_1_60_0文件夹里 boost_1_60_0$ ./bootstrap.sh –prefix=/data/zly/application/boost ./b2 install 检验： touch test.cpp vim test.cpp #include #include using namespace std; using namespace boost::placeholders; int fun(int x,int y){return x+y;} int main(){ int m=1;int n=2; cout\u003c\u003cboost::bind(fun,_1,_2)(m,n)\u003c\u003cendl; return 0; } g++ test.cpp -o test ./test 输出3，ok 加入环境变量echo 'export BOOST_ROOT=/data/zly/application/boost' \u003e\u003e ~/.bashrc\recho 'export LD_LIBRARY_PATH=$BOOST_ROOT/lib:$LD_LIBRARY_PATH' \u003e\u003e ~/.bashrc\recho 'export CPATH=$BOOST_ROOT/include:$CPATH' \u003e\u003e ~/.bashrc\recho 'export LIBRARY_PATH=$BOOST_ROOT/lib:$LIBRARY_PATH' \u003e\u003e ~/.bashrc cmake(version 3.5 or higher)\ncmake –version输出3.10.2，那就不安装了 eigen (version 3.3 or higher)\n从gitlab下载源代码 选择3.4.0 下载解压 测试代码 #include #include using Eigen::MatrixXd; int main() { MatrixXd m(2,2); m(0,0) = 3; m(1,0) = 2.5; m(0,1) = -1; m(1,1) = m(1,0) + m(0,1); std::cout \u003c\u003c m \u003c\u003c std::endl; } g++ -I /path/to/eigen/ my_program.cpp -o my_program 把上面两个加入c++的头文件里面another option is to symlink or copy the Eigen folder into /usr/local/include/\npy++直接pip3 install -vU pygccxml pyplusplus安装 C++14 compiler 满足 下载ompl库wget https://github.com/ompl/ompl/archive/refs/tags/1.6.0.tar.gz，然后 tar -xzvf 1.6.0.tar.gz\n尝试cmake ../.. 时报错 /usr/bin/c++: 2: /usr/bin/c++: clang++: not found\nwget https://github.com/llvm/llvm-project/releases/download/llvmorg-14.0.0/clang+llvm-14.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz splashsurf 安装cargo：curl -sSf https://static.rust-lang.org/rustup.sh | sh，然后回车，最后要重启terminal cargo install splashsurf genesis摩擦系数设置 先用基础的方块，简单franka抓取。 确定位置/相机设定 为什么用example data的0.5会弹出去..它系统又出了什么bug friction must be in the range [1e-2, 5.0] for simulation stability. 方块加上friction ok material=gs.materials.Rigid(friction=friction)。看到很多加了这个。 set_friction 还没尝试，以后再看，material设置的基本够了 方块加上mass？先不管，没空搞 解析dataset：MultiDex ' 嗯现在物品能导入了就是变成灰模了，不管\nhttps://github.com/IRVLUTD/isaac_sim_grasping/ 这个仓库里的gripper都符合我的需求。不行，有的没有collision\n导入3finger gripper 导入sapien 下载的object（比如水杯） 调整3finger的位置到obj附近 抓取 抓取后移动 加入机械臂 ur5e 调整运动轨迹 设置不同摩擦力 整理3f+水杯结果 怎么获得jnt_names来着\n",
+  "wordCount" : "245",
+  "inLanguage": "en",
+  "datePublished": "2025-04-01T16:54:39Z",
+  "dateModified": "2025-04-01T16:54:39Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/post/%E7%81%B5%E5%B7%A7%E6%89%8B%E6%8A%93%E5%8F%96%E7%A4%BA%E4%BE%8B/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://example.com/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      灵巧手抓取示例
+    </h1>
+    <div class="post-meta">
+
+<span title='2025-04-01 16:54:39 +0000 UTC'>April 1, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>要求：灵巧手（手臂尽可能简单）抓取不同摩擦力的常见物体（能抓到就行，不需要用模型）</p>
+<h1 id="环境">环境<a hidden class="anchor" aria-hidden="true" href="#环境">#</a></h1>
+<h2 id="基础安装">基础安装<a hidden class="anchor" aria-hidden="true" href="#基础安装">#</a></h2>
+<ol>
+<li>git(为了及时更新genesis)</li>
+<li>git clone <a href="https://github.com/Genesis-Embodied-AI/Genesis.git">https://github.com/Genesis-Embodied-AI/Genesis.git</a></li>
+<li>为了方便import genesis，在~/.bashrc里面加入 export PYTHONPATH=/data/zly/Genesis:$PYTHONPATH</li>
+<li>conda</li>
+<li>Python: 3.9+，conda create -n genesis python==3.10</li>
+<li>torch：nvidia-smi查出来最高12.0。pip3 install torch torchvision torchaudio &ndash;index-url <a href="https://download.pytorch.org/whl/cu118">https://download.pytorch.org/whl/cu118</a></li>
+<li>在Gnesis文件夹里面 pip install -e .</li>
+</ol>
+<h2 id="可选安装">可选安装<a hidden class="anchor" aria-hidden="true" href="#可选安装">#</a></h2>
+<ol>
+<li>ompl：不知道能不能用:(
+<ol>
+<li>
+<p>pip debug &ndash;verbose 查看支持的cp版本： cp310-cp310-manylinux_2_27_x86_64。表示这个系统glibc2.27。但是提供的只有2.28+的</p>
+<ol>
+<li>算了，安装ompl一堆问题，运动规划库而以，懒得搞了</li>
+<li>方案1：重新编译
+<ol>
+<li>
+<p>Boost 1.58 or higher</p>
+<ol>
+<li><a href="https://www.boost.org/users/history/">boost各版本下载</a></li>
+<li>准备用1.60
+<ol>
+<li>下载.tar.gz</li>
+<li>tar -xvzf boost_1_70_0.tar.gz</li>
+<li>放在/application/boost_1_60_0文件夹里</li>
+<li>boost_1_60_0$ ./bootstrap.sh &ndash;prefix=/data/zly/application/boost</li>
+<li>./b2 install</li>
+<li>检验：
+<ol>
+<li>touch test.cpp</li>
+<li>vim test.cpp</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>  <span style="color:#75715e">#include&lt;iostream&gt;
+</span></span></span><span style="display:flex;"><span>  <span style="color:#75715e">#include&lt;boost/bind/bind.hpp&gt;
+</span></span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> boost<span style="color:#f92672">::</span>placeholders;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">fun</span>(<span style="color:#66d9ef">int</span> x,<span style="color:#66d9ef">int</span> y){<span style="color:#66d9ef">return</span> x<span style="color:#f92672">+</span>y;}
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> m<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;<span style="color:#66d9ef">int</span> n<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>  cout<span style="color:#f92672">&lt;&lt;</span>boost<span style="color:#f92672">::</span>bind(fun,_1,_2)(m,n)<span style="color:#f92672">&lt;&lt;</span>endl;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span></code></pre></div><ol start="3">
+<li>g++ test.cpp -o test</li>
+<li>./test 输出3，ok</li>
+</ol>
+</li>
+<li>加入环境变量<code>echo 'export BOOST_ROOT=/data/zly/application/boost' &gt;&gt; ~/.bashrc echo 'export LD_LIBRARY_PATH=$BOOST_ROOT/lib:$LD_LIBRARY_PATH' &gt;&gt; ~/.bashrc echo 'export CPATH=$BOOST_ROOT/include:$CPATH' &gt;&gt; ~/.bashrc echo 'export LIBRARY_PATH=$BOOST_ROOT/lib:$LIBRARY_PATH' &gt;&gt; ~/.bashrc</code></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>cmake(version 3.5 or higher)</p>
+<ol>
+<li>cmake &ndash;version输出3.10.2，那就不安装了</li>
+</ol>
+</li>
+<li>
+<p>eigen (version 3.3 or higher)</p>
+<ol>
+<li>从gitlab下载源代码</li>
+<li>选择3.4.0</li>
+<li>下载解压</li>
+<li>测试代码
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;Eigen/Dense&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> Eigen<span style="color:#f92672">::</span>MatrixXd;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>MatrixXd m(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>m(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>) <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>m(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>) <span style="color:#f92672">=</span> <span style="color:#ae81ff">2.5</span>;
+</span></span><span style="display:flex;"><span>m(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>) <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>m(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>) <span style="color:#f92672">=</span> m(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>) <span style="color:#f92672">+</span> m(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> m <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>g++ -I /path/to/eigen/ my_program.cpp -o my_program</li>
+</ol>
+<p>把上面两个加入c++的头文件里面another option is to symlink or copy the Eigen folder into /usr/local/include/</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>py++直接pip3 install -vU pygccxml pyplusplus安装
+C++14 compiler 满足
+下载ompl库wget <a href="https://github.com/ompl/ompl/archive/refs/tags/1.6.0.tar.gz">https://github.com/ompl/ompl/archive/refs/tags/1.6.0.tar.gz</a>，然后 tar -xzvf 1.6.0.tar.gz</p>
+<p>尝试cmake ../.. 时报错 /usr/bin/c++: 2: /usr/bin/c++: clang++: not found</p>
+<ol>
+<li>wget <a href="https://github.com/llvm/llvm-project/releases/download/llvmorg-14.0.0/clang+llvm-14.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz">https://github.com/llvm/llvm-project/releases/download/llvmorg-14.0.0/clang+llvm-14.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>splashsurf
+<ol>
+<li>安装cargo：curl -sSf <a href="https://static.rust-lang.org/rustup.sh">https://static.rust-lang.org/rustup.sh</a> | sh，然后回车，最后要重启terminal</li>
+<li>cargo install splashsurf</li>
+</ol>
+</li>
+</ol>
+<h1 id="genesis摩擦系数设置">genesis摩擦系数设置<a hidden class="anchor" aria-hidden="true" href="#genesis摩擦系数设置">#</a></h1>
+<ol>
+<li>先用基础的方块，简单franka抓取。
+<ol>
+<li>确定位置/相机设定</li>
+<li>为什么用example data的0.5会弹出去..它系统又出了什么bug</li>
+<li><code>friction</code> must be in the range [1e-2, 5.0] for simulation stability.</li>
+</ol>
+</li>
+<li>方块加上friction ok
+<ol>
+<li>material=gs.materials.Rigid(friction=friction)。看到很多加了这个。</li>
+<li>set_friction 还没尝试，以后再看，material设置的基本够了</li>
+</ol>
+</li>
+<li>方块加上mass？先不管，没空搞</li>
+<li>解析dataset：MultiDex
+<ol>
+<li>'</li>
+</ol>
+</li>
+</ol>
+<p>嗯现在物品能导入了就是变成灰模了，不管</p>
+<p><a href="https://github.com/IRVLUTD/isaac_sim_grasping/">https://github.com/IRVLUTD/isaac_sim_grasping/</a>
+这个仓库里的gripper都符合我的需求。不行，有的没有collision</p>
+<ol>
+<li>导入3finger gripper</li>
+<li>导入sapien 下载的object（比如水杯）</li>
+<li>调整3finger的位置到obj附近</li>
+<li>抓取</li>
+<li>抓取后移动</li>
+<li>加入机械臂 ur5e</li>
+<li>调整运动轨迹</li>
+<li>设置不同摩擦力</li>
+<li>整理3f+水杯结果</li>
+</ol>
+<p>怎么获得jnt_names来着</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://example.com/tags/dexterous/">Dexterous</a></li>
+      <li><a href="https://example.com/tags/genesis/">Genesis</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

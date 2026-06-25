@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>控制 | 我的博客</title>
+<meta name="keywords" content="control">
+<meta name="description" content="补一点">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
+<link rel="canonical" href="https://example.com/post/%E6%8E%A7%E5%88%B6/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://example.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://example.com/post/%E6%8E%A7%E5%88%B6/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://example.com/post/%E6%8E%A7%E5%88%B6/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="控制">
+  <meta property="og:description" content="补一点">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-10-27T15:33:04+00:00">
+    <meta property="article:modified_time" content="2025-10-27T15:33:04+00:00">
+    <meta property="article:tag" content="Control">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="控制">
+  <meta name="twitter:description" content="补一点">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://example.com/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "控制",
+      "item": "https://example.com/post/%E6%8E%A7%E5%88%B6/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "控制",
+  "name": "控制",
+  "description": "补一点\n",
+  "keywords": [
+    "control"
+  ],
+  "articleBody": "补一点\n轨迹规划 (1) 轨迹： 机械手臂（的末端点或者操作点）的位置、速度、加速度对时间的历程；\n可进一步定义成{T}相对{G}的状态历程（和手臂种类无关，{G}也可随时间变动，比如传送带）。\n（2）理想轨迹: 机械手臂（的末端点或者操作点）的位置、速度、加速度对时间的历程； 理想轨迹，必须是Smooth Path(i.e.,continuous with continuous first derivative)。 Smooth Path不仅要求位置上连续，而且要求速度上也必须连续，若速度上不连续，速度曲线会有很多转折点，在转折点上，其加速度有可能突破限制（力学限制），连续速度曲线加速度变化不大，若速度变化不连续，在那一瞬间，执行器需要提供巨大扭力符合加速度要求，不符合真实的情况。\nvia point，在轨迹规划过程中，往往还需要到达特定的中间位置，该位置叫做via point； initial point , 初始位置、姿态； final point，目标位置、姿态； 轨迹规划，常常在两个不同空间下进行处理，第一个是Joint Space，即将规划细化到每一个Joint上进行；另外一个是Cartesian Space上的轨迹规划，即当前知道手臂位置，直接在手臂末端点空间姿态上进行规划。 2. Joint Space下的轨迹规划 （1）步骤 定义{T} 相对于{G}的initial point, via, final point, (包含移动和转动自由度）。\ni = 1: initial\ni = 2~N-1: via points\ni = N+1: final\n注意，规划只有6个自由度，但是Trans Matrics有16个参数，故将其以6个参数方式来表达：\n上面是移动，下面是转动\n旋转矩阵里，9个数字有3个自由度，即6个限制条件，若各自规划9个数字，没有加以限制，有可能形成的矩阵很大几率不符合Rotation Matrix的形式，无法满足6个限制条件。所以我们直接以3个自由度形式进行规划。\n做Inverse Kinematics: 将手臂末端点状态转换到joint状态： 对所有joints规划smooth trajectories 做Forward Kinematics：将joint状态转换到手臂末端点状态，检查末端点在Cartesian Space下轨迹的可行性。 (2)示例 joint space Cartesian space 经历了上述步骤，最后一步，进行Trajectory Checking… ，看看手臂在运动时，有没有碰倒障碍物，或者有没有满足其他的一些条件… …\n3. Cartesian-Space下的轨迹规划 （1）步骤 定义{T} 相对于{G}的initial point, via, final point, (包含移动和转动自由度）。\ni = 1: initial\ni = 2~N-1: via points\ni = N+1: final\n注意，规划只有6个自由度，但是Trans Matrics有16个参数，故将其以6个参数方式来表达：\n在上述需求下，直接对所有手臂末端点规划smooth trajectories。\n做Inverse Kinematics: 将规划好手臂末端点状态的轨迹点转换到joint状态： 检查joint状态在Joint-Space下轨迹的可行性（有没有达到执行器的极限位置…blabla）\nCOMMENTS\nCartersian 方法用的比较多，因为其可以规划更具物理直观意义的轨迹。\n缺点: 较高的运算负载(IK)，规划完了做IK。\n比如已知init point，2个via points，1个final point，Joint Space的方法，只须做4次IK。\n若4s空间，先在Cartesian下做规划，在做IK，运算量就大很多，比如规划出1000个路径，做IK，就需要算4000次。\n对Real Time下，电脑的计算能力考验比较大。\n(2) 示例 经历了上述步骤，最后一步，进行Trajectory Checking… ，检测各个Joint运动有没有超出限制… …\n机械臂运动规划中通常涉及几个坐标系。\n坐标系 含义 常用记号 基坐标系（Base Frame / {G}） 机械臂底座固定的参考坐标系 {G}、{B} 工具坐标系（Tool Frame / {T}） 定义在末端执行器上的坐标系（TCP） {T} 关节坐标系（Joint Frames） 每个关节都有自己的局部坐标系 {i} 任务坐标系 / 世界坐标系（Task / World Frame） 有时与基坐标系不同，用于描述外部环境或工件位置 {W} 6维表达（3个平移 + 3个旋转） Joint Space 与 Cartesian Space 后面的笛卡尔坐标系就是末端执行器的6维表达（3个平移 + 3个旋转）；joint space可以说是每个电机的角度 它俩通过正/逆运动学可以互相转换，but有个问题：逆运动学会有多解 为什么： 机械臂的构型是冗余的（Redundant Manipulator）；有时不同解都能让末端到达同一位置（称为不同的“工作构型”）。\n维度 常见解的命名 肩部 左臂 / 右臂 (lefty/righty) 肘部 肘上 / 肘下 (elbow up/down) 腕部 翻转 / 不翻转 (wrist flip/non-flip) 每个二元选择都可能导致 23=823=8 种不同的解。 还有一个问题奇异点（Singularities）。 奇异点就是机械臂处于某种几何姿态时，某些方向的运动会“失效”或变得不稳定；- 奇异点就是机械臂处于某种几何姿态时，某些方向的运动会“失效”或变得不稳定；\n在数学上，对应雅可比矩阵 J(q)J(q) 的行列式为 0；\n意义：此时关节的小变化不能引起末端的有效变化，系统自由度“退化”。\n举例：\n手臂完全伸直；\n手腕三轴重叠；\n→ 都是奇异点。\n在奇异点附近：\nIK 解可能不连续；\n很小的末端运动需要极大的关节运动；\n控制器可能出现突跳或震荡。 多解其实还好，主要是奇异点\n现在的逆运动学求解能否做到？改善这两个问题？\n目前确实有不少逆运动学（IK）求解器（solver）表现不错、速度快、准确率高。下面我列出几个比较推荐的，并附上它们的优缺点（供你在选择时参考）。\n✅ 推荐的 IK 求解器 1. IKPy 一个用 Python 写的通用 IK 库。GitHub\n特点：支持任意机械臂链、支持 URDF、支持位置和姿态两者求解。GitHub\n性能：作者表示“从 ~7 ms 到 ~50 ms”完成一次 IK 求解（取决于模型复杂度）GitHub\n适合：快速原型、小型机械臂、教学或研究。\n注意：如果用于工业实时控制（硬实时要求、低延迟、高频率）可能还需评估其 Python 实现的延迟与稳定性。\n2. pick_ik （适用于 MoveIt 生态） 一个为 ROS/MoveIt 设计的 IK 求解插件。GitHub\n特点：结合了局部优化（梯度下降等）+ 全局优化（例如进化算法）以解决冗余、多解、约束问题。index.ros.org\n优点：在 ROS 机械臂系统中使用方便，可定制成本函数（例如最小化关节移动、避免关节极限、避免碰撞）GitHub\n适合：使用 ROS/MoveIt 框架、需要集成规划器、碰撞检测、约束处理的系统。\n3. IK‑Geo 一个更偏“几何解析”方向、C++/Python 混合实现的 IK 库。GitHub\n特点：支持“分解子问题”（Paden–Kahan 子问题）等几何方法来求解 6R 或通用串联机械臂的 IK。\n优点：对于结构良好的工业机械臂（例如腕部三轴交叉、肩肘结构良好）可能能够得到 解析解 或 接近解析解，速度快、精度高。\n适合：你若有控制自己机械臂的几何结构、想要自行整合或实现高性能 IK 的话。\n4. IKFast（来自 OpenRAVE） IKFast 是一个“生成器”（compiler）型工具，可以为给定机械臂生成专用的 C++ IK 求解器。维基百科+1\n特点：生成后的求解器为专机型、解析或近解析方法、执行速度极快（有论文中提到几 µs 级别）维基百科\n优点：如果你用于工业控制、需要最高性能、且机械臂结构已知固定，那它是一个非常好的选择。\n缺点：配置和生成过程较为复杂；每更换机械臂结构或关节数都可能要重新生成。\n⚠️ 选择时需要关注的 “因素” 结构匹配性：机械臂结构如果是标准的 “3‐轴腕部” + “肩肘部”结构（如很多工业 6 DoF 机械臂），则解析/几何方法（如 IK-Geo、IKFast）效果最佳。若结构非常不规则或冗余多，则可能需要数值方法。\n实时性能：如果规划/控制频率要求很高（如 1 kHz 以上），要优先考虑生成型或 C++ 实现的求解器，而不是纯 Python 的。\n约束处理能力：是否要考虑关节限位、碰撞检测、最小路径、避障、冗余优化等。许多“简单”求解器只求一个基本解，不处理这些。\n稳定性与收敛性：数值方法可能陷入局部最优、收敛慢、或在奇异点附近表现差。解析方法虽然快，但可能受限于机械结构是否满足可解析条件。\n集成便利度：是否与你系统（ROS/MoveIt、工业控制器、自定义控制系统）兼容。\n维护和社区支持：库是否活跃、文档是否完善、是否有实际工程案例。\n看这个视频# Hardware Demo of a Digital PID Controller 转载自Youtube：@Gregory L. Holst The demonstration in this video will show you the effect of proportional, derivative, and integral control on a real system. It’s a DC motor connected to an optical rotary encod https://www.bilibili.com/video/BV1ix411M7RX/\nPID 控制器为什么要用比例、积分、微分？\n这个问题问得非常好，本质上是在问：为什么这三项刚好能解决“控制误差”的主要问题。我们可以从“误差如何表现”这个角度来理解，而不是从公式出发。\n一、控制的核心问题是什么？ 任何反馈控制，本质上都在处理一个量：\n误差\ne(t)=期望值−实际值e(t) = \\text{期望值} - \\text{实际值}e(t)=期望值−实际值\n误差有三种典型“表现形式”：\n现在有多大（当前偏差）\n过去积累了多少（长期偏差）\n将来可能怎么变（变化趋势）\nPID 正好一一对应这三类信息。\n二、比例（P）：解决“现在差多少” 作用 比例项直接根据当前误差大小给控制输出：\nuP=KP⋅e(t)u_P = K_P \\cdot e(t)uP​=KP​⋅e(t)\n为什么需要？ 误差大 → 动作大\n误差小 → 动作小\n这是最直觉、最基本的控制方式。\n但它解决不了什么？ 稳态误差：\n在有负载、摩擦、偏置的系统中，单靠 P，往往需要“留一点误差”才能产生足够的输出\nKPK_PKP​ 太大 → 振荡、超调、不稳定\nKPK_PKP​ 太小 → 反应迟钝\n👉 P 只能“对症”，不能“根治”\n三、积分（I）：解决“为什么老是差一点” 作用 积分项累加历史误差：\nuI=KI∫e(t) dtu_I = K_I \\int e(t),dtuI​=KI​∫e(t)dt\n为什么需要？ 如果系统长期存在一个小误差：\nP 项输出是常数\n但这个常数可能不足以抵消外界扰动（重力、负载）\n积分会：\n不断累加误差\n直到误差被“逼到 0”\n👉 I 的核心作用：消除稳态误差\n但它带来什么问题？ 响应变慢\n容易 超调\n执行器饱和时会发生 积分饱和（windup）\n所以工程中常配合 anti-windup 使用。\n四、微分（D）：解决“马上要出事了” 作用 微分项看的是误差变化率：\nuD=KD⋅de(t)dtu_D = K_D \\cdot \\frac{de(t)}{dt}uD​=KD​⋅dtde(t)​\n为什么需要？ 微分相当于在问：\n“误差是不是正在快速变大？”\n如果误差变化很快：\nD 项提前“踩刹车”\n抑制超调和振荡\n👉 D 的本质：预测趋势、增加阻尼\n它像什么？ 像减震器\n像提前刹车，而不是撞上再修正\n局限 对噪声非常敏感\n实际中常对测量值微分 + 低通滤波\n五、为什么一定是 P + I + D，而不是别的？ 从信息角度看：\n项 利用的信息 解决的问题 P 当前误差 响应速度 I 历史误差 稳态误差 D 误差趋势 超调 / 振荡 它们共同覆盖了：\n现在、过去、未来\n在不需要系统精确模型的前提下，\nPID 是最简单、最通用、最鲁棒的一阶控制结构。\n六、一个直觉类比（很重要） 想象你在 倒车入库：\nP：离车位远就多打方向盘\nI：如果一直偏一点点，就慢慢修正回来\nD：发现方向偏得越来越快，提前反打\n你并没有解微分方程，但你在用 PID。\n七、一句话总结 PID 之所以用比例、积分、微分，是因为它们分别对应误差的“大小、积累和变化趋势”，用最少的结构解决了速度、精度和稳定性三大矛盾。\nwindup（积分饱和/积分过冲）：\n积分项“积累得太多”，即使误差变小，控制器也还在努力“修正过去的误差”，导致动作过大、系统超调或振荡。\nanti-windup 的核心思想 防止积分累积过头，让系统更快恢复正常。\n方法简单说：\n检测控制输出饱和（比如电压达到最大/最小）\n停止或减缓积分累积\n不让积分项继续“胡乱加” 当误差回到合理范围时，积分再继续\n",
+  "wordCount" : "501",
+  "inLanguage": "en",
+  "datePublished": "2025-10-27T15:33:04Z",
+  "dateModified": "2025-10-27T15:33:04Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/post/%E6%8E%A7%E5%88%B6/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://example.com/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      控制
+    </h1>
+    <div class="post-meta">
+
+<span title='2025-10-27 15:33:04 +0000 UTC'>October 27, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>补一点</p>
+<h1 id="轨迹规划">轨迹规划<a hidden class="anchor" aria-hidden="true" href="#轨迹规划">#</a></h1>
+<h3 id="1-轨迹">(1) 轨迹：<a hidden class="anchor" aria-hidden="true" href="#1-轨迹">#</a></h3>
+<p>机械手臂（的末端点或者操作点）的位置、速度、加速度对时间的历程；</p>
+<p><img loading="lazy" src="https://pic4.zhimg.com/v2-2614c7661b880a853f2e7353f33d17e1_r.jpg"></p>
+<p>可进一步定义成{T}相对{G}的状态历程（<strong>和手臂种类无关，{G}也可随时间变动，比如传送带</strong>）。</p>
+<h3 id="2理想轨迹">（2）理想轨迹:<a hidden class="anchor" aria-hidden="true" href="#2理想轨迹">#</a></h3>
+<p>机械手臂（的末端点或者操作点）的位置、速度、加速度对时间的历程；
+理想轨迹，必须是Smooth Path(i.e.,continuous with continuous first derivative)。 Smooth Path不仅要求位置上连续，而且要求速度上也必须连续，<strong>若速度上不连续，速度曲线会有很多转折点，在转折点上，其加速度有可能突破限制（力学限制）</strong>，连续速度曲线加速度变化不大，若速度变化不连续，在那一瞬间，<strong>执行器需要提供巨大扭力符合加速度要求</strong>，不符合真实的情况。</p>
+<ul>
+<li>via point，在轨迹规划过程中，往往还需要到达特定的中间位置，该位置叫做via point；</li>
+<li>initial point , 初始位置、姿态；</li>
+<li>final point，目标位置、姿态；
+轨迹规划，常常在两个不同空间下进行处理，第一个是Joint Space，即将规划细化到每一个Joint上进行；另外一个是Cartesian Space上的轨迹规划，即当前知道手臂位置，直接在手臂末端点空间姿态上进行规划。</li>
+</ul>
+<h2 id="2-joint-space下的轨迹规划">2. Joint Space下的轨迹规划<a hidden class="anchor" aria-hidden="true" href="#2-joint-space下的轨迹规划">#</a></h2>
+<h3 id="1步骤">（1）步骤<a hidden class="anchor" aria-hidden="true" href="#1步骤">#</a></h3>
+<ul>
+<li>
+<p>定义{T} 相对于{G}的initial point, via, final point,  (包含移动和转动自由度）。</p>
+</li>
+<li>
+<p>i = 1: initial</p>
+</li>
+<li>
+<p>i = 2~N-1: via points</p>
+</li>
+<li>
+<p>i = N+1: final</p>
+</li>
+<li>
+<p>注意，规划只有6个自由度，但是Trans Matrics有16个参数，故将其以6个参数方式来表达：</p>
+</li>
+</ul>
+<p><img loading="lazy" src="https://pic2.zhimg.com/v2-ea3dc6e86fb7dc81bace89620ba0d777_1440w.jpg"></p>
+<p>上面是移动，下面是转动</p>
+<blockquote>
+<p>旋转矩阵里，9个数字有3个自由度，即6个限制条件，若各自规划9个数字，没有加以限制，有可能形成的矩阵很大几率不符合Rotation Matrix的形式，无法满足6个限制条件。所以我们直接以3个自由度形式进行规划。</p>
+</blockquote>
+<ul>
+<li>做Inverse Kinematics: 将手臂末端点状态转换到joint状态： </li>
+<li>对<strong>所有joints规划</strong>smooth trajectories</li>
+<li>做Forward Kinematics：将joint状态转换到手臂末端点状态，检查末端点在Cartesian Space下轨迹的<strong>可行性</strong>。</li>
+</ul>
+<h3 id="2示例">(2)示例<a hidden class="anchor" aria-hidden="true" href="#2示例">#</a></h3>
+<ul>
+<li>joint space </li>
+<li>Cartesian space </li>
+</ul>
+<p><img loading="lazy" src="https://pic3.zhimg.com/v2-51346ba42e67f429c444cba5d70c420e_r.jpg"></p>
+<p>经历了上述步骤，最后一步，进行<strong>Trajectory Checking&hellip;</strong> ，看看手臂在运动时，有没有碰倒障碍物，或者有没有满足其他的一些条件&hellip; &hellip;</p>
+<h2 id="3-cartesian-space下的轨迹规划">3. Cartesian-Space下的轨迹规划<a hidden class="anchor" aria-hidden="true" href="#3-cartesian-space下的轨迹规划">#</a></h2>
+<h3 id="1步骤-1">（1）步骤<a hidden class="anchor" aria-hidden="true" href="#1步骤-1">#</a></h3>
+<ul>
+<li>
+<p>定义{T} 相对于{G}的initial point, via, final point,  (包含移动和转动自由度）。</p>
+</li>
+<li>
+<p>i = 1: initial</p>
+</li>
+<li>
+<p>i = 2~N-1: via points</p>
+</li>
+<li>
+<p>i = N+1: final</p>
+</li>
+<li>
+<p>注意，规划只有6个自由度，但是Trans Matrics有16个参数，故将其以6个参数方式来表达：</p>
+</li>
+</ul>
+<p><img loading="lazy" src="https://pica.zhimg.com/v2-0bea77b4100a6a9dcbd2f18c52e11584_1440w.jpg"></p>
+<ul>
+<li>
+<p>在上述需求下，<strong>直接对所有手臂末端点规划</strong>smooth trajectories。</p>
+</li>
+<li>
+<p>做Inverse Kinematics: 将规划好手臂末端点状态的<strong>轨迹点转换到joint状态</strong>： </p>
+</li>
+<li>
+<p><strong>检查</strong>joint状态在Joint-Space下轨迹的可行性（有没有达到执行器的极限位置&hellip;blabla）</p>
+</li>
+<li>
+<p><strong>COMMENTS</strong></p>
+</li>
+<li>
+<p><strong>Cartersian 方法用的比较多，<strong>因为其可以规划</strong>更具物理直观意义</strong>的轨迹。</p>
+</li>
+<li>
+<p>缺点: 较高的运算负载(IK)，规划完了做IK。</p>
+</li>
+<li>
+<p>比如已知init point，2个via points，1个final point，Joint Space的方法，只须做4次IK。</p>
+</li>
+<li>
+<p>若4s空间，先在Cartesian下做规划，在做IK，运算量就大很多，比如规划出1000个路径，做IK，就需要算4000次。</p>
+</li>
+<li>
+<p>对Real Time下，电脑的计算能力考验比较大。</p>
+</li>
+</ul>
+<h3 id="2-示例">(2) 示例<a hidden class="anchor" aria-hidden="true" href="#2-示例">#</a></h3>
+<p><img loading="lazy" src="https://picx.zhimg.com/v2-9eb845b13c471217968b4e2fa78d57af_r.jpg"></p>
+<p>经历了上述步骤，最后一步，进行<strong>Trajectory Checking&hellip;</strong> ，检测各个Joint运动有没有超出限制&hellip; &hellip;</p>
+<p>机械臂运动规划中通常涉及几个坐标系。</p>
+<table>
+  <thead>
+      <tr>
+          <th>坐标系</th>
+          <th>含义</th>
+          <th>常用记号</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>基坐标系（Base Frame / {G}）</strong></td>
+          <td>机械臂底座固定的参考坐标系</td>
+          <td>{G}、{B}</td>
+      </tr>
+      <tr>
+          <td><strong>工具坐标系（Tool Frame / {T}）</strong></td>
+          <td>定义在末端执行器上的坐标系（TCP）</td>
+          <td>{T}</td>
+      </tr>
+      <tr>
+          <td><strong>关节坐标系（Joint Frames）</strong></td>
+          <td>每个关节都有自己的局部坐标系</td>
+          <td>{i}</td>
+      </tr>
+      <tr>
+          <td><strong>任务坐标系 / 世界坐标系（Task / World Frame）</strong></td>
+          <td>有时与基坐标系不同，用于描述外部环境或工件位置</td>
+          <td>{W}</td>
+      </tr>
+      <tr>
+          <td>6维表达（3个平移 + 3个旋转）</td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<p>Joint Space 与 Cartesian Space 后面的笛卡尔坐标系就是末端执行器的6维表达（3个平移 + 3个旋转）；joint space可以说是每个电机的角度
+它俩通过正/逆运动学可以互相转换，but有个问题：逆运动学会有多解
+为什么： 机械臂的构型是冗余的（Redundant Manipulator）；有时不同解都能让末端到达同一位置（称为不同的“工作构型”）。</p>
+<table>
+  <thead>
+      <tr>
+          <th>维度</th>
+          <th>常见解的命名</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>肩部</td>
+          <td>左臂 / 右臂 (lefty/righty)</td>
+      </tr>
+      <tr>
+          <td>肘部</td>
+          <td>肘上 / 肘下 (elbow up/down)</td>
+      </tr>
+      <tr>
+          <td>腕部</td>
+          <td>翻转 / 不翻转 (wrist flip/non-flip)</td>
+      </tr>
+      <tr>
+          <td>每个二元选择都可能导致 23=823=8 种不同的解。</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>还有一个问题奇异点（Singularities）。</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>
+<p>奇异点就是机械臂处于某种几何姿态时，某些方向的运动会“失效”或变得不稳定；- 奇异点就是机械臂处于某种几何姿态时，某些方向的运动会“失效”或变得不稳定；</p>
+</li>
+<li>
+<p>在数学上，对应雅可比矩阵 J(q)J(q) 的行列式为 0；</p>
+</li>
+<li>
+<p>意义：此时关节的小变化不能引起末端的有效变化，系统自由度“退化”。</p>
+</li>
+</ul>
+<p>举例：</p>
+<ul>
+<li>
+<p>手臂完全伸直；</p>
+</li>
+<li>
+<p>手腕三轴重叠；<br>
+→ 都是奇异点。</p>
+</li>
+</ul>
+<p>在奇异点附近：</p>
+<ul>
+<li>
+<p>IK 解可能不连续；</p>
+</li>
+<li>
+<p>很小的末端运动需要极大的关节运动；</p>
+</li>
+<li>
+<p>控制器可能出现突跳或震荡。
+多解其实还好，主要是奇异点</p>
+</li>
+</ul>
+<p>现在的逆运动学求解能否做到？改善这两个问题？</p>
+<p>目前确实有不少逆运动学（IK）求解器（solver）表现不错、速度快、准确率高。下面我列出几个比较推荐的，并附上它们的优缺点（供你在选择时参考）。</p>
+<hr>
+<h2 id="-推荐的-ik-求解器">✅ 推荐的 IK 求解器<a hidden class="anchor" aria-hidden="true" href="#-推荐的-ik-求解器">#</a></h2>
+<h3 id="1-ikpy">1. IKPy<a hidden class="anchor" aria-hidden="true" href="#1-ikpy">#</a></h3>
+<ul>
+<li>
+<p>一个用 Python 写的通用 IK 库。<a href="https://github.com/Phylliade/ikpy?utm_source=chatgpt.com">GitHub</a></p>
+</li>
+<li>
+<p>特点：支持任意机械臂链、支持 URDF、支持位置和姿态两者求解。<a href="https://github.com/Phylliade/ikpy?utm_source=chatgpt.com">GitHub</a></p>
+</li>
+<li>
+<p>性能：作者表示“从 ~7 ms 到 ~50 ms”完成一次 IK 求解（取决于模型复杂度）<a href="https://github.com/Phylliade/ikpy?utm_source=chatgpt.com">GitHub</a></p>
+</li>
+<li>
+<p>适合：快速原型、小型机械臂、教学或研究。</p>
+</li>
+<li>
+<p>注意：如果用于工业实时控制（硬实时要求、低延迟、高频率）可能还需评估其 Python 实现的延迟与稳定性。</p>
+</li>
+</ul>
+<hr>
+<h3 id="2-pick_ik-适用于-moveit-生态">2. pick_ik （适用于 MoveIt 生态）<a hidden class="anchor" aria-hidden="true" href="#2-pick_ik-适用于-moveit-生态">#</a></h3>
+<ul>
+<li>
+<p>一个为 ROS/MoveIt 设计的 IK 求解插件。<a href="https://github.com/PickNikRobotics/pick_ik?utm_source=chatgpt.com">GitHub</a></p>
+</li>
+<li>
+<p>特点：结合了局部优化（梯度下降等）+ 全局优化（例如进化算法）以解决冗余、多解、约束问题。<a href="https://index.ros.org/p/pick_ik/?utm_source=chatgpt.com">index.ros.org</a></p>
+</li>
+<li>
+<p>优点：在 ROS 机械臂系统中使用方便，可定制成本函数（例如最小化关节移动、避免关节极限、避免碰撞）<a href="https://github.com/PickNikRobotics/pick_ik?utm_source=chatgpt.com">GitHub</a></p>
+</li>
+<li>
+<p>适合：使用 ROS/MoveIt 框架、需要集成规划器、碰撞检测、约束处理的系统。</p>
+</li>
+</ul>
+<hr>
+<h3 id="3-ikgeo">3. IK‑Geo<a hidden class="anchor" aria-hidden="true" href="#3-ikgeo">#</a></h3>
+<ul>
+<li>
+<p>一个更偏“几何解析”方向、C++/Python 混合实现的 IK 库。<a href="https://github.com/rpiRobotics/ik-geo?utm_source=chatgpt.com">GitHub</a></p>
+</li>
+<li>
+<p>特点：支持“分解子问题”（Paden–Kahan 子问题）等几何方法来求解 6R 或通用串联机械臂的 IK。</p>
+</li>
+<li>
+<p>优点：对于结构良好的工业机械臂（例如腕部三轴交叉、肩肘结构良好）可能能够得到 <strong>解析解</strong> 或 接近解析解，速度快、精度高。</p>
+</li>
+<li>
+<p>适合：你若有控制自己机械臂的几何结构、想要自行整合或实现高性能 IK 的话。</p>
+</li>
+</ul>
+<hr>
+<h3 id="4-ikfast来自-openrave">4. IKFast（来自 OpenRAVE）<a hidden class="anchor" aria-hidden="true" href="#4-ikfast来自-openrave">#</a></h3>
+<ul>
+<li>
+<p>IKFast 是一个“生成器”（compiler）型工具，可以为给定机械臂生成专用的 C++ IK 求解器。<a href="https://en.wikipedia.org/wiki/OpenRAVE?utm_source=chatgpt.com">维基百科+1</a></p>
+</li>
+<li>
+<p>特点：生成后的求解器为专机型、解析或近解析方法、执行速度极快（有论文中提到几 µs 级别）<a href="https://en.wikipedia.org/wiki/OpenRAVE?utm_source=chatgpt.com">维基百科</a></p>
+</li>
+<li>
+<p>优点：如果你用于工业控制、需要最高性能、且机械臂结构已知固定，那它是一个非常好的选择。</p>
+</li>
+<li>
+<p>缺点：配置和生成过程较为复杂；每更换机械臂结构或关节数都可能要重新生成。</p>
+</li>
+</ul>
+<hr>
+<h2 id="-选择时需要关注的-因素">⚠️ 选择时需要关注的 “因素”<a hidden class="anchor" aria-hidden="true" href="#-选择时需要关注的-因素">#</a></h2>
+<ul>
+<li>
+<p><strong>结构匹配性</strong>：机械臂结构如果是标准的 “3‐轴腕部” + “肩肘部”结构（如很多工业 6 DoF 机械臂），则解析/几何方法（如 IK-Geo、IKFast）效果最佳。若结构非常不规则或冗余多，则可能需要数值方法。</p>
+</li>
+<li>
+<p><strong>实时性能</strong>：如果规划/控制频率要求很高（如 1 kHz 以上），要优先考虑生成型或 C++ 实现的求解器，而不是纯 Python 的。</p>
+</li>
+<li>
+<p><strong>约束处理能力</strong>：是否要考虑关节限位、碰撞检测、最小路径、避障、冗余优化等。许多“简单”求解器只求一个基本解，不处理这些。</p>
+</li>
+<li>
+<p><strong>稳定性与收敛性</strong>：数值方法可能陷入局部最优、收敛慢、或在奇异点附近表现差。解析方法虽然快，但可能受限于机械结构是否满足可解析条件。</p>
+</li>
+<li>
+<p><strong>集成便利度</strong>：是否与你系统（ROS/MoveIt、工业控制器、自定义控制系统）兼容。</p>
+</li>
+<li>
+<p><strong>维护和社区支持</strong>：库是否活跃、文档是否完善、是否有实际工程案例。</p>
+</li>
+</ul>
+<p>看这个视频# Hardware Demo of a Digital PID Controller
+转载自Youtube：@Gregory L. Holst The demonstration in this video will show you the effect of proportional, derivative, and integral control on a real system. It&rsquo;s a DC motor connected to an optical rotary encod
+<a href="https://www.bilibili.com/video/BV1ix411M7RX/">https://www.bilibili.com/video/BV1ix411M7RX/</a></p>
+<p>PID 控制器为什么要用比例、积分、微分？</p>
+<p>这个问题问得非常好，本质上是在问：<strong>为什么这三项刚好能解决“控制误差”的主要问题</strong>。我们可以从“误差如何表现”这个角度来理解，而不是从公式出发。</p>
+<hr>
+<h2 id="一控制的核心问题是什么">一、控制的核心问题是什么？<a hidden class="anchor" aria-hidden="true" href="#一控制的核心问题是什么">#</a></h2>
+<p>任何反馈控制，本质上都在处理一个量：</p>
+<blockquote>
+<p><strong>误差</strong><br>
+e(t)=期望值−实际值e(t) = \text{期望值} - \text{实际值}e(t)=期望值−实际值</p>
+</blockquote>
+<p>误差有三种典型“表现形式”：</p>
+<ol>
+<li>
+<p><strong>现在有多大</strong>（当前偏差）</p>
+</li>
+<li>
+<p><strong>过去积累了多少</strong>（长期偏差）</p>
+</li>
+<li>
+<p><strong>将来可能怎么变</strong>（变化趋势）</p>
+</li>
+</ol>
+<p>PID 正好一一对应这三类信息。</p>
+<hr>
+<h2 id="二比例p解决现在差多少">二、比例（P）：解决“现在差多少”<a hidden class="anchor" aria-hidden="true" href="#二比例p解决现在差多少">#</a></h2>
+<h3 id="作用">作用<a hidden class="anchor" aria-hidden="true" href="#作用">#</a></h3>
+<p>比例项直接根据<strong>当前误差大小</strong>给控制输出：</p>
+<p>uP=KP⋅e(t)u_P = K_P \cdot e(t)uP​=KP​⋅e(t)</p>
+<h3 id="为什么需要">为什么需要？<a hidden class="anchor" aria-hidden="true" href="#为什么需要">#</a></h3>
+<ul>
+<li>
+<p>误差大 → 动作大</p>
+</li>
+<li>
+<p>误差小 → 动作小</p>
+</li>
+</ul>
+<p>这是<strong>最直觉、最基本</strong>的控制方式。</p>
+<h3 id="但它解决不了什么">但它解决不了什么？<a hidden class="anchor" aria-hidden="true" href="#但它解决不了什么">#</a></h3>
+<ul>
+<li>
+<p><strong>稳态误差</strong>：<br>
+在有负载、摩擦、偏置的系统中，单靠 P，往往需要“留一点误差”才能产生足够的输出</p>
+</li>
+<li>
+<p>KPK_PKP​ 太大 → 振荡、超调、不稳定</p>
+</li>
+<li>
+<p>KPK_PKP​ 太小 → 反应迟钝</p>
+</li>
+</ul>
+<p>👉 <strong>P 只能“对症”，不能“根治”</strong></p>
+<hr>
+<h2 id="三积分i解决为什么老是差一点">三、积分（I）：解决“为什么老是差一点”<a hidden class="anchor" aria-hidden="true" href="#三积分i解决为什么老是差一点">#</a></h2>
+<h3 id="作用-1">作用<a hidden class="anchor" aria-hidden="true" href="#作用-1">#</a></h3>
+<p>积分项累加<strong>历史误差</strong>：</p>
+<p>uI=KI∫e(t) dtu_I = K_I \int e(t),dtuI​=KI​∫e(t)dt</p>
+<h3 id="为什么需要-1">为什么需要？<a hidden class="anchor" aria-hidden="true" href="#为什么需要-1">#</a></h3>
+<p>如果系统长期存在一个小误差：</p>
+<ul>
+<li>
+<p>P 项输出是常数</p>
+</li>
+<li>
+<p>但这个常数可能不足以抵消外界扰动（重力、负载）</p>
+</li>
+</ul>
+<p>积分会：</p>
+<ul>
+<li>
+<p><strong>不断累加误差</strong></p>
+</li>
+<li>
+<p>直到误差被“逼到 0”</p>
+</li>
+</ul>
+<p>👉 <strong>I 的核心作用：消除稳态误差</strong></p>
+<h3 id="但它带来什么问题">但它带来什么问题？<a hidden class="anchor" aria-hidden="true" href="#但它带来什么问题">#</a></h3>
+<ul>
+<li>
+<p>响应变慢</p>
+</li>
+<li>
+<p>容易 <strong>超调</strong></p>
+</li>
+<li>
+<p>执行器饱和时会发生 <strong>积分饱和（windup）</strong></p>
+</li>
+</ul>
+<p>所以工程中常配合 <strong>anti-windup</strong> 使用。</p>
+<hr>
+<h2 id="四微分d解决马上要出事了">四、微分（D）：解决“马上要出事了”<a hidden class="anchor" aria-hidden="true" href="#四微分d解决马上要出事了">#</a></h2>
+<h3 id="作用-2">作用<a hidden class="anchor" aria-hidden="true" href="#作用-2">#</a></h3>
+<p>微分项看的是误差变化率：</p>
+<p>uD=KD⋅de(t)dtu_D = K_D \cdot \frac{de(t)}{dt}uD​=KD​⋅dtde(t)​</p>
+<h3 id="为什么需要-2">为什么需要？<a hidden class="anchor" aria-hidden="true" href="#为什么需要-2">#</a></h3>
+<p>微分相当于在问：</p>
+<blockquote>
+<p>“误差是不是正在快速变大？”</p>
+</blockquote>
+<p>如果误差变化很快：</p>
+<ul>
+<li>
+<p>D 项提前“踩刹车”</p>
+</li>
+<li>
+<p>抑制超调和振荡</p>
+</li>
+</ul>
+<p>👉 <strong>D 的本质：预测趋势、增加阻尼</strong></p>
+<h3 id="它像什么">它像什么？<a hidden class="anchor" aria-hidden="true" href="#它像什么">#</a></h3>
+<ul>
+<li>
+<p>像减震器</p>
+</li>
+<li>
+<p>像提前刹车，而不是撞上再修正</p>
+</li>
+</ul>
+<h3 id="局限">局限<a hidden class="anchor" aria-hidden="true" href="#局限">#</a></h3>
+<ul>
+<li>
+<p>对噪声非常敏感</p>
+</li>
+<li>
+<p>实际中常对测量值微分 + 低通滤波</p>
+</li>
+</ul>
+<hr>
+<h2 id="五为什么一定是-p--i--d而不是别的">五、为什么一定是 P + I + D，而不是别的？<a hidden class="anchor" aria-hidden="true" href="#五为什么一定是-p--i--d而不是别的">#</a></h2>
+<p>从信息角度看：</p>
+<table>
+  <thead>
+      <tr>
+          <th>项</th>
+          <th>利用的信息</th>
+          <th>解决的问题</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>P</td>
+          <td>当前误差</td>
+          <td>响应速度</td>
+      </tr>
+      <tr>
+          <td>I</td>
+          <td>历史误差</td>
+          <td>稳态误差</td>
+      </tr>
+      <tr>
+          <td>D</td>
+          <td>误差趋势</td>
+          <td>超调 / 振荡</td>
+      </tr>
+  </tbody>
+</table>
+<p>它们共同覆盖了：</p>
+<blockquote>
+<p><strong>现在、过去、未来</strong></p>
+</blockquote>
+<p>在不需要系统精确模型的前提下，<br>
+PID 是<strong>最简单、最通用、最鲁棒</strong>的一阶控制结构。</p>
+<hr>
+<h2 id="六一个直觉类比很重要">六、一个直觉类比（很重要）<a hidden class="anchor" aria-hidden="true" href="#六一个直觉类比很重要">#</a></h2>
+<p>想象你在 <strong>倒车入库</strong>：</p>
+<ul>
+<li>
+<p><strong>P</strong>：离车位远就多打方向盘</p>
+</li>
+<li>
+<p><strong>I</strong>：如果一直偏一点点，就慢慢修正回来</p>
+</li>
+<li>
+<p><strong>D</strong>：发现方向偏得越来越快，提前反打</p>
+</li>
+</ul>
+<p>你并没有解微分方程，但你在用 PID。</p>
+<hr>
+<h2 id="七一句话总结">七、一句话总结<a hidden class="anchor" aria-hidden="true" href="#七一句话总结">#</a></h2>
+<blockquote>
+<p><strong>PID 之所以用比例、积分、微分，是因为它们分别对应误差的“大小、积累和变化趋势”，用最少的结构解决了速度、精度和稳定性三大矛盾。</strong></p>
+</blockquote>
+<p><strong>windup（积分饱和/积分过冲）</strong>：</p>
+<blockquote>
+<p>积分项“积累得太多”，即使误差变小，控制器也还在努力“修正过去的误差”，导致<strong>动作过大、系统超调或振荡</strong>。</p>
+</blockquote>
+<h2 id="anti-windup-的核心思想">anti-windup 的核心思想<a hidden class="anchor" aria-hidden="true" href="#anti-windup-的核心思想">#</a></h2>
+<p><strong>防止积分累积过头，让系统更快恢复正常</strong>。</p>
+<p>方法简单说：</p>
+<ol>
+<li>
+<p><strong>检测控制输出饱和</strong>（比如电压达到最大/最小）</p>
+</li>
+<li>
+<p><strong>停止或减缓积分累积</strong></p>
+<ul>
+<li>不让积分项继续“胡乱加”</li>
+</ul>
+</li>
+<li>
+<p><strong>当误差回到合理范围时，积分再继续</strong></p>
+</li>
+</ol>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://example.com/tags/control/">Control</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

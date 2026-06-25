@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>MANISKILL3: GPU PARALLELIZED ROBOTICS  SIMULATION AND RENDERING FOR  GENERALIZABLE EMBODIED AI | 我的博客</title>
+<meta name="keywords" content="generalizable">
+<meta name="description" content="一个机器人模拟平台的论文
+paper(12/100)">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
+<link rel="canonical" href="https://example.com/post/maniskill3-gpu-parallelized-robotics-simulation-and-rendering-for-generalizable-embodied-ai/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://example.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://example.com/post/maniskill3-gpu-parallelized-robotics-simulation-and-rendering-for-generalizable-embodied-ai/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://example.com/post/maniskill3-gpu-parallelized-robotics-simulation-and-rendering-for-generalizable-embodied-ai/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="MANISKILL3: GPU PARALLELIZED ROBOTICS  SIMULATION AND RENDERING FOR  GENERALIZABLE EMBODIED AI">
+  <meta property="og:description" content="一个机器人模拟平台的论文
+paper(12/100)">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-11-25T20:55:43+00:00">
+    <meta property="article:modified_time" content="2024-11-25T20:55:43+00:00">
+    <meta property="article:tag" content="Generalizable">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="MANISKILL3: GPU PARALLELIZED ROBOTICS  SIMULATION AND RENDERING FOR  GENERALIZABLE EMBODIED AI">
+  <meta name="twitter:description" content="一个机器人模拟平台的论文
+paper(12/100)">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://example.com/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "MANISKILL3: GPU PARALLELIZED ROBOTICS  SIMULATION AND RENDERING FOR  GENERALIZABLE EMBODIED AI",
+      "item": "https://example.com/post/maniskill3-gpu-parallelized-robotics-simulation-and-rendering-for-generalizable-embodied-ai/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "MANISKILL3: GPU PARALLELIZED ROBOTICS  SIMULATION AND RENDERING FOR  GENERALIZABLE EMBODIED AI",
+  "name": "MANISKILL3: GPU PARALLELIZED ROBOTICS  SIMULATION AND RENDERING FOR  GENERALIZABLE EMBODIED AI",
+  "description": "一个机器人模拟平台的论文\npaper(12/100)\n",
+  "keywords": [
+    "generalizable"
+  ],
+  "articleBody": "一个机器人模拟平台的论文\npaper(12/100)\n论文不重要，这一篇重点还在平台啊，官网，需要梯子\nabstract 问题：仿真框架不够通用化 解决：ManiSkill3 fastest 状态可视化 + GPU并行 robotics simulator with contact-rich physics targeting generalizable manipulation introduction GPU 并行模拟：通过强化学习 问题：不支持异构模拟，不支持快速并行渲染功能，所以用强化学习时会很慢 “ManiSkill3” 的优点 快速并行渲染和低开销 环境很全，全部GPU并行化 异构模拟：ManiSkill3 可以在每个并行环境中模拟和渲染完全不同的对象、关节，甚至整个房间规模的场景 api好用 从少量演示中生成可扩展的数据生成管道 realted works ManiSkill 通过不同方法的组合来获取大规模演示demonstration。\n对简单任务：使用 RL 的运动规划和奖励来生成演示。 对没有简单定义的运动规划脚本或奖励函数的更多复杂任务：依赖于 RLPD和 RFCL等演示算法的在线学习 Maniskill3的核心特征 支持开箱即用的统一 的GPU 并行化任务：有基于任务的API 这个和第五点差不多吧 GPU 并行模拟和渲染 异构 GPU 模拟：这是能够在不同的并行环境中模拟不同对象几何图形、不同数量对象以及具有不同景深的不同关节的功能。 用于机器人操作的 SIM2REAL 和 REAL2SIM：都可以通过数字孪生使用 ManiSkill3来完成 用于构建 GPU 模拟机器人任务的简单统一 API 用于关节、链接、关节和角色的面向对象的 API 高级关节/角色，直至单个链接/关节和网格 ManiSkill3 中的姿势信息是面向对象的，并存储为批处理的 Pose 对象 机器人和控制器：原生支持 URDF 和 Mujoco MJCF 定义格式，并直接基于 URDF/MJCF 构建关节机器人 演示数据集 对于最简单的任务，我们编写并开源了一些基于运动规划的解决方案来生成演示数据。一些具有易于定义的奖励函数的任务定义了密集的奖励函数，并使用融合的 RL 策略来生成演示数据。 对于更困难的任务，我们通过远程操作工具收集演示数据（通常约为 10 个演示）。然后，我们使用 RFCL 或 RLPD 来运行快速的在线模仿学习，并从融合策略中生成数据。 ",
+  "wordCount" : "85",
+  "inLanguage": "en",
+  "datePublished": "2024-11-25T20:55:43Z",
+  "dateModified": "2024-11-25T20:55:43Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/post/maniskill3-gpu-parallelized-robotics-simulation-and-rendering-for-generalizable-embodied-ai/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://example.com/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      MANISKILL3: GPU PARALLELIZED ROBOTICS  SIMULATION AND RENDERING FOR  GENERALIZABLE EMBODIED AI
+    </h1>
+    <div class="post-meta">
+
+<span title='2024-11-25 20:55:43 +0000 UTC'>November 25, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>一个机器人模拟平台的论文</p>
+<p>paper(12/100)</p>
+<p>论文不重要，这一篇重点还在平台啊，<a href="http://maniskill.ai/">官网，需要梯子</a></p>
+<h1 id="abstract">abstract<a hidden class="anchor" aria-hidden="true" href="#abstract">#</a></h1>
+<ol>
+<li>问题：仿真框架不够通用化</li>
+<li>解决：ManiSkill3
+<ol>
+<li>fastest</li>
+<li>状态可视化 + GPU并行</li>
+<li>robotics simulator</li>
+<li>with contact-rich physics</li>
+<li>targeting generalizable manipulation</li>
+</ol>
+</li>
+</ol>
+<h1 id="introduction">introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h1>
+<ol>
+<li>GPU 并行模拟：通过强化学习</li>
+<li>问题：不支持异构模拟，不支持快速并行渲染功能，所以用强化学习时会很慢</li>
+<li>“ManiSkill3” 的优点
+<ol>
+<li>快速并行渲染和低开销</li>
+<li>环境很全，全部GPU并行化</li>
+<li>异构模拟：ManiSkill3 可以在每个并行环境中模拟和渲染完全不同的对象、关节，甚至整个房间规模的场景</li>
+<li>api好用</li>
+<li>从少量演示中生成可扩展的数据生成管道</li>
+</ol>
+</li>
+</ol>
+<h1 id="realted-works">realted works<a hidden class="anchor" aria-hidden="true" href="#realted-works">#</a></h1>
+<p>ManiSkill 通过不同方法的组合来获取大规模演示demonstration。</p>
+<ul>
+<li>对简单任务：使用 RL 的运动规划和奖励来生成演示。</li>
+<li>对没有简单定义的运动规划脚本或奖励函数的更多复杂任务：依赖于 RLPD和 RFCL等演示算法的在线学习</li>
+</ul>
+<h1 id="maniskill3的核心特征">Maniskill3的核心特征<a hidden class="anchor" aria-hidden="true" href="#maniskill3的核心特征">#</a></h1>
+<ol>
+<li>支持开箱即用的统一 的GPU 并行化任务：有基于任务的API   这个和第五点差不多吧</li>
+<li>GPU 并行模拟和渲染</li>
+<li>异构 GPU 模拟：这是能够在不同的并行环境中模拟不同对象几何图形、不同数量对象以及具有不同景深的不同关节的功能。</li>
+<li>用于机器人操作的 SIM2REAL 和 REAL2SIM：都可以通过数字孪生使用 ManiSkill3来完成</li>
+<li>用于构建 GPU 模拟机器人任务的简单统一 API
+<ol>
+<li>用于关节、链接、关节和角色的面向对象的 API
+<ol>
+<li>高级关节/角色，直至单个链接/关节和网格</li>
+<li>ManiSkill3 中的姿势信息是面向对象的，并存储为批处理的 Pose 对象</li>
+</ol>
+</li>
+<li>机器人和控制器：原生支持 URDF 和 Mujoco MJCF 定义格式，并直接基于 URDF/MJCF 构建关节机器人</li>
+</ol>
+</li>
+<li>演示数据集
+<ol>
+<li>对于最简单的任务，我们编写并开源了一些基于运动规划的解决方案来生成演示数据。一些具有易于定义的奖励函数的任务定义了密集的奖励函数，并使用融合的 RL 策略来生成演示数据。</li>
+<li>对于更困难的任务，我们通过远程操作工具收集演示数据（通常约为 10 个演示）。然后，我们使用 RFCL  或 RLPD  来运行快速的在线模仿学习，并从融合策略中生成数据。</li>
+</ol>
+</li>
+</ol>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://example.com/tags/generalizable/">Generalizable</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Generalizable on 我的博客</title>
+    <link>https://example.com/tags/generalizable/</link>
+    <description>Recent content in Generalizable on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 25 Nov 2024 20:55:43 +0000</lastBuildDate>
+    <atom:link href="https://example.com/tags/generalizable/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MANISKILL3: GPU PARALLELIZED ROBOTICS  SIMULATION AND RENDERING FOR  GENERALIZABLE EMBODIED AI</title>
+      <link>https://example.com/post/maniskill3-gpu-parallelized-robotics-simulation-and-rendering-for-generalizable-embodied-ai/</link>
+      <pubDate>Mon, 25 Nov 2024 20:55:43 +0000</pubDate>
+      <guid>https://example.com/post/maniskill3-gpu-parallelized-robotics-simulation-and-rendering-for-generalizable-embodied-ai/</guid>
+      <description>&lt;p&gt;一个机器人模拟平台的论文&lt;/p&gt;
+&lt;p&gt;paper(12/100)&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

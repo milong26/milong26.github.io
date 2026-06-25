@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Alignment on 我的博客</title>
+    <link>https://example.com/tags/alignment/</link>
+    <description>Recent content in Alignment on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 03 Mar 2025 10:20:54 +0000</lastBuildDate>
+    <atom:link href="https://example.com/tags/alignment/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A Comprehensive Survey of LLM Alignment Techniques: RLHF, RLAIF, PPO, DPO and More</title>
+      <link>https://example.com/post/a-comprehensive-survey-of-llm-alignment-techniques-rlhf-rlaif-ppo-dpo-and-more/</link>
+      <pubDate>Mon, 03 Mar 2025 10:20:54 +0000</pubDate>
+      <guid>https://example.com/post/a-comprehensive-survey-of-llm-alignment-techniques-rlhf-rlaif-ppo-dpo-and-more/</guid>
+      <description>&lt;p&gt;时过境迁，当时怎么看的已经忘记了。现在我的问题变成了：什么是llm的对齐？vlm也有对齐吗？怎样实现对齐的？从这篇文章出发的话，我应该怎么做
+重看论文(1)&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

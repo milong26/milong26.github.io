@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Robotic on 我的博客</title>
+    <link>https://example.com/tags/robotic/</link>
+    <description>Recent content in Robotic on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 29 Sep 2025 15:19:42 +0000</lastBuildDate>
+    <atom:link href="https://example.com/tags/robotic/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TinyVLA: Toward Fast, Data-Efficient Vision-Language-Action Models for Robotic Manipulation</title>
+      <link>https://example.com/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</link>
+      <pubDate>Mon, 29 Sep 2025 15:19:42 +0000</pubDate>
+      <guid>https://example.com/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</guid>
+      <description>&lt;p&gt;我要看这篇文章能否复现&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>RoboGen: Towards Unleashing Infinite Data for  Automated Robot Learning via Generative Simulation</title>
+      <link>https://example.com/post/robogen-towards-unleashing-infinite-data-for-automated-robot-learning-via-generative-simulation/</link>
+      <pubDate>Tue, 01 Apr 2025 15:56:36 +0000</pubDate>
+      <guid>https://example.com/post/robogen-towards-unleashing-infinite-data-for-automated-robot-learning-via-generative-simulation/</guid>
+      <description>&lt;p&gt;看上去是那种一句话生成仿真环境的。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;一句话-&amp;gt;llm生成代码？assets还是得自己搞吧-&amp;gt;传到环境里面这个流程？
+&lt;ol&gt;
+&lt;li&gt;基本流程是propose-generate-learn&lt;/li&gt;
+&lt;li&gt;不是直接生成代码，与最近采用大型语言模型等基础模型直接产生策略或低级行动的努力相比，robogen只提取完全属于这些模型的能力和模式的信息——对象语义、对象可供性、关于哪些任务值得学习的常识性知识等。不过我也不知道这个指什么&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;用的什么环境，issac gym吗，居然是genesis&lt;/li&gt;
+&lt;li&gt;asset有没有好用的数据库 里面提到几个，还有图片生成mesh的，没有考虑collision吗
+&lt;ol&gt;
+&lt;li&gt;放置asset的时候，RoboGen 指示 GPT-4 以无碰撞的方式放置对象：当 LLM 生成对象的初始姿势时，我们会提示它利用其基本的空间理解，并尝试将对象放置在不同的位置。我们将其用作初始化，并检查初始场景配置中的潜在冲突。对于两个对象之间检测到的任何碰撞，我们识别接触对象的碰撞节点，并沿碰撞法线的相反方向推开它们的质心以解决碰撞。&lt;/li&gt;
+&lt;li&gt;collision-free 动作基元与运动规划相结合，在解决任务时更可靠，例如通过无碰撞路径接近目标对象&lt;/li&gt;
+&lt;li&gt;看起来论文里面涉及到collision的就这些了，那collision属性不考虑了？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;看样子是2finger机器人，什么模型抓取的，视觉？ 居然是吸盘式的&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    <item>
+      <title>Generative Artificial Intelligence in Robotic Manipulation: A Survey</title>
+      <link>https://example.com/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</link>
+      <pubDate>Thu, 13 Mar 2025 15:59:45 +0000</pubDate>
+      <guid>https://example.com/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</guid>
+      <description>&lt;p&gt;(16/100)&lt;/p&gt;
+&lt;p&gt;what i want to get&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;了解其所描述的通用机器人操作是否和我想的一样：qpos of robot&lt;/li&gt;
+&lt;li&gt;找里面有没有我想要的数据集：text-guided robotic video task&lt;/li&gt;
+&lt;li&gt;只要看dexterous部分&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    <item>
+      <title>genesis平台</title>
+      <link>https://example.com/post/genesis%E5%B9%B3%E5%8F%B0/</link>
+      <pubDate>Thu, 19 Dec 2024 14:51:53 +0000</pubDate>
+      <guid>https://example.com/post/genesis%E5%B9%B3%E5%8F%B0/</guid>
+      <description>&lt;p&gt;一个比robosuite更简洁的物理平台，专为通用机器人/人工智能/物理AI应用而设计。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>robosuite平台</title>
+      <link>https://example.com/post/robosuite%E5%B9%B3%E5%8F%B0/</link>
+      <pubDate>Mon, 02 Dec 2024 14:22:27 +0000</pubDate>
+      <guid>https://example.com/post/robosuite%E5%B9%B3%E5%8F%B0/</guid>
+      <description>&lt;p&gt;机器人模拟平台robosuite ，最后还是不用了。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>genesis平台</title>
+      <link>https://example.com/post/genesis-%E5%B9%B3%E5%8F%B0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/genesis-%E5%B9%B3%E5%8F%B0/</guid>
+      <description>&lt;p&gt;新物理平台https://genesis-world.readthedocs.io/en/latest/&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

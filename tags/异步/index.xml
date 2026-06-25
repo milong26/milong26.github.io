@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>异步 on 我的博客</title>
+    <link>https://example.com/tags/%E5%BC%82%E6%AD%A5/</link>
+    <description>Recent content in 异步 on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 28 Nov 2025 11:22:05 +0000</lastBuildDate>
+    <atom:link href="https://example.com/tags/%E5%BC%82%E6%AD%A5/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>同步和异步</title>
+      <link>https://example.com/post/%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5/</link>
+      <pubDate>Fri, 28 Nov 2025 11:22:05 +0000</pubDate>
+      <guid>https://example.com/post/%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5/</guid>
+      <description>&lt;p&gt;写代码的时候看到但是想不起来，死脑快动，好吧原来我当时学java的时候就没听进去，只能补课了。真的是java吗，怎么操作系统也有，哲学家就餐问题……&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

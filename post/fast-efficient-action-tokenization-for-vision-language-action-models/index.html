@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>FAST:Efficient Action Tokenization for  Vision-Language-Action Models | 我的博客</title>
+<meta name="keywords" content="tokenizer, vla, pi0">
+<meta name="description" content="pi0.5的时候用到这个方法：post-train里面用这个方法，说是因为这个论文发现了用离散的token训练更快。有点好奇是怎么把动作给离散化的，又不能分词，既然它能离散化的话，那图像也能离散化吗？">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
+<link rel="canonical" href="https://example.com/post/fast-efficient-action-tokenization-for-vision-language-action-models/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://example.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://example.com/post/fast-efficient-action-tokenization-for-vision-language-action-models/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://example.com/post/fast-efficient-action-tokenization-for-vision-language-action-models/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="FAST:Efficient Action Tokenization for  Vision-Language-Action Models">
+  <meta property="og:description" content="pi0.5的时候用到这个方法：post-train里面用这个方法，说是因为这个论文发现了用离散的token训练更快。有点好奇是怎么把动作给离散化的，又不能分词，既然它能离散化的话，那图像也能离散化吗？">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:tag" content="Tokenizer">
+    <meta property="article:tag" content="Vla">
+    <meta property="article:tag" content="Pi0">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="FAST:Efficient Action Tokenization for  Vision-Language-Action Models">
+  <meta name="twitter:description" content="pi0.5的时候用到这个方法：post-train里面用这个方法，说是因为这个论文发现了用离散的token训练更快。有点好奇是怎么把动作给离散化的，又不能分词，既然它能离散化的话，那图像也能离散化吗？">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://example.com/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "FAST:Efficient Action Tokenization for  Vision-Language-Action Models",
+      "item": "https://example.com/post/fast-efficient-action-tokenization-for-vision-language-action-models/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "FAST:Efficient Action Tokenization for  Vision-Language-Action Models",
+  "name": "FAST:Efficient Action Tokenization for  Vision-Language-Action Models",
+  "description": "pi0.5的时候用到这个方法：post-train里面用这个方法，说是因为这个论文发现了用离散的token训练更快。有点好奇是怎么把动作给离散化的，又不能分词，既然它能离散化的话，那图像也能离散化吗？\n",
+  "keywords": [
+    "tokenizer", "vla", "pi0"
+  ],
+  "articleBody": "pi0.5的时候用到这个方法：post-train里面用这个方法，说是因为这个论文发现了用离散的token训练更快。有点好奇是怎么把动作给离散化的，又不能分词，既然它能离散化的话，那图像也能离散化吗？\n看这篇文章只想了解：\n结论怎么得到的：离散的训练更快，不是FAST，而是理论上的结果有吗 本来的工作是直接用离散的训练和输出吗，那它的效果应该比较慢 FAST怎么给动作编码的，连续的怎么变成离散？ 其它可能的问题？希望没有了 abstract里面看到一句话：Our tokenization approach, Frequency-space Action Sequence Tokenization (FAST), enables us to train autoregressive VLAs for highly dexterous and high-frequency tasks where standard discretization methods fail completely. 现在FAST是一个分词方法我明白了，自回归​​指的是一种序列生成模型的工作方式：模型在生成一个序列（如文本、动作令牌）时，会​​根据之前已经生成的所有内容来预测下一个单元​​。它是一个“一步接一步”的过程。一个自回归的Vision-Language-Action (VLA) 模型接收图像和语言指令作为输入，然后以自回归的方式生成一系列​​动作令牌​​。首先，它根据输入预测第一个动作令牌；然后，结合输入和第一个令牌预测第二个令牌，以此类推，直到生成完整的动作序列。\nFAST本质上就是一种​​针对自回归VLA模型设计的、全新的动作令牌化方案​​。它的提出，正是为了解决传统令牌化方法在高频、灵巧任务上训练自回归VLA时遇到的瓶颈。 Flow Matching（以及更广泛的扩散模型）是一种非自回归的方法，并不涉及下一个令牌预测。\n为什么要在pi0上用FAST实验，pi0不是用flow matching的吗 可以纯粹地比较​​“扩散解码”和“FAST自回归解码”​​ 这两种范式的优劣。实验结果（训练速度提升5倍）的说服力非常强。\nflow matching不是自回归，所以不会用历史动作，虽然也不是不行\nFAST怎么做到连续-离散的：归一化连续动作→应用离散余弦变换（DCT）到频域→量化和压缩→使用BPE生成离散令牌\n然后根据文章内容看\n离散的训练更快 相关工作怎么分action的： 方法：基于离散余弦变换的基于压缩的机器人动作标记化方案 结果 和pi0，pi0.5的比较 拓展\nfast是分词方式，特别适合用来给vla的动作分词（因为用自回归？flow matching不是自回归吧，pi0不就是用自回归的吗）？是这样的吗，可以给别的分吗 ",
+  "wordCount" : "54",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/post/fast-efficient-action-tokenization-for-vision-language-action-models/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://example.com/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      FAST:Efficient Action Tokenization for  Vision-Language-Action Models
+    </h1>
+    <div class="post-meta">
+
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>pi0.5的时候用到这个方法：post-train里面用这个方法，说是因为这个论文发现了用离散的token训练更快。有点好奇是怎么把动作给离散化的，又不能分词，既然它能离散化的话，那图像也能离散化吗？</p>
+<p>看这篇文章只想了解：</p>
+<ol>
+<li>结论怎么得到的：离散的训练更快，不是FAST，而是理论上的结果有吗</li>
+<li>本来的工作是直接用离散的训练和输出吗，那它的效果应该比较慢</li>
+<li>FAST怎么给动作编码的，连续的怎么变成离散？</li>
+<li>其它可能的问题？希望没有了</li>
+</ol>
+<p>abstract里面看到一句话：Our tokenization approach, Frequency-space Action Sequence Tokenization (FAST), enables us to train autoregressive VLAs for highly dexterous and high-frequency tasks where standard discretization methods fail completely.
+现在FAST是一个分词方法我明白了，<strong>自回归​</strong>​指的是一种序列生成模型的工作方式：模型在生成一个序列（如文本、动作令牌）时，会​<strong>​根据之前已经生成的所有内容来预测下一个单元​</strong>​。它是一个“一步接一步”的过程。一个自回归的Vision-Language-Action (VLA) 模型接收图像和语言指令作为输入，然后以自回归的方式生成一系列​<strong>​动作令牌​</strong>​。首先，它根据输入预测第一个动作令牌；然后，结合输入和第一个令牌预测第二个令牌，以此类推，直到生成完整的动作序列。</p>
+<p>FAST本质上就是一种​<strong>​针对自回归VLA模型设计的、全新的动作令牌化方案​</strong>​。它的提出，正是为了解决传统令牌化方法在高频、灵巧任务上训练自回归VLA时遇到的瓶颈。
+Flow Matching（以及更广泛的扩散模型）是一种非自回归的方法，并不涉及下一个令牌预测。</p>
+<p>为什么要在pi0上用FAST实验，pi0不是用flow matching的吗
+可以纯粹地比较​<strong>​“扩散解码”和“FAST自回归解码”​</strong>​ 这两种范式的优劣。实验结果（训练速度提升5倍）的说服力非常强。</p>
+<p>flow matching不是自回归，所以不会用历史动作，虽然也不是不行</p>
+<p>FAST怎么做到连续-离散的：归一化连续动作→应用离散余弦变换（DCT）到频域→量化和压缩→使用BPE生成离散令牌</p>
+<p>然后根据文章内容看</p>
+<ol>
+<li>离散的训练更快
+<ol>
+<li>相关工作怎么分action的：</li>
+</ol>
+</li>
+<li>方法：基于离散余弦变换的基于压缩的机器人动作标记化方案</li>
+<li>结果</li>
+<li>和pi0，pi0.5的比较</li>
+</ol>
+<p>拓展</p>
+<ol>
+<li>fast是分词方式，特别适合用来给vla的动作分词（因为用自回归？flow matching不是自回归吧，pi0不就是用自回归的吗）？是这样的吗，可以给别的分吗</li>
+</ol>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://example.com/tags/tokenizer/">Tokenizer</a></li>
+      <li><a href="https://example.com/tags/vla/">Vla</a></li>
+      <li><a href="https://example.com/tags/pi0/">Pi0</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

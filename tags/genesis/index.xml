@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Genesis on 我的博客</title>
+    <link>https://example.com/tags/genesis/</link>
+    <description>Recent content in Genesis on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 01 Apr 2025 16:54:39 +0000</lastBuildDate>
+    <atom:link href="https://example.com/tags/genesis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>灵巧手抓取示例</title>
+      <link>https://example.com/post/%E7%81%B5%E5%B7%A7%E6%89%8B%E6%8A%93%E5%8F%96%E7%A4%BA%E4%BE%8B/</link>
+      <pubDate>Tue, 01 Apr 2025 16:54:39 +0000</pubDate>
+      <guid>https://example.com/post/%E7%81%B5%E5%B7%A7%E6%89%8B%E6%8A%93%E5%8F%96%E7%A4%BA%E4%BE%8B/</guid>
+      <description>&lt;p&gt;要求：灵巧手（手臂尽可能简单）抓取不同摩擦力的常见物体（能抓到就行，不需要用模型）&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

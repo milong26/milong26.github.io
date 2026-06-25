@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>RoboKeyGen: Robot Pose and Joint Angles Estimation via  Diffusion-based 3D Keypoint Generation | 我的博客</title>
+<meta name="keywords" content="pose-estimation, robot, cross-camera-generalization, generalization">
+<meta name="description" content="这篇文章用的英文单词好拗口，但是写得挺清晰的，还挺喜欢
+解决什么问题？pose estimation，以前的要么慢，要么不够精确。这篇文章首先检测2d关键点，然后cross-camera（用内参计算）规范化，然后扩散模型生成3d（相机坐标），然后MLP推理出joint angle，用fk算出eepose等。
+对我有什么启发？相机的归一化能不能拓展到外参？Intrinsic-&gt;Extrinsic
+并不是VLA！只是传统的视觉">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
+<link rel="canonical" href="https://example.com/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://example.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://example.com/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://example.com/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="RoboKeyGen: Robot Pose and Joint Angles Estimation via  Diffusion-based 3D Keypoint Generation">
+  <meta property="og:description" content="这篇文章用的英文单词好拗口，但是写得挺清晰的，还挺喜欢
+解决什么问题？pose estimation，以前的要么慢，要么不够精确。这篇文章首先检测2d关键点，然后cross-camera（用内参计算）规范化，然后扩散模型生成3d（相机坐标），然后MLP推理出joint angle，用fk算出eepose等。 对我有什么启发？相机的归一化能不能拓展到外参？Intrinsic-&gt;Extrinsic
+并不是VLA！只是传统的视觉">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-12-08T16:09:53+00:00">
+    <meta property="article:modified_time" content="2025-12-08T16:09:53+00:00">
+    <meta property="article:tag" content="Pose-Estimation">
+    <meta property="article:tag" content="Robot">
+    <meta property="article:tag" content="Cross-Camera-Generalization">
+    <meta property="article:tag" content="Generalization">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="RoboKeyGen: Robot Pose and Joint Angles Estimation via  Diffusion-based 3D Keypoint Generation">
+  <meta name="twitter:description" content="这篇文章用的英文单词好拗口，但是写得挺清晰的，还挺喜欢
+解决什么问题？pose estimation，以前的要么慢，要么不够精确。这篇文章首先检测2d关键点，然后cross-camera（用内参计算）规范化，然后扩散模型生成3d（相机坐标），然后MLP推理出joint angle，用fk算出eepose等。 对我有什么启发？相机的归一化能不能拓展到外参？Intrinsic-&gt;Extrinsic
+并不是VLA！只是传统的视觉">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://example.com/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "RoboKeyGen: Robot Pose and Joint Angles Estimation via  Diffusion-based 3D Keypoint Generation",
+      "item": "https://example.com/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "RoboKeyGen: Robot Pose and Joint Angles Estimation via  Diffusion-based 3D Keypoint Generation",
+  "name": "RoboKeyGen: Robot Pose and Joint Angles Estimation via  Diffusion-based 3D Keypoint Generation",
+  "description": "这篇文章用的英文单词好拗口，但是写得挺清晰的，还挺喜欢\n解决什么问题？pose estimation，以前的要么慢，要么不够精确。这篇文章首先检测2d关键点，然后cross-camera（用内参计算）规范化，然后扩散模型生成3d（相机坐标），然后MLP推理出joint angle，用fk算出eepose等。 对我有什么启发？相机的归一化能不能拓展到外参？Intrinsic-\u0026gt;Extrinsic\n并不是VLA！只是传统的视觉\n",
+  "keywords": [
+    "pose-estimation", "robot", "cross-camera-generalization", "generalization"
+  ],
+  "articleBody": "这篇文章用的英文单词好拗口，但是写得挺清晰的，还挺喜欢\n解决什么问题？pose estimation，以前的要么慢，要么不够精确。这篇文章首先检测2d关键点，然后cross-camera（用内参计算）规范化，然后扩散模型生成3d（相机坐标），然后MLP推理出joint angle，用fk算出eepose等。 对我有什么启发？相机的归一化能不能拓展到外参？Intrinsic-\u003eExtrinsic\n并不是VLA！只是传统的视觉\nabstract 本文做了什么？预测任务分成两个：2d关键点检测和将2d关键点提升到3d 难点：2d-\u003e3d，用扩散，所以问题变成 条件3d关键点生成 to 跨摄像头适应性，引入 归一化相机坐标空间（normalized camera coordinate space） 确保估计的二维关键点在不同相机内在元件上的对齐 同类的方法居然是渲染与比较？因为问题是从当前状况推断出joint state 一句话总结这篇文章做的东西：识别2d关键点，用扩散模型生成3d关键点，同时利用NCCS做到跨相机泛化性。\nintroduction 问题明确了：是pose estimation，而且重点放在joint estimation，也就是没有joint-state作为输入 同类的方法两种：render and compare，但是要渲染很慢的；还有一种是key-point-based，比较典型的是一个2d heatmap扩展到3d，它能够通过深度输入直接预测机械臂上预定义关键点的三维坐标，快，但是精度比较低，受限于cross-camera-generalization。为什么精度比较低？3d heatmap和2d heatmap，以及深度输入算什么？关键点是什么？ 所以提出robokeygen，基于key-point，但是要提升它的精度，提高cross-camera generlization。咋做的：高维任务分成2d keypoint detection+ lift 2d keypoint to 3d。2d关键点怎么来？用上面的heatmap吗？3d关键点有什么用？ 方法具体说明： 预测 predefined keypoint的2d projection-\u003e这个用现有技术 这些projection 对齐到nccs里面-\u003e我好奇的技术 基于对齐后的生成3d keypoint-\u003e本文的重点 用一个已有的pose-fitting算法估计pose 3d关键点为什么能估计位姿？nccs怎么用的？pose-fitting是什么？ 看完introduction，我对这个文章的思路更清晰了，所以对我来说，重点在nccs，关键点作为边角料。\nrelated works 有点懵，“Robot pose estimation with known joint angles: Recent advances in deep learning offer innovative methods for robot pose recovery. Dream [5] uses a convolutional network to regress 2D heatmaps and compute poses through a Perspective-n-Point (PnP) RANSAC solver [17]. SGTAPose [6] integrates temporal information to address selfocclusion in pose estimation. Meanwhile, CtRNet [7] employs a self-supervision framework, narrowing the sim-to-real gap effectively. Notably, these methods depend on immediate joint angles feedback, thus limiting their applicability.” (“RoboKeyGen: Robot Pose and Joint Angles Estimation via Diffusion-based 3D Keypoint Generation | IEEE Conference Publication | IEEE Xplore”, p. 5376)这一段提到的问题我怎么看不懂，知道关节角度以后为什么还需要各种网络，直接正向运动学就能求出来了？ 量子速度了SGTAPose和DREAM这些：这篇文章解决的是什么问题，告诉我输入是什么，输出是什么 dream:论文解决的问题：摄像头到机器人位姿估计本文解决的是从单个RGB图像估计外部摄像头相对于机器人的位姿（camera-to-robot pose estimation）​ 的问题。传统的手眼标定（hand-eye calibration）方法需要依赖标记物（如ArUco码）和离线多帧数据收集，而本文提出的DREAM框架实现了无需标记物、在线、单图像的标定，适用于动态环境中的机器人控制任务（如抓取、避障）。核心挑战是消除对物理标记和复杂校准步骤的依赖，实现实时、通用的摄像头外参估计。方法的输入包括以下元素：单个RGB图像：由外部摄像头捕获的机器人图像，默认分辨率为640×480像素。图像中需包含机器人的可见部分（即使关键点被遮挡）。已知摄像头内参：包括焦距、主点等内部参数，假设已预先校准。机器人关节配置：通过机器人控制器实时获取的关节角度，用于计算关键点的3D位置（通过前向运动学）。方法的输出是：摄像头外参（camera extrinsics）：即摄像头坐标系到机器人基础坐标系的刚体变换矩阵（旋转和平移）该变换允许将图像中的观测转换到机器人任务空间，用于实时控制。输出通过以下流程生成：关键点检测：深度学习网络（如VGG或ResNet编码器）处理RGB图像，输出每个关键点的2D置信度图（belief maps），红色斑点表示检测到的关键点投影位置：位姿计算：使用PnP（Perspective-n-Point）算法，结合2D关键点、机器人前向运动学计算的3D关键点位置和摄像头内参，求解摄像头外参。方法关键特点仅用合成数据训练：通过域随机化（domain randomization）在模拟环境中生成数据，避免真实数据收集。实时性：在NVIDIA Titan Xp GPU上可实现实时处理。泛化性强：支持多类机器人（如Franka Panda、Kuka LBR iiwa、Baxter）和摄像头传感器。实验结果（如Tab. I）表明，单帧精度与传统多帧手眼标定相当，多帧融合可进一步提升准确性。该方法为机器人视觉控制提供了更灵活的在线校准工具。 sgtapose：这篇文章解决的是在线相机到机器人姿态估计的问题。具体来说，它致力于从单视角连续图像序列中实时估计相机坐标系与机器人基坐标系之间的刚性变换（即姿态），包括旋转和平移。这一任务对于机器人执行抓取、操作等下游应用至关重要，但面临机器人自遮挡和单视角图像模糊性等挑战。输入方面，方法接收以下内容：一是连续两帧的RGB图像（如当前帧I_t和前一帧I_t-1），这些图像包含机器人的视觉信息；二是机器人的关节状态信息，即预定义关键点（如关节）的3D位置{P_t^i}，这些位置在机器人基坐标系中已知；三是相机内参，用于投影计算；四是前一帧的估计相机到机器人姿态，作为时间序列的初始参考。输出方面，方法产生相机到机器人的6D姿态估计结果，具体表示为旋转矩阵R_t和平移向量T_t，构成SE(3)变换。该姿态描述了相机相对于机器人基坐标系的位姿，可直接用于机器人控制任务。方法的核心创新在于利用时间信息和机器人结构先验来提升估计精度。它通过深度学习模型预测图像中机器人关键点的2D坐标，然后结合已知3D信息使用PnP求解器计算初始姿态，并进一步通过结构先验优化得到最终结果。这种方法在合成和真实数据集上实现了高精度和实时性能（如36 FPS），并在下游任务如机器人抓取中表现出色。总体而言，文章首次展示了从图像序列中估计相机到机器人姿态的有效性，通过时序注意力机制和结构先验融合，显著提升了鲁棒性和准确性。 CtRNet：这篇文章题为“Markerless Camera-to-Robot Pose Estimation via Self-supervised Sim-to-Real Transfer”，主要解决的是在视觉引导的机器人控制中，相机到机器人姿态估计的挑战。传统方法依赖于在机器人上附加标记物（如Aruco标记）来进行校准，但这过程繁琐且无法在线调整，限制了在动态环境中的应用。深度学习方法虽然实现了无标记的姿态估计，但通常只使用合成数据训练，面临模拟到现实差距的问题，因为真实世界的3D注释获取成本高。本文旨在克服这些限制，提出一种能够在线校准且无需大量标注数据的解决方案。在输入方面，该框架接收两个主要部分：一是来自相机的RGB图像，提供了视觉信息；二是机器人的关节角度数据，通过机器人系统实时获取。这些输入使得系统能够感知环境并了解机器人的当前配置。输出方面，框架产生两个关键结果：首先是相机到机器人的6自由度姿态估计，即机器人基座坐标系相对于相机坐标系的变换，这包括位置和方向信息；其次是机器人的前景分割掩码，即一个二进制图像，标识出图像中机器人所占的区域。这些输出共同支持精确的机器人定位和视觉反馈。方法上，文章引入了一个端到端的网络CtRNet，它结合了深度学习特征提取和几何视觉求解。网络首先在合成数据上预训练，学习分割和关键点检测，然后通过自监督训练利用真实世界数据进一步优化。自监督部分使用可微分渲染器，将估计的姿态渲染为轮廓图像，并与分割结果比较，通过图像损失反向传播来更新网络参数，从而实现无需真实标签的模拟到现实迁移。总之，本文的核心贡献是提供了一个高效、准确的无标记姿态估计框架，输入为图像和关节数据，输出为姿态和分割结果，通过自训练管道提升了在真实场景中的适用性，为机器人自动化任务提供了可靠支持。深度学习方法做的“机器人姿态估计”与“根据关节角 + 机器人模型做正向运动学 (FK)”根本不是一个任务。那个是这是机器人自身内部坐标系中的几何推断，属于纯 kinematics（运动学）领域：只能告诉你机器人在自己内部坐标系里的样子，无法告诉你机器人在相机里的样子 所以这个论文的重点工作是现实在相机里的坐标？这些方法解决的是：从图像估计“相机坐标系到机器人坐标系的外参”也就是 camera-to-robot extrinsic calibration。也就是相机外参标定问题。输入：RGB图像，joint angle，相机内参，输出摄像头在机器人坐标系中的 6D 位姿 T_cam_base 这个问题对VLA重要吗？很重要- 图像是 camera frame，机器人运动学与控制是在 robot base frame，VLA 必须把视觉观察对齐到动作坐标系 扩散模型：这篇文章的重点是用扩散来将二维关键点检测提升为条件三维关键点生成。据我们所知，我们的方法是首次通过扩散模型探索机器人手臂结构。 method 重点：\n相机相关的 扩散模型怎么设计的？ 问题理论化：输入rgb image，正运动学和cad模型。要求输出pose和joint数值\n问题分解成：检测2d+变成3d，具体是\n从image里面预测关键点的二维投影：关键词：pose estimation,keypoint detection, segmentation, positional embedding。训练一个模型，关键点会提前定义，能从图片里面输出像素坐标。分割是为了去掉背景，用PIDNet-L做的；位置嵌入是为了利用上一帧的关键点。 对齐到NCCS：防止不同内参的相机焦距、光心不同，只适用于针孔摄像头啊。2d像素减去光心再除以焦距。因为焦距和光心里面已经包含了横纵向信息。所以不同相机拍出来的同一个机器人图像对应的差不多一样了，所以只需要预测关键点离相机的距离（z 轴）即可。 用扩撒模型建模2d变成（camera空间中的）3d分布。监督学习？ 变成一个条件生成问题，要建模归一化后的c到xcam 扩散模型分成两个阶段：训练（方差保持随机微分方程）和生成（DDIM） 需要有带有标注的机器人数据集 轻量regression网络预测joint，把3d关键点恢复到robot space里面 用MLP预测关节角度 正运动学求姿态 什么是pose fitting：是指根据已知的3D关键点预测结果，将机器人模型与这些关键点对齐，从而恢复机器人的完整位姿。处理异常点：可微分异常值估计differentiable outliers estimation 1. 核心核心思想：给每个关键点一个可训练或可优化的权重，表示这个点是否可信 2. 如果某个点是异常值，优化会自动降低它的权重 3. 单帧处理，怎么判断异常？- 这个权重只依赖当前帧 Xcam 与预测的 Xrob 的残差，Xorb是fk计算出来的。 有一个问题：step4里面，直接mlp求出joint，但是相机位置的健壮性不行啊\nexperiment 往后看的时候确认一下，有没有提到zero-shot moved camera的事情？\nCOLMAPCOLMAP是一款开源的结合SfM(Structure-from-Motion)和MVS(Multi-View Stereo)的三维重建Pipeline，用来标定相机外参\nbaseline： 分成未知joint angle 和已知。为什么要做已知的对比实验，毕竟joint angle是mlp算出来的？算法不需要去预测 θ，只需要做机器人姿态估计或关键点重建 这样可以区分误差的来源是扩散还是MLP\nunknwon用的RoboPose和SPDH\nknown：Dream和SGTAPose，CtRNet\n哦这个就是姿态估计，做的是直接抓取，不是VLA。但是能作为一个前提。\n重点看cross-camera，好像只是内参不同啊D:完全没有提到外参，那演示图里面放个相机在不同位置的是干啥 但是可以拿过来当个参考，外参可以归一化吗？\n",
+  "wordCount" : "253",
+  "inLanguage": "en",
+  "datePublished": "2025-12-08T16:09:53Z",
+  "dateModified": "2025-12-08T16:09:53Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://example.com/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      RoboKeyGen: Robot Pose and Joint Angles Estimation via  Diffusion-based 3D Keypoint Generation
+    </h1>
+    <div class="post-meta">
+
+<span title='2025-12-08 16:09:53 +0000 UTC'>December 8, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>这篇文章用的英文单词好拗口，但是写得挺清晰的，还挺喜欢</p>
+<p>解决什么问题？pose estimation，以前的要么慢，要么不够精确。这篇文章首先检测2d关键点，然后cross-camera（用内参计算）规范化，然后扩散模型生成3d（相机坐标），然后MLP推理出joint angle，用fk算出eepose等。
+对我有什么启发？相机的归一化能不能拓展到外参？Intrinsic-&gt;Extrinsic</p>
+<p>并不是VLA！只是传统的视觉</p>
+<h1 id="abstract">abstract<a hidden class="anchor" aria-hidden="true" href="#abstract">#</a></h1>
+<ol>
+<li>本文做了什么？预测任务分成两个：2d关键点检测和将2d关键点提升到3d</li>
+<li>难点：2d-&gt;3d，用扩散，所以问题变成 <strong>条件3d关键点生成</strong></li>
+<li>to 跨摄像头适应性，引入 <strong>归一化相机坐标空间（normalized camera coordinate space）</strong> 确保估计的二维关键点在不同相机内在元件上的对齐</li>
+<li>同类的方法居然是渲染与比较？因为问题是从当前状况推断出joint state</li>
+</ol>
+<p>一句话总结这篇文章做的东西：识别2d关键点，用扩散模型生成3d关键点，同时利用NCCS做到跨相机泛化性。</p>
+<h1 id="introduction">introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h1>
+<ol>
+<li>问题明确了：是pose estimation，而且重点放在joint estimation，也就是没有joint-state作为输入</li>
+<li>同类的方法两种：render and compare，但是要渲染很慢的；还有一种是key-point-based，比较典型的是一个2d heatmap扩展到3d，它能够通过深度输入直接预测机械臂上预定义关键点的三维坐标，快，但是精度比较低，受限于cross-camera-generalization。为什么精度比较低？3d heatmap和2d heatmap，以及深度输入算什么？关键点是什么？</li>
+<li>所以提出robokeygen，基于key-point，但是要提升它的精度，提高cross-camera generlization。咋做的：高维任务分成2d keypoint detection+ lift 2d keypoint to 3d。2d关键点怎么来？用上面的heatmap吗？3d关键点有什么用？</li>
+<li>方法具体说明：
+<ol>
+<li>预测 predefined keypoint的2d projection-&gt;这个用现有技术</li>
+<li>这些projection 对齐到nccs里面-&gt;我好奇的技术</li>
+<li>基于对齐后的生成3d keypoint-&gt;本文的重点</li>
+<li>用一个已有的pose-fitting算法估计pose</li>
+</ol>
+</li>
+<li>3d关键点为什么能估计位姿？nccs怎么用的？pose-fitting是什么？</li>
+</ol>
+<p>看完introduction，我对这个文章的思路更清晰了，所以对我来说，重点在nccs，关键点作为边角料。</p>
+<h1 id="related-works">related works<a hidden class="anchor" aria-hidden="true" href="#related-works">#</a></h1>
+<ol>
+<li>有点懵，“Robot pose estimation with known joint angles: Recent advances in deep learning offer innovative methods for robot pose recovery. Dream [5] uses a convolutional network to regress 2D heatmaps and compute poses through a Perspective-n-Point (PnP) RANSAC solver [17]. SGTAPose [6] integrates temporal information to address selfocclusion in pose estimation. Meanwhile, CtRNet [7] employs a self-supervision framework, narrowing the sim-to-real gap effectively. Notably, these methods depend on immediate joint angles feedback, thus limiting their applicability.” (“RoboKeyGen: Robot Pose and Joint Angles Estimation via Diffusion-based 3D Keypoint Generation | IEEE Conference Publication | IEEE Xplore”, p. 5376)这一段提到的问题我怎么看不懂，知道关节角度以后为什么还需要各种网络，直接正向运动学就能求出来了？</li>
+<li>量子速度了SGTAPose和DREAM这些：这篇文章解决的是什么问题，告诉我输入是什么，输出是什么
+<ol>
+<li>dream:论文解决的问题：摄像头到机器人位姿估计本文解决的是从单个RGB图像估计外部摄像头相对于机器人的位姿（camera-to-robot pose estimation）​ 的问题。传统的手眼标定（hand-eye calibration）方法需要依赖标记物（如ArUco码）和离线多帧数据收集，而本文提出的DREAM框架实现了无需标记物、在线、单图像的标定，适用于动态环境中的机器人控制任务（如抓取、避障）。核心挑战是消除对物理标记和复杂校准步骤的依赖，实现实时、通用的摄像头外参估计。方法的输入包括以下元素：单个RGB图像：由外部摄像头捕获的机器人图像，默认分辨率为640×480像素。图像中需包含机器人的可见部分（即使关键点被遮挡）。已知摄像头内参：包括焦距、主点等内部参数，假设已预先校准。机器人关节配置：通过机器人控制器实时获取的关节角度，用于计算关键点的3D位置（通过前向运动学）。方法的输出是：摄像头外参（camera extrinsics）：即摄像头坐标系到机器人基础坐标系的刚体变换矩阵（旋转和平移）该变换允许将图像中的观测转换到机器人任务空间，用于实时控制。输出通过以下流程生成：关键点检测：深度学习网络（如VGG或ResNet编码器）处理RGB图像，输出每个关键点的2D置信度图（belief maps），红色斑点表示检测到的关键点投影位置：位姿计算：使用PnP（Perspective-n-Point）算法，结合2D关键点、机器人前向运动学计算的3D关键点位置和摄像头内参，求解摄像头外参。方法关键特点仅用合成数据训练：通过域随机化（domain randomization）在模拟环境中生成数据，避免真实数据收集。实时性：在NVIDIA Titan Xp GPU上可实现实时处理。泛化性强：支持多类机器人（如Franka Panda、Kuka LBR iiwa、Baxter）和摄像头传感器。实验结果（如Tab. I）表明，单帧精度与传统多帧手眼标定相当，多帧融合可进一步提升准确性。该方法为机器人视觉控制提供了更灵活的在线校准工具。</li>
+<li>sgtapose：这篇文章解决的是在线相机到机器人姿态估计的问题。具体来说，它致力于从单视角连续图像序列中实时估计相机坐标系与机器人基坐标系之间的刚性变换（即姿态），包括旋转和平移。这一任务对于机器人执行抓取、操作等下游应用至关重要，但面临机器人自遮挡和单视角图像模糊性等挑战。输入方面，方法接收以下内容：一是连续两帧的RGB图像（如当前帧I_t和前一帧I_t-1），这些图像包含机器人的视觉信息；二是机器人的关节状态信息，即预定义关键点（如关节）的3D位置{P_t^i}，这些位置在机器人基坐标系中已知；三是相机内参，用于投影计算；四是前一帧的估计相机到机器人姿态，作为时间序列的初始参考。输出方面，方法产生相机到机器人的6D姿态估计结果，具体表示为旋转矩阵R_t和平移向量T_t，构成SE(3)变换。该姿态描述了相机相对于机器人基坐标系的位姿，可直接用于机器人控制任务。方法的核心创新在于利用时间信息和机器人结构先验来提升估计精度。它通过深度学习模型预测图像中机器人关键点的2D坐标，然后结合已知3D信息使用PnP求解器计算初始姿态，并进一步通过结构先验优化得到最终结果。这种方法在合成和真实数据集上实现了高精度和实时性能（如36 FPS），并在下游任务如机器人抓取中表现出色。总体而言，文章首次展示了从图像序列中估计相机到机器人姿态的有效性，通过时序注意力机制和结构先验融合，显著提升了鲁棒性和准确性。</li>
+<li>CtRNet：这篇文章题为“Markerless Camera-to-Robot Pose Estimation via Self-supervised Sim-to-Real Transfer”，主要解决的是在视觉引导的机器人控制中，相机到机器人姿态估计的挑战。传统方法依赖于在机器人上附加标记物（如Aruco标记）来进行校准，但这过程繁琐且无法在线调整，限制了在动态环境中的应用。深度学习方法虽然实现了无标记的姿态估计，但通常只使用合成数据训练，面临模拟到现实差距的问题，因为真实世界的3D注释获取成本高。本文旨在克服这些限制，提出一种能够在线校准且无需大量标注数据的解决方案。在输入方面，该框架接收两个主要部分：一是来自相机的RGB图像，提供了视觉信息；二是机器人的关节角度数据，通过机器人系统实时获取。这些输入使得系统能够感知环境并了解机器人的当前配置。输出方面，框架产生两个关键结果：首先是相机到机器人的6自由度姿态估计，即机器人基座坐标系相对于相机坐标系的变换，这包括位置和方向信息；其次是机器人的前景分割掩码，即一个二进制图像，标识出图像中机器人所占的区域。这些输出共同支持精确的机器人定位和视觉反馈。方法上，文章引入了一个端到端的网络CtRNet，它结合了深度学习特征提取和几何视觉求解。网络首先在合成数据上预训练，学习分割和关键点检测，然后通过自监督训练利用真实世界数据进一步优化。自监督部分使用可微分渲染器，将估计的姿态渲染为轮廓图像，并与分割结果比较，通过图像损失反向传播来更新网络参数，从而实现无需真实标签的模拟到现实迁移。总之，本文的核心贡献是提供了一个高效、准确的无标记姿态估计框架，输入为图像和关节数据，输出为姿态和分割结果，通过自训练管道提升了在真实场景中的适用性，为机器人自动化任务提供了可靠支持。深度学习方法做的“机器人姿态估计”与“根据关节角 + 机器人模型做正向运动学 (FK)”根本不是一个任务。那个是这是<strong>机器人自身内部坐标系中的几何推断</strong>，属于纯 kinematics（运动学）领域：只能告诉你机器人在自己内部坐标系里的样子，无法告诉你机器人在相机里的样子</li>
+</ol>
+</li>
+<li>所以这个论文的重点工作是现实在相机里的坐标？这些方法解决的是：从图像估计“相机坐标系到机器人坐标系的外参”也就是 camera-to-robot extrinsic calibration。也就是相机外参标定问题。输入：RGB图像，joint angle，相机内参，输出摄像头在机器人坐标系中的 6D 位姿 T_cam_base</li>
+<li>这个问题对VLA重要吗？很重要- 图像是 <strong>camera frame</strong>，机器人运动学与控制是在 <strong>robot base frame</strong>，VLA 必须把视觉观察对齐到动作坐标系</li>
+<li>扩散模型：这篇文章的重点是用扩散来将二维关键点检测提升为条件三维关键点生成。据我们所知，我们的方法是首次通过扩散模型探索机器人手臂结构。</li>
+</ol>
+<h1 id="method">method<a hidden class="anchor" aria-hidden="true" href="#method">#</a></h1>
+<p>重点：</p>
+<ol>
+<li>相机相关的</li>
+<li>扩散模型怎么设计的？</li>
+</ol>
+<p>问题理论化：输入rgb image，正运动学和cad模型。要求输出pose和joint数值</p>
+<p>问题分解成：检测2d+变成3d，具体是</p>
+<ol>
+<li>从image里面预测关键点的二维投影：关键词：pose estimation,keypoint detection, segmentation, positional embedding。训练一个模型，关键点会提前定义，能从图片里面输出像素坐标。分割是为了去掉背景，用PIDNet-L做的；位置嵌入是为了利用上一帧的关键点。</li>
+<li>对齐到NCCS：防止不同内参的相机焦距、光心不同，只适用于针孔摄像头啊。2d像素减去光心再除以焦距。因为焦距和光心里面已经包含了横纵向信息。所以不同相机拍出来的同一个机器人图像对应的差不多一样了，所以只需要预测关键点离相机的距离（z 轴）即可。</li>
+<li>用扩撒模型建模2d变成（camera空间中的）3d分布。监督学习？
+<ol>
+<li>变成一个条件生成问题，要建模归一化后的c到xcam</li>
+<li>扩散模型分成两个阶段：训练（方差保持随机微分方程）和生成（DDIM）</li>
+<li>需要有带有标注的机器人数据集</li>
+</ol>
+</li>
+<li>轻量regression网络预测joint，把3d关键点恢复到robot space里面
+<ol>
+<li>用MLP预测关节角度</li>
+<li>正运动学求姿态</li>
+</ol>
+</li>
+<li>什么是pose fitting：是指根据已知的3D关键点预测结果，将机器人模型与这些关键点对齐，从而恢复机器人的完整位姿。处理异常点：可微分异常值估计differentiable outliers estimation
+1. 核心核心思想：给每个关键点一个<strong>可训练或可优化的权重</strong>，表示这个点是否可信
+2. 如果某个点是异常值，优化会自动降低它的权重
+3. 单帧处理，怎么判断异常？- 这个权重只依赖当前帧 Xcam 与预测的 Xrob 的残差，Xorb是fk计算出来的。</li>
+</ol>
+<p>有一个问题：step4里面，直接mlp求出joint，但是相机位置的健壮性不行啊</p>
+<h1 id="experiment">experiment<a hidden class="anchor" aria-hidden="true" href="#experiment">#</a></h1>
+<p>往后看的时候确认一下，有没有提到zero-shot moved camera的事情？</p>
+<p>COLMAPCOLMAP是一款开源的结合SfM(Structure-from-Motion)和MVS(Multi-View Stereo)的三维重建Pipeline，用来标定相机外参</p>
+<p>baseline：
+分成未知joint angle 和已知。为什么要做已知的对比实验，毕竟joint angle是mlp算出来的？<strong>算法不需要去预测 θ</strong>，只需要做<strong>机器人姿态估计或关键点重建</strong>
+这样可以区分误差的来源是扩散还是MLP</p>
+<p>unknwon用的RoboPose和SPDH</p>
+<p>known：Dream和SGTAPose，CtRNet</p>
+<p>哦这个就是姿态估计，做的是直接抓取，不是VLA。但是能作为一个前提。</p>
+<p>重点看cross-camera，好像只是内参不同啊D:完全没有提到外参，那演示图里面放个相机在不同位置的是干啥
+但是可以拿过来当个参考，外参可以归一化吗？</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://example.com/tags/pose-estimation/">Pose-Estimation</a></li>
+      <li><a href="https://example.com/tags/robot/">Robot</a></li>
+      <li><a href="https://example.com/tags/cross-camera-generalization/">Cross-Camera-Generalization</a></li>
+      <li><a href="https://example.com/tags/generalization/">Generalization</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

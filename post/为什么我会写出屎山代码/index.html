@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>为什么我会写出屎山代码 | 我的博客</title>
+<meta name="keywords" content="code, structure">
+<meta name="description" content="导模块导得头疼，连续必可导，可导不一定连续">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
+<link rel="canonical" href="https://example.com/post/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BC%9A%E5%86%99%E5%87%BA%E5%B1%8E%E5%B1%B1%E4%BB%A3%E7%A0%81/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://example.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://example.com/post/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BC%9A%E5%86%99%E5%87%BA%E5%B1%8E%E5%B1%B1%E4%BB%A3%E7%A0%81/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://example.com/post/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BC%9A%E5%86%99%E5%87%BA%E5%B1%8E%E5%B1%B1%E4%BB%A3%E7%A0%81/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="为什么我会写出屎山代码">
+  <meta property="og:description" content="导模块导得头疼，连续必可导，可导不一定连续">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:tag" content="Code">
+    <meta property="article:tag" content="Structure">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="为什么我会写出屎山代码">
+  <meta name="twitter:description" content="导模块导得头疼，连续必可导，可导不一定连续">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://example.com/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "为什么我会写出屎山代码",
+      "item": "https://example.com/post/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BC%9A%E5%86%99%E5%87%BA%E5%B1%8E%E5%B1%B1%E4%BB%A3%E7%A0%81/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "为什么我会写出屎山代码",
+  "name": "为什么我会写出屎山代码",
+  "description": "导模块导得头疼，连续必可导，可导不一定连续\n",
+  "keywords": [
+    "code", "structure"
+  ],
+  "articleBody": "导模块导得头疼，连续必可导，可导不一定连续\n为什么vscode不够好？ 虽然轻量，但是涉及很大的项目代码的时候就很混乱\npython\n@classmethod 类方法和普通的类里面的实例方法有什么区别\n实例方法（默认）def foo(self): …第一个参数是 self（对象实例本身），只能通过对象来调用，主要用来操作当前对象的状态。 类方法（@classmethod） @classmethod def foo(cls, …): … 第一个参数是 cls（类本身，不是对象），既可以通过类名调用，也可以通过对象调用。 它适合：创建对象的工厂方法（from_pretrained、from_json、from_dict 等）。\n静态方法（@staticmethod）\n@staticmethod def foo(…): …\n没有 self 或 cls，更像普通函数，只是被放进类的命名空间里方便组织。\n针对整个类而不是某个实例的逻辑。\nfactory method的目的是创建并返回这个类的一个实例，直接用类名调用policy = PreTrainedConfig.from_pretrained(“path/to/policy”)\n类方法 是 方法的调用方式/绑定方式 的一种。\n工厂方法是 一种设计模式/用途，描述“用一个方法来生成对象”的做法。\n一种能够看起来很高级pipeline 数据流式处理 pipeline（Pipeline Pattern），在强化学习、机器人控制、以及数据处理系统里非常常见。 Pipeline / Data Processing Pipeline\n特点： 数据按顺序流过一系列处理步骤（ProcessorStep），每一步对数据做某种变换。 优点： 每一步都可以独立测试、替换或者重用。 在机器学习/机器人中的常见用法： 数据预处理（features、actions、observations） 动作处理（joints → EE 或 EE → joints） 数据记录（dataset frame 构建） 动作安全检查 / clipping / IK/FK 等 在 LeRobot 里，它具体是：\nRobotProcessorPipeline：机器人动作/观测处理 pipeline ProcessorStep：每个独立处理步骤（如 FK、IK、EE 限幅、动作归一化） to_transition / to_output：pipeline 的接口适配器，把外部输入/输出统一封装 总结一句话： 这就是 一个类型安全、可组合的机器人数据流 pipeline，专门用于动作和观测的转换。 2️⃣ 这种代码好不好？适不适合用？\n我可以从几个角度分析： ✅ 优点\n模块化强： 每个 ProcessorStep 独立，可重用，可单独测试。 可组合： FK、IK、安全限制、归一化等可以随意组合，不改其他代码。 统一接口： 任何 teleop、policy 或 dataset pipeline 都可以复用同一个 pipeline。 类型安全： 使用泛型注解（Python type hints），明确每一步输入输出类型。 ⚠️ 潜在缺点\n代码复杂： 对初学者来说，理解 transition → step → pipeline → output 可能需要一些时间。 轻微性能开销： 每帧数据都经过 pipeline 封装、转换，会有一点性能消耗（通常微不足道）。 过度设计风险： 对简单任务（比如直接用 FK/IK 控制一个机械臂）可能显得“重”，不必要。 总体评价： ✅ 对复杂机器人系统或需要统一动作/观测处理的项目非常适合，尤其是强化学习、teleop + dataset recording 等场景。 ⚠️ 对简单 demo 或单次 FK/IK 测试，可能太“架构化”，直接调用 FK/IK 函数就够了。 3️⃣ 适合什么情况下使用？\n机器人动作与观测需要统一处理 例如：EE → joints，joints → EE，动作限制，数据记录。 你有多种控制来源 teleop、policy、dataset replay，或者混合控制。 需要可复用和可组合模块 不同机器人或不同任务之间，可以复用 FK/IK、安全限制/归一化等 pipeline step。 强化学习或模仿学习场景 pipeline 可以保证训练和推理时的数据处理一致。 简单说，如果你希望“动作/观测转换逻辑可复用、可插拔、可组合”，这个 pipeline 就非常合适。 4️⃣ 如果你想学习，建议从哪里开始？\n我给你一个循序渐进路线： 第一步：理解基础概念\nFK / IK（正向运动学 / 逆运动学） 动作/观测空间（joint space vs EE space） 数据流思想（Pipeline） 第二步：小规模练手\n写一个简单的 pipeline，把： joint → EE EE → joint 加一个动作 clipping step 在本地机械臂或仿真里测试 第三步：理解 transition 与 processor\n观察 EnvTransition 数据结构 写一个自定义的 ProcessorStep： 比如：动作归一化、速度限制、EE 步长限制 用 pipeline 串联你的步骤 第四步：完整系统\n用 pipeline 替换 teleop + dataset recording 中的 FK/IK step 尝试混合 teleop + policy 熟悉 to_transition 和 to_output 的作用 第五步：扩展\n支持多机器人 支持 RL 模型训练输入输出处理 可视化 pipeline 中的每一步数据 一个简单示例\nfrom dataclasses import dataclass from typing import Any, Dict, Tuple, Callable # 定义数据类型 Action = Dict[str, float] Observation = Dict[str, float] Transition = Dict[str, Any] # 一个基础的 ProcessorStep 接口 class ProcessorStep: def __call__(self, transition: Transition) -\u003e Transition: raise NotImplementedError # 示例 Step A：动作加 1 @dataclass class StepA(ProcessorStep): def __call__(self, transition: Transition) -\u003e Transition: if \"action\" in transition: transition[\"action\"] = {k: v + 1 for k, v in transition[\"action\"].items()} return transition # 示例 Step B：观测乘 2 @dataclass class StepB(ProcessorStep): def __call__(self, transition: Transition) -\u003e Transition: if \"observation\" in transition: transition[\"observation\"] = {k: v * 2 for k, v in transition[\"observation\"].items()} return transition # Pipeline class Pipeline: def __init__(self, steps: list[ProcessorStep], to_transition: Callable[[Tuple[Action, Observation]], Transition], to_output: Callable[[Transition], Action]): self.steps = steps self.to_transition = to_transition self.to_output = to_output def __call__(self, data: Tuple[Action, Observation]) -\u003e Action: transition = self.to_transition(data) for step in self.steps: transition = step(transition) return self.to_output(transition) # to_transition / to_output 函数 def make_transition(data: Tuple[Action, Observation]) -\u003e Transition: action, obs = data return {\"action\": action, \"observation\": obs} def extract_action(transition: Transition) -\u003e Action: return transition[\"action\"] # 使用 pipeline pipeline = Pipeline( steps=[StepA(), StepB()], to_transition=make_transition, to_output=extract_action ) # 输入数据 action = {\"move_x\": 1.0} obs = {\"pos_y\": 3.0} result = pipeline((action, obs)) print(\"最终动作输出:\", result) 示例图\nflowchart TD input[(Action, Observation)] to_transition[\"to_transition() \\n(make_transition)\"] stepA[\"StepA: Process Action\"] stepB[\"StepB: Process Observation\"] to_output[\"to_output() \\n(extract_action)\"] output[(Final Action)] input --\u003e to_transition --\u003e stepA --\u003e stepB --\u003e to_output --\u003e output 输入 (Action, Observation) 先转换成统一 Transition\nStepA 处理 action\nStepB 处理 observation\nto_output 从 transition 中提取最终动作\n快速定位bug 大方向\n有些可能忽略的地方\n输入的顺序 同步异步问题 ",
+  "wordCount" : "484",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/post/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BC%9A%E5%86%99%E5%87%BA%E5%B1%8E%E5%B1%B1%E4%BB%A3%E7%A0%81/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://example.com/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      为什么我会写出屎山代码
+    </h1>
+    <div class="post-meta">
+
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>导模块导得头疼，连续必可导，可导不一定连续</p>
+<p>为什么vscode不够好？ 虽然轻量，但是涉及很大的项目代码的时候就很混乱</p>
+<p>python</p>
+<p>@classmethod 类方法和普通的类里面的实例方法有什么区别</p>
+<p>实例方法（默认）def foo(self): &hellip;第一个参数是 self（对象实例本身），只能通过对象来调用，主要用来操作当前对象的状态。
+类方法（@classmethod）
+@classmethod
+def foo(cls, &hellip;): &hellip;
+第一个参数是 cls（类本身，不是对象），既可以通过类名调用，也可以通过对象调用。
+它适合：创建对象的工厂方法（from_pretrained、from_json、from_dict 等）。</p>
+<p>静态方法（@staticmethod）</p>
+<p>@staticmethod
+def foo(&hellip;): &hellip;</p>
+<p>没有 self 或 cls，更像普通函数，只是被放进类的命名空间里方便组织。</p>
+<p>针对整个类而不是某个实例的逻辑。</p>
+<p>factory method的目的是创建并返回这个类的一个实例，直接用类名调用policy = PreTrainedConfig.from_pretrained(&ldquo;path/to/policy&rdquo;)</p>
+<p>类方法 是 方法的调用方式/绑定方式 的一种。</p>
+<p>工厂方法是 一种设计模式/用途，描述“用一个方法来生成对象”的做法。</p>
+<p>一种能够看起来很高级pipeline
+数据流式处理 pipeline（Pipeline Pattern），在强化学习、机器人控制、以及数据处理系统里非常常见。
+Pipeline / Data Processing Pipeline</p>
+<pre><code>特点： 数据按顺序流过一系列处理步骤（ProcessorStep），每一步对数据做某种变换。
+
+优点： 每一步都可以独立测试、替换或者重用。
+
+在机器学习/机器人中的常见用法：
+
+    数据预处理（features、actions、observations）
+
+    动作处理（joints → EE 或 EE → joints）
+
+    数据记录（dataset frame 构建）
+
+    动作安全检查 / clipping / IK/FK 等
+</code></pre>
+<p>在 LeRobot 里，它具体是：</p>
+<pre><code>RobotProcessorPipeline：机器人动作/观测处理 pipeline
+
+ProcessorStep：每个独立处理步骤（如 FK、IK、EE 限幅、动作归一化）
+
+to_transition / to_output：pipeline 的接口适配器，把外部输入/输出统一封装
+
+总结一句话：
+这就是 一个类型安全、可组合的机器人数据流 pipeline，专门用于动作和观测的转换。
+</code></pre>
+<p>2️⃣ 这种代码好不好？适不适合用？</p>
+<p>我可以从几个角度分析：
+✅ 优点</p>
+<pre><code>模块化强：
+
+    每个 ProcessorStep 独立，可重用，可单独测试。
+
+可组合：
+
+    FK、IK、安全限制、归一化等可以随意组合，不改其他代码。
+
+统一接口：
+
+    任何 teleop、policy 或 dataset pipeline 都可以复用同一个 pipeline。
+
+类型安全：
+
+    使用泛型注解（Python type hints），明确每一步输入输出类型。
+</code></pre>
+<p>⚠️ 潜在缺点</p>
+<pre><code>代码复杂：
+
+    对初学者来说，理解 transition → step → pipeline → output 可能需要一些时间。
+
+轻微性能开销：
+
+    每帧数据都经过 pipeline 封装、转换，会有一点性能消耗（通常微不足道）。
+
+过度设计风险：
+
+    对简单任务（比如直接用 FK/IK 控制一个机械臂）可能显得“重”，不必要。
+
+总体评价：
+✅ 对复杂机器人系统或需要统一动作/观测处理的项目非常适合，尤其是强化学习、teleop + dataset recording 等场景。
+⚠️ 对简单 demo 或单次 FK/IK 测试，可能太“架构化”，直接调用 FK/IK 函数就够了。
+</code></pre>
+<p>3️⃣ 适合什么情况下使用？</p>
+<pre><code>机器人动作与观测需要统一处理
+
+    例如：EE → joints，joints → EE，动作限制，数据记录。
+
+你有多种控制来源
+
+    teleop、policy、dataset replay，或者混合控制。
+
+需要可复用和可组合模块
+
+    不同机器人或不同任务之间，可以复用 FK/IK、安全限制/归一化等 pipeline step。
+
+强化学习或模仿学习场景
+
+    pipeline 可以保证训练和推理时的数据处理一致。
+
+简单说，如果你希望“动作/观测转换逻辑可复用、可插拔、可组合”，这个 pipeline 就非常合适。
+</code></pre>
+<p>4️⃣ 如果你想学习，建议从哪里开始？</p>
+<p>我给你一个循序渐进路线：
+第一步：理解基础概念</p>
+<pre><code>FK / IK（正向运动学 / 逆运动学）
+
+动作/观测空间（joint space vs EE space）
+
+数据流思想（Pipeline）
+</code></pre>
+<p>第二步：小规模练手</p>
+<pre><code>写一个简单的 pipeline，把：
+
+    joint → EE
+
+    EE → joint
+
+    加一个动作 clipping step
+
+在本地机械臂或仿真里测试
+</code></pre>
+<p>第三步：理解 transition 与 processor</p>
+<pre><code>观察 EnvTransition 数据结构
+
+写一个自定义的 ProcessorStep：
+
+    比如：动作归一化、速度限制、EE 步长限制
+
+用 pipeline 串联你的步骤
+</code></pre>
+<p>第四步：完整系统</p>
+<pre><code>用 pipeline 替换 teleop + dataset recording 中的 FK/IK step
+
+尝试混合 teleop + policy
+
+熟悉 to_transition 和 to_output 的作用
+</code></pre>
+<p>第五步：扩展</p>
+<pre><code>支持多机器人
+
+支持 RL 模型训练输入输出处理
+
+可视化 pipeline 中的每一步数据
+</code></pre>
+<p>一个简单示例</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> dataclasses <span style="color:#f92672">import</span> dataclass
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Any, Dict, Tuple, Callable
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 定义数据类型</span>
+</span></span><span style="display:flex;"><span>Action <span style="color:#f92672">=</span> Dict[str, float]
+</span></span><span style="display:flex;"><span>Observation <span style="color:#f92672">=</span> Dict[str, float]
+</span></span><span style="display:flex;"><span>Transition <span style="color:#f92672">=</span> Dict[str, Any]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 一个基础的 ProcessorStep 接口</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ProcessorStep</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__call__</span>(self, transition: Transition) <span style="color:#f92672">-&gt;</span> Transition:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">NotImplementedError</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 示例 Step A：动作加 1</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@dataclass</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StepA</span>(ProcessorStep):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__call__</span>(self, transition: Transition) <span style="color:#f92672">-&gt;</span> Transition:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#34;action&#34;</span> <span style="color:#f92672">in</span> transition:
+</span></span><span style="display:flex;"><span>            transition[<span style="color:#e6db74">&#34;action&#34;</span>] <span style="color:#f92672">=</span> {k: v <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">for</span> k, v <span style="color:#f92672">in</span> transition[<span style="color:#e6db74">&#34;action&#34;</span>]<span style="color:#f92672">.</span>items()}
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> transition
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 示例 Step B：观测乘 2</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@dataclass</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StepB</span>(ProcessorStep):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__call__</span>(self, transition: Transition) <span style="color:#f92672">-&gt;</span> Transition:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#34;observation&#34;</span> <span style="color:#f92672">in</span> transition:
+</span></span><span style="display:flex;"><span>            transition[<span style="color:#e6db74">&#34;observation&#34;</span>] <span style="color:#f92672">=</span> {k: v <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> <span style="color:#66d9ef">for</span> k, v <span style="color:#f92672">in</span> transition[<span style="color:#e6db74">&#34;observation&#34;</span>]<span style="color:#f92672">.</span>items()}
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> transition
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Pipeline</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Pipeline</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self, steps: list[ProcessorStep], 
+</span></span><span style="display:flex;"><span>                 to_transition: Callable[[Tuple[Action, Observation]], Transition],
+</span></span><span style="display:flex;"><span>                 to_output: Callable[[Transition], Action]):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>steps <span style="color:#f92672">=</span> steps
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>to_transition <span style="color:#f92672">=</span> to_transition
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>to_output <span style="color:#f92672">=</span> to_output
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__call__</span>(self, data: Tuple[Action, Observation]) <span style="color:#f92672">-&gt;</span> Action:
+</span></span><span style="display:flex;"><span>        transition <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>to_transition(data)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> step <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>steps:
+</span></span><span style="display:flex;"><span>            transition <span style="color:#f92672">=</span> step(transition)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>to_output(transition)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># to_transition / to_output 函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_transition</span>(data: Tuple[Action, Observation]) <span style="color:#f92672">-&gt;</span> Transition:
+</span></span><span style="display:flex;"><span>    action, obs <span style="color:#f92672">=</span> data
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;action&#34;</span>: action, <span style="color:#e6db74">&#34;observation&#34;</span>: obs}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">extract_action</span>(transition: Transition) <span style="color:#f92672">-&gt;</span> Action:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> transition[<span style="color:#e6db74">&#34;action&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用 pipeline</span>
+</span></span><span style="display:flex;"><span>pipeline <span style="color:#f92672">=</span> Pipeline(
+</span></span><span style="display:flex;"><span>    steps<span style="color:#f92672">=</span>[StepA(), StepB()],
+</span></span><span style="display:flex;"><span>    to_transition<span style="color:#f92672">=</span>make_transition,
+</span></span><span style="display:flex;"><span>    to_output<span style="color:#f92672">=</span>extract_action
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 输入数据</span>
+</span></span><span style="display:flex;"><span>action <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;move_x&#34;</span>: <span style="color:#ae81ff">1.0</span>}
+</span></span><span style="display:flex;"><span>obs <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;pos_y&#34;</span>: <span style="color:#ae81ff">3.0</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>result <span style="color:#f92672">=</span> pipeline((action, obs))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;最终动作输出:&#34;</span>, result)
+</span></span></code></pre></div><p>示例图</p>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart TD
+    input[(Action, Observation)]
+    to_transition[&#34;to_transition() \n(make_transition)&#34;]
+    stepA[&#34;StepA: Process Action&#34;]
+    stepB[&#34;StepB: Process Observation&#34;]
+    to_output[&#34;to_output() \n(extract_action)&#34;]
+    output[(Final Action)]
+
+    input --&gt; to_transition --&gt; stepA --&gt; stepB --&gt; to_output --&gt; output
+</code></pre><p>输入 (Action, Observation) 先转换成统一 Transition</p>
+<p>StepA 处理 action</p>
+<p>StepB 处理 observation</p>
+<p>to_output 从 transition 中提取最终动作</p>
+<h1 id="快速定位bug">快速定位bug<a hidden class="anchor" aria-hidden="true" href="#快速定位bug">#</a></h1>
+<p>大方向</p>
+<p>有些可能忽略的地方</p>
+<ol>
+<li>输入的顺序</li>
+<li>同步异步问题</li>
+</ol>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://example.com/tags/code/">Code</a></li>
+      <li><a href="https://example.com/tags/structure/">Structure</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

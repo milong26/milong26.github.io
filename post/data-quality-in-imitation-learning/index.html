@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Data Quality in Imitation Learning | 我的博客</title>
+<meta name="keywords" content="">
+<meta name="description" content="开年第一篇论文，讲模仿学习中的数据质量
+我想从这篇论文中得到的信息：
+数据质量怎么评估，只能训练吗？
+有什么办法可以增加数据质量，采集和算法层面？">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
+<link rel="canonical" href="https://example.com/post/data-quality-in-imitation-learning/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://example.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://example.com/post/data-quality-in-imitation-learning/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://example.com/post/data-quality-in-imitation-learning/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="Data Quality in Imitation Learning">
+  <meta property="og:description" content="开年第一篇论文，讲模仿学习中的数据质量 我想从这篇论文中得到的信息： 数据质量怎么评估，只能训练吗？ 有什么办法可以增加数据质量，采集和算法层面？">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2026-02-25T17:52:40+00:00">
+    <meta property="article:modified_time" content="2026-02-25T17:52:40+00:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Data Quality in Imitation Learning">
+  <meta name="twitter:description" content="开年第一篇论文，讲模仿学习中的数据质量 我想从这篇论文中得到的信息： 数据质量怎么评估，只能训练吗？ 有什么办法可以增加数据质量，采集和算法层面？">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://example.com/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Data Quality in Imitation Learning",
+      "item": "https://example.com/post/data-quality-in-imitation-learning/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Data Quality in Imitation Learning",
+  "name": "Data Quality in Imitation Learning",
+  "description": "开年第一篇论文，讲模仿学习中的数据质量 我想从这篇论文中得到的信息： 数据质量怎么评估，只能训练吗？ 有什么办法可以增加数据质量，采集和算法层面？\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "开年第一篇论文，讲模仿学习中的数据质量 我想从这篇论文中得到的信息： 数据质量怎么评估，只能训练吗？ 有什么办法可以增加数据质量，采集和算法层面？\nAdvances in Neural Information Processing Systems 36 (NeurIPS 2023)\nhttps://proceedings.neurips.cc/paper_files/paper/2023/hash/fe692980c5d9732cf153ce27947653a7-Abstract-Conference.html\n这篇论文探讨了模仿学习（Imitation Learning）中数据质量的重要性及其如何影响学习效果。模仿学习是让机器人通过观察专家演示来学习完成任务的一种方法，但一个常见问题是：学到的策略在真实测试时容易“跑偏”，因为小的错误会累积，导致机器人遇到从未见过的状态而失败。传统方法通常通过改进算法来解决这个问题，但本文提出，提升数据本身的质量可能同样甚至更有效。\n论文的核心观点是，数据质量的好坏可以通过它是否能帮助学习策略在测试时“保持正轨”（即最小化分布偏移）来衡量。为此，作者提出了两个影响数据质量的关键属性：\n动作分歧：指学习到的策略与专家策略在相同状态下做出的动作之间的差异。如果专家演示的动作不一致（比如专家操作时手抖或犹豫），或者学习算法难以准确模仿这些动作，就会增加动作分歧，导致测试时更容易出错。\n转移多样性：指环境本身的不确定性或噪声。例如，同一个动作在执行时，由于物理世界的随机性（如摩擦力变化），可能导致不同的结果状态。\n通过理论分析和在模拟环境（如点质量导航和机械臂操作任务）中的实验，论文得出几个重要结论：\n动作一致性至关重要：让专家的演示动作更一致、更确定（降低动作分歧），能显著提高学习策略的成功率。这意味着，一个动作干净利落的专家演示比一个犹豫或嘈杂的演示更有价值。\n状态多样性不是万能药：以往许多工作认为数据应尽可能覆盖更多不同的状态（即追求高状态多样性）。但本文发现，如果这种多样性是通过引入不稳定的专家动作（即增加动作分歧）换来的，反而会损害性能。有时，数据量少但动作一致的数据集，效果可能更好。\n系统噪声的双重作用：在环境中加入适量噪声（增加转移多样性）可以扩展数据的覆盖范围，让策略更鲁棒，甚至能部分抵消专家动作噪声带来的负面影响。但数据量如果太小，过多的噪声会导致数据过于稀疏，效果变差。\n总的来说，这篇论文主张，在为模仿学习收集和整理数据时，不应只盲目追求“状态多样性”，而应更精细地平衡动作的一致性和环境的适度随机性，这样才能获得更高质量的数据集，从而训练出更可靠的机器人策略。\n发现这个论文针对的目标是直接imitation learning的，有没有切入到vlm？ 它没有对vlm\n动作分歧：指的是学习到的策略与专家策略在相同状态下，其动作分布之间的不匹配程度。它衡量了模仿策略“学得不像”的程度。文档中形式化地将其定义为两种策略动作分布之间的f-散度（如KL散度）。例如，如果专家操作非常精准一致，但学习到的策略输出动作方差很大，那么动作分歧就很高，容易导致后续出错。如果我要测试的话，就得采集测试时的视频和action等数据 分布偏移问题：这是模仿学习中的一个核心挑战。在训练时，策略学习的是专家演示数据中的状态分布。但在测试时，由于策略本身会有微小的动作预测误差，加上环境动态的随机性，这些误差会随时间累积，导致机器人实际经历的状态逐渐偏离训练时见过的专家状态分布，进入“未见过”的状态。一旦进入这种状态，策略就容易做出错误决策，且难以恢复，最终导致任务失败。文档第3.1节对此过程有详细描述。也就是说，我要怎么做，才能让模型在“未见过”的状态也能输出“正确”的内容\n状态访问分布：智能体（不管是专家还是学到的策略）在执行完整任务过程中，所有可能访问到的状态构成的概率分布。这个分布是动态演变的。所以“匹配程度”比较的是两个策略（专家策略和学到的策略）各自引导出的整个状态轨迹的分布是否相似。从初始状态开始，在整个任务执行过程中，所有可能访问到的状态所构成的概率分布。它是一个动态的、由策略和环境共同决定的轨迹分布\n动作分歧特指在同一个状态s下，学习策略的动作分布 π_A(a|s) 与专家策略的动作分布 π_E(a|s) 之间的差异（比如KL散度）。它不是直接比较两条不同的轨迹数据，而是比较在轨迹中可能出现的同一点上，两个策略会怎么做。这个差异是导致测试时状态分布逐渐偏离专家分布（即分布偏移）的直接原因之一。所以，动作分歧是发生在策略层面、导致最终问题的近因，而状态访问分布的匹配是我们要追求的最终结果。**“动作分歧”比较的就是：对于同一个状态 s，专家会怎么做，而学到的模型会怎么做。**​ 它衡量的是模型“模仿得像不像”的本质。\n从这篇论文得到的启示\n最好保存验证时的数据分布进行分析？ 怎么分析，参考这篇论文里面的什么属性？动作分歧？怎么比较？ 使用vlm的话是不是会更简单一点？毕竟相比原来的，使用vlm会简化状态表示，可惜这篇论文只使用低维的动作表示，那我需要看 有一些方向上的可行方案\n专家采集一堆，利用VLM（如GPT-4V）分析演示视频，识别出动作不一致、低效或错误的片段。也就是给一个生成高质量数据的工程方案，缺点在于不能保证生成的数据都正确 专家采集少量，生成大量直到满足数据分布要求，同样也不能保证生成的数据正确 但感觉都不怎么样。 反正有一个有用的：\n保存测试数据 用状态访问分布的匹配”和“动作分歧”这两个属性来验证数据集质量 实验设计\n1. 状态访问分布的匹配 状态访问分布的匹配（matching of state visitation distribution）衡量的是学习到的策略在测试阶段访问到的状态分布是否和专家演示的状态分布相似。为了实现这一点，你需要定义“状态”以及如何度量状态的分布。\n如何定义状态：原始图像 + 本体感觉 vs 冻结VLM输出 在模仿学习中，状态通常由传感器数据（如图像、传感器读数等）组成。在你的实验中，你可以选择以下两种方式来定义“状态”：\n原始图像 + 机器人本体感觉（raw image + robot proprioception）：这是最直接的状态表示方式，代表机器人在环境中的原始感知信息。这里，你需要保存机器人每一步的感知数据（如图像和本体感觉），然后通过这些信息来比较状态分布。\n冻结VLM输出的内容（frozen VLM output）：如果你使用VLM（如GPT-4V）分析图像并从中提取特征，那么状态可以通过VLM输出的高层次表示来定义。冻结VLM的特征提取可以帮助简化原始图像的表示，并将其转换为更高层次、抽象的状态表示。\n根据你的实验设置，如果VLM能够显著提取到图像中的重要特征，并且提高了机器人对环境的理解能力，冻结VLM输出的内容可能更合适，因为它将图像和本体感觉的高维信息压缩成更有用、更稳定的特征表示。\n设计实验 对于专家示范数据和测试数据，分别计算它们的“状态访问分布”。你可以基于每一步的“状态”定义来构建状态分布。\n步骤：\n提取专家示范数据和测试数据中的状态（选择原始状态或VLM输出的状态表示）。\n计算状态的分布，常用的方法有统计频率分布、k-means聚类等。\n比较测试数据的状态分布与专家示范数据的状态分布的相似度，可以使用KL散度、JS散度或其他相似性度量方法。\n建议：如果你选择冻结VLM输出的内容作为状态，可以先用VLM对图像进行处理，得到每一步的抽象特征。然后基于这些高层次的表示来计算状态访问分布。这样，即使测试数据的图像和专家数据的图像在像素级上不同，你仍然可以从VLM的抽象表示中找到一致性。\n2. 动作分歧 动作分歧（action divergence）衡量的是在相同状态下，学习到的策略和专家策略之间的动作分布差异。你需要通过比较不同状态下的动作分布，来度量模型的模仿效果。\n如何找到相同状态下的动作分布 由于你提到每个“step”包含图像、本体感觉和动作，并且专家数据和测试数据的目标物体位置是随机的，如何定义相同的状态会是一个关键问题。因为像素级的图像不可能完全一致，所以我们需要通过特征层次上的“状态”来进行比较。\n步骤：\n定义状态：根据前面的分析，最好使用冻结VLM输出的高层次表示作为状态，而不是直接使用原始图像。这样可以避免因图像内容的随机差异而导致的匹配问题。\n构建动作分布：\n每个状态（无论是原始状态还是VLM表示的状态）对应一个动作分布。在专家数据和测试数据中，记录每一步的动作。\n对于专家数据，你有288集数据，每集包含若干step。在每个step中，你可以得到一个动作（假设动作是离散的或通过某种方式量化的）。\n对于测试数据，同样记录每一步的动作。\n在同一个状态下，专家策略的动作分布和测试策略的动作分布可以通过统计方法（如直方图、KL散度等）进行比较。\n比较动作分布：\n比较每个状态对应的动作分布（专家和测试数据），并计算它们之间的差异。常用的度量方法有KL散度或JS散度，这两种方法都可以衡量两个分布的差异。\n需要注意的是，比较动作分布时，你可能无法做到完全一对一地对齐每个状态和动作，因此可以采用聚合的方式来对比整体分布差异，而不是单一的step。\n实验设计： 通过VLM的输出对每个状态进行特征提取。\n对每一集（或每一步）记录对应的动作，并计算每个状态下的动作分布。\n比较专家数据和测试数据在相同状态下的动作分布，使用KL散度等方法量化差异。\n分析粒度：你可以选择按“集”为单位来计算动作分布的差异。也就是说，比较一集数据中的状态分布和动作分布，而不是逐步对齐每个step的动作分布。这样可以避免由于小的时序差异导致的干扰，同时保持数据分析的合理性。\n3. 实验步骤总结 状态访问分布匹配：\n提取专家示范数据和测试数据的状态表示（使用原始状态或冻结VLM输出的状态）。\n计算每组数据的状态访问分布（使用聚类、统计方法等）。\n比较状态访问分布的相似性（使用KL散度、JS散度等）。\n动作分歧：\n对每个状态（使用VLM输出的状态）记录专家和测试数据的动作分布。\n使用KL散度等方法比较专家动作分布与测试动作分布的差异。\n4. 总结 对于状态访问分布的匹配，建议使用冻结VLM输出的状态表示来避免图像的像素差异，并且确保你比较的是高层次的、抽象的状态。\n对于动作分歧，通过VLM输出的状态表示来定义相同状态，在每个状态下计算动作分布，并通过KL散度等方法进行比较。 所以我要定义”状态“，最终还是选择vlm吧？但是端到端又感觉更希望从类似自然语言那样的表示，从原始数据确定。 同状态下，学习到的策略和专家策略之间的动作分布差异“这一步无法实现，那能不能减少要求，比如图像相差不大？ 我的问题是想从更高级（接近人类语义）的视角定义”状态“，比如我自己测试的时候发现：当把物体摆放成和专家数据”近似“的位置和姿势的时候，都能成功。但是这个”近似“的位置和姿势也只是估计，那应该就是vlm啊\n1. 状态相似性的计算方法与伪代码 论文中“状态相似性”（State Similarity）是衡量状态一致性的指标，其值越低，表示状态多样性越高。它被定义为数据集中所有状态的“邻居”状态数量的平均值。\n该指标的计算方法在**附录B（第18页）**​ 有明确定义。其核心思想是：对于数据集中的每一个状态 s，定义一个距离阈值 ε，找出数据集中所有与 s的距离小于等于 ε的其他状态，形成一个“聚类”（或邻居集合）。状态相似性就是这个聚类大小的期望值。\n公式定义 (Equation 10):\nStateSimilarity(D) = (1/|D|) * Σ_{s,a ∈ D} |C(s, D)|\n其中：\nD是整个数据集。\n|D|是数据集的大小（状态-动作对的数量）。\nC(s, D) = { (s̃, ã, s̃’) ∈ D : ||s - s̃|| ≤ ε }，即数据集中所有与状态 s的距离在 ε范围内的数据点集合。\n|C(s, D)|是该集合的大小（即 s的“邻居”数量）。\n伪代码表示:\ndef calculate_state_similarity(dataset D, distance_threshold epsilon): \"\"\" 计算数据集D的状态相似性。 参数: D: 数据集，每个元素为 (state, action, next_state) 元组。 epsilon: 距离阈值，用于判断两个状态是否“相似”。 返回: state_similarity: 浮点数，状态相似性值。 \"\"\" total_similarity = 0 N = len(D) # 数据集大小 for i in range(N): s_i, _, _ = D[i] # 当前查询状态 neighbor_count = 0 # 遍历整个数据集，计算邻居数量 for j in range(N): s_j, _, _ = D[j] # 候选状态 if distance(s_i, s_j) \u003c= epsilon: # 使用合适的距离度量（如L2范数） neighbor_count += 1 total_similarity += neighbor_count state_similarity = total_similarity / N return state_similarity 改成vlm的话，就不能用以前低维能用的：\n2. 核心评估指标 结合论文中的思路，以下是适应VLM的指标和评估方法：\na. 任务特征空间的覆盖（Semantic Coverage） 这与原论文中的“状态覆盖”类似，但要考虑的是VLM输出的语义特征空间，而不是物理状态空间。\n方法：\nVLM聚类分析：使用VLM（如GPT-4V）对专家示范进行处理，将每个状态映射到VLM特征空间中。然后，进行聚类分析，看看任务的关键语义特征是否得到充分覆盖。\n分析聚类中心：检查VLM特征空间中的聚类中心的数量和分布，确保数据集覆盖了任务所需的所有关键动作模式（例如：抓取、移动等）。\n覆盖度指标：通过聚类数量、覆盖率等指标，定量化任务关键特征的覆盖情况。\n示例评估：假设任务是“抓取物体”，你可以计算VLM特征空间中聚类的数量和密度，确保任务所需的动作（如抓取、稳定物体）得到了足够的表示。\nb. 动作一致性与质量（Action Consistency and Quality） 这里不再直接计算“动作分歧”在物理状态空间中的差异，而是评估专家示范在语义空间中的一致性和质量。\n方法：\n任务阶段划分：使用VLM或其它方法对专家演示进行任务阶段分割（例如：“接近物体”，“抓取物体”）。然后，评估每个阶段内的动作一致性。\n动作方差：在每个任务阶段内，计算专家动作的方差。如果同一任务阶段内的动作分布非常分散，可能说明该阶段的专家示范不够一致，导致训练模型可能难以模仿。\n专家动作质量评估：可以通过VLM的推理能力直接评估动作的流畅性、精确性和一致性。例如，使用VLM（如GPT-4V）对专家示范的视频片段进行分析，评估动作的自然性与准确性。\n示例评估：假设在抓取任务中，专家示范在“接近物体”阶段的动作一致性较差，VLM可以通过分析视频片段，找出是否存在不一致的动作（例如，专家的手抖动、迟疑）。你可以计算该阶段的动作方差，并对高方差阶段的数据进行筛选或改进。 搜索有没有 评估 vla数据\n",
+  "wordCount" : "266",
+  "inLanguage": "en",
+  "datePublished": "2026-02-25T17:52:40Z",
+  "dateModified": "2026-02-25T17:52:40Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/post/data-quality-in-imitation-learning/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://example.com/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Data Quality in Imitation Learning
+    </h1>
+    <div class="post-meta">
+
+<span title='2026-02-25 17:52:40 +0000 UTC'>February 25, 2026</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>开年第一篇论文，讲模仿学习中的数据质量
+我想从这篇论文中得到的信息：
+数据质量怎么评估，只能训练吗？
+有什么办法可以增加数据质量，采集和算法层面？</p>
+<p><a href="https://proceedings.neurips.cc/paper_files/paper/2023">Advances in Neural Information Processing Systems 36 (NeurIPS 2023)</a></p>
+<p><a href="https://proceedings.neurips.cc/paper_files/paper/2023/hash/fe692980c5d9732cf153ce27947653a7-Abstract-Conference.html">https://proceedings.neurips.cc/paper_files/paper/2023/hash/fe692980c5d9732cf153ce27947653a7-Abstract-Conference.html</a></p>
+<p>这篇论文探讨了模仿学习（Imitation Learning）中数据质量的重要性及其如何影响学习效果。模仿学习是让机器人通过观察专家演示来学习完成任务的一种方法，但一个常见问题是：学到的策略在真实测试时容易“跑偏”，因为小的错误会累积，导致机器人遇到从未见过的状态而失败。传统方法通常通过改进算法来解决这个问题，但本文提出，<strong>提升数据本身的质量可能同样甚至更有效</strong>。</p>
+<p>论文的核心观点是，数据质量的好坏可以通过它是否能帮助学习策略在测试时“保持正轨”（即最小化分布偏移）来衡量。为此，作者提出了两个影响数据质量的关键属性：</p>
+<ol>
+<li>
+<p><strong>动作分歧</strong>：指学习到的策略与专家策略在相同状态下做出的动作之间的差异。如果专家演示的动作不一致（比如专家操作时手抖或犹豫），或者学习算法难以准确模仿这些动作，就会增加动作分歧，导致测试时更容易出错。</p>
+</li>
+<li>
+<p><strong>转移多样性</strong>：指环境本身的不确定性或噪声。例如，同一个动作在执行时，由于物理世界的随机性（如摩擦力变化），可能导致不同的结果状态。</p>
+</li>
+</ol>
+<p>通过理论分析和在模拟环境（如点质量导航和机械臂操作任务）中的实验，论文得出几个重要结论：</p>
+<ul>
+<li>
+<p><strong>动作一致性至关重要</strong>：让专家的演示动作更一致、更确定（降低动作分歧），能显著提高学习策略的成功率。这意味着，一个动作干净利落的专家演示比一个犹豫或嘈杂的演示更有价值。</p>
+</li>
+<li>
+<p><strong>状态多样性不是万能药</strong>：以往许多工作认为数据应尽可能覆盖更多不同的状态（即追求高状态多样性）。但本文发现，如果这种多样性是通过引入不稳定的专家动作（即增加动作分歧）换来的，反而会损害性能。有时，数据量少但动作一致的数据集，效果可能更好。</p>
+</li>
+<li>
+<p><strong>系统噪声的双重作用</strong>：在环境中加入适量噪声（增加转移多样性）可以扩展数据的覆盖范围，让策略更鲁棒，甚至能部分抵消专家动作噪声带来的负面影响。但数据量如果太小，过多的噪声会导致数据过于稀疏，效果变差。</p>
+</li>
+</ul>
+<p>总的来说，这篇论文主张，在为模仿学习收集和整理数据时，不应只盲目追求“状态多样性”，而应更精细地平衡<strong>动作的一致性</strong>和<strong>环境的适度随机性</strong>，这样才能获得更高质量的数据集，从而训练出更可靠的机器人策略。</p>
+<p>发现这个论文针对的目标是直接imitation learning的，有没有切入到vlm？
+它没有对vlm</p>
+<p><strong>动作分歧</strong>：指的是学习到的策略与专家策略在<strong>相同状态</strong>下，其动作分布之间的不匹配程度。它衡量了模仿策略“学得不像”的程度。文档中形式化地将其定义为两种策略动作分布之间的f-散度（如KL散度）。例如，如果专家操作非常精准一致，但学习到的策略输出动作方差很大，那么动作分歧就很高，容易导致后续出错。如果我要测试的话，就得采集测试时的视频和action等数据
+<strong>分布偏移问题</strong>：这是模仿学习中的一个核心挑战。在训练时，策略学习的是专家演示数据中的状态分布。但在测试时，由于策略本身会有微小的动作预测误差，加上环境动态的随机性，这些误差会随时间累积，导致机器人实际经历的状态逐渐偏离训练时见过的专家状态分布，进入“未见过”的状态。一旦进入这种状态，策略就容易做出错误决策，且难以恢复，最终导致任务失败。文档第3.1节对此过程有详细描述。也就是说，我要怎么做，才能让模型在“未见过”的状态也能输出“正确”的内容</p>
+<p>状态访问分布：<strong>智能体（不管是专家还是学到的策略）在执行完整任务过程中，所有可能访问到的状态构成的概率分布</strong>。这个分布是动态演变的。所以“匹配程度”比较的是两个策略（专家策略和学到的策略）各自引导出的<strong>整个状态轨迹的分布</strong>是否相似。<strong>从初始状态开始，在整个任务执行过程中，所有可能访问到的状态所构成的概率分布</strong>。它是一个动态的、由策略和环境共同决定的轨迹分布</p>
+<p>动作分歧特指在<strong>同一个状态s</strong>下，学习策略的动作分布 π_A(a|s) 与专家策略的动作分布 π_E(a|s) 之间的差异（比如KL散度）。它不是直接比较两条不同的轨迹数据，而是比较在轨迹中可能出现的同一点上，两个策略会怎么做。这个差异是导致测试时状态分布逐渐偏离专家分布（即分布偏移）的<strong>直接原因之一</strong>。所以，动作分歧是发生在策略层面、导致最终问题的近因，而状态访问分布的匹配是我们要追求的最终结果。**“动作分歧”比较的就是：对于同一个状态 s，专家会怎么做，而学到的模型会怎么做。**​ 它衡量的是模型“模仿得像不像”的本质。</p>
+<hr>
+<p>从这篇论文得到的启示</p>
+<ol>
+<li>最好保存验证时的数据分布进行分析？</li>
+<li>怎么分析，参考这篇论文里面的什么属性？动作分歧？怎么比较？</li>
+<li>使用vlm的话是不是会更简单一点？毕竟相比原来的，使用vlm会简化状态表示，可惜这篇论文只使用低维的动作表示，那我需要看</li>
+</ol>
+<p>有一些方向上的可行方案</p>
+<ol>
+<li>专家采集一堆，利用VLM（如GPT-4V）分析演示视频，识别出动作不一致、低效或错误的片段。也就是给一个生成高质量数据的工程方案，缺点在于不能保证生成的数据都正确</li>
+<li>专家采集少量，生成大量直到满足数据分布要求，同样也不能保证生成的数据正确
+但感觉都不怎么样。</li>
+</ol>
+<p>反正有一个有用的：</p>
+<ol>
+<li>保存测试数据</li>
+<li>用状态访问分布的匹配”和“动作分歧”这两个属性来验证数据集质量</li>
+</ol>
+<p>实验设计</p>
+<h3 id="1-状态访问分布的匹配">1. <strong>状态访问分布的匹配</strong><a hidden class="anchor" aria-hidden="true" href="#1-状态访问分布的匹配">#</a></h3>
+<p>状态访问分布的匹配（matching of state visitation distribution）衡量的是学习到的策略在测试阶段访问到的状态分布是否和专家演示的状态分布相似。为了实现这一点，你需要定义“状态”以及如何度量状态的分布。</p>
+<h4 id="如何定义状态原始图像--本体感觉-vs-冻结vlm输出"><strong>如何定义状态：原始图像 + 本体感觉 vs 冻结VLM输出</strong><a hidden class="anchor" aria-hidden="true" href="#如何定义状态原始图像--本体感觉-vs-冻结vlm输出">#</a></h4>
+<p>在模仿学习中，<strong>状态</strong>通常由传感器数据（如图像、传感器读数等）组成。在你的实验中，你可以选择以下两种方式来定义“状态”：</p>
+<ol>
+<li>
+<p><strong>原始图像 + 机器人本体感觉（raw image + robot proprioception）</strong>：这是最直接的状态表示方式，代表机器人在环境中的原始感知信息。这里，你需要保存机器人每一步的感知数据（如图像和本体感觉），然后通过这些信息来比较状态分布。</p>
+</li>
+<li>
+<p><strong>冻结VLM输出的内容（frozen VLM output）</strong>：如果你使用VLM（如GPT-4V）分析图像并从中提取特征，那么状态可以通过VLM输出的高层次表示来定义。冻结VLM的特征提取可以帮助简化原始图像的表示，并将其转换为更高层次、抽象的状态表示。</p>
+</li>
+</ol>
+<p>根据你的实验设置，如果VLM能够显著提取到图像中的重要特征，并且提高了机器人对环境的理解能力，<strong>冻结VLM输出的内容</strong>可能更合适，因为它将图像和本体感觉的高维信息压缩成更有用、更稳定的特征表示。</p>
+<h4 id="设计实验"><strong>设计实验</strong><a hidden class="anchor" aria-hidden="true" href="#设计实验">#</a></h4>
+<ul>
+<li>
+<p>对于专家示范数据和测试数据，分别计算它们的“状态访问分布”。你可以基于每一步的“状态”定义来构建状态分布。</p>
+</li>
+<li>
+<p><strong>步骤</strong>：</p>
+<ul>
+<li>
+<p>提取专家示范数据和测试数据中的状态（选择原始状态或VLM输出的状态表示）。</p>
+</li>
+<li>
+<p>计算状态的分布，常用的方法有统计频率分布、k-means聚类等。</p>
+</li>
+<li>
+<p>比较测试数据的状态分布与专家示范数据的状态分布的相似度，可以使用KL散度、JS散度或其他相似性度量方法。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>建议</strong>：如果你选择冻结VLM输出的内容作为状态，可以先用VLM对图像进行处理，得到每一步的抽象特征。然后基于这些高层次的表示来计算状态访问分布。这样，即使测试数据的图像和专家数据的图像在像素级上不同，你仍然可以从VLM的抽象表示中找到一致性。</p>
+</li>
+</ul>
+<hr>
+<h3 id="2-动作分歧">2. <strong>动作分歧</strong><a hidden class="anchor" aria-hidden="true" href="#2-动作分歧">#</a></h3>
+<p>动作分歧（action divergence）衡量的是在相同状态下，学习到的策略和专家策略之间的动作分布差异。你需要通过比较不同状态下的动作分布，来度量模型的模仿效果。</p>
+<h4 id="如何找到相同状态下的动作分布"><strong>如何找到相同状态下的动作分布</strong><a hidden class="anchor" aria-hidden="true" href="#如何找到相同状态下的动作分布">#</a></h4>
+<p>由于你提到每个“step”包含图像、本体感觉和动作，并且专家数据和测试数据的目标物体位置是随机的，<strong>如何定义相同的状态</strong>会是一个关键问题。因为像素级的图像不可能完全一致，所以我们需要通过特征层次上的“状态”来进行比较。</p>
+<p><strong>步骤</strong>：</p>
+<ol>
+<li>
+<p><strong>定义状态</strong>：根据前面的分析，最好使用冻结VLM输出的高层次表示作为状态，而不是直接使用原始图像。这样可以避免因图像内容的随机差异而导致的匹配问题。</p>
+</li>
+<li>
+<p><strong>构建动作分布</strong>：</p>
+<ul>
+<li>
+<p>每个状态（无论是原始状态还是VLM表示的状态）对应一个动作分布。在专家数据和测试数据中，记录每一步的动作。</p>
+</li>
+<li>
+<p>对于专家数据，你有288集数据，每集包含若干step。在每个step中，你可以得到一个动作（假设动作是离散的或通过某种方式量化的）。</p>
+</li>
+<li>
+<p>对于测试数据，同样记录每一步的动作。</p>
+</li>
+<li>
+<p>在同一个状态下，专家策略的动作分布和测试策略的动作分布可以通过统计方法（如直方图、KL散度等）进行比较。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>比较动作分布</strong>：</p>
+<ul>
+<li>
+<p>比较每个状态对应的动作分布（专家和测试数据），并计算它们之间的差异。常用的度量方法有<strong>KL散度</strong>或<strong>JS散度</strong>，这两种方法都可以衡量两个分布的差异。</p>
+</li>
+<li>
+<p>需要注意的是，比较动作分布时，你可能无法做到完全一对一地对齐每个状态和动作，因此可以采用聚合的方式来对比整体分布差异，而不是单一的step。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="实验设计"><strong>实验设计</strong>：<a hidden class="anchor" aria-hidden="true" href="#实验设计">#</a></h4>
+<ul>
+<li>
+<p>通过VLM的输出对每个状态进行特征提取。</p>
+</li>
+<li>
+<p>对每一集（或每一步）记录对应的动作，并计算每个状态下的动作分布。</p>
+</li>
+<li>
+<p>比较专家数据和测试数据在相同状态下的动作分布，使用KL散度等方法量化差异。</p>
+</li>
+</ul>
+<p><strong>分析粒度</strong>：你可以选择按“集”为单位来计算动作分布的差异。也就是说，比较一集数据中的状态分布和动作分布，而不是逐步对齐每个step的动作分布。这样可以避免由于小的时序差异导致的干扰，同时保持数据分析的合理性。</p>
+<hr>
+<h3 id="3-实验步骤总结">3. <strong>实验步骤总结</strong><a hidden class="anchor" aria-hidden="true" href="#3-实验步骤总结">#</a></h3>
+<ul>
+<li>
+<p><strong>状态访问分布匹配</strong>：</p>
+<ul>
+<li>
+<p>提取专家示范数据和测试数据的状态表示（使用原始状态或冻结VLM输出的状态）。</p>
+</li>
+<li>
+<p>计算每组数据的状态访问分布（使用聚类、统计方法等）。</p>
+</li>
+<li>
+<p>比较状态访问分布的相似性（使用KL散度、JS散度等）。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>动作分歧</strong>：</p>
+<ul>
+<li>
+<p>对每个状态（使用VLM输出的状态）记录专家和测试数据的动作分布。</p>
+</li>
+<li>
+<p>使用KL散度等方法比较专家动作分布与测试动作分布的差异。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-总结">4. <strong>总结</strong><a hidden class="anchor" aria-hidden="true" href="#4-总结">#</a></h3>
+<ul>
+<li>
+<p>对于<strong>状态访问分布的匹配</strong>，建议使用<strong>冻结VLM输出的状态表示</strong>来避免图像的像素差异，并且确保你比较的是高层次的、抽象的状态。</p>
+</li>
+<li>
+<p>对于<strong>动作分歧</strong>，通过VLM输出的状态表示来定义相同状态，在每个状态下计算动作分布，并通过KL散度等方法进行比较。
+所以我要定义”状态“，最终还是选择vlm吧？但是端到端又感觉更希望从类似自然语言那样的表示，从原始数据确定。
+同状态下，学习到的策略和专家策略之间的动作分布差异“这一步无法实现，那能不能减少要求，比如图像相差不大？ 我的问题是想从更高级（接近人类语义）的视角定义”状态“，比如我自己测试的时候发现：当把物体摆放成和专家数据”近似“的位置和姿势的时候，都能成功。但是这个”近似“的位置和姿势也只是估计，那应该就是vlm啊</p>
+</li>
+</ul>
+<h3 id="1-状态相似性的计算方法与伪代码">1. 状态相似性的计算方法与伪代码<a hidden class="anchor" aria-hidden="true" href="#1-状态相似性的计算方法与伪代码">#</a></h3>
+<p>论文中“状态相似性”（State Similarity）是衡量<strong>状态一致性</strong>的指标，其<strong>值越低，表示状态多样性越高</strong>。它被定义为数据集中所有状态的“邻居”状态数量的平均值。</p>
+<p>该指标的计算方法在**附录B（第18页）**​ 有明确定义。其核心思想是：对于数据集中的每一个状态 <code>s</code>，定义一个距离阈值 <code>ε</code>，找出数据集中所有与 <code>s</code>的距离小于等于 <code>ε</code>的其他状态，形成一个“聚类”（或邻居集合）。状态相似性就是这个聚类大小的期望值。</p>
+<p><strong>公式定义 (Equation 10)</strong>:</p>
+<p><code>StateSimilarity(D) = (1/|D|) * Σ_{s,a ∈ D} |C(s, D)|</code></p>
+<p>其中：</p>
+<ul>
+<li>
+<p><code>D</code>是整个数据集。</p>
+</li>
+<li>
+<p><code>|D|</code>是数据集的大小（状态-动作对的数量）。</p>
+</li>
+<li>
+<p><code>C(s, D) = { (s̃, ã, s̃’) ∈ D : ||s - s̃|| ≤ ε }</code>，即数据集中所有与状态 <code>s</code>的距离在 <code>ε</code>范围内的数据点集合。</p>
+</li>
+<li>
+<p><code>|C(s, D)|</code>是该集合的大小（即 <code>s</code>的“邻居”数量）。</p>
+</li>
+</ul>
+<p><strong>伪代码表示</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calculate_state_similarity</span>(dataset D, distance_threshold epsilon):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    计算数据集D的状态相似性。
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    参数:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        D: 数据集，每个元素为 (state, action, next_state) 元组。
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        epsilon: 距离阈值，用于判断两个状态是否“相似”。
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    返回:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        state_similarity: 浮点数，状态相似性值。
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    total_similarity <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    N <span style="color:#f92672">=</span> len(D)  <span style="color:#75715e"># 数据集大小</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(N):
+</span></span><span style="display:flex;"><span>        s_i, _, _ <span style="color:#f92672">=</span> D[i]  <span style="color:#75715e"># 当前查询状态</span>
+</span></span><span style="display:flex;"><span>        neighbor_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 遍历整个数据集，计算邻居数量</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(N):
+</span></span><span style="display:flex;"><span>            s_j, _, _ <span style="color:#f92672">=</span> D[j]  <span style="color:#75715e"># 候选状态</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> distance(s_i, s_j) <span style="color:#f92672">&lt;=</span> epsilon:  <span style="color:#75715e"># 使用合适的距离度量（如L2范数）</span>
+</span></span><span style="display:flex;"><span>                neighbor_count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        total_similarity <span style="color:#f92672">+=</span> neighbor_count
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    state_similarity <span style="color:#f92672">=</span> total_similarity <span style="color:#f92672">/</span> N
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> state_similarity
+</span></span></code></pre></div><p>改成vlm的话，就不能用以前低维能用的：</p>
+<h3 id="2-核心评估指标">2. <strong>核心评估指标</strong><a hidden class="anchor" aria-hidden="true" href="#2-核心评估指标">#</a></h3>
+<p>结合论文中的思路，以下是适应VLM的指标和评估方法：</p>
+<h4 id="a-任务特征空间的覆盖semantic-coverage">a. <strong>任务特征空间的覆盖（Semantic Coverage）</strong><a hidden class="anchor" aria-hidden="true" href="#a-任务特征空间的覆盖semantic-coverage">#</a></h4>
+<p>这与原论文中的“状态覆盖”类似，但要考虑的是VLM输出的语义特征空间，而不是物理状态空间。</p>
+<ul>
+<li>
+<p><strong>方法</strong>：</p>
+<ol>
+<li>
+<p><strong>VLM聚类分析</strong>：使用VLM（如GPT-4V）对专家示范进行处理，将每个状态映射到VLM特征空间中。然后，进行聚类分析，看看任务的关键语义特征是否得到充分覆盖。</p>
+</li>
+<li>
+<p><strong>分析聚类中心</strong>：检查VLM特征空间中的聚类中心的数量和分布，确保数据集覆盖了任务所需的所有关键动作模式（例如：抓取、移动等）。</p>
+</li>
+<li>
+<p><strong>覆盖度指标</strong>：通过聚类数量、覆盖率等指标，定量化任务关键特征的覆盖情况。</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>示例评估</strong>：假设任务是“抓取物体”，你可以计算VLM特征空间中聚类的数量和密度，确保任务所需的动作（如抓取、稳定物体）得到了足够的表示。</p>
+</li>
+</ul>
+<h4 id="b-动作一致性与质量action-consistency-and-quality">b. <strong>动作一致性与质量（Action Consistency and Quality）</strong><a hidden class="anchor" aria-hidden="true" href="#b-动作一致性与质量action-consistency-and-quality">#</a></h4>
+<p>这里不再直接计算“动作分歧”在物理状态空间中的差异，而是评估专家示范在语义空间中的一致性和质量。</p>
+<ul>
+<li>
+<p><strong>方法</strong>：</p>
+<ol>
+<li>
+<p><strong>任务阶段划分</strong>：使用VLM或其它方法对专家演示进行任务阶段分割（例如：“接近物体”，“抓取物体”）。然后，评估每个阶段内的动作一致性。</p>
+</li>
+<li>
+<p><strong>动作方差</strong>：在每个任务阶段内，计算专家动作的方差。如果同一任务阶段内的动作分布非常分散，可能说明该阶段的专家示范不够一致，导致训练模型可能难以模仿。</p>
+</li>
+<li>
+<p><strong>专家动作质量评估</strong>：可以通过VLM的推理能力直接评估动作的流畅性、精确性和一致性。例如，使用VLM（如GPT-4V）对专家示范的视频片段进行分析，评估动作的自然性与准确性。</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>示例评估</strong>：假设在抓取任务中，专家示范在“接近物体”阶段的动作一致性较差，VLM可以通过分析视频片段，找出是否存在不一致的动作（例如，专家的手抖动、迟疑）。你可以计算该阶段的动作方差，并对高方差阶段的数据进行筛选或改进。
+搜索有没有 评估 vla数据</p>
+</li>
+</ul>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

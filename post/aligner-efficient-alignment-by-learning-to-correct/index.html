@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Aligner: Efficient Alignment by Learning to Correct | 我的博客</title>
+<meta name="keywords" content="aligner">
+<meta name="description" content="以前看论文的方式好糟糕，看完以后完全没印象，一句话形容：对预训练的llm微调对齐，利用通过小模型学习偏好与不偏好答案之间的纠正残差
+所以LLM的方向实际上就两种：微调和压缩？">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
+<link rel="canonical" href="https://example.com/post/aligner-efficient-alignment-by-learning-to-correct/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://example.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://example.com/post/aligner-efficient-alignment-by-learning-to-correct/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://example.com/post/aligner-efficient-alignment-by-learning-to-correct/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="Aligner: Efficient Alignment by Learning to Correct">
+  <meta property="og:description" content="以前看论文的方式好糟糕，看完以后完全没印象，一句话形容：对预训练的llm微调对齐，利用通过小模型学习偏好与不偏好答案之间的纠正残差
+所以LLM的方向实际上就两种：微调和压缩？">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-03-03T10:18:23+00:00">
+    <meta property="article:modified_time" content="2025-03-03T10:18:23+00:00">
+    <meta property="article:tag" content="Aligner">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Aligner: Efficient Alignment by Learning to Correct">
+  <meta name="twitter:description" content="以前看论文的方式好糟糕，看完以后完全没印象，一句话形容：对预训练的llm微调对齐，利用通过小模型学习偏好与不偏好答案之间的纠正残差
+所以LLM的方向实际上就两种：微调和压缩？">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://example.com/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Aligner: Efficient Alignment by Learning to Correct",
+      "item": "https://example.com/post/aligner-efficient-alignment-by-learning-to-correct/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Aligner: Efficient Alignment by Learning to Correct",
+  "name": "Aligner: Efficient Alignment by Learning to Correct",
+  "description": "以前看论文的方式好糟糕，看完以后完全没印象，一句话形容：对预训练的llm微调对齐，利用通过小模型学习偏好与不偏好答案之间的纠正残差\n所以LLM的方向实际上就两种：微调和压缩？\n",
+  "keywords": [
+    "aligner"
+  ],
+  "articleBody": "以前看论文的方式好糟糕，看完以后完全没印象，一句话形容：对预训练的llm微调对齐，利用通过小模型学习偏好与不偏好答案之间的纠正残差\n所以LLM的方向实际上就两种：微调和压缩？\n论文标题：Aligner: Efficient Alignment by Learning to Correct 打标签：对齐 时间：2024年6月24日(latest) 9/19开始看，希望9/20能看完第一遍\nabstract llm需要alignment method 现有的方法比较复杂，但是需求是快速迭代，所以需要一个可在这些限制条件下运行的与模型无关的alignment方法 aligner，是一个alignment paradigm，利用一个小模型，学习首选答案和非首选答案之间的correctional residual 修正残差 aligner是一个与模型无关的plug-and-play模块，可以用在各种开源、基于API的模型上面，满足快速迭代的需求，还有其他一堆应用好处 实验是在11个不同的llm中部署相同的aligner模型评估，评估3H 有helpfulness,harmlessness,honesty Q:\n什么是alignment method，有同行吗 alignment是什么？简单的说就是对齐人类的意图，换句话就是人类希望AI产生怎样的行为，那么AI就应该产生什么行为。 修正残差 correctional residual是啥 矫正残差（correctional residual）通常指的是在统计模型或预测模型中，通过某种方法对原始残差进行修正以提高模型精度的过程 原始残差？残差在数理统计中是指实际观察值与估计值（拟合值）之间的差 introduction 背景 同行有那些：supervised fine-tune(SFT)用人类演示来微调、RLHF根据人类偏好训练奖励模型，用强化学习来微调 好处：3H的结果不错， 坏处：消耗太多的训练资源，并且难以保证性能一致性，实际应用时需求是动态变化的，模型可能会遇到对齐训练之外的情况，并表现出不期望的行为，这些行为很难立即使用耗时的方法解决，例如SFT和RLHF。 问题：尝试开发一种高效、轻量、模型无关的对齐方法? 解决 思路来源：受残差学习的启发，我们通过关注复制和校正操作来简化对齐过程。 aligner是什么：是一个对齐范式alignment paradigm，不涉及RL过程，具体见论文图1 特性：plug-and-play模块，堆叠在llm的上游 如何运行：aligner将来自上游模型的初始答案重新分配为更有帮助和无害的答案，从而使合成的LLM响应与人类意图保持一致。可以将aligner类比为LLMs在架构和能力上的残差学习增强器，就像一个通过捷径添加修改而不改变基础结构的残差块一样，aligner采用了复制和更正的方法来改进原始答案。 aligner的优点：保留上游模型参数的同时，增强参数(还是增强模型？)这样能和期望的结果一致 具体aligner怎么设计的 在偏好数据集 preference dataset上进行微调，以学习偏好和非偏好相应之间的校正残差 堆叠在上游模型上以实现校正对齐 这里的上游LLM指的是用于对齐的模型，并将其与RLHF过程中的源模型进行比较。 与需要训练和加载多个模型的RLHF方法不同，aligner只需要一个额外的模块堆叠在上游的LLM上。而且计算资源只取决于aligner，跟上游llm无关 aligner为什么好 从表示学习的角度看，aligner表现出可解释的残差行为 如图4所示，aligner在早期层根据原始答案的质量来决定对原始答案的参考程度和额外修正的程度，而它的中期和后期层则用于实现这一决策。 该机制比直接学习从输入查询到对齐答案的映射更简单。这种简单性表明，小的输纸装置也可以学习复杂的校正模式，证明了它们能够以相对较少的推理来驾驭强大的模型，这进一步强调了我们的输纸装置范式的优越性。 总结下它的优点 资源高效：在没有actor, critic, reward, and reference模型等额外模型的情况下，aligner就只是一个在偏好数据集上训练的小模型，用于学习校正残差。 即插即用：aligner的即插即用特性和模型不可知论使得它非常适合于没有参数访问的基于API的模型。一旦训练好，aligner可以应用于各种上游LLMs，而无需进行参数调整。 Q：\n难以保证性能一致性(ensure consistent performance)是什么样的结果？(后面好像有，第二遍看得时候应该可以解答了) 残差学习怎么启发你了？ 经常说到的corrected是什么意思，还有校正残差 这一章还不够精简 aligner 在那之前 SFT监督微调 目的是利用监督学习，特别是最大似然估计，在一个高质量的数据集上对预训练的LLM进行微调以生成目标答案\n总结重点 aligner是什么？一个和模型无关的模块 目的？ 好在哪？ 怎么做到的？ 结果？ ",
+  "wordCount" : "82",
+  "inLanguage": "en",
+  "datePublished": "2025-03-03T10:18:23Z",
+  "dateModified": "2025-03-03T10:18:23Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/post/aligner-efficient-alignment-by-learning-to-correct/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://example.com/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Aligner: Efficient Alignment by Learning to Correct
+    </h1>
+    <div class="post-meta">
+
+<span title='2025-03-03 10:18:23 +0000 UTC'>March 3, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>以前看论文的方式好糟糕，看完以后完全没印象，一句话形容：对预训练的llm微调对齐，利用通过小模型学习偏好与不偏好答案之间的纠正残差</p>
+<p>所以LLM的方向实际上就两种：微调和压缩？</p>
+<ul>
+<li>论文标题：Aligner: Efficient Alignment by Learning to Correct</li>
+<li>打标签：对齐</li>
+<li>时间：2024年6月24日(latest)</li>
+</ul>
+<p>9/19开始看，希望9/20能看完第一遍</p>
+<h1 id="abstract">abstract<a hidden class="anchor" aria-hidden="true" href="#abstract">#</a></h1>
+<ol>
+<li>llm需要alignment method</li>
+<li>现有的方法比较复杂，但是需求是快速迭代，所以需要一个可在这些限制条件下运行的与模型无关的alignment方法</li>
+<li>aligner，是一个alignment paradigm，利用一个小模型，学习首选答案和非首选答案之间的correctional residual 修正残差</li>
+<li>aligner是一个与模型无关的plug-and-play模块，可以用在各种开源、基于API的模型上面，满足快速迭代的需求，还有其他一堆应用好处</li>
+<li>实验是在11个不同的llm中部署相同的aligner模型评估，评估3H 有helpfulness,harmlessness,honesty</li>
+</ol>
+<p>Q:</p>
+<ol>
+<li>什么是alignment method，有同行吗
+<ol>
+<li>alignment是什么？简单的说就是对齐人类的意图，换句话就是人类希望AI产生怎样的行为，那么AI就应该产生什么行为。</li>
+</ol>
+</li>
+<li>修正残差 correctional residual是啥
+<ol>
+<li>矫正残差（correctional residual）通常指的是在统计模型或预测模型中，通过某种方法对原始残差进行修正以提高模型精度的过程</li>
+<li>原始残差？残差在数理统计中是指实际观察值与估计值（拟合值）之间的差</li>
+</ol>
+</li>
+</ol>
+<h1 id="introduction">introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h1>
+<ol>
+<li>背景
+<ol>
+<li>同行有那些：supervised fine-tune(SFT)用人类演示来微调、RLHF根据人类偏好训练奖励模型，用强化学习来微调</li>
+<li>好处：3H的结果不错，</li>
+<li>坏处：消耗太多的训练资源，并且难以保证性能一致性，实际应用时需求是动态变化的，模型可能会遇到对齐训练之外的情况，并表现出不期望的行为，这些行为很难立即使用耗时的方法解决，例如SFT和RLHF。</li>
+</ol>
+</li>
+<li>问题：尝试开发一种高效、轻量、模型无关的对齐方法?</li>
+<li>解决
+<ol>
+<li>思路来源：受残差学习的启发，我们通过关注复制和校正操作来简化对齐过程。</li>
+<li>aligner是什么：是一个对齐范式alignment paradigm，不涉及RL过程，具体见论文图1</li>
+<li>特性：plug-and-play模块，堆叠在llm的上游</li>
+<li>如何运行：aligner将来自上游模型的初始答案重新分配为更有帮助和无害的答案，从而使合成的LLM响应与人类意图保持一致。可以将aligner类比为LLMs在架构和能力上的残差学习增强器，就像一个通过捷径添加修改而不改变基础结构的残差块一样，aligner采用了复制和更正的方法来改进原始答案。</li>
+<li>aligner的优点：保留上游模型参数的同时，增强参数(还是增强模型？)这样能和期望的结果一致</li>
+</ol>
+</li>
+<li>具体aligner怎么设计的
+<ol>
+<li>在偏好数据集 preference dataset上进行微调，以学习偏好和非偏好相应之间的校正残差</li>
+<li>堆叠在上游模型上以实现校正对齐</li>
+<li>这里的上游LLM指的是用于对齐的模型，并将其与RLHF过程中的源模型进行比较。</li>
+<li>与需要训练和加载多个模型的RLHF方法不同，aligner只需要一个额外的模块堆叠在上游的LLM上。而且计算资源只取决于aligner，跟上游llm无关</li>
+</ol>
+</li>
+<li>aligner为什么好
+<ol>
+<li>从表示学习的角度看，aligner表现出可解释的残差行为</li>
+<li>如图4所示，aligner在早期层根据原始答案的质量来决定对原始答案的参考程度和额外修正的程度，而它的中期和后期层则用于实现这一决策。</li>
+<li>该机制比直接学习从输入查询到对齐答案的映射更简单。这种简单性表明，小的输纸装置也可以学习复杂的校正模式，证明了它们能够以相对较少的推理来驾驭强大的模型，这进一步强调了我们的输纸装置范式的优越性。</li>
+<li>总结下它的优点
+<ol>
+<li>资源高效：在没有actor, critic, reward, and reference模型等额外模型的情况下，aligner就只是一个在偏好数据集上训练的小模型，用于学习校正残差。</li>
+<li>即插即用：aligner的即插即用特性和模型不可知论使得它非常适合于没有参数访问的基于API的模型。一旦训练好，aligner可以应用于各种上游LLMs，而无需进行参数调整。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>Q：</p>
+<ol>
+<li>难以保证性能一致性(ensure consistent performance)是什么样的结果？(后面好像有，第二遍看得时候应该可以解答了)</li>
+<li>残差学习怎么启发你了？</li>
+<li>经常说到的corrected是什么意思，还有校正残差</li>
+<li>这一章还不够精简</li>
+</ol>
+<h1 id="aligner">aligner<a hidden class="anchor" aria-hidden="true" href="#aligner">#</a></h1>
+<h2 id="在那之前">在那之前<a hidden class="anchor" aria-hidden="true" href="#在那之前">#</a></h2>
+<h3 id="sft监督微调">SFT监督微调<a hidden class="anchor" aria-hidden="true" href="#sft监督微调">#</a></h3>
+<p>目的是利用监督学习，特别是最大似然估计，在一个高质量的数据集上对预训练的LLM进行微调以生成目标答案</p>
+<h1 id="总结重点">总结重点<a hidden class="anchor" aria-hidden="true" href="#总结重点">#</a></h1>
+<ol>
+<li>aligner是什么？一个和模型无关的模块</li>
+<li>目的？</li>
+<li>好在哪？</li>
+<li>怎么做到的？</li>
+<li>结果？</li>
+</ol>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://example.com/tags/aligner/">Aligner</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

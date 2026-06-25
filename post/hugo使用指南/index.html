@@ -109,7 +109,7 @@
     "website"
   ],
   "articleBody": "hugo配置日志\n需求清单\n能联动pages（pages只支持静态吧） 可以有热力图 可以显示公式 有标签和分类 可以obsidian 开搞 参考别人的博客 都是windows环境\n环境配置 hugo 安装 下载v0.156.0release搜索到有windows版本的，最好直接安装extended版本：hugo_extended_withdeploy_windows命名的文件下载 设置环境变量，Path中添加hugo解压后的文件夹（可以访问到hugo.exe的那个路径） hugo version检查有结果了就行\n教程\n使用前的配置 在期望存放的位置\nhugo new site guance 出现Congratulations! Your new Hugo project was created in表示成功 进入文件夹，必须先找到一个主题，用PaperMod吧\ngit init git submodule add https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod 然后修改 hugo.toml：\nbaseURL = \"https://example.com/\" languageCode = \"en-us\" title = \"My Notes\" theme = \"PaperMod\" 重点是改theme\n然后执行hugo就能转到public\nhugo server -D 可以预览\nhugo 可以生成\n将网站文件夹转换为 Git ，要去public文件夹然后git init\n将 Git 本地库关联至远程库。\n已有的md文件复制粘贴到blog/content/posts/ 创建模板（借助obsidian）\n--- title: \"{{title}}\" date: \"{{date}}\" tags: categories: description: summary: cover.image: draft: true --- github 相关 源代码（markdown文件）更新\ngit add . git submodule add https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod pages展览\n创建username.github.io的仓库 源代码上传还比较简单\n但是hugo上传还是麻烦了一点\n还差什么功能\n基本配置：改hugo.toml，参考https://hugo.opendocs.io/getting-started/configuration/，抄了一个https://blog.rzlnb.top/posts/blog/hugo-blog-setup/。必要的时候文件名也可以修改。 页面增加ategory 上ai，爽歪歪 然后调整文章页面的\nobsidian模板 最好还是要有草稿箱的功能 obsidian一键怎么搞 域名配置好 然后把这一篇完善好 然后想要增加功能\nobsidian里面自动上传文档（非必须） obsidian上传public的功能（必须） 遇到报错\nrender: [en v1.0.0 guest] failed to render pages: render of \"D:/guance/content/post/GR-2-A-Generative-Video-Language-Action-Model-with-Web-Scale-Knowledge-for-Robot-Manipulation.md\" failed: \"D:\\guance\\themes\\PaperMod\\layouts\\baseof.html:16:8\": execute of template failed at ",
-  "wordCount" : "230",
+  "wordCount" : "261",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
   "dateModified": "0001-01-01T00:00:00Z",
@@ -296,6 +296,26 @@ hugo v0.157.0-7747abbb316b03c8f353fd3be62d5011fa883ee6+extended+withdeploy windo
 
 Reload Page
 </code></pre><p>是tags的问题</p>
+<p>我用obsidian，所以直接打开了content/post文件夹，但是里面还有一些我不想生成网页的文件，所以hugo生成网页的时候，对post内部的内容能否增加对文件夹的跳过？
+参考[<a href="https://manski.net/articles/hugo/ignore-files">https://discourse.gohugo.io/t/ignore-certain-files-and-directory-in-hugo/41960</a>](<a href="https://blog.sangeeth.dev/notes/excluding-directories-from-build-in-hugo/">https://blog.sangeeth.dev/notes/excluding-directories-from-build-in-hugo/</a>)</p>
+<p>在 hugo.toml / config.yaml 里加：
+Hugo config：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">ignoreFiles</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#34;/content/post/private/.*&#34;</span>
+</span></span></code></pre></div><p>整个文件夹完全不会参与构建</p>
+<p>主题是否支持draft，支持的，但是我需要用吗？用吧，虽然刚开始可能不习惯</p>
+<p>模板设定：在哪里，内容是什么</p>
+<p>自动插入模板
+创建文件的时候自动使用模板
+不支持自动，必须用插件Templater
+Templater → Trigger Templater on new file creation（新文件创建时触发）</p>
+<p>private文件夹迁移</p>
+<p>obsidian的vault配置完成了，然后搞一下</p>
+<ul>
+<li>github上传代码的时候不要把private、daily这些也上传：.gitignore</li>
+<li>上传一下最近的代码，别是网络问题</li>
+<li>hugo生成网页的时候不要把这两个里面的也生成</li>
+</ul>
 
   </div>
 

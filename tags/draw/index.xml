@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Draw on 我的博客</title>
+    <link>https://example.com/tags/draw/</link>
+    <description>Recent content in Draw on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 10 Sep 2025 16:18:55 +0000</lastBuildDate>
+    <atom:link href="https://example.com/tags/draw/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>visio</title>
+      <link>https://example.com/post/visio/</link>
+      <pubDate>Wed, 10 Sep 2025 16:18:55 +0000</pubDate>
+      <guid>https://example.com/post/visio/</guid>
+      <description>&lt;p&gt;画图用的&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

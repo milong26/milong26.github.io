@@ -1,0 +1,15 @@
+{
+  "files": [
+    "log.md.md"
+  ],
+  "templaterFiles": [],
+  "newFileTemplates": [
+    {
+      "folder": "template",
+      "path": "log.md.md",
+      "plugin": "core"
+    }
+  ],
+  "openNewFileTemplateInNewPane": true,
+  "useNewFileTemplateOnFileCreation": true
+}

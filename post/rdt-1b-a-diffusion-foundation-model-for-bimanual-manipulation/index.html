@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>RDT-1B: A DIFFUSION FOUNDATION MODEL FOR  BIMANUAL MANIPULATION | 我的博客</title>
+<meta name="keywords" content="">
+<meta name="description" content="RDT-1B: A DIFFUSION FOUNDATION MODEL FOR  BIMANUAL MANIPULATION。双臂机器人操作，扩散模型">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
+<link rel="canonical" href="https://example.com/post/rdt-1b-a-diffusion-foundation-model-for-bimanual-manipulation/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://example.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://example.com/post/rdt-1b-a-diffusion-foundation-model-for-bimanual-manipulation/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://example.com/post/rdt-1b-a-diffusion-foundation-model-for-bimanual-manipulation/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="RDT-1B: A DIFFUSION FOUNDATION MODEL FOR  BIMANUAL MANIPULATION">
+  <meta property="og:description" content="RDT-1B: A DIFFUSION FOUNDATION MODEL FOR BIMANUAL MANIPULATION。双臂机器人操作，扩散模型">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-01-15T16:55:49+00:00">
+    <meta property="article:modified_time" content="2025-01-15T16:55:49+00:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="RDT-1B: A DIFFUSION FOUNDATION MODEL FOR  BIMANUAL MANIPULATION">
+  <meta name="twitter:description" content="RDT-1B: A DIFFUSION FOUNDATION MODEL FOR BIMANUAL MANIPULATION。双臂机器人操作，扩散模型">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://example.com/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "RDT-1B: A DIFFUSION FOUNDATION MODEL FOR  BIMANUAL MANIPULATION",
+      "item": "https://example.com/post/rdt-1b-a-diffusion-foundation-model-for-bimanual-manipulation/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "RDT-1B: A DIFFUSION FOUNDATION MODEL FOR  BIMANUAL MANIPULATION",
+  "name": "RDT-1B: A DIFFUSION FOUNDATION MODEL FOR  BIMANUAL MANIPULATION",
+  "description": "RDT-1B: A DIFFUSION FOUNDATION MODEL FOR BIMANUAL MANIPULATION。双臂机器人操作，扩散模型\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "RDT-1B: A DIFFUSION FOUNDATION MODEL FOR BIMANUAL MANIPULATION。双臂机器人操作，扩散模型\nabstract 解决coordination和traning data lack问题 Robotics Diffusion Transformer 基于扩散基础模型，bimanual manipulation diffusion model+Transformer to deal with multi-modal for data scarcity: Physically Interpretable Unified Action Space pre-train on large and scale up fine-tune on self multi-task dataset experiments on real robot show outperform,good generalization introduction 问题：narrow generalization and failing in complex tasks 解决：“imitation learning on large-scale datasets” （选中模仿学习） 问题：数据缺少 解决：首先对广泛的多机器人数据集进行预训练，然后对目标双臂机器人上收集的小数据集进行微调。 有两个难点 需要一个架构，有表现力和可扩展性 数据异构 RDT 最大的双手操控基础模型，通用性强，用“Diffusion Transformers (DiTs)”作为骨干网络 设计思路 expressiveness：利用扩散模型的能力来建模复杂的分布 scalability:利用 Transformer 主干并精心设计多模式编码 characterize：对原有DiT结构进行重要修改，包括 MLP 解码、改进的归一化和交替条件注入 heterogeneous：提出物理上可解释的统一行动空间 实验 在最大集合上预训练 RDT 模型 在自收集的多任务双手数据集上微调 RDT PROBLEM FORMULATION AND CHALLENGES 选择 ALOHA双臂机器人 语言条件下的视觉双手操作 instruction,observation,time,action,RGB observation,low-dimensional proprioception of the robot,control frequency的设置 low-dimensional proprioception of the robot 不知道是什么 task：给定一项新任务，需要一种实用的策略来泛化到训练数据中未出现的未见过的元素。 policy:预训练和微调管道 开发这样的“foundation model” 有俩challenge（introduction提到的） architecture expressiveness scalability heterogeneous data RDT 整体的框架见论文图3\nRDT MODEL 为了解决第一个challenge。\nDiffusion Modeling 将扩散模型应用于机器人任务的2个挑战\n机器人物理量的特点是其非线性动力学和物理相互作用（如碰撞、约束和阻尼等材料属性）可能引起的高频变化 不稳定的数值范围，可能是传感器导致的 Encoding of Heterogeneous Multi-Modal Inputs 这个异构是SD带来的，和第二个challenge不一样。\n为了将这些不同的模态编码到一个统一的潜在空间中，用以下编码方法\n针对表示物理量的低维输入，MLP（具有傅里叶特征可以有效地捕捉低维空间中的高频变化 图像输入是高维的，包含丰富的空间和语义信息，用图像-文本对齐的预训练视觉编码器 SigLIP 语言输入的长度各不相同，并且高度抽象，用预先训练的基于 Transformer 的语言模型 T5-XXL 除了结构之外，异构性还意味着不同输入中包含的信息量不同。首先，不同模态的数据包含的信息量不同。例如，图像通常比文本包含更多的信息，并且在编码后，它们会产生更多的标记。其次，同一模态的不同输入可能包含非常不同的信息量。例如，与腕式摄像头相比，机器人的外部摄像头具有更全局的视野，包含的信息也更丰富，如图 3 的右上方所示。在这种情况下，模型可能会学习一条捷径：只关注外部视图而忽略手腕视图，从而失去感知深度的能力。为了解决这个问题，我们在编码过程中以一定的概率随机独立地屏蔽每个多模态输入，以防止模型过度依赖特定的输入。\nNetwork Structure Transformer 作为可扩展的骨干网络 对Diffusion Transfomer (DiT)做3个改进 QKNorm \u0026 RMSNorm 输入机器人物理量的数值范围不稳定，会导致梯度不稳定和数值溢出等问题，尤其是在训练大型基础模型时。 为了解决这个问题，我们添加了 QKNorm以避免在计算注意力时数值不稳定。 此外，我们还注意到，我们的问题可以被认为是一个时间序列预测任务，原始 DiT 的 LayerNorm 中的居中操作可能会导致标记转移和注意力转移，从而破坏时间序列的对称性。 因此，我们用RMSNorm替换LayerNorm，而无需进行居中操作。 MLP Decoder 为了提高非线性机器人动作的逼近能力 将最终的线性解码器替换为非线性 MLP 解码器，作为从潜在空间返回物理空间的投影 Alternating Condition Injection (ACI) 条件（图像和语言）高维且长度会变，难以压缩为单个令牌 采用交叉注意corss attention适应不同长度的条件，避免在进一步压缩中丢失信息 图像标记通常比文本标记多得多 在连续层的交叉注意力中策略性地交替注入图像和文本标记 data 在异构多机器人数据上训练 一个统一的action space\n使用单个空间来容纳其本体感觉 zt 和动作 at 包含所有主要物理量 收集数据集 为了进行微调。\n为了确保数据集的高质量\n数量：6K+ 轨迹 综合性：300+ challenging tasks 差异性： 100+ 个不同大小和纹理的刚体和非刚体的物体，以及 15+ 个具有不同照明条件的不同房间。此外，我们进一步利用 GPT-4-Turbo （Achiam et al.， 2023） 重写人工注释的指令，以增加文本多样性。 实验 想解决5个问题\ngeneralize effective facilitate capable helpful 看视频学的\n前任工作里面有一个code as policies[5] 通过编程 rule base 会限制应用范围 另外一些工作就是end-to-end，泛化性差 所以本文模仿学习 end-to-end，不用rl [10-13]是用rl的，可以看看 没搞清楚的问题\n预训练也是用RDT这个框架的吗？输入要求的图片也有？ 之前视频里面说直接看代码就行，先看代码里面有没有说预训练的部分 太好了，找到pretrain的文档了 扩散模型在RDT起到的作用是 扩散模型做什么的：原始数据加噪声，去噪声，输出没加噪声的 在RDT里面，DM有两个步骤 加噪声：从真实action生成带噪声的动作 利用RDT那个网络框架得到去噪的action 训练目标就是最小化MSE DiT在这中间也没做什么 DiT就相当于锦（扩散模型）上添花 重新看的时候才注意到图像处理的部分SigLip反而没那么重要……它后面还提到一个petr进行3d编码，那个才是比较重要的……那个能把多张2d图片编码成3d位置（自动驾驶里面的），不然单纯的图像景深什么的也没法做得很准确吧。如果我搞这部分我肯定会想死磕2d图片到3d位置定位这里（梦回本科学图形学。。） 流程如下\n预训练 准备数据集 下载 清洗，转换格式 统一动作空间 输入： 图片经过SigLIP处理、指令T5-XXL处理。ACI交替注入token 经过噪声处理的action、proprio，映射到unified action space中，MLP。其他如控制频率等，MLP。二者连接 有cross-attention的DiT Block norm、mlp 损失函数，最小化MSE 微调 输入数据：目标机器人的任务指令（语言）、视觉观察（图片）、机器人状态和动作 训练过程和预训练一致，数据来源为自己调整的机器人(原文中使用ALOHA) 推理 输入：本体感觉proprio，相机获取的图像images，指令instruction；输出action 用DPM-Solver++加快训练速度 验证模型对相机位置的健壮性：修改相机位置、角度后收集捕获的图片作为模型输入，评价标准为能否生成正确的动作轨迹 说明：原来的模型提供了3个相机：场景相机、左臂、右臂。其中场景相机固定，左右臂跟随双臂移动。 验证已训练好的模型 左右相机跟随机械臂 修改左右相机相对机械臂的位置和视角 修改场景相机的位置和观察角度 左右臂不跟随机械臂运动， 对比固定左右相机的位置和角度后输出的运动轨迹与之前的差异 改变左右相机相对物体、机械臂的位置，比较输出的运动轨迹 修改相机位置，重新微调模型 改变3个相机的位置和角度(仿照4.2) 修改原文网络结构中和图像相关的方法 直接处理图像的：siglip 位置嵌入：PETR ",
+  "wordCount" : "273",
+  "inLanguage": "en",
+  "datePublished": "2025-01-15T16:55:49Z",
+  "dateModified": "2025-01-15T16:55:49Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/post/rdt-1b-a-diffusion-foundation-model-for-bimanual-manipulation/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://example.com/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://example.com/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      RDT-1B: A DIFFUSION FOUNDATION MODEL FOR  BIMANUAL MANIPULATION
+    </h1>
+    <div class="post-meta">
+
+<span title='2025-01-15 16:55:49 +0000 UTC'>January 15, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>RDT-1B: A DIFFUSION FOUNDATION MODEL FOR  BIMANUAL MANIPULATION。双臂机器人操作，扩散模型</p>
+<h1 id="abstract">abstract<a hidden class="anchor" aria-hidden="true" href="#abstract">#</a></h1>
+<ol>
+<li>解决coordination和traning data lack问题</li>
+<li>Robotics Diffusion Transformer</li>
+<li>基于扩散基础模型，bimanual manipulation</li>
+<li>diffusion model+Transformer to deal with multi-modal</li>
+<li>for data scarcity: Physically Interpretable Unified Action Space</li>
+<li>pre-train on large and scale up</li>
+<li>fine-tune on self multi-task dataset</li>
+<li>experiments on real robot show outperform,good generalization</li>
+</ol>
+<h1 id="introduction">introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h1>
+<ol>
+<li>问题：narrow generalization and failing in complex tasks</li>
+<li>解决：“imitation learning on large-scale datasets” （选中模仿学习）</li>
+<li>问题：数据缺少</li>
+<li>解决：首先对广泛的多机器人数据集进行预训练，然后对目标双臂机器人上收集的小数据集进行微调。</li>
+<li>有两个难点
+<ol>
+<li>需要一个架构，有表现力和可扩展性</li>
+<li>数据异构</li>
+</ol>
+</li>
+<li>RDT
+<ol>
+<li>最大的双手操控基础模型，通用性强，用“Diffusion Transformers (DiTs)”作为骨干网络</li>
+<li>设计思路
+<ol>
+<li>expressiveness：利用扩散模型的能力来建模复杂的分布</li>
+<li>scalability:利用 Transformer 主干并精心设计多模式编码</li>
+<li>characterize：对原有DiT结构进行重要修改，包括 MLP 解码、改进的归一化和交替条件注入</li>
+<li>heterogeneous：提出物理上可解释的统一行动空间</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>实验
+<ol>
+<li>在最大集合上预训练 RDT 模型</li>
+<li>在自收集的多任务双手数据集上微调 RDT</li>
+</ol>
+</li>
+</ol>
+<h1 id="problem-formulation-and-challenges">PROBLEM FORMULATION AND CHALLENGES<a hidden class="anchor" aria-hidden="true" href="#problem-formulation-and-challenges">#</a></h1>
+<ol>
+<li>选择
+<ol>
+<li>ALOHA双臂机器人</li>
+<li>语言条件下的视觉双手操作</li>
+</ol>
+</li>
+<li>instruction,observation,time,action,RGB observation,low-dimensional proprioception of the robot,control frequency的设置
+<ol>
+<li>low-dimensional proprioception of the robot 不知道是什么</li>
+</ol>
+</li>
+<li>task：给定一项新任务，需要一种实用的策略来泛化到训练数据中未出现的未见过的元素。</li>
+<li>policy:预训练和微调管道</li>
+<li>开发这样的“foundation model” 有俩challenge（introduction提到的）
+<ol>
+<li>architecture
+<ol>
+<li>expressiveness</li>
+<li>scalability</li>
+</ol>
+</li>
+<li>heterogeneous data</li>
+</ol>
+</li>
+</ol>
+<h1 id="rdt">RDT<a hidden class="anchor" aria-hidden="true" href="#rdt">#</a></h1>
+<p>整体的框架见论文图3</p>
+<h2 id="rdt-model">RDT MODEL<a hidden class="anchor" aria-hidden="true" href="#rdt-model">#</a></h2>
+<p>为了解决第一个challenge。</p>
+<h3 id="diffusion-modeling">Diffusion Modeling<a hidden class="anchor" aria-hidden="true" href="#diffusion-modeling">#</a></h3>
+<p>将扩散模型应用于机器人任务的2个挑战</p>
+<ol>
+<li>机器人物理量的特点是其非线性动力学和物理相互作用（如碰撞、约束和阻尼等材料属性）可能引起的高频变化</li>
+<li>不稳定的数值范围，可能是传感器导致的</li>
+</ol>
+<h3 id="encoding-of-heterogeneous-multi-modal-inputs">Encoding of Heterogeneous Multi-Modal Inputs<a hidden class="anchor" aria-hidden="true" href="#encoding-of-heterogeneous-multi-modal-inputs">#</a></h3>
+<p>这个异构是SD带来的，和第二个challenge不一样。</p>
+<p>为了将这些不同的模态编码到一个统一的潜在空间中，用以下编码方法</p>
+<ol>
+<li>针对表示物理量的低维输入，MLP（具有傅里叶特征可以有效地捕捉低维空间中的高频变化</li>
+<li>图像输入是高维的，包含丰富的空间和语义信息，用图像-文本对齐的预训练视觉编码器 SigLIP</li>
+<li>语言输入的长度各不相同，并且高度抽象，用预先训练的基于 Transformer 的语言模型 T5-XXL</li>
+</ol>
+<p>除了结构之外，异构性还意味着不同输入中包含的信息量不同。首先，不同模态的数据包含的信息量不同。例如，图像通常比文本包含更多的信息，并且在编码后，它们会产生更多的标记。其次，同一模态的不同输入可能包含非常不同的信息量。例如，与腕式摄像头相比，机器人的外部摄像头具有更全局的视野，包含的信息也更丰富，如图 3 的右上方所示。在这种情况下，模型可能会学习一条捷径：只关注外部视图而忽略手腕视图，从而失去感知深度的能力。为了解决这个问题，我们在编码过程中以一定的概率随机独立地屏蔽每个多模态输入，以防止模型过度依赖特定的输入。</p>
+<h3 id="network-structure">Network Structure<a hidden class="anchor" aria-hidden="true" href="#network-structure">#</a></h3>
+<ol>
+<li>Transformer 作为可扩展的骨干网络</li>
+<li>对Diffusion Transfomer (DiT)做3个改进
+<ol>
+<li>QKNorm &amp; RMSNorm
+<ol>
+<li>输入机器人物理量的数值范围不稳定，会导致梯度不稳定和数值溢出等问题，尤其是在训练大型基础模型时。</li>
+<li>为了解决这个问题，我们添加了 QKNorm以避免在计算注意力时数值不稳定。</li>
+<li>此外，我们还注意到，我们的问题可以被认为是一个时间序列预测任务，原始 DiT 的 LayerNorm 中的居中操作可能会导致标记转移和注意力转移，从而破坏时间序列的对称性。</li>
+<li>因此，我们用RMSNorm替换LayerNorm，而无需进行居中操作。</li>
+</ol>
+</li>
+<li>MLP Decoder
+<ol>
+<li>为了提高非线性机器人动作的逼近能力</li>
+<li>将最终的线性解码器替换为非线性 MLP 解码器，作为从潜在空间返回物理空间的投影</li>
+</ol>
+</li>
+<li>Alternating Condition Injection (ACI)
+<ol>
+<li>条件（图像和语言）高维且长度会变，难以压缩为单个令牌</li>
+<li>采用交叉注意corss attention适应不同长度的条件，避免在进一步压缩中丢失信息</li>
+<li>图像标记通常比文本标记多得多</li>
+<li>在连续层的交叉注意力中策略性地交替注入图像和文本标记</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="data">data<a hidden class="anchor" aria-hidden="true" href="#data">#</a></h2>
+<h3 id="在异构多机器人数据上训练">在异构多机器人数据上训练<a hidden class="anchor" aria-hidden="true" href="#在异构多机器人数据上训练">#</a></h3>
+<p>一个统一的action space</p>
+<ol>
+<li>使用单个空间来容纳其本体感觉 zt 和动作 at</li>
+<li>包含所有主要物理量</li>
+</ol>
+<h3 id="收集数据集">收集数据集<a hidden class="anchor" aria-hidden="true" href="#收集数据集">#</a></h3>
+<p>为了进行微调。</p>
+<p>为了确保数据集的高质量</p>
+<ol>
+<li>数量：6K+ 轨迹</li>
+<li>综合性：300+ challenging tasks</li>
+<li>差异性： 100+ 个不同大小和纹理的刚体和非刚体的物体，以及 15+ 个具有不同照明条件的不同房间。此外，我们进一步利用 GPT-4-Turbo （Achiam et al.， 2023） 重写人工注释的指令，以增加文本多样性。</li>
+</ol>
+<h1 id="实验">实验<a hidden class="anchor" aria-hidden="true" href="#实验">#</a></h1>
+<p>想解决5个问题</p>
+<ol>
+<li>generalize</li>
+<li>effective</li>
+<li>facilitate</li>
+<li>capable</li>
+<li>helpful</li>
+</ol>
+<p>看视频学的</p>
+<ol>
+<li>前任工作里面有一个code as policies[5] 通过编程 rule base 会限制应用范围</li>
+<li>另外一些工作就是end-to-end，泛化性差</li>
+<li>所以本文模仿学习 end-to-end，不用rl</li>
+<li>[10-13]是用rl的，可以看看</li>
+</ol>
+<p>没搞清楚的问题</p>
+<ol>
+<li>预训练也是用RDT这个框架的吗？输入要求的图片也有？
+<ol>
+<li>之前视频里面说直接看代码就行，先看代码里面有没有说预训练的部分</li>
+<li>太好了，找到<a href="https://github.com/thu-ml/RoboticsDiffusionTransformer/blob/main/docs/pretrain.md">pretrain</a>的文档了</li>
+</ol>
+</li>
+<li>扩散模型在RDT起到的作用是
+<ol>
+<li>扩散模型做什么的：原始数据加噪声，去噪声，输出没加噪声的</li>
+<li>在RDT里面，DM有两个步骤
+<ol>
+<li>加噪声：从真实action生成带噪声的动作</li>
+<li>利用RDT那个网络框架得到去噪的action</li>
+<li>训练目标就是最小化MSE</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>DiT在这中间也没做什么
+<ol>
+<li>DiT就相当于锦（扩散模型）上添花</li>
+</ol>
+</li>
+<li>重新看的时候才注意到图像处理的部分SigLip反而没那么重要……它后面还提到一个petr进行3d编码，那个才是比较重要的……那个能把多张2d图片编码成3d位置（自动驾驶里面的），不然单纯的图像景深什么的也没法做得很准确吧。如果我搞这部分我肯定会想死磕2d图片到3d位置定位这里（梦回本科学图形学。。）</li>
+</ol>
+<p>流程如下</p>
+<ol>
+<li>预训练
+<ol>
+<li>准备数据集
+<ol>
+<li>下载</li>
+<li>清洗，转换格式</li>
+<li>统一动作空间</li>
+</ol>
+</li>
+<li>输入：
+<ol>
+<li>图片经过SigLIP处理、指令T5-XXL处理。ACI交替注入token</li>
+<li>经过噪声处理的action、proprio，映射到unified action space中，MLP。其他如控制频率等，MLP。二者连接</li>
+</ol>
+</li>
+<li>有cross-attention的DiT Block</li>
+<li>norm、mlp</li>
+<li>损失函数，最小化MSE</li>
+</ol>
+</li>
+<li>微调
+<ol>
+<li>输入数据：目标机器人的任务指令（语言）、视觉观察（图片）、机器人状态和动作</li>
+<li>训练过程和预训练一致，数据来源为自己调整的机器人(原文中使用ALOHA)</li>
+</ol>
+</li>
+<li>推理
+<ol>
+<li>输入：本体感觉proprio，相机获取的图像images，指令instruction；输出action</li>
+<li>用DPM-Solver++加快训练速度</li>
+</ol>
+</li>
+<li>验证模型对相机位置的健壮性：修改相机位置、角度后收集捕获的图片作为模型输入，评价标准为能否生成正确的动作轨迹
+<ol>
+<li>说明：原来的模型提供了3个相机：场景相机、左臂、右臂。其中场景相机固定，左右臂跟随双臂移动。</li>
+<li>验证已训练好的模型
+<ol>
+<li>左右相机跟随机械臂
+<ol>
+<li>修改左右相机相对机械臂的位置和视角</li>
+<li>修改场景相机的位置和观察角度</li>
+</ol>
+</li>
+<li>左右臂不跟随机械臂运动，
+<ol>
+<li>对比固定左右相机的位置和角度后输出的运动轨迹与之前的差异</li>
+<li>改变左右相机相对物体、机械臂的位置，比较输出的运动轨迹</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>修改相机位置，重新微调模型
+<ol>
+<li>改变3个相机的位置和角度(仿照4.2)</li>
+<li>修改原文网络结构中和图像相关的方法
+<ol>
+<li>直接处理图像的：siglip</li>
+<li>位置嵌入：PETR</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

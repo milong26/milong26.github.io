@@ -6,8 +6,99 @@
     <description>Recent content in It on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 24 Mar 2025 20:59:10 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 28 Nov 2025 11:22:05 +0000</lastBuildDate>
     <atom:link href="https://example.com/categories/it/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>同步和异步</title>
+      <link>https://example.com/post/%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5/</link>
+      <pubDate>Fri, 28 Nov 2025 11:22:05 +0000</pubDate>
+      <guid>https://example.com/post/%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5/</guid>
+      <description>&lt;p&gt;写代码的时候看到但是想不起来，死脑快动，好吧原来我当时学java的时候就没听进去，只能补课了。真的是java吗，怎么操作系统也有，哲学家就餐问题……&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>ros</title>
+      <link>https://example.com/post/ros/</link>
+      <pubDate>Thu, 13 Nov 2025 10:04:05 +0000</pubDate>
+      <guid>https://example.com/post/ros/</guid>
+      <description>&lt;p&gt;原来是一个系统集成的框架，和Lerobot相比它侧重于真实场景的“系统”。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>lerobot</title>
+      <link>https://example.com/post/lerobot/</link>
+      <pubDate>Thu, 23 Oct 2025 14:41:46 +0000</pubDate>
+      <guid>https://example.com/post/lerobot/</guid>
+      <description>&lt;p&gt;Lerobot的使用以及代码教程&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>具身智能</title>
+      <link>https://example.com/post/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/</link>
+      <pubDate>Fri, 10 Oct 2025 18:26:10 +0000</pubDate>
+      <guid>https://example.com/post/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/</guid>
+      <description>&lt;p&gt;它跟vla啥关系啊，怎么感觉哪哪都能听到这个词语&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>vla</title>
+      <link>https://example.com/post/vla/</link>
+      <pubDate>Mon, 29 Sep 2025 15:17:34 +0000</pubDate>
+      <guid>https://example.com/post/vla/</guid>
+      <description>&lt;p&gt;直觉告诉我这肯定是一大坨一直写不完的东西。&lt;/p&gt;
+&lt;p&gt;我对vla的畅想：
+用户输入自然语言文本，机器人自己准确执行操作
+那整个系统里面，用户输入文本，机器人得理解（结合vlm），视觉感知，
+准确动作就要有 空间理解？&lt;/p&gt;
+&lt;p&gt;一个教程https://zsc.github.io/vla_tutorial/html/index.html，内容一般，但是结构不错，可能是ai生成的？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>dropout</title>
+      <link>https://example.com/post/dropout/</link>
+      <pubDate>Sun, 28 Sep 2025 16:05:41 +0000</pubDate>
+      <guid>https://example.com/post/dropout/</guid>
+      <description>&lt;p&gt;以前没好好学的现在孽力回馈了。&lt;/p&gt;
+&lt;p&gt;搜了一下dropout居然算深度学习，深度学习是神经网络里面的？&lt;/p&gt;
+&lt;p&gt;嗯原来是一种skill :D&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>模型训练黑话</title>
+      <link>https://example.com/post/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%BB%91%E8%AF%9D/</link>
+      <pubDate>Wed, 20 Aug 2025 21:30:13 +0000</pubDate>
+      <guid>https://example.com/post/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%BB%91%E8%AF%9D/</guid>
+      <description>&lt;p&gt;先写着，以后有空再整理&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>cuda</title>
+      <link>https://example.com/post/cuda/</link>
+      <pubDate>Mon, 04 Aug 2025 21:22:26 +0000</pubDate>
+      <guid>https://example.com/post/cuda/</guid>
+      <description>&lt;p&gt;不过cuda和cuda toolkit之间的区别还挺大的，一般nvidia-smi能有输出的话就不用管了，一些特殊的依赖才必须nvcc。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>wheel</title>
+      <link>https://example.com/post/wheel/</link>
+      <pubDate>Mon, 30 Jun 2025 19:53:14 +0000</pubDate>
+      <guid>https://example.com/post/wheel/</guid>
+      <description>&lt;p&gt;&amp;ldquo;Build the wheels from source&amp;rdquo; 的意思是 从源代码构建 .whl 文件，然后再进行安装，而不是直接使用已经编译好的 .whl 文件。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>windows</title>
+      <link>https://example.com/post/windows/</link>
+      <pubDate>Wed, 02 Apr 2025 15:14:40 +0000</pubDate>
+      <guid>https://example.com/post/windows/</guid>
+      <description>&lt;p&gt;windows，系统和使用。有linux了怎么能没有windows&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>灵巧手抓取示例</title>
+      <link>https://example.com/post/%E7%81%B5%E5%B7%A7%E6%89%8B%E6%8A%93%E5%8F%96%E7%A4%BA%E4%BE%8B/</link>
+      <pubDate>Tue, 01 Apr 2025 16:54:39 +0000</pubDate>
+      <guid>https://example.com/post/%E7%81%B5%E5%B7%A7%E6%89%8B%E6%8A%93%E5%8F%96%E7%A4%BA%E4%BE%8B/</guid>
+      <description>&lt;p&gt;要求：灵巧手（手臂尽可能简单）抓取不同摩擦力的常见物体（能抓到就行，不需要用模型）&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>dexgrasp类数据集收集</title>
+      <link>https://example.com/post/dexgrasp%E7%B1%BB%E6%95%B0%E6%8D%AE%E9%9B%86%E6%94%B6%E9%9B%86/</link>
+      <pubDate>Wed, 26 Mar 2025 10:15:30 +0000</pubDate>
+      <guid>https://example.com/post/dexgrasp%E7%B1%BB%E6%95%B0%E6%8D%AE%E9%9B%86%E6%94%B6%E9%9B%86/</guid>
+      <description>&lt;p&gt;收集的一些数据集&lt;/p&gt;</description>
+    </item>
     <item>
       <title>python压缩pdf</title>
       <link>https://example.com/post/python%E5%8E%8B%E7%BC%A9pdf/</link>
@@ -24,6 +115,97 @@
       <description>&lt;p&gt;又来看新环境 Gymnasium-Robotics，看上了它提供的shadown hand&lt;/p&gt;</description>
     </item>
     <item>
+      <title>DexGraspNet</title>
+      <link>https://example.com/post/dexgraspnet/</link>
+      <pubDate>Thu, 06 Mar 2025 15:26:43 +0000</pubDate>
+      <guid>https://example.com/post/dexgraspnet/</guid>
+      <description>&lt;p&gt;DexGraspNet，灵巧抓取数据集，我需要用它的数据辅助我的机械臂面对物体生成抓取姿态(dof)然后配置torchSDF的时候失败&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>mediapipe</title>
+      <link>https://example.com/post/mediapipe/</link>
+      <pubDate>Thu, 06 Mar 2025 10:46:08 +0000</pubDate>
+      <guid>https://example.com/post/mediapipe/</guid>
+      <description>&lt;p&gt;midiapipe是一个实时计算机视觉框架&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>one-shot</title>
+      <link>https://example.com/post/one-shot/</link>
+      <pubDate>Thu, 27 Feb 2025 14:39:26 +0000</pubDate>
+      <guid>https://example.com/post/one-shot/</guid>
+      <description>&lt;p&gt;看论文看到了但没懂表示什么&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>wsl</title>
+      <link>https://example.com/post/wsl/</link>
+      <pubDate>Tue, 25 Feb 2025 15:11:18 +0000</pubDate>
+      <guid>https://example.com/post/wsl/</guid>
+      <description>&lt;p&gt;windows上能用linux子系统&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>linux</title>
+      <link>https://example.com/post/linux/</link>
+      <pubDate>Fri, 21 Feb 2025 11:10:22 +0000</pubDate>
+      <guid>https://example.com/post/linux/</guid>
+      <description>&lt;p&gt;linux一些常用指令&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>git</title>
+      <link>https://example.com/post/git/</link>
+      <pubDate>Fri, 10 Jan 2025 10:55:21 +0000</pubDate>
+      <guid>https://example.com/post/git/</guid>
+      <description>&lt;p&gt;常用工具git，虽然网络是阻挠我是用的最大问题&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>运动学</title>
+      <link>https://example.com/post/%E8%BF%90%E5%8A%A8%E5%AD%A6/</link>
+      <pubDate>Wed, 08 Jan 2025 10:05:53 +0000</pubDate>
+      <guid>https://example.com/post/%E8%BF%90%E5%8A%A8%E5%AD%A6/</guid>
+      <description>&lt;p&gt;kinematics，包括正向与逆向。用于joint-space和end-effector Cartesian-space的转换&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>zotero</title>
+      <link>https://example.com/post/zotero/</link>
+      <pubDate>Tue, 07 Jan 2025 17:14:43 +0000</pubDate>
+      <guid>https://example.com/post/zotero/</guid>
+      <description>&lt;p&gt;zotero文献管理&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>clash</title>
+      <link>https://example.com/post/clash/</link>
+      <pubDate>Fri, 03 Jan 2025 17:15:36 +0000</pubDate>
+      <guid>https://example.com/post/clash/</guid>
+      <description>&lt;p&gt;clash安装和配置&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>VS code</title>
+      <link>https://example.com/post/vs-code/</link>
+      <pubDate>Thu, 19 Dec 2024 18:42:06 +0000</pubDate>
+      <guid>https://example.com/post/vs-code/</guid>
+      <description>&lt;p&gt;Visual studio Code&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>conda</title>
+      <link>https://example.com/post/conda/</link>
+      <pubDate>Thu, 19 Dec 2024 18:40:56 +0000</pubDate>
+      <guid>https://example.com/post/conda/</guid>
+      <description>&lt;p&gt;conda。管理python环境的，很好用&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>genesis平台</title>
+      <link>https://example.com/post/genesis%E5%B9%B3%E5%8F%B0/</link>
+      <pubDate>Thu, 19 Dec 2024 14:51:53 +0000</pubDate>
+      <guid>https://example.com/post/genesis%E5%B9%B3%E5%8F%B0/</guid>
+      <description>&lt;p&gt;一个比robosuite更简洁的物理平台，专为通用机器人/人工智能/物理AI应用而设计。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>robosuite平台</title>
+      <link>https://example.com/post/robosuite%E5%B9%B3%E5%8F%B0/</link>
+      <pubDate>Mon, 02 Dec 2024 14:22:27 +0000</pubDate>
+      <guid>https://example.com/post/robosuite%E5%B9%B3%E5%8F%B0/</guid>
+      <description>&lt;p&gt;机器人模拟平台robosuite ，最后还是不用了。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>latexocr</title>
       <link>https://example.com/post/latexocr/</link>
       <pubDate>Mon, 28 Oct 2024 22:07:18 +0000</pubDate>
@@ -31,11 +213,41 @@
       <description>&lt;p&gt;图片转latex，本地版。需要梯子，也可以搞镜像&lt;/p&gt;</description>
     </item>
     <item>
+      <title>AMD修复</title>
+      <link>https://example.com/post/amd%E4%BF%AE%E5%A4%8D/</link>
+      <pubDate>Thu, 17 Oct 2024 11:31:18 +0000</pubDate>
+      <guid>https://example.com/post/amd%E4%BF%AE%E5%A4%8D/</guid>
+      <description>&lt;p&gt;想装cuda所以尝试看看电脑上到底有没有NVIDIA&lt;/p&gt;
+&lt;p&gt;平时用不到这个，以后有需要再整理吧。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>nodejs</title>
+      <link>https://example.com/post/nodejs/</link>
+      <pubDate>Thu, 12 Sep 2024 11:34:24 +0000</pubDate>
+      <guid>https://example.com/post/nodejs/</guid>
+      <description>&lt;p&gt;安装、配置、更新nodejs的流程&lt;/p&gt;
+&lt;p&gt;但是我现在更新不了……重新配置一遍算了&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>latex</title>
       <link>https://example.com/post/latex/</link>
       <pubDate>Tue, 09 Jul 2024 10:19:41 +0000</pubDate>
       <guid>https://example.com/post/latex/</guid>
       <description>&lt;p&gt;写英文论文还是用latex比较好&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>串</title>
+      <link>https://example.com/post/%E4%B8%B2/</link>
+      <pubDate>Tue, 28 May 2024 17:18:36 +0000</pubDate>
+      <guid>https://example.com/post/%E4%B8%B2/</guid>
+      <description>&lt;p&gt;串相关的算法题整理&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>leetcode肝活</title>
+      <link>https://example.com/post/leetcode%E8%82%9D%E6%B4%BB/</link>
+      <pubDate>Tue, 09 Apr 2024 16:37:52 +0000</pubDate>
+      <guid>https://example.com/post/leetcode%E8%82%9D%E6%B4%BB/</guid>
+      <description>&lt;p&gt;leetcode刷题日志，哪天有空哪天刷&lt;/p&gt;</description>
     </item>
     <item>
       <title>hexo</title>
@@ -46,11 +258,184 @@
 &lt;p&gt;估计下次更新就变成使用hugo了，尽管我还没写几篇，等写到100篇的时候换hugo吧&lt;/p&gt;</description>
     </item>
     <item>
+      <title>FreeAdversarialTraining</title>
+      <link>https://example.com/post/freeadversarialtraining/</link>
+      <pubDate>Sat, 16 Apr 2022 16:32:50 +0000</pubDate>
+      <guid>https://example.com/post/freeadversarialtraining/</guid>
+      <description>&lt;p&gt;以前写毕设学的，留个纪念。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>affordance模型</title>
+      <link>https://example.com/post/affordance%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/affordance%E6%A8%A1%E5%9E%8B/</guid>
+      <description>&lt;p&gt;看论文看到一个概念 functional affordance model,一开始还以为是affordable（给得起的）还在想这论文这么节俭，后面才发现是一个专有概念orz&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>diffusion transformer</title>
+      <link>https://example.com/post/diffusion-transformer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/diffusion-transformer/</guid>
+      <description>&lt;p&gt;想学习，但没找到好的教程，学的时候复盘一下diffusion,transformer和DiT是用来干啥的吧。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>genesis平台</title>
+      <link>https://example.com/post/genesis-%E5%B9%B3%E5%8F%B0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/genesis-%E5%B9%B3%E5%8F%B0/</guid>
+      <description>&lt;p&gt;新物理平台https://genesis-world.readthedocs.io/en/latest/&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>hugo使用指南</title>
       <link>https://example.com/post/hugo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://example.com/post/hugo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</guid>
       <description>&lt;p&gt;hugo配置日志&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>maniskill</title>
+      <link>https://example.com/post/maniskill/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/maniskill/</guid>
+      <description>&lt;p&gt;以前经常看见的一个baseline？环境？基于gym&lt;/p&gt;
+&lt;p&gt;可以headless运行，但是需要vulkan&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>mujoco</title>
+      <link>https://example.com/post/mujoco/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/mujoco/</guid>
+      <description>&lt;p&gt;物理引擎。虽然genesis不用装，但是gym还要，装着试试&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>onnx</title>
+      <link>https://example.com/post/onnx/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/onnx/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>pip安装产生的隔离环境问题</title>
+      <link>https://example.com/post/pip%E5%AE%89%E8%A3%85%E4%BA%A7%E7%94%9F%E7%9A%84%E9%9A%94%E7%A6%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/pip%E5%AE%89%E8%A3%85%E4%BA%A7%E7%94%9F%E7%9A%84%E9%9A%94%E7%A6%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98/</guid>
+      <description>&lt;p&gt;conda创建了一个环境，已经安装了pytorch，import torch也正常
+但是pip install torch3d这种的时候，报错说no module named torch&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>pose estimation</title>
+      <link>https://example.com/post/pose-estimation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/pose-estimation/</guid>
+      <description>&lt;p&gt;感觉对VLA挺重要，尤其是camera pose estimation&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>python</title>
+      <link>https://example.com/post/python/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>pytorch</title>
+      <link>https://example.com/post/pytorch/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/pytorch/</guid>
+      <description>&lt;p&gt;pytorch好多内容orz&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>VLA们</title>
+      <link>https://example.com/post/vla%E4%BB%AC/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/vla%E4%BB%AC/</guid>
+      <description>&lt;p&gt;还是很混沌，多看论文吧&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>vla数据集</title>
+      <link>https://example.com/post/vla%E6%95%B0%E6%8D%AE%E9%9B%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/vla%E6%95%B0%E6%8D%AE%E9%9B%86/</guid>
+      <description>&lt;p&gt;看论文的时候一些数据集记录下来&lt;/p&gt;
+&lt;p&gt;有个问题：vla为啥还能有benchmark，不都是本地部署吗？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>vla泛化-多变相机视角</title>
+      <link>https://example.com/post/vla%E6%B3%9B%E5%8C%96-%E5%A4%9A%E5%8F%98%E7%9B%B8%E6%9C%BA%E8%A7%86%E8%A7%92/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/vla%E6%B3%9B%E5%8C%96-%E5%A4%9A%E5%8F%98%E7%9B%B8%E6%9C%BA%E8%A7%86%E8%A7%92/</guid>
+      <description>&lt;p&gt;当作研究记录。希望能早点确定下来。
+目标是：同一机械臂同一场景下更改相机位置仍然能zero-shot使用某一相机视角采集+微调后的模型
+说好听一点：在固定场景中实现机械臂策略对相机位置变化的零样本鲁棒性的研究？通过学习视角不变的视觉表征实现机器人操作策略的跨相机泛化&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>vla里面的插值</title>
+      <link>https://example.com/post/vla%E9%87%8C%E9%9D%A2%E7%9A%84%E6%8F%92%E5%80%BC/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/vla%E9%87%8C%E9%9D%A2%E7%9A%84%E6%8F%92%E5%80%BC/</guid>
+      <description>&lt;p&gt;最近见到的有点多，搞一个看看&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>为什么我会写出屎山代码</title>
+      <link>https://example.com/post/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BC%9A%E5%86%99%E5%87%BA%E5%B1%8E%E5%B1%B1%E4%BB%A3%E7%A0%81/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BC%9A%E5%86%99%E5%87%BA%E5%B1%8E%E5%B1%B1%E4%BB%A3%E7%A0%81/</guid>
+      <description>&lt;p&gt;导模块导得头疼，连续必可导，可导不一定连续&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>多gpu的accelerate</title>
+      <link>https://example.com/post/%E5%A4%9Agpu%E7%9A%84acclerate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E5%A4%9Agpu%E7%9A%84acclerate/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>条件transformer</title>
+      <link>https://example.com/post/%E6%9D%A1%E4%BB%B6transformer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E6%9D%A1%E4%BB%B6transformer/</guid>
+      <description>&lt;p&gt;什么是条件transformer？它能做到什么？什么情况下使用它？怎么样能看出来这是一个条件transformer？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 整理文本&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 有哪些经典的实际上就是条件transformer&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 和最基本的transformer对比&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>相机标定</title>
+      <link>https://example.com/post/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>端到端</title>
+      <link>https://example.com/post/%E7%AB%AF%E5%88%B0%E7%AB%AF/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E7%AB%AF%E5%88%B0%E7%AB%AF/</guid>
+      <description>&lt;p&gt;smolvla:SmolVLA is trained end-to-end on fewer than 30k episodes&lt;/p&gt;
+&lt;p&gt;“端到端训练”（End-to-End Training）是机器学习和深度学习中一种训练方式，它的核心思想是：将整个任务建模为一个统一的系统，并直接从输入到输出进行优化。整个模型从头到尾一次性训练，而不是将任务拆解成多个独立的子模块分别训练。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>视角重建</title>
+      <link>https://example.com/post/%E8%A7%86%E8%A7%92%E9%87%8D%E5%BB%BA/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E8%A7%86%E8%A7%92%E9%87%8D%E5%BB%BA/</guid>
+      <description>&lt;p&gt;试错过程&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>解读smolvla代码</title>
+      <link>https://example.com/post/%E8%A7%A3%E8%AF%BBsmolvla%E4%BB%A3%E7%A0%81/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E8%A7%A3%E8%AF%BBsmolvla%E4%BB%A3%E7%A0%81/</guid>
+      <description>&lt;p&gt;一个比较小的模型smovla，但里面涉及的还挺多，当扫盲&lt;/p&gt;
+&lt;p&gt;看代码不能看单词的含义而是看整体结构orz&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>轻量化vla</title>
+      <link>https://example.com/post/%E8%BD%BB%E9%87%8F%E5%8C%96vla/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/%E8%BD%BB%E9%87%8F%E5%8C%96vla/</guid>
+      <description>&lt;p&gt;感觉这方面论文挺少的&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Towards Generalizable Robotic Data Flywheel High-Dimensional Factorization and Composition | 我的博客</title>
+<meta name="keywords" content="">
+<meta name="description" content="讲得很有意思而且很贴切的一个论文，就是很多词我看不懂。这一篇要是ai直接看会很浪费">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/towards-generalizable-robotic-data-flywheel-high-dimensional-factorization-and-composition/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/towards-generalizable-robotic-data-flywheel-high-dimensional-factorization-and-composition/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Towards Generalizable Robotic Data Flywheel High-Dimensional Factorization and Composition
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h1>
+    <div class="post-meta">
+
+<span title='2026-06-24 16:57:24 +0000 UTC'>June 24, 2026</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>讲得很有意思而且很贴切的一个论文，就是很多词我看不懂。这一篇要是ai直接看会很浪费</p>
+<p>边看边提问，提问了一堆</p>
+<ol>
+<li>a heuristic Factor-Aware Compositional Iterative Learning framework for data factorization and compositional generalization.这里面每个词和词组我都没看懂。是专业名词的话解释一下</li>
+<li>figure1里面，数据分布的图是怎么画出来的？As a result, the overall data coverage typically forms a Gaussian-like distribution, as illustrated in Fig. <a href="https://arxiv.org/html/2603.25583v1#S1.F1.sf1" title="Figure 1(a) ‣ Figure 1 ‣ 1 Introduction ‣ Towards Generalizable Robotic Data Flywheel: High-Dimensional Factorization and Composition">1(a)</a>. 这个结论怎么得到的？</li>
+<li> However, naive expansion toward a quasi-uniform distribution across multiple axes in high-dimensional factor spaces often leads to the curse of dimensionality这个结论又怎么得到的？ 什么是 curse of dimensionality？是因为维度太多了吗？</li>
+<li>实现有效泛化所需的数据分布既不是高斯分布，也不是准均匀分布。好像也没有解释过。</li>
+<li>什么是迭代学习</li>
+<li>Factor-aware Robotic Evaluation 这里的factor是什么意思，也就是benchmark里面的环境、光照、相机配置这些？</li>
+<li>VLA evaluations [8, 17, 23, 24] often largely focus on aggregate task success or semantic intent, without systematically disentangling how individual factor(e.g., object properties, action element, and environmental conditions) affects generalization performance. In contrast, F-ACIL directly evaluates how VLAs adapt to compositional variations, enabling a more precise understanding of how policies manipulate objects across diverse environments and various poses.怎么做到的？</li>
+<li>introduction给我说心动了，这个东西到底可以实现哪些功能，为什么设计出来的F-ACIL可以做到？</li>
+<li>那我的改进切入点的办法是不是就只有把成功率提升到99%？</li>
+<li> Instead of exhaustive enumeration over all possible factors, F-ACIL iteratively expands along selected dimensions, leveraging relationships among different spaces to extrapolate to unseen compositions with fewer demonstrations, shifting generalization from passive coverage-based scaling to active dimension-aware expansion.迭代扩展是什么？这么强</li>
+<li>Data-efficient Robotic Learning.这一节列举的相关工作都值得看看</li>
+<li>we adopt a factorized perspective based on the physical structure of the real world. 那我现在真的好奇：基于embedding的思路有没有搞头？</li>
+<li>物体相关的分解成 纹理、几何形状和尺寸。但是直接分类？这个分类有什么作用吗</li>
+<li>通过初始场景配置的不同来体现动作的多样性：是个好想法，但是这个操作跟模仿学习很接近……也就是和模仿学习强绑定的，它意味着在测试的时候，一个初始状态需要完整的轨迹示范？我的想法有点混乱，i mean，初始配置是否已经决定好了整个轨迹的方向，而不是：agent在运行过程中实时调整？</li>
+<li>环境主要是视觉观测，目前这个我没有太涉及，就先跳过</li>
+<li>在单因素的情况下构建推广模型？ formulating generalization in the single-factor case什么意思</li>
+<li>我看懂了这个相当于比我的多了绕xy轴旋转的和环境，我之前没有做环境，分解之后怎么做的？</li>
+<li>group action是什么意思</li>
+<li>定义一个函数，map a dataset to the object factor space，就是将一个数据集按照object之前的定义，比，也就是table1:object factors的texture geometry 和size进行分组</li>
+<li>figure4的实验是直接做出来的？放在method部分不会显得method和experiment混乱吗？还是说只要这个图没有写具体的数据就没事？但是也说了 Demonstrations collected for iteration 1 under 𝒪 space，所以还是先采集了一组数据然后测试，给出了一个没有具体数据但是可以图表示的实验结果？所以这个图的意思是，采集了16个数据集，分别测试，测试出来每个组合，比如cylind和trans的组合，记录成功率，画图的时候只画和tau的对比关系。然后选择D1只有4个，也就是f (D1) = [(Transparent, Cylindrical), (Diffuse, Dish-like), (Specular, Rod-like), (Absorptive, Irregular)].</li>
+<li>a model can generalize to via an orbit closure induced by an empirical transformed set怎么做到的？</li>
+<li>orb的部分概括起来就是：定义数据集D1，包含于数据集D。f函数是因子表示。HO denotes the set of empirical transformations obtained from evaluation along O这个HO直观来说是什么？orb ho D直观上，OrbHO （D） 表示模型在数据集 D 上训练后可以泛化的对象因素集合。HO 表示沿 O 的求值所得的经验变换集合，我从它的定义公式中看不出来，解释这个定义公式</li>
+<li>As illustrated in Fig. 4, the OrbHO (D1) is the region where the success rate over τ什么意思，图上没有标注Orb的结果，我只知道D1是4个，所以这里OrbHO (D1)指的是结果论（成功率高）而不是定义？Notably, the composition (Absorptive, Irregular) belongs to f (D1) but lies outside OrbHO (D1). This discrepancy reveals that certain factor compositions are inherently more difficult to learn than others.这个差异我没看懂，怎么突然来了差异</li>
+<li>前面说了一堆，Our goal is therefore to identify a training dataset D′ so that才切入正题。minimize the cardinality就是找满足什么条件，但是数目最小的集合吧</li>
+<li>我知道为什么要这么定义了，就是想找到数目最少，但同时模型能从少量数据集学习泛化到整个环境的子集，但是我看到这个定义也不知道怎么找到，模型不都是黑盒吗？</li>
+<li>数据收集策略 a hierarchical data collection strategy哪里体现出分层，噢原来是先O，再拓展到A，再拓展到environment。那iterative subset search怎么做的？用object的因子分解解释一下</li>
+<li>prioritize the factor spaces according to their relative impact on generalization, following the order怎么知道是Object，action，environment的顺序的？？</li>
+<li>还是orb的定义问题，怎么知道orbHo(Do)=那么大的集合o</li>
+<li>Although this condition does not guarantee the generalization to the full product OA, we further show (in Sec. 4.2) that  所以这个完全是实验证明的？需要多少实验数据？</li>
+<li>所以sequential factor exploration讲的是宏观上怎样A-&gt;O-&gt;environment的，iterative subset search within each factor space讲的就是怎么找到orb=o的？</li>
+<li>Then, the model is evaluated on a factor-based benchmark specifically designed to measure performance across different object factors. From the evaluation, we obtain the individual success rate for each object factor and the overall success rate aggregated across all factors, resulting in an success rate tensor R.什么benchmark这么高级，真的是实验出来的？？？</li>
+<li>为什么突然开始定义tensor S，是要处理成功率矩阵。S后面有用到吗</li>
+<li>所以这个迭代策略就是先分组实验，测出结果以后得到成功率矩阵？然后再算S？</li>
+<li>尝试algorithm1，就是我看不懂的迭代计算，先构建对焦点，怎么感觉就是看成功率和success threshold的比较。update dataset是通过factorization and composition实现</li>
+<li>algorthm完全看不懂，好抽象。原来S是用在这里的</li>
+<li>3.2.3节这个标题怎么感觉跟algorthm2的Collecting Data based on Factorization and Composition中后面三个单词差不多？没怎么看懂， 感觉这一节没什么干货？</li>
+<li>实验部分，naive full-space iteration是什么，就是所有数据都采集一遍吗</li>
+<li>选择GR-3作为基准，模型的原始架构不变，主干的参数不变，只训练策略，那不就是只用自己采集的数据微调已经有的VLA模型，而且只微调动作生成部分？</li>
+<li>动作空间的维度划分跟我之前想的好像不一样</li>
+<li>During the real-world iterative process, we perform five tests for each subset in the evaluation set when assessing different skills.什么叫5次测试，就每个任务只检测5次，相当于计算成功率的时候成功次数/总次数这个公式，总次数=5？还是说5次是不同的随机种子之类的？</li>
+<li>figure7的right图是采集数据消耗的时间吗</li>
+<li>看得有点晕，f(Do)A采集过程中不是还需要尝试其他类型的吗，得到那个成功率表格</li>
+<li>图 7 的右侧面板中，比较了在完整产品空间 𝒪​𝒜 和简化后的空间 f​(D𝒪)​𝒜 下，数据飞轮每次迭代所需的成本。在完整的 𝒪​𝒜 空间中，完成一次迭代需要评估所有可能的因素组合，这意味着需要处理 4×2×3×4×4=384 种可能性以及进行 384×5=1920 次评估。而在简化后的空间 f​(D𝒪)​𝒜 中，可用的对象因素组合要少得多（如图 5 中的第 4 次迭代所示，为 |f​(D𝒪)|=7 种），因此需要处理的 possibility 数量减少到了 4×2×3×7=169种，但是评估还是1920次？</li>
+<li>figure8 是什么，怎么还有个gaussian，描述是As illustrated in Fig. 8, there is a consistent trend that the proposed F-ACIL-Factors-Ratio strategy achieves comparable performance with substantially fewer demonstrations across both skill groups (Pick-and-Place and Open-and-Close). gaussian是什么，怎么突然出现。F-ACIL-后面ratio，mixture，这些方法之前没说过啊，分别是什么定义？</li>
+<li>table4只考虑数据规模没有做数据质量的区分吗？因为前文不是已经发现会有orbhO=O因为模型泛化，所以肯定有数据是多余的，那table4的数据规模没有对数据做区分，岂不是会出现：100个满足orb的数据，然后100个多余的数据，这样成功率应该没有提高太多？</li>
+<li>总结所有的实验，按照实验目的进行划分，说清楚实验目的、实验内容以及预期结果</li>
+</ol>
+<p>开始逐个解答问题</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

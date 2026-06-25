@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Application on 我的博客</title>
+    <link>https://example.com/categories/application/</link>
+    <description>Recent content in Application on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 15 Sep 2025 22:09:22 +0000</lastBuildDate>
+    <atom:link href="https://example.com/categories/application/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>obsidian</title>
+      <link>https://example.com/post/obsidian/</link>
+      <pubDate>Mon, 15 Sep 2025 22:09:22 +0000</pubDate>
+      <guid>https://example.com/post/obsidian/</guid>
+      <description>&lt;p&gt;现在才发现如此好用的软件，用用用&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>visio</title>
+      <link>https://example.com/post/visio/</link>
+      <pubDate>Wed, 10 Sep 2025 16:18:55 +0000</pubDate>
+      <guid>https://example.com/post/visio/</guid>
+      <description>&lt;p&gt;画图用的&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

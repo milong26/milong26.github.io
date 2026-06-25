@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Ubuntu on 我的博客</title>
+    <link>https://example.com/tags/ubuntu/</link>
+    <description>Recent content in Ubuntu on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 06 Mar 2025 15:26:43 +0000</lastBuildDate>
+    <atom:link href="https://example.com/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DexGraspNet</title>
+      <link>https://example.com/post/dexgraspnet/</link>
+      <pubDate>Thu, 06 Mar 2025 15:26:43 +0000</pubDate>
+      <guid>https://example.com/post/dexgraspnet/</guid>
+      <description>&lt;p&gt;DexGraspNet，灵巧抓取数据集，我需要用它的数据辅助我的机械臂面对物体生成抓取姿态(dof)然后配置torchSDF的时候失败&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
