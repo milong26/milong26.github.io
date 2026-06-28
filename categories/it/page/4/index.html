@@ -205,77 +205,98 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">FreeAdversarialTraining
+    <h2 class="entry-hint-parent">hexo建站
     </h2>
   </header>
   <div class="entry-content">
-    <p>以前写毕设学的，留个纪念。
+    <p>个人blog生成日志，防备以后需要
 ...</p>
   </div>
   <footer class="entry-footer">
 
-<span title='2022-04-16 16:32:50 +0000 UTC'>April 16, 2022</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to FreeAdversarialTraining" href="http://localhost:1313/post/freeadversarialtraining/"></a>
+<span title='2024-03-04 15:26:28 +0000 UTC'>March 4, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to hexo建站" href="http://localhost:1313/post/hexo%E5%BB%BA%E7%AB%99/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">affordance模型
+    <h2 class="entry-hint-parent">寒假之前搞定的aimax配置
     </h2>
   </header>
   <div class="entry-content">
-    <p>看论文看到一个概念 functional affordance model,一开始还以为是affordable（给得起的）还在想这论文这么节俭，后面才发现是一个专有概念orz
-...</p>
+    <p>目标：在aimax平台上面部署MedicalGPT
+aimax平台 连校园网，http://10.60.81.153/index.html#/login 账户名 general07 密码 ner@507 登录，多端登录会下线之前的 (选)右上角有用户手册 私有数据目录 数据存储-私有数据-创建目录，名字随便写
+创建环境 还是在aimax平台 侧边栏：模型训练-交互式开发-创建
+名字随便，自己记得 选terminal 密码也要自己记得，密码只能由字母数字和特殊字符（!@#$%^&amp;*）组成，且6~20位字符。 工作空间选刚才创建的私有数据目录 最长运行时间没法加，认命吧 绑定的分区看不懂 加速器选3090 选择GPU个数 xshell</p>
   </div>
   <footer class="entry-footer">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to affordance模型" href="http://localhost:1313/post/affordance%E6%A8%A1%E5%9E%8B/"></a>
+<span title='2024-01-06 16:47:14 +0000 UTC'>January 6, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 寒假之前搞定的aimax配置" href="http://localhost:1313/post/%E5%AF%92%E5%81%87%E4%B9%8B%E5%89%8D%E6%90%9E%E5%AE%9A%E7%9A%84aimax%E9%85%8D%E7%BD%AE/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">diffusion transformer
+    <h2 class="entry-hint-parent">batch
     </h2>
   </header>
   <div class="entry-content">
-    <p>想学习，但没找到好的教程，学的时候复盘一下diffusion,transformer和DiT是用来干啥的吧。
+    <p>包含：mini-batch
+batch mini-batch 在梯度下降中需要对所有样本进行处理过后然后走一步，那么如果我们的样本规模的特别大的话效率就会比较低。 假如有500万，甚至5000万个样本的话走一轮迭代就会非常的耗时。这个时候的梯度下降叫做full batch。 所以为了提高效率，我们可以把样本分成等量的子集。 例如我们把100万样本分成1000份， 每份1000个样本， 这些子集就称为mini batch。 然后我们分别用一个for循环遍历这1000个子集。 针对每一个子集做一次梯度下降。 然后更新参数w和b的值。接着到下一个子集中继续进行梯度下降。 这样在遍历完所有的mini batch之后我们相当于在梯度下降中做了1000次迭代。 我们将遍历一次所有样本的行为叫做一个 epoch，也就是一个世代。 在mini batch下的梯度下降中做的事情其实跟full batch一样，只不过我们训练的数据不再是所有的样本，而是一个个的子集。 这样在mini batch我们在一个epoch中就能进行1000次的梯度下降，而在full batch中只有一次。 这样就大大的提高了我们算法的运行速度。 既然有了mini batch那就会有一个batch size的超参数，也就是块大小。代表着每一个mini batch中有多少个样本。 我们一般设置为2的n次方。 例如64,128,512,1024. 一般不会超过这个范围。不能太大，因为太大了会无限接近full batch的行为，速度会慢。 也不能太小，太小了以后可能算法永远不会收敛。 当然如果我们的数据比较小， 但也用不着mini batch了。 full batch的效果是最好的。
 </p>
   </div>
   <footer class="entry-footer">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to diffusion transformer" href="http://localhost:1313/post/diffusion-transformer/"></a>
+<span title='2023-12-26 20:23:43 +0000 UTC'>December 26, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to batch" href="http://localhost:1313/post/batch/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">genesis平台
+    <h2 class="entry-hint-parent">SGD vs Adam
     </h2>
   </header>
   <div class="entry-content">
-    <p>新物理平台https://genesis-world.readthedocs.io/en/latest/
-...</p>
+    <p>比较一下SGD和Adam这两个优化器，时间顺序上Adam是对SGD的改进，但是在一些层面SGD还是很好用的。
+只写了一点点，没空了，以后再搞 参考：https://blog.csdn.net/S20144144/article/details/103417502 参考：https://www.zhihu.com/question/422203931/answers/updated#:~:text=Adam%20%E7%AE%97%E6%B3%95%E5%8F%AF%E4%BB%A5%E7%9C%8B%E4%BD%9C%E6%98%AF%E5%9C%A8,SGD%20%E7%9A%84%E5%9F%BA%E7%A1%80%E4%B8%8A%E8%BF%9B%E8%A1%8C%E4%BA%86%E4%BC%98%E5%8C%96%EF%BC%8C%E5%AE%83%E7%BB%93%E5%90%88%E4%BA%86%E6%A2%AF%E5%BA%A6%E7%9A%84%E4%B8%80%E9%98%B6%E7%9F%A9%E4%BC%B0%E8%AE%A1%E5%92%8C%E4%BA%8C%E9%98%B6%E7%9F%A9%E4%BC%B0%E8%AE%A1%E6%9D%A5%E5%8A%A8%E6%80%81%E8%B0%83%E6%95%B4%E5%AD%A6%E4%B9%A0%E7%8E%87%EF%BC%8C%E4%BD%BF%E5%BE%97%E5%B0%8F%E7%90%83%E8%83%BD%E5%A4%9F%E6%9B%B4%E5%8A%A0%E6%99%BA%E8%83%BD%E5%9C%B0%E6%BB%9A%E5%8A%A8%E5%88%B0%E5%B1%B1%E8%B0%B7%E7%9A%84%E6%9C%80%E4%BD%8E%E7%82%B9%E3%80%82 优化算法总览 SGD和Adam的设定部分直接看原文，这里只做总结。
+深度学习优化算法经历了 SGD -&gt; SGDM -&gt; NAG -&gt;AdaGrad -&gt; AdaDelta -&gt; Adam -&gt; Nadam 这样的发展历程。
+优化问题：待优化参数w，目标函数f(w)，初始学习率$\alpha$，对该优化问题迭代优化。在每个epoch t：
+计算梯度$g_t=\nabla f(w_t)$ 根据历史梯度计算一阶动$m_t$量和二阶动量$v_t$（一阶动量和二阶动量分别是历史梯度的一阶函数和二阶函数。） 计算当前时刻的下降梯度 $$ \Delta\theta_t=-\alpha\cdot \frac{m_t}{\sqrt{v_t}} $$ 根据下降梯度更新 $$ w_{t&#43;1}=w_t-\Delta\theta_t $$ 步骤3、4对于各个算法都是一致的，主要的差别就体现在1和2上。
+SGD SGD没有动量（vanilla SGD），即上面公式里面 $m_t=g_t,v_t=I^2$
+</p>
   </div>
   <footer class="entry-footer">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to genesis平台" href="http://localhost:1313/post/genesis-%E5%B9%B3%E5%8F%B0/"></a>
+<span title='2023-12-21 16:09:48 +0000 UTC'>December 21, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to SGD vs Adam" href="http://localhost:1313/post/sgd-vs-adam/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">hugo使用指南
+    <h2 class="entry-hint-parent">adam优化器
     </h2>
   </header>
   <div class="entry-content">
-    <p>hugo配置日志
-...</p>
+    <p>Adam 优化算法，Adaptive。 可以将其理解成Adam = Momentum &#43; Adaptive Learning Rate
+梯度下降不够 基本的mini-batch SGD优化算法在深度学习取得很多不错的成绩。然而也存在一些问题需解决：
+选择恰当的初始学习率很困难。 学习率调整策略受限于预先指定的调整规则。 相同的学习率被应用于各个参数。 高度非凸的误差函数的优化过程，如何避免陷入大量的局部次优解或鞍点。 自适应优化 AdaGrad 针对简单的SGD及Momentum存在的问题，AdaGrad优化算法(Adaptive Gradient，自适应梯度)出现 它能够对每个不同的参数调整不同的学习率，对频繁变化的参数以更小的步长进行更新，而稀疏的参数以更大的步长进行更新。 $$ g_i=\nabla_\theta J(\theta_{t-1})\ \theta_{t&#43;1}=\theta_t-\alpha \cdot\frac{g_t}{\sqrt{\sum_{i=1}^t}g_i^2} $$ $g_t$表示第t时间步的梯度（向量，包含各个参数对应的偏导数， 表示第i个参数t时刻偏导数）
+$g_t^2$表示第t时间步的梯度平方（向量，由 各元素自己进行平方运算所得，即Element-wise）
+AdaGrad与SGD的核心区别在于:计算更新步长时，增加了分母：梯度平方累积和的平方根。 此项能够累积各个参数的历史梯度平方，频繁更新的梯度，则累积的分母项逐渐偏大，那么更新的步长(stepsize)相对就会变小，而稀疏的梯度，则导致累积的分母项中对应值比较小，那么更新的步长则相对比较大。
+AdaGrad能够自动为不同参数适应不同的学习率（平方根的分母项相当于对学习率α进进行了自动调整，然后再乘以本次梯度），大多数的框架实现采用默认学习率α=0.01即可完成比较好的收敛。
+优势：在数据分布稀疏的场景，能更好利用稀疏梯度的信息，比标准的SGD算法更有效地收敛。
+缺点：主要缺陷来自分母项的对梯度平方不断累积，随之时间步地增加，分母项越来越大，最终导致学习率收缩到太小无法进行有效更新。
+数据分布稀疏是什么情况？数据的稀疏性
+RMSProp RMSProp结合梯度平方的指数移动平均数来调节学习率的变化,能够在不稳定（Non-Stationary）的目标函数情况下进行很好地收敛。 $$ g_t=\nabla \theta J(\theta{t-1})\ v_t=\gamma(v_{t-1})&#43;(1-\gamma)g_t^2 $$ 计算梯度平方的指数移动平均数vt（Exponential Moving Average），γ是遗忘因子（或称为指数衰减率），依据经验，默认设置为0.9。
+梯度更新时候，与AdaGrad类似，只是更新的梯度平方的期望（指数移动均值），其中ε=10^-8，避免除数为0。默认学习率α=0.001。 $$ \theta_t=\theta_{t-1}-\alpha\cdot\frac{g_t}{\sqrt{v_t}&#43;\varepsilon} $$
+优势：能够克服AdaGrad梯度急剧减小的问题，在很多应用中都展示出优秀的学习率自适应能力。尤其在不稳定(Non-Stationary)的目标函数下，比基本的SGD、Momentum、AdaGrad表现更良好。
+Adam优化器 Adam优化器结合AdaGrad和RMSProp两种优化算法的优点。对梯度的一阶矩估计（First Moment Estimation，即梯度的均值）和二阶矩估计（Second Moment Estimation，即梯度的未中心化的方差）进行综合考虑，计算出更新步长。
+优点 实现简单，计算高效，对内存需求少 参数的更新不受梯度的伸缩变换影响 超参数具有很好的解释性，且通常无需调整或仅需很少的微调 更新的步长能够被限制在大致的范围内（初始学习率） 能自然地实现步长退火过程（自动调整学习率） 很适合应用于大规模的数据及参数的场景 适用于不稳定目标函数 适用于梯度稀疏或梯度存在很大噪声的问题 综合Adam在很多情况下算作默认工作性能比较优秀的优化器
+伪代码 ...</p>
   </div>
   <footer class="entry-footer">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to hugo使用指南" href="http://localhost:1313/post/hugo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/"></a>
+<span title='2023-12-21 11:02:12 +0000 UTC'>December 21, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to adam优化器" href="http://localhost:1313/post/adam%E4%BC%98%E5%8C%96%E5%99%A8/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

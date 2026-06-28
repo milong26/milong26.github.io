@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Reverse Dictionary on 我的博客</title>
+    <link>http://localhost:1313/tags/reverse-dictionary/</link>
+    <description>Recent content in Reverse Dictionary on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 24 Oct 2023 16:21:15 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/reverse-dictionary/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>基于对比学习的大型语言模型反向词典任务提示生成方法</title>
+      <link>http://localhost:1313/post/%E5%9F%BA%E4%BA%8E%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8F%8D%E5%90%91%E8%AF%8D%E5%85%B8%E4%BB%BB%E5%8A%A1%E6%8F%90%E7%A4%BA%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95/</link>
+      <pubDate>Tue, 24 Oct 2023 16:21:15 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E5%9F%BA%E4%BA%8E%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8F%8D%E5%90%91%E8%AF%8D%E5%85%B8%E4%BB%BB%E5%8A%A1%E6%8F%90%E7%A4%BA%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95/</guid>
+      <description>&lt;p&gt;2023年10月才发的中文paper，看了之后感觉是大杂烩，学一下它的结构吧
+感觉没什么特别厉害的创意&lt;/p&gt;
+&lt;h1 id=&#34;paper&#34;&gt;paper&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://kns.cnki.net/kcms2/article/abstract?v=A67obWUfw0klPsaU27SILDfmAhRFDx8g4znhsvTW3NjQ-mAG-l_nQ8aGUnlqhHNgUl_yk7IM3pyGYjo8V--zYEQqzrRcylTYciSHkMJEfTW1k29gH5HwKy7NFD_AtZQbBR7LLD0u1HU=&amp;amp;uniplatform=NZKPT&amp;amp;language=CHS&#34;&gt;论文地址&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;introduction&#34;&gt;introduction&lt;/h2&gt;
+&lt;p&gt;introduction里面怎么没有介绍反向词典？&lt;/p&gt;
+&lt;h3 id=&#34;反向词典&#34;&gt;反向词典&lt;/h3&gt;
+&lt;p&gt;输入释义，输出表示这个意思的词汇列表&lt;/p&gt;
+&lt;h3 id=&#34;大规模语言模型&#34;&gt;大规模语言模型&lt;/h3&gt;
+&lt;p&gt;对GPT-3测试之后，发现prompt中含有期望词汇时输出正确率会大大提高&lt;/p&gt;
+&lt;h3 id=&#34;这篇文章&#34;&gt;这篇文章&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;目的：自动生成prompt&lt;/li&gt;
+&lt;li&gt;模型：基于对比学习的反向词典模型RDMCL&lt;/li&gt;
+&lt;li&gt;数据集 Oxford&lt;/li&gt;
+&lt;li&gt;方法
+&lt;ul&gt;
+&lt;li&gt;用RDMCL生成单词&lt;/li&gt;
+&lt;li&gt;用生成的单词创建prompt&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;创新点
+&lt;ul&gt;
+&lt;li&gt;RDMCL比较高级
+&lt;ul&gt;
+&lt;li&gt;语义信息捕捉
+&lt;ul&gt;
+&lt;li&gt;Bi-LSTM&lt;/li&gt;
+&lt;li&gt;cnn(卷积神经网络)&lt;/li&gt;
+&lt;li&gt;自注意力机制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;融合语义信息，并映射到目标单词的语义空间&lt;/li&gt;
+&lt;li&gt;(新)提出有监督对比损失函数
+&lt;ul&gt;
+&lt;li&gt;引入负例，提高泛化性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;相关工作&#34;&gt;相关工作&lt;/h2&gt;
+&lt;h3 id=&#34;反向词典-1&#34;&gt;反向词典&lt;/h3&gt;
+&lt;p&gt;从多尺度上考虑了定义的不同于一层次的信息（在说什么鬼话）&lt;/p&gt;
+&lt;h3 id=&#34;对比学习&#34;&gt;对比学习&lt;/h3&gt;
+&lt;p&gt;为了提高反向词典的准确性，就是个辅助
+关于如何构建负例样本&lt;/p&gt;
+&lt;h2 id=&#34;研究方法&#34;&gt;研究方法&lt;/h2&gt;
+&lt;p&gt;目的：自动生成高质量的prompt
+方法：基于对比学习的promp生成方法
+步骤：1. RDMCL生成候选词汇；2. 根据词汇生成prompt&lt;/p&gt;
+&lt;h3 id=&#34;语义信息&#34;&gt;语义信息&lt;/h3&gt;
+&lt;p&gt;该文章把一段话分成三个语义层次，但我不知道为什么&lt;/p&gt;
+&lt;h4 id=&#34;句子&#34;&gt;句子&lt;/h4&gt;
+&lt;p&gt;输入的就是普通句子
+先经过embedding层（嵌入层）&lt;a href=&#34;https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;amp;arnumber=8791735&#34;&gt;我没看懂这篇paper里怎么得到embs的&lt;/a&gt;得到$emb_s$&lt;/p&gt;
+&lt;p&gt;然后经过&lt;a href=&#34;Bi-LSTM.md&#34;&gt;Bi-LSTM&lt;/a&gt;
+得到两个输出
+$$
+v_{sen}=\mathop{h}\limits^\rightarrow+\mathop{h}\limits^\leftarrow \
+E_{emb_s}=\mathop{E}\limits^\rightarrow+\mathop{E}\limits^\leftarrow
+$$&lt;/p&gt;
+&lt;h4 id=&#34;短语&#34;&gt;短语&lt;/h4&gt;
+&lt;p&gt;主要是cnn（卷积神经网络）+self-attention
+卷积神经网络比较熟就不重复了
+&lt;a href=&#34;%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6.md&#34;&gt;自注意力&lt;/a&gt; 也写了
+先卷积
+$$
+c_{r,k}=tanh(\sum_{i,j}(F_r&lt;em&gt;E_{emb_s}^{k:k+l-1})&lt;em&gt;{i,j})\
+c_r=(c&lt;/em&gt;{r,1},c_{r,2},&amp;hellip;c_{t,n-l+1})\
+C=(c_1,c_2,&amp;hellip;c_t)
+$$
+再用自注意力
+$$
+i=softmax(tanh(W_1E_{emb_s}^T+b_1))
+$$
+i广播操作(torch、numpy里面都有，其实就是合并到同一个维度)得到I
+最后得到
+$$
+V_{phrase}=(I&lt;/em&gt;E_{emb_s}^T)
+$$&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

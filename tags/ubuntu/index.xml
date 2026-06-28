@@ -15,5 +15,12 @@
       <guid>http://localhost:1313/post/dexgraspnet/</guid>
       <description>&lt;p&gt;DexGraspNet，灵巧抓取数据集，我需要用它的数据辅助我的机械臂面对物体生成抓取姿态(dof)然后配置torchSDF的时候失败&lt;/p&gt;</description>
     </item>
+    <item>
+      <title>ubuntu系统中安装klee</title>
+      <link>http://localhost:1313/post/ubuntu%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%AE%89%E8%A3%85klee/</link>
+      <pubDate>Thu, 15 Apr 2021 23:49:26 +0000</pubDate>
+      <guid>http://localhost:1313/post/ubuntu%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%AE%89%E8%A3%85klee/</guid>
+      <description>&lt;p&gt;docker安装&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>

@@ -64,5 +64,74 @@ $$&lt;/p&gt;
 &lt;p&gt;又由鞍点的特征值有正有负，所以存在特征值λ使得λ‖u‖²&amp;lt;0，所以$u^THu$小于0，也就是$L(\theta)&amp;lt;L(\theta&amp;rsquo;)$。即假设$\theta-\theta&amp;rsquo;=u$，你在$\theta&amp;rsquo;$的位置加上u，沿着u的方向做update得到θ，你就可以让loss变小。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;对于saddle point，我们只需要找出特征值λ小于0的点，再找出它对应的特征向量u，用$u+\theta&amp;rsquo;$，就可以找到一个新的点，这个点的loss比原来低&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
+    <item>
+      <title>模拟退火算法</title>
+      <link>http://localhost:1313/post/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Fri, 27 Oct 2023 18:48:46 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/</guid>
+      <description>&lt;p&gt;准备pre，学习一下。计算智能课讲了一下但是印象不深，此外最近看过的论文里有提到一个“温度系数”，不知道概念是否相通。&lt;/p&gt;
+&lt;h1 id=&#34;概念&#34;&gt;概念&lt;/h1&gt;
+&lt;p&gt;适用场合：模拟退火是一种随机化算法。当一个问题的方案数量极大（甚至是无穷的）而且不是一个单峰函数时，我们常使用模拟退火求解。&lt;/p&gt;
+&lt;h2 id=&#34;区别&#34;&gt;区别&lt;/h2&gt;
+&lt;h3 id=&#34;蒙特卡洛模拟&#34;&gt;蒙特卡洛模拟&lt;/h3&gt;
+&lt;h1 id=&#34;原理&#34;&gt;原理&lt;/h1&gt;
+&lt;h2 id=&#34;物理现象&#34;&gt;物理现象&lt;/h2&gt;
+&lt;p&gt;金属退火是将金属加热到一定温度，保持足够时间，然后以适宜速度冷却(通常是缓慢冷却，有时是控制冷却)的一种金属热处理工艺。
+模拟退火算法来源于固体退火原理，将固体加温至充分高，再让其徐徐冷却，加温时，固体内部粒子随温升变为无序状，内能增大，而徐徐冷却时粒子渐趋有序，在每个温度都达到平衡态，最后在常温时达到基态，内能减为最小。&lt;/p&gt;
+&lt;h2 id=&#34;算法&#34;&gt;算法&lt;/h2&gt;
+&lt;p&gt;它是基于Monte-Carlo 迭代求解策略的一种随机寻优算法，其出发点是基于物理中固体物质的退火过程与一般组合优化问题之间的相似性。
+可以应用到组合优化问题中。&lt;/p&gt;
+&lt;h3 id=&#34;爬山算法&#34;&gt;爬山算法&lt;/h3&gt;
+&lt;p&gt;爬山算法是一种简单的贪心搜索算法，该算法每次从当前解的临近解空间中选择一个最优解作为当前解，直到达到一个局部最优解。
+&lt;img loading=&#34;lazy&#34; src=&#34;https://pic3.zhimg.com/80/v2-dc9922369b5cf664398149e6d983a5b6_1440w.webp&#34;&gt;&lt;/p&gt;
+&lt;p&gt;爬山算法实现很简单，其主要缺点是会陷入局部最优解，而不一定能搜索到全局最优解。&lt;/p&gt;
+&lt;h3 id=&#34;模拟退火&#34;&gt;模拟退火&lt;/h3&gt;
+&lt;p&gt;模拟退火算法从某一较高初温出发，伴随温度参数的不断下降,结合一定的概率突跳特性在解空间中随机寻找目标函数的全局最优解，即在局部最优解能概率性地跳出并最终趋于全局最优。如下图：
+&lt;img loading=&#34;lazy&#34; src=&#34;https://oi-wiki.org/misc/images/simulated-annealing.gif&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里的“一定的概率”的计算参考了金属冶炼的退火过程，这也是模拟退火算法名称的由来。
+将温度T当作控制参数，目标函数值f视为内能E，而固体在某温度T时的一个状态对应一个解
+，然后算法试图随着控制参数T的降低，使目标函数f(内能E)也逐渐降低，直至趋于全局最小值（退火中低温时的最低能量状态），就像金属退火过程一样。&lt;/p&gt;
+&lt;h4 id=&#34;数学原理&#34;&gt;数学原理&lt;/h4&gt;
+&lt;p&gt;从概念知道会结合概率突跳特性在解空间中随机寻找目标函数的全局最优解，
+具体的更新解的机制是：如果新解比当前解更优，则接受新解，否则基于Metropolis准则判断是否接受新解。&lt;/p&gt;
+&lt;p&gt;接受概率为：
+$$
+P =  	\begin{cases} 	1,~~~~~~~~~~~~~~~~~ E_{t+1} \lt E_{t} \ 	e^{\frac{-(E_{t+1} - E_{t})}{kT}},~~~~ E_{t+1} \ge E_{t} 	\end{cases}
+$$&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;为什么是这个公式&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如上公式，假设当前时刻搜索的解为$x_t$，对应的系统能量(目标函数)为$E_t$.
+对搜索点施加随机扰动，产生新解$x_{t+1}$，相应地，系统能量为$E_{t+1}$.
+那么系统对搜索点从$x_t$到$x_{t+1}$转变的接受概率就为上公式。&lt;/p&gt;
+&lt;h2 id=&#34;流程&#34;&gt;流程&lt;/h2&gt;
+&lt;p&gt;由于算法初始温度比较高，这样，使E增大的新解在初始时也可能被接受，因而能跳出局部极小值，然后通过缓慢地降低温度，算法就最终可能收敛到全局最优解。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$T=T_0$表示初始温度，随机产生一个初始解$x_0$，并计算$E(x_0)$&lt;/li&gt;
+&lt;li&gt;令$T=kT$，$k\in(0,1)$为温度下降速率&lt;/li&gt;
+&lt;li&gt;对当前解$x_t$增加随机扰动，在其邻域内产生一个新解$x_{t+1}$，并计算$E(x_{t+1})$&lt;/li&gt;
+&lt;li&gt;计算$\Delta E=E(x_{t+1})-E(x_t)$&lt;/li&gt;
+&lt;li&gt;$\Delta E&amp;lt;0$ 接受$x_{t+1}$为新解
+else 按照P的概率接受&lt;/li&gt;
+&lt;li&gt;在温度T下，重复L次扰动和接受过程，即执行步骤3-5&lt;/li&gt;
+&lt;li&gt;判断温度是否达到终止温度水平，若是则终止算法，否则返回步骤2.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;改进&#34;&gt;改进&lt;/h1&gt;
+&lt;h1 id=&#34;应用&#34;&gt;应用&lt;/h1&gt;
+&lt;p&gt;模拟退火算法作为一种通用的随机搜索算法，现已广泛用于VLSI设计、图像识别和神经网计算机的研究。模拟退火算法的应用如下：&lt;/p&gt;
+&lt;h1 id=&#34;作业&#34;&gt;作业&lt;/h1&gt;
+&lt;h2 id=&#34;旅行商问题&#34;&gt;旅行商问题&lt;/h2&gt;
+&lt;h3 id=&#34;描述&#34;&gt;描述&lt;/h3&gt;
+&lt;p&gt;Develop a generic simulated annealing algorithm to solve the traveling salesman problem with 20 cities that are uniformly distributed within a unit square in a 2-dimensional plane.
+The coordinates of 20 cities are given below in a 2x20 matrix.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PPO优化方法</title>
+      <link>http://localhost:1313/post/ppo%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/</link>
+      <pubDate>Tue, 19 Sep 2023 20:21:17 +0000</pubDate>
+      <guid>http://localhost:1313/post/ppo%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/</guid>
+      <description>&lt;p&gt;准备拿来当素材
+我炼我炼&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Feature Engineering on 我的博客</title>
+    <link>http://localhost:1313/tags/feature-engineering/</link>
+    <description>Recent content in Feature Engineering on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 19 Sep 2023 15:37:10 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/feature-engineering/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>特征工程</title>
+      <link>http://localhost:1313/post/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/</link>
+      <pubDate>Tue, 19 Sep 2023 15:37:10 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/</guid>
+      <description>&lt;p&gt;特征工程(feature engineering)，干的是原始数据-&amp;gt;特征这个过程的事情。数据清洗什么的都算。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/fengdu78/Data-Science-Notes/tree/master/9.feature-engineering&#34;&gt;参考&lt;/a&gt;，代码和数据集均可考&lt;/p&gt;
+&lt;h1 id=&#34;序章&#34;&gt;序章&lt;/h1&gt;
+&lt;p&gt;不重要，跳过，&lt;strong&gt;数据、模型、特征&lt;/strong&gt;这几个知道就行&lt;/p&gt;
+&lt;h1 id=&#34;数字技巧&#34;&gt;数字技巧&lt;/h1&gt;
+&lt;p&gt;标量、向量、向量空间&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Jupyternotebook on 我的博客</title>
+    <link>http://localhost:1313/tags/jupyternotebook/</link>
+    <description>Recent content in Jupyternotebook on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 20 May 2023 14:13:41 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/jupyternotebook/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>部署jupyternotebook</title>
+      <link>http://localhost:1313/post/%E9%83%A8%E7%BD%B2jupyternotebook/</link>
+      <pubDate>Sat, 20 May 2023 14:13:41 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E9%83%A8%E7%BD%B2jupyternotebook/</guid>
+      <description>&lt;p&gt;上次安装还是写毕设的时候，jupyternotebook对现在的我来说还是比较好用的，缺点就是.ipynb和.md文件不兼容，不然我就可以把它们和日志放在一个文件夹里面了&lt;/p&gt;
+&lt;p&gt;先进入&lt;a href=&#34;https://jupyter.org/&#34;&gt;官网&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;安装&#34;&gt;安装&lt;/h1&gt;
+&lt;p&gt;安装python3后&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pip install -i https://pypi.tuna.tsinghua.edu.cn/simple/ jupyter
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行时会遇到报错“ValueError: check_hostname requires server_hostname”，梯子记得关了&lt;/p&gt;
+&lt;h1 id=&#34;运行&#34;&gt;运行&lt;/h1&gt;
+&lt;p&gt;老样子还是vscode&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;python&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装 Insiders 插件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;使用 &lt;code&gt;ctrl+ shift+ p&lt;/code&gt; 调出 &lt;strong&gt;Command Palette&lt;/strong&gt; 然后输入 &lt;code&gt;Python: Switch&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;这里我们选择第二个  &lt;strong&gt;Python: Switch to Insiders Daily Channel&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;问题&#34;&gt;问题&lt;/h1&gt;</description>
+    </item>
+  </channel>
+</rss>

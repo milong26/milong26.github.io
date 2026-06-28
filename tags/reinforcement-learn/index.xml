@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Reinforcement Learn on 我的博客</title>
+    <link>http://localhost:1313/tags/reinforcement-learn/</link>
+    <description>Recent content in Reinforcement Learn on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 11 Sep 2023 19:56:04 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/reinforcement-learn/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>强化学习</title>
+      <link>http://localhost:1313/post/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Mon, 11 Sep 2023 19:56:04 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</guid>
+      <description>&lt;p&gt;先根据课程梳理一条线，后面会把其它我觉得有类似的补充过来&lt;/p&gt;
+&lt;h1 id=&#34;course-by-david-silver&#34;&gt;Course by David Silver&lt;/h1&gt;
+&lt;p&gt;本章内容出自&lt;a href=&#34;https://www.davidsilver.uk/teaching/&#34;&gt;UCL Course on RL by David Silver&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;introduction-of-rl&#34;&gt;introduction of RL&lt;/h2&gt;
+&lt;p&gt;一句话：RL=非监督+有奖励
+需要考虑如何设计奖励。
+这一章好多概念性的东西，so我进行了精简，看不懂可以&lt;a href=&#34;https://zhuanlan.zhihu.com/p/50553186&#34;&gt;参考&lt;/a&gt;
+&lt;strong&gt;学完可能会会过头来看看&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;原理&#34;&gt;原理&lt;/h3&gt;
+&lt;p&gt;强化学习是一个序列决策（Sequential Decision Making）问题：连续选择一些行为，从这些行为完成后得到最大的收益作为最好的结果。
+先尝试实践，得到反馈之后调整。&lt;/p&gt;
+&lt;h3 id=&#34;区别&#34;&gt;区别&lt;/h3&gt;
+&lt;h4 id=&#34;vs监督学习&#34;&gt;vs监督学习&lt;/h4&gt;
+&lt;p&gt;监督学习有标签；立刻反馈；输入时独立分布的
+RL没有标签；反馈有延时；输入变化
+强化学习具有时间相关性（作为序列决策问题，属于非独立同分布数据）。&lt;/p&gt;
+&lt;h4 id=&#34;vs其它非监督学习&#34;&gt;vs其它非监督学习&lt;/h4&gt;
+&lt;p&gt;非监督学习主要是为了挖掘无标签数据之间的内部关联（譬如聚类问题）
+RL是为了最大化reward。&lt;/p&gt;
+&lt;h4 id=&#34;总结&#34;&gt;总结&lt;/h4&gt;
+&lt;p&gt;RL并不需要出现正确的输入/输出对，也不需要精确校正次优化的行为。RL更加专注于在线规划，需要在exploration和exploitation之间找到平衡。&lt;/p&gt;
+&lt;h3 id=&#34;概念解释&#34;&gt;概念解释&lt;/h3&gt;
+&lt;h4 id=&#34;奖励rewards&#34;&gt;奖励rewards&lt;/h4&gt;
+&lt;p&gt;很重要，独家的
+$R_{t}$是一个标量反馈信号反映了智能体在时刻$t$行为的好坏
+Agent的目的即最大化累积回报
+RL奖励假设：所有目标都可以表示为最大化期望累计回报&lt;/p&gt;
+&lt;h4 id=&#34;马尔可夫性-markov-property&#34;&gt;马尔可夫性 Markov Property&lt;/h4&gt;
+&lt;p&gt;随机过程的某事件只取决于它的上一事件，与初始状态无关。（以前写过，不赘述）&lt;/p&gt;
+&lt;p&gt;这是强化学习的主要研究问题——马尔可夫决策过程 （Markov Decision Process，MDP）&lt;/p&gt;
+&lt;h3 id=&#34;mdp问题组成&#34;&gt;MDP问题组成&lt;/h3&gt;
+&lt;p&gt;策略（Policy）、值函数（value function）、模型（model）&lt;/p&gt;
+&lt;h4 id=&#34;policy&#34;&gt;policy&lt;/h4&gt;
+&lt;p&gt;最终的目的就是找到一个策略，通过策略可以描述智能体的行为。&lt;/p&gt;
+&lt;p&gt;由当前看到的observation来决定action，是从state到action的映射，直观上描述就是：当智能体在什么状态时应该做什么事。
+有两种表达形式：
+一种是Deterministic policy（确定策略）在某种状态下，一定会执行某个动作$a=\pi(s)$，a时action，s是状态
+一种是Stochastic policy（随机策略）它是在某种状态下执行某个动作的概率。$\pi(a|s)=P[A_t=a|S_t=s]$&lt;/p&gt;
+&lt;h4 id=&#34;回报&#34;&gt;回报&lt;/h4&gt;
+&lt;p&gt;它预测了当前状态下未来可能获得的reward的期望，用来评价当前状态的好坏程度
+Return(回报):$G_t/U_t$为在一个马尔科夫奖励链上从t时刻开始往后所有的奖励的有衰减的收益总和。&lt;/p&gt;
+&lt;p&gt;$$
+G(s_0,s_1,s_2&amp;hellip;=)=\sum_{t=0}^\infty\gamma^tR(s_t)\
+\leq\sum_{t=0}^\infty\gamma^tR_{max}=\frac{R_{max}}{1-\gamma}
+$$&lt;/p&gt;
+&lt;p&gt;这里s是状态，R是reward=奖励；
+第二个等式用的高数里面的幂级数展开
+强化学习的目的是最大化长期未来奖励，即寻找最大的 U&lt;/p&gt;
+&lt;p&gt;其中的$\gamma\in[0,1]$ 指的是衰减因子，体现了未来的奖励在当前时刻的价值比例， 接近0，则表明趋向于“近视”性评估；接近1则表明偏重考虑远期的利益。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

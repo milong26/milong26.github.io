@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>模拟退火算法 | 我的博客</title>
+<meta name="keywords" content="method, simulated annealing, optimization">
+<meta name="description" content="准备pre，学习一下。计算智能课讲了一下但是印象不深，此外最近看过的论文里有提到一个“温度系数”，不知道概念是否相通。
+概念
+适用场合：模拟退火是一种随机化算法。当一个问题的方案数量极大（甚至是无穷的）而且不是一个单峰函数时，我们常使用模拟退火求解。
+区别
+蒙特卡洛模拟
+原理
+物理现象
+金属退火是将金属加热到一定温度，保持足够时间，然后以适宜速度冷却(通常是缓慢冷却，有时是控制冷却)的一种金属热处理工艺。
+模拟退火算法来源于固体退火原理，将固体加温至充分高，再让其徐徐冷却，加温时，固体内部粒子随温升变为无序状，内能增大，而徐徐冷却时粒子渐趋有序，在每个温度都达到平衡态，最后在常温时达到基态，内能减为最小。
+算法
+它是基于Monte-Carlo 迭代求解策略的一种随机寻优算法，其出发点是基于物理中固体物质的退火过程与一般组合优化问题之间的相似性。
+可以应用到组合优化问题中。
+爬山算法
+爬山算法是一种简单的贪心搜索算法，该算法每次从当前解的临近解空间中选择一个最优解作为当前解，直到达到一个局部最优解。
+
+爬山算法实现很简单，其主要缺点是会陷入局部最优解，而不一定能搜索到全局最优解。
+模拟退火
+模拟退火算法从某一较高初温出发，伴随温度参数的不断下降,结合一定的概率突跳特性在解空间中随机寻找目标函数的全局最优解，即在局部最优解能概率性地跳出并最终趋于全局最优。如下图：
+
+这里的“一定的概率”的计算参考了金属冶炼的退火过程，这也是模拟退火算法名称的由来。
+将温度T当作控制参数，目标函数值f视为内能E，而固体在某温度T时的一个状态对应一个解
+，然后算法试图随着控制参数T的降低，使目标函数f(内能E)也逐渐降低，直至趋于全局最小值（退火中低温时的最低能量状态），就像金属退火过程一样。
+数学原理
+从概念知道会结合概率突跳特性在解空间中随机寻找目标函数的全局最优解，
+具体的更新解的机制是：如果新解比当前解更优，则接受新解，否则基于Metropolis准则判断是否接受新解。
+接受概率为：
+$$
+P =  	\begin{cases} 	1,~~~~~~~~~~~~~~~~~ E_{t&#43;1} \lt E_{t} \ 	e^{\frac{-(E_{t&#43;1} - E_{t})}{kT}},~~~~ E_{t&#43;1} \ge E_{t} 	\end{cases}
+$$
+
+为什么是这个公式
+
+如上公式，假设当前时刻搜索的解为$x_t$，对应的系统能量(目标函数)为$E_t$.
+对搜索点施加随机扰动，产生新解$x_{t&#43;1}$，相应地，系统能量为$E_{t&#43;1}$.
+那么系统对搜索点从$x_t$到$x_{t&#43;1}$转变的接受概率就为上公式。
+流程
+由于算法初始温度比较高，这样，使E增大的新解在初始时也可能被接受，因而能跳出局部极小值，然后通过缓慢地降低温度，算法就最终可能收敛到全局最优解。
+
+$T=T_0$表示初始温度，随机产生一个初始解$x_0$，并计算$E(x_0)$
+令$T=kT$，$k\in(0,1)$为温度下降速率
+对当前解$x_t$增加随机扰动，在其邻域内产生一个新解$x_{t&#43;1}$，并计算$E(x_{t&#43;1})$
+计算$\Delta E=E(x_{t&#43;1})-E(x_t)$
+$\Delta E&lt;0$ 接受$x_{t&#43;1}$为新解
+else 按照P的概率接受
+在温度T下，重复L次扰动和接受过程，即执行步骤3-5
+判断温度是否达到终止温度水平，若是则终止算法，否则返回步骤2.
+
+改进
+应用
+模拟退火算法作为一种通用的随机搜索算法，现已广泛用于VLSI设计、图像识别和神经网计算机的研究。模拟退火算法的应用如下：
+作业
+旅行商问题
+描述
+Develop a generic simulated annealing algorithm to solve the traveling salesman problem with 20 cities that are uniformly distributed within a unit square in a 2-dimensional plane.
+The coordinates of 20 cities are given below in a 2x20 matrix.">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      模拟退火算法
+    </h1>
+    <div class="post-meta">
+
+<span title='2023-10-27 18:48:46 +0000 UTC'>October 27, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>准备pre，学习一下。计算智能课讲了一下但是印象不深，此外最近看过的论文里有提到一个“温度系数”，不知道概念是否相通。</p>
+<h1 id="概念">概念<a hidden class="anchor" aria-hidden="true" href="#概念">#</a></h1>
+<p>适用场合：模拟退火是一种随机化算法。当一个问题的方案数量极大（甚至是无穷的）而且不是一个单峰函数时，我们常使用模拟退火求解。</p>
+<h2 id="区别">区别<a hidden class="anchor" aria-hidden="true" href="#区别">#</a></h2>
+<h3 id="蒙特卡洛模拟">蒙特卡洛模拟<a hidden class="anchor" aria-hidden="true" href="#蒙特卡洛模拟">#</a></h3>
+<h1 id="原理">原理<a hidden class="anchor" aria-hidden="true" href="#原理">#</a></h1>
+<h2 id="物理现象">物理现象<a hidden class="anchor" aria-hidden="true" href="#物理现象">#</a></h2>
+<p>金属退火是将金属加热到一定温度，保持足够时间，然后以适宜速度冷却(通常是缓慢冷却，有时是控制冷却)的一种金属热处理工艺。
+模拟退火算法来源于固体退火原理，将固体加温至充分高，再让其徐徐冷却，加温时，固体内部粒子随温升变为无序状，内能增大，而徐徐冷却时粒子渐趋有序，在每个温度都达到平衡态，最后在常温时达到基态，内能减为最小。</p>
+<h2 id="算法">算法<a hidden class="anchor" aria-hidden="true" href="#算法">#</a></h2>
+<p>它是基于Monte-Carlo 迭代求解策略的一种随机寻优算法，其出发点是基于物理中固体物质的退火过程与一般组合优化问题之间的相似性。
+可以应用到组合优化问题中。</p>
+<h3 id="爬山算法">爬山算法<a hidden class="anchor" aria-hidden="true" href="#爬山算法">#</a></h3>
+<p>爬山算法是一种简单的贪心搜索算法，该算法每次从当前解的临近解空间中选择一个最优解作为当前解，直到达到一个局部最优解。
+<img loading="lazy" src="https://pic3.zhimg.com/80/v2-dc9922369b5cf664398149e6d983a5b6_1440w.webp"></p>
+<p>爬山算法实现很简单，其主要缺点是会陷入局部最优解，而不一定能搜索到全局最优解。</p>
+<h3 id="模拟退火">模拟退火<a hidden class="anchor" aria-hidden="true" href="#模拟退火">#</a></h3>
+<p>模拟退火算法从某一较高初温出发，伴随温度参数的不断下降,结合一定的概率突跳特性在解空间中随机寻找目标函数的全局最优解，即在局部最优解能概率性地跳出并最终趋于全局最优。如下图：
+<img loading="lazy" src="https://oi-wiki.org/misc/images/simulated-annealing.gif"></p>
+<p>这里的“一定的概率”的计算参考了金属冶炼的退火过程，这也是模拟退火算法名称的由来。
+将温度T当作控制参数，目标函数值f视为内能E，而固体在某温度T时的一个状态对应一个解
+，然后算法试图随着控制参数T的降低，使目标函数f(内能E)也逐渐降低，直至趋于全局最小值（退火中低温时的最低能量状态），就像金属退火过程一样。</p>
+<h4 id="数学原理">数学原理<a hidden class="anchor" aria-hidden="true" href="#数学原理">#</a></h4>
+<p>从概念知道会结合概率突跳特性在解空间中随机寻找目标函数的全局最优解，
+具体的更新解的机制是：如果新解比当前解更优，则接受新解，否则基于Metropolis准则判断是否接受新解。</p>
+<p>接受概率为：
+$$
+P =  	\begin{cases} 	1,~~~~~~~~~~~~~~~~~ E_{t+1} \lt E_{t} \ 	e^{\frac{-(E_{t+1} - E_{t})}{kT}},~~~~ E_{t+1} \ge E_{t} 	\end{cases}
+$$</p>
+<blockquote>
+<p>为什么是这个公式</p>
+</blockquote>
+<p>如上公式，假设当前时刻搜索的解为$x_t$，对应的系统能量(目标函数)为$E_t$.
+对搜索点施加随机扰动，产生新解$x_{t+1}$，相应地，系统能量为$E_{t+1}$.
+那么系统对搜索点从$x_t$到$x_{t+1}$转变的接受概率就为上公式。</p>
+<h2 id="流程">流程<a hidden class="anchor" aria-hidden="true" href="#流程">#</a></h2>
+<p>由于算法初始温度比较高，这样，使E增大的新解在初始时也可能被接受，因而能跳出局部极小值，然后通过缓慢地降低温度，算法就最终可能收敛到全局最优解。</p>
+<ol>
+<li>$T=T_0$表示初始温度，随机产生一个初始解$x_0$，并计算$E(x_0)$</li>
+<li>令$T=kT$，$k\in(0,1)$为温度下降速率</li>
+<li>对当前解$x_t$增加随机扰动，在其邻域内产生一个新解$x_{t+1}$，并计算$E(x_{t+1})$</li>
+<li>计算$\Delta E=E(x_{t+1})-E(x_t)$</li>
+<li>$\Delta E&lt;0$ 接受$x_{t+1}$为新解
+else 按照P的概率接受</li>
+<li>在温度T下，重复L次扰动和接受过程，即执行步骤3-5</li>
+<li>判断温度是否达到终止温度水平，若是则终止算法，否则返回步骤2.</li>
+</ol>
+<h1 id="改进">改进<a hidden class="anchor" aria-hidden="true" href="#改进">#</a></h1>
+<h1 id="应用">应用<a hidden class="anchor" aria-hidden="true" href="#应用">#</a></h1>
+<p>模拟退火算法作为一种通用的随机搜索算法，现已广泛用于VLSI设计、图像识别和神经网计算机的研究。模拟退火算法的应用如下：</p>
+<h1 id="作业">作业<a hidden class="anchor" aria-hidden="true" href="#作业">#</a></h1>
+<h2 id="旅行商问题">旅行商问题<a hidden class="anchor" aria-hidden="true" href="#旅行商问题">#</a></h2>
+<h3 id="描述">描述<a hidden class="anchor" aria-hidden="true" href="#描述">#</a></h3>
+<p>Develop a generic simulated annealing algorithm to solve the traveling salesman problem with 20 cities that are uniformly distributed within a unit square in a 2-dimensional plane.
+The coordinates of 20 cities are given below in a 2x20 matrix.</p>
+<p>cities=[(0.6606,0.9500),(0.9695,0.6740),(0.5906,0.5029),(0.2124,0.8274),(0.0398,0.9697),(0.1367,0.5979),(0.9536,0.2184),(0.6091,0.7148),(0.8767,0.2395),(0.8148,0.2867),(0.3876,0.8200),(0.7041,0.3296),(0.0213,0.1649),(0.3429,0.3025),(0.7471,0.8192),(0.5449,0.9392),(0.9464,0.8191),(0.1247,0.4351),(0.1636,0.8646),(0.8668,0.6768)]</p>
+<p>Show the &ldquo;best&rdquo; route you find and the associated distance with attached computer coding(with documentation).</p>
+<h3 id="伪代码">伪代码<a hidden class="anchor" aria-hidden="true" href="#伪代码">#</a></h3>
+<pre tabindex="0"><code>f(y):在状态y时的目标函数值
+Y(i): 表示当前状态
+Y(i+1):表示新的状态
+r:用于控制降温的快慢
+T:系统的温度，系统初始应该要处于一个高温的状态.
+T_ min:温度的下限，若温度T达到T_ min， 则停止搜索
+
+while(T&gt;T_min){
+   dE=f(Y(i+l))-f(Y(i));
+   if ( dE &gt;=0 ) //表达移动后得到更优解，则总是接受移动
+      Y(i+l) = Y(i) ; //接受从Y(i)到Y(i+1)的移动
+   else
+      //函数exp( dE/T )的取值范围是(0,1) ，dE/T越大，则exp( dE/T )也大
+      if(exp(dE/T)&gt;random(0，1))
+         Y(i+1) = Y(i) ; //接受从Y(i)到Y(i+1)的移动
+   T=r*T;//降温退火，0&lt;r&lt;1。r越大，降温越慢; r越小，降温越快
+   若r过大，则搜索到全局最优解的可能会较高，但搜索的过程也就较长。
+   若r过小，则搜索的过程会很快，但最终可能会达到一个局部最优值
+   i++ ;
+}
+</code></pre>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/method/">Method</a></li>
+      <li><a href="http://localhost:1313/tags/simulated-annealing/">Simulated Annealing</a></li>
+      <li><a href="http://localhost:1313/tags/optimization/">Optimization</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

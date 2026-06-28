@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Claat on 我的博客</title>
+    <link>http://localhost:1313/tags/claat/</link>
+    <description>Recent content in Claat on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 08 Sep 2023 14:36:06 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/claat/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>配置claat</title>
+      <link>http://localhost:1313/post/%E9%85%8D%E7%BD%AEclaat/</link>
+      <pubDate>Fri, 08 Sep 2023 14:36:06 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E9%85%8D%E7%BD%AEclaat/</guid>
+      <description>&lt;p&gt;claat是由谷歌维护的开源命令行工具，全称Codelabs command line tool&lt;/p&gt;
+&lt;h1 id=&#34;官网&#34;&gt;官网&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/googlecodelabs/tools/tree/master/claat#install&#34;&gt;github上的&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;安装&#34;&gt;安装&lt;/h1&gt;
+&lt;p&gt;参见文档：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The easiest way is to download pre-compiled binary.
+The binaries, as well as their checksums are available at the Releases page.
+Alternatively, if you have Go installed:
+go install github.com/googlecodelabs/tools/claat@latest
+已经安装了go，so执行&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;go install github.com/googlecodelabs/tools/claat@latest
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;出现报错：
+connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

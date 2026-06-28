@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>jqgrid | 我的博客</title>
+<meta name="keywords" content="js">
+<meta name="description" content="js，显示表格">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/jqgrid/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/jqgrid/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      jqgrid
+    </h1>
+    <div class="post-meta">
+
+<span title='2021-08-08 15:32:42 +0000 UTC'>August 8, 2021</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>js，显示表格</p>
+<p>看jqgrid</p>
+<h2 id="参数">参数<a hidden class="anchor" aria-hidden="true" href="#参数">#</a></h2>
+<table>
+  <thead>
+      <tr>
+          <th>名称</th>
+          <th>类型</th>
+          <th>描述</th>
+          <th>默认值</th>
+          <th>可修改</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>url</td>
+          <td>string</td>
+          <td>获取数据的地址</td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>datatype</td>
+          <td>string</td>
+          <td>从服务器端返回的数据类型，默认xml。可选类型：xml，local，json，jsonnp，script，xmlstring，jsonstring，clientside</td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mtype</td>
+          <td>string</td>
+          <td>ajax提交方式。POST或者GET，默认GET</td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>colNames</td>
+          <td>Array</td>
+          <td>列显示名称，是一个数组对象</td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>colModel</td>
+          <td>Array</td>
+          <td>常用到的属性：<strong>name</strong> 列显示的名称；<strong>index</strong> 传到服务器端用来排序用的列名称；<strong>width</strong> 列宽度；<strong>align</strong> 对齐方式；<strong>sortable</strong> 是否可以排序</td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>pager</td>
+          <td>string</td>
+          <td>定义翻页用的导航栏，必须是有效的html元素。翻页工具栏可以放置在html页面任意位置</td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>rowNum</td>
+          <td>int</td>
+          <td>在grid上显示记录条数，这个参数是要被传递到后台</td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>rowList</td>
+          <td>array</td>
+          <td>一个下拉选择框，用来改变显示记录数，当选择时会覆盖rowNum参数传递到后台</td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>sortname</td>
+          <td>string</td>
+          <td>默认的排序列。可以是列名称或者是一个数字，这个参数会被提交到后台</td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>viewrecords</td>
+          <td>boolean</td>
+          <td>定义是否要显示总记录数</td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>caption</td>
+          <td>string</td>
+          <td>表格名称</td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>ajaxGridOptions[<a href="http://www.blogjava.net/ilovebabyfat/archive/2012/04/06/373456.html#_msocom_1">a1]</a></td>
+          <td>object</td>
+          <td>对ajax参数进行全局设置，可以覆盖ajax事件</td>
+          <td>null</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>ajaxSelectOptions[<a href="http://www.blogjava.net/ilovebabyfat/archive/2012/04/06/373456.html#_msocom_2">a2]</a></td>
+          <td>object</td>
+          <td>对ajax的select参数进行全局设置</td>
+          <td>null</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>altclass</td>
+          <td>String</td>
+          <td>用来指定行显示的css，可以编辑自己的css文件，只有当altRows设为 ture时起作用</td>
+          <td>ui-priority-secondary</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>altRows</td>
+          <td>boolean</td>
+          <td>设置表格 zebra-striped 值</td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>autoencode</td>
+          <td>boolean</td>
+          <td>对url进行编码</td>
+          <td>false</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>autowidth</td>
+          <td>boolean</td>
+          <td>如果为ture时，则当表格在首次被创建时会根据父元素比例重新调整表格宽度。如果父元素宽度改变，为了使表格宽度能够自动调整则需要实现函数：setGridWidth</td>
+          <td>false</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>cellLayout</td>
+          <td>integer</td>
+          <td>定义了单元格padding + border 宽度。通常不必修改此值。初始值为</td>
+          <td>5</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>cellEdit</td>
+          <td>boolean</td>
+          <td>启用或者禁用单元格编辑功能</td>
+          <td>false</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>cellsubmit</td>
+          <td>String</td>
+          <td>定义了单元格内容保存位置</td>
+          <td>‘remote’</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>cellurl</td>
+          <td>String</td>
+          <td>单元格提交的url</td>
+          <td>空值</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>datastr</td>
+          <td>String</td>
+          <td>xmlstring或者jsonstring</td>
+          <td>空值</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>deselectAfterSort</td>
+          <td>boolean</td>
+          <td>只有当datatype为local时起作用。当排序时不选择当前行</td>
+          <td>true</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>direction</td>
+          <td>string</td>
+          <td>表格中文字的显示方向，从左向右（ltr）或者从右向左（rtr）</td>
+          <td>ltr</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>editurl</td>
+          <td>string</td>
+          <td>定义对form编辑时的url</td>
+          <td>空值</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>emptyrecords</td>
+          <td>string</td>
+          <td>当返回的数据行数为0时显示的信息。只有当属性viewrecords 设置为ture时起作用</td>
+          <td></td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>ExpandColClick</td>
+          <td>boolean</td>
+          <td>当为true时，点击展开行的文本时，treeGrid就能展开或者收缩，不仅仅是点击图片</td>
+          <td>true</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>ExpandColumn</td>
+          <td>string</td>
+          <td>指定那列来展开tree grid，默认为第一列，只有在treeGrid为true时起作用</td>
+          <td>空值</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>footerrow[<a href="http://www.blogjava.net/ilovebabyfat/archive/2012/04/06/373456.html#_msocom_3">a3]</a></td>
+          <td>boolean</td>
+          <td>当为true时，会在翻页栏之上增加一行</td>
+          <td>false</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>forceFit</td>
+          <td>boolean</td>
+          <td>当为ture时，调整列宽度不会改变表格的宽度。当shrinkToFit 为false时，此属性会被忽略</td>
+          <td>false</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>gridstate</td>
+          <td>string</td>
+          <td>定义当前表格的状态：&lsquo;visible&rsquo; or &lsquo;hidden&rsquo;</td>
+          <td>visible</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>gridview</td>
+          <td>boolean</td>
+          <td>构造一行数据后添加到grid中，如果设为true则是将整个表格的数据都构造完成后再添加到grid中，但treeGrid, subGrid, or afterInsertRow 不能用</td>
+          <td>false</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>height</td>
+          <td>mixed</td>
+          <td>表格高度，可以是数字，像素值或者百分比</td>
+          <td>150</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>hiddengrid</td>
+          <td>boolean</td>
+          <td>当为ture时，表格不会被显示，只显示表格的标题。只有当点击显示表格的那个按钮时才会去初始化表格数据。</td>
+          <td>false</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>hidegrid</td>
+          <td>boolean</td>
+          <td>启用或者禁用控制表格显示、隐藏的按钮，只有当caption属性不为空时起效</td>
+          <td>true</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>hoverrows</td>
+          <td>boolean</td>
+          <td>当为false时mouse hovering会被禁用</td>
+          <td>false</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>jsonReader</td>
+          <td>array</td>
+          <td>描述json 数据格式的数组</td>
+          <td></td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>lastpage</td>
+          <td>integer</td>
+          <td>只读属性，定义了总页数</td>
+          <td>0</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>lastsort</td>
+          <td>integer</td>
+          <td>只读属性，定义了最后排序列的索引，从0开始</td>
+          <td>0</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>loadonce</td>
+          <td>boolean</td>
+          <td>如果为ture则数据只从服务器端抓取一次，之后所有操作都是在客户端执行，翻页功能会被禁用</td>
+          <td>false</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>loadtext</td>
+          <td>string</td>
+          <td>当请求或者排序时所显示的文字内容</td>
+          <td>Loading&hellip;.</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>loadui</td>
+          <td>string</td>
+          <td>当执行ajax请求时要干什么。<strong>disable</strong>禁用ajax执行提示；<strong>enable</strong>默认，当执行ajax请求时的提示； <strong>block</strong>启用Loading提示，但是阻止其他操作</td>
+          <td>enable</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>multikey</td>
+          <td>string</td>
+          <td>只有在multiselect设置为ture时起作用，定义使用那个key来做多选。<strong>shiftKey</strong>，<strong>altKey</strong>，<strong>ctrlKey</strong></td>
+          <td>空值</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>multiboxonly</td>
+          <td>boolean</td>
+          <td>只有当multiselect = true.起作用，当multiboxonly 为ture时只有选择checkbox才会起作用</td>
+          <td>false</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>multiselect</td>
+          <td>boolean</td>
+          <td>定义是否可以多选</td>
+          <td>false</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>multiselectWidth</td>
+          <td>integer</td>
+          <td>当multiselect为true时设置multiselect列宽度</td>
+          <td>20</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>page</td>
+          <td>integer</td>
+          <td>设置初始的页码</td>
+          <td>1</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>pagerpos</td>
+          <td>string</td>
+          <td>指定分页栏的位置</td>
+          <td>center</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>pgbuttons</td>
+          <td>boolean</td>
+          <td>是否显示翻页按钮</td>
+          <td>true</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>pginput</td>
+          <td>boolean</td>
+          <td>是否显示跳转页面的输入框</td>
+          <td>true</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>pgtext</td>
+          <td>string</td>
+          <td>当前页信息</td>
+          <td></td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>prmNames</td>
+          <td>array</td>
+          <td>Default valuesprmNames: {page:“page”,rows:“rows”, sort: “sidx”,order: “sord”, search:“_search”, nd:“nd”, npage:null}当参数为null时不会被发到服务器端</td>
+          <td>none</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>postData</td>
+          <td>array</td>
+          <td>此数组内容直接赋值到url上，参数类型：{name1:value1…}</td>
+          <td>空array</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>reccount</td>
+          <td>integer</td>
+          <td>只读属性，定义了grid中确切的行数。通常情况下与records属性相同，但有一种情况例外，假如rowNum=15，但是从服务器端返回的记录数是20，那么records值是20，但reccount值仍然为15，而且表格中也只显示15条记录。</td>
+          <td>0</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>recordpos</td>
+          <td>string</td>
+          <td>定义了记录信息的位置： left, center, right</td>
+          <td>right</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>records</td>
+          <td>integer</td>
+          <td>只读属性，定义了返回的记录数</td>
+          <td>none</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>recordtext</td>
+          <td>string</td>
+          <td>显示记录数信息。{0} 为记录数开始，{1}为记录数结束。viewrecords为ture时才能起效，且总记录数大于0时才会显示此信息</td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>resizeclass</td>
+          <td>string</td>
+          <td>定义一个class到一个列上用来显示列宽度调整时的效果</td>
+          <td>空值</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>rowList</td>
+          <td>array</td>
+          <td>一个数组用来调整表格显示的记录数，此参数值会替代rowNum参数值传给服务器端。</td>
+          <td>[]</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>rownumbers</td>
+          <td>boolean</td>
+          <td>如果为ture则会在表格左边新增一列，显示行顺序号，从1开始递增。此列名为&rsquo;rn&rsquo;.</td>
+          <td>false</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>rownumWidth</td>
+          <td>integer</td>
+          <td>如果rownumbers为true，则可以设置column的宽度</td>
+          <td>25</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>savedRow</td>
+          <td>array</td>
+          <td>只读属性，只用在编辑模式下保存数据</td>
+          <td>空值</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>scroll</td>
+          <td>boolean</td>
+          <td>创建一个动态滚动的表格，当为true时，翻页栏被禁用，使用垂直滚动条加载数据，且在首次访问服务器端时将加载所有数据到客户端。当此参数为数字时，表格只控制可见的几行，所有数据都在这几行中加载</td>
+          <td>false</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>scrollOffset</td>
+          <td>integer</td>
+          <td>设置垂直滚动条宽度</td>
+          <td>18</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>scrollrows</td>
+          <td>boolean</td>
+          <td>当为true时让所选择的行可见</td>
+          <td>false</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td><strong>selarrrow</strong></td>
+          <td>array</td>
+          <td>只读属性，用来存放当前选择的行</td>
+          <td>array</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>selrow</td>
+          <td>string</td>
+          <td>只读属性，最后选择行的id</td>
+          <td>null</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>shrinkToFit</td>
+          <td>boolean</td>
+          <td>此属性用来说明当初始化列宽度时候的计算类型，如果为ture，则按比例初始化列宽度。如果为false，则列宽度使用colModel指定的宽度</td>
+          <td>true</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>sortable</td>
+          <td>boolean</td>
+          <td>是否可排序</td>
+          <td>false</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>sortname</td>
+          <td>string</td>
+          <td>排序列的名称，此参数会被传到后台</td>
+          <td>空字符串</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>sortorder</td>
+          <td>string</td>
+          <td>排序顺序，升序或者降序（asc or desc）</td>
+          <td>asc</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>subGrid</td>
+          <td>boolean</td>
+          <td>是否使用suggrid</td>
+          <td>false</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>subGridModel</td>
+          <td>array</td>
+          <td>subgrid模型</td>
+          <td>array</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>subGridType</td>
+          <td>mixed</td>
+          <td>如果为空则使用表格的dataType</td>
+          <td>null</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>subGridUrl</td>
+          <td>string</td>
+          <td>加载subgrid数据的url，jqGrid会把每行的id值加到url中</td>
+          <td>空值</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>subGridWidth</td>
+          <td>integer</td>
+          <td>subgrid列的宽度</td>
+          <td>20</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>toolbar</td>
+          <td>array</td>
+          <td>表格的工具栏。数组中有两个值，第一个为是否启用，第二个指定工具栏位置（相对于body layer），如：[true,”both”] 。工具栏位置可选值：“top”,”bottom”, “both”. 如果工具栏在上面，则工具栏id为“t_”+表格id；如果在下面则为“tb_”+表格id；如果只有一个工具栏则为 “t_”+表格id</td>
+          <td>[false,&rsquo;']</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>totaltime</td>
+          <td>integer</td>
+          <td>只读属性，计算加载数据的时间。目前支持xml跟json数据</td>
+          <td>0</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>treedatatype</td>
+          <td>mixed</td>
+          <td>数据类型，通常情况下与datatype相同，不会变</td>
+          <td>null</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>treeGrid</td>
+          <td>boolean</td>
+          <td>启用或者禁用treegrid模式</td>
+          <td>false</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>treeGridModel</td>
+          <td>string</td>
+          <td>treeGrid所使用的方法</td>
+          <td>Nested</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>treeIcons</td>
+          <td>array</td>
+          <td>树的图标，默认值：{plus:&lsquo;ui-icon-triangle-1-e&rsquo;,minus:&lsquo;ui-icon-triangle-1-s&rsquo;,leaf:&lsquo;ui-icon-radio-off&rsquo;}</td>
+          <td></td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>treeReader</td>
+          <td>array</td>
+          <td>扩展表格的colModel且加在colModel定义的后面</td>
+          <td></td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>tree_root_level</td>
+          <td>numeric</td>
+          <td>r oot元素的级别，</td>
+          <td>0</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>userData</td>
+          <td>array</td>
+          <td>从request中取得的一些用户信息</td>
+          <td>array</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>userDataOnFooter</td>
+          <td>boolean</td>
+          <td>当为true时把userData放到底部，用法：如果userData的值与colModel的值相同，那么此列就显示正确的值，如果不等那么此列就为空</td>
+          <td>false</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>viewsortcols</td>
+          <td>array</td>
+          <td>定义排序列的外观跟行为。数据格式：[false,&lsquo;vertical&rsquo;,true].第一个参数是说，是否都要显示排序列的图标，false就是只显示 当前排序列的图标；第二个参数是指图标如何显示，vertical：排序图标垂直放置，horizontal：排序图标水平放置；第三个参数指单击功能，true：单击列可排序，false：单击图标排序。说明：如果第三个参数为false则第一个参数必须为ture否则不能排序</td>
+          <td></td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>width</td>
+          <td>number</td>
+          <td>如果设置则按此设置为主，如果没有设置则按colModel中定义的宽度计算</td>
+          <td>none</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>xmlReader</td>
+          <td>array</td>
+          <td>对xml数据结构的描述</td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<h1 id="colmodel-api">ColModel API<a hidden class="anchor" aria-hidden="true" href="#colmodel-api">#</a></h1>
+<p>ColModel 是jqGrid里最重要的一个属性，设置表格列的属性。</p>
+<table>
+  <thead>
+      <tr>
+          <th>属性</th>
+          <th>数据类型</th>
+          <th style="text-align: left">备注</th>
+          <th>默认值</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>align</td>
+          <td>string</td>
+          <td style="text-align: left">left, center, right.</td>
+          <td>left</td>
+      </tr>
+      <tr>
+          <td>classes</td>
+          <td>string</td>
+          <td style="text-align: left">设置列的css。多个class之间用空格分隔，如：&lsquo;class1 class2&rsquo; 。表格默认的css属性是ui-ellipsis</td>
+          <td>empty string</td>
+      </tr>
+      <tr>
+          <td>datefmt</td>
+          <td>string</td>
+          <td style="text-align: left">”/”, ”-”, and ”.”都是有效的日期分隔符。y,Y,yyyy 年YY, yy 月m,mm for monthsd,dd 日.</td>
+          <td>ISO Date (Y-m-d)</td>
+      </tr>
+      <tr>
+          <td>defval</td>
+          <td>string</td>
+          <td style="text-align: left">查询字段的默认值</td>
+          <td>空</td>
+      </tr>
+      <tr>
+          <td>editable</td>
+          <td>boolean</td>
+          <td style="text-align: left">单元格是否可编辑</td>
+          <td>false</td>
+      </tr>
+      <tr>
+          <td>editoptions</td>
+          <td>array</td>
+          <td style="text-align: left">编辑的一系列选项。 {name:’__department_id’,index:’__department_id’,width:200,editable:true,edittype:’select’,editoptions: {dataUrl:”${ctx}/admin/deplistforstu.action”}},这个是演示动态从服务器端获取数据。</td>
+          <td>empty</td>
+      </tr>
+      <tr>
+          <td>editrules</td>
+          <td>array</td>
+          <td style="text-align: left">编辑的规则{name:’age’,index:’age’, width:90,editable:true,editrules: {edithidden:true,required:true,number:true,minValue:10,maxValue:100}},设定 年龄的最大值为100，最小值为10，而且为数字类型，并且为必输字段。</td>
+          <td>empty</td>
+      </tr>
+      <tr>
+          <td>edittype</td>
+          <td>string</td>
+          <td style="text-align: left">可以编辑的类型。可选值：text, textarea, select, checkbox, password, button, image and file.</td>
+          <td>text</td>
+      </tr>
+      <tr>
+          <td>fixed</td>
+          <td>boolean</td>
+          <td style="text-align: left">列宽度是否要固定不可变</td>
+          <td>false</td>
+      </tr>
+      <tr>
+          <td>formoptions</td>
+          <td>array</td>
+          <td style="text-align: left">对于form进行编辑时的属性设置</td>
+          <td>empty</td>
+      </tr>
+      <tr>
+          <td>formatoptions</td>
+          <td>array</td>
+          <td style="text-align: left">对某些列进行格式化的设置</td>
+          <td>none</td>
+      </tr>
+      <tr>
+          <td>formatter</td>
+          <td>mixed</td>
+          <td style="text-align: left">对列进行格式化时设置的函数名或者类型{name:’sex’,index:’sex’, align:’center’,width:60,editable:true,edittype:’select’,editoptions: {value:’0:待定;1:男;2:女’},formatter:function(cellvalue, options, rowObject){ var temp = “&lt;img src=’${ctx}/jquery-ui-1.7.2.custom/css/img/” if(cellvalue==1){ temp = temp +”user-white.png”; } else if(cellvalue==2){ temp = temp +”user-white-female.png”; } else { temp = temp + “user-silhouette.png”; } temp = temp + “‘ border=’0′ /&gt;” return temp; }},//返回性别的图标。</td>
+          <td>none</td>
+      </tr>
+      <tr>
+          <td>hidedlg</td>
+          <td>boolean</td>
+          <td style="text-align: left">是否显示或者隐藏此列</td>
+          <td>false</td>
+      </tr>
+      <tr>
+          <td>hidden</td>
+          <td>boolean</td>
+          <td style="text-align: left">在初始化表格时是否要隐藏此列</td>
+          <td>false</td>
+      </tr>
+      <tr>
+          <td>index</td>
+          <td>string</td>
+          <td style="text-align: left">索引。其和后台交互的参数为sidx</td>
+          <td>empty</td>
+      </tr>
+      <tr>
+          <td>jsonmap</td>
+          <td>string</td>
+          <td style="text-align: left">定义了返回的json数据映射</td>
+          <td>none</td>
+      </tr>
+      <tr>
+          <td>key</td>
+          <td>boolean</td>
+          <td style="text-align: left">当从服务器端返回的数据中没有id时，将此作为唯一rowid使用只有一个列可以做这项设置。如果设置多于一个，那么只选取第一个，其他被忽略</td>
+          <td>false</td>
+      </tr>
+      <tr>
+          <td>label</td>
+          <td>string</td>
+          <td style="text-align: left">如果colNames为空则用此值来作为列的显示名称，如果都没有设置则使用name 值</td>
+          <td>none</td>
+      </tr>
+      <tr>
+          <td>name</td>
+          <td>string</td>
+          <td style="text-align: left">表格列的名称，所有关键字，保留字都不能作为名称使用包括subgrid, cb and rn.</td>
+          <td>Required</td>
+      </tr>
+      <tr>
+          <td>resizable</td>
+          <td>boolean</td>
+          <td style="text-align: left">是否可以被resizable</td>
+          <td>true</td>
+      </tr>
+      <tr>
+          <td>search</td>
+          <td>boolean</td>
+          <td style="text-align: left">在搜索模式下，定义此列是否可以作为搜索列</td>
+          <td>true</td>
+      </tr>
+      <tr>
+          <td>searchoptions</td>
+          <td>array</td>
+          <td style="text-align: left">设置搜索参数</td>
+          <td>empty</td>
+      </tr>
+      <tr>
+          <td>sortable</td>
+          <td>boolean</td>
+          <td style="text-align: left">是否可排序</td>
+          <td>true</td>
+      </tr>
+      <tr>
+          <td>sorttype</td>
+          <td>string</td>
+          <td style="text-align: left">用在当datatype为local时，定义搜索列的类型，可选值：int/integer - 对integer排序float/number/currency - 排序数字date - 排序日期text - 排序文本</td>
+          <td>text</td>
+      </tr>
+      <tr>
+          <td>stype</td>
+          <td>string</td>
+          <td style="text-align: left">定义搜索元素的类型</td>
+          <td>text</td>
+      </tr>
+      <tr>
+          <td>surl</td>
+          <td>string</td>
+          <td style="text-align: left">搜索数据时的url</td>
+          <td>empty</td>
+      </tr>
+      <tr>
+          <td>width</td>
+          <td>number</td>
+          <td style="text-align: left">默认列的宽度，只能是象素值，不能是百分比</td>
+          <td>150</td>
+      </tr>
+      <tr>
+          <td>xmlmap</td>
+          <td>string</td>
+          <td style="text-align: left">定义当前列跟返回的xml数据之间的映射关系</td>
+          <td>none</td>
+      </tr>
+      <tr>
+          <td>unformat</td>
+          <td>function</td>
+          <td style="text-align: left">‘unformat’单元格值</td>
+          <td>null</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="示例">示例<a hidden class="anchor" aria-hidden="true" href="#示例">#</a></h2>
+<p>代码示例：http://trirand.com/blog/jqgrid/jqgrid.html</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/js/">Js</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

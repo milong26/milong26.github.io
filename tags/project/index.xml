@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Project on 我的博客</title>
+    <link>http://localhost:1313/tags/project/</link>
+    <description>Recent content in Project on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 06 Jan 2024 16:47:14 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/project/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>寒假之前搞定的aimax配置</title>
+      <link>http://localhost:1313/post/%E5%AF%92%E5%81%87%E4%B9%8B%E5%89%8D%E6%90%9E%E5%AE%9A%E7%9A%84aimax%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Sat, 06 Jan 2024 16:47:14 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E5%AF%92%E5%81%87%E4%B9%8B%E5%89%8D%E6%90%9E%E5%AE%9A%E7%9A%84aimax%E9%85%8D%E7%BD%AE/</guid>
+      <description>&lt;p&gt;目标：在aimax平台上面部署MedicalGPT&lt;/p&gt;
+&lt;h1 id=&#34;aimax平台&#34;&gt;aimax平台&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;连校园网，http://10.60.81.153/index.html#/login&lt;/li&gt;
+&lt;li&gt;账户名 general07 密码 ner@507 登录，多端登录会下线之前的&lt;/li&gt;
+&lt;li&gt;(选)右上角有用户手册&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;私有数据目录&#34;&gt;私有数据目录&lt;/h1&gt;
+&lt;p&gt;数据存储-私有数据-创建目录，名字随便写&lt;/p&gt;
+&lt;h1 id=&#34;创建环境&#34;&gt;创建环境&lt;/h1&gt;
+&lt;p&gt;还是在aimax平台
+侧边栏：模型训练-交互式开发-创建&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;名字随便，自己记得&lt;/li&gt;
+&lt;li&gt;选terminal&lt;/li&gt;
+&lt;li&gt;密码也要自己记得，密码只能由字母数字和特殊字符（!@#$%^&amp;amp;*）组成，且6~20位字符。&lt;/li&gt;
+&lt;li&gt;工作空间选刚才创建的私有数据目录&lt;/li&gt;
+&lt;li&gt;最长运行时间没法加，认命吧&lt;/li&gt;
+&lt;li&gt;绑定的分区看不懂&lt;/li&gt;
+&lt;li&gt;加速器选3090&lt;/li&gt;
+&lt;li&gt;选择GPU个数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;xshell&#34;&gt;xshell&lt;/h1&gt;</description>
+    </item>
+  </channel>
+</rss>

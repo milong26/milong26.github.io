@@ -124,50 +124,206 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">逆运动学
+    <h2 class="entry-hint-parent">codelab
     </h2>
   </header>
   <div class="entry-content">
-    <p></p>
+    <p>本科学移动智能开发的时候用codelab学的，当时的作业也有要求，但是我比较懒所以请同学帮忙提交的，现在重新学一下。
+官网 参考文档 遇事不决走官网，华为也有一个可以参考，本文所学习的主要是谷歌的。 但是为什么官网没有教怎么写codelabs，如果有的话记得删掉这句
+配置 go-language Node.js-v10&#43;以及npm claat 写 先找到准备存放codelabs项目的文件夹 下载工具(?个人理解是类似hexo搞的环境依赖)
+git clone https://github.com/googlecodelabs/tools 慢的话试试镜像
+git clone https://github.com.cnpmjs.org/googlecodelabs/tools 在该文件夹里信件md文件即可写了，markdown语法都一样 开头可以有几个配置
+summary: 测试，第一个codelab id: first_codelab categories: Android tags: android status: Published authors: kk Feedback Link: https://github.com/wkk-knight/ 如果在Windows系统写这个md 文件，使用的编辑器一定要用unix 的换行格式 ，否则你会发现输出的格式会有异常。这个换行符在vs code 等编辑器可以修改的。
+执行命令
+claat export FileName.md html文件可以看了，后面部署以后有空再写，我懒=)
+</p>
   </div>
   <footer class="entry-footer">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 逆运动学" href="http://localhost:1313/post/%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6/"></a>
+<span title='2023-09-07 22:49:09 +0000 UTC'>September 7, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to codelab" href="http://localhost:1313/post/codelab/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">骨盆前倾
+    <h2 class="entry-hint-parent">python里@的作用
     </h2>
   </header>
   <div class="entry-content">
-    <p></p>
+    <p>看文献的时候看到里面有一句x=a@x，遂搜索
+修饰符 用做函数的修饰符，可以在模块或者类的定义层内对函数进行修饰 函数前面有两个及以上装饰器时倒着来
+#Example 2 def FA(fn): def warp(): return &#34;&lt;a&gt;&#34;&#43;fn()&#43;&#34;&lt;a&gt;&#34; return warp def FB(fn): def warp(): return &#34;&lt;b&gt;&#34;&#43;fn()&#43;&#34;&lt;b&gt;&#34; return warp @FA #相当于makebold(test1),也就是把当前函数作为入参传过去 def test1(): return &#34;test1&#34; @FB def test2(): return &#34;test2&#34; @FA @FB def test3(): #函数和装饰器是倒着执行的，从下往上，从内而外，一层层执行 return &#34;test3&#34; print(test1()) print(test2()) print(test3()) 结果：
+&lt;a&gt;test1&lt;a&gt; &lt;b&gt;test2&lt;b&gt; &lt;a&gt;&lt;b&gt;test3&lt;b&gt;&lt;a&gt; 矩阵乘法 运算符*在矩阵运算中的功能是逐元素的乘法（称为Hadamard积（Hadamard product，数学符号⊙） @在矩阵运算中的功能是矩阵乘法。也即，在矩阵乘法中，b矩阵右乘的作用是交换被乘矩阵的1、2两列，结果即是。其实@运算符和numpy的matmul是一样的
+</p>
   </div>
   <footer class="entry-footer">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 骨盆前倾" href="http://localhost:1313/post/%E9%AA%A8%E7%9B%86%E5%89%8D%E5%80%BE/"></a>
+<span title='2023-06-25 17:14:52 +0000 UTC'>June 25, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to python里@的作用" href="http://localhost:1313/post/python%E9%87%8C@%E7%9A%84%E4%BD%9C%E7%94%A8/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">魔法世界观下生产力会发展吗
+    <h2 class="entry-hint-parent">在神经网络里初始化权重
     </h2>
   </header>
   <div class="entry-content">
-    <p>看异世界类型的动画看多了脑子里冒出来的诡异想法，异世界为什么大多都是封建君主专制？按道理说生产力足够了&#43;思想变革会促进革命拜托封建专制那动画里面的魔法世界观为什么没有。说道理，革命的必要条件是什么，既然有魔法世界观了生产力会得到相应的发展吗
+    <p>其实我还没明白怎么就到这里了 参考
+为什么要初始化权重 权重初始化的目的是防止层激活输出在深度神经网络前向传播过程中爆炸或消失。如果发生任何一种情况，损失梯度要么太大要么太小而无法有益地向后流动，并且网络将需要更长的时间才能收敛（即使它能够收敛）。 一句话概括：权重太大导致梯度爆炸（torch.isnan()可判断是否是空值），权重太小导致输出不明显
+如何找到最佳权重 从权重定义开始 输出与权重、输入 输出y是输入向量x和权重矩阵a之间的矩阵乘积，即 $Y_{i}=\sum_{k=0}^{n-1}a_{i,k}*x_{k}$ 其中i是权重矩阵a的给定行索引，k是权重矩阵a中的给定列索引和输入向量x中的元素索引，n是x中元素的范围或总数。这也可以在 Python 中定义为：
+y[i] = sum([c*d for c,d in zip(a[i], x)]) 标准差相近 在给定的层，我们从标准正态分布初始化的输入x和权重矩阵a的矩阵乘积，平均而言，标准偏差非常接近输入通道的平方根
+代码证明 import math import torch mean = 0. var = 0. for i in range(10000): x = torch.randn(512) a = torch.randn(512, 512) y = a @ x mean &#43;= y.mean().item() var &#43;= y.pow(2).mean().item() print(mean/10000, math.sqrt(var/10000)) 数学方法 为了计算y，我们将输入x的一列元素与权重a的一行的元素相乘的512个乘积累加。其中，x服从标准正态分布，a服从标准正态分布，且互相独立。 对于a中的点与x中点相乘，可以粗略看完两个正态分布相乘。 对于两个独立的正态分布相乘。 令$X ∼ N ( μ_1 , σ_1^2 ) ,Y ∼ N ( μ_2 , σ_2^2 ) $，XY独立 $\operatorname{var}(X Y)=E\left[(X Y)^{2}\right]-(E[X Y])^{2}=E\left[X^{2} Y^{2}\right]-(E[X Y])^{2}$
 ...</p>
   </div>
   <footer class="entry-footer">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 魔法世界观下生产力会发展吗" href="http://localhost:1313/post/%E9%AD%94%E6%B3%95%E4%B8%96%E7%95%8C%E8%A7%82%E4%B8%8B%E7%94%9F%E4%BA%A7%E5%8A%9B%E4%BC%9A%E5%8F%91%E5%B1%95%E5%90%97/"></a>
+<span title='2023-06-25 17:03:24 +0000 UTC'>June 25, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 在神经网络里初始化权重" href="http://localhost:1313/post/%E5%9C%A8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E9%87%8C%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9D%83%E9%87%8D/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">embedding层
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>学rnn的时候遇到过，看名字也没能看出来是干什么用的
+one-hot编码 用稀疏矩阵来存储一个变量特征，优点计算快，缺点是变量太多的时候占空间。 为了解决这个，就要把矩阵缩小点
+embedding层功能 降维 embedding层，在某种程度上，就是用来降维的，降维的原理就是矩阵乘法。在卷积网络中，可以理解为特殊全连接层操作，跟1x1卷积核异曲同工
+升维 同理
+embedding用于NLP 这个例子挺形象的 把文字的one-hot编码，从稀疏态变成了密集态，并且让相互独立向量变成了有内在联系的关系向量 从稀疏矩阵到密集矩阵的过程，叫做embedding，很多人也把它叫做查表，因为他们之间也是一个一一映射的关系。
+更重要的是，这种关系在反向传播的过程中，是一直在更新的，因此能在多次epoch后，使得这个关系变成相对成熟，即：正确的表达整个语义以及各个语句之间的关系。这个成熟的关系，就是embedding层的所有权重参数。
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-06-01 22:31:53 +0000 UTC'>June 1, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to embedding层" href="http://localhost:1313/post/embedding%E5%B1%82/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">springboot从头开始
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>以前学过的springboot全忘光了。。 从头学起来，就当是复习java了
+新建项目 本地创建 我用的intellij idea community没有这个功能，跳过
+外部导入 spring initializer
+几个选项 project Gradle
+Maven
+Project Metadata</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-05-26 15:07:22 +0000 UTC'>May 26, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to springboot从头开始" href="http://localhost:1313/post/springboot%E4%BB%8E%E5%A4%B4%E5%BC%80%E5%A7%8B/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">配置java
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>搞开发（特别是软件比较多的）还得是看java啊
+下载 官网 jdk和jre都是啥
+JRE是java运行时环境而JDK是java开发工具包，JDK包含JRE，但是JRE可以独立安装。JDK 是用于开发 Java 程序的最小环境，JRE是提供给 Java 程序运行的最小环境。运行java程序只需安装JRE。如果需要编写java程序，需要安装JDK。
+配置 cmd -&gt; java -verbose 查看安装目录 这个就没有python智能了需要手动配置环境 在系统变量里面点新建
+其他问题 带有相对地址的不要放在环境变量最开始，要不然环境变量就只显示一条横的很难改
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-05-23 16:45:04 +0000 UTC'>May 23, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 配置java" href="http://localhost:1313/post/%E9%85%8D%E7%BD%AEjava/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">配置python
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>重装系统之后很多配置也没了，python反正也要用，安装过程也记录一下
+环境配置 下载 官网 找windows的就行 速度比较快可以不用镜像
+安装 点costume的，然后改地址 点配置环境变量可以免得自己再搞
+执行 cmd可以直接跑
+import sys print(sys.version) 可以查看版本
+项目 现在不着急，ide以后再装
+问题 在配置好了python环境变量之后在cmd命令行下输入python但是打开的是windows 10的应用商店，但是我们希望显示的是python的安装版本，可以使用以下的方法解决：首先打开计算机的环境变量，找到path，将python的环境变量移动到WindowsApps环境变量前面
+Fatal error in launcher: Unable to create process using ‘“D:\conf\python\python.exe” “D:\conf\python\Scripts\pip.exe” install -i https://pypi.tuna.tsinghua.edu.cn/simple/ jupyter’: ??????????? 步骤1：到python\scripts\目录，将原来的pip.exe文件删掉 步骤2：cmd窗口执行：python -m pip install -U pip 步骤3：验证
+Traceback (most recent call last): File “D:\conf\python\lib\runpy.py”, line 196, in _run_module_as_main return run_code(code, main_globals, None, File “D:\conf\python\lib\runpy.py”, line 86, in run_code exec(code, run_globals) File “D:\conf\python\scripts\pip.exe_main.py”, line 2, in File “D:\conf\python\lib\re_init.py”, line 125, in from . import _compiler, _parser File “D:\conf\python\lib\re_compiler.py”, line 18, in assert _sre.MAGIC == MAGIC, “SRE module mismatch” AssertionError: SRE module mismatch 说是版本不一致，我的话就是之前的没删干净，删了重装就行
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-05-20 14:15:39 +0000 UTC'>May 20, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 配置python" href="http://localhost:1313/post/%E9%85%8D%E7%BD%AEpython/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">部署jupyternotebook
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>上次安装还是写毕设的时候，jupyternotebook对现在的我来说还是比较好用的，缺点就是.ipynb和.md文件不兼容，不然我就可以把它们和日志放在一个文件夹里面了
+先进入官网
+安装 安装python3后
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple/ jupyter 执行时会遇到报错“ValueError: check_hostname requires server_hostname”，梯子记得关了
+运行 老样子还是vscode
+python
+安装 Insiders 插件
+使用 ctrl&#43; shift&#43; p 调出 Command Palette 然后输入 Python: Switch
+这里我们选择第二个 Python: Switch to Insiders Daily Channel
+问题</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-05-20 14:13:41 +0000 UTC'>May 20, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 部署jupyternotebook" href="http://localhost:1313/post/%E9%83%A8%E7%BD%B2jupyternotebook/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">循环神经网络
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>循环神经网络以前只看过一点，趁现在补一下
+rnn基础 概念 功能：相比cnn干图像，rnn是专用于处理序列信息的神经网络 rnn示意图 每个时刻RNN会产生两个输出，一个output和一个state（state是输入向下一个时序的结果），上一个时刻state和当前作为输入给当前网络
+代码 用jupyternotebook写的，参见
+pytorch nn.rnn()参数说明 nn.RNN(input_size, hidden_size, num_layers=1, nonlinearity=tanh, bias=True, batch_first=False, dropout=0, bidirectional=False) input_size输入特征的维度（专业一点的说法是“特征数量”或者“通道数”）， 一般rnn中输入的是词向量，那么 input_size 就等于一个词向量的维度 hidden_size隐藏层神经元个数，或者也叫输出的维度（因为rnn输出为各个时间步上的隐藏状态）.hidden_size是自己定的，根据炼丹得到最佳结果 num_layers网络的层数 nonlinearity激活函数 bias是否使用偏置 batch_first输入数据的形式，默认是 False，就是这样形式，(seq(num_step), batch, input_dim)，也就是将序列长度放在第一位，batch 放在第二位 dropout是否应用dropout, 默认不使用，如若使用将其设置成一个0-1的数字即可 birdirectional是否使用双向的 rnn，默认是 False 举个例子 rnn改进 双向RNN</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-05-20 14:11:03 +0000 UTC'>May 20, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 循环神经网络" href="http://localhost:1313/post/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">部署latex
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>说到写论文就要latex了（word用起来很难受哎）
+配置 下载texlive 官网 众所周知上不了，来镜像 下载iso文件 解压到随便哪就行，运行install-tl-windows这个文件 prefix一定要英文路径(不然我为什么重装了系统- -)，时间很长慢慢等 载体 vscode配置起来比较麻烦，我还是随大流用Texstudio 下载
+使用 想系统学习的话
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-05-17 16:55:45 +0000 UTC'>May 17, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 部署latex" href="http://localhost:1313/post/%E9%83%A8%E7%BD%B2latex/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="http://localhost:1313/page/17/">
       «&nbsp;Prev&nbsp;
+    </a>
+    <a class="next" href="http://localhost:1313/page/19/">Next&nbsp;&nbsp;»
     </a>
   </nav>
 </footer>

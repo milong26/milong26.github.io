@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Game on 我的博客</title>
+    <link>http://localhost:1313/tags/game/</link>
+    <description>Recent content in Game on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 19 Apr 2021 23:08:46 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/game/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>游戏脑洞</title>
+      <link>http://localhost:1313/post/%E6%B8%B8%E6%88%8F%E8%84%91%E6%B4%9E/</link>
+      <pubDate>Mon, 19 Apr 2021 23:08:46 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E6%B8%B8%E6%88%8F%E8%84%91%E6%B4%9E/</guid>
+      <description>&lt;p&gt;As you can see,&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

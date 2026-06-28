@@ -60,11 +60,290 @@
       <description>&lt;p&gt;刚看完十二国记，名字取自那里。留存作为我在这儿学习的记录.&lt;/p&gt;</description>
     </item>
     <item>
+      <title>todo app测评</title>
+      <link>http://localhost:1313/post/todo-app%E6%B5%8B%E8%AF%84/</link>
+      <pubDate>Mon, 09 Dec 2024 14:19:09 +0000</pubDate>
+      <guid>http://localhost:1313/post/todo-app%E6%B5%8B%E8%AF%84/</guid>
+      <description>&lt;p&gt;受不了这种全用脑子记录事情的状态了，测评一下几个todo软件。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>看过的动画目录</title>
+      <link>http://localhost:1313/post/%E7%9C%8B%E8%BF%87%E7%9A%84%E5%8A%A8%E7%94%BB%E7%9B%AE%E5%BD%95/</link>
+      <pubDate>Wed, 10 Jul 2024 16:44:26 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E7%9C%8B%E8%BF%87%E7%9A%84%E5%8A%A8%E7%94%BB%E7%9B%AE%E5%BD%95/</guid>
+      <description>&lt;p&gt;动画目录&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>开伙</title>
       <link>http://localhost:1313/post/%E5%BC%80%E4%BC%99/</link>
       <pubDate>Mon, 01 Jul 2024 10:25:15 +0000</pubDate>
       <guid>http://localhost:1313/post/%E5%BC%80%E4%BC%99/</guid>
       <description>&lt;p&gt;关于在家里做饭的备忘录&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>tim</title>
+      <link>http://localhost:1313/post/tim/</link>
+      <pubDate>Mon, 18 Dec 2023 16:19:09 +0000</pubDate>
+      <guid>http://localhost:1313/post/tim/</guid>
+      <description>&lt;p&gt;qq办公版，比qq轻量而且功能简单。但是也有问题，等到哪天我实在忍不了的时候再放弃吧==&lt;/p&gt;
+&lt;h1 id=&#34;下载&#34;&gt;下载&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://office.qq.com/&#34;&gt;官网&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;安装&#34;&gt;安装&lt;/h1&gt;
+&lt;p&gt;无脑操作就行
+按照个人习惯把应用全塞到D:/application文件&lt;/p&gt;
+&lt;h1 id=&#34;配置&#34;&gt;配置&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;关闭TIM&lt;/li&gt;
+&lt;li&gt;打开&lt;code&gt;C:\Users\Public\Documents&lt;/code&gt;文件夹（可直接复制路径到资源管理器中打开），在此路径下新建名为&lt;code&gt;Tencent&lt;/code&gt;的文件夹，在Tencent文件夹中新建名为&lt;code&gt;QQ&lt;/code&gt;的文件夹，&lt;/li&gt;
+&lt;li&gt;在新建的QQ文件夹中，新建文本文件，输入以下内容&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[UserDataImportSet]
+NeedImport=0
+OldVersion=
+OldVerDataPathType=
+OldVerDataPath=
+OldQQInstallPath=C:\Program\Tencent\TIM
+[UserDataSet]
+UserDataSavePathType=2
+UserDataSavePath=D:\TimFiles
+NewVersion=
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注意：第6行OldQQInstallPath等号后面的路径应改为自己电脑上TIM的安装路径，第9行等号后面UserDataSavePath的路径改为自己想放的位置。&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;将新建的文本文件另存为“UserDataInfo.ini”，放在第3步新建这个QQ文件夹中&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;关闭文件，打开TIM，可以在设置中看到个人文件夹目录已经设置成功。如下图&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;文件夹位置不用改，会自己调整（但是也没法单独分离出来）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    <item>
+      <title>以后有钱了一定买</title>
+      <link>http://localhost:1313/post/%E4%BB%A5%E5%90%8E%E6%9C%89%E9%92%B1%E4%BA%86%E4%B8%80%E5%AE%9A%E4%B9%B0/</link>
+      <pubDate>Tue, 12 Dec 2023 21:12:33 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E4%BB%A5%E5%90%8E%E6%9C%89%E9%92%B1%E4%BA%86%E4%B8%80%E5%AE%9A%E4%B9%B0/</guid>
+      <description>&lt;p&gt;随机看到的一些东西，但还没有买回来试过，以后有钱了买！好的话留着当礼物！&lt;/p&gt;
+&lt;h1 id=&#34;香水&#34;&gt;香水&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Maison margiela 的by the fireplace，像烤栗子&lt;/li&gt;
+&lt;li&gt;TF 的 oud wood，温暖的羊毛毯味&lt;/li&gt;
+&lt;li&gt;欧珑的赤霞橘光！闻起来就是橘子剥开的味道&lt;/li&gt;
+&lt;li&gt;lelabo的22号bergamote&lt;/li&gt;
+&lt;li&gt;祖玛珑的圣诞定番限定“苦橙”，是柑橘→檀香的发展&lt;/li&gt;
+&lt;li&gt;蒂菩提克的肌肤之花，特别适合用来喷衣服&lt;/li&gt;
+&lt;li&gt;香水还是蛮私人的，我感觉我可能给不到具体哪一瓶香水但是我可以给出一个思路？我冬天喷香水喜欢两个方向：一个是闻起来很冰冷就跟冬天一样冰天雪地，一个是闻起来很温暖会让人联觉到幸福的样子。前者对我而言就是广藿/雪松/檀香木之类的味道，后者的话是美食调（比如评论里说的马丁马吉拉的温暖壁炉）&lt;/li&gt;
+&lt;li&gt;卤蛋的香料糖果味，感觉玻璃纸之夜，摩洛哥热风，还有午时姜香都很适合秋冬。还有娇兰沙龙线的白芷香（好像叫这个，前调是皮革味&lt;/li&gt;
+&lt;li&gt;卤蛋氏的柏林少女 :0170: 有点辛辣的玫瑰味 很温暖&lt;/li&gt;
+&lt;li&gt;蒂菩提克的肌肤之花，特别适合用来喷衣服&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;花&#34;&gt;花&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;如果有武汉|云南的可以小程序“斗南花城”&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>日常memo</title>
+      <link>http://localhost:1313/post/%E6%97%A5%E5%B8%B8memo/</link>
+      <pubDate>Mon, 04 Dec 2023 16:42:42 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E6%97%A5%E5%B8%B8memo/</guid>
+      <description>&lt;p&gt;每天记一点点，以后说不定会变成庞然大物。&lt;/p&gt;
+&lt;h1 id=&#34;家具&#34;&gt;家具&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;衣架一定要多！！
+如果是长时间住宿的话，衣架最少20+。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;电器&#34;&gt;电器&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;充电线要买那种可以把边缘包住的，普通的容易坏。&lt;/li&gt;
+&lt;li&gt;电脑键盘最好买个键盘膜，虽然手感会差一点但是可以防止一堆乱七八糟的头皮屑……&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>防止老年痴呆</title>
+      <link>http://localhost:1313/post/%E9%98%B2%E6%AD%A2%E8%80%81%E5%B9%B4%E7%97%B4%E5%91%86/</link>
+      <pubDate>Thu, 30 Nov 2023 16:58:21 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E9%98%B2%E6%AD%A2%E8%80%81%E5%B9%B4%E7%97%B4%E5%91%86/</guid>
+      <description>&lt;p&gt;每天随便写点儿&lt;/p&gt;
+&lt;h1 id=&#34;2023年&#34;&gt;2023年&lt;/h1&gt;
+&lt;h2 id=&#34;12月&#34;&gt;12月&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;1
+周五，风特别冷。考试，考完好好犒劳一下。&lt;/li&gt;
+&lt;li&gt;2
+下午才上工，累，昨天睡得很舒服。
+玩酒杯世界居然已经一年了^^
+不死不幸动画9集观感上来了，和第8集比起来就像是在过山车&lt;/li&gt;
+&lt;li&gt;3
+组会，水过去了。说好的今天复习考试还是没干，一大里程碑就是设置了提醒事项的同步，但是注意充电哦。
+嘴巴终于没有那么干燥了，之前是为啥啊？还是没想懂，要不以后哪年干了去医院看看。
+不知道是不是水果的问题。
+我们酒杯世界是不是要火了？
+衣架真是幸福之源，日常生活一定要很多衣架，衣柜也要大&lt;/li&gt;
+&lt;li&gt;4
+人类一思考：对烈士女男骂“草你父母”的时候会不会被判侮辱英烈&lt;/li&gt;
+&lt;li&gt;5
+今天居然早起了！然后今天一天都挺困的zzz
+要赶紧购入热水袋。
+实验室的墨粉盒换了，一盒居然用这么快？
+好困啊，以后还是早上要睡够ZZZZ
+这几天的主要task是写完&lt;a href=&#34;%E6%9C%89%E9%99%90%E8%B5%84%E6%BA%90%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%85%A8%E5%8F%82%E6%95%B0%E5%BE%AE%E8%B0%83.md&#34;&gt;paper读后感&lt;/a&gt;+把代码整出来在服务器上面跑
+需要兑换：购买热水袋。
+明天考试加油啊！&lt;/li&gt;
+&lt;li&gt;6
+考完了，就是直接抄资料。
+sd学校，三流学校抓考勤是吧。
+下午还有体育课，穿的鞋子还是不舒服，试试买个垫子？&lt;/li&gt;
+&lt;li&gt;7
+酒杯银行格子喜+1。
+把zotero的翻译插件撞上去了，快乐啊！
+不能摸鱼了，抓紧时间高效率学习！
+拖了很长时间的introduction搞定了！
+今天还欠related work和method。
+学完再看生成ai的课。才看到p3呢，还有好多。
+&lt;blockquote&gt;
+&lt;p&gt;我感觉gpt想提高正确率是让它能自己分辨正确？
+甜豆腐脑太难吃了，世界上怎么会有这么难吃的东西！
+去航院门口农村进城参观一下^^&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;8
+早起了！了不起！我是世界上最棒的！还吃了早饭！
+发现我买的笔芯特别细，怪不得便宜又用得很快。
+网课第一次遇到长课，paper看累了就看看网课休息，真快乐啊^^
+整理了一下我的草稿纸，这也太多了。
+看paper太消耗脑细胞了，中午1点左右吃的饭，现在5点半就饿了:( 而且看的效率也不高。
+今天争取把paper看完，剩下一些额外的问题明天再解决。&lt;/li&gt;
+&lt;li&gt;9
+周六打了一天游戏-.-&lt;/li&gt;
+&lt;li&gt;10
+爬起来学习！
+结果周日还是摆烂了&lt;/li&gt;
+&lt;li&gt;11
+怎么就要指纹打卡了怎么就要指纹打卡了怎么就要指纹打卡了怎么就要指纹打卡了
+今天早上就没吃早饭，最近有好多东西堆着要买&amp;ndash;
+晚上还要取快递，留着明天去吧，反正是热水袋，能放。&lt;/li&gt;
+&lt;li&gt;12
+早上8点醒了，但是不想起来，没吃早饭，等yzz投喂我
+午觉睡得很晚，打算挑电脑了
+电脑下单了！我还有5k多，要预留1k用来买车票+买生日礼物。
+9点了，完全不想学习==，先把目标系统完善一下，再决定要不要学一点吧&lt;/li&gt;
+&lt;li&gt;13
+为了不迟到特意扫了电瓶车，早上好困啊zzz&lt;/li&gt;
+&lt;li&gt;14
+又去桂航进货了，给实验室里的熟人分了柿子
+桂航那边的草莓真不错，还想再买点！
+下周二等别人考完试约刘&lt;/li&gt;
+&lt;li&gt;15
+把模型部署上去之后就不管代码了，专心看论文，要准备大数据的作业了！
+好冷啊啊啊啊啊啊啊啊啊啊啊啊啊！&lt;/li&gt;
+&lt;li&gt;16&lt;/li&gt;
+&lt;li&gt;17&lt;/li&gt;
+&lt;li&gt;18&lt;/li&gt;
+&lt;li&gt;19&lt;/li&gt;
+&lt;li&gt;20&lt;/li&gt;
+&lt;li&gt;21&lt;/li&gt;
+&lt;li&gt;22&lt;/li&gt;
+&lt;li&gt;23&lt;/li&gt;
+&lt;li&gt;24&lt;/li&gt;
+&lt;li&gt;25&lt;/li&gt;
+&lt;li&gt;26&lt;/li&gt;
+&lt;li&gt;27&lt;/li&gt;
+&lt;li&gt;28&lt;/li&gt;
+&lt;li&gt;29&lt;/li&gt;
+&lt;li&gt;30&lt;/li&gt;
+&lt;li&gt;31&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>给予最幸运的死亡</title>
+      <link>http://localhost:1313/post/%E7%BB%99%E4%BA%88%E6%9C%80%E5%B9%B8%E8%BF%90%E7%9A%84%E6%AD%BB%E4%BA%A1/</link>
+      <pubDate>Tue, 10 Oct 2023 20:43:13 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E7%BB%99%E4%BA%88%E6%9C%80%E5%B9%B8%E8%BF%90%E7%9A%84%E6%AD%BB%E4%BA%A1/</guid>
+      <description>&lt;p&gt;《不死不幸》repo
+花了一天把漫画补完了，鸡血上头来写观后感。
+目前对这个漫画还比较欣赏，因为是女主角吧。&lt;/p&gt;
+&lt;h1 id=&#34;外表&#34;&gt;外表&lt;/h1&gt;
+&lt;p&gt;画风比较丑，人设不是很时髦。
+女主太童颜巨乳了，有点生理不适。男主怎么评价呢，说猥琐吧不像猥琐，特别理所当然地想交配但是是为了体验不幸，再加上男主露得比女主多得多，算坦荡（蛋）吧，好像没有那种世俗的欲望。女主童颜巨乳男主老颜巨乳，行吧，热血类型的搞一个干柴的男主来确实不太适合，女主算是热血漫人设标配，刻板印象拉满了。
+其他角色画得都挺丑的，特别是路人，第一遍看下来我喜欢的只有boss，但是有几个角色外观设定比较特殊的，抛开人物刷出场，第一眼能让我记住的：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不变，头上这帽子让我幻视猎人的谁谁&lt;/li&gt;
+&lt;li&gt;不可触的妹子，长得好像赛尔号。。&lt;/li&gt;
+&lt;li&gt;秋天，很反常规的秋天，但是人设和它的技能不匹配啊
+丑是挺丑的，但是故事好就行了&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;背景&#34;&gt;背景&lt;/h1&gt;
+&lt;p&gt;分成几个阵营：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;人类：小白鼠，被随意拿捏，主观能动性在这里毫无用处&lt;/li&gt;
+&lt;li&gt;否定能力者：原来是人类，被一些能力选上之后成了容器，难道每个周目都是你们这些人吗，有个屁的随意性
+这里面再分3个，union，under和龙套&lt;/li&gt;
+&lt;li&gt;UMA：理解成npc boss就行，除了春天和衣服好像都没有自我意识，但是增加一些UMA导致人类意识集体改变的时候挺有意思的，比如统一语言，科学认知上的拓展，就是这一点才让人类变得特别像小白鼠了&lt;/li&gt;
+&lt;li&gt;神：挺傲慢的，玩游戏就玩游戏，恼羞成怒自己下场是干啥
+还有一些基础设定：&lt;/li&gt;
+&lt;li&gt;规则：所有能力和UMA设定的基础，毕竟整个漫画的能力设定来自于否定规则嘛&lt;/li&gt;
+&lt;li&gt;古代兵器：任务物品吧，最重要的就是书和ark，其它没有花太多笔墨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;人设&#34;&gt;人设&lt;/h1&gt;
+&lt;h2 id=&#34;女主&#34;&gt;女主&lt;/h2&gt;
+&lt;p&gt;有真！女主就是好的！
+童颜巨乳真的令人不适，在漫画后期这一点没有过多显示了（甚至看起来像缩胸了），好好好。
+有非常明显的成长过程，开头家破人亡非常惨。但是由于漫画表现得比较搞笑+这个背景死人太多了，看起来倒不是很惨。性格是从一而终的老好人，在galgame里算温柔亲切主人公那种，可以靠嘴炮攻略其他人，也会因为救人搭上自己（刻板印象增加了！）&lt;/p&gt;
+&lt;h2 id=&#34;男主&#34;&gt;男主&lt;/h2&gt;
+&lt;p&gt;居然是中村悠易？？？？？我是真没想到他还能有这种不油的声线
+感觉剧情有点bug，但是说白了其实就是切片男主，性格比较坦荡，外表也比较坦蛋。&lt;/p&gt;
+&lt;h2 id=&#34;其它&#34;&gt;其它&lt;/h2&gt;
+&lt;h1 id=&#34;剧情&#34;&gt;剧情&lt;/h1&gt;
+&lt;p&gt;女主为了自己活命加入union，为了别的否定者不再像自己那样被追杀选择改变union，虽然是被男主带着跑的吧，但看起来是不是很有远大志向！很有一种打进全国大赛的目标感！书都给任务了，那就是妥妥的rpg啊，刷，慢慢刷。但是剧情发展远比这种传统升级流自由很多，反而“升级”这种东西在原作里面都没有出现，更多的是心理疾病治疗吧，其它都是突然就变强了。&lt;/p&gt;
+&lt;h2 id=&#34;主角相遇&#34;&gt;主角相遇&lt;/h2&gt;
+&lt;p&gt;girl meets old man(?)
+动画刚开始的时候我真的以为加载错了，退出重进了好几次。漫画里也就一两格内容吧，我感觉这个处理不太好，性急的观众可能点开就退出了。除此之外不管是动画还是漫画，在吸引人把第一话看下去这个方面还是挺有水平的，至少我愿意看下去。动画方面把又是表现出来了，男主利用不死这一能力进行移动的画面做得非常炫酷。虽然有些画面比较穷但还好。&lt;/p&gt;
+&lt;h2 id=&#34;不变&#34;&gt;不变&lt;/h2&gt;
+&lt;p&gt;不变的人物设计真的挺亮眼的，但是性格上就很一般了。都有不变的能力了能干的事情却还只有那一点，也只是抓着安迪不放。女主在这个环节还是露得比较多，不变的能力设定像是刻意让她被打败而设计的，但是确实简单，我都能看懂，珍惜下现在还能看懂的战斗场面吧。
+动画第四集做得真好，cv太卖力了，只是画面实在太暗&lt;/p&gt;
+&lt;h2 id=&#34;spoil&#34;&gt;spoil&lt;/h2&gt;
+&lt;p&gt;没想到漫画里一点点的spoil篇动画做了这么长，受不了了。这不就是用来引出union成员和维克托的一章嘛，怎么整这么多，感觉是败笔
+旁白cv是安野云没跑了。&lt;/p&gt;
+&lt;h2 id=&#34;入union&#34;&gt;入union&lt;/h2&gt;
+&lt;p&gt;union的这些就是以后的队友了吧，一下子放出来这么多新角色，还好刚开始只要和之前见过的人共事。打僵尸过程比较一般，送上外太空真是雷同二乔了，这一章里面算沈的主场回吧，不死的原壳也露了面，开始回顾过去。队友来助战，感觉能力都挺一般的，最后还是靠女主喊回来，这一段也不算精彩。
+你们union真的好菜，干到现在也没什么好的奖励，还领了一大堆惩罚。&lt;/p&gt;
+&lt;h2 id=&#34;拍卖会&#34;&gt;拍卖会&lt;/h2&gt;
+&lt;p&gt;开头先卖了一把cp，只要卖得不太明显我都能吃。从这开始pve变成pvp。
+整个作品里面唯一美型的男的出现了（沈那是金刚芭比&lt;/p&gt;
+&lt;h2 id=&#34;秋&#34;&gt;秋&lt;/h2&gt;
+&lt;p&gt;秋这章画得真好，从找漫画作者开始就非常引人入胜&lt;/p&gt;
+&lt;p&gt;二周目开始！&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>只要饿不死</title>
+      <link>http://localhost:1313/post/%E5%8F%AA%E8%A6%81%E9%A5%BF%E4%B8%8D%E6%AD%BB/</link>
+      <pubDate>Tue, 25 Apr 2023 18:10:02 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E5%8F%AA%E8%A6%81%E9%A5%BF%E4%B8%8D%E6%AD%BB/</guid>
+      <description>&lt;p&gt;就往死里饿&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;下饺子&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;包好的&lt;/li&gt;
+&lt;li&gt;放水煮，沸腾了把饺子下锅&lt;/li&gt;
+&lt;li&gt;煮到泡沫变多的时候把饺子翻一下防止粘锅&lt;/li&gt;
+&lt;li&gt;浮上来后关火，焖一段时间&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;炒菠菜&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;洗好了，根太长的就去了&lt;/li&gt;
+&lt;li&gt;锅里放点油（怕油炸的话可以先不点火&lt;/li&gt;
+&lt;li&gt;先把菠菜梗那段下锅炒会&lt;/li&gt;
+&lt;li&gt;再上其它的&lt;/li&gt;
+&lt;li&gt;炒到瘪了就差不多&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
     <item>
       <title>马了就是忘了</title>
@@ -74,11 +353,11 @@
       <description>&lt;p&gt;放了一下暂时没用到的东西&lt;/p&gt;</description>
     </item>
     <item>
-      <title>_日记2026</title>
-      <link>http://localhost:1313/post/%E6%97%A5%E8%AE%B02026/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/%E6%97%A5%E8%AE%B02026/</guid>
-      <description></description>
+      <title>游戏脑洞</title>
+      <link>http://localhost:1313/post/%E6%B8%B8%E6%88%8F%E8%84%91%E6%B4%9E/</link>
+      <pubDate>Mon, 19 Apr 2021 23:08:46 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E6%B8%B8%E6%88%8F%E8%84%91%E6%B4%9E/</guid>
+      <description>&lt;p&gt;As you can see,&lt;/p&gt;</description>
     </item>
     <item>
       <title>如何提高精力</title>

@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>树 | 我的博客</title>
+<meta name="keywords" content="数据结构">
+<meta name="description" content="
+高度：点到叶子节点，最长
+
+
+若二叉树的高度为h，h≥0，则它最少有h个节点，最多有2^h^-1个节点
+包含n个节点的二叉树的高度最大为n，最小为 ⌈log2 (n&#43;1)⌉
+设完全二叉树中一节点的序号为i, 1≤i≤n。则有以下关系成立：
+1)当i = 1时，该元素为二叉树的根。若i &gt; 1，则该元素父节点的编号为⌈i/2⌉
+2)当2i&gt;n时，该元素无左孩子。否则，其左孩子的编号为2i
+3)若2i &#43; 1&gt;n，该元素无右孩子。否则，其右孩子编号为2i &#43; 1
+设二叉树中度为2的节点有n2个，度为1的节点有n1个，度为0的节点有n0个，则n0=n2&#43;1
+
+高度为h，节点数2h-1
+
+BinaryTreeNode类
+template &lt;class T&gt;
+class BinaryTreeNode{
+    public:
+      BinaryTreeNode() {LeftChild = RightChild = 0;}
+      BinaryTreeNode(const T&amp; e) {data = e;  LeftChild = RightChild = 0;}
+      BinaryTreeNode(const T&amp; e, BinaryTreeNode *l, BinaryTreeNode *r){data = e;  LeftChild = l;  RightChild = r;}
+   private:
+      T data;
+      BinaryTreeNode&lt;T&gt; *LeftChild,*RightChild;
+};
+BinaryTree类
+template&lt;class T&gt;
+class BinaryTree {
+public:
+      BinaryTree() {root = 0;}
+      ~BinaryTree(){}
+      bool IsEmpty() const
+        {return ((root) ? false : true);}
+      bool Root(T&amp; x) const;
+      void MakeTree(const T&amp; element,BinaryTree&lt;T&gt;&amp; left, BinaryTree&lt;T&gt;&amp; right);
+      void BreakTree(T&amp; element, BinaryTree&lt;T&gt;&amp; left,BinaryTree&lt;T&gt;&amp; right);
+      void PreOrder(void(*Visit)(BinaryTreeNode&lt;T&gt; *u))
+           {PreOrder(Visit, root);}
+          void InOrder(void(*Visit)(BinaryTreeNode&lt;T&gt; *u))
+           {InOrder(Visit, root);}
+      void PostOrder(void(*Visit)(BinaryTreeNode&lt;T&gt; *u))
+           {PostOrder(Visit, root);}
+      void LevelOrder(void(*Visit)(BinaryTreeNode&lt;T&gt; *u));
+private:
+      BinaryTreeNode&lt;T&gt; *root;  // pointer to root
+      void PreOrder(void(*Visit)
+        (BinaryTreeNode&lt;T&gt; *u), BinaryTreeNode&lt;T&gt; *t);
+      void InOrder(void(*Visit)
+        (BinaryTreeNode&lt;T&gt; *u), BinaryTreeNode&lt;T&gt; *t);
+      void PostOrder(void(*Visit)
+        (BinaryTreeNode&lt;T&gt; *u), BinaryTreeNode&lt;T&gt; *t);
+};
+//获取根节点数据
+template&lt;class T&gt;
+bool BinaryTree&lt;T&gt;::Root(T&amp; x) const
+{// Return root data in x.
+ // Return false if no root.
+   if (root) {x = root-&gt;data;
+              return true;}
+   else return false;  // no root
+}
+
+//创建树
+template&lt;class T&gt;
+void BinaryTree&lt;T&gt;::MakeTree(const T&amp; element,BinaryTree&lt;T&gt;&amp; left, BinaryTree&lt;T&gt;&amp; right)
+{// Combine left, right, and element to make new tree.
+ // left, right, and this must be different trees.
+   // create combined tree
+   root = new BinaryTreeNode&lt;T&gt;
+              (element, left.root, right.root);
+   // deny access from trees left and right
+   left.root = right.root = 0;
+}
+
+//分裂树
+template&lt;class T&gt;
+void BinaryTree&lt;T&gt;::BreakTree(T&amp; element,BinaryTree&lt;T&gt;&amp; left, BinaryTree&lt;T&gt;&amp; right)
+{// left, right, and this must be different trees.
+   // check if empty
+   if (!root) throw BadInput(); // tree empty
+   // break the tree
+   element = root-&gt;data;
+   left.root = root-&gt;LeftChild;
+   right.root = root-&gt;RightChild;
+
+   delete root;
+   root = 0;
+}
+
+//获得树高
+template &lt;class T&gt;
+int BinaryTree&lt;T&gt;::Height(BinaryTreeNode&lt;T&gt; *t) const
+{// Return height of tree *t.
+   if (!t) return 0;               // empty tree
+   int hl = Height(t-&gt;LeftChild);  // height of left
+   int hr = Height(t-&gt;RightChild); // height of right
+   if (hl &gt; hr) return &#43;&#43;hl;
+   else return &#43;&#43;hr;
+}
+在上述存储方式下，寻找某一节点孩子的复杂度是O(1)，寻找其父亲的复杂度是O(n)">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/%E6%A0%91/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/%E6%A0%91/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      树
+    </h1>
+    <div class="post-meta">
+
+<span title='2019-10-29 15:26:18 +0000 UTC'>October 29, 2019</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><!-- raw HTML omitted -->
+<p>高度：点到叶子节点，最长</p>
+<hr>
+<!-- raw HTML omitted -->
+<p>若二叉树的高度为h，h≥0，则它最少有h个节点，最多有2^h^-1个节点</p>
+<p>包含n个节点的二叉树的高度最大为n，最小为 ⌈log<del>2</del> (n+1)⌉</p>
+<p>设完全二叉树中一节点的序号为<em>i</em>, 1≤<em>i</em>≤<em>n</em>。则有以下关系成立：</p>
+<p>1)当<em>i</em> = 1时，该元素为二叉树的根。若<em>i</em> &gt; 1，则该元素父节点的编号为⌈i/2⌉</p>
+<p>2)当2<em>i</em>&gt;<em>n</em>时，该元素无左孩子。否则，其左孩子的编号为2<em>i</em></p>
+<p>3)若2<em>i</em> + 1&gt;<em>n</em>，该元素无右孩子。否则，其右孩子编号为2<em>i</em> + 1</p>
+<p>设二叉树中度为2的节点有n<del>2</del>个，度为1的节点有n<del>1</del>个，度为0的节点有n<del>0</del>个，则n<del>0</del>=n<del>2</del>+1</p>
+<!-- raw HTML omitted -->
+<p>高度为<em>h</em>，节点数2<em>h</em>-1</p>
+<!-- raw HTML omitted -->
+<h4 id="binarytreenode类">BinaryTreeNode类<a hidden class="anchor" aria-hidden="true" href="#binarytreenode类">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BinaryTreeNode</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      BinaryTreeNode() {LeftChild <span style="color:#f92672">=</span> RightChild <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;}
+</span></span><span style="display:flex;"><span>      BinaryTreeNode(<span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span> e) {data <span style="color:#f92672">=</span> e;  LeftChild <span style="color:#f92672">=</span> RightChild <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;}
+</span></span><span style="display:flex;"><span>      BinaryTreeNode(<span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span> e, BinaryTreeNode <span style="color:#f92672">*</span>l, BinaryTreeNode <span style="color:#f92672">*</span>r){data <span style="color:#f92672">=</span> e;  LeftChild <span style="color:#f92672">=</span> l;  RightChild <span style="color:#f92672">=</span> r;}
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      T data;
+</span></span><span style="display:flex;"><span>      BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>LeftChild,<span style="color:#f92672">*</span>RightChild;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h4 id="binarytree类">BinaryTree类<a hidden class="anchor" aria-hidden="true" href="#binarytree类">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BinaryTree</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      BinaryTree() {root <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;}
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">~</span>BinaryTree(){}
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">IsEmpty</span>() <span style="color:#66d9ef">const</span>
+</span></span><span style="display:flex;"><span>        {<span style="color:#66d9ef">return</span> ((root) <span style="color:#f92672">?</span> false <span style="color:#f92672">:</span> true);}
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">Root</span>(T<span style="color:#f92672">&amp;</span> x) <span style="color:#66d9ef">const</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">MakeTree</span>(<span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span> element,BinaryTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;&amp;</span> left, BinaryTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;&amp;</span> right);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">BreakTree</span>(T<span style="color:#f92672">&amp;</span> element, BinaryTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;&amp;</span> left,BinaryTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;&amp;</span> right);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">PreOrder</span>(<span style="color:#66d9ef">void</span>(<span style="color:#f92672">*</span>Visit)(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>u))
+</span></span><span style="display:flex;"><span>           {PreOrder(Visit, root);}
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">InOrder</span>(<span style="color:#66d9ef">void</span>(<span style="color:#f92672">*</span>Visit)(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>u))
+</span></span><span style="display:flex;"><span>           {InOrder(Visit, root);}
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">PostOrder</span>(<span style="color:#66d9ef">void</span>(<span style="color:#f92672">*</span>Visit)(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>u))
+</span></span><span style="display:flex;"><span>           {PostOrder(Visit, root);}
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">LevelOrder</span>(<span style="color:#66d9ef">void</span>(<span style="color:#f92672">*</span>Visit)(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>u));
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>root;  <span style="color:#75715e">// pointer to root
+</span></span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">PreOrder</span>(<span style="color:#66d9ef">void</span>(<span style="color:#f92672">*</span>Visit)
+</span></span><span style="display:flex;"><span>        (BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>u), BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>t);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">InOrder</span>(<span style="color:#66d9ef">void</span>(<span style="color:#f92672">*</span>Visit)
+</span></span><span style="display:flex;"><span>        (BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>u), BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>t);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">PostOrder</span>(<span style="color:#66d9ef">void</span>(<span style="color:#f92672">*</span>Visit)
+</span></span><span style="display:flex;"><span>        (BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>u), BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>t);
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//获取根节点数据
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> BinaryTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>Root(T<span style="color:#f92672">&amp;</span> x) <span style="color:#66d9ef">const</span>
+</span></span><span style="display:flex;"><span>{<span style="color:#75715e">// Return root data in x.
+</span></span></span><span style="display:flex;"><span> <span style="color:#75715e">// Return false if no root.
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (root) {x <span style="color:#f92672">=</span> root<span style="color:#f92672">-&gt;</span>data;
+</span></span><span style="display:flex;"><span>              <span style="color:#66d9ef">return</span> true;}
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> false;  <span style="color:#75715e">// no root
+</span></span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//创建树
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> BinaryTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>MakeTree(<span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span> element,BinaryTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;&amp;</span> left, BinaryTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;&amp;</span> right)
+</span></span><span style="display:flex;"><span>{<span style="color:#75715e">// Combine left, right, and element to make new tree.
+</span></span></span><span style="display:flex;"><span> <span style="color:#75715e">// left, right, and this must be different trees.
+</span></span></span><span style="display:flex;"><span>   <span style="color:#75715e">// create combined tree
+</span></span></span><span style="display:flex;"><span>   root <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>              (element, left.root, right.root);
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">// deny access from trees left and right
+</span></span></span><span style="display:flex;"><span>   left.root <span style="color:#f92672">=</span> right.root <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//分裂树
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> BinaryTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>BreakTree(T<span style="color:#f92672">&amp;</span> element,BinaryTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;&amp;</span> left, BinaryTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;&amp;</span> right)
+</span></span><span style="display:flex;"><span>{<span style="color:#75715e">// left, right, and this must be different trees.
+</span></span></span><span style="display:flex;"><span>   <span style="color:#75715e">// check if empty
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>root) <span style="color:#66d9ef">throw</span> BadInput(); <span style="color:#75715e">// tree empty
+</span></span></span><span style="display:flex;"><span>   <span style="color:#75715e">// break the tree
+</span></span></span><span style="display:flex;"><span>   element <span style="color:#f92672">=</span> root<span style="color:#f92672">-&gt;</span>data;
+</span></span><span style="display:flex;"><span>   left.root <span style="color:#f92672">=</span> root<span style="color:#f92672">-&gt;</span>LeftChild;
+</span></span><span style="display:flex;"><span>   right.root <span style="color:#f92672">=</span> root<span style="color:#f92672">-&gt;</span>RightChild;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">delete</span> root;
+</span></span><span style="display:flex;"><span>   root <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//获得树高
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> BinaryTree<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>Height(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>t) <span style="color:#66d9ef">const</span>
+</span></span><span style="display:flex;"><span>{<span style="color:#75715e">// Return height of tree *t.
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>t) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;               <span style="color:#75715e">// empty tree
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">int</span> hl <span style="color:#f92672">=</span> Height(t<span style="color:#f92672">-&gt;</span>LeftChild);  <span style="color:#75715e">// height of left
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">int</span> hr <span style="color:#f92672">=</span> Height(t<span style="color:#f92672">-&gt;</span>RightChild); <span style="color:#75715e">// height of right
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (hl <span style="color:#f92672">&gt;</span> hr) <span style="color:#66d9ef">return</span> <span style="color:#f92672">++</span>hl;
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> <span style="color:#f92672">++</span>hr;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>在上述存储方式下，寻找某一节点孩子的复杂度是O(1)，寻找其父亲的复杂度是O(n)</p>
+<h4 id="遍历">遍历<a hidden class="anchor" aria-hidden="true" href="#遍历">#</a></h4>
+<p>不管啥序表达式，叶子节点都是字母，符号都是在中间</p>
+<h5 id="先序中左右">先序：中左右；<a hidden class="anchor" aria-hidden="true" href="#先序中左右">#</a></h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> PreOrder(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>t)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (t)
+</span></span><span style="display:flex;"><span>   {
+</span></span><span style="display:flex;"><span>      Visit(t);                 <span style="color:#75715e">// visit tree root
+</span></span></span><span style="display:flex;"><span>      PreOrder(t<span style="color:#f92672">-&gt;</span>LeftChild);   <span style="color:#75715e">// do left subtree
+</span></span></span><span style="display:flex;"><span>      PreOrder(t<span style="color:#f92672">-&gt;</span>RightChild);  <span style="color:#75715e">// do right subtre
+</span></span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>有前缀表达式字符串-&gt;有符号就放，先往左，数字就放在符号的左右子叶子上，然后向上回溯；获得正确的就是左中右</p>
+<h5 id="中序左中右">中序：左中右；<a hidden class="anchor" aria-hidden="true" href="#中序左中右">#</a></h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> InOrder(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>t)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (t)
+</span></span><span style="display:flex;"><span>   {
+</span></span><span style="display:flex;"><span>      InOrder(t<span style="color:#f92672">-&gt;</span>LeftChild);   <span style="color:#75715e">// do left subtree
+</span></span></span><span style="display:flex;"><span>      Visit(t);                <span style="color:#75715e">// visit tree root
+</span></span></span><span style="display:flex;"><span>      InOrder(t<span style="color:#f92672">-&gt;</span>RightChild);  <span style="color:#75715e">// do right subtree
+</span></span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>中缀表达式：就是正常的数学表达式，是从下往上构建</p>
+<h5 id="后序左右中">后序：左右中<a hidden class="anchor" aria-hidden="true" href="#后序左右中">#</a></h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> PostOrder(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>t)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (t) {
+</span></span><span style="display:flex;"><span>      PostOrder(t<span style="color:#f92672">-&gt;</span>LeftChild);   <span style="color:#75715e">// do left subtree
+</span></span></span><span style="display:flex;"><span>      PostOrder(t<span style="color:#f92672">-&gt;</span>RightChild);  <span style="color:#75715e">// do right subtree
+</span></span></span><span style="display:flex;"><span>      Visit(t);                  <span style="color:#75715e">// visit tree root
+</span></span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>后缀表达式：也是从下往上构建，方便计算机计算</p>
+<h5 id="逐层遍历宽度优先">逐层遍历（宽度优先）<a hidden class="anchor" aria-hidden="true" href="#逐层遍历宽度优先">#</a></h5>
+<p>根-&gt;叶逐层，同层由左至右</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> LevelOrder(BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>t)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>   LinkedQueue<span style="color:#f92672">&lt;</span>BinaryTreeNode<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*&gt;</span> Q;<span style="color:#75715e">//用队列就可以
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">while</span> (t) {
+</span></span><span style="display:flex;"><span>      Visit(t);  <span style="color:#75715e">// visit t
+</span></span></span><span style="display:flex;"><span> <span style="color:#75715e">// put t&#39;s children on queue
+</span></span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (t<span style="color:#f92672">-&gt;</span>LeftChild) Q.Add(t<span style="color:#f92672">-&gt;</span>LeftChild);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (t<span style="color:#f92672">-&gt;</span>RightChild) Q.Add(t<span style="color:#f92672">-&gt;</span>RightChild);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">try</span> {Q.Delete(t);}
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">catch</span> (OutOfBounds) {<span style="color:#66d9ef">return</span>;}
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span> }
+</span></span></code></pre></div><h5 id="由遍历顺序推导二叉树结构">由遍历顺序推导二叉树结构<a hidden class="anchor" aria-hidden="true" href="#由遍历顺序推导二叉树结构">#</a></h5>
+<p>个别先序+中序不能推出</p>
+<h5 id="非递归实现先中后序">非递归实现先中后序<a hidden class="anchor" aria-hidden="true" href="#非递归实现先中后序">#</a></h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">//先序
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">preOrderS</span>(Node <span style="color:#f92672">*</span>root)   
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    stack<span style="color:#f92672">&lt;</span>Node<span style="color:#f92672">*&gt;</span> s;
+</span></span><span style="display:flex;"><span>    Node <span style="color:#f92672">*</span>p<span style="color:#f92672">=</span>root;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(p<span style="color:#f92672">!=</span>NULL<span style="color:#f92672">||!</span>s.empty())
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//沿着左支走到底
+</span></span></span><span style="display:flex;"><span>        <span style="color:#75715e">//用栈记录走过的路径
+</span></span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(p<span style="color:#f92672">!=</span>NULL)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            cout<span style="color:#f92672">&lt;&lt;</span>p<span style="color:#f92672">-&gt;</span>data<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34; &#34;</span>;
+</span></span><span style="display:flex;"><span>            s.push(p);
+</span></span><span style="display:flex;"><span>            p<span style="color:#f92672">=</span>p<span style="color:#f92672">-&gt;</span>left;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//当左支走到尽头时，若栈里边还有结点
+</span></span></span><span style="display:flex;"><span>        <span style="color:#75715e">//则退栈，后退到跟结点，并且向右支前进
+</span></span></span><span style="display:flex;"><span>        <span style="color:#75715e">//此时p!=NULL,会进入以上while循环
+</span></span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>s.empty())
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            p<span style="color:#f92672">=</span>s.top();
+</span></span><span style="display:flex;"><span>            s.pop();
+</span></span><span style="display:flex;"><span>            p<span style="color:#f92672">=</span>p<span style="color:#f92672">-&gt;</span>right;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//注：在 if(!s.empty())中，获取根结点只是为了得到往右支的中转，
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//当获得右支指针后，将根结点从栈中弹出，以便返回的时候直接
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//回到爷爷结点
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//中序
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">inOrderS</span>(Node <span style="color:#f92672">*</span>root){
+</span></span><span style="display:flex;"><span>    stack<span style="color:#f92672">&lt;</span>Node<span style="color:#f92672">*&gt;</span> s;
+</span></span><span style="display:flex;"><span>    Node <span style="color:#f92672">*</span>p<span style="color:#f92672">=</span>root;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(p<span style="color:#f92672">!=</span>NULL<span style="color:#f92672">||!</span>s.empty())
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(p<span style="color:#f92672">!=</span>NULL)){
+</span></span><span style="display:flex;"><span>            s.push(p);
+</span></span><span style="display:flex;"><span>            p<span style="color:#f92672">=</span>p<span style="color:#f92672">-&gt;</span>left;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>s.empty())
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            p<span style="color:#f92672">=</span>s.top();
+</span></span><span style="display:flex;"><span>            s.pop();
+</span></span><span style="display:flex;"><span>            cout<span style="color:#f92672">&lt;&lt;</span>p<span style="color:#f92672">-&gt;</span>data<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34; &#34;</span>;
+</span></span><span style="display:flex;"><span>            p<span style="color:#f92672">=</span>p<span style="color:#f92672">-&gt;</span>right;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//中序遍历和先序遍历的代码几乎一致，除了访问点的位置不一样
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//中序遍历是在退栈的时候访问根结点
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//后序
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">PostOrderS</span>(Node <span style="color:#f92672">*</span>root) {
+</span></span><span style="display:flex;"><span>    Node <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> root, <span style="color:#f92672">*</span>r <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>    stack<span style="color:#f92672">&lt;</span>Node<span style="color:#f92672">*&gt;</span> s;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (p<span style="color:#f92672">!=</span>NULL <span style="color:#f92672">||</span> <span style="color:#f92672">!</span>s.empty())
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (p<span style="color:#f92672">!=</span>NULL)
+</span></span><span style="display:flex;"><span>        {<span style="color:#75715e">//走到最左边
+</span></span></span><span style="display:flex;"><span>            s.push(p);
+</span></span><span style="display:flex;"><span>            p <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>left;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            p <span style="color:#f92672">=</span> s.top();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (p<span style="color:#f92672">-&gt;</span>right<span style="color:#f92672">!=</span>NULL <span style="color:#f92672">&amp;&amp;</span> p<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">!=</span> r)<span style="color:#75715e">//右子树存在，未被访问
+</span></span></span><span style="display:flex;"><span>                p <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>right;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                s.pop();
+</span></span><span style="display:flex;"><span>                cout<span style="color:#f92672">&lt;&lt;</span>p<span style="color:#f92672">-&gt;</span>val<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34; &#34;</span>;
+</span></span><span style="display:flex;"><span>                r <span style="color:#f92672">=</span> p;<span style="color:#75715e">//记录最近访问过的节点
+</span></span></span><span style="display:flex;"><span>                p <span style="color:#f92672">=</span> NULL;<span style="color:#75715e">//节点访问完后，重置p指针
+</span></span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }<span style="color:#75715e">//else
+</span></span></span><span style="display:flex;"><span>    }<span style="color:#75715e">//while
+</span></span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//因为后序非递归遍历二叉树的顺序是先访问左子树，再访问右子树，最后访问根节点。当用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//堆栈来存储节点，必须分清返回根节点时，是从左子树返回的，还是从右子树返回的。所以，
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//使用辅助指针r，其指向最近访问过的节点。也可以在节点中增加一个标志域，记录是否已被
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//访问
+</span></span></span></code></pre></div><hr>
+<h3 id="优先队列">优先队列<a hidden class="anchor" aria-hidden="true" href="#优先队列">#</a></h3>
+<p>就是每个元素有优先权值</p>
+<p>线性表描述</p>
+<p>无序线性表——最简单</p>
+<p>•数组描述</p>
+<ol>
+<li>•插入操作：表尾，Q(1)</li>
+<li>•删除操作：查找最大优先级元素， Q(n)</li>
+</ol>
+<p>•链表描述</p>
+<ol>
+<li>•插入操作：链头， Q(1)；删除操作，Q(n)</li>
+</ol>
+<p>有序列表</p>
+<ol>
+<li>•数组：递增，链表：递减</li>
+<li>•删除：Q(1)；插入：Q(n)</li>
+</ol>
+<hr>
+<!-- raw HTML omitted -->
+<p>最大树：每个节点的值≥其子节点值的树</p>
+<p>最小树：每个节点的值≤其子节点值的树</p>
+<p>最大堆：最大树+完全二叉树</p>
+<h4 id="描述">描述<a hidden class="anchor" aria-hidden="true" href="#描述">#</a></h4>
+<p>特殊的完全二叉树-&gt;一维数组有效描述</p>
+<p>•父子节点位置关系——简单公式</p>
+<p>堆节点从1开始编号，则节点i的左孩子是2i、右孩子是2i+1</p>
+<p>堆节点从0开始编号，则节点i的左孩子是2i+1、右孩子是2i+2</p>
+<p>•n个元素，高度⌈log<del>2</del> (n+1)⌉</p>
+<!-- raw HTML omitted -->
+<p>堆节点从0开始：i节点 左子2i+1，右子2i+2</p>
+<p>n个元素，堆的高度为log<del>2</del>^(n+1)^</p>
+<!-- raw HTML omitted -->
+<pre><code>~MaxHeap() { delete[] heap; }
+int Size() const { return CurrentSize; }
+
+//查找
+T Max() 
+{         
+	if (CurrentSize == 0)
+		throw OutOfBounds();
+	return heap[1];
+}
+
+//插入:新元素向上移动（与父节点交换）重复此过程，直到到达某个位置时符合堆的特性为止最坏情况O(log2n)
+MaxHeap&lt;T&gt;&amp; Insert(const T&amp; x)
+{
+	if (CurrentSize == MaxSize)
+		throw NoMem(); // no space
+					   // 寻找新元素x的位置		   
+	int i = ++CurrentSize;// i——初始为新叶节点的位置，逐层向上，寻找最终位置
+	while (i != 1 &amp;&amp; x &gt; heap[i / 2]) 
+	{
+		// i不是根节点，且其值大于父节点的值，需要继续调整
+		heap[i] = heap[i / 2]; // 父节点下降
+		i /= 2;              // 继续向上，搜寻正确位置
+	}
+	heap[i] = x;
+	return *this;
+}
+
+//删除选取子节点中较大者与父节点交换；重复，直至符合堆特性
+MaxHeap&lt;T&gt;&amp; DeleteMax(T&amp; x)
+{// Set x to max element and delete max element from heap.
+	if (CurrentSize == 0)
+	throw OutOfBounds(); // empty
+	x = heap[1]; // 删除最大元素
+			 //删
+			 // 重整堆
+	T y = heap[CurrentSize--]; // 取最后一个节点，从根开始重整
+						   // find place for y starting at root
+	int i = 1,  // current node of heap
+	ci = 2; // child of i
+	while (ci &lt;= CurrentSize)
+	{
+	// 使ci指向i的两个孩子中较大者
+		if (ci &lt; CurrentSize &amp;&amp; heap[ci] &lt; heap[ci + 1])
+			ci++;
+	// y的值大于等于孩子节点吗？
+		if (y &gt;= heap[ci]) break;   // 是，i就是y的正确位置，退出
+								// 否，需要继续向下，重整堆
+		heap[i] = heap[ci]; // 大于父节点的孩子节点上升
+		i = ci;             // 向下一层，继续搜索正确位置
+		ci *= 2；
+	}
+	heap[i] = y;
+	return *this;
+}
+
+//初始化
+void Initialize(T a[], int size, int ArraySize)
+{
+	delete[] heap;
+	heap = a;
+	CurrentSize = size;
+	MaxSize = ArraySize;
+	// 从最后一个内部节点开始，一直到根，对每个子树进行堆重整
+	for (int i = CurrentSize / 2; i &gt;= 1; i--)
+	{
+		T y = heap[i]; // 子树根节点元素
+					   // find place to put y
+		int c = 2 * i; // parent of c is target
+					   // location for y
+		while (c &lt;= CurrentSize) {
+			// heap[c] should be larger sibling
+			if (c &lt; CurrentSize &amp;&amp;
+				heap[c] &lt; heap[c + 1]) c++;
+			// can we put y in heap[c/2]?
+			if (y &gt;= heap[c]) break;  // yes
+
+									  // no
+			heap[c / 2] = heap[c]; // move child up
+			c *= 2; // move down a level
+		}
+		heap[c / 2] = y;
+	}
+}
+</code></pre>
+<p>private:
+int CurrentSize, MaxSize;
+T *heap;  // element array
+};</p>
+<pre tabindex="0"><code>
+&lt;h4&gt;最大堆的创建&lt;/h4&gt;
+&lt;h5&gt;原理&lt;/h5&gt;
+O(n)先形成一棵完全二叉树
+
+从最后一个内部节点（n/2）开始到根节点，将每个节点i的子树（完全二叉树）整理为堆
+
+重要特性——i的两个子树都已经是堆了
+
+刚开始的i直至上一层，其子树均为单节点，肯定是
+
+更高层节点，子树已经重整过,必然是堆
+
+&lt;h5&gt;复杂性分析&lt;/h5&gt;
+内层循环O(logn)，n/2次，O(nlogn)
+
+实际上，Θ(n)
+
+每次内层循环O(h~i~)
+
+- h~i~，子树高度，取值2～h
+
+- 第j层节点数2^j-1^，以它们为根子树高度h-j+1
+
+- 且循环执行n/2，所以建堆时间O(n)
+
+
+&lt;h4&gt;堆排序&lt;/h4&gt;
+```c++
+template &lt;class T&gt;
+void HeapSort(T a[], int n)
+{// Sort a[1:n] using the heap sort method.
+   // create a max heap of the elements
+   MaxHeap&lt;T&gt; H(1);
+   H.Initialize(a,n,n);	 // 建堆，直接使用a作为堆的空间
+   // extract one by one from the max heap
+   T x;
+   for (int i = n-1; i &gt;= 1; i--) {
+      H.DeleteMax(x);
+      a[i+1] = x;
+      }
+   // 将堆设置为空，但不释放空间——不销毁a
+   H.Deactivate();
+}
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">#include&lt;iostream&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include&lt;vector&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 递归方式构建大根堆(len是arr的长度，index是第一个非叶子节点的下标)
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">adjust</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>arr, <span style="color:#66d9ef">int</span> len, <span style="color:#66d9ef">int</span> index)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;index=&#34;</span> <span style="color:#f92672">&lt;&lt;</span> index <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// index的左子节点
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> right <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> index <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>;<span style="color:#75715e">// index的右子节点
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> maxIdx <span style="color:#f92672">=</span> index;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (left<span style="color:#f92672">&lt;</span>len <span style="color:#f92672">&amp;&amp;</span> arr[left] <span style="color:#f92672">&gt;</span> arr[maxIdx])     maxIdx <span style="color:#f92672">=</span> left;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (right<span style="color:#f92672">&lt;</span>len <span style="color:#f92672">&amp;&amp;</span> arr[right] <span style="color:#f92672">&gt;</span> arr[maxIdx])     maxIdx <span style="color:#f92672">=</span> right;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (maxIdx <span style="color:#f92672">!=</span> index)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//	cout &lt;&lt; &#34;swap[&#34; &lt;&lt; maxIdx &lt;&lt; &#34;]-[&#34; &lt;&lt; index &lt;&lt; &#34;]&#34; &lt;&lt; endl;
+</span></span></span><span style="display:flex;"><span>		swap(arr[maxIdx], arr[index]);
+</span></span><span style="display:flex;"><span>		adjust(arr, len, maxIdx);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 堆排序
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">heapSort</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>arr, <span style="color:#66d9ef">int</span> size)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> size <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 构建大根堆（从最后一个非叶子节点向上）
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> size <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		adjust(arr, size, i);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>arr.size(); i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		cout <span style="color:#f92672">&lt;&lt;</span> arr[i] <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 调整大根堆
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> size <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">--</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		swap(arr[<span style="color:#ae81ff">0</span>], arr[i]);           <span style="color:#75715e">// 将当前最大的放置到数组末尾
+</span></span></span><span style="display:flex;"><span>		adjust(arr, i, <span style="color:#ae81ff">0</span>);              <span style="color:#75715e">// 将未完成排序的部分继续进行堆排序
+</span></span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> arr <span style="color:#f92672">=</span> { <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">21</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">10</span> };
+</span></span><span style="display:flex;"><span>	heapSort(arr, arr.size());
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>arr.size(); i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		cout <span style="color:#f92672">&lt;&lt;</span> arr[i] <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="建堆">建堆<a hidden class="anchor" aria-hidden="true" href="#建堆">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> MaxHeap<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>Initialize(T a[], <span style="color:#66d9ef">int</span> size,<span style="color:#66d9ef">int</span> ArraySize)
+</span></span><span style="display:flex;"><span>{<span style="color:#75715e">// Initialize max heap to array a.
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">delete</span> [] heap;
+</span></span><span style="display:flex;"><span>   heap <span style="color:#f92672">=</span> a;
+</span></span><span style="display:flex;"><span>   CurrentSize <span style="color:#f92672">=</span> size;
+</span></span><span style="display:flex;"><span>   MaxSize <span style="color:#f92672">=</span> ArraySize;
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">// 从最后一个内部节点开始，一直到根，对每个子树进行堆重整
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> CurrentSize<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>      T y <span style="color:#f92672">=</span> heap[i]; <span style="color:#75715e">// 子树根节点元素
+</span></span></span><span style="display:flex;"><span>      <span style="color:#75715e">// find place to put y
+</span></span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> c <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>i; <span style="color:#75715e">// parent of c is target
+</span></span></span><span style="display:flex;"><span>                   <span style="color:#75715e">// location for y
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">while</span> (c <span style="color:#f92672">&lt;=</span> CurrentSize) {
+</span></span><span style="display:flex;"><span>         <span style="color:#75715e">// heap[c] should be larger sibling
+</span></span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">if</span> (c <span style="color:#f92672">&lt;</span> CurrentSize <span style="color:#f92672">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>             heap[c] <span style="color:#f92672">&lt;</span> heap[c<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]) c<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>         <span style="color:#75715e">// can we put y in heap[c/2]?
+</span></span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">if</span> (y <span style="color:#f92672">&gt;=</span> heap[c]) <span style="color:#66d9ef">break</span>;  <span style="color:#75715e">// yes
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>         <span style="color:#75715e">// no
+</span></span></span><span style="display:flex;"><span>         heap[c<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> heap[c]; <span style="color:#75715e">// move child up
+</span></span></span><span style="display:flex;"><span>         c <span style="color:#f92672">*=</span> <span style="color:#ae81ff">2</span>; <span style="color:#75715e">// move down a level
+</span></span></span><span style="display:flex;"><span>         }
+</span></span><span style="display:flex;"><span>      heap[c<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> y;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>堆是表达优先队列的一种方式</p>
+<p>堆的插入：O(<em>log</em>n)从下向上调整</p>
+<p>堆的删除：O(<em>log</em>n)从上向下调整</p>
+<p>堆的初始化：O(n)从后向前遍历、自上而下调整</p>
+<p>堆排序：先建最大堆、再依次删除</p>
+<p>堆排序时间已达最优O(1)</p>
+<hr>
+<h3 id="霍夫曼编码">霍夫曼编码<a hidden class="anchor" aria-hidden="true" href="#霍夫曼编码">#</a></h3>
+<p>huffman类</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span>  <span style="color:#a6e22e">Huffman</span> {
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">friend</span> BinaryTree<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> HuffmanTree(T [], <span style="color:#66d9ef">int</span>);
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">operator</span> T () <span style="color:#66d9ef">const</span> {<span style="color:#66d9ef">return</span> weight;}
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      BinaryTree<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> tree;
+</span></span><span style="display:flex;"><span>      T weight;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//构造函数
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>BinaryTree<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> HuffmanTree(T a[], <span style="color:#66d9ef">int</span> n)
+</span></span><span style="display:flex;"><span>{<span style="color:#75715e">// Generate Huffman tree with weights a[1:n].
+</span></span></span><span style="display:flex;"><span>   <span style="color:#75715e">// create an array of single node trees
+</span></span></span><span style="display:flex;"><span>   Huffman<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>w <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Huffman<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> [n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>   BinaryTree<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> z, zero;
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>      z.MakeTree(i, zero, zero);
+</span></span><span style="display:flex;"><span>      w[i].weight <span style="color:#f92672">=</span> a[i];
+</span></span><span style="display:flex;"><span>      w[i].tree <span style="color:#f92672">=</span> z;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">// make array into a min heap
+</span></span></span><span style="display:flex;"><span>   MinHeap<span style="color:#f92672">&lt;</span>Huffman<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> H(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>   H.Initialize(w,n,n);
+</span></span><span style="display:flex;"><span>       <span style="color:#75715e">// repeatedly combine trees from heap
+</span></span></span><span style="display:flex;"><span>   Huffman<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> x, y;
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>      H.DeleteMin(x);
+</span></span><span style="display:flex;"><span>      H.DeleteMin(y);
+</span></span><span style="display:flex;"><span>      z.MakeTree(<span style="color:#ae81ff">0</span>, x.tree, y.tree);
+</span></span><span style="display:flex;"><span>      x.weight <span style="color:#f92672">+=</span> y.weight; x.tree <span style="color:#f92672">=</span> z;
+</span></span><span style="display:flex;"><span>      H.Insert(x);
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   H.DeleteMin(x); <span style="color:#75715e">// final tree
+</span></span></span><span style="display:flex;"><span>   H.Deactivate();
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">delete</span> [] w;
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> x.tree;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h3 id="二叉树与森林互转">二叉树与森林互转<a hidden class="anchor" aria-hidden="true" href="#二叉树与森林互转">#</a></h3>
+<p>树转为二叉树：</p>
+<p>1.树中某节点的第一个孩子是二叉树中该节点的左孩子；</p>
+<p>2.树中某节点的右兄弟是二叉树中该节点的右孩子。</p>
+<p>森林转为二叉树：</p>
+<ul>
+<li>由于根没有兄弟，所以树转换为二叉树后，二叉树的根一定没有右子树。</li>
+<li>先将森林中的每一棵树转换为二叉树；</li>
+<li>再将第一棵二叉树的根作为转换后二叉树的根；</li>
+<li>第一棵二叉树的左子树作为转换后二叉树的左子树；</li>
+<li>第二棵二叉树作为转换后二叉树的右子树；</li>
+<li>第三棵二叉树作为转换后二叉树根的右孩子的右子树</li>
+<li>依此类推</li>
+</ul>
+<hr>
+<!-- raw HTML omitted -->
+<p>每个元素一个关键值，所有的关键值唯一</p>
+<p>(如果有的话) 左＜根＜右</p>
+<p>根结点的左右子树也是二叉搜索树（递归定义）</p>
+<p>中序遍历的结果是升序序列</p>
+<p>并不要求是完全二叉树</p>
+<p>索引二叉搜索树：求节点在子树中的排名，左子树大小+1</p>
+<p>抽象数据类型</p>
+<pre tabindex="0"><code>BSTree{
+实例
+二叉树，每一个节点中有一个元素，该元素有一个关键值域；所有元素的关键值各不相同；任何节点左子树的关键值小于该节点的关键值；任何节点右子树的关键值大于该节点的关键值。
+操作
+	Create()：创建一个空的二叉搜索树
+	Search(k, e)：将关键值为k的元素返回到e中；如果操作失败则返回false，否则返回true
+	Insert(e)：将元素e插入到搜索树中
+	Delete(k, e)：删除关键值为k的元素并且将其返回到e中
+	Ascend()：按照关键值的升序排列输出所有元素
+}
+</code></pre><p>索引二叉搜索树</p>
+<pre tabindex="0"><code>抽象数据类型IndexedBSTree{
+实例
+	除每个节点有一个LeftSize域以外，其他与BSTree相同
+操作
+	Create()：产生一个空的带索引的二叉搜索树
+	Search(k, e)：将关键值为k的元素返回到e中；如果操作	失败返回false，否则返回true
+	(k, e)：将第k个元素返回到e中
+	Insert(e)：将元素e插入到搜索树
+	Delete(k, e)：删除关键值为k的元素并且将其返回到e中
+	IndexDelete(k, e)：删除第k个元素并将其返回到e中
+	Ascend()：按照关键值的升序排列输出所有元素
+}
+</code></pre><h4 id="类bstree">类BSTREE<a hidden class="anchor" aria-hidden="true" href="#类bstree">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">E</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">K</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BSTree</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> BinaryTree<span style="color:#f92672">&lt;</span>E<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">bool</span> Search(<span style="color:#66d9ef">const</span> K<span style="color:#f92672">&amp;</span> k, E<span style="color:#f92672">&amp;</span> e) <span style="color:#66d9ef">const</span>;
+</span></span><span style="display:flex;"><span>      BSTree<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;&amp;</span> Insert(<span style="color:#66d9ef">const</span> E<span style="color:#f92672">&amp;</span> e);
+</span></span><span style="display:flex;"><span>      BSTree<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;&amp;</span> Delete(<span style="color:#66d9ef">const</span> K<span style="color:#f92672">&amp;</span> k, E<span style="color:#f92672">&amp;</span> e);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Ascend</span>() {InOutput();}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h5 id="bst搜索">BST搜索：<a hidden class="anchor" aria-hidden="true" href="#bst搜索">#</a></h5>
+<ul>
+<li>从根节点开始将key与节点值比较</li>
+<li>如果key小于节点值，进入左子树；</li>
+<li>如果key大于节点值，进入右子树；</li>
+<li>直到找到或子树为空停止</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">E</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">K</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> BSTree<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;::</span>Search(<span style="color:#66d9ef">const</span> K<span style="color:#f92672">&amp;</span> k, E <span style="color:#f92672">&amp;</span>e) <span style="color:#66d9ef">const</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>   BinaryTreeNode<span style="color:#f92672">&lt;</span>E<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> root;
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">while</span> (p) <span style="color:#75715e">// examine p-&gt;data
+</span></span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (k <span style="color:#f92672">&lt;</span> p<span style="color:#f92672">-&gt;</span>data) p <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>LeftChild;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (k <span style="color:#f92672">&gt;</span> p<span style="color:#f92672">-&gt;</span>data) p <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>RightChild;
+</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">else</span> {<span style="color:#75715e">// found element
+</span></span></span><span style="display:flex;"><span>                 e <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>data;
+</span></span><span style="display:flex;"><span>                 <span style="color:#66d9ef">return</span> true;}
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h5 id="bst插入">BST插入<a hidden class="anchor" aria-hidden="true" href="#bst插入">#</a></h5>
+<p>新插入的节点一定是一个叶子节点</p>
+<p>并且是查找不成功时查找路径上访问的最后一个节点的左孩子或右孩子节点</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">E</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">K</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>BSTree<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;&amp;</span> BSTree<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;::</span>Insert(<span style="color:#66d9ef">const</span> E<span style="color:#f92672">&amp;</span> e)
+</span></span><span style="display:flex;"><span>{<span style="color:#75715e">// Insert e if not duplicate.
+</span></span></span><span style="display:flex;"><span>   BinaryTreeNode<span style="color:#f92672">&lt;</span>E<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> root,  <span style="color:#75715e">// search pointer
+</span></span></span><span style="display:flex;"><span>                     <span style="color:#f92672">*</span>pp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;    <span style="color:#75715e">// parent of p
+</span></span></span><span style="display:flex;"><span>   <span style="color:#75715e">// find place to insert
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">while</span> (p) 
+</span></span><span style="display:flex;"><span>   {<span style="color:#75715e">// examine p-&gt;data
+</span></span></span><span style="display:flex;"><span>      pp <span style="color:#f92672">=</span> p;
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// move p to a child
+</span></span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (e <span style="color:#f92672">&lt;</span> p<span style="color:#f92672">-&gt;</span>data) p <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>LeftChild;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (e <span style="color:#f92672">&gt;</span> p<span style="color:#f92672">-&gt;</span>data) p <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>RightChild;
+</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">BadInput</span>(); <span style="color:#75715e">// duplicate
+</span></span></span><span style="display:flex;"><span>      }<span style="color:#75715e">//找到parent节点
+</span></span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>   BinaryTreeNode<span style="color:#f92672">&lt;</span>E<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>r <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BinaryTreeNode<span style="color:#f92672">&lt;</span>E<span style="color:#f92672">&gt;</span> (e);
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (root) {<span style="color:#75715e">// tree not empty
+</span></span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (e <span style="color:#f92672">&lt;</span> pp<span style="color:#f92672">-&gt;</span>data) pp<span style="color:#f92672">-&gt;</span>LeftChild <span style="color:#f92672">=</span> r;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">else</span> pp<span style="color:#f92672">-&gt;</span>RightChild <span style="color:#f92672">=</span> r;}
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">else</span> <span style="color:#75715e">// insertion into empty tree
+</span></span></span><span style="display:flex;"><span>        root <span style="color:#f92672">=</span> r;
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h5 id="bst删除">BST删除<a hidden class="anchor" aria-hidden="true" href="#bst删除">#</a></h5>
+<h6 id="删除叶节点">删除叶节点<a hidden class="anchor" aria-hidden="true" href="#删除叶节点">#</a></h6>
+<p>父节点指向它的指针置为0</p>
+<h6 id="不是叶节点">不是叶节点<a hidden class="anchor" aria-hidden="true" href="#不是叶节点">#</a></h6>
+<p>删除节点p，p的子树内部调整 :找到BST中p的直接前驱或直接后继替代它</p>
+<p>1 p有且只有一个非空子树t，其根为q：丢弃p，以q取代p的位置</p>
+<ul>
+<li>p是整个二叉搜索树的根——q作为新的根</li>
+<li>否则——p的父节点的“指向p的指针”变为指向q</li>
+</ul>
+<p>2 3.p的两个子树都不空：</p>
+<p>p与某个节点q（满足情况2或1）交换</p>
+<ul>
+<li>删除p-&gt;删除q</li>
+<li>q的选择准则？——替代p成为子树的根后，应当保持二叉搜索树特性</li>
+<li>左子树的最右节点或右子树的最左节点，排名恰与p相邻——之前或之后</li>
+</ul>
+<h5 id="代码">代码<a hidden class="anchor" aria-hidden="true" href="#代码">#</a></h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">E</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">K</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>BSTree<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;&amp;</span> BSTree<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;::</span>Delete(<span style="color:#66d9ef">const</span> K<span style="color:#f92672">&amp;</span> k, E<span style="color:#f92672">&amp;</span> e)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>   BinaryTreeNode<span style="color:#f92672">&lt;</span>E<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> root,  <span style="color:#f92672">*</span>pp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; 
+</span></span><span style="display:flex;"><span>       <span style="color:#75715e">//先搜索要删除的节点p
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">while</span> (p <span style="color:#f92672">&amp;&amp;</span> p<span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">!=</span> k)
+</span></span><span style="display:flex;"><span>   {
+</span></span><span style="display:flex;"><span>      pp <span style="color:#f92672">=</span> p;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (k <span style="color:#f92672">&lt;</span> p<span style="color:#f92672">-&gt;</span>data) 
+</span></span><span style="display:flex;"><span>          p <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>LeftChild;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">else</span> p <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>RightChild;
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>p) <span style="color:#66d9ef">throw</span> BadInput(); <span style="color:#75715e">// no element with key k
+</span></span></span><span style="display:flex;"><span>       e <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>data;  <span style="color:#75715e">//?
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">//最坏情况，
+</span></span></span><span style="display:flex;"><span>   <span style="color:#75715e">//两个子树均不空，
+</span></span></span><span style="display:flex;"><span>   <span style="color:#75715e">// 转换为简单情况
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (p<span style="color:#f92672">-&gt;</span>LeftChild <span style="color:#f92672">&amp;&amp;</span> p<span style="color:#f92672">-&gt;</span>RightChild)
+</span></span><span style="display:flex;"><span>   {<span style="color:#75715e">// two children
+</span></span></span><span style="display:flex;"><span>      <span style="color:#75715e">// find largest element in left subtree of p
+</span></span></span><span style="display:flex;"><span>      <span style="color:#75715e">// 搜索左子树最右（大）节点
+</span></span></span><span style="display:flex;"><span>      BinaryTreeNode<span style="color:#f92672">&lt;</span>E<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>s <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>LeftChild,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">*</span>ps <span style="color:#f92672">=</span> p;  <span style="color:#75715e">// parent of s
+</span></span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">while</span> (s<span style="color:#f92672">-&gt;</span>RightChild) 
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>         ps <span style="color:#f92672">=</span> s;
+</span></span><span style="display:flex;"><span>         s <span style="color:#f92672">=</span> s<span style="color:#f92672">-&gt;</span>RightChild;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// 交换p和其左子树的最右节点
+</span></span></span><span style="display:flex;"><span>      p<span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">=</span> s<span style="color:#f92672">-&gt;</span>data;
+</span></span><span style="display:flex;"><span>      p <span style="color:#f92672">=</span> s;
+</span></span><span style="display:flex;"><span>      pp <span style="color:#f92672">=</span> ps;
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">// p has at most one child
+</span></span></span><span style="display:flex;"><span>   <span style="color:#75715e">// save child pointer in c
+</span></span></span><span style="display:flex;"><span>   BinaryTreeNode<span style="color:#f92672">&lt;</span>E<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>c;
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (p<span style="color:#f92672">-&gt;</span>LeftChild) c <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>LeftChild;
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">else</span> c <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>RightChild;
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">// delete p
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (p <span style="color:#f92672">==</span> root) root <span style="color:#f92672">=</span> c;
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">else</span> 
+</span></span><span style="display:flex;"><span>   {<span style="color:#75715e">// is p left or right child of pp?
+</span></span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">if</span> (p <span style="color:#f92672">==</span> pp<span style="color:#f92672">-&gt;</span>LeftChild)
+</span></span><span style="display:flex;"><span>              pp<span style="color:#f92672">-&gt;</span>LeftChild <span style="color:#f92672">=</span> c;
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">else</span> pp<span style="color:#f92672">-&gt;</span>RightChild <span style="color:#f92672">=</span> c;
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">delete</span> p;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="示例">示例<a hidden class="anchor" aria-hidden="true" href="#示例">#</a></h4>
+<p>实现插入、删除和层序输出（前中后我不会非递归的就没写）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">#include&lt;iostream&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include&lt;queue&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">node</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> data;
+</span></span><span style="display:flex;"><span>	node <span style="color:#f92672">*</span>lc, <span style="color:#f92672">*</span>rc;
+</span></span><span style="display:flex;"><span>	node(<span style="color:#66d9ef">int</span> da)<span style="color:#f92672">:</span>data(da),lc(NULL),rc(NULL){}
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">bstree</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	bstree(){}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">insert</span>(<span style="color:#66d9ef">int</span> dat)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>root)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			root <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> node(dat);
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		node <span style="color:#f92672">*</span>par<span style="color:#f92672">=</span>NULL,<span style="color:#f92672">*</span>p<span style="color:#f92672">=</span>root;
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">while</span> (p<span style="color:#f92672">!=</span>NULL)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			par <span style="color:#f92672">=</span> p; 
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (dat <span style="color:#f92672">&lt;</span>p<span style="color:#f92672">-&gt;</span>data) p <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>lc;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (dat<span style="color:#f92672">&gt;</span>p<span style="color:#f92672">-&gt;</span>data) p <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>rc;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		p <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> node(dat);
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (dat <span style="color:#f92672">&lt;</span> par<span style="color:#f92672">-&gt;</span>data) par<span style="color:#f92672">-&gt;</span>lc <span style="color:#f92672">=</span> p;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">else</span> par<span style="color:#f92672">-&gt;</span>rc <span style="color:#f92672">=</span> p;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">prin</span>()
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		queue<span style="color:#f92672">&lt;</span>node<span style="color:#f92672">*&gt;</span> q;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (root)
+</span></span><span style="display:flex;"><span>			q.push(root);
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>q.empty())
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			cout <span style="color:#f92672">&lt;&lt;</span> q.front()<span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (q.front()<span style="color:#f92672">-&gt;</span>lc)
+</span></span><span style="display:flex;"><span>				q.push(q.front()<span style="color:#f92672">-&gt;</span>lc);
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (q.front()<span style="color:#f92672">-&gt;</span>rc)
+</span></span><span style="display:flex;"><span>				q.push(q.front()<span style="color:#f92672">-&gt;</span>rc);
+</span></span><span style="display:flex;"><span>			q.pop();
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">remove</span>(<span style="color:#66d9ef">int</span> k)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>root) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>		node <span style="color:#f92672">*</span>par <span style="color:#f92672">=</span> NULL, <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> root;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">while</span> (p<span style="color:#f92672">&amp;&amp;</span>p<span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">!=</span> k)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			par <span style="color:#f92672">=</span> p;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (k <span style="color:#f92672">&lt;</span> p<span style="color:#f92672">-&gt;</span>data)
+</span></span><span style="display:flex;"><span>				p <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>lc;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">else</span> p <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>rc;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>p) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">//两个子树均不空
+</span></span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (p<span style="color:#f92672">-&gt;</span>lc<span style="color:#f92672">&amp;&amp;</span>p<span style="color:#f92672">-&gt;</span>rc)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			node <span style="color:#f92672">*</span>s <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>lc,<span style="color:#f92672">*</span>spar<span style="color:#f92672">=</span>p;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">while</span> (s<span style="color:#f92672">-&gt;</span>rc)
+</span></span><span style="display:flex;"><span>			{
+</span></span><span style="display:flex;"><span>				spar <span style="color:#f92672">=</span> s;
+</span></span><span style="display:flex;"><span>				s <span style="color:#f92672">=</span> s<span style="color:#f92672">-&gt;</span>rc;
+</span></span><span style="display:flex;"><span>			}<span style="color:#75715e">//得到后继节点（左子树最大）
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">//交换
+</span></span></span><span style="display:flex;"><span>			p<span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">=</span> s<span style="color:#f92672">-&gt;</span>data;<span style="color:#75715e">//这个不能删？是指针指向改变，不是指针指向的节点内容改变
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			p <span style="color:#f92672">=</span> s;
+</span></span><span style="display:flex;"><span>			par <span style="color:#f92672">=</span> spar;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">//p至少有一个子树
+</span></span></span><span style="display:flex;"><span>		node <span style="color:#f92672">*</span>c;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (p<span style="color:#f92672">-&gt;</span>lc) c <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>lc;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">else</span> c <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>rc;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (p <span style="color:#f92672">==</span> root) root <span style="color:#f92672">=</span> c;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (p <span style="color:#f92672">==</span> par<span style="color:#f92672">-&gt;</span>lc)
+</span></span><span style="display:flex;"><span>				par<span style="color:#f92672">-&gt;</span>lc <span style="color:#f92672">=</span> c;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">else</span> par<span style="color:#f92672">-&gt;</span>rc <span style="color:#f92672">=</span> c;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">delete</span> p;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> size;
+</span></span><span style="display:flex;"><span>	node <span style="color:#f92672">*</span>root;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> n, arr;
+</span></span><span style="display:flex;"><span>	cin <span style="color:#f92672">&gt;&gt;</span> n;
+</span></span><span style="display:flex;"><span>	bstree cfd;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		cin <span style="color:#f92672">&gt;&gt;</span> arr;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">bool</span> t <span style="color:#f92672">=</span> cfd.insert(arr);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	cfd.prin();
+</span></span><span style="display:flex;"><span>	cin <span style="color:#f92672">&gt;&gt;</span> n;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		cin <span style="color:#f92672">&gt;&gt;</span> arr;
+</span></span><span style="display:flex;"><span>		cfd.remove(arr);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>	cfd.prin();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="复杂性分析">复杂性分析<a hidden class="anchor" aria-hidden="true" href="#复杂性分析">#</a></h4>
+<p>搜索、插入、删除的复杂性为O(h)</p>
+<p>二叉搜索树的高度h，最坏情况为n</p>
+<p>可证明，若搜索、插入、删除是随机的，平均情况为O(logn)</p>
+<p>而升序输出为O(n)</p>
+<hr>
+<h3 id="avl树">AVL树<a hidden class="anchor" aria-hidden="true" href="#avl树">#</a></h3>
+<p>树高最坏情况保持在O(logn)</p>
+<h4 id="定义">定义<a hidden class="anchor" aria-hidden="true" href="#定义">#</a></h4>
+<p>空二叉树是AVL树；
+如果T是一棵非空的二叉树，
+T<del>L</del>和T<del>R</del>分别是其左子树和右子树，
+那么满足以下条件，<em>T</em>是一棵AVL树：</p>
+<ol>
+<li>T<del>L</del>和T<del>R</del>是AVL树</li>
+<li>|h<del>L</del>-h<del>R</del>|≤1，h<del>L</del>和h<del>R</del>分别是左子树和右子树的高度</li>
+</ol>
+<h4 id="特性">特性<a hidden class="anchor" aria-hidden="true" href="#特性">#</a></h4>
+<ul>
+<li>n个元素（节点）的AVL树的高度是O(logn)</li>
+<li>对于每一个<em>n</em>（<em>n</em>≥0）值，都存在一棵AVL树（保证任何时刻，插入操作都是可完成的）</li>
+<li>一棵<em>n</em>元素的AVL搜索树能在O(高度)=O(log<em>n</em>)的时间内完成搜索。</li>
+<li>将一个新元素插入到一棵<em>n</em>元素的AVL搜索树中，可得到一棵<em>n</em>+1元素的AVL树，这种插入过程可以在O(log<em>n</em>)时间内完成</li>
+<li>从一棵<em>n</em>元素的AVL搜索树中删除一个元素，可得到一棵<em>n</em>-1元素的AVL树，这种删除过程可以在O(log<em>n</em>)时间内完成</li>
+</ul>
+<h4 id="高度">高度<a hidden class="anchor" aria-hidden="true" href="#高度">#</a></h4>
+<ul>
+<li>n个节点的AVL树的高度最高是多少？</li>
+</ul>
+<p>F<del>h</del>表示高度为h的节点数最少的AVL树</p>
+<p>左、右子树也是AVL树，高度一个为h-1，另一个为h-1或h-2</p>
+<p>F<del>h</del>节点数最少-&gt;子树中分别为F<del>h-1</del>和F<del>h-2</del></p>
+<p>|F<del>h</del>|=|F<del>h-1</del>|+|F<del>h-2</del>|+1 是斐波那契数列</p>
+<p>h≈1.44log<del>2</del>|F<del>h</del>|=l.44log<del>2</del>n=O(logn)</p>
+<h4 id="描述-1">描述<a hidden class="anchor" aria-hidden="true" href="#描述-1">#</a></h4>
+<p>增加平衡因子bf=左数高-右树高</p>
+<h4 id="搜索">搜索<a hidden class="anchor" aria-hidden="true" href="#搜索">#</a></h4>
+<p>与普通二叉树一致</p>
+<h4 id="不平衡时的旋转调整">不平衡时的旋转调整<a hidden class="anchor" aria-hidden="true" href="#不平衡时的旋转调整">#</a></h4>
+<h5 id="ll">LL<a hidden class="anchor" aria-hidden="true" href="#ll">#</a></h5>
+<p><img loading="lazy" src="https://images2017.cnblogs.com/blog/1281268/201801/1281268-20180119074857396-1391797908.png"></p>
+<h5 id="lrimg">LR<img alt="img" loading="lazy" src="https://images2017.cnblogs.com/blog/1281268/201801/1281268-20180123063313662-696038993.png"><a hidden class="anchor" aria-hidden="true" href="#lrimg">#</a></h5>
+<h5 id="rr">RR<a hidden class="anchor" aria-hidden="true" href="#rr">#</a></h5>
+<p><img alt="img" loading="lazy" src="https://images2017.cnblogs.com/blog/1281268/201801/1281268-20180123065745319-1039256167.png"></p>
+<h5 id="rlimg">RL<img alt="img" loading="lazy" src="https://images2017.cnblogs.com/blog/1281268/201801/1281268-20180130062836312-255811591.png"><a hidden class="anchor" aria-hidden="true" href="#rlimg">#</a></h5>
+<h4 id="插入">插入<a hidden class="anchor" aria-hidden="true" href="#插入">#</a></h4>
+<p>先插入，会出现不平衡，再调整结构</p>
+<h5 id="插入导致的不平衡">插入导致的不平衡<a hidden class="anchor" aria-hidden="true" href="#插入导致的不平衡">#</a></h5>
+<ol>
+<li>不平衡树中的平衡因子的值限于-2，-1，0，1和2</li>
+<li>平衡因子值为2的节点，在插入前其平衡因子为1；类似的，平衡因子值为-2的，插入前为-1</li>
+<li>只有从根到新插入节点路径上的节点，其平衡因子才会在插入操作后发生改变</li>
+<li>假设<em>A</em>是离新插入节点最近的，平衡因子为-2或2的祖先节点，则在插入前，从<em>A</em>到新插入节点的路径上，所有节点的平衡因子都是0</li>
+</ol>
+<h5 id="插入算法">插入算法<a hidden class="anchor" aria-hidden="true" href="#插入算法">#</a></h5>
+<p>1)从根节点开始搜索，确定插入位置</p>
+<ul>
+<li>同时寻找最后的平衡因子为-1或1的节点，记为<em>A</em></li>
+<li>若找到相同关键字的元素，插入失败</li>
+</ul>
+<p>2)若没有这样的节点<em>A</em>——插入后平衡</p>
+<ul>
+<li>从根节点重新遍历一次，修改平衡因子，然后终止</li>
+</ul>
+<p>3)若<em>bf</em>(A)=1且新节点插入A的右子树，
+或<em>bf</em>(A)=-1且新节点插入A的左子树
+-&gt;A 的新平衡因子是0</p>
+<ul>
+<li>修改从A 到新节点路径中节点的平衡因子，然后终止</li>
+</ul>
+<p>4)不平衡情况</p>
+<ul>
+<li>确定不平衡类型，并执行相应的旋转</li>
+<li>在从新子树根节点至新插入节点路径中，根据旋转需要修改相应的平衡因子</li>
+</ul>
+<p>关键是找到距离插入点最近的不平衡节点！</p>
+<h4 id="删除">删除<a hidden class="anchor" aria-hidden="true" href="#删除">#</a></h4>
+<p>首先执行二叉搜索树的删除，如不平衡则调整</p>
+<p>从删除节点的父节点开始到根节点，对路径上的每个节点q，根据新的平衡因子， 判断子树高度变化， 调整方法，以及是否继续调整过程</p>
+<h5 id="根据平衡因子调整">根据平衡因子调整<a hidden class="anchor" aria-hidden="true" href="#根据平衡因子调整">#</a></h5>
+<p>1)0：子树平衡，无需调整，但其高度减少了1，需继续向上，改变祖先节点平衡因子，继续修正过程</p>
+<p>2)1或-1：子树平衡，且高度未变，修正过程终止</p>
+<p>3)2或-2：子树不平衡，需调整，根据调整结果判断是否继续向上修正过程</p>
+<h5 id="三种情况">三种情况<a hidden class="anchor" aria-hidden="true" href="#三种情况">#</a></h5>
+<p>一次旋转即停止</p>
+<p>一次旋转不平衡</p>
+<p>两次旋转不平衡</p>
+<p>关键是不平衡节点的另一棵子树</p>
+<h4 id="代码-1">代码<a hidden class="anchor" aria-hidden="true" href="#代码-1">#</a></h4>
+<ul>
+<li><input disabled="" type="checkbox"> 有空再写</li>
+</ul>
+<hr>
+<h3 id="b树-b树">B树 B+树<a hidden class="anchor" aria-hidden="true" href="#b树-b树">#</a></h3>
+<p>当数据元素<strong>数目较大</strong>时，不能一次读入内存，可以把所有n个元素分为b个子块存放</p>
+<p>建立索引表，其中每一项是索引项，记录了各子块中最大的关键值</p>
+<p>此时，索引项与子块一一对应，便于查找</p>
+<p>当元素<strong>数目特别大</strong>时，索引也不能一次读入内存，可以建立索引的索引（多级索引）</p>
+<h4 id="m叉搜索树">m叉搜索树<a hidden class="anchor" aria-hidden="true" href="#m叉搜索树">#</a></h4>
+<h5 id="定义-1">定义<a hidden class="anchor" aria-hidden="true" href="#定义-1">#</a></h5>
+<p><em>m</em>叉搜索树（<em>m</em>-way search tree）可以是一棵空树，</p>
+<p>如果非空，它必须满足：</p>
+<ol>
+<li>在相应的扩充搜索树中（用外部节点替换零指针），每个内部节点最多可以有<em>m</em>个子女及1～<em>m</em>-1个元素（外部节点不含元素和子女）</li>
+<li>每个含<em>p</em>个元素的节点，有<em>p</em>+1个子女</li>
+<li>考察含<em>p</em>个元素的任意节点：</li>
+</ol>
+<ul>
+<li>设k<del>1</del>, &hellip; k<del>p</del>是这些元素的关键值，元素按关键字升序排列，即有k<del>1</del>&lt;k<del>2</del>&lt;&hellip;&lt;<em>k</em><del>p</del>
+设<em>c</em><del>0</del>, <em>c</em><del>1</del>, &hellip;, <em>c</em><del>p</del>是节点的<em>p</em>+1个孩子</li>
+<li>以<em>c</em><del>0</del>为根的子树中的元素关键值小于<em>k</em><del>1</del></li>
+<li>以c<del>p</del>为根的子树中的元素关键值大于<em>k</em><del>p</del></li>
+<li>并且以c<del>i</del>为根的子树中的元素关键值会大于<em>k</em>i而小于<em>k</em>i+1，其中1≤<em>i</em>≤p</li>
+</ul>
+<h5 id="搜索-1">搜索<a hidden class="anchor" aria-hidden="true" href="#搜索-1">#</a></h5>
+<p>从根节点开始，向下搜索</p>
+<p>对每个节点，若目标关键字k＝k<del>i</del>，搜索成功</p>
+<p>否则 k<del>i</del>&lt;k&lt;k<del>i+1</del>，在子树i中继续寻找</p>
+<p>到达外部节点——失败</p>
+<h5 id="插入-1">插入<a hidden class="anchor" aria-hidden="true" href="#插入-1">#</a></h5>
+<p>先进行搜索：成功，插入失败；否则，在失败位置（最后的一个内部节点）进行插入</p>
+<p>元素数&lt;m-1，直接插入：</p>
+<p>≥m-1，生成新孩子节点：</p>
+<h5 id="删除-1">删除<a hidden class="anchor" aria-hidden="true" href="#删除-1">#</a></h5>
+<p>先进行搜索，找到元素后进行删除</p>
+<p>左右子树均为空，直接进行删除</p>
+<p>不都为空，子树中元素提升，替代被删除元素</p>
+<h5 id="m叉搜索树的高度">m叉搜索树的高度<a hidden class="anchor" aria-hidden="true" href="#m叉搜索树的高度">#</a></h5>
+<p>高度h，最少h个元素，最多m^h^-1</p>
+<p>n个元素，高度n~ log<del>m</del>(n+1)</p>
+<h4 id="m阶b-树">m阶B-树<a hidden class="anchor" aria-hidden="true" href="#m阶b-树">#</a></h4>
+<h5 id="定义-2">定义<a hidden class="anchor" aria-hidden="true" href="#定义-2">#</a></h5>
+<p>m阶<em>B</em>-树（B-Tree of order m）是一棵<em>m</em>叉搜索树，如果B-树非空，那么相应的扩充树满足下列特征：</p>
+<p>1.每个节点至多有m棵子树</p>
+<p>2.若根节点有子树，则至少有2棵子树</p>
+<p>3.除根节点外，每个节点至少有ceil(m/2)棵子树</p>
+<p>4.子树与它的索引有确定的大小关系</p>
+<p>5.所有外部节点在同一层上</p>
+<p>1、2、3为个数要求，4为大小要求，5为层次要求</p>
+<p>1）在扩充搜索树中，每个内部节点最多可以有<em>m</em>个子女及1～<em>m</em>-1个元素</p>
+<p>2）每个含<em>p</em>个元素的节点，有<em>p</em>+1个子女</p>
+<p>3）考察含<em>p</em>个元素的任意节点以c<del>i</del>为根的子树中的元素关键值会大于<em>k</em><del>i</del>而小于<em>k</em><del>i+1</del>，其中1≤<em>i</em>≤p</p>
+<h5 id="举例">举例<a hidden class="anchor" aria-hidden="true" href="#举例">#</a></h5>
+<p>二阶B-树：满二叉树（完美二叉树）</p>
+<p>三阶B-树：2-3树</p>
+<p>四阶B-树：2-3-4树</p>
+<h5 id="高度-1">高度<a hidden class="anchor" aria-hidden="true" href="#高度-1">#</a></h5>
+<p>设<em>T</em>是一棵高度为<em>h</em>的<em>m</em>阶B-树,d=ceil(m/2)且<em>n</em>是<em>T</em>中的元素个数，则</p>
+<p>1)2d^h-1^-1≤<em>n</em>≤m^h^-1</p>
+<p>2)log<del>m</del>(<em>n</em>+1)≤<em>h</em>≤log<del>d</del>((<em>n</em>+1)/2)+1</p>
+<p>证明：</p>
+<p>n的上限：是m叉搜索树所以这样</p>
+<p>n的下限：扩充B-树时外部节点都在第h+1层，第1、2、3、4&hellip;h+1层的节点的最小数目是1、2、2d、2d^2^&hellip;2d^h-1^</p>
+<h5 id="插入操作">插入操作<a hidden class="anchor" aria-hidden="true" href="#插入操作">#</a></h5>
+<p>插入节点的元素数&lt;m-1，直接插入</p>
+<p>=m-1，会溢出：分裂，分裂后，可能需要回溯至根节点</p>
+<p>s次分裂，磁盘操作次数为——h（读取路径上的节点）+2s（写回两个分裂出的新节点）+1（写回根节点或未分裂节点）</p>
+<p>最多3h+1</p>
+<h5 id="删除-2">删除<a hidden class="anchor" aria-hidden="true" href="#删除-2">#</a></h5>
+<p>1)删除叶节点中元素</p>
+<p>2)删除非叶节点元素，类似AVL树，子树叶节点元素与之交换，转换为1)</p>
+<ul>
+<li>元素数目&gt;d-1，直接删除即可</li>
+<li>元素数目=d-1，删除后小于限制值</li>
+<li>借用兄弟节点“多余”的元素</li>
+<li>兄弟节点也无多余元素，合并</li>
+</ul>
+<h6 id="借用节点">借用节点<a hidden class="anchor" aria-hidden="true" href="#借用节点">#</a></h6>
+<p>左（右）兄弟节点元素数&gt;d-1</p>
+<p>将其最右（左）元素提升至父节点，父节点相应元素下降到删除节点-&gt;元素数目&gt;=d-1</p>
+<p>m-1次磁盘操作</p>
+<h6 id="合并节点">合并节点<a hidden class="anchor" aria-hidden="true" href="#合并节点">#</a></h6>
+<p>本节点元素数：d-2＋兄弟节点元素数：d-1＋父节点中介于两者之间的元素 = 2d – 2≤m – 1</p>
+<p>m-2次磁盘操作</p>
+<p>需要回溯，可能到根节点</p>
+<h6 id="删除小结">删除小结<a hidden class="anchor" aria-hidden="true" href="#删除小结">#</a></h6>
+<p>删除操作是指，根据key删除记录，如果B树中的记录中不存对应key的记录，则删除失败。</p>
+<p>1）如果当前需要删除的key位于非叶子结点上，则用后继key（这里的后继key均指后继记录的意思）覆盖要删除的key，然后在后继key所在的子支中删除该后继key。此时后继key一定位于叶子结点上，这个过程和二叉搜索树删除结点的方式类似。删除这个记录后执行第2步</p>
+<p>2）该结点key个数大于等于Math.ceil(m/2)-1，结束删除操作，否则执行第3步。</p>
+<p>3）如果兄弟结点key个数大于Math.ceil(m/2)-1，则父结点中的key下移到该结点，兄弟结点中的一个key上移，删除操作结束。</p>
+<p>否则，将父结点中的key下移与当前结点及它的兄弟结点中的key合并，形成一个新的结点。原父结点中的key的两个孩子指针就变成了一个孩子指针，指向这个新结点。然后当前结点的指针指向父结点，重复上第2步。</p>
+<p>有些结点它可能即有左兄弟，又有右兄弟，那么我们任意选择一个兄弟结点进行操作即可。</p>
+<h5 id="小结">小结<a hidden class="anchor" aria-hidden="true" href="#小结">#</a></h5>
+<p>n阶B树的插入</p>
+<ul>
+<li>需考虑违背n阶上限的情况</li>
+<li>处理方法：分裂</li>
+</ul>
+<p>n阶B树的删除</p>
+<ul>
+<li>需考虑违背n阶下限的情况</li>
+<li>处理方法：能借就借，不能借合并</li>
+</ul>
+<p>磁盘操作次数</p>
+<ul>
+<li>最坏情况：h层～2层均发生合并</li>
+<li>磁盘操作次数为3h次=搜索删除元素h次读操作+2～h层读取相邻兄弟节点h-1次+3～h层写回合并节点h-2次+写回修改后的根节点和第2层的两个节点3次</li>
+</ul>
+<h4 id="b树">B+树<a hidden class="anchor" aria-hidden="true" href="#b树">#</a></h4>
+<h5 id="定义-3">定义<a hidden class="anchor" aria-hidden="true" href="#定义-3">#</a></h5>
+<p>所有关键字都放在叶节点中，上层的非叶结点的关键字是其子树中最大关键字的复写</p>
+<p>叶节点包含了全部关键字，且叶节点本身按关键字值从小到大链接</p>
+<h5 id="插入-2">插入<a hidden class="anchor" aria-hidden="true" href="#插入-2">#</a></h5>
+<p>通过查找，在叶节点的适当位置插入元素</p>
+<p>如果插入后合法，结束</p>
+<p>如果插入后非法，将该叶节点均匀分裂，更新其父节点</p>
+<p>递归检查其父节点在更新后是否合法，直至结束。</p>
+<h5 id="删除-3">删除<a hidden class="anchor" aria-hidden="true" href="#删除-3">#</a></h5>
+<p>首先在叶节点上进行删除</p>
+<p>如果删除后该节点仍满足最小元素数要求，停止</p>
+<p>如果不满足了，从兄弟节点借元素</p>
+<p>如果没法借，则合并兄弟节点</p>
+<p>递归考察父节点，直至结束</p>
+<hr>
+<!-- raw HTML omitted -->
+<p>•RB2：根至外部节点的路径上没有连续红节点</p>
+<p>•RB3：所有根至外部节点的路径具有相同数目的黑节点</p>
+<p>另一种定义：</p>
+<ol>
+<li>边（指针）的颜色</li>
+<li>
+<ul>
+<li>RB1’：从内部节点指向外部节点的指针是黑的</li>
+<li>RB2’：从根至外部节点的路径上没有连续红指针</li>
+<li>RB3’：所有根至外部节点的路径具有相同数目的黑指针</li>
+</ul>
+</li>
+<li>黑指针指向的孩子节点是黑的
+红指针指向的孩子节点是红的</li>
+</ol>
+<p>节点的阶（rank）：从该节点到其子树中任一外部节点的路径上的黑色指针数目</p>
+<h4 id="特性-1">特性<a hidden class="anchor" aria-hidden="true" href="#特性-1">#</a></h4>
+<ol>
+<li>设从根到外部节点的路径的长度（length）是该路径中指针的数量，若P、Q是红－黑树中两条从根至外部节点的路径，那么length(P) ≤2length(Q)</li>
+</ol>
+<ul>
+<li>证明：设根的阶为r（黑指针数）</li>
+<li>每条路径最后一个指针是黑，所有路径不包含连续红指针：</li>
+<li>每个红指针后一定会跟着一个黑指针，红指针竖目最多为r</li>
+<li>指针总数在r~2r之间</li>
+</ul>
+<ol start="2">
+<li>
+<p>设h是一棵红－黑树的高度（不包括外部节点），n是树中内部节点的数目，而r是根节点的阶，则有</p>
+<p>1)h≤2r——显然</p>
+<p>2)n≥2^r^ – 1  根的阶为r-&gt;树高至少为r</p>
+<p>3)h≤2log<del>2</del>(n+1)       r≤log<del>2</del>(n+1)</p>
+</li>
+</ol>
+<h4 id="描述-2">描述<a hidden class="anchor" aria-hidden="true" href="#描述-2">#</a></h4>
+<p>外部节点无需实际保存</p>
+<p>每个节点需保存其颜色和两个指针的颜色——最多需3个二进制位</p>
+<h4 id="搜索-2">搜索<a hidden class="anchor" aria-hidden="true" href="#搜索-2">#</a></h4>
+<p>与二哈搜索树相同 O(logn)</p>
+<h4 id="插入-3">插入<a hidden class="anchor" aria-hidden="true" href="#插入-3">#</a></h4>
+<p>新插入的节点是红色</p>
+<h5 id="没有连续红边">没有连续红边<a hidden class="anchor" aria-hidden="true" href="#没有连续红边">#</a></h5>
+<p>直接插入</p>
+<h5 id="有连续红边">有连续红边<a hidden class="anchor" aria-hidden="true" href="#有连续红边">#</a></h5>
+<h6 id="grandparent的另一个孩子节点是黑">grandparent的另一个孩子节点是黑<a hidden class="anchor" aria-hidden="true" href="#grandparent的另一个孩子节点是黑">#</a></h6>
+<p>3节点变成4节点，旋转变色 根黑、子红</p>
+<h6 id="grandparent的另一个孩子节点是红">grandparent的另一个孩子节点是红<a hidden class="anchor" aria-hidden="true" href="#grandparent的另一个孩子节点是红">#</a></h6>
+<p>溢出，不旋转，直接变色：根红、子黑</p>
+<h4 id="删除-4">删除<a hidden class="anchor" aria-hidden="true" href="#删除-4">#</a></h4>
+<p>首先还是类似二叉搜索树的方法——
+转化为叶节点删除——
+不是叶节点的，与中序遍历的后继节点交换</p>
+<p>可对应2-3-4树自底向上删除算法设计红－黑树自底向上的删除算法</p>
+<p>若删除红节点，结束——3节点或4节点的删除</p>
+<p>若删除黑节点，调整，可能回溯——2节点的删除</p>
+<h4 id="操作演示">操作演示<a hidden class="anchor" aria-hidden="true" href="#操作演示">#</a></h4>
+<p><a href="https://www.cs.usfca.edu/~galles/visualization/RedBlack.html">https://www.cs.usfca.edu/~galles/visualization/RedBlack.html</a></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

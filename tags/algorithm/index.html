@@ -140,6 +140,193 @@
 <span title='2024-05-28 17:18:36 +0000 UTC'>May 28, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
   <a class="entry-link" aria-label="post link to 串" href="http://localhost:1313/post/%E4%B8%B2/"></a>
 </article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">策略梯度算法
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>策略梯度算法（GradientPolicy） Policy Optimization（策略优化）是强化学习中的一大类算法，其基本思路区别于Value-based的算法。因此，很多教科书都将model-free RL分成两大类，Policy Optimization和Value-based。
+理解 如果用一句话来表达策略梯度的直观解释，那就是“如果动作使得最终回报变大，那么增加这个动作出现的概率，反之，减少这个动作出现的概率”。这句话表达了两个含义：
+我们考虑的是动作对于回报的影响，没有考虑状态或者其他因素。 我们调整的是动作出现的概率，而没有给某个动作打分，这区别于Value-based类的算法。
+公式推导 基础理论来自于强化学习。
+目标函数 策略$\pi_\theta$
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-20 19:43:50 +0000 UTC'>September 20, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 策略梯度算法" href="http://localhost:1313/post/%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">PPO优化方法
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>准备拿来当素材 我炼我炼
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-19 20:21:17 +0000 UTC'>September 19, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to PPO优化方法" href="http://localhost:1313/post/ppo%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">AStar算法
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>A*算法被认为Dijkstra算法的扩展。 由于借助启发函数的引导，A*算法通常拥有更好的性能。
+前面需要的基础知识BFS、Dijkstra算法、最佳优先（Best First）算法不再赘述。
+定义 A*算法利用一个函数$f(n)=g(n)&#43;h(n)$来计算每个节点的优先级 f(n)是节点n的综合优先级。当我们选择下一个要遍历的节点时，我们总会选取综合优先级最高（值最小）的节点。 g(n) 是节点n距离起点的代价。 h(n)是节点n距离终点的预计代价，这也就是A*算法的启发函数。 A*算法在运算过程中，每次从优先队列中选取f(n)值最小（优先级最高）的节点作为下一个待遍历的节点。
+另外，A*算法使用两个集合来表示待遍历的节点，与已经遍历过的节点，这通常称之为open_set和close_set。
+完整的A*算法描述如下：
+* 初始化open_set和close_set； * 将起点加入open_set中，并设置优先级为0（优先级最高）； * 如果open_set不为空，则从open_set中选取优先级最高的节点n： * 如果节点n为终点，则： * 从终点开始逐步追踪parent节点，一直达到起点； * 返回找到的结果路径，算法结束； * 如果节点n不是终点，则： * 将节点n从open_set中删除，并加入close_set中； * 遍历节点n所有的邻近节点： * 如果邻近节点m在close_set中，则： * 跳过，选取下一个邻近节点 * 如果邻近节点m也不在open_set中，则： * 设置节点m的parent为节点n * 计算节点m的优先级 * 将节点m加入open_set中 启发函数 上面已经提到，启发函数会影响A*算法的行为。
+在极端情况下，当启发函数h(n)始终为0，则将由g(n)决定节点的优先级，此时算法就退化成了Dijkstra算法。 如果h(n)始终小于等于节点n到终点的代价，则A算法保证一定能够找到最短路径。但是当h(n)的值越小，算法将遍历越多的节点，也就导致算法越慢。 如果h(n)完全等于节点n到终点的代价，则A算法将找到最佳路径，并且速度很快。可惜的是，并非所有场景下都能做到这一点。因为在没有达到终点之前，我们很难确切算出距离终点还有多远、 如果h(n)的值比节点n到终点的代价要大，则A*算法不能保证找到最短路径，不过此时会很快。 在另外一个极端情况下，如果h()n相较于g(n)大很多，则此时只有h(n)产生效果，这也就变成了最佳优先搜索。 由上面这些信息我们可以知道，通过调节启发函数我们
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-16 17:33:38 +0000 UTC'>September 16, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to AStar算法" href="http://localhost:1313/post/astar%E7%AE%97%E6%B3%95/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">树的计数相关问题
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>光看名字就比较高级了:D 学习这个的动力来自于一个问题：对于包含n个顶点的无向完全图最多包含$n^{n-2}$棵生成树。
+Prüfer序列 Prüfer 序列可以将一个带标号 n 个结点的树用 [1,n] 中的 n-2 个整数表示。你也可以把它理解为完全图的生成树与数列之间的双射。常用于组合计数问题中。
+对树建立序列 对树建立Prüfer序列的步骤：每次选择一个编号最小的叶结点并删掉它，然后在序列中记录下它连接到的那个结点。重复 n-2 次后就只剩下两个结点，算法结束。 先删除节点再记录标号，重复n-2之后只剩下根节点没删。
+堆构造 听起来挺像建堆的过程，用堆的方法时间复杂度O(NlogN) 代码
+// 结点是从 0 标号的 vector&lt;vector&lt;int&gt;&gt; adj;// adj的构造应该是：一行上每一个数表示和这行对应的点连接的节点序号 vector&lt;int&gt; pruefer_code() { int n = adj.size(); set&lt;int&gt; leafs; vector&lt;int&gt; degree(n); vector&lt;bool&gt; killed(n, false);//killed表示已经删除的 for (int i = 0; i &lt; n; i&#43;&#43;) { degree[i] = adj[i].size();//求每个点的度 if (degree[i] == 1) leafs.insert(i);//如果这行只有自己一个节点，就是度为0（degree=1）=叶子节点 } //求Prüfer code vector&lt;int&gt; code(n - 2); for (int i = 0; i &lt; n - 2; i&#43;&#43;) { int leaf = *leafs.begin();//叶子节点 leafs.erase(leafs.begin());//每次都会删掉一个节点 killed[leaf] = true; int v; for (int u : adj[leaf])//找leaf的邻接节点 if (!killed[u]) v = u; code[i] = v;//记录leaf的邻接节点 if (--degree[v] == 1) leafs.insert(v);//重新更新叶子节点 } return code; } 代码读懂了：一句话：按从小到大的顺序删除叶子节点，因为是树，code记录的就是被删除的叶子节点的parent 但是我不知道它有什么用.-.
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-15 18:29:36 +0000 UTC'>September 15, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 树的计数相关问题" href="http://localhost:1313/post/%E6%A0%91%E7%9A%84%E8%AE%A1%E6%95%B0%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">图中判断成环
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>求最小生成树的Kruskal算法里面遇到，这边写一下
+无向图 DFS 对无向图有环=某个结点有一条边指向已访问过的结点，并且这个已访问过的结点不是上一步访问的结点 so问题可以转换成，如何区分已经访问过的节点，需要区分相邻的sibling、parent和间接的grandparent，当某节点有个sibling和某个grandparnt相同时，就是个环
+修饰节点颜色 我们不能仅仅使用一个 bool 数组来表示结点是否访问过。规定每个结点都拥有三种状态，白、灰、黑。开始时所有结点都是白色，当访问过某个结点后，该结点变为灰色，当该结点的所有邻接点都访问完，该节点变为黑色。
+那么我们的算法可以表示为：如果在遍历的过程中，发现某个结点有一条边指向灰色节点，并且这个灰色结点不是上一步访问的结点，那么存在环。
+为什么：假设灰色节点为G，它为灰色表示至少已访问过其中一个child节点，其中一个表示为parent，现在遍历到一个节点为grandchild，它可以指向G就表示它的sibling=grandparent，同时G不是grandchild上一步所访问的节点，so出现了环，这样正着推ok 反过来推，为什么需要3个状态，如果单纯两个状态就是下面的暴力递归。
+再梳理一遍就能发现对DFS来说，就好比祖母和同学是同一个人这样
+没有修饰，直接暴力递归 节点就两个状态，访问过、没访问过。 我看不懂 个人理解： 更加纯正的DFS，不管三七二十一先遍历，遍历过了就给它标记成visited，然后一旦在遍历的时候遇到即将访问的point满足1. visited过了，2.不是直系parent，就直接输出是环，要等到所有遍历走过了才确认不是环。
+BFS 和dfs相比主要的思路是一样的 BUR，BFS需要增加一个parent数组（不是DFS里面用单个parent记录刚访问过的节点） BFS相比DFS用得不怎么多，有空再钻研
+Union-Find 也叫并查集。 对于无向图来说，在遍历边（u-v）时，如果结点 u 和结点 v 的parent相同，那么结点 u 和结点 v 在同一个环中。 图的全部顶点都各自属于一个集合；然后依次检查图中的所有边，如果边关联的两个顶点不属于同一个集合，就合并两个顶点所在的集合。若图中存在环，则一定会在检测到某条边的时候，发现它关联的两个顶点早已属于同一个集合。 并查集我不会啊
+首先初始化所有元素的根为-1，-1代表根节点，接下来对于图中的每一条边(v1,v2)都并入集合，并入的方式为查找v1和v2的根节点，然后让v2的根节点作为v1的根节点，查找根节点的过程为：如果当前的结点根为-1，说明这个结点就是根，直接返回，否则再继续查找结点parent的根，直到找到root结点，这里因为只是判断环路，不需要压缩路径。
+int findSet(int x){ if(Parent[x] == -1){ return x; // x is root } return findSet(Parent[x]); } 并查集我真的看不懂 并查集find and union里面主要的是find吧，关键是怎么找root节点。
+#include &lt;bits/stdc&#43;&#43;.h&gt; using namespace std; //无向图的边 class Edge { public: int src, dest;	}; //边集数组 class EdgeSet { private: int V, E; Edge *edge; int size; //边的数量 public: EdgeSet(int V, int E); ~EdgeSet() { delete [] edge; } void addEdge(int v, int w); //加入边到图中 int find(int parent[], int i); void merge(int parent[], int x, int y); bool isCycle(); }; EdgeSet::EdgeSet(int V, int E) { size = 0; this-&gt;V = V; this-&gt;E = E; this-&gt;edge = new Edge[this-&gt;E]; } void EdgeSet::addEdge(int v, int w) { edge[size].src = v; edge[size].dest = w; &#43;&#43;size;	} //使用并查集判断无向图中的环 //找到这个元素所在的子集 int EdgeSet::find(int parent[], int i) { if (parent[i] == -1) return i; return find(parent, parent[i]); } //进行两个子集的合并 void EdgeSet::merge(int parent[], int xset, int yset) { if (xset != yset) parent[xset] = yset; } //检查无向图中是否存在环 bool EdgeSet::isCycle() { int parent[V]; for (int i = 0; i &lt; V; &#43;&#43;i) parent[i] = -1; //迭代图中所有的边,找到每条边的两个顶点所在的子集 //如果发现一条边,它的两个顶点属于相同子集,就存在环 //否则合并两个顶点的子集 for (int i = 0; i &lt; E; &#43;&#43;i) { int x = find(parent, edge[i].src); int y = find(parent, edge[i].dest); if (x == y) return true; merge(parent, x, y); } return false; } int main() { /* 0 | \ | \ 1----2 */ EdgeSet es(3, 3); es.addEdge(0, 1); //(0,1) es.addEdge(1, 2); //(1,2) es.addEdge(0, 2); //(0,2) es.isCycle() ? cout &lt;&lt; &#34;Contains Cycle!\n&#34; : cout &lt;&lt; &#34;Contains No Cycle!\n&#34;; return 0; } </p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-15 18:06:50 +0000 UTC'>September 15, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 图中判断成环" href="http://localhost:1313/post/%E5%9B%BE%E4%B8%AD%E5%88%A4%E6%96%AD%E6%88%90%E7%8E%AF/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">最小生成树
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>满足两点之间有且仅有一条简单路径的结构只有树 且这棵树包含 n 个节点。我们称这棵树为给定的图的生成树，其中总权值最小的生成树，我们称其为最小生成树。 最小生成树关键在避免环
+生成树 定义 一个连通图的生成树是一个极小的连通子图，它包含图中全部的n个顶点，但只有构成一棵树的n-1条边。
+性质 生成树的属性 一个连通图可以有多个生成树； 一个连通图的所有生成树都包含相同的顶点个数和边数； 生成树当中不存在环； 移除生成树中的任意一条边都会导致图的不连通， 生成树的边最少特性； 在生成树中添加一条边会构成环。 对于包含n个顶点的连通图，生成树包含n个顶点和n-1条边； 对于包含n个顶点的无向完全图最多包含$n^{n-2}$颗生成树。 证明$n^{n-2}$： 为什么是n^n-2），一篇里面塞不下:D
+最小生成树 定义 所谓一个带权图的最小生成树，就是原图中边的权值最小的生成树 ，所谓最小是指边的权值之和小于或者等于其它生成树的边的权值之和。
+求解 Kruskal 贪心找边，从小到大加入边
+按边长度排序 从小到大，if加入e之后没有形成环，e加入G&#39; 最后得到G‘ 问题是判断成环，见其它post Prim 加点，把点分成两坨A,B集合，A表示已经成了，B是待选的，要做的事从B里面挑一个点，满足它到A的点里面，有个边距离是最短的 （理解成长三角经济圈画好了，接下来先从周边里挑一个离长三角圈里面的城市最近的，这么想有点奇怪） 关键在怎么从待选里找距离最短的点 思路是用一个点个数大小的数组，没有直接连用∞，否则记录最小值 注意区分已访问过的点 这个为什么不会成环？把点分成两坨了，找的都是新点
+示例与代码 测试数据
+1 6 10 1 2 28 6 5 25 5 7 24 2 7 14 2 3 16 3 4 12 4 7 18 4 5 22 代码
+使用Kruskal算法
+#include&lt;iostream&gt; #include&lt;algorithm&gt; using namespace std; const int maxe = 100; int fa[maxe], n, m, ans = 0; struct edge { int u, v, w; }e[maxe]; bool cmp(edge a, edge b) { return a.w&lt;b.w; } int get(int x)//用处是看它是否成环的，nb { if (fa[x] == x) return x;//x的根为它本身，x就是该集的根 return fa[x] = get(fa[x]);//路径压缩 } int main() { cin &gt;&gt; n &gt;&gt; m; for (int i = 1; i &lt;= n; i&#43;&#43;) fa[i] = i;//初始化 for (int i = 1; i &lt;= m; i&#43;&#43;) { cin &gt;&gt; e[i].u &gt;&gt; e[i].v &gt;&gt; e[i].w; } sort(e &#43; 1, e &#43; 1 &#43; m, cmp);//升序排序 for (int i = 1; i &lt;= m; i&#43;&#43;) { int u = get(e[i].u);//找根 int v = get(e[i].v); if (u == v) continue;//continue 表示终止本次（本轮）循环，进入下一轮循环。判断它是否成环 fa[u] = v; cout &lt;&lt; e[i].u &lt;&lt; &#34; &#34; &lt;&lt; e[i].v &lt;&lt; endl; ans &#43;= e[i].w; } cout &lt;&lt; ans &lt;&lt; endl; return 0; } </p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-15 15:40:34 +0000 UTC'>September 15, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 最小生成树" href="http://localhost:1313/post/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">欧拉图
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>几百年不学离散数学了我都，这次遇到代码题正好复习一遍。
+理论 起源 哥尼斯堡七桥问题：遍历七桥一次如何返回起点。这个是遍历所有点
+定义 图、路径和回路这些定义就不再重复了 欧拉路径：图G上有一条经过所有顶点、所有边的简单路径（边不重复，点可以重复）
+欧拉回路：图G上有一条经过所有顶点、所有边的简单回路（边不重复，点可以重复）
+欧拉回路比欧拉路就是多了个回的区别，回路vs路径也就是回路的起点和终点是相同的点
+欧拉图：有欧拉回路的连通无向图
+欧拉有向图：有欧拉回路的连通有向图
+定理 复习一下欧拉图：有回路经过所有边一次，所有点至少一次的连通无向图
+判断欧拉图 一个连通无向图G是欧拉图？=经过所有边一次，点至少一次 当且仅当 所有节点为偶节点
+判断欧拉路径 设G=&lt;V，E&gt;为连通无向图，且v1,v2∈V，则有一条从v1至v2的欧拉路径 当且仅当 恰有两个奇结点v1和v2。
+判断欧拉有向图 设G为弱连通有向图。G是欧拉有向图， 当且仅当 所有结点的出度等于入度。
+实践</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-14 21:11:37 +0000 UTC'>September 14, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 欧拉图" href="http://localhost:1313/post/%E6%AC%A7%E6%8B%89%E5%9B%BE/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">leetcode刷题崩溃全过程
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>尝试过多次之后，于2023年9月8日重新开始刷leetcode，名字是小鱼就把它刷成大佬号:D
+总结一下写代码的时候遇到的问题（说真的，碰到哪个哪个不会）
+语法 几种常见语法
+c&#43;&#43; 118Pascal’s Triangle vector 1282. Group the People Given the Group Size They Belong To unordered_map 可以学一下容器的emplace方法 java python 算法 动态规划 377 Combination Sum IV 方程： $$f[n]=\sum_{target\ge number[i] }f[target-number[i]]$$ 1359 Count All Valid Pickup and Delivery Options 1420. Build Array Where You Can Find The Maximum Exactly K Comparisons 三维的动态规划你见过吗？ 递归 滑动窗口 1658. Minimum Operations to Reduce X to Zero 前缀和 数据结构 图 欧拉图 332Reconstruct Itinerary 求解欧拉回路&#43;贪心 树 最小生成树 1584Min Cost to Connect All Points 居然是最小生成树，以前怎么没想到呢 问题 排序 查找 二分查找 287. Find the Duplicate Number 有很多限制的题目 我觉得可以有很多想法的题目
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-08 16:02:59 +0000 UTC'>September 8, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to leetcode刷题崩溃全过程" href="http://localhost:1313/post/leetcode%E5%88%B7%E9%A2%98%E5%B4%A9%E6%BA%83%E5%85%A8%E8%BF%87%E7%A8%8B/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">动态规划
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>动态规划算法
+遇到动态规划-确定状态转移方程和边界条件，写代码（确定循环的开始结束顺序）
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2021-05-24 17:04:08 +0000 UTC'>May 24, 2021</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 动态规划" href="http://localhost:1313/post/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="http://localhost:1313/tags/algorithm/page/2/">Next&nbsp;&nbsp;»
+    </a>
+  </nav>
+</footer>
     </main>
     
 <footer class="footer">

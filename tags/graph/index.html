@@ -141,6 +141,71 @@
 <span title='2025-03-03 10:17:31 +0000 UTC'>March 3, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
   <a class="entry-link" aria-label="post link to 最短路径问题" href="http://localhost:1313/post/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/"></a>
 </article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">关键路径
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>刷题刷到的，之前学的也忘光了
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-10-18 20:23:28 +0000 UTC'>October 18, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 关键路径" href="http://localhost:1313/post/%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">图中判断成环
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>求最小生成树的Kruskal算法里面遇到，这边写一下
+无向图 DFS 对无向图有环=某个结点有一条边指向已访问过的结点，并且这个已访问过的结点不是上一步访问的结点 so问题可以转换成，如何区分已经访问过的节点，需要区分相邻的sibling、parent和间接的grandparent，当某节点有个sibling和某个grandparnt相同时，就是个环
+修饰节点颜色 我们不能仅仅使用一个 bool 数组来表示结点是否访问过。规定每个结点都拥有三种状态，白、灰、黑。开始时所有结点都是白色，当访问过某个结点后，该结点变为灰色，当该结点的所有邻接点都访问完，该节点变为黑色。
+那么我们的算法可以表示为：如果在遍历的过程中，发现某个结点有一条边指向灰色节点，并且这个灰色结点不是上一步访问的结点，那么存在环。
+为什么：假设灰色节点为G，它为灰色表示至少已访问过其中一个child节点，其中一个表示为parent，现在遍历到一个节点为grandchild，它可以指向G就表示它的sibling=grandparent，同时G不是grandchild上一步所访问的节点，so出现了环，这样正着推ok 反过来推，为什么需要3个状态，如果单纯两个状态就是下面的暴力递归。
+再梳理一遍就能发现对DFS来说，就好比祖母和同学是同一个人这样
+没有修饰，直接暴力递归 节点就两个状态，访问过、没访问过。 我看不懂 个人理解： 更加纯正的DFS，不管三七二十一先遍历，遍历过了就给它标记成visited，然后一旦在遍历的时候遇到即将访问的point满足1. visited过了，2.不是直系parent，就直接输出是环，要等到所有遍历走过了才确认不是环。
+BFS 和dfs相比主要的思路是一样的 BUR，BFS需要增加一个parent数组（不是DFS里面用单个parent记录刚访问过的节点） BFS相比DFS用得不怎么多，有空再钻研
+Union-Find 也叫并查集。 对于无向图来说，在遍历边（u-v）时，如果结点 u 和结点 v 的parent相同，那么结点 u 和结点 v 在同一个环中。 图的全部顶点都各自属于一个集合；然后依次检查图中的所有边，如果边关联的两个顶点不属于同一个集合，就合并两个顶点所在的集合。若图中存在环，则一定会在检测到某条边的时候，发现它关联的两个顶点早已属于同一个集合。 并查集我不会啊
+首先初始化所有元素的根为-1，-1代表根节点，接下来对于图中的每一条边(v1,v2)都并入集合，并入的方式为查找v1和v2的根节点，然后让v2的根节点作为v1的根节点，查找根节点的过程为：如果当前的结点根为-1，说明这个结点就是根，直接返回，否则再继续查找结点parent的根，直到找到root结点，这里因为只是判断环路，不需要压缩路径。
+int findSet(int x){ if(Parent[x] == -1){ return x; // x is root } return findSet(Parent[x]); } 并查集我真的看不懂 并查集find and union里面主要的是find吧，关键是怎么找root节点。
+#include &lt;bits/stdc&#43;&#43;.h&gt; using namespace std; //无向图的边 class Edge { public: int src, dest;	}; //边集数组 class EdgeSet { private: int V, E; Edge *edge; int size; //边的数量 public: EdgeSet(int V, int E); ~EdgeSet() { delete [] edge; } void addEdge(int v, int w); //加入边到图中 int find(int parent[], int i); void merge(int parent[], int x, int y); bool isCycle(); }; EdgeSet::EdgeSet(int V, int E) { size = 0; this-&gt;V = V; this-&gt;E = E; this-&gt;edge = new Edge[this-&gt;E]; } void EdgeSet::addEdge(int v, int w) { edge[size].src = v; edge[size].dest = w; &#43;&#43;size;	} //使用并查集判断无向图中的环 //找到这个元素所在的子集 int EdgeSet::find(int parent[], int i) { if (parent[i] == -1) return i; return find(parent, parent[i]); } //进行两个子集的合并 void EdgeSet::merge(int parent[], int xset, int yset) { if (xset != yset) parent[xset] = yset; } //检查无向图中是否存在环 bool EdgeSet::isCycle() { int parent[V]; for (int i = 0; i &lt; V; &#43;&#43;i) parent[i] = -1; //迭代图中所有的边,找到每条边的两个顶点所在的子集 //如果发现一条边,它的两个顶点属于相同子集,就存在环 //否则合并两个顶点的子集 for (int i = 0; i &lt; E; &#43;&#43;i) { int x = find(parent, edge[i].src); int y = find(parent, edge[i].dest); if (x == y) return true; merge(parent, x, y); } return false; } int main() { /* 0 | \ | \ 1----2 */ EdgeSet es(3, 3); es.addEdge(0, 1); //(0,1) es.addEdge(1, 2); //(1,2) es.addEdge(0, 2); //(0,2) es.isCycle() ? cout &lt;&lt; &#34;Contains Cycle!\n&#34; : cout &lt;&lt; &#34;Contains No Cycle!\n&#34;; return 0; } </p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-15 18:06:50 +0000 UTC'>September 15, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 图中判断成环" href="http://localhost:1313/post/%E5%9B%BE%E4%B8%AD%E5%88%A4%E6%96%AD%E6%88%90%E7%8E%AF/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">欧拉图
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>几百年不学离散数学了我都，这次遇到代码题正好复习一遍。
+理论 起源 哥尼斯堡七桥问题：遍历七桥一次如何返回起点。这个是遍历所有点
+定义 图、路径和回路这些定义就不再重复了 欧拉路径：图G上有一条经过所有顶点、所有边的简单路径（边不重复，点可以重复）
+欧拉回路：图G上有一条经过所有顶点、所有边的简单回路（边不重复，点可以重复）
+欧拉回路比欧拉路就是多了个回的区别，回路vs路径也就是回路的起点和终点是相同的点
+欧拉图：有欧拉回路的连通无向图
+欧拉有向图：有欧拉回路的连通有向图
+定理 复习一下欧拉图：有回路经过所有边一次，所有点至少一次的连通无向图
+判断欧拉图 一个连通无向图G是欧拉图？=经过所有边一次，点至少一次 当且仅当 所有节点为偶节点
+判断欧拉路径 设G=&lt;V，E&gt;为连通无向图，且v1,v2∈V，则有一条从v1至v2的欧拉路径 当且仅当 恰有两个奇结点v1和v2。
+判断欧拉有向图 设G为弱连通有向图。G是欧拉有向图， 当且仅当 所有结点的出度等于入度。
+实践</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-14 21:11:37 +0000 UTC'>September 14, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 欧拉图" href="http://localhost:1313/post/%E6%AC%A7%E6%8B%89%E5%9B%BE/"></a>
+</article>
     </main>
     
 <footer class="footer">

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Rlhf on 我的博客</title>
+    <link>http://localhost:1313/tags/rlhf/</link>
+    <description>Recent content in Rlhf on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 04 May 2023 15:59:12 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/rlhf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>RLHF是什么</title>
+      <link>http://localhost:1313/post/rlhf%E6%98%AF%E4%BB%80%E4%B9%88/</link>
+      <pubDate>Thu, 04 May 2023 15:59:12 +0000</pubDate>
+      <guid>http://localhost:1313/post/rlhf%E6%98%AF%E4%BB%80%E4%B9%88/</guid>
+      <description>&lt;p&gt;大型语言模型 (Large Language Model，LLM) 生成领域的新训练范式：RLHF (Reinforcement Learning from Human Feedback) ，即以强化学习方式依据人类反馈优化语言模型。&lt;/p&gt;
+&lt;p&gt;LLM：根据人类输入提示 (prompt) 生成多样化文本，but主观和依赖上下文。现有的模型通常以预测下一个单词的方式和简单的损失函数 (如交叉熵) 来建模，没有显式地引入人的偏好和主观意见。&lt;/p&gt;
+&lt;p&gt;RLHF 的思想：使用强化学习的方式直接优化带有人类反馈的语言模型&lt;/p&gt;
+&lt;p&gt;步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;预训练一个语言模型 (LM) ；
+使用经典的预训练目标训练一个语言模型&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;聚合问答数据并训练一个奖励模型 (Reward Model，RM) ；
+输入：文本，输出：标量奖励，对应的就是人的偏好&lt;/p&gt;
+&lt;p&gt;这一模型接收一系列文本并返回一个标量奖励，数值上对应人的偏好。我们可以用端到端的方式用 LM 建模，或者用模块化的系统建模 (比如对输出进行排名，再将排名转换为奖励) 。这一奖励数值将对后续无缝接入现有的 RL 算法至关重要。&lt;/p&gt;
+&lt;p&gt;关于模型选择方面，RM 可以是另一个经过微调的 LM，也可以是根据偏好数据从头开始训练的 LM。例如 Anthropic 提出了一种特殊的预训练方式，即用偏好模型预训练 (Preference Model Pretraining，PMP) 来替换一般预训练后的微调过程。因为前者被认为对样本数据的利用率更高。但对于哪种 RM 更好尚无定论。&lt;/p&gt;
+&lt;p&gt;关于训练文本方面，RM 的提示 - 生成对文本是从预定义数据集中采样生成的，并用初始的 LM 给这些提示生成文本。Anthropic 的数据主要是通过 Amazon Mechanical Turk 上的聊天工具生成的，并在 Hub 上可用 (&lt;a href=&#34;https://huggingface.co/datasets/Anthropic/hh-rlhf&#34;&gt;https://huggingface.co/datasets/Anthropic/hh-rlhf&lt;/a&gt;)，而 OpenAI 使用了用户提交给 GPT API 的 prompt。&lt;/p&gt;
+&lt;p&gt;关于训练奖励数值方面，这里需要人工对 LM 生成的回答进行排名。起初我们可能会认为应该直接对文本标注分数来训练 RM，但是由于标注者的价值观不同导致这些分数未经过校准并且充满噪音。通过排名可以比较多个模型的输出并构建更好的规范数据集。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

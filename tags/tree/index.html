@@ -5,10 +5,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
-<title>Tree | My New Hugo Project</title>
+<title>Tree | 我的博客</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
-<meta name="author" content="">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
 <link rel="canonical" href="http://localhost:1313/tags/tree/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
@@ -71,7 +71,7 @@
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="My New Hugo Project (Alt + H)">My New Hugo Project</a>
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
@@ -96,6 +96,26 @@
             </div>
         </div>
         <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
@@ -105,6 +125,25 @@
     Tree
   </h1>
 </header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">树的计数相关问题
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>光看名字就比较高级了:D 学习这个的动力来自于一个问题：对于包含n个顶点的无向完全图最多包含$n^{n-2}$棵生成树。
+Prüfer序列 Prüfer 序列可以将一个带标号 n 个结点的树用 [1,n] 中的 n-2 个整数表示。你也可以把它理解为完全图的生成树与数列之间的双射。常用于组合计数问题中。
+对树建立序列 对树建立Prüfer序列的步骤：每次选择一个编号最小的叶结点并删掉它，然后在序列中记录下它连接到的那个结点。重复 n-2 次后就只剩下两个结点，算法结束。 先删除节点再记录标号，重复n-2之后只剩下根节点没删。
+堆构造 听起来挺像建堆的过程，用堆的方法时间复杂度O(NlogN) 代码
+// 结点是从 0 标号的 vector&lt;vector&lt;int&gt;&gt; adj;// adj的构造应该是：一行上每一个数表示和这行对应的点连接的节点序号 vector&lt;int&gt; pruefer_code() { int n = adj.size(); set&lt;int&gt; leafs; vector&lt;int&gt; degree(n); vector&lt;bool&gt; killed(n, false);//killed表示已经删除的 for (int i = 0; i &lt; n; i&#43;&#43;) { degree[i] = adj[i].size();//求每个点的度 if (degree[i] == 1) leafs.insert(i);//如果这行只有自己一个节点，就是度为0（degree=1）=叶子节点 } //求Prüfer code vector&lt;int&gt; code(n - 2); for (int i = 0; i &lt; n - 2; i&#43;&#43;) { int leaf = *leafs.begin();//叶子节点 leafs.erase(leafs.begin());//每次都会删掉一个节点 killed[leaf] = true; int v; for (int u : adj[leaf])//找leaf的邻接节点 if (!killed[u]) v = u; code[i] = v;//记录leaf的邻接节点 if (--degree[v] == 1) leafs.insert(v);//重新更新叶子节点 } return code; } 代码读懂了：一句话：按从小到大的顺序删除叶子节点，因为是树，code记录的就是被删除的叶子节点的parent 但是我不知道它有什么用.-.
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-15 18:29:36 +0000 UTC'>September 15, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 树的计数相关问题" href="http://localhost:1313/post/%E6%A0%91%E7%9A%84%E8%AE%A1%E6%95%B0%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/"></a>
+</article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
@@ -125,13 +164,28 @@
   </div>
   <footer class="entry-footer">
 
-<span title='2023-09-15 15:40:34 +0000 UTC'>September 15, 2023</span></footer>
+<span title='2023-09-15 15:40:34 +0000 UTC'>September 15, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
   <a class="entry-link" aria-label="post link to 最小生成树" href="http://localhost:1313/post/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">二叉树
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>二叉树
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2021-05-17 20:40:53 +0000 UTC'>May 17, 2021</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 二叉树" href="http://localhost:1313/post/%E4%BA%8C%E5%8F%89%E6%A0%91/"></a>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="http://localhost:1313/">My New Hugo Project</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
 
     
     

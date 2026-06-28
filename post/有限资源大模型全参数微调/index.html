@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>有限资源大模型全参数微调 | 我的博客</title>
+<meta name="keywords" content="fine tune, llm, memory, undone">
+<meta name="description" content="论文标题：Full Parameter Fine-tuning for Large Language Models with Limited Resources
+arxiv地址：链接
+用有限的资源（主要是内存）进行全参数大模型微调
+code：github
+abstract
+
+背景：LLMs给NLP问题带来了革命性变化，but需要大量GPU资源
+已有：高效参数微调（PEFT），没有彻底解决
+PEFT参考文档
+
+parameter-efficient fine-tuning vs full-parameter fine-tune
+
+
+创新：提出了新的优化器 LOw-Memory-Optimization
+内容：在一个步骤融合了梯度计算和参数更新
+
+怎么融合(fuse)？
+
+
+效果：和标准方法（DeepSpeed解决方案）相比，我们将内存使用量减少到10.8%。
+因此，我们的方法可以在一台拥有8×RTX 3090的机器上对65B模型进行全参数微调，每台机器都有24GB内存
+
+introduction
+
+感觉就是把摘要扩写了一遍
+
+
+背景：LLMs 厉害，但是要钱。
+目前：有效参数微调方法
+比如：LoRA,Prefix-tuning
+但是：没有全参数的
+解决问题：我们要找个办法实现全参数微调
+干了啥
+
+分析LLMs里面内存使用的四个主要方面：
+激活，优化器状态，梯度张量和参数
+从三个方面优化了训练过程：
+
+SGD-优化器：由于SGD不存储任何中间状态，可以删除整个优化器状态部分SGD是什么
+LOMO把梯度tensor的内存使用降到了O(1)
+为了稳定使用混合精度训练：集成梯度归一化和损失缩放，并将某些计算过渡到全精度
+
+
+
+
+结果
+内存使用量等于参数使用量加上激活量和最大梯度张量。
+分析了：
+
+内存和吞吐量
+下游表现
+
+
+贡献
+
+SGD
+LOMO
+验证
+
+
+
+related work
+都是节省内存的技术
+Activation Checkpointing
+计算图中策略性地选择的检查点节点的激活变量在正向阶段后保留在内存中，而其余节点的激活变量在梯度计算时最多重新计算一次。激活内存可以降低原始内存使用量的平方根，代价是需要多一次正向传递。
+在前向传播过程中，有选择性的丢弃一些产生的中间激活值，当反向传播需要使用这些激活值时，再依据上一个保存的激活值来计算出这些需要的激活值来帮助完成反向传播。这样一来，便可以大大减少训练过程中所需要的存储空间。
+Mixed-Precision Training
+混合精度，32位浮点数和16位浮点数混合使用
+Heterogeneous Training System
+通过利用异构内存（如CPU和NVMe内存）来减少GPU内存消耗
+
+但是怎么做？？
+
+method
+优化器
+adam和SGD比起来哪里不好了！
+参考https://blog.csdn.net/S20144144/article/details/103417502">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/%E6%9C%89%E9%99%90%E8%B5%84%E6%BA%90%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%85%A8%E5%8F%82%E6%95%B0%E5%BE%AE%E8%B0%83/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/%E6%9C%89%E9%99%90%E8%B5%84%E6%BA%90%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%85%A8%E5%8F%82%E6%95%B0%E5%BE%AE%E8%B0%83/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      有限资源大模型全参数微调
+    </h1>
+    <div class="post-meta">
+
+<span title='2023-11-24 17:10:38 +0000 UTC'>November 24, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>论文标题：Full Parameter Fine-tuning for Large Language Models with Limited Resources
+arxiv地址：<a href="https://arxiv.org/abs/2306.09782">链接</a>
+用有限的资源（主要是内存）进行全参数大模型微调
+code：<a href="https://github.com/OpenLMLab/LOMO">github</a></p>
+<h1 id="abstract">abstract<a hidden class="anchor" aria-hidden="true" href="#abstract">#</a></h1>
+<ul>
+<li>背景：LLMs给NLP问题带来了革命性变化，but需要大量GPU资源</li>
+<li>已有：高效参数微调（PEFT），没有彻底解决
+<a href="%E9%AB%98%E6%95%88%E5%8F%82%E6%95%B0%E5%BE%AE%E8%B0%83.md">PEFT参考文档</a>
+<blockquote>
+<p>parameter-efficient fine-tuning vs full-parameter fine-tune</p>
+</blockquote>
+</li>
+<li>创新：提出了新的优化器 LOw-Memory-Optimization
+内容：在一个步骤融合了梯度计算和参数更新
+<blockquote>
+<p>怎么融合(fuse)？</p>
+</blockquote>
+</li>
+<li>效果：和标准方法（DeepSpeed解决方案）相比，我们将内存使用量减少到10.8%。
+因此，我们的方法可以在一台拥有8×RTX 3090的机器上对65B模型进行全参数微调，每台机器都有24GB内存</li>
+</ul>
+<h1 id="introduction">introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h1>
+<blockquote>
+<p>感觉就是把摘要扩写了一遍</p>
+</blockquote>
+<ul>
+<li>背景：LLMs 厉害，但是要钱。</li>
+<li>目前：有效参数微调方法
+比如：LoRA,Prefix-tuning
+但是：没有全参数的</li>
+<li>解决问题：我们要找个办法实现全参数微调</li>
+<li>干了啥
+<ul>
+<li>分析LLMs里面内存使用的四个主要方面：
+激活，优化器状态，梯度张量和参数</li>
+<li>从三个方面优化了训练过程：
+<ul>
+<li>SGD-优化器：由于SGD不存储任何中间状态，可以删除整个优化器状态部分<a href="SGD.md">SGD是什么</a></li>
+<li>LOMO把梯度tensor的内存使用降到了O(1)</li>
+<li>为了稳定使用混合精度训练：集成梯度归一化和损失缩放，并将某些计算过渡到全精度</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>结果
+内存使用量等于参数使用量加上激活量和最大梯度张量。
+分析了：
+<ol>
+<li>内存和吞吐量</li>
+<li>下游表现</li>
+</ol>
+</li>
+<li>贡献
+<ol>
+<li>SGD</li>
+<li>LOMO</li>
+<li>验证</li>
+</ol>
+</li>
+</ul>
+<h1 id="related-work">related work<a hidden class="anchor" aria-hidden="true" href="#related-work">#</a></h1>
+<p>都是节省内存的技术</p>
+<h2 id="activation-checkpointing">Activation Checkpointing<a hidden class="anchor" aria-hidden="true" href="#activation-checkpointing">#</a></h2>
+<p>计算图中策略性地选择的检查点节点的激活变量在正向阶段后保留在内存中，而其余节点的激活变量在梯度计算时最多重新计算一次。激活内存可以降低原始内存使用量的平方根，代价是需要多一次正向传递。
+在前向传播过程中，有选择性的丢弃一些产生的中间激活值，当反向传播需要使用这些激活值时，再依据上一个保存的激活值来计算出这些需要的激活值来帮助完成反向传播。这样一来，便可以大大减少训练过程中所需要的存储空间。</p>
+<h2 id="mixed-precision-training">Mixed-Precision Training<a hidden class="anchor" aria-hidden="true" href="#mixed-precision-training">#</a></h2>
+<p>混合精度，32位浮点数和16位浮点数混合使用</p>
+<h2 id="heterogeneous-training-system">Heterogeneous Training System<a hidden class="anchor" aria-hidden="true" href="#heterogeneous-training-system">#</a></h2>
+<p>通过利用异构内存（如CPU和NVMe内存）来减少GPU内存消耗</p>
+<blockquote>
+<p>但是怎么做？？</p>
+</blockquote>
+<h1 id="method">method<a hidden class="anchor" aria-hidden="true" href="#method">#</a></h1>
+<h2 id="优化器">优化器<a hidden class="anchor" aria-hidden="true" href="#优化器">#</a></h2>
+<p>adam和SGD比起来哪里不好了！
+参考https://blog.csdn.net/S20144144/article/details/103417502</p>
+<h3 id="使用sgd">使用SGD<a hidden class="anchor" aria-hidden="true" href="#使用sgd">#</a></h3>
+<p>SGD遭人诟病的有三个：</p>
+<ul>
+<li>大曲率损失面（什么叫曲率？）</li>
+<li>局部最优</li>
+<li>散点
+作者对LLMs问题上用SGD时这些可能的问题逐一分析</li>
+</ul>
+<h4 id="更平滑的损失面">更平滑的损失面<a hidden class="anchor" aria-hidden="true" href="#更平滑的损失面">#</a></h4>
+<p>验证了更大的模型有更加平滑的损失面
+所以LLMs上面这一点可以忽略</p>
+<h4 id="局部最优就够了">局部最优就够了<a hidden class="anchor" aria-hidden="true" href="#局部最优就够了">#</a></h4>
+<p>微调的目标是让模型能够解决新任务，基础模型没变。
+而且有限的训练数据（和预训练时期相比）也不可能实现全局最优。</p>
+<h4 id="鞍点很遥远">鞍点很遥远<a hidden class="anchor" aria-hidden="true" href="#鞍点很遥远">#</a></h4>
+<p>对于传统的NLP任务，LLM 参数的初始点通常是在谷底，如果模型是通过指令微调，当出现新任务时，模型在某种程度上对这些任务都是似曾相识，那么saddle points通常出现在边缘且距离valley有一定距离，因此如果在改变参数值不大的情况下是也许不会碰到saddle points在finetune过程中。
+关于散点详细介绍可以看<a href="%E5%B1%80%E9%83%A8%E6%9C%80%E4%BC%98%E5%92%8C%E9%9E%8D%E7%82%B9.md">局部最优和鞍点</a></p>
+<p>从结论上来看，SGD是可以胜任微调工作。</p>
+<h3 id="batch-size">batch size<a hidden class="anchor" aria-hidden="true" href="#batch-size">#</a></h3>
+<p>这里用的应该是mini-batch的SGD，在一个batch中含有2个样本的参数更新公式如下：
+$$
+\theta ^{&rsquo;} = \theta - \alpha[\nabla \mathcal{L} (d_i, f(d_i, \theta)) + \nabla \mathcal{L}(d_j, f(d_j, \theta)) ]
+$$
+模型参数在这两个样本上的更新过程：
+$$
+\theta_1 = \theta - \alpha \nabla \mathcal{L}(d_i, f(d_i, \theta)) \ \theta_2 = \theta_1 - \alpha \nabla \mathcal{L}(d_j, f(d_j, \theta_1)) \ \theta_2 = \theta - \alpha \nabla \mathcal{L}(d_i, f(d_i, \theta)) - \alpha \nabla \mathcal{L}(d_j, f(d_j, \theta_1))
+$$</p>
+<blockquote>
+<p>说是利用微分中值定理但是是不是缺了个求导？</p>
+</blockquote>
+<p>$$
+\mathcal{L}(d_j,\xi) = \frac{\mathcal{L(d_j, f(d_j,\theta_1))} - \mathcal{L}(d_j, f(d_j, \theta)}{f(d_j, \theta_1) - f(d_j, \theta)} \ \mathcal{L}(d_j, f(d_j, \theta_1)) = \mathcal{L}(d_j, f(d_j, \theta)) + \mathcal{L}(d_j, \xi)(f(d_j, \theta_1) - f(d_j, \theta))
+$$</p>
+<p>代入后得到
+$$
+\theta_2 = \theta - \alpha \nabla \mathcal{L}(d_i,f(d_i,\theta)) - \alpha \nabla [\mathcal{L(d_j, f(d_j, \theta))} + \mathcal{L}(d_j, \xi)(f(d_j, \theta_1) - f(d_j, \theta))] \ \theta_2 = \theta - \alpha [\nabla \mathcal{L}(d_i,f(d_i,\theta)) +  \nabla \mathcal{L(d_j, f(d_j, \theta))}] + \alpha \nabla \mathcal{L}(d_j, \xi)(f(d_j, \theta_1) - f(d_j, \theta))
+$$</p>
+<p>化简之后
+$$
+\theta_2 - \theta^{&rsquo;} = \alpha \nabla \mathcal{L}(d_j, \xi)(f(d_j, \theta_1) - f(d_j, \theta))
+$$
+按照假设loss surface足够平滑，等号后边的式子可以忽略不计。当使用SGD作为optimizer时，可以采用较大的batch size 提高训练稳定性；这也从另外一个方面解释了SGD在小模型上效果不佳但在大模型上效果较好。</p>
+<h2 id="lomo">lomo<a hidden class="anchor" aria-hidden="true" href="#lomo">#</a></h2>
+<p>梯度张量的作用：计算优化器状态和梯度正则化
+因为用SGD，第一个可以省掉了，接下来的问题就是梯度正则化。
+LOMO：在一步内同时完成梯度计算和参数更新，以避免存储梯度张量。</p>
+<p>两步计算过程是先计算梯度，再更新参数：而所提出的方法是计算完梯度之后，直接对参数进行更新
+Pytorch中提供类似 injecting hook function但无法实现参数的即时更新；作者所采用方法是随着backward progagation的进行只存储一个参数的梯度，这种方案将之前存储所有参数的梯度，降低到只存储一个参数，从而减少了内存的占用</p>
+<h2 id="训练过程的稳定性">训练过程的稳定性<a hidden class="anchor" aria-hidden="true" href="#训练过程的稳定性">#</a></h2>
+<h3 id="梯度正则化和裁剪的替代方案">梯度正则化和裁剪的替代方案<a hidden class="anchor" aria-hidden="true" href="#梯度正则化和裁剪的替代方案">#</a></h3>
+<p>梯度正则化和裁剪用来干什么的：防止梯度爆炸和消失。提出了两个方法</p>
+<ul>
+<li>Clip gradient by values，而不是采用gradient norm。Clip gradient by values是缓解梯度爆炸有效的方案，但这种方式唯一需要考虑的是，通过gradient value来进行裁剪会改变方向。采用这种方法时需要考虑学习率的设置，根据经验学习率应低于1e-3</li>
+<li>用额外的过程来计算gradient norm。计算梯度的norm，由于所提出的算法并不会记录所有参数值，作者提出了一个可以探索的方案就是计算相邻层参数的norm来替代全局；当然这种方法仍值得广泛讨论，因为对于不同的parameters采用了不同的update step size</li>
+</ul>
+<p>矛盾点：目前的训练框架是根据所有参数来计算梯度准则的，因此需要两次后向传递（backward）。
+解决：一种解决方案是用一组参数（例如相邻层）来近似梯度张量的规范。然而，这种方法确实存在偏差，因为它会导致不同参数的更新步长不同。更新时，参数会根据梯度准则乘以一个比例系数。由于不同参数组的梯度准则不同，这种近似方法会导致比例系数的差异。尽管存在这种局限性，这种分组梯度削波方法仍可视为根据不同参数组的梯度准则对其采用动态学习率。
+真解决：动态learning rate</p>
+<h3 id="保证精度">保证精度<a hidden class="anchor" aria-hidden="true" href="#保证精度">#</a></h3>
+<p>为了保证训练速度和精度，采用dynamic loss scaling 和将确定的计算转化为全精度计算。作者提出将一个dynamic loss scaler 和LOMO进行集成，它在整个训练过程中条件scaling factor。当特定数量的后向传播为发生溢出时，scale factor加倍，反正则减半。这里出现个疑惑点即怎么去判断是否有溢出，实际过程中只有当后向传递结束时我们才能知道是否有溢出发生。为了解决这个问题，作者提出二次后传方案，即第一次后向传播时判断是否有溢出，如果没有溢出在第二次传递时更新参数。</p>
+<h1 id="experiment">experiment<a hidden class="anchor" aria-hidden="true" href="#experiment">#</a></h1>
+<p>评估标准：内存占用、吞吐率、下游任务表现
+模型：LLaMA(7B-65B)
+硬件：RTX 3090 GPU</p>
+<h2 id="内存占用">内存占用<a hidden class="anchor" aria-hidden="true" href="#内存占用">#</a></h2>
+<p>比较的是是否用激活检查点、三个优化器的内存占用
+结论：</p>
+<ol>
+<li>LOMO不存储优化器状态，保存一点的梯度</li>
+<li>使用ac的明显消耗更少</li>
+<li>内存使用量的大幅减少主要归功于梯度和优化器状态对内存需求的降低。
+我提的问题：</li>
+<li>为什么没做bacth-size？</li>
+<li>为什么SGD还保存优化器状态，不是说不保存吗？</li>
+</ol>
+<h3 id="优化器状态">优化器状态<a hidden class="anchor" aria-hidden="true" href="#优化器状态">#</a></h3>
+<p>用AdamW,sgd和LOMO实验时优化器状态、梯度、参数和激活的内存使用占比。
+混合精度训练方法，在这种方法中，权重、动量和方差的全精度副本被保留在优化器状态中，用于权重更新。用 SGD 优化器替换 AdamW 优化器可以有效降低内存中优化器状态的百分比，从而减少 GPU 内存使用量。这是因为 SGD 优化器不需要存储全精度动量和方差。对 LOMO 而言，参数更新和后退融合为一个步骤，进一步消除了对优化器状态内存的需求。</p>
+<h3 id="梯度">梯度<a hidden class="anchor" aria-hidden="true" href="#梯度">#</a></h3>
+<p>在使用 LOMO 的训练过程中，一旦接收到梯度，就会立即更新参数，然后将梯度从内存中丢弃。因此，梯度内存消耗的上限取决于与最大参数矩阵相关的梯度。这种方法大大减少了内存使用量，几乎与参数的大小相当。</p>
+<h3 id="激活">激活<a hidden class="anchor" aria-hidden="true" href="#激活">#</a></h3>
+<p>LOMO 与激活检查点等减少激活内存的技术兼容。</p>
+<h2 id="吞吐量">吞吐量<a hidden class="anchor" aria-hidden="true" href="#吞吐量">#</a></h2>
+<p>吞吐量以每 GPU 每秒处理的令牌数（TGS）来衡量，参数分区使用 ZeRO-3 实现。</p>
+<ul>
+<li>对于 7B 模型，LOMO 的吞吐量非常可观，比 AdamW 和 SGD 高出约 11 倍。因为LOMO可以仅在一个CPU上就能run 7B 模型，从而减少了 GPU 之间的通信开销。与 AdamW 相比，SGD 的吞吐量略高，这是因为 SGD 排除了动量和方差计算。</li>
+<li>至于 13B 模型，由于内存限制，无法在现有的 8 个 RTX 3090 GPU 上使用 AdamW 进行训练。在这种需要 LOMO 进行模型并行化的情况下，LOMO 的吞吐量仍然优于 SGD。这一优势归功于 LOMO 的内存效率特性，以及只需要两个 GPU 就能在相同设置下训练模型，从而降低了通信成本，提高了吞吐量。</li>
+<li>在训练 30B 模型时，SGD 在使用 8 个 RTX 3090 GPU 时遇到了内存不足（OOM）问题，而 LOMO 仅在使用 4 个 GPU 时表现良好。</li>
+<li>最后，我们使用 8 个 RTX 3090 GPU 成功训练了 65B 模型，吞吐量达到 4.93 TGS。利用这样的服务器配置和 LOMO，对 1000 个样本（每个样本包含 512 个 token）的训练过程大约需要 3.6 个小时。</li>
+</ul>
+<h2 id="下游表现">下游表现<a hidden class="anchor" aria-hidden="true" href="#下游表现">#</a></h2>
+<blockquote>
+<p>downstream performance是什么啊？就是真正要做的fine-tune任务
+目的：为了评估 LOMO 在微调大型语言模型方面的有效性
+干活：将LOMO 与其他两种方法进行了比较，一种是不需要微调的 Zero-shot，另一种是目前最流行的参数高效微调技术之一 LoRA。LoRA优点： 对密集层重新参数化，只更新低等级矩阵，同时在推理过程中不引入延迟。
+数据集： SuperGLUE
+样本数据构成：鉴于运行大型语言模型的计算成本较高，从训练集中随机抽样 1000 个训练数据，从验证集中随机抽样 1000 个测试数据，并报告使用相同随机种子获得的最佳结果。
+评价指标： 准确度</p>
+</blockquote>
+<h3 id="主要结果">主要结果<a hidden class="anchor" aria-hidden="true" href="#主要结果">#</a></h3>
+<p>LOMO 的性能明显优于 Zero-shot
+在大多数实验中，LOMO 的性能普遍优于 LoRA
+LOMO可以扩展到65B</p>
+<h3 id="比较lora">比较lora<a hidden class="anchor" aria-hidden="true" href="#比较lora">#</a></h3>
+<p>无论 LoRA 取得了多高的结果，LOMO 始终能增强 LoRA 的性能。这表明，LOMO 和 LoRA 采用的不同微调方法是互补的。
+具体来说，LOMO 侧重于微调预训练模型的权重，而 LoRA 则对其他模块进行微调。因此，LOMO 不会影响 LoRA 的性能，反而有助于为下游任务进行更好的模型调整。
+实验结果表明，在某些场景下，LOMO的效果是比LoRA差，原因是LOMO是全参数微调，微调数据有限训练不充分，另一方面LOMO和LoRA采用两种不同的架构，后者只是采用了一个shortcut，在某些场景下会更加有利。LOMO关注的是微调pre-trained 模型权重，而LoRA微调附加的模块。</p>
+<h1 id="总结">总结<a hidden class="anchor" aria-hidden="true" href="#总结">#</a></h1>
+<p>贡献：</p>
+<ul>
+<li>LOMO优化器 在利用有限的资源促进大型语言模型的全参数微调</li>
+<li>演示了在配备 RTX 3090 GPU 的服务器上对 65B 模型进行微调的可行性</li>
+<li>通过分析 LOMO 的内存使用情况、进行吞吐量测试以及在 SuperGLUE 上进行实验，我们展示了其有效性和潜在影响
+未来：</li>
+<li>进一步降低训练大型语言模型所需的资源门槛，从而使这些模型得到更广泛的访问和采用</li>
+<li>参数占用多，探索参数量化技术，这可以大大减少内存的使用</li>
+<li>LOMO 的更多应用场景，并深入研究优化大型语言模型的理论分析</li>
+</ul>
+<h1 id="附">附<a hidden class="anchor" aria-hidden="true" href="#附">#</a></h1>
+<h2 id="代码解读">代码解读<a hidden class="anchor" aria-hidden="true" href="#代码解读">#</a></h2>
+<ul>
+<li><input disabled="" type="checkbox"> 代码以后再看</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 继承Optimizer类，从torch.optim中import的Optimizer类中已经有hook相关</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LOMO</span>(Optimizer):
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/fine-tune/">Fine Tune</a></li>
+      <li><a href="http://localhost:1313/tags/llm/">Llm</a></li>
+      <li><a href="http://localhost:1313/tags/memory/">Memory</a></li>
+      <li><a href="http://localhost:1313/tags/undone/">Undone</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

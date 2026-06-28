@@ -140,6 +140,87 @@
 <span title='2025-03-24 20:59:10 +0000 UTC'>March 24, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
   <a class="entry-link" aria-label="post link to python压缩pdf" href="http://localhost:1313/post/python%E5%8E%8B%E7%BC%A9pdf/"></a>
 </article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">pytorch之hook
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>hook，钩子。一般来说，“hook”是在特定事件之后自动执行的函数。
+参考pytorch-hook文档 前情提要
+x = torch.tensor([2.], requires_grad=True) a=x**2 b=a**3 b.backward() # 求grad和back是在一起的，算出来就是db/dx print(x.grad) 定义 PyTorch提供四种Hook函数： 1、torch.Tensor.register_hook(hook) 2、torch.nn.Module.register_forward_hook 3、torch.nn.Module.register_forward_pre_hook 4、torch.nn.Module.register_backward_hook
+torch.Tensor.register_hook 功能：注册一个反向传播hook函数，Hook函数仅一个输入参数，为张量的梯度。Hook不应修改其参数梯度值，但可以选择返回一个新的梯度，该梯度将代替grad使用。
+hook(grad) -&gt; Tensor or None
+def hook_grad(grad): print(grad) x = torch.tensor([1.], requires_grad=True) a=x*2 b=a**2 c=b**3 handle = b.register_hook(hook_grad) c.backward() print(&#34;x.grad:&#34;,x.grad) 在hook中输出的grad为dc/dc(backward/register) 最后输出的x.grad为dc/dx(backward/requires_grad=True) 更多内容看autograd
+torch.nn.Module.register_forward_hook 功能：注册module的前向传播Hook函数 参数：
+module：当前网络层 input：当前网络层输入数据 output：当前网络层输出数据 import torch import torch.nn as nn # 构建网络，一个卷积层一个池化层 class Net(nn.Module): def __init__(self): super(Net,self).__init__() self.conv1 = nn.Conv2d(1, 2, 3) self.pool1 = nn.MaxPool2d(2) def forward(self, x): # 卷积 x = self.conv1(x) # 池化 x = self.pool1(x) return x # 初始化网络 net = Net() # detach将张量分离 # fill_将tensor中的所有值都填充为指定的value # conv1的weight有2张，都是3x3，第一张全填充1，第二张全填充2 net.conv1.weight[0].detach().fill_(1) net.conv1.weight[1].detach().fill_(2) net.conv1.bias.detach().zero_() print(net.conv1) print(net.conv1.weight) print(net.conv1.bias) # fake_img bacth_size=1,input_channel=1,为4x4大小，每个格子都是1的二维 fake_img = torch.ones(1,1,4,4) # 定义forward_hook # input：当前网络层输入数据 # output：当前网络层输出数据 def forward_hook(module, data_input, data_output): print(&#34;output&#34;,data_output) print(&#34;input&#34;,data_input) # 注册Hook net.conv1.register_forward_hook(forward_hook) output = net(fake_img) 最后显示的是卷积层进行了一次卷积的输入和输出。
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-12-11 16:26:36 +0000 UTC'>December 11, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to pytorch之hook" href="http://localhost:1313/post/pytorch%E4%B9%8Bhook/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">python之dot
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>numpy.dot() 和 x.dot(y) 为矩阵乘法计算。
+import numpy as np mat1 = np.array([[1, 2, 3], [4, 5, 6]]) mat2 = np.array([[1, 2], [1, 2], [1, 2] ]) np.dot(mat1, mat2) # numpy.dot() 结果
+array([[ 6, 12], [15, 30]]) x mat1.dot(mat2) # x.dot(y) 结果
+array([[ 6, 12], [15, 30]]) 矩阵乘法，需要满足mat1.length=mat2.lengthx
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-12-07 14:03:56 +0000 UTC'>December 7, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to python之dot" href="http://localhost:1313/post/python%E4%B9%8Bdot/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">python里@的作用
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>看文献的时候看到里面有一句x=a@x，遂搜索
+修饰符 用做函数的修饰符，可以在模块或者类的定义层内对函数进行修饰 函数前面有两个及以上装饰器时倒着来
+#Example 2 def FA(fn): def warp(): return &#34;&lt;a&gt;&#34;&#43;fn()&#43;&#34;&lt;a&gt;&#34; return warp def FB(fn): def warp(): return &#34;&lt;b&gt;&#34;&#43;fn()&#43;&#34;&lt;b&gt;&#34; return warp @FA #相当于makebold(test1),也就是把当前函数作为入参传过去 def test1(): return &#34;test1&#34; @FB def test2(): return &#34;test2&#34; @FA @FB def test3(): #函数和装饰器是倒着执行的，从下往上，从内而外，一层层执行 return &#34;test3&#34; print(test1()) print(test2()) print(test3()) 结果：
+&lt;a&gt;test1&lt;a&gt; &lt;b&gt;test2&lt;b&gt; &lt;a&gt;&lt;b&gt;test3&lt;b&gt;&lt;a&gt; 矩阵乘法 运算符*在矩阵运算中的功能是逐元素的乘法（称为Hadamard积（Hadamard product，数学符号⊙） @在矩阵运算中的功能是矩阵乘法。也即，在矩阵乘法中，b矩阵右乘的作用是交换被乘矩阵的1、2两列，结果即是。其实@运算符和numpy的matmul是一样的
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-06-25 17:14:52 +0000 UTC'>June 25, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to python里@的作用" href="http://localhost:1313/post/python%E9%87%8C@%E7%9A%84%E4%BD%9C%E7%94%A8/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">配置python
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>重装系统之后很多配置也没了，python反正也要用，安装过程也记录一下
+环境配置 下载 官网 找windows的就行 速度比较快可以不用镜像
+安装 点costume的，然后改地址 点配置环境变量可以免得自己再搞
+执行 cmd可以直接跑
+import sys print(sys.version) 可以查看版本
+项目 现在不着急，ide以后再装
+问题 在配置好了python环境变量之后在cmd命令行下输入python但是打开的是windows 10的应用商店，但是我们希望显示的是python的安装版本，可以使用以下的方法解决：首先打开计算机的环境变量，找到path，将python的环境变量移动到WindowsApps环境变量前面
+Fatal error in launcher: Unable to create process using ‘“D:\conf\python\python.exe” “D:\conf\python\Scripts\pip.exe” install -i https://pypi.tuna.tsinghua.edu.cn/simple/ jupyter’: ??????????? 步骤1：到python\scripts\目录，将原来的pip.exe文件删掉 步骤2：cmd窗口执行：python -m pip install -U pip 步骤3：验证
+Traceback (most recent call last): File “D:\conf\python\lib\runpy.py”, line 196, in _run_module_as_main return run_code(code, main_globals, None, File “D:\conf\python\lib\runpy.py”, line 86, in run_code exec(code, run_globals) File “D:\conf\python\scripts\pip.exe_main.py”, line 2, in File “D:\conf\python\lib\re_init.py”, line 125, in from . import _compiler, _parser File “D:\conf\python\lib\re_compiler.py”, line 18, in assert _sre.MAGIC == MAGIC, “SRE module mismatch” AssertionError: SRE module mismatch 说是版本不一致，我的话就是之前的没删干净，删了重装就行
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-05-20 14:15:39 +0000 UTC'>May 20, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 配置python" href="http://localhost:1313/post/%E9%85%8D%E7%BD%AEpython/"></a>
+</article>
     </main>
     
 <footer class="footer">

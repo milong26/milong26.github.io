@@ -22,5 +22,73 @@
       <guid>http://localhost:1313/post/leetcode%E8%82%9D%E6%B4%BB/</guid>
       <description>&lt;p&gt;leetcode刷题日志，哪天有空哪天刷&lt;/p&gt;</description>
     </item>
+    <item>
+      <title>杨辉三角</title>
+      <link>http://localhost:1313/post/%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92/</link>
+      <pubDate>Mon, 16 Oct 2023 16:08:55 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92/</guid>
+      <description>&lt;p&gt;好几次遇到杨辉三角了，虽然都是简单题，但因为我的基础实在太烂，遇到这种题目也比较懵。&lt;/p&gt;
+&lt;h1 id=&#34;设定&#34;&gt;设定&lt;/h1&gt;
+&lt;p&gt;&lt;img alt=&#34;杨辉三角gif&#34; loading=&#34;lazy&#34; src=&#34;https://pic.leetcode-cn.com/1626927345-DZmfxB-PascalTriangleAnimated2.gif&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;性质&#34;&gt;性质&lt;/h1&gt;</description>
+    </item>
+    <item>
+      <title>leetcode刷题崩溃全过程</title>
+      <link>http://localhost:1313/post/leetcode%E5%88%B7%E9%A2%98%E5%B4%A9%E6%BA%83%E5%85%A8%E8%BF%87%E7%A8%8B/</link>
+      <pubDate>Fri, 08 Sep 2023 16:02:59 +0000</pubDate>
+      <guid>http://localhost:1313/post/leetcode%E5%88%B7%E9%A2%98%E5%B4%A9%E6%BA%83%E5%85%A8%E8%BF%87%E7%A8%8B/</guid>
+      <description>&lt;p&gt;尝试过多次之后，于2023年9月8日重新开始刷leetcode，名字是小鱼就把它刷成大佬号:D&lt;/p&gt;
+&lt;p&gt;总结一下写代码的时候遇到的问题（说真的，碰到哪个哪个不会）&lt;/p&gt;
+&lt;h1 id=&#34;语法&#34;&gt;语法&lt;/h1&gt;
+&lt;p&gt;几种常见语法&lt;/p&gt;
+&lt;h2 id=&#34;c&#34;&gt;c++&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/pascals-triangle/&#34;&gt;118&lt;/a&gt;Pascal&amp;rsquo;s Triangle
+vector&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/group-the-people-given-the-group-size-they-belong-to/&#34;&gt;1282&lt;/a&gt;. Group the People Given the Group Size They Belong To
+unordered_map
+可以学一下容器的emplace方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;java&#34;&gt;java&lt;/h2&gt;
+&lt;h2 id=&#34;python&#34;&gt;python&lt;/h2&gt;
+&lt;h1 id=&#34;算法&#34;&gt;算法&lt;/h1&gt;
+&lt;h2 id=&#34;动态规划&#34;&gt;动态规划&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/combination-sum-iv/&#34;&gt;377&lt;/a&gt; Combination Sum IV
+方程：
+$$f[n]=\sum_{target\ge number[i] }f[target-number[i]]$$&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/count-all-valid-pickup-and-delivery-options/&#34;&gt;1359&lt;/a&gt; Count All Valid Pickup and Delivery Options&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/build-array-where-you-can-find-the-maximum-exactly-k-comparisons/&#34;&gt;1420. Build Array Where You Can Find The Maximum Exactly K Comparisons&lt;/a&gt;
+三维的动态规划你见过吗？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;递归&#34;&gt;递归&lt;/h2&gt;
+&lt;h2 id=&#34;滑动窗口&#34;&gt;滑动窗口&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero/&#34;&gt;1658. Minimum Operations to Reduce X to Zero&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;前缀和&#34;&gt;前缀和&lt;/h2&gt;
+&lt;h1 id=&#34;数据结构&#34;&gt;数据结构&lt;/h1&gt;
+&lt;h2 id=&#34;图&#34;&gt;图&lt;/h2&gt;
+&lt;h3 id=&#34;欧拉图&#34;&gt;欧拉图&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/reconstruct-itinerary/&#34;&gt;332&lt;/a&gt;Reconstruct Itinerary
+求解欧拉回路+贪心&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;树&#34;&gt;树&lt;/h2&gt;
+&lt;h3 id=&#34;最小生成树&#34;&gt;最小生成树&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/min-cost-to-connect-all-points/&#34;&gt;1584&lt;/a&gt;Min Cost to Connect All Points
+居然是最小生成树，以前怎么没想到呢&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;问题&#34;&gt;问题&lt;/h1&gt;
+&lt;h2 id=&#34;排序&#34;&gt;排序&lt;/h2&gt;
+&lt;h2 id=&#34;查找&#34;&gt;查找&lt;/h2&gt;
+&lt;h3 id=&#34;二分查找&#34;&gt;二分查找&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/find-the-duplicate-number/&#34;&gt;287&lt;/a&gt;. Find the Duplicate Number
+有很多限制的题目
+&lt;blockquote&gt;
+&lt;p&gt;我觉得可以有很多想法的题目&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>

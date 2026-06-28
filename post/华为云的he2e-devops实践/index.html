@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>华为云的HE2E devops实践 | 我的博客</title>
+<meta name="keywords" content="软件工程">
+<meta name="description" content="华为云的HE2E devops实践 - 我的博客">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/%E5%8D%8E%E4%B8%BA%E4%BA%91%E7%9A%84he2e-devops%E5%AE%9E%E8%B7%B5/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/%E5%8D%8E%E4%B8%BA%E4%BA%91%E7%9A%84he2e-devops%E5%AE%9E%E8%B7%B5/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      华为云的HE2E devops实践
+    </h1>
+    <div class="post-meta">
+
+<span title='2021-05-31 14:03:44 +0000 UTC'>May 31, 2021</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p><a href="https://support.huaweicloud.com/bestpractice-devcloud/devcloud_practice_20072.html">参考文档</a></p>
+<p>框架</p>
+<p><img loading="lazy" src="https://support.huaweicloud.com/bestpractice-devcloud/zh-cn_image_0230143620.png"></p>
+<h4 id="实践流程">实践流程<a hidden class="anchor" aria-hidden="true" href="#实践流程">#</a></h4>
+<p>本文档将按照以下步骤介绍HE2E DevOps实践的操作流程。</p>
+<ol>
+<li>
+<p>准备实践环境。</p>
+<p>请参照<a href="https://support.huaweicloud.com/bestpractice-devcloud/devcloud_practice_2010.html">实践准备工作</a>完成实践前的准备，包括：</p>
+<ul>
+<li>注册帐号并实名认证。</li>
+<li>为项目成员分配帐号。</li>
+<li>创建项目、添加项目成员。</li>
+</ul>
+<blockquote>
+<p>登录华为账号</p>
+</blockquote>
+</li>
+<li>
+<p>管理项目规划。</p>
+<p>请参照<a href="https://support.huaweicloud.com/bestpractice-devcloud/devcloud_practice_2001.html">步骤一：管理项目规划</a>完成以下项目规划操作：</p>
+<ul>
+<li>管理需求规划。</li>
+<li>管理迭代规划。</li>
+<li>监控和跟踪项目状态。</li>
+</ul>
+</li>
+<li>
+<p>管理项目配置。</p>
+<p>请参照<a href="https://support.huaweicloud.com/bestpractice-devcloud/devcloud_practice_2002.html">步骤二：管理项目配置</a>完成以下项目设置：</p>
+<ul>
+<li>管理项目通知。</li>
+<li>定制项目工作流程。</li>
+</ul>
+</li>
+<li>
+<p>开发项目代码。</p>
+<p>请参照<a href="https://support.huaweicloud.com/bestpractice-devcloud/devcloud_practice_2004.html">步骤四：开发项目代码</a>完成以下代码开发过程：</p>
+<ul>
+<li>使用分支管理项目代码。</li>
+<li>使用CloudIDE修改和提交代码。</li>
+<li>检视代码、合并分支。</li>
+</ul>
+</li>
+<li>
+<p>检查项目代码。</p>
+<p>请参照<a href="https://support.huaweicloud.com/bestpractice-devcloud/devcloud_practice_2005.html">步骤五：检查项目代码</a>对代码进行静态检查，主要操作包括：</p>
+<ul>
+<li>配置并执行代码检查任务。</li>
+<li>查看代码检查结果。</li>
+</ul>
+</li>
+<li>
+<p>构建应用</p>
+<p>请参照<a href="https://support.huaweicloud.com/bestpractice-devcloud/devcloud_practice_2006.html">步骤六：构建应用</a>配置编译构建任务，包括：</p>
+<ul>
+<li>配置并执行编译构建任务。</li>
+<li>设置提交代码触发自动编译。</li>
+<li>设置定时执行编译构建任务。</li>
+</ul>
+</li>
+<li>
+<p>部署应用。</p>
+<p>软件开发平台支持以下两种部署方式，请根据需要选择。</p>
+<ul>
+<li><a href="https://support.huaweicloud.com/bestpractice-devcloud/devcloud_practice_2007.html">ECS部署</a>。</li>
+<li><a href="https://support.huaweicloud.com/bestpractice-devcloud/devcloud_practice_2011.html">CCE部署</a>。</li>
+</ul>
+</li>
+<li>
+<p>创建流水线</p>
+<p>请参照<a href="https://support.huaweicloud.com/bestpractice-devcloud/devcloud_practice_2008.html">步骤八：配置流水线，实现持续交付</a>创建并配置流水线，包括：</p>
+<ul>
+<li>配置并执行流水线。</li>
+<li>配置质量门禁。</li>
+<li>配置代码变更自动触发流水线。</li>
+</ul>
+</li>
+<li>
+<p>释放资源</p>
+<p>完成实践全部操作后，请参照<a href="https://support.huaweicloud.com/bestpractice-devcloud/devcloud_practice_2012.html">释放资源</a>释放不需要的资源，包括：</p>
+<ul>
+<li>删除项目。</li>
+<li>删除弹性云服务器。</li>
+<li>删除集群。</li>
+</ul>
+</li>
+</ol>
+<p>主账号：hw76570025</p>
+<p>Chirs</p>
+<p>Maggie</p>
+<p>Billy</p>
+<p>密码都是Devops1</p>
+<p>步骤三处测试<a href="https://support.huaweicloud.com/bestpractice-devcloud/devcloud_practice_2003.html#devcloud_practice_2003__fig19582175753411">中止</a>，需部署之后再做测试</p>
+<p>登陆指令docker login -u cn-north-4@9SEFZTLEEZT4N93ZGHBN -p edca9dbe16c19e59e574562a32d1a41ba41191ce700b5db4258c8adff63182d7 swr.cn-north-4.myhuaweicloud.com</p>
+<p>u   cn-north-4@9SEFZTLEEZT4N93ZGHBN</p>
+<p>p   edca9dbe16c19e59e574562a32d1a41ba41191ce700b5db4258c8adff63182d7</p>
+<p>org: phoenixabc</p>
+<p>dockerServer   swr.cn-north-4.myhuaweicloud.com</p>
+<p>构建的自动执行没有测试</p>
+<p>shell的用户名：root</p>
+<p>密码 HuaweiDevops7</p>
+<p>弹性ip：114.116.212.75</p>
+<p>集群名称：p1813098</p>
+<p>节点名称：p1813098-node</p>
+<p><a href="https://support.huaweicloud.com/bestpractice-devcloud/devcloud_practice_2011.html#devcloud_practice_2011__fig9353102132115">目前：</a></p>
+<h4 id="云部署的视频">云部署的视频<a hidden class="anchor" aria-hidden="true" href="#云部署的视频">#</a></h4>
+<p>弹性云服务器</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

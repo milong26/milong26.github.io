@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Lfqa on 我的博客</title>
+    <link>http://localhost:1313/tags/lfqa/</link>
+    <description>Recent content in Lfqa on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 19 Sep 2023 17:08:20 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/lfqa/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LFQA的问题</title>
+      <link>http://localhost:1313/post/%E9%98%85%E8%AF%BB-lfqa%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Tue, 19 Sep 2023 17:08:20 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E9%98%85%E8%AF%BB-lfqa%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+      <description>&lt;p&gt;论文标题：Hurdles to Progress in Long-form Question Answering
+地址：
+阅读参考：https://blog.csdn.net/c9Yv2cf9I06K2A9E/article/details/115387895&lt;/p&gt;
+&lt;p&gt;显而易见这篇还没来得及写&lt;/p&gt;
+&lt;p&gt;LFQA现有的工作倾向于集中在任务的两个核心部分，信息检索和综合合成information retrieval and synthesis。（from WebGPT: Browser-assisted question-answering with human feedback）&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

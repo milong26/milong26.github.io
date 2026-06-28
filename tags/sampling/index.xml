@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Sampling on 我的博客</title>
+    <link>http://localhost:1313/tags/sampling/</link>
+    <description>Recent content in Sampling on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 10 Sep 2023 15:58:45 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/sampling/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>拒绝采样</title>
+      <link>http://localhost:1313/post/%E6%8B%92%E7%BB%9D%E9%87%87%E6%A0%B7/</link>
+      <pubDate>Sun, 10 Sep 2023 15:58:45 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E6%8B%92%E7%BB%9D%E9%87%87%E6%A0%B7/</guid>
+      <description>&lt;p&gt;针对复杂问题的一种随机采样方法。&lt;/p&gt;
+&lt;h1 id=&#34;蒙特卡洛&#34;&gt;蒙特卡洛&lt;/h1&gt;
+&lt;p&gt;蒙特·卡罗方法(Monte Carlo method)也称统计模拟方法，核心思想就是使用随机数（或更常见的伪随机数）来解决一些复杂的计算问题。&lt;/p&gt;
+&lt;p&gt;当所求解问题可以转化为某种随机分布的特征数（比如随机事件出现的概率，或者随机变量的期望值等）时，往往就可以考虑使用蒙特卡洛方法。通过随机抽样的方法，&lt;strong&gt;以随机事件出现的频率估计其概率，或者以抽样的数字特征估算随机变量的数字特征&lt;/strong&gt;，并将其作为问题的解。这种方法多用于求解复杂的高维积分问题。&lt;/p&gt;
+&lt;h1 id=&#34;采样&#34;&gt;采样&lt;/h1&gt;
+&lt;p&gt;在统计学中， 抽样（或称采样）是指从目标总体中抽取一部分个体作为样本的过程。
+但是在计算机模拟时，我们所说的抽样，其实是指从一个概率分布中生成观察值（observations）的方法。而这个分布通常是由其概率密度函数（PDF）来表示的。而且，即使在已知PDF的情况下，让计算机自动生成观测值也不是一件容易的事情。从本质上来说，计算机只能实现对均匀分布（Uniform distribution）的采样。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;PDF：概率密度函数（probability density function）, 在数学中，连续型随机变量的概率密度函数（在不至于混淆时可以简称为密度函数）是一个描述这个随机变量的输出值，在某个确定的取值点附近的可能性的函数。
+PMF : 概率质量函数（probability mass function), 在概率论中，概率质量函数是离散随机变量在各特定取值上的概率。
+CDF : 累积分布函数 (cumulative distribution function)，又叫分布函数，是概率密度函数的积分，能完整描述一个实随机变量X的概率分布。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;一句话概括&lt;strong&gt;PDF就是f(x)，积分为1，与x轴面积=1&lt;/strong&gt;，&lt;strong&gt;CDF是F(X),+∞时值为1&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;复杂问题用拒绝采样&#34;&gt;复杂问题用拒绝采样&lt;/h1&gt;
+&lt;p&gt;找一个简单函数可以尽可能地罩住已知的。&lt;/p&gt;
+&lt;h2 id=&#34;原理&#34;&gt;原理&lt;/h2&gt;
+&lt;p&gt;对所有x，有kq(x)≥f(x)&lt;/p&gt;
+&lt;h2 id=&#34;步骤&#34;&gt;步骤&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;需要一个辅助的“建议分布”G（概率密度函数g(x)已知）来产生候选样本。可选均匀分布、正态分布等。&lt;/li&gt;
+&lt;li&gt;另一个辅助的均匀分布 u(0,1)&lt;/li&gt;
+&lt;li&gt;计算一个常数值 c,满足不等式cg(x)≥f(x)的最小值&lt;/li&gt;
+&lt;li&gt;开始生成样本
+&lt;ol&gt;
+&lt;li&gt;从G抽样得到Y&lt;/li&gt;
+&lt;li&gt;从U抽样得到V&lt;/li&gt;
+&lt;li&gt;若$V\le \frac{f(Y)}{C*g(Y)} $，则X=Y(即接受Y)，否则继续执行step1&lt;/li&gt;
+&lt;li&gt;重复直到样本总数够&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+  </channel>
+</rss>

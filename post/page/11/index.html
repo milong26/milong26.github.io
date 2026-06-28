@@ -128,173 +128,198 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">FreeAdversarialTraining
+    <h2 class="entry-hint-parent">npm
     </h2>
   </header>
   <div class="entry-content">
-    <p>以前写毕设学的，留个纪念。
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2022-04-16 16:32:50 +0000 UTC'>April 16, 2022</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to FreeAdversarialTraining" href="http://localhost:1313/post/freeadversarialtraining/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>今天搞定：
-仿真环境配置 仿真环境训练pi0试试 看完tinyvla&#43;efficient这两篇论文 10:01:47 到达工位，开始干活，先去泡茶
-上午11点半之前，配置好metaworld 上午配置好了，但是还在下载数据集，顺便配置好了多卡训练 下午看数据集下载好以后能不能act训练和pi0fast训练 14:10:26 来到工位了，看来数据集已经下载完了，正在训练，那我要不写一个wandb吧
-今天计划：晚上随便吃点晚饭，然后继续肝。今天在工位呆到10点半再回去 14:42:12 这40分钟我在干啥……迷茫ing 那14:42:22开始，摩拳擦掌向pi
-16:03:20 好困啊，晚上还是要多睡觉，今晚早点睡，12点睡觉 今天要删除1G的视频，加油
-今天要看完tinylvla,efficient,pi0fast这两篇论文
-16:55:08 再等一个半小时跑完act的训练才行，哎，然后试试看能不能重启 那现在只能看论文了
-有点烦躁，感觉进度太慢了 18:25:04 玩到7点，然后做一个工程：为什么网页上乱码
-我擦，好困啊，回去洗澡和睡觉算了，真的困 洗完澡了，洗了白色拖鞋，味道去掉了 在看青春之旅，动画12集，看到8了
+    <p>淘宝镜像过期 提示：request to https://registry.npm.taobao.org/xxx failed, reason: certificate has expired 三、解决方案
+1、查看当前的npm镜像设置：npm config list
+2、清空缓存：npm cache clean –force
+3、然后修改镜像即可：npm config set registry https://registry.npmmirror.com 一般国内用户还是建议使用淘宝镜像，所以推荐还是设置成用淘宝镜像 4、再次运行： npm config list，查看 registry 已经被更改为默认的 npm 公共镜像地址。
 </p>
   </div>
   <footer class="entry-footer">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/post/6-16/"></a>
+<span title='2024-02-29 17:30:15 +0000 UTC'>February 29, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to npm" href="http://localhost:1313/post/npm/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">
+    <h2 class="entry-hint-parent">寒假之前搞定的aimax配置
     </h2>
   </header>
   <div class="entry-content">
-    <p>创新点与结果分析 【Big】创新点一：基于状态信息覆盖（SIC）的示范数据分析框架 核心问题 轻量化 VLA 的下游微调数据采集面临一个实践难题：不同的位置-姿态采集配置与重复次数组合，会导致模型获得截然不同的泛化能力，但评估代价极高。现有主动学习方法（FPS、k-center）只能解决&#34;覆盖哪些状态&#34;，无法解决&#34;有限预算下重复次数如何分配&#34;这一同等重要的问题。SIC 框架正是为此而设计的。
-方法 将数据质量评估转化为冻结 VLM 嵌入空间中的覆盖密度问题。以最小全覆盖集 $B_0$ 构建锚点参考系，锚点由全局首帧嵌入（刻画初始位置姿态）与腕部中段均值嵌入（刻画操作动态）双视角互补表示。
-SIC 函数融合三个机制：
-$$\text{SIC}(\mathcal{D}) = \sum_{a \in \mathcal{A}} \frac{\sigma_\text{global}(a,\mathcal{D})}{1&#43;\sigma_\text{global}} &#43; \lambda \cdot \sum_{a \in \mathcal{A}} \frac{\sigma_\text{wrist}(a,\mathcal{D})}{1&#43;\sigma_\text{wrist}}$$
-Laplacian 空间接近度：带宽由最近邻距离自适应确定，无额外超参数； 对数次数软化权重 $\tau(t) = \alpha \log\frac{t&#43;1}{t}$：对重复采集的边际贡献建模，使 SIC 能感知重复次数的合理性； 锚点级饱和变换：将已充分覆盖区域的边际收益压至趋零，为贪心算法提供理论保障（SIC 具有单调性与边际递减性）。 在 SIC 的基础上，以 $B_0$ 为起点运行前向贪心规划，每步追加边际增益最大的配置，输出&#34;位置-姿态-次数&#34;采集清单。
-关键结果 📊 图示参考：fig:ch3_siv_scatter——SIC 分数与真实任务成功率散点图（Spearman ρ=0.8336，p=0.0008），正相关趋势清晰；留一法检验 ρ 均值 0.8292，最差 0.7836，结论稳健。
-📊 图示参考：fig:ch3_greedy_curve &#43; fig:ch3_heatmap——贪心迭代 SIC 增长曲线与最终采集方案热力图，呈现非均匀异构分配：高信息量配置获得 3-4 次，已饱和区域仅保留 1 次。
-144 集预算下核心对比：
-策略 SR (%) 最小覆盖基线 $B_0$（72 集） 78±0.7 均匀双倍 / FPS / k-center（均为 144 集） 84±0.4 固定结构最优（B144-diagonal） 86±1.3 SIC 引导（本文，144 集） 93±1.0 全量数据（288 集） 96±1.2 FPS 和 k-center 在 $B_0$ 已全覆盖的条件下均退化为均匀分配，说明传统空间采样方法对重复次数分配问题完全无效。SIC 引导方案以 50% 的数据量将性能差距控制在 3 个百分点内。
-...</p>
+    <p>目标：在aimax平台上面部署MedicalGPT
+aimax平台 连校园网，http://10.60.81.153/index.html#/login 账户名 general07 密码 ner@507 登录，多端登录会下线之前的 (选)右上角有用户手册 私有数据目录 数据存储-私有数据-创建目录，名字随便写
+创建环境 还是在aimax平台 侧边栏：模型训练-交互式开发-创建
+名字随便，自己记得 选terminal 密码也要自己记得，密码只能由字母数字和特殊字符（!@#$%^&amp;*）组成，且6~20位字符。 工作空间选刚才创建的私有数据目录 最长运行时间没法加，认命吧 绑定的分区看不懂 加速器选3090 选择GPU个数 xshell</p>
   </div>
   <footer class="entry-footer">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/post/analysis_v2/"></a>
+<span title='2024-01-06 16:47:14 +0000 UTC'>January 6, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 寒假之前搞定的aimax配置" href="http://localhost:1313/post/%E5%AF%92%E5%81%87%E4%B9%8B%E5%89%8D%E6%90%9E%E5%AE%9A%E7%9A%84aimax%E9%85%8D%E7%BD%AE/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">
+    <h2 class="entry-hint-parent">xshell和xftp指北
     </h2>
   </header>
   <div class="entry-content">
-    <p>git clone git@github.com:RLinf/RLinf.git 文档里面只写了venv安装，那conda环境怎么搞？ conda create -n rlinf python=3.11 conda activate rlinf
+    <p>XShell 是一种流行且简单的网络程序，旨在模拟虚拟终端。XShell可以在Windows界面下来访问远端不同系统下的服务器，从而比较好的达到远程控制终端的目的。它支持 RLOGIN、SFTP、SERIAL、TELNET、SSH2 和 SSH1，可以非常方便的对Linux主机进行远程管理。除此之外，其还有丰富的外观配色方案以及样式选择。 xftp是用来上传和下载文件的
+下载与安装 下载地址：https://www.xshell.com/zh/free-for-home-school/ xshell和xftp都可以下载 安装：直接无脑安装，但是不知道为啥它还要自己新建文件夹，不能自动创建吗 注册：随便用个邮箱注册，它不是商用的
+使用 连接</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2024-01-06 16:24:20 +0000 UTC'>January 6, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to xshell和xftp指北" href="http://localhost:1313/post/xshell%E6%8C%87%E5%8C%97/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">batch
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>包含：mini-batch
+batch mini-batch 在梯度下降中需要对所有样本进行处理过后然后走一步，那么如果我们的样本规模的特别大的话效率就会比较低。 假如有500万，甚至5000万个样本的话走一轮迭代就会非常的耗时。这个时候的梯度下降叫做full batch。 所以为了提高效率，我们可以把样本分成等量的子集。 例如我们把100万样本分成1000份， 每份1000个样本， 这些子集就称为mini batch。 然后我们分别用一个for循环遍历这1000个子集。 针对每一个子集做一次梯度下降。 然后更新参数w和b的值。接着到下一个子集中继续进行梯度下降。 这样在遍历完所有的mini batch之后我们相当于在梯度下降中做了1000次迭代。 我们将遍历一次所有样本的行为叫做一个 epoch，也就是一个世代。 在mini batch下的梯度下降中做的事情其实跟full batch一样，只不过我们训练的数据不再是所有的样本，而是一个个的子集。 这样在mini batch我们在一个epoch中就能进行1000次的梯度下降，而在full batch中只有一次。 这样就大大的提高了我们算法的运行速度。 既然有了mini batch那就会有一个batch size的超参数，也就是块大小。代表着每一个mini batch中有多少个样本。 我们一般设置为2的n次方。 例如64,128,512,1024. 一般不会超过这个范围。不能太大，因为太大了会无限接近full batch的行为，速度会慢。 也不能太小，太小了以后可能算法永远不会收敛。 当然如果我们的数据比较小， 但也用不着mini batch了。 full batch的效果是最好的。
 </p>
   </div>
   <footer class="entry-footer">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/post/rlinf/"></a>
+<span title='2023-12-26 20:23:43 +0000 UTC'>December 26, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to batch" href="http://localhost:1313/post/batch/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">
+    <h2 class="entry-hint-parent">训练具有次线性记忆代价的深度网络
     </h2>
   </header>
   <div class="entry-content">
-    <p>做一件事时要完全专注于当下，不同时想着其他任务，切换到下一件事时也尽量让情绪和思维归零，不带着上一件事的干扰。为了帮助实现这种切换，可以利用物理环境或工具的变化，比如换地点、换设备、换软件，甚至用不同空间来区分不同任务，从而给大脑明确的“结束与开始”的信号。同时，建议将脑力和体力任务交替安排，避免连续高消耗，从而减少疲劳感。整体想表达的是，通过人为设计“切换机制”，让注意力更集中、内耗更少，使多任务生活变得更可持续，而不是同时分心处理多件事。
+    <p>主要是激活检查点的技术，不精读了，论文比较古早
+paper 标题：Training Deep Nets with Sublinear Memory Cost 地址：arxiv 摘要 文章结构 感觉这篇都是干货，都没提背景
+贡献：设计了一个系统上的方法 减少深度神经网络训练时的内存消耗。 具体：设计了一种算法 训练n层网络时消耗$O(\sqrt{n})$的内存，只需要每一个mini-batch额外的foward计算成本。 大背景： 模型达到GPU内存上限 目标： 减少内存消耗 什么样的：训练过程存储中间特征图和梯度的 小背景 计算图分析Computation graph analysis 用来：自动现场操作&#43;内存共享优化 我们证明了有可能以牺牲内存计算为代价，以较小的额外计算成本给出一个更高效的内存训练算法。 结果 在极端情况下，我们的分析还表明，内存消耗可以降低到O ( log n )，而forward的额外开销只有O( nlogn)。 我们的实验表明，在ImageNet问题上，我们可以将1，000层深度残差网络的内存开销从48G降低到7G。类似地，在非常长的序列上训练复杂的递归神经网络时，观察到显著的记忆成本降低。 个人总结 大背景是模型超过GPU上限，因为研究的时候大模型还不热（或者说还没出来）； 采取了计算图分析这个技术，利用其在自动现场操作&#43;内存共享优化这两个方面的作用，以减少训练过程中存储中间特征图（中间结果？）和梯度的内存消耗； 方法是用额外的forward计算赚回内存消耗，使得训练n层网络只要消耗$O(\sqrt{n})$的内存 最后还有实际实验数据。
+结构比较另类，可能因为比较早。 大概需要了解一下计算图分析是什么 因为不是精读，了解一下后面论文干了什么
+介绍 扩充了摘要部分，有几个问题
+为什么要搞中间结果 由于在许多常见的深度架构中，与中间特征图的大小相比，参数的大小相对较小。 中间特征图是什么？看起来像是训练过程中特征的可视化。。
+计算图分析技术 来进行自动就地(in-place，现场？就地？)操作和内存共享优化。 结果写得更清楚 提出了一种新的方法来用计算换换内存 我们给出了一个用O (√n )的内存来训练一个n层网络的实用算法，只要两倍的forward计算。 验证了：在极端情况下，对特征图使用尽可能少的O (log n)内存来训练一个n层网络是可能的。 </p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-12-26 20:11:12 +0000 UTC'>December 26, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 训练具有次线性记忆代价的深度网络" href="http://localhost:1313/post/%E8%AE%AD%E7%BB%83%E5%85%B7%E6%9C%89%E6%AC%A1%E7%BA%BF%E6%80%A7%E8%AE%B0%E5%BF%86%E4%BB%A3%E4%BB%B7%E7%9A%84%E6%B7%B1%E5%BA%A6%E7%BD%91%E7%BB%9C/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">矩阵in线性代数
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>包含正定矩阵、
+正定矩阵 正定矩阵的定义是从正定二次型来的
+判断 求出A的所有特征值 若A的特征值均为正数，则A是正定的； 若A的特征值均为负数，则A为负定的。
+计算A的各阶主子式。
+顺序主子式的计算方式： 在n 阶方阵中，选取行号i，再选取与行号相同的列号i，行与列均取i个元素的行列式即为n阶行列式的i阶顺序主子式。
+若A的各阶主子式均大于零，则A是正定的； 若A的各阶主子式中，奇数阶主子式为负，偶数阶为正，则A为负定的。
+这俩方法里面2稍微简单点。
 </p>
   </div>
   <footer class="entry-footer">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/post/%E5%BF%83%E7%90%86/"></a>
+<span title='2023-12-26 16:50:35 +0000 UTC'>December 26, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 矩阵in线性代数" href="http://localhost:1313/post/%E7%9F%A9%E9%98%B5in%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">
+    <h2 class="entry-hint-parent">SGD vs Adam
     </h2>
   </header>
   <div class="entry-content">
-    <p></p>
-  </div>
-  <footer class="entry-footer">
-
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/post/%E6%9C%AA%E5%91%BD%E5%90%8D/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>2026年6月7日大清理：
-BIlibili历史记录：网页版关闭保存历史记录的功能。 app端历史记录已清除。 还留下若干收藏夹，稍后再看。这一波清理干净之前不再增加 一周内清理干净 手机端缓存视频若干 ipad端缓存视频活干 长毛象上面的收藏稍微清理了一些，还是有很多。 难受啊，怎么会有这么多马了的。 看看能不能把“马了就是忘了”那里做一个单独的工具箱页面
+    <p>比较一下SGD和Adam这两个优化器，时间顺序上Adam是对SGD的改进，但是在一些层面SGD还是很好用的。
+只写了一点点，没空了，以后再搞 参考：https://blog.csdn.net/S20144144/article/details/103417502 参考：https://www.zhihu.com/question/422203931/answers/updated#:~:text=Adam%20%E7%AE%97%E6%B3%95%E5%8F%AF%E4%BB%A5%E7%9C%8B%E4%BD%9C%E6%98%AF%E5%9C%A8,SGD%20%E7%9A%84%E5%9F%BA%E7%A1%80%E4%B8%8A%E8%BF%9B%E8%A1%8C%E4%BA%86%E4%BC%98%E5%8C%96%EF%BC%8C%E5%AE%83%E7%BB%93%E5%90%88%E4%BA%86%E6%A2%AF%E5%BA%A6%E7%9A%84%E4%B8%80%E9%98%B6%E7%9F%A9%E4%BC%B0%E8%AE%A1%E5%92%8C%E4%BA%8C%E9%98%B6%E7%9F%A9%E4%BC%B0%E8%AE%A1%E6%9D%A5%E5%8A%A8%E6%80%81%E8%B0%83%E6%95%B4%E5%AD%A6%E4%B9%A0%E7%8E%87%EF%BC%8C%E4%BD%BF%E5%BE%97%E5%B0%8F%E7%90%83%E8%83%BD%E5%A4%9F%E6%9B%B4%E5%8A%A0%E6%99%BA%E8%83%BD%E5%9C%B0%E6%BB%9A%E5%8A%A8%E5%88%B0%E5%B1%B1%E8%B0%B7%E7%9A%84%E6%9C%80%E4%BD%8E%E7%82%B9%E3%80%82 优化算法总览 SGD和Adam的设定部分直接看原文，这里只做总结。
+深度学习优化算法经历了 SGD -&gt; SGDM -&gt; NAG -&gt;AdaGrad -&gt; AdaDelta -&gt; Adam -&gt; Nadam 这样的发展历程。
+优化问题：待优化参数w，目标函数f(w)，初始学习率$\alpha$，对该优化问题迭代优化。在每个epoch t：
+计算梯度$g_t=\nabla f(w_t)$ 根据历史梯度计算一阶动$m_t$量和二阶动量$v_t$（一阶动量和二阶动量分别是历史梯度的一阶函数和二阶函数。） 计算当前时刻的下降梯度 $$ \Delta\theta_t=-\alpha\cdot \frac{m_t}{\sqrt{v_t}} $$ 根据下降梯度更新 $$ w_{t&#43;1}=w_t-\Delta\theta_t $$ 步骤3、4对于各个算法都是一致的，主要的差别就体现在1和2上。
+SGD SGD没有动量（vanilla SGD），即上面公式里面 $m_t=g_t,v_t=I^2$
 </p>
   </div>
   <footer class="entry-footer">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/post/%E6%B8%85%E7%90%86/"></a>
+<span title='2023-12-21 16:09:48 +0000 UTC'>December 21, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to SGD vs Adam" href="http://localhost:1313/post/sgd-vs-adam/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">
+    <h2 class="entry-hint-parent">数据的稀疏性
     </h2>
   </header>
   <div class="entry-content">
-    <p>ZLY@3090# 查看磁盘占用情况
-主要的home du -sh ~/* /.??* 2&gt;/dev/null | sort -hr 主要是/.cache这个文件夹，可以过段时间再删
-然后是主要的工作文件夹 /data/zhonglinye du -sh /data/zhonglinye 2&gt;/dev/null 查看总占用，但是没啥用 du -sh /data/zhonglinye/* 2&gt;/dev/null 查看一级子目录，有用 du -ah /data/zhonglinye 2&gt;/dev/null | sort -rh | head -20 查看前20个最大文件和目录
-好像差不多了，以后再看lerobot的还有hfdata，太乱了看不懂
-cd ~ du -sh ~/* ~/.??* 2&gt;/dev/null | sort -hr 感觉.cache文件夹过大了，删掉 然后是/data/zhonglinye
-du -sh /data/zhonglinye/* 2&gt;/dev/null wandb文件夹可以清空 然后hfdata 和code太大了 cache里面主要是pip的，等我安装完再删除 code和hfdata比较大 du -sh /data/zhonglinye/hfdata/* 2&gt;/dev/null 主要是datasets文件夹很大，但我又不知道哪些数据重要orz 还有hub，huggingface，lerobot这几个文件夹比较大。 那把自己采集的数据集做一个存档吧 之前的数据都上传到哪里了？ /data/zhonglinye/hfdata/huggingface/lerobot 其他的都是后来下载的，不用管
-…/hfdata/huggingface$ tar -czvf lerobot.tar.gz lerobot 打包需要一点时间，压缩以后还15.72G，等下载到windows以后就把hfdata里面的内容清理掉
+    <p>稀疏数据是指，数据框中绝大多数数值缺失或者为零的数据
+抄的这一篇
+没抄完，以后再写 狭义上来讲，“稀疏”就是指数据中有大量的零，所以最简单的稀疏性指标就是统计零的比例。但如果仅仅是这样的话，注意力矩阵就谈不上稀疏了，因为softmax出来的结果一定是正数。所以，有必要推广稀疏的概念。一个朴素的想法是统计绝对值不超过ϵ的元素比例，但这个ϵ怎么确定呢？
+平均值指标 1相比于0.0001很大，但是相比10000又很小，所以大和小的概念不是绝对的。直观来想，稀疏的向量存在很多接近于零的数，那么它的绝对值的平均肯定会比较小，又因为大和小的概念是相对的，我们不妨将这个平均值跟最大值做除法，以获得相对结果，所以一个看上去比较合理的指标是 $$ S_0(\boldsymbol{x})=\frac{(|x_1|&#43;|x_2|&#43;\cdots&#43;|x_n|)/n}{\max(|x_1|,|x_2|,\cdots,|x_n|)} $$
+指标越小的向量越稀疏。不过，尽管这个指标有一定的合理性，但它却不够“光滑”，主要是max这个操作极易受到异常值的影响，不能很好地反应数据统计特性。
+光滑</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-12-21 11:48:49 +0000 UTC'>December 21, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 数据的稀疏性" href="http://localhost:1313/post/%E6%95%B0%E6%8D%AE%E7%9A%84%E7%A8%80%E7%96%8F%E6%80%A7/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">adam优化器
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Adam 优化算法，Adaptive。 可以将其理解成Adam = Momentum &#43; Adaptive Learning Rate
+梯度下降不够 基本的mini-batch SGD优化算法在深度学习取得很多不错的成绩。然而也存在一些问题需解决：
+选择恰当的初始学习率很困难。 学习率调整策略受限于预先指定的调整规则。 相同的学习率被应用于各个参数。 高度非凸的误差函数的优化过程，如何避免陷入大量的局部次优解或鞍点。 自适应优化 AdaGrad 针对简单的SGD及Momentum存在的问题，AdaGrad优化算法(Adaptive Gradient，自适应梯度)出现 它能够对每个不同的参数调整不同的学习率，对频繁变化的参数以更小的步长进行更新，而稀疏的参数以更大的步长进行更新。 $$ g_i=\nabla_\theta J(\theta_{t-1})\ \theta_{t&#43;1}=\theta_t-\alpha \cdot\frac{g_t}{\sqrt{\sum_{i=1}^t}g_i^2} $$ $g_t$表示第t时间步的梯度（向量，包含各个参数对应的偏导数， 表示第i个参数t时刻偏导数）
+$g_t^2$表示第t时间步的梯度平方（向量，由 各元素自己进行平方运算所得，即Element-wise）
+AdaGrad与SGD的核心区别在于:计算更新步长时，增加了分母：梯度平方累积和的平方根。 此项能够累积各个参数的历史梯度平方，频繁更新的梯度，则累积的分母项逐渐偏大，那么更新的步长(stepsize)相对就会变小，而稀疏的梯度，则导致累积的分母项中对应值比较小，那么更新的步长则相对比较大。
+AdaGrad能够自动为不同参数适应不同的学习率（平方根的分母项相当于对学习率α进进行了自动调整，然后再乘以本次梯度），大多数的框架实现采用默认学习率α=0.01即可完成比较好的收敛。
+优势：在数据分布稀疏的场景，能更好利用稀疏梯度的信息，比标准的SGD算法更有效地收敛。
+缺点：主要缺陷来自分母项的对梯度平方不断累积，随之时间步地增加，分母项越来越大，最终导致学习率收缩到太小无法进行有效更新。
+数据分布稀疏是什么情况？数据的稀疏性
+RMSProp RMSProp结合梯度平方的指数移动平均数来调节学习率的变化,能够在不稳定（Non-Stationary）的目标函数情况下进行很好地收敛。 $$ g_t=\nabla \theta J(\theta{t-1})\ v_t=\gamma(v_{t-1})&#43;(1-\gamma)g_t^2 $$ 计算梯度平方的指数移动平均数vt（Exponential Moving Average），γ是遗忘因子（或称为指数衰减率），依据经验，默认设置为0.9。
+梯度更新时候，与AdaGrad类似，只是更新的梯度平方的期望（指数移动均值），其中ε=10^-8，避免除数为0。默认学习率α=0.001。 $$ \theta_t=\theta_{t-1}-\alpha\cdot\frac{g_t}{\sqrt{v_t}&#43;\varepsilon} $$
+优势：能够克服AdaGrad梯度急剧减小的问题，在很多应用中都展示出优秀的学习率自适应能力。尤其在不稳定(Non-Stationary)的目标函数下，比基本的SGD、Momentum、AdaGrad表现更良好。
+Adam优化器 Adam优化器结合AdaGrad和RMSProp两种优化算法的优点。对梯度的一阶矩估计（First Moment Estimation，即梯度的均值）和二阶矩估计（Second Moment Estimation，即梯度的未中心化的方差）进行综合考虑，计算出更新步长。
+优点 实现简单，计算高效，对内存需求少 参数的更新不受梯度的伸缩变换影响 超参数具有很好的解释性，且通常无需调整或仅需很少的微调 更新的步长能够被限制在大致的范围内（初始学习率） 能自然地实现步长退火过程（自动调整学习率） 很适合应用于大规模的数据及参数的场景 适用于不稳定目标函数 适用于梯度稀疏或梯度存在很大噪声的问题 综合Adam在很多情况下算作默认工作性能比较优秀的优化器
+伪代码 ...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-12-21 11:02:12 +0000 UTC'>December 21, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to adam优化器" href="http://localhost:1313/post/adam%E4%BC%98%E5%8C%96%E5%99%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">tim
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>qq办公版，比qq轻量而且功能简单。但是也有问题，等到哪天我实在忍不了的时候再放弃吧==
+下载 官网
+安装 无脑操作就行 按照个人习惯把应用全塞到D:/application文件
+配置 关闭TIM 打开C:\Users\Public\Documents文件夹（可直接复制路径到资源管理器中打开），在此路径下新建名为Tencent的文件夹，在Tencent文件夹中新建名为QQ的文件夹， 在新建的QQ文件夹中，新建文本文件，输入以下内容 [UserDataImportSet] NeedImport=0 OldVersion= OldVerDataPathType= OldVerDataPath= OldQQInstallPath=C:\Program\Tencent\TIM [UserDataSet] UserDataSavePathType=2 UserDataSavePath=D:\TimFiles NewVersion= 注意：第6行OldQQInstallPath等号后面的路径应改为自己电脑上TIM的安装路径，第9行等号后面UserDataSavePath的路径改为自己想放的位置。
+将新建的文本文件另存为“UserDataInfo.ini”，放在第3步新建这个QQ文件夹中
+关闭文件，打开TIM，可以在设置中看到个人文件夹目录已经设置成功。如下图
+文件夹位置不用改，会自己调整（但是也没法单独分离出来）
 </p>
   </div>
   <footer class="entry-footer">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/post/%E6%B8%85%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>2026年6月24日20元购入小米无线键鼠套装3，蓝牙，需要5号电池，鼠标和键盘都需要。usb-A连接器不能乱丢。
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/post/%E7%89%A9%E6%96%BD%E4%BA%8E%E4%BA%BA/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">_日记2026
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to _日记2026" href="http://localhost:1313/post/%E6%97%A5%E8%AE%B02026/"></a>
+<span title='2023-12-18 16:19:09 +0000 UTC'>December 18, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to tim" href="http://localhost:1313/post/tim/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

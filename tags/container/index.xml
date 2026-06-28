@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Container on 我的博客</title>
+    <link>http://localhost:1313/tags/container/</link>
+    <description>Recent content in Container on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 11 Sep 2023 17:30:29 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/container/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>gcc的emplace方法</title>
+      <link>http://localhost:1313/post/gcc%E7%9A%84emplace%E6%96%B9%E6%B3%95/</link>
+      <pubDate>Mon, 11 Sep 2023 17:30:29 +0000</pubDate>
+      <guid>http://localhost:1313/post/gcc%E7%9A%84emplace%E6%96%B9%E6%B3%95/</guid>
+      <description>&lt;p&gt;和insert/push_back有点区别&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;std::unordered_map&amp;lt;Key,T,Hash,KeyEqual,Allocator&amp;gt;::emplace&lt;/code&gt;
+c++11才有
+如果容器里面的key没有对象，就插入新元素&lt;/p&gt;
+&lt;p&gt;优点：可以减少在构造时用copy或者move操作,so在添加新的键值对时，效率比insert()高&lt;/p&gt;
+&lt;p&gt;对比&lt;code&gt;push_back&lt;/code&gt;和&lt;code&gt;emplace_back&lt;/code&gt;源码，最大区别在于&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;_Alloc_traits&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;construct(&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;_M_impl, &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;_M_impl._M_finish,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                 std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;forward&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;_Args&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;(__args)...); &lt;span style=&#34;color:#75715e&#34;&gt;// emplace_back()
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;_Alloc_traits&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;construct(&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;_M_impl, &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;_M_impl._M_finish,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                 __x);                            &lt;span style=&#34;color:#75715e&#34;&gt;// push_back()
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;forward()&lt;/code&gt;就是最主要的区别，其功能为类型转换，所以在用&lt;code&gt;push_back()&lt;/code&gt;时会多用构造函数。
+在强制类型转换中，将参数 __t 传递给对应类 _Tp 的构造函数，然后调用了该类的构造函数从而完成对象创建过程。在&lt;code&gt;emplace_back()&lt;/code&gt;函数中，是支持直接将构造函数所需的参数传递过去，然后构建一个新的对象出来，然后填充到容器尾部的。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

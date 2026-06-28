@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Configure on 我的博客</title>
+    <link>http://localhost:1313/tags/configure/</link>
+    <description>Recent content in Configure on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 16 Sep 2023 17:15:33 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/configure/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>配置gcc</title>
+      <link>http://localhost:1313/post/%E9%85%8D%E7%BD%AEgcc/</link>
+      <pubDate>Sat, 16 Sep 2023 17:15:33 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E9%85%8D%E7%BD%AEgcc/</guid>
+      <description>&lt;p&gt;c/c++环境没自己配置过，试试&lt;/p&gt;
+&lt;h1 id=&#34;windows配置&#34;&gt;windows配置&lt;/h1&gt;
+&lt;h2 id=&#34;下载并解压&#34;&gt;下载并解压&lt;/h2&gt;
+&lt;p&gt;离线下载&lt;a href=&#34;https://link.zhihu.com/?target=https%3A//sourceforge.net/projects/mingw-w64/files/Toolchains%2520targetting%2520Win64/Personal%2520Builds/mingw-builds/8.1.0/threads-posix/seh/x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z/download&#34;&gt;地址&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;修改环境变量&#34;&gt;修改环境变量&lt;/h2&gt;
+&lt;p&gt;修改系统变量的Path，新增(也就是gcc解压后的bin路径)
+&lt;code&gt;D:\conf\gcc\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;验证&#34;&gt;验证&lt;/h2&gt;
+&lt;p&gt;按win+r运行cmd或者powershell输入gcc -v
+出现一大坨就证明ok&lt;/p&gt;
+&lt;h2 id=&#34;vscode使用&#34;&gt;vscode使用&lt;/h2&gt;
+&lt;h3 id=&#34;安装插件&#34;&gt;安装插件&lt;/h3&gt;
+&lt;p&gt;在vscode中安装以下插件
+C/C++
+Code Runner&lt;/p&gt;
+&lt;h3 id=&#34;之前写的blog不知道可不可行&#34;&gt;之前写的blog，不知道可不可行&lt;/h3&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;MinGW&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://sourceforge.net/projects/mingw-w64/files/&#34;&gt;链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;往下滑，找到最新版的 &amp;ldquo;x86_64-posix-seh&amp;rdquo;。&lt;/p&gt;
+&lt;p&gt;下载后得到一个7z压缩包，解压到指定conf位置D:\conf\MinGW&lt;/p&gt;
+&lt;p&gt;编辑用户变量Path，加入刚才的D:\conf\MinGW\mingw64\bin&lt;/p&gt;
+&lt;p&gt;验证：g++，提示：g++: fatal error: no input files，证明🆗&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;配置vs的c++环境（和以前在ubuntu上面有点像，所以很痛苦的，是一个文件夹里配置）&lt;/p&gt;
+&lt;p&gt;打开一个文件夹，新建一个cpp文件，写点代码上去。&lt;/p&gt;
+&lt;p&gt;侧边工作栏的bug按钮，（以下最好连续）**选中Run and Debug，选C++(GDB/LLDB)，g++.exe，**会自动生成一个launch.json.&lt;/p&gt;
+&lt;p&gt;然后咱们来看看launch.json啊&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;version&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;0.2.0&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;configurations&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;g++.exe build and debug active file&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;type&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;cppdbg&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;request&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;launch&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;program&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;${fileDirname}\\${fileBasenameNoExtension}.exe&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;args&amp;#34;&lt;/span&gt;: [],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;stopAtEntry&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;cwd&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;${workspaceFolder}&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;environment&amp;#34;&lt;/span&gt;: [],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;externalConsole&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;,      &lt;span style=&#34;color:#75715e&#34;&gt;//修改此项，让其弹出终端
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;MIMode&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;gdb&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;miDebuggerPath&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;D:\\conf\\MinGW\\mingw64\\bin\\gdb.exe&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;setupCommands&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;description&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Enable pretty-printing for gdb&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;text&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-enable-pretty-printing&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;ignoreFailures&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;preLaunchTask&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;task g++&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;//修改此项
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;保存，返回c++，停止运行，按F5调试，提示找不到文件。选择Configure Task，编辑tasks.json，把其中label行修改成&lt;code&gt;       &amp;quot;label&amp;quot;: &amp;quot;task g++&amp;quot;, &lt;/code&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>配置claat</title>
+      <link>http://localhost:1313/post/%E9%85%8D%E7%BD%AEclaat/</link>
+      <pubDate>Fri, 08 Sep 2023 14:36:06 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E9%85%8D%E7%BD%AEclaat/</guid>
+      <description>&lt;p&gt;claat是由谷歌维护的开源命令行工具，全称Codelabs command line tool&lt;/p&gt;
+&lt;h1 id=&#34;官网&#34;&gt;官网&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/googlecodelabs/tools/tree/master/claat#install&#34;&gt;github上的&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;安装&#34;&gt;安装&lt;/h1&gt;
+&lt;p&gt;参见文档：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The easiest way is to download pre-compiled binary.
+The binaries, as well as their checksums are available at the Releases page.
+Alternatively, if you have Go installed:
+go install github.com/googlecodelabs/tools/claat@latest
+已经安装了go，so执行&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;go install github.com/googlecodelabs/tools/claat@latest
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;出现报错：
+connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>配置go语言</title>
+      <link>http://localhost:1313/post/%E9%85%8D%E7%BD%AEgo%E8%AF%AD%E8%A8%80/</link>
+      <pubDate>Fri, 08 Sep 2023 14:18:49 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E9%85%8D%E7%BD%AEgo%E8%AF%AD%E8%A8%80/</guid>
+      <description>&lt;p&gt;go之前没学过，先配再说&lt;/p&gt;
+&lt;h2 id=&#34;下载&#34;&gt;下载&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://golang.org/dl/&#34;&gt;官网&lt;/a&gt;
+&lt;a href=&#34;https://golang.google.cn/dl/&#34;&gt;打不开？&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;配置&#34;&gt;配置&lt;/h2&gt;
+&lt;h3 id=&#34;windows&#34;&gt;windows&lt;/h3&gt;
+&lt;h4 id=&#34;下载msi格式&#34;&gt;下载msi格式&lt;/h4&gt;
+&lt;p&gt;下了直接无脑安装，换一下路径就行&lt;/p&gt;
+&lt;h2 id=&#34;检验&#34;&gt;检验&lt;/h2&gt;
+&lt;p&gt;命令行里面&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;go version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;出现版本结果即证明安装成功&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>配置java</title>
+      <link>http://localhost:1313/post/%E9%85%8D%E7%BD%AEjava/</link>
+      <pubDate>Tue, 23 May 2023 16:45:04 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E9%85%8D%E7%BD%AEjava/</guid>
+      <description>&lt;p&gt;搞开发（特别是软件比较多的）还得是看java啊&lt;/p&gt;
+&lt;h1 id=&#34;下载&#34;&gt;下载&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.oracle.com/java/technologies/downloads&#34;&gt;官网&lt;/a&gt;
+jdk和jre都是啥&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;JRE是java运行时环境而JDK是java开发工具包，JDK包含JRE，但是JRE可以独立安装。JDK 是用于开发 Java 程序的最小环境，JRE是提供给 Java 程序运行的最小环境。运行java程序只需安装JRE。如果需要编写java程序，需要安装JDK。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;配置&#34;&gt;配置&lt;/h1&gt;
+&lt;p&gt;cmd -&amp;gt; &lt;code&gt;java -verbose&lt;/code&gt; 查看安装目录
+这个就没有python智能了需要手动配置环境
+在系统变量里面点新建&lt;/p&gt;
+&lt;h1 id=&#34;其他问题&#34;&gt;其他问题&lt;/h1&gt;
+&lt;p&gt;带有相对地址的不要放在环境变量最开始，要不然环境变量就只显示一条横的很难改&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>配置python</title>
+      <link>http://localhost:1313/post/%E9%85%8D%E7%BD%AEpython/</link>
+      <pubDate>Sat, 20 May 2023 14:15:39 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E9%85%8D%E7%BD%AEpython/</guid>
+      <description>&lt;p&gt;重装系统之后很多配置也没了，python反正也要用，安装过程也记录一下&lt;/p&gt;
+&lt;h1 id=&#34;环境配置&#34;&gt;环境配置&lt;/h1&gt;
+&lt;h2 id=&#34;下载&#34;&gt;下载&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.python.org/&#34;&gt;官网&lt;/a&gt;
+找windows的就行
+速度比较快可以不用镜像&lt;/p&gt;
+&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+&lt;p&gt;点costume的，然后改地址
+点配置环境变量可以免得自己再搞&lt;/p&gt;
+&lt;h2 id=&#34;执行&#34;&gt;执行&lt;/h2&gt;
+&lt;p&gt;cmd可以直接跑&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; sys
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(sys&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;version)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可以查看版本&lt;/p&gt;
+&lt;h2 id=&#34;项目&#34;&gt;项目&lt;/h2&gt;
+&lt;p&gt;现在不着急，ide以后再装&lt;/p&gt;
+&lt;h1 id=&#34;问题&#34;&gt;问题&lt;/h1&gt;
+&lt;p&gt;在配置好了python环境变量之后在cmd命令行下输入python但是打开的是windows 10的应用商店，但是我们希望显示的是python的安装版本，可以使用以下的方法解决：首先打开计算机的环境变量，找到path，将python的环境变量移动到WindowsApps环境变量前面&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Fatal error in launcher: Unable to create process using &amp;lsquo;&amp;ldquo;D:\conf\python\python.exe&amp;rdquo;  &amp;ldquo;D:\conf\python\Scripts\pip.exe&amp;rdquo; install -i &lt;a href=&#34;https://pypi.tuna.tsinghua.edu.cn/simple/&#34;&gt;https://pypi.tuna.tsinghua.edu.cn/simple/&lt;/a&gt; jupyter&amp;rsquo;: ???????????
+步骤1：到python\scripts\目录，将原来的pip.exe文件删掉
+步骤2：cmd窗口执行：python -m pip install -U pip
+步骤3：验证&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Traceback (most recent call last):
+File &amp;ldquo;D:\conf\python\lib\runpy.py&amp;rdquo;, line 196, in _run_module_as_main
+return &lt;em&gt;run_code(code, main_globals, None,
+File &amp;ldquo;D:\conf\python\lib\runpy.py&amp;rdquo;, line 86, in &lt;em&gt;run_code
+exec(code, run_globals)
+File &amp;ldquo;D:\conf\python\scripts\pip.exe_&lt;em&gt;main&lt;/em&gt;&lt;/em&gt;.py&amp;rdquo;, line 2, in &lt;!-- raw HTML omitted --&gt;
+File &amp;ldquo;D:\conf\python\lib\re_&lt;em&gt;init&lt;/em&gt;&lt;/em&gt;.py&amp;rdquo;, line 125, in &lt;!-- raw HTML omitted --&gt;
+from . import _compiler, _parser
+File &amp;ldquo;D:\conf\python\lib\re_compiler.py&amp;rdquo;, line 18, in &lt;!-- raw HTML omitted --&gt;
+assert _sre.MAGIC == MAGIC, &amp;ldquo;SRE module mismatch&amp;rdquo;
+AssertionError: SRE module mismatch
+说是版本不一致，我的话就是之前的没删干净，删了重装就行&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

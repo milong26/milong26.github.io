@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>FlexMoE：基于动态设备放置的大规模稀疏预训练模型训练 | 我的博客</title>
+<meta name="keywords" content="undone, pre-trained, large model">
+<meta name="description" content="动态设备放置是其方法，内容是对大规模稀疏预训练模型的训练。其中预训练模型是在GPT体系里的，现在是预训练-提示语句-微调的结构。
+一句话：改进moe
+论文地址：arxiv
+Comments:	Accepted by SIGMOD 2023
+Subjects:	Distributed, Parallel, and Cluster Computing (cs.DC); Machine Learning (cs.LG)
+Cite as:	arXiv:2304.03946 [cs.DC]
+(or arXiv:2304.03946v1 [cs.DC] for this version)
+https://doi.org/10.48550/arXiv.2304.03946
+Focus to learn more
+Journal reference:	Proc. ACM Manag. Data, Vol. 1, No. 1, Article 110. Publication date: May 2023
+摘要
+背景
+使用大规模预训练模型，在训练中需要用很多参数，包含许多稀疏代数，很占硬件资源。
+稀疏门专家混合sparsely-gated Mixture-of-Experts (MoEs)在很多下游任务里展示了令人印象深刻的预训练可扩展性。
+但是，由于路由不平衡和波动问题，这种稀疏的条件计算在实际系统中可能并不像预期的那样有效。
+总结一下：问题大背景是大规模预训练模型，主要方向是使用MoEs，但是它有两个问题：路由不平衡和波动。那这篇文章主要就是解决这两个问题的。
+工作
+提出了一种新的DNN训练框架，FlexMoE，它系统地、透明地解决了动态数据流引起的效率低下问题。
+步骤：
+
+对训练MoE模型进行分析
+通过动态的专家管理和设备放置机制来克服路由不平衡和波动问题
+改进DNN
+引入了一个新的调度模块来监视数据流、制定调度计划，并根据实时数据流量动态调整模型到硬件的映射。
+启发式算法
+为了在训练时动态地最优化设备放置
+实验
+在NLP和图像模型上都训练了
+结果
+FlexMoE比DeepSpeed平均提升1.70 ×，最高提升2.10 ×，比FasterMoE平均提升1.30 ×，最高提升1.45 ×。
+
+介绍
+前提
+
+大背景：大规模预训练模型Large-scale pre-trained models (PTMs)
+1是应用广泛
+2是可以微调（基准模型）
+3问题：模型质量与数据规模呈指数关系，要得到好的模型需要相当多的参数，因此也消耗大量训练时间。
+小方向：稀疏门混合专家sparsely-gated Mixture-of-Experts (MoE)
+目的当然是减少消耗哈，怎么实现的：
+保持计算预算稳定的情况下，通过扩展专家网络来扩大模型参数规模。
+具体来说，每个MoE层由一个门网络&#43;一堆专家构成。门网络仅将输入令牌发送给少数专家，而不是所有，以提高计算效率。
+MoE应用广泛，但有问题
+大的MoE模型不仅需要很多数据，还要很多计算资源
+有必要解决现有系统中隐藏的数据管理问题
+怎么解决
+因为i一个单独的MoE层就能轻易超过GPU内存限制，之前的分布式训练技术已经不够用了。
+专家分布技术：
+将专家分布到多个GPU中，以适应有限的GPU内存
+对于每个训练令牌，在门网络确定路由后，将其发送给其目标专家所在的GPU。
+由于它适应了MoE结构的特点，专家并行已经成为在几个著名的框架中训练基于MoE的模型的最广泛使用的技术之一。
+
+工作量不平衡的挑战
+问题：由MoE层的稀疏性和条件性计算性质带来的负载不均衡
+来源：MoE层稀疏、且有条件的计算性质带来的
+具体：输入的token被组织在一个细粒度的水平，并通过门控网络路由到个人的专家。
+表现：输入token显示出对专家的高度不均匀偏好，并且路由结果在训练过程中不断变化。
+结果：这种工作量不平衡可能导致效率显著下降和严重的资源利用不足。">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/flexmoe%E5%9F%BA%E4%BA%8E%E5%8A%A8%E6%80%81%E8%AE%BE%E5%A4%87%E6%94%BE%E7%BD%AE%E7%9A%84%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%A8%80%E7%96%8F%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/flexmoe%E5%9F%BA%E4%BA%8E%E5%8A%A8%E6%80%81%E8%AE%BE%E5%A4%87%E6%94%BE%E7%BD%AE%E7%9A%84%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%A8%80%E7%96%8F%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      FlexMoE：基于动态设备放置的大规模稀疏预训练模型训练
+    </h1>
+    <div class="post-meta">
+
+<span title='2023-12-18 10:44:54 +0000 UTC'>December 18, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>动态设备放置是其方法，内容是对大规模稀疏预训练模型的训练。其中预训练模型是在GPT体系里的，现在是预训练-提示语句-微调的结构。
+一句话：改进moe</p>
+<p>论文地址：<a href="https://arxiv.org/abs/2304.03946">arxiv</a>
+Comments:	Accepted by SIGMOD 2023
+Subjects:	Distributed, Parallel, and Cluster Computing (cs.DC); Machine Learning (cs.LG)
+Cite as:	arXiv:2304.03946 [cs.DC]
+(or arXiv:2304.03946v1 [cs.DC] for this version)</p>
+<p><a href="https://doi.org/10.48550/arXiv.2304.03946">https://doi.org/10.48550/arXiv.2304.03946</a>
+Focus to learn more
+Journal reference:	Proc. ACM Manag. Data, Vol. 1, No. 1, Article 110. Publication date: May 2023</p>
+<h1 id="摘要">摘要<a hidden class="anchor" aria-hidden="true" href="#摘要">#</a></h1>
+<h2 id="背景">背景<a hidden class="anchor" aria-hidden="true" href="#背景">#</a></h2>
+<p>使用大规模预训练模型，在训练中需要用很多参数，包含许多稀疏代数，很占硬件资源。
+稀疏门专家混合sparsely-gated Mixture-of-Experts (MoEs)在很多下游任务里展示了令人印象深刻的预训练可扩展性。
+但是，由于路由不平衡和波动问题，这种稀疏的条件计算在实际系统中可能并不像预期的那样有效。
+总结一下：问题大背景是大规模预训练模型，主要方向是使用MoEs，但是它有两个问题：路由不平衡和波动。那这篇文章主要就是解决这两个问题的。</p>
+<h2 id="工作">工作<a hidden class="anchor" aria-hidden="true" href="#工作">#</a></h2>
+<p>提出了一种新的DNN训练框架，FlexMoE，它系统地、透明地解决了动态数据流引起的效率低下问题。
+步骤：</p>
+<ol>
+<li>对训练MoE模型进行分析
+通过动态的专家管理和设备放置机制来克服路由不平衡和波动问题</li>
+<li>改进DNN
+引入了一个新的调度模块来监视数据流、制定调度计划，并根据实时数据流量动态调整模型到硬件的映射。</li>
+<li>启发式算法
+为了在训练时动态地最优化设备放置</li>
+<li>实验
+在NLP和图像模型上都训练了</li>
+<li>结果
+FlexMoE比DeepSpeed平均提升1.70 ×，最高提升2.10 ×，比FasterMoE平均提升1.30 ×，最高提升1.45 ×。</li>
+</ol>
+<h1 id="介绍">介绍<a hidden class="anchor" aria-hidden="true" href="#介绍">#</a></h1>
+<h2 id="前提">前提<a hidden class="anchor" aria-hidden="true" href="#前提">#</a></h2>
+<ol>
+<li>大背景：大规模预训练模型Large-scale pre-trained models (PTMs)
+1是应用广泛
+2是可以微调（基准模型）
+3问题：模型质量与数据规模呈指数关系，要得到好的模型需要相当多的参数，因此也消耗大量训练时间。</li>
+<li>小方向：稀疏门混合专家sparsely-gated Mixture-of-Experts (MoE)
+目的当然是减少消耗哈，怎么实现的：
+保持计算预算稳定的情况下，通过扩展专家网络来扩大模型参数规模。
+具体来说，每个MoE层由一个门网络+一堆专家构成。门网络仅将输入令牌发送给少数专家，而不是所有，以提高计算效率。</li>
+<li>MoE应用广泛，但有问题
+大的MoE模型不仅需要很多数据，还要很多计算资源
+有必要解决现有系统中隐藏的数据管理问题</li>
+<li>怎么解决
+因为i一个单独的MoE层就能轻易超过GPU内存限制，之前的分布式训练技术已经不够用了。
+专家分布技术：
+将专家分布到多个GPU中，以适应有限的GPU内存
+对于每个训练令牌，在门网络确定路由后，将其发送给其目标专家所在的GPU。
+由于它适应了MoE结构的特点，专家并行已经成为在几个著名的框架中训练基于MoE的模型的最广泛使用的技术之一。</li>
+</ol>
+<h2 id="工作量不平衡的挑战">工作量不平衡的挑战<a hidden class="anchor" aria-hidden="true" href="#工作量不平衡的挑战">#</a></h2>
+<p>问题：由MoE层的稀疏性和条件性计算性质带来的负载不均衡
+来源：MoE层稀疏、且有条件的计算性质带来的
+具体：输入的token被组织在一个细粒度的水平，并通过门控网络路由到个人的专家。
+表现：输入token显示出对专家的高度不均匀偏好，并且路由结果在训练过程中不断变化。
+结果：这种工作量不平衡可能导致效率显著下降和严重的资源利用不足。</p>
+<h2 id="目前的景观landscape">目前的景观(landscape??)<a hidden class="anchor" aria-hidden="true" href="#目前的景观landscape">#</a></h2>
+<ul>
+<li>为了解决工作量不均衡的问题:
+大多数选择在每个MoE层，利用一个辅助平衡损失函数来促进平衡路由(分配)</li>
+<li>为了控制系统效率（工作负载平衡）和统计效率（模型质量）之间的权衡:
+平衡损失与一个可调惩罚权重相关联</li>
+<li>防止专家被分配太多输入
+引入专家容量
+以上三种改进方案只能缓解，不能完全保证负载均衡
+写了一串就是说别人的方法不够好。
+作者尝试从<strong>系统</strong>的角度来优化工作负载不平衡问题
+所以现在研究的核心问题是：怎样设计一个分布式的MoE训练系统，在不影响模型质量的前提下，实现系统效率的最大化</li>
+</ul>
+<h2 id="方法总结">方法总结<a hidden class="anchor" aria-hidden="true" href="#方法总结">#</a></h2>
+<ol>
+<li>提出：FlexMoE</li>
+<li>定义：一个新的分布式训练系统，给大规模稀疏MoE模型使用的</li>
+<li>克服：路由不平衡
+从<strong>专家放置</strong>的角度来克服路由不平衡问题
+引入了一种<strong>细粒度的复制专家并行策略</strong>，它选择特定的重专家，将其复制到多个设备上，并在副本之间传播输入令牌(input tokens)。</li>
+<li>评价
+这在稀疏的矩估计模型中是非平凡的，因为这些专家的设备放置
+<ol>
+<li>改变了原始输入数据分配(不同专家之间的全面交流)</li>
+<li>涉及额外的同步开销(需要尽可能减少重复专家之间的交流)。
+通过对MoE层的实际执行过程进行精确建模，FlexMoE估计了确定具体专家复制方案的成本。
+以上是路由不平衡结束</li>
+</ol>
+</li>
+<li>分析：在不同的MoE训练负载下，稀疏激活专家的分布不均匀。</li>
+<li>克服：MoE模型在迭代训练过程中表现出<strong>路由波动</strong>。</li>
+<li>描述：
+不平衡的专家偏好分布连续+平滑地变化着。门网络的训练高度不稳定，因为基于梯度的优化算法会加强先前的路由确定，直到达到某一点，并从原先错误的学习方向跳出。</li>
+<li>解决方案：
+设计了一个<strong>动态的专家管理机制</strong>来自适应地调整专家到设备的映射和训练过程中令牌的分配。
+具体来说，我们采用<strong>数据驱动</strong>的方法，通过监控数据流趋向来自适应地改变训练过程中专家的位置
+例如，FlexMoE逐步为工作量增加的专家扩充资源以加快计算，为工作量减少的专家缩减资源以减少副本同步开销</li>
+<li>FLEXMoeE设计总结
+FlexMoE是在现有的DNN框架上设计的一个新的调度模块，它监控数据流量，制定调度计划，并动态调整数据流图与分布式设备之间的映射。
+提供了3个位置调整原语(即扩张、收缩、迁移)来灵活地控制专家位置，并引入了门控流控机制来实现自主的全局流量优化。
+基于这些构建模块，设计了一种简单而有效的算法来估计每次调整的收益或开销，以确定最优的调度计划。</li>
+<li>实验
+最后，在PyTorch的基础上实现了FlexMoE，并通过全面的实验验证了我们工作的优越性。
+当在64 - GPU A100集群上训练多个流行的基于MoE的PTMs (如BERT、GPT、Swin等)时，与现有的先进的MoE训练系统相比，FlexMoE获得了高达2.1倍的加速比。
+此外，FlexMoE在模型质量方面始终优于它们，因为我们不允许专家布局与妥协的信令寻径。</li>
+</ol>
+<h2 id="文章结构">文章结构<a hidden class="anchor" aria-hidden="true" href="#文章结构">#</a></h2>
+<p>第2节，讨论了训练具有专家并行性的稀疏MoE模型的低效性，并探索了通过系统级优化来优化此类问题的机会。
+第3节，介绍了FlexMoE的系统设计，它利用vExpert抽象来方便动态的专家管理和设备放置。
+第4节，详细介绍了系统的实现。
+第5节，评估了FlexMoE的有效性。</p>
+<h1 id="背景和动机">背景和动机<a hidden class="anchor" aria-hidden="true" href="#背景和动机">#</a></h1>
+<p>定义了一些符号</p>
+<h2 id="transformermoe">transformer+MoE<a hidden class="anchor" aria-hidden="true" href="#transformermoe">#</a></h2>
+<p>这一节解释了一下transformer+moe的工作原理，并说明为什么moe的效率低</p>
+<h3 id="transformer">transformer<a hidden class="anchor" aria-hidden="true" href="#transformer">#</a></h3>
+<p>transformer有用，包含注意力网络和前馈网络</p>
+<h4 id="注意力">注意力<a hidden class="anchor" aria-hidden="true" href="#注意力">#</a></h4>
+<p>每个注意力网络首先将输入的令牌线性变换为对应的查询( Q )、键( K )和值( V )，然后对它们执行缩放后的点积。
+同时，这种注意力网络得益于捕获序列内token之间的依赖关系，从而在序列转导任务中有效。</p>
+<p>$$
+Attention(Q,K,V)=fostmax(\frac{QK^T}{\sqrt{d}})V
+$$
+d为查询和键的维数。</p>
+<h4 id="前馈网络">前馈网络<a hidden class="anchor" aria-hidden="true" href="#前馈网络">#</a></h4>
+<p>每个前馈网络( FFN )由两个全连接层和一个激活函数ReLU组成，表示为：
+$$
+FFN(x)=W_2\cdot RELU(W_1\cdot x+b_1)+b_2
+$$
+与注意力网络不同，FFNs通过将特征维度扩展到更大的维度来建模单个标记内不同特征维度空间之间的关系。</p>
+<h3 id="moe">MoE<a hidden class="anchor" aria-hidden="true" href="#moe">#</a></h3>
+<p>为了有效地扩展模型，研究人员采用了稀疏门控的专家混合范式，通过将FFN网络替换为MoE层，其中每个输入令牌仅激活模型参数的子集，从而引入<strong>模型稀疏性</strong>。</p>
+<p>MoE层的重点包含：
+一个以来数据的稀疏门网络g(x)+一系列专家
+对每个输入token x</p>
+<ol>
+<li>门网络产生x相对于所有专家的概率</li>
+<li>把x路由到对应的专家</li>
+<li>top-k门只保留softmax函数前的前k个值</li>
+</ol>
+<p>$$
+g(x)=softmax(TOPK(x\cdot W_g))
+$$</p>
+<p>当每个专家都受到输入令牌x之后，它们会产生对应的输出ei
+最终结果y由ei与门网络的输出g(x)加权后线性组合得到
+$$
+y=\sum_{i=1}^Ng(x)_i \cdot e_i(x)
+$$</p>
+<p>当门网络的稀疏度是静态的，例如Top-1 或Top-2时，随着专家数量的增加，给定输入的计算和通信成本几乎保持不变，从而允许模型通过MoE进行有效的缩放。</p>
+<p>每个GPU会根据自己的计算给专家分配token，最后每个专家分到的个数不一定相同。但是再在专家计算之后有一个反向路由步骤（reverse routing step），所有GPU在执行下一层之前要等，所以整体效率低。</p>
+<h2 id="分布式训练">分布式训练<a hidden class="anchor" aria-hidden="true" href="#分布式训练">#</a></h2>
+<p>这一章写在这里干啥的啊。。为了解释专家并行比别的分布式好？
+分析现有的几种技术：</p>
+<h3 id="数据并行性">数据并行性<a hidden class="anchor" aria-hidden="true" href="#数据并行性">#</a></h3>
+<p>数据并行性( Data Parallelism，DP )通常用于在模型能够适应设备可用GPU内存的情况下进行规模训练，因为DP的通信原语(AllReduce)具有良好的可扩展性能。
+在DP中，对训练样本进行划分，并为每个设备复制模型参数。给定一批训练样本，每个工作者执行前向和后向计算，全局同步梯度(平均)，并根据同步梯度更新局部参数。然而，每个设备</p>
+<h3 id="模型平行性">模型平行性<a hidden class="anchor" aria-hidden="true" href="#模型平行性">#</a></h3>
+<p>如果给定模型的内存需求超过GPU内存，则应该在多个设备之间进行分区。在张量并行( Tensor Parallelization，TP )中，每个张量可以在多个设备上进行划分，以减少每个GPU的内存占用。例如，塔形电子管-LM [ 33 ]提出在多头注意力操作中利用其固有的并行性对注意力网络进行划分，其中查询( Q )、键( K )和值( V )矩阵可以以列级并行的方式进行划分。流水线并行( PP )是一种可供选择的分区方法，其中不同的组层被放置在不同的设备上。例如，GPipe [ 18 ]将输入批划分为若干个微批，并将每个设备的计算流水化。</p>
+<h3 id="专家平行论">专家平行论。<a hidden class="anchor" aria-hidden="true" href="#专家平行论">#</a></h3>
+<p>GShard [ 21 ]首先提出了专家并行( Expert Parallelization，EP )作为一种特定的模型并行方法用于MoE模型，其中MoE层内的专家被放置在不同的设备上，而非MoE层以DP的形式复制到设备上。分布式训练Top - 1门MoE层的工作流程如图1 ( b )所示。在得到每个令牌的目标专家后，进行All - to - All通信，将令牌发送给目标专家进行处理。此外，为了执行数据并行的非MoE层，还需要另一个All - to - All通信来发送数据。由于矩量法模型通常有大量的专家，如开关变压器中的1024位专家[ 12 ]，EP比模型并行更能实现模型规模的扩展。</p>
+<h2 id="问题公式化">问题公式化<a hidden class="anchor" aria-hidden="true" href="#问题公式化">#</a></h2>
+<h2 id="观察和机会">观察和机会<a hidden class="anchor" aria-hidden="true" href="#观察和机会">#</a></h2>
+<h1 id="flexmoe设计">FLEXMOE设计<a hidden class="anchor" aria-hidden="true" href="#flexmoe设计">#</a></h1>
+<h2 id="总览">总览<a hidden class="anchor" aria-hidden="true" href="#总览">#</a></h2>
+<h2 id="动态专家管理vexpert">动态专家管理+vEXPERT<a hidden class="anchor" aria-hidden="true" href="#动态专家管理vexpert">#</a></h2>
+<h2 id="调度者">调度者<a hidden class="anchor" aria-hidden="true" href="#调度者">#</a></h2>
+<h2 id="决策者">决策者<a hidden class="anchor" aria-hidden="true" href="#决策者">#</a></h2>
+<h1 id="实现">实现<a hidden class="anchor" aria-hidden="true" href="#实现">#</a></h1>
+<h1 id="评估">评估<a hidden class="anchor" aria-hidden="true" href="#评估">#</a></h1>
+<h1 id="总结">总结<a hidden class="anchor" aria-hidden="true" href="#总结">#</a></h1>
+<ol>
+<li>干了什么
+提出了一种新颖的解决方案Flex MoE，以解决大规模MoE模型训练过程中遇到的动态不平衡挑战。</li>
+<li>怎么做的
+FlexMoE通过在现有DNN框架上集成调度模块，监控数据流量，创建调度计划，并在训练过程中动态调整专家到设备的映射。</li>
+<li>结果
+我们在6个流行的矩估计模型上的实证结果表明，FlexMoE比DeepSpeed平均高出1.70 ×，最高可达2.10 ×，比FasterMoE平均高出1.30 ×，最高可达1.45 ×。</li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/undone/">Undone</a></li>
+      <li><a href="http://localhost:1313/tags/pre-trained/">Pre-Trained</a></li>
+      <li><a href="http://localhost:1313/tags/large-model/">Large Model</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

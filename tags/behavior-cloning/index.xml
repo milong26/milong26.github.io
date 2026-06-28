@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Behavior Cloning on 我的博客</title>
+    <link>http://localhost:1313/tags/behavior-cloning/</link>
+    <description>Recent content in Behavior Cloning on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 11 Sep 2023 18:00:42 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/behavior-cloning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>行为克隆</title>
+      <link>http://localhost:1313/post/%E8%A1%8C%E4%B8%BA%E5%85%8B%E9%9A%86/</link>
+      <pubDate>Mon, 11 Sep 2023 18:00:42 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E8%A1%8C%E4%B8%BA%E5%85%8B%E9%9A%86/</guid>
+      <description>&lt;p&gt;属于模仿学习（Imitation Learning），属于监督学习方法&lt;/p&gt;
+&lt;p&gt;单纯的监督学习就是给数据做训练，完全对着答案抄。一旦遇到数据集里面没有的就有偏差，即监督学习的泛化性问题。
+（对它就是这么简单，我看到这个名词还以为很复杂呢）
+对以上问题的改善方案&lt;/p&gt;
+&lt;h2 id=&#34;data-augmentation数据增强&#34;&gt;Data Augmentation（数据增强）&lt;/h2&gt;
+&lt;p&gt;多收集一点数据，但是增加了人工标注label的工作量&lt;/p&gt;
+&lt;p&gt;这篇写得不好，以后看学习情况决定改还是直接删了&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

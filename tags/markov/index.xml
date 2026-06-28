@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Markov on 我的博客</title>
+    <link>http://localhost:1313/tags/markov/</link>
+    <description>Recent content in Markov on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 01 May 2023 21:46:31 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/markov/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>马尔科夫链</title>
+      <link>http://localhost:1313/post/%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE/</link>
+      <pubDate>Mon, 01 May 2023 21:46:31 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE/</guid>
+      <description>&lt;h3 id=&#34;随机过程&#34;&gt;随机过程&lt;/h3&gt;
+&lt;p&gt;简单来说，通过已经有的数据，预测未来&lt;/p&gt;
+&lt;h3 id=&#34;马尔科夫链&#34;&gt;马尔科夫链&lt;/h3&gt;
+&lt;p&gt;无记忆性：后面的只能根据前一个状态，类似自然数后面的数只比前面的大1&lt;/p&gt;
+&lt;h3 id=&#34;转移概率矩阵&#34;&gt;转移概率矩阵&lt;/h3&gt;
+&lt;p&gt;状态之间转移，也就是做概率矩阵的点乘运算（多次即幂）
+稳定性：经过一定有限次数序列的转换，最终一定可以得到一个稳定的概率分布 ，且与初始状态概率分布无关&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>马尔科夫随机场</title>
+      <link>http://localhost:1313/post/%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%9A%8F%E6%9C%BA%E5%9C%BA/</link>
+      <pubDate>Wed, 26 Apr 2023 18:27:49 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%9A%8F%E6%9C%BA%E5%9C%BA/</guid>
+      <description>&lt;p&gt;马尔可夫随机场（Markov Random Field）或马尔可夫网络（ Markov Network）是一类在随机变量之间具有无向图的图形模型。该图的结构决定了随机变量之间的相关性或独立性。&lt;/p&gt;
+&lt;p&gt;定义：MRF是一种无向图模型。图中每个结点表示一个或一组变量，结点之间的边表示两个变量的依赖关系。MRF有一组势函数，也可称为“因子”，这是定义在变量子集上的非负实函数，主要用于定义概率分布函数。&lt;/p&gt;
+&lt;p&gt;对于一个结点子集，其中任意两点都有边连接，则称该结点子集为“团”。&lt;/p&gt;
+&lt;p&gt;若在一个图中加入任何一个结点均不再构成团，则称该团为&amp;quot;极大团&amp;quot;。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

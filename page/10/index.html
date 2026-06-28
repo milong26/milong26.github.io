@@ -262,68 +262,47 @@ $$ max_\theta \frac{1}{N} \sum_{n=1}^N logp_\theta(y_n|x_n) $$
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">FULL PARAMETER FINE-TUNING FOR LARGE LANGUAGE MODELS WITH LIMITED RESOURCES
+    <h2 class="entry-hint-parent">hexo建站
     </h2>
   </header>
   <div class="entry-content">
-    <p>百篇paper计划(1/100)，推荐阅读的，没有选择趋向。内容是：用有限的资源（主要是内存）进行全参数大模型微调，研究重点集中在微调部分，做的是内存优化的工作。
-论文标题：Full Parameter Fine-tuning for Large Language Models with Limited Resources arxiv地址：链接 code：github abstract 背景：LLMs给NLP问题带来了革命性变化，but需要大量GPU资源
-已有：高效参数微调（PEFT），没有彻底解决 PEFT参考文档
-parameter-efficient fine-tuning vs full-parameter fine-tune
-创新：提出了新的优化器 LOw-Memory-Optimization 内容：在一个步骤融合了梯度计算和参数更新
-怎么融合(fuse)？
-效果：和标准方法（DeepSpeed解决方案）相比，我们将内存使用量减少到10.8%。 因此，我们的方法可以在一台拥有8×RTX 3090的机器上对65B模型进行全参数微调，每台机器都有24GB内存
-introduction 感觉就是把摘要扩写了一遍
-背景：LLMs 厉害，但是要钱。
-目前：有效参数微调方法 比如：LoRA,Prefix-tuning 但是：没有全参数的
-解决问题：我们要找个办法实现全参数微调
-干了啥
-分析LLMs里面内存使用的四个主要方面： 激活，优化器状态，梯度张量和参数 从三个方面优化了训练过程： SGD-优化器：由于SGD不存储任何中间状态，可以删除整个优化器状态部分SGD是什么 LOMO把梯度tensor的内存使用降到了O(1) 为了稳定使用混合精度训练：集成梯度归一化和损失缩放，并将某些计算过渡到全精度 结果 内存使用量等于参数使用量加上激活量和最大梯度张量。
-分析了：
-内存和吞吐量 下游表现 贡献
-SGD LOMO 验证 related work 都是节省内存的技术
-Activation Checkpointing 计算图中策略性地选择的检查点节点的激活变量在正向阶段后保留在内存中，而其余节点的激活变量在梯度计算时最多重新计算一次。激活内存可以降低原始内存使用量的平方根，代价是需要多一次正向传递。 在前向传播过程中，有选择性的丢弃一些产生的中间激活值，当反向传播需要使用这些激活值时，再依据上一个保存的激活值来计算出这些需要的激活值来帮助完成反向传播。这样一来，便可以大大减少训练过程中所需要的存储空间。
-Mixed-Precision Training 混合精度，32位浮点数和16位浮点数混合使用
-Heterogeneous Training System 通过利用异构内存（如CPU和NVMe内存）来减少GPU内存消耗
-但是怎么做？？
-method 优化器 adam和SGD比起来哪里不好了！ 参考https://blog.csdn.net/S20144144/article/details/103417502
+    <p>个人blog生成日志，防备以后需要
 ...</p>
   </div>
   <footer class="entry-footer">
 
-<span title='2023-11-24 17:10:38 +0000 UTC'>November 24, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to FULL PARAMETER FINE-TUNING FOR LARGE LANGUAGE MODELS WITH LIMITED RESOURCES" href="http://localhost:1313/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/"></a>
+<span title='2024-03-04 15:26:28 +0000 UTC'>March 4, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to hexo建站" href="http://localhost:1313/post/hexo%E5%BB%BA%E7%AB%99/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">用c&#43;&#43;实现电梯自动控制有限状态机
+    <h2 class="entry-hint-parent">最大似然估计
     </h2>
   </header>
   <div class="entry-content">
-    <p>课程作业，gcc实现电梯前后感应器的状态转换
-要求 graph TB closed[closed] --&gt;|front| open[open] open --&gt;|neither|closed closed --&gt; |neither,rear,both| closed open --&gt; |rear,front,both| open fsm包含以下：
-状态集合：{closed,open} 输入集合：{neither,rear,both,front} 状态转换：{closed&#43;neither=open这样类似的一共8个状态转换函数} 开整 #include&lt;iostream&gt; #include&lt;random&gt; using namespace std; //门状态 typedef enum { CLOSED, OPEN } State; // 输入 typedef enum { FRONT, REAR, BOTH, NEITHER } Input; class Gate { private: State state; public: //构造函数，初始化 Gate(State initial) { state = initial; } //状态转移 void transition(Input input) { State now = this-&gt;state; if (now == CLOSED) { if (input == REAR || input == NEITHER) { this-&gt;state=CLOSED; } else if (input == FRONT || input == BOTH) { this-&gt;state = OPEN; } } else if ( now == OPEN) { if (input == FRONT || input == REAR || input == BOTH) { this-&gt;state=OPEN; } else if (input == NEITHER) { this-&gt;state=CLOSED; } } } //输出 void print() { State now = this-&gt;state; if (now == CLOSED)cout &lt;&lt; &#34;closed&#34;&lt;&lt;endl; else cout &lt;&lt; &#34;open&#34;&lt;&lt;endl; } }; void printInput(Input input) { switch (input) { case FRONT: cout&lt;&lt;&#34;front &#34;; break; case REAR: cout&lt;&lt;&#34;rear &#34;; break; case BOTH: cout&lt;&lt;&#34;Both &#34;; break; case NEITHER: cout&lt;&lt;&#34;Neither &#34;; break; } } int main() { //初始状态 Gate a(CLOSED); a.print(); for (int i = 0;i &lt; 50;i&#43;&#43;) { //[0,4)随机数 int random = (rand() % 4); Input realinput = Input(random); printInput(realinput); a.transition(realinput); a.print(); } return 0; } </p>
+    <p>hello
+参考这一篇hehe
+</p>
   </div>
   <footer class="entry-footer">
 
-<span title='2023-10-12 20:54:21 +0000 UTC'>October 12, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 用c&#43;&#43;实现电梯自动控制有限状态机" href="http://localhost:1313/post/%E7%94%A8c&#43;&#43;%E5%AE%9E%E7%8E%B0%E7%94%B5%E6%A2%AF%E8%87%AA%E5%8A%A8%E6%8E%A7%E5%88%B6%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA/"></a>
+<span title='2024-03-03 15:11:54 +0000 UTC'>March 3, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 最大似然估计" href="http://localhost:1313/post/%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">马了就是忘了
+    <h2 class="entry-hint-parent">双拼入门
     </h2>
   </header>
   <div class="entry-content">
-    <p>放了一下暂时没用到的东西
-...</p>
+    <p></p>
   </div>
   <footer class="entry-footer">
 
-<span title='2023-03-06 15:53:11 +0000 UTC'>March 6, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 马了就是忘了" href="http://localhost:1313/post/%E9%A9%AC%E4%BA%86%E5%B0%B1%E6%98%AF%E5%BF%98%E4%BA%86/"></a>
+<span title='2024-02-29 21:21:26 +0000 UTC'>February 29, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 双拼入门" href="http://localhost:1313/post/%E5%8F%8C%E6%8B%BC%E5%85%A5%E9%97%A8/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

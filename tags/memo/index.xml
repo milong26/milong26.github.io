@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Memo on 我的博客</title>
+    <link>http://localhost:1313/tags/memo/</link>
+    <description>Recent content in Memo on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 04 Dec 2023 16:42:42 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/memo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>日常memo</title>
+      <link>http://localhost:1313/post/%E6%97%A5%E5%B8%B8memo/</link>
+      <pubDate>Mon, 04 Dec 2023 16:42:42 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E6%97%A5%E5%B8%B8memo/</guid>
+      <description>&lt;p&gt;每天记一点点，以后说不定会变成庞然大物。&lt;/p&gt;
+&lt;h1 id=&#34;家具&#34;&gt;家具&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;衣架一定要多！！
+如果是长时间住宿的话，衣架最少20+。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;电器&#34;&gt;电器&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;充电线要买那种可以把边缘包住的，普通的容易坏。&lt;/li&gt;
+&lt;li&gt;电脑键盘最好买个键盘膜，虽然手感会差一点但是可以防止一堆乱七八糟的头皮屑……&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+  </channel>
+</rss>

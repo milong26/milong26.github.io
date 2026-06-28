@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Hessian Matrix on 我的博客</title>
+    <link>http://localhost:1313/tags/hessian-matrix/</link>
+    <description>Recent content in Hessian Matrix on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 08 Dec 2023 11:24:20 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/hessian-matrix/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>海森矩阵</title>
+      <link>http://localhost:1313/post/%E6%B5%B7%E6%A3%AE%E7%9F%A9%E9%98%B5/</link>
+      <pubDate>Fri, 08 Dec 2023 11:24:20 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E6%B5%B7%E6%A3%AE%E7%9F%A9%E9%98%B5/</guid>
+      <description>&lt;p&gt;Hessian，黑塞矩阵（Hessian Matrix），是一个多元函数的二阶偏导数构成的方阵，描述了函数的局部曲率。黑塞矩阵常用于牛顿法解决优化问题，利用黑塞矩阵可判定多元函数的极值问题。在工程实际问题的优化设计中，所列的目标函数往往很复杂，为了使问题简化，常常将目标函数在某点邻域展开成泰勒多项式来逼近原函数，此时函数在某点泰勒展开式的矩阵形式中会涉及到黑塞矩阵。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;省流&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;定义：用损失函数和参数写出矩阵&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 以后学多少写多少，现在只要会定义就行&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 黑塞矩阵为什么可以判断鞍点？为什么损失函数可以近似写成f+梯度+黑塞？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;定义&#34;&gt;定义&lt;/h1&gt;
+&lt;p&gt;对一个多元函数f，如果其二阶导数都存在，定义海森矩阵为：
+$$
+H(f)(\boldsymbol{x}) =
+\left [
+\begin{matrix}
+\frac {\partial^2F} {\partial x_1^2} &amp;amp; \frac {\partial^F} {\partial x_1 \partial x_2} &amp;amp; \cdots &amp;amp; \frac {\partial^F} {\partial x_1 \partial x_n} \
+\frac {\partial^2F} {\partial x_2 \partial x_1} &amp;amp; \frac {\partial^F} {\partial x_2^2} &amp;amp; \cdots &amp;amp; \frac {\partial^F} {\partial x_2 \partial x_n} \
+\vdots &amp;amp; \vdots &amp;amp; \ddots &amp;amp; \vdots \
+\frac {\partial^2F} {\partial x_n \partial x_1} &amp;amp; \frac {\partial^F} {\partial x_n \partial x_2} &amp;amp; \cdots &amp;amp; \frac {\partial^F} {\partial x_n^2}
+\end{matrix}
+\right] \
+$$&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

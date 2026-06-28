@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>面向对象 on 我的博客</title>
+    <link>http://localhost:1313/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</link>
+    <description>Recent content in 面向对象 on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 21 Apr 2021 12:55:08 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>UML类图</title>
+      <link>http://localhost:1313/post/uml%E7%B1%BB%E5%9B%BE/</link>
+      <pubDate>Wed, 21 Apr 2021 12:55:08 +0000</pubDate>
+      <guid>http://localhost:1313/post/uml%E7%B1%BB%E5%9B%BE/</guid>
+      <description>&lt;p&gt;UML类图&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

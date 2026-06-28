@@ -16,5 +16,19 @@
       <description>&lt;p&gt;hexo+github pages 生成个人网站。不知道hexo我还愿意用几年。&lt;/p&gt;
 &lt;p&gt;估计下次更新就变成使用hugo了，尽管我还没写几篇，等写到100篇的时候换hugo吧&lt;/p&gt;</description>
     </item>
+    <item>
+      <title>hexo建站</title>
+      <link>http://localhost:1313/post/hexo%E5%BB%BA%E7%AB%99/</link>
+      <pubDate>Mon, 04 Mar 2024 15:26:28 +0000</pubDate>
+      <guid>http://localhost:1313/post/hexo%E5%BB%BA%E7%AB%99/</guid>
+      <description>&lt;p&gt;个人blog生成日志，防备以后需要&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>hexo搭建</title>
+      <link>http://localhost:1313/post/hexo%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Mon, 12 Apr 2021 20:47:54 +0000</pubDate>
+      <guid>http://localhost:1313/post/hexo%E6%90%AD%E5%BB%BA/</guid>
+      <description>&lt;p&gt;hexo搭建个人blog，相关配置信息&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>

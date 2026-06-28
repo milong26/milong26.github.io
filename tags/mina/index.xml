@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>MINA on 我的博客</title>
+    <link>http://localhost:1313/tags/mina/</link>
+    <description>Recent content in MINA on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 01 Jun 2021 16:18:24 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/mina/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>微信小程序使用ColorUI</title>
+      <link>http://localhost:1313/post/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BD%BF%E7%94%A8colorui/</link>
+      <pubDate>Tue, 01 Jun 2021 16:18:24 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BD%BF%E7%94%A8colorui/</guid>
+      <description>&lt;p&gt;如题，之前一直硬写的，就很难受。早知道最开始就用这个了。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

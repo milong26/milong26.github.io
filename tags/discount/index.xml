@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Discount on 我的博客</title>
+    <link>http://localhost:1313/tags/discount/</link>
+    <description>Recent content in Discount on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 20 Sep 2023 20:41:17 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/discount/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>阅读-安全高效的非政策强化学习</title>
+      <link>http://localhost:1313/post/%E9%98%85%E8%AF%BB-%E5%AE%89%E5%85%A8%E9%AB%98%E6%95%88%E7%9A%84%E9%9D%9E%E6%94%BF%E7%AD%96%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Wed, 20 Sep 2023 20:41:17 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E9%98%85%E8%AF%BB-%E5%AE%89%E5%85%A8%E9%AB%98%E6%95%88%E7%9A%84%E9%9D%9E%E6%94%BF%E7%AD%96%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</guid>
+      <description>&lt;p&gt;论文标题：Safe and Efficient Off-Policy Reinforcement Learning
+&lt;a href=&#34;https://arxiv.org/abs/1606.02647&#34;&gt;地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我现在啃不动，以后有时间一定啃:D
+（其实我不想啃）&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Data on 我的博客</title>
+    <link>http://localhost:1313/tags/data/</link>
+    <description>Recent content in Data on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 21 Dec 2023 11:48:49 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/data/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据的稀疏性</title>
+      <link>http://localhost:1313/post/%E6%95%B0%E6%8D%AE%E7%9A%84%E7%A8%80%E7%96%8F%E6%80%A7/</link>
+      <pubDate>Thu, 21 Dec 2023 11:48:49 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E6%95%B0%E6%8D%AE%E7%9A%84%E7%A8%80%E7%96%8F%E6%80%A7/</guid>
+      <description>&lt;p&gt;稀疏数据是指，数据框中绝大多数数值缺失或者为零的数据&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://kexue.fm/archives/9595&#34;&gt;抄的这一篇&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 没抄完，以后再写&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;狭义上来讲，“稀疏”就是指数据中有大量的零，所以最简单的稀疏性指标就是统计零的比例。但如果仅仅是这样的话，注意力矩阵就谈不上稀疏了，因为softmax出来的结果一定是正数。所以，有必要推广稀疏的概念。一个朴素的想法是统计绝对值不超过ϵ的元素比例，但这个ϵ怎么确定呢？&lt;/p&gt;
+&lt;h1 id=&#34;平均值指标&#34;&gt;平均值指标&lt;/h1&gt;
+&lt;p&gt;1相比于0.0001很大，但是相比10000又很小，所以大和小的概念不是绝对的。直观来想，稀疏的向量存在很多接近于零的数，那么它的绝对值的平均肯定会比较小，又因为大和小的概念是相对的，我们不妨将这个平均值跟最大值做除法，以获得相对结果，所以一个看上去比较合理的指标是
+$$
+S_0(\boldsymbol{x})=\frac{(|x_1|+|x_2|+\cdots+|x_n|)/n}{\max(|x_1|,|x_2|,\cdots,|x_n|)}
+$$&lt;/p&gt;
+&lt;p&gt;指标越小的向量越稀疏。不过，尽管这个指标有一定的合理性，但它却不够“光滑”，主要是max这个操作极易受到异常值的影响，不能很好地反应数据统计特性。&lt;/p&gt;
+&lt;h1 id=&#34;光滑&#34;&gt;光滑&lt;/h1&gt;</description>
+    </item>
+  </channel>
+</rss>

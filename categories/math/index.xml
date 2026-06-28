@@ -101,5 +101,142 @@ $$&lt;/p&gt;
       <guid>http://localhost:1313/post/softmax/</guid>
       <description>&lt;p&gt;之前学的时候把softmax当作在公式里的点缀，现在来研究一下整个函数&lt;/p&gt;</description>
     </item>
+    <item>
+      <title>最大似然估计</title>
+      <link>http://localhost:1313/post/%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/</link>
+      <pubDate>Sun, 03 Mar 2024 15:11:54 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/</guid>
+      <description>&lt;p&gt;hello&lt;/p&gt;
+&lt;p&gt;参考这一篇&lt;a href=&#34;https://zhuanlan.zhihu.com/p/55791843&#34;&gt;hehe&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>矩阵in线性代数</title>
+      <link>http://localhost:1313/post/%E7%9F%A9%E9%98%B5in%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/</link>
+      <pubDate>Tue, 26 Dec 2023 16:50:35 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E7%9F%A9%E9%98%B5in%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/</guid>
+      <description>&lt;p&gt;包含正定矩阵、&lt;/p&gt;
+&lt;h1 id=&#34;正定矩阵&#34;&gt;正定矩阵&lt;/h1&gt;
+&lt;p&gt;正定矩阵的定义是从正定二次型来的&lt;/p&gt;
+&lt;h2 id=&#34;判断&#34;&gt;判断&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;求出A的所有&lt;strong&gt;特征值&lt;/strong&gt;
+若A的特征值均为正数，则A是正定的；
+若A的特征值均为负数，则A为负定的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;计算A的&lt;strong&gt;各阶主子式&lt;/strong&gt;。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;顺序主子式的计算方式： 在n 阶方阵中，选取行号i，再选取与行号相同的列号i，行与列均取i个元素的行列式即为n阶行列式的i阶顺序主子式。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;若A的各阶主子式均大于零，则A是正定的；
+若A的各阶主子式中，奇数阶主子式为负，偶数阶为正，则A为负定的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这俩方法里面2稍微简单点。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>数据的稀疏性</title>
+      <link>http://localhost:1313/post/%E6%95%B0%E6%8D%AE%E7%9A%84%E7%A8%80%E7%96%8F%E6%80%A7/</link>
+      <pubDate>Thu, 21 Dec 2023 11:48:49 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E6%95%B0%E6%8D%AE%E7%9A%84%E7%A8%80%E7%96%8F%E6%80%A7/</guid>
+      <description>&lt;p&gt;稀疏数据是指，数据框中绝大多数数值缺失或者为零的数据&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://kexue.fm/archives/9595&#34;&gt;抄的这一篇&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 没抄完，以后再写&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;狭义上来讲，“稀疏”就是指数据中有大量的零，所以最简单的稀疏性指标就是统计零的比例。但如果仅仅是这样的话，注意力矩阵就谈不上稀疏了，因为softmax出来的结果一定是正数。所以，有必要推广稀疏的概念。一个朴素的想法是统计绝对值不超过ϵ的元素比例，但这个ϵ怎么确定呢？&lt;/p&gt;
+&lt;h1 id=&#34;平均值指标&#34;&gt;平均值指标&lt;/h1&gt;
+&lt;p&gt;1相比于0.0001很大，但是相比10000又很小，所以大和小的概念不是绝对的。直观来想，稀疏的向量存在很多接近于零的数，那么它的绝对值的平均肯定会比较小，又因为大和小的概念是相对的，我们不妨将这个平均值跟最大值做除法，以获得相对结果，所以一个看上去比较合理的指标是
+$$
+S_0(\boldsymbol{x})=\frac{(|x_1|+|x_2|+\cdots+|x_n|)/n}{\max(|x_1|,|x_2|,\cdots,|x_n|)}
+$$&lt;/p&gt;
+&lt;p&gt;指标越小的向量越稀疏。不过，尽管这个指标有一定的合理性，但它却不够“光滑”，主要是max这个操作极易受到异常值的影响，不能很好地反应数据统计特性。&lt;/p&gt;
+&lt;h1 id=&#34;光滑&#34;&gt;光滑&lt;/h1&gt;</description>
+    </item>
+    <item>
+      <title>二项式公式</title>
+      <link>http://localhost:1313/post/%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%85%AC%E5%BC%8F/</link>
+      <pubDate>Sun, 17 Sep 2023 20:46:39 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%85%AC%E5%BC%8F/</guid>
+      <description>&lt;p&gt;针对二项式格式的说明，方便看论文&lt;/p&gt;
+&lt;p&gt;$一般格式C_{n}^{p}=\binom{n}{p}$
+论文里用&lt;code&gt;\binom&lt;/code&gt;也就是圆括号比较多
+$$
+\binom{n}{p}=\frac{n!}{(n-p)!p!}
+$$
+特殊形式形如
+$$
+\binom{n}{p_{1},p_{2},&amp;hellip;p_{k}}
+$$&lt;/p&gt;
+&lt;p&gt;属于Multinomial Coefficients（多项式？）
+定义：
+p1,p2..都是非负整数，令n=p1+p2+&amp;hellip;+pk
+,有
+$$
+\binom{n}{p_{1},p_{2},&amp;hellip;p_{k}}=\binom{n}{p_{1}}\binom{n-p_{1}}{p_{2}}&amp;hellip;\binom{p_{k}}{p_{k}}=\frac{n!}{p_{1}!p_{2}!&amp;hellip;p_{k}!}
+$$
+表示将n个物品放入k个容器里，所以第i个容器里有pi个物品，这种放法一共多少种方案。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>拒绝采样</title>
+      <link>http://localhost:1313/post/%E6%8B%92%E7%BB%9D%E9%87%87%E6%A0%B7/</link>
+      <pubDate>Sun, 10 Sep 2023 15:58:45 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E6%8B%92%E7%BB%9D%E9%87%87%E6%A0%B7/</guid>
+      <description>&lt;p&gt;针对复杂问题的一种随机采样方法。&lt;/p&gt;
+&lt;h1 id=&#34;蒙特卡洛&#34;&gt;蒙特卡洛&lt;/h1&gt;
+&lt;p&gt;蒙特·卡罗方法(Monte Carlo method)也称统计模拟方法，核心思想就是使用随机数（或更常见的伪随机数）来解决一些复杂的计算问题。&lt;/p&gt;
+&lt;p&gt;当所求解问题可以转化为某种随机分布的特征数（比如随机事件出现的概率，或者随机变量的期望值等）时，往往就可以考虑使用蒙特卡洛方法。通过随机抽样的方法，&lt;strong&gt;以随机事件出现的频率估计其概率，或者以抽样的数字特征估算随机变量的数字特征&lt;/strong&gt;，并将其作为问题的解。这种方法多用于求解复杂的高维积分问题。&lt;/p&gt;
+&lt;h1 id=&#34;采样&#34;&gt;采样&lt;/h1&gt;
+&lt;p&gt;在统计学中， 抽样（或称采样）是指从目标总体中抽取一部分个体作为样本的过程。
+但是在计算机模拟时，我们所说的抽样，其实是指从一个概率分布中生成观察值（observations）的方法。而这个分布通常是由其概率密度函数（PDF）来表示的。而且，即使在已知PDF的情况下，让计算机自动生成观测值也不是一件容易的事情。从本质上来说，计算机只能实现对均匀分布（Uniform distribution）的采样。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;PDF：概率密度函数（probability density function）, 在数学中，连续型随机变量的概率密度函数（在不至于混淆时可以简称为密度函数）是一个描述这个随机变量的输出值，在某个确定的取值点附近的可能性的函数。
+PMF : 概率质量函数（probability mass function), 在概率论中，概率质量函数是离散随机变量在各特定取值上的概率。
+CDF : 累积分布函数 (cumulative distribution function)，又叫分布函数，是概率密度函数的积分，能完整描述一个实随机变量X的概率分布。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;一句话概括&lt;strong&gt;PDF就是f(x)，积分为1，与x轴面积=1&lt;/strong&gt;，&lt;strong&gt;CDF是F(X),+∞时值为1&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;复杂问题用拒绝采样&#34;&gt;复杂问题用拒绝采样&lt;/h1&gt;
+&lt;p&gt;找一个简单函数可以尽可能地罩住已知的。&lt;/p&gt;
+&lt;h2 id=&#34;原理&#34;&gt;原理&lt;/h2&gt;
+&lt;p&gt;对所有x，有kq(x)≥f(x)&lt;/p&gt;
+&lt;h2 id=&#34;步骤&#34;&gt;步骤&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;需要一个辅助的“建议分布”G（概率密度函数g(x)已知）来产生候选样本。可选均匀分布、正态分布等。&lt;/li&gt;
+&lt;li&gt;另一个辅助的均匀分布 u(0,1)&lt;/li&gt;
+&lt;li&gt;计算一个常数值 c,满足不等式cg(x)≥f(x)的最小值&lt;/li&gt;
+&lt;li&gt;开始生成样本
+&lt;ol&gt;
+&lt;li&gt;从G抽样得到Y&lt;/li&gt;
+&lt;li&gt;从U抽样得到V&lt;/li&gt;
+&lt;li&gt;若$V\le \frac{f(Y)}{C*g(Y)} $，则X=Y(即接受Y)，否则继续执行step1&lt;/li&gt;
+&lt;li&gt;重复直到样本总数够&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    <item>
+      <title>马尔科夫链</title>
+      <link>http://localhost:1313/post/%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE/</link>
+      <pubDate>Mon, 01 May 2023 21:46:31 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE/</guid>
+      <description>&lt;h3 id=&#34;随机过程&#34;&gt;随机过程&lt;/h3&gt;
+&lt;p&gt;简单来说，通过已经有的数据，预测未来&lt;/p&gt;
+&lt;h3 id=&#34;马尔科夫链&#34;&gt;马尔科夫链&lt;/h3&gt;
+&lt;p&gt;无记忆性：后面的只能根据前一个状态，类似自然数后面的数只比前面的大1&lt;/p&gt;
+&lt;h3 id=&#34;转移概率矩阵&#34;&gt;转移概率矩阵&lt;/h3&gt;
+&lt;p&gt;状态之间转移，也就是做概率矩阵的点乘运算（多次即幂）
+稳定性：经过一定有限次数序列的转换，最终一定可以得到一个稳定的概率分布 ，且与初始状态概率分布无关&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>马尔科夫随机场</title>
+      <link>http://localhost:1313/post/%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%9A%8F%E6%9C%BA%E5%9C%BA/</link>
+      <pubDate>Wed, 26 Apr 2023 18:27:49 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%9A%8F%E6%9C%BA%E5%9C%BA/</guid>
+      <description>&lt;p&gt;马尔可夫随机场（Markov Random Field）或马尔可夫网络（ Markov Network）是一类在随机变量之间具有无向图的图形模型。该图的结构决定了随机变量之间的相关性或独立性。&lt;/p&gt;
+&lt;p&gt;定义：MRF是一种无向图模型。图中每个结点表示一个或一组变量，结点之间的边表示两个变量的依赖关系。MRF有一组势函数，也可称为“因子”，这是定义在变量子集上的非负实函数，主要用于定义概率分布函数。&lt;/p&gt;
+&lt;p&gt;对于一个结点子集，其中任意两点都有边连接，则称该结点子集为“团”。&lt;/p&gt;
+&lt;p&gt;若在一个图中加入任何一个结点均不再构成团，则称该团为&amp;quot;极大团&amp;quot;。&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>

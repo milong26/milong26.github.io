@@ -128,152 +128,221 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">相机标定
+    <h2 class="entry-hint-parent">图中判断成环
     </h2>
   </header>
   <div class="entry-content">
-    <p>...</p>
+    <p>求最小生成树的Kruskal算法里面遇到，这边写一下
+无向图 DFS 对无向图有环=某个结点有一条边指向已访问过的结点，并且这个已访问过的结点不是上一步访问的结点 so问题可以转换成，如何区分已经访问过的节点，需要区分相邻的sibling、parent和间接的grandparent，当某节点有个sibling和某个grandparnt相同时，就是个环
+修饰节点颜色 我们不能仅仅使用一个 bool 数组来表示结点是否访问过。规定每个结点都拥有三种状态，白、灰、黑。开始时所有结点都是白色，当访问过某个结点后，该结点变为灰色，当该结点的所有邻接点都访问完，该节点变为黑色。
+那么我们的算法可以表示为：如果在遍历的过程中，发现某个结点有一条边指向灰色节点，并且这个灰色结点不是上一步访问的结点，那么存在环。
+为什么：假设灰色节点为G，它为灰色表示至少已访问过其中一个child节点，其中一个表示为parent，现在遍历到一个节点为grandchild，它可以指向G就表示它的sibling=grandparent，同时G不是grandchild上一步所访问的节点，so出现了环，这样正着推ok 反过来推，为什么需要3个状态，如果单纯两个状态就是下面的暴力递归。
+再梳理一遍就能发现对DFS来说，就好比祖母和同学是同一个人这样
+没有修饰，直接暴力递归 节点就两个状态，访问过、没访问过。 我看不懂 个人理解： 更加纯正的DFS，不管三七二十一先遍历，遍历过了就给它标记成visited，然后一旦在遍历的时候遇到即将访问的point满足1. visited过了，2.不是直系parent，就直接输出是环，要等到所有遍历走过了才确认不是环。
+BFS 和dfs相比主要的思路是一样的 BUR，BFS需要增加一个parent数组（不是DFS里面用单个parent记录刚访问过的节点） BFS相比DFS用得不怎么多，有空再钻研
+Union-Find 也叫并查集。 对于无向图来说，在遍历边（u-v）时，如果结点 u 和结点 v 的parent相同，那么结点 u 和结点 v 在同一个环中。 图的全部顶点都各自属于一个集合；然后依次检查图中的所有边，如果边关联的两个顶点不属于同一个集合，就合并两个顶点所在的集合。若图中存在环，则一定会在检测到某条边的时候，发现它关联的两个顶点早已属于同一个集合。 并查集我不会啊
+首先初始化所有元素的根为-1，-1代表根节点，接下来对于图中的每一条边(v1,v2)都并入集合，并入的方式为查找v1和v2的根节点，然后让v2的根节点作为v1的根节点，查找根节点的过程为：如果当前的结点根为-1，说明这个结点就是根，直接返回，否则再继续查找结点parent的根，直到找到root结点，这里因为只是判断环路，不需要压缩路径。
+int findSet(int x){ if(Parent[x] == -1){ return x; // x is root } return findSet(Parent[x]); } 并查集我真的看不懂 并查集find and union里面主要的是find吧，关键是怎么找root节点。
+#include &lt;bits/stdc&#43;&#43;.h&gt; using namespace std; //无向图的边 class Edge { public: int src, dest;	}; //边集数组 class EdgeSet { private: int V, E; Edge *edge; int size; //边的数量 public: EdgeSet(int V, int E); ~EdgeSet() { delete [] edge; } void addEdge(int v, int w); //加入边到图中 int find(int parent[], int i); void merge(int parent[], int x, int y); bool isCycle(); }; EdgeSet::EdgeSet(int V, int E) { size = 0; this-&gt;V = V; this-&gt;E = E; this-&gt;edge = new Edge[this-&gt;E]; } void EdgeSet::addEdge(int v, int w) { edge[size].src = v; edge[size].dest = w; &#43;&#43;size;	} //使用并查集判断无向图中的环 //找到这个元素所在的子集 int EdgeSet::find(int parent[], int i) { if (parent[i] == -1) return i; return find(parent, parent[i]); } //进行两个子集的合并 void EdgeSet::merge(int parent[], int xset, int yset) { if (xset != yset) parent[xset] = yset; } //检查无向图中是否存在环 bool EdgeSet::isCycle() { int parent[V]; for (int i = 0; i &lt; V; &#43;&#43;i) parent[i] = -1; //迭代图中所有的边,找到每条边的两个顶点所在的子集 //如果发现一条边,它的两个顶点属于相同子集,就存在环 //否则合并两个顶点的子集 for (int i = 0; i &lt; E; &#43;&#43;i) { int x = find(parent, edge[i].src); int y = find(parent, edge[i].dest); if (x == y) return true; merge(parent, x, y); } return false; } int main() { /* 0 | \ | \ 1----2 */ EdgeSet es(3, 3); es.addEdge(0, 1); //(0,1) es.addEdge(1, 2); //(1,2) es.addEdge(0, 2); //(0,2) es.isCycle() ? cout &lt;&lt; &#34;Contains Cycle!\n&#34; : cout &lt;&lt; &#34;Contains No Cycle!\n&#34;; return 0; } </p>
   </div>
   <footer class="entry-footer">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 相机标定" href="http://localhost:1313/post/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/"></a>
+<span title='2023-09-15 18:06:50 +0000 UTC'>September 15, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 图中判断成环" href="http://localhost:1313/post/%E5%9B%BE%E4%B8%AD%E5%88%A4%E6%96%AD%E6%88%90%E7%8E%AF/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">租房技巧
+    <h2 class="entry-hint-parent">最小生成树
     </h2>
   </header>
   <div class="entry-content">
-    <p>从各种地方扒拉过来的信息
+    <p>满足两点之间有且仅有一条简单路径的结构只有树 且这棵树包含 n 个节点。我们称这棵树为给定的图的生成树，其中总权值最小的生成树，我们称其为最小生成树。 最小生成树关键在避免环
+生成树 定义 一个连通图的生成树是一个极小的连通子图，它包含图中全部的n个顶点，但只有构成一棵树的n-1条边。
+性质 生成树的属性 一个连通图可以有多个生成树； 一个连通图的所有生成树都包含相同的顶点个数和边数； 生成树当中不存在环； 移除生成树中的任意一条边都会导致图的不连通， 生成树的边最少特性； 在生成树中添加一条边会构成环。 对于包含n个顶点的连通图，生成树包含n个顶点和n-1条边； 对于包含n个顶点的无向完全图最多包含$n^{n-2}$颗生成树。 证明$n^{n-2}$： 为什么是n^n-2），一篇里面塞不下:D
+最小生成树 定义 所谓一个带权图的最小生成树，就是原图中边的权值最小的生成树 ，所谓最小是指边的权值之和小于或者等于其它生成树的边的权值之和。
+求解 Kruskal 贪心找边，从小到大加入边
+按边长度排序 从小到大，if加入e之后没有形成环，e加入G&#39; 最后得到G‘ 问题是判断成环，见其它post Prim 加点，把点分成两坨A,B集合，A表示已经成了，B是待选的，要做的事从B里面挑一个点，满足它到A的点里面，有个边距离是最短的 （理解成长三角经济圈画好了，接下来先从周边里挑一个离长三角圈里面的城市最近的，这么想有点奇怪） 关键在怎么从待选里找距离最短的点 思路是用一个点个数大小的数组，没有直接连用∞，否则记录最小值 注意区分已访问过的点 这个为什么不会成环？把点分成两坨了，找的都是新点
+示例与代码 测试数据
+1 6 10 1 2 28 6 5 25 5 7 24 2 7 14 2 3 16 3 4 12 4 7 18 4 5 22 代码
+使用Kruskal算法
+#include&lt;iostream&gt; #include&lt;algorithm&gt; using namespace std; const int maxe = 100; int fa[maxe], n, m, ans = 0; struct edge { int u, v, w; }e[maxe]; bool cmp(edge a, edge b) { return a.w&lt;b.w; } int get(int x)//用处是看它是否成环的，nb { if (fa[x] == x) return x;//x的根为它本身，x就是该集的根 return fa[x] = get(fa[x]);//路径压缩 } int main() { cin &gt;&gt; n &gt;&gt; m; for (int i = 1; i &lt;= n; i&#43;&#43;) fa[i] = i;//初始化 for (int i = 1; i &lt;= m; i&#43;&#43;) { cin &gt;&gt; e[i].u &gt;&gt; e[i].v &gt;&gt; e[i].w; } sort(e &#43; 1, e &#43; 1 &#43; m, cmp);//升序排序 for (int i = 1; i &lt;= m; i&#43;&#43;) { int u = get(e[i].u);//找根 int v = get(e[i].v); if (u == v) continue;//continue 表示终止本次（本轮）循环，进入下一轮循环。判断它是否成环 fa[u] = v; cout &lt;&lt; e[i].u &lt;&lt; &#34; &#34; &lt;&lt; e[i].v &lt;&lt; endl; ans &#43;= e[i].w; } cout &lt;&lt; ans &lt;&lt; endl; return 0; } </p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-15 15:40:34 +0000 UTC'>September 15, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 最小生成树" href="http://localhost:1313/post/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">欧拉图
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>几百年不学离散数学了我都，这次遇到代码题正好复习一遍。
+理论 起源 哥尼斯堡七桥问题：遍历七桥一次如何返回起点。这个是遍历所有点
+定义 图、路径和回路这些定义就不再重复了 欧拉路径：图G上有一条经过所有顶点、所有边的简单路径（边不重复，点可以重复）
+欧拉回路：图G上有一条经过所有顶点、所有边的简单回路（边不重复，点可以重复）
+欧拉回路比欧拉路就是多了个回的区别，回路vs路径也就是回路的起点和终点是相同的点
+欧拉图：有欧拉回路的连通无向图
+欧拉有向图：有欧拉回路的连通有向图
+定理 复习一下欧拉图：有回路经过所有边一次，所有点至少一次的连通无向图
+判断欧拉图 一个连通无向图G是欧拉图？=经过所有边一次，点至少一次 当且仅当 所有节点为偶节点
+判断欧拉路径 设G=&lt;V，E&gt;为连通无向图，且v1,v2∈V，则有一条从v1至v2的欧拉路径 当且仅当 恰有两个奇结点v1和v2。
+判断欧拉有向图 设G为弱连通有向图。G是欧拉有向图， 当且仅当 所有结点的出度等于入度。
+实践</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-14 21:11:37 +0000 UTC'>September 14, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 欧拉图" href="http://localhost:1313/post/%E6%AC%A7%E6%8B%89%E5%9B%BE/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">强化学习
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>先根据课程梳理一条线，后面会把其它我觉得有类似的补充过来
+Course by David Silver 本章内容出自UCL Course on RL by David Silver
+introduction of RL 一句话：RL=非监督&#43;有奖励 需要考虑如何设计奖励。 这一章好多概念性的东西，so我进行了精简，看不懂可以参考 学完可能会会过头来看看
+原理 强化学习是一个序列决策（Sequential Decision Making）问题：连续选择一些行为，从这些行为完成后得到最大的收益作为最好的结果。 先尝试实践，得到反馈之后调整。
+区别 vs监督学习 监督学习有标签；立刻反馈；输入时独立分布的 RL没有标签；反馈有延时；输入变化 强化学习具有时间相关性（作为序列决策问题，属于非独立同分布数据）。
+vs其它非监督学习 非监督学习主要是为了挖掘无标签数据之间的内部关联（譬如聚类问题） RL是为了最大化reward。
+总结 RL并不需要出现正确的输入/输出对，也不需要精确校正次优化的行为。RL更加专注于在线规划，需要在exploration和exploitation之间找到平衡。
+概念解释 奖励rewards 很重要，独家的 $R_{t}$是一个标量反馈信号反映了智能体在时刻$t$行为的好坏 Agent的目的即最大化累积回报 RL奖励假设：所有目标都可以表示为最大化期望累计回报
+马尔可夫性 Markov Property 随机过程的某事件只取决于它的上一事件，与初始状态无关。（以前写过，不赘述）
+这是强化学习的主要研究问题——马尔可夫决策过程 （Markov Decision Process，MDP）
+MDP问题组成 策略（Policy）、值函数（value function）、模型（model）
+policy 最终的目的就是找到一个策略，通过策略可以描述智能体的行为。
+由当前看到的observation来决定action，是从state到action的映射，直观上描述就是：当智能体在什么状态时应该做什么事。 有两种表达形式： 一种是Deterministic policy（确定策略）在某种状态下，一定会执行某个动作$a=\pi(s)$，a时action，s是状态 一种是Stochastic policy（随机策略）它是在某种状态下执行某个动作的概率。$\pi(a|s)=P[A_t=a|S_t=s]$
+回报 它预测了当前状态下未来可能获得的reward的期望，用来评价当前状态的好坏程度 Return(回报):$G_t/U_t$为在一个马尔科夫奖励链上从t时刻开始往后所有的奖励的有衰减的收益总和。
+$$ G(s_0,s_1,s_2…=)=\sum_{t=0}^\infty\gamma^tR(s_t)\ \leq\sum_{t=0}^\infty\gamma^tR_{max}=\frac{R_{max}}{1-\gamma} $$
+这里s是状态，R是reward=奖励； 第二个等式用的高数里面的幂级数展开 强化学习的目的是最大化长期未来奖励，即寻找最大的 U
+其中的$\gamma\in[0,1]$ 指的是衰减因子，体现了未来的奖励在当前时刻的价值比例， 接近0，则表明趋向于“近视”性评估；接近1则表明偏重考虑远期的利益。
 ...</p>
   </div>
   <footer class="entry-footer">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 租房技巧" href="http://localhost:1313/post/%E7%A7%9F%E6%88%BF%E6%8A%80%E5%B7%A7/"></a>
+<span title='2023-09-11 19:56:04 +0000 UTC'>September 11, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 强化学习" href="http://localhost:1313/post/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">端到端
+    <h2 class="entry-hint-parent">行为克隆
     </h2>
   </header>
   <div class="entry-content">
-    <p>smolvla:SmolVLA is trained end-to-end on fewer than 30k episodes
-“端到端训练”（End-to-End Training）是机器学习和深度学习中一种训练方式，它的核心思想是：将整个任务建模为一个统一的系统，并直接从输入到输出进行优化。整个模型从头到尾一次性训练，而不是将任务拆解成多个独立的子模块分别训练。
+    <p>属于模仿学习（Imitation Learning），属于监督学习方法
+单纯的监督学习就是给数据做训练，完全对着答案抄。一旦遇到数据集里面没有的就有偏差，即监督学习的泛化性问题。 （对它就是这么简单，我看到这个名词还以为很复杂呢） 对以上问题的改善方案
+Data Augmentation（数据增强） 多收集一点数据，但是增加了人工标注label的工作量
+这篇写得不好，以后看学习情况决定改还是直接删了
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-11 18:00:42 +0000 UTC'>September 11, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 行为克隆" href="http://localhost:1313/post/%E8%A1%8C%E4%B8%BA%E5%85%8B%E9%9A%86/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">gcc的emplace方法
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>和insert/push_back有点区别
+std::unordered_map&lt;Key,T,Hash,KeyEqual,Allocator&gt;::emplace c&#43;&#43;11才有 如果容器里面的key没有对象，就插入新元素
+优点：可以减少在构造时用copy或者move操作,so在添加新的键值对时，效率比insert()高
+对比push_back和emplace_back源码，最大区别在于
+_Alloc_traits::construct(this-&gt;_M_impl, this-&gt;_M_impl._M_finish, std::forward&lt;_Args&gt;(__args)...); // emplace_back() _Alloc_traits::construct(this-&gt;_M_impl, this-&gt;_M_impl._M_finish, __x); // push_back() forward()就是最主要的区别，其功能为类型转换，所以在用push_back()时会多用构造函数。 在强制类型转换中，将参数 __t 传递给对应类 _Tp 的构造函数，然后调用了该类的构造函数从而完成对象创建过程。在emplace_back()函数中，是支持直接将构造函数所需的参数传递过去，然后构建一个新的对象出来，然后填充到容器尾部的。
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-11 17:30:29 +0000 UTC'>September 11, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to gcc的emplace方法" href="http://localhost:1313/post/gcc%E7%9A%84emplace%E6%96%B9%E6%B3%95/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">拒绝采样
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>针对复杂问题的一种随机采样方法。
+蒙特卡洛 蒙特·卡罗方法(Monte Carlo method)也称统计模拟方法，核心思想就是使用随机数（或更常见的伪随机数）来解决一些复杂的计算问题。
+当所求解问题可以转化为某种随机分布的特征数（比如随机事件出现的概率，或者随机变量的期望值等）时，往往就可以考虑使用蒙特卡洛方法。通过随机抽样的方法，以随机事件出现的频率估计其概率，或者以抽样的数字特征估算随机变量的数字特征，并将其作为问题的解。这种方法多用于求解复杂的高维积分问题。
+采样 在统计学中， 抽样（或称采样）是指从目标总体中抽取一部分个体作为样本的过程。 但是在计算机模拟时，我们所说的抽样，其实是指从一个概率分布中生成观察值（observations）的方法。而这个分布通常是由其概率密度函数（PDF）来表示的。而且，即使在已知PDF的情况下，让计算机自动生成观测值也不是一件容易的事情。从本质上来说，计算机只能实现对均匀分布（Uniform distribution）的采样。
+PDF：概率密度函数（probability density function）, 在数学中，连续型随机变量的概率密度函数（在不至于混淆时可以简称为密度函数）是一个描述这个随机变量的输出值，在某个确定的取值点附近的可能性的函数。 PMF : 概率质量函数（probability mass function), 在概率论中，概率质量函数是离散随机变量在各特定取值上的概率。 CDF : 累积分布函数 (cumulative distribution function)，又叫分布函数，是概率密度函数的积分，能完整描述一个实随机变量X的概率分布。
+一句话概括PDF就是f(x)，积分为1，与x轴面积=1，CDF是F(X),&#43;∞时值为1
+复杂问题用拒绝采样 找一个简单函数可以尽可能地罩住已知的。
+原理 对所有x，有kq(x)≥f(x)
+步骤 需要一个辅助的“建议分布”G（概率密度函数g(x)已知）来产生候选样本。可选均匀分布、正态分布等。 另一个辅助的均匀分布 u(0,1) 计算一个常数值 c,满足不等式cg(x)≥f(x)的最小值 开始生成样本 从G抽样得到Y 从U抽样得到V 若$V\le \frac{f(Y)}{C*g(Y)} $，则X=Y(即接受Y)，否则继续执行step1 重复直到样本总数够 </p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-10 15:58:45 +0000 UTC'>September 10, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 拒绝采样" href="http://localhost:1313/post/%E6%8B%92%E7%BB%9D%E9%87%87%E6%A0%B7/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">leetcode刷题崩溃全过程
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>尝试过多次之后，于2023年9月8日重新开始刷leetcode，名字是小鱼就把它刷成大佬号:D
+总结一下写代码的时候遇到的问题（说真的，碰到哪个哪个不会）
+语法 几种常见语法
+c&#43;&#43; 118Pascal’s Triangle vector 1282. Group the People Given the Group Size They Belong To unordered_map 可以学一下容器的emplace方法 java python 算法 动态规划 377 Combination Sum IV 方程： $$f[n]=\sum_{target\ge number[i] }f[target-number[i]]$$ 1359 Count All Valid Pickup and Delivery Options 1420. Build Array Where You Can Find The Maximum Exactly K Comparisons 三维的动态规划你见过吗？ 递归 滑动窗口 1658. Minimum Operations to Reduce X to Zero 前缀和 数据结构 图 欧拉图 332Reconstruct Itinerary 求解欧拉回路&#43;贪心 树 最小生成树 1584Min Cost to Connect All Points 居然是最小生成树，以前怎么没想到呢 问题 排序 查找 二分查找 287. Find the Duplicate Number 有很多限制的题目 我觉得可以有很多想法的题目
 ...</p>
   </div>
   <footer class="entry-footer">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 端到端" href="http://localhost:1313/post/%E7%AB%AF%E5%88%B0%E7%AB%AF/"></a>
+<span title='2023-09-08 16:02:59 +0000 UTC'>September 8, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to leetcode刷题崩溃全过程" href="http://localhost:1313/post/leetcode%E5%88%B7%E9%A2%98%E5%B4%A9%E6%BA%83%E5%85%A8%E8%BF%87%E7%A8%8B/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">能否自愈
+    <h2 class="entry-hint-parent">配置claat
     </h2>
   </header>
   <div class="entry-content">
-    <p>生病自理简述
+    <p>claat是由谷歌维护的开源命令行工具，全称Codelabs command line tool
+官网 github上的
+安装 参见文档：
+The easiest way is to download pre-compiled binary. The binaries, as well as their checksums are available at the Releases page. Alternatively, if you have Go installed: go install github.com/googlecodelabs/tools/claat@latest 已经安装了go，so执行
+go install github.com/googlecodelabs/tools/claat@latest 出现报错： connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
 ...</p>
   </div>
   <footer class="entry-footer">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 能否自愈" href="http://localhost:1313/post/%E8%83%BD%E5%90%A6%E8%87%AA%E6%84%88/"></a>
+<span title='2023-09-08 14:36:06 +0000 UTC'>September 8, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 配置claat" href="http://localhost:1313/post/%E9%85%8D%E7%BD%AEclaat/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">被玩坏的魔法少年题材
+    <h2 class="entry-hint-parent">配置go语言
     </h2>
   </header>
   <div class="entry-content">
-    <p>记录看过的魔法少年题材的作品
-...</p>
+    <p>go之前没学过，先配再说
+下载 官网 打不开？
+配置 windows 下载msi格式 下了直接无脑安装，换一下路径就行
+检验 命令行里面
+go version 出现版本结果即证明安装成功
+</p>
   </div>
   <footer class="entry-footer">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 被玩坏的魔法少年题材" href="http://localhost:1313/post/%E8%A2%AB%E7%8E%A9%E5%9D%8F%E7%9A%84%E9%AD%94%E6%B3%95%E5%B0%91%E5%B9%B4%E9%A2%98%E6%9D%90/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">西班牙语
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p></p>
-  </div>
-  <footer class="entry-footer">
-
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 西班牙语" href="http://localhost:1313/post/%E8%A5%BF%E7%8F%AD%E7%89%99%E8%AF%AD/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">视角重建
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>试错过程
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 视角重建" href="http://localhost:1313/post/%E8%A7%86%E8%A7%92%E9%87%8D%E5%BB%BA/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">解读smolvla代码
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>一个比较小的模型smovla，但里面涉及的还挺多，当扫盲
-看代码不能看单词的含义而是看整体结构orz
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 解读smolvla代码" href="http://localhost:1313/post/%E8%A7%A3%E8%AF%BBsmolvla%E4%BB%A3%E7%A0%81/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">轻量化vla
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>感觉这方面论文挺少的
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 轻量化vla" href="http://localhost:1313/post/%E8%BD%BB%E9%87%8F%E5%8C%96vla/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">运动类动画点评
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>给之前看过的动画做个总结
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 运动类动画点评" href="http://localhost:1313/post/%E8%BF%90%E5%8A%A8%E7%B1%BB%E5%8A%A8%E7%94%BB%E7%82%B9%E8%AF%84/"></a>
+<span title='2023-09-08 14:18:49 +0000 UTC'>September 8, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 配置go语言" href="http://localhost:1313/post/%E9%85%8D%E7%BD%AEgo%E8%AF%AD%E8%A8%80/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

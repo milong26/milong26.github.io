@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>基于对比学习的大型语言模型反向词典任务提示生成方法 | 我的博客</title>
+<meta name="keywords" content="prompt, large model, contrastive learn, reverse dictionary">
+<meta name="description" content="2023年10月才发的中文paper，看了之后感觉是大杂烩，学一下它的结构吧
+感觉没什么特别厉害的创意
+paper
+论文地址
+introduction
+introduction里面怎么没有介绍反向词典？
+反向词典
+输入释义，输出表示这个意思的词汇列表
+大规模语言模型
+对GPT-3测试之后，发现prompt中含有期望词汇时输出正确率会大大提高
+这篇文章
+
+目的：自动生成prompt
+模型：基于对比学习的反向词典模型RDMCL
+数据集 Oxford
+方法
+
+用RDMCL生成单词
+用生成的单词创建prompt
+
+
+创新点
+
+RDMCL比较高级
+
+语义信息捕捉
+
+Bi-LSTM
+cnn(卷积神经网络)
+自注意力机制
+
+
+融合语义信息，并映射到目标单词的语义空间
+(新)提出有监督对比损失函数
+
+引入负例，提高泛化性
+
+
+
+
+
+
+
+相关工作
+反向词典
+从多尺度上考虑了定义的不同于一层次的信息（在说什么鬼话）
+对比学习
+为了提高反向词典的准确性，就是个辅助
+关于如何构建负例样本
+研究方法
+目的：自动生成高质量的prompt
+方法：基于对比学习的promp生成方法
+步骤：1. RDMCL生成候选词汇；2. 根据词汇生成prompt
+语义信息
+该文章把一段话分成三个语义层次，但我不知道为什么
+句子
+输入的就是普通句子
+先经过embedding层（嵌入层）我没看懂这篇paper里怎么得到embs的得到$emb_s$
+然后经过Bi-LSTM
+得到两个输出
+$$
+v_{sen}=\mathop{h}\limits^\rightarrow&#43;\mathop{h}\limits^\leftarrow \
+E_{emb_s}=\mathop{E}\limits^\rightarrow&#43;\mathop{E}\limits^\leftarrow
+$$
+短语
+主要是cnn（卷积神经网络）&#43;self-attention
+卷积神经网络比较熟就不重复了
+自注意力 也写了
+先卷积
+$$
+c_{r,k}=tanh(\sum_{i,j}(F_rE_{emb_s}^{k:k&#43;l-1}){i,j})\
+c_r=(c{r,1},c_{r,2},&hellip;c_{t,n-l&#43;1})\
+C=(c_1,c_2,&hellip;c_t)
+$$
+再用自注意力
+$$
+i=softmax(tanh(W_1E_{emb_s}^T&#43;b_1))
+$$
+i广播操作(torch、numpy里面都有，其实就是合并到同一个维度)得到I
+最后得到
+$$
+V_{phrase}=(IE_{emb_s}^T)
+$$">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/%E5%9F%BA%E4%BA%8E%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8F%8D%E5%90%91%E8%AF%8D%E5%85%B8%E4%BB%BB%E5%8A%A1%E6%8F%90%E7%A4%BA%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/%E5%9F%BA%E4%BA%8E%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8F%8D%E5%90%91%E8%AF%8D%E5%85%B8%E4%BB%BB%E5%8A%A1%E6%8F%90%E7%A4%BA%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      基于对比学习的大型语言模型反向词典任务提示生成方法
+    </h1>
+    <div class="post-meta">
+
+<span title='2023-10-24 16:21:15 +0000 UTC'>October 24, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>2023年10月才发的中文paper，看了之后感觉是大杂烩，学一下它的结构吧
+感觉没什么特别厉害的创意</p>
+<h1 id="paper">paper<a hidden class="anchor" aria-hidden="true" href="#paper">#</a></h1>
+<p><a href="https://kns.cnki.net/kcms2/article/abstract?v=A67obWUfw0klPsaU27SILDfmAhRFDx8g4znhsvTW3NjQ-mAG-l_nQ8aGUnlqhHNgUl_yk7IM3pyGYjo8V--zYEQqzrRcylTYciSHkMJEfTW1k29gH5HwKy7NFD_AtZQbBR7LLD0u1HU=&amp;uniplatform=NZKPT&amp;language=CHS">论文地址</a></p>
+<h2 id="introduction">introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h2>
+<p>introduction里面怎么没有介绍反向词典？</p>
+<h3 id="反向词典">反向词典<a hidden class="anchor" aria-hidden="true" href="#反向词典">#</a></h3>
+<p>输入释义，输出表示这个意思的词汇列表</p>
+<h3 id="大规模语言模型">大规模语言模型<a hidden class="anchor" aria-hidden="true" href="#大规模语言模型">#</a></h3>
+<p>对GPT-3测试之后，发现prompt中含有期望词汇时输出正确率会大大提高</p>
+<h3 id="这篇文章">这篇文章<a hidden class="anchor" aria-hidden="true" href="#这篇文章">#</a></h3>
+<ul>
+<li>目的：自动生成prompt</li>
+<li>模型：基于对比学习的反向词典模型RDMCL</li>
+<li>数据集 Oxford</li>
+<li>方法
+<ul>
+<li>用RDMCL生成单词</li>
+<li>用生成的单词创建prompt</li>
+</ul>
+</li>
+<li>创新点
+<ul>
+<li>RDMCL比较高级
+<ul>
+<li>语义信息捕捉
+<ul>
+<li>Bi-LSTM</li>
+<li>cnn(卷积神经网络)</li>
+<li>自注意力机制</li>
+</ul>
+</li>
+<li>融合语义信息，并映射到目标单词的语义空间</li>
+<li>(新)提出有监督对比损失函数
+<ul>
+<li>引入负例，提高泛化性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="相关工作">相关工作<a hidden class="anchor" aria-hidden="true" href="#相关工作">#</a></h2>
+<h3 id="反向词典-1">反向词典<a hidden class="anchor" aria-hidden="true" href="#反向词典-1">#</a></h3>
+<p>从多尺度上考虑了定义的不同于一层次的信息（在说什么鬼话）</p>
+<h3 id="对比学习">对比学习<a hidden class="anchor" aria-hidden="true" href="#对比学习">#</a></h3>
+<p>为了提高反向词典的准确性，就是个辅助
+关于如何构建负例样本</p>
+<h2 id="研究方法">研究方法<a hidden class="anchor" aria-hidden="true" href="#研究方法">#</a></h2>
+<p>目的：自动生成高质量的prompt
+方法：基于对比学习的promp生成方法
+步骤：1. RDMCL生成候选词汇；2. 根据词汇生成prompt</p>
+<h3 id="语义信息">语义信息<a hidden class="anchor" aria-hidden="true" href="#语义信息">#</a></h3>
+<p>该文章把一段话分成三个语义层次，但我不知道为什么</p>
+<h4 id="句子">句子<a hidden class="anchor" aria-hidden="true" href="#句子">#</a></h4>
+<p>输入的就是普通句子
+先经过embedding层（嵌入层）<a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=8791735">我没看懂这篇paper里怎么得到embs的</a>得到$emb_s$</p>
+<p>然后经过<a href="Bi-LSTM.md">Bi-LSTM</a>
+得到两个输出
+$$
+v_{sen}=\mathop{h}\limits^\rightarrow+\mathop{h}\limits^\leftarrow \
+E_{emb_s}=\mathop{E}\limits^\rightarrow+\mathop{E}\limits^\leftarrow
+$$</p>
+<h4 id="短语">短语<a hidden class="anchor" aria-hidden="true" href="#短语">#</a></h4>
+<p>主要是cnn（卷积神经网络）+self-attention
+卷积神经网络比较熟就不重复了
+<a href="%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6.md">自注意力</a> 也写了
+先卷积
+$$
+c_{r,k}=tanh(\sum_{i,j}(F_r<em>E_{emb_s}^{k:k+l-1})<em>{i,j})\
+c_r=(c</em>{r,1},c_{r,2},&hellip;c_{t,n-l+1})\
+C=(c_1,c_2,&hellip;c_t)
+$$
+再用自注意力
+$$
+i=softmax(tanh(W_1E_{emb_s}^T+b_1))
+$$
+i广播操作(torch、numpy里面都有，其实就是合并到同一个维度)得到I
+最后得到
+$$
+V_{phrase}=(I</em>E_{emb_s}^T)
+$$</p>
+<blockquote>
+<p>写错了吧？？？？C算出来干啥的，已发邮件咨询</p>
+</blockquote>
+<h4 id="单词">单词<a hidden class="anchor" aria-hidden="true" href="#单词">#</a></h4>
+<p>和短语参数不同的注意力机制
+目的：放大关键词的影响，减少虚拟词的影响</p>
+<blockquote>
+<p>虚拟词是什么，搜不到</p>
+</blockquote>
+<p>用自注意力
+$$
+i&rsquo;=softmax(tanh(W_2E_{emb_s}^T+b_2))
+$$
+最后得到
+$$
+V_{word}=sum(I&rsquo;*E_{emb_s}^T)
+$$</p>
+<h4 id="总结">总结<a hidden class="anchor" aria-hidden="true" href="#总结">#</a></h4>
+<p>将以上三个特征向量$V_{sen} V_{phrase} V_{word}$融合成一个$V_{def}$</p>
+<h3 id="损失函数">损失函数<a hidden class="anchor" aria-hidden="true" href="#损失函数">#</a></h3>
+<p>使用特征向量$V_{def}$和目标词向量$V_{tar}$进行损失函数计算来训练RDMCL
+为了引入负例样本，提出了一种全新的有有监督对比学习损失函数SCL
+<a href="%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0.md">对比学习</a></p>
+<p>我感觉你这个对比损失函数不太正经，但是为什么不直接用正例-负例呢？
+<a href="https://zhuanlan.zhihu.com/p/590547670">设计参考</a></p>
+<p>我真的看不懂这个损失函数的设计思路
+肯定有鼻祖<a href="https://arxiv.org/abs/2004.11362v5">supervised constrative learn</a></p>
+<h2 id="结果">结果<a hidden class="anchor" aria-hidden="true" href="#结果">#</a></h2>
+<ul>
+<li>RDMCL方法 vs  FCNN CNN LSTMT</li>
+<li>ransExplain 几个模型</li>
+<li>对比学习 vs 未经过对比学习的模型</li>
+<li>候选词集大小</li>
+<li>提示语句的质量
+Gpt3-Prompt vs GPT3
+ChatGLM-6B-prompt vs ChatGLM-6B</li>
+</ul>
+<p>我觉得这个论文公式10肯定有问题，反正发了邮件，回不回就看作者了，结构前面写得挺好的，后面就比较糟糕了
+这个论文算是不想再看了，删了删了</p>
+<p>（大概是我第一个写完的paper reading post，纪念一下^^，果然ddl使人进步）</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/prompt/">Prompt</a></li>
+      <li><a href="http://localhost:1313/tags/large-model/">Large Model</a></li>
+      <li><a href="http://localhost:1313/tags/contrastive-learn/">Contrastive Learn</a></li>
+      <li><a href="http://localhost:1313/tags/reverse-dictionary/">Reverse Dictionary</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

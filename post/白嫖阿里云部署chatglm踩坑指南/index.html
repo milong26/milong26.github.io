@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>白嫖阿里云部署ChatGLM踩坑指南 | 我的博客</title>
+<meta name="keywords" content="undone">
+<meta name="description" content="自己电脑跑不动，白嫖阿里云一个服务器试试
+服务器
+
+领取阿里云资源
+地址
+只要没有申请过PAI-DSW资源的新老用户皆可申请5000CU的免费额度，3个月内使用。
+找“交互式建模 PAI-DSW 5000CU”的那个点试用
+如果想玩Stable Diffusion来做AI画图可以试试官方教程
+开通控制台
+在阿里云页面内搜索PAI平台，点击立即开通，开通PAI控制台
+我选了默认的设置项，这个拿来玩玩
+创建实例
+进入控制台，交互式建模（DSW）页面，创建实例
+资源配额如果没有显示的话要先进行授权
+选取资源，注意选择GPU资源，并选择支持资源包抵扣的资源。比如下图的ecs.gn6v-c8g1.2xlarg。可以看到他们的价格里，写明了每小时消耗的CU，你可以大致计算一下，5000CU可以用多久，ecs.gn6v-c8g1.2xlarg这个型号可以跑333小时，大概连续13天。
+创建实例
+等待加载一段时间
+打开
+进入操作页面
+
+模型准备
+
+下载
+模型较大（13G左右）小文件下载不麻烦，主要是几个大文件LFS很麻烦
+官方仓库
+可以去镜像站[https://hf-mirror.com/]找
+（不过我没有下载成功，最后还是用u盘蹭别人的）
+为什么要下载到本地：因为
+创建OSS
+先开通oss
+进入控制台
+创建OSS bucket
+
+名字自己记得就行
+地域要选和PAI一致的，我当时是“华东2-上海”
+反正是拿来练手的，随便创……
+
+
+上传文件
+扫描很快，上传需要花点时间
+中间断了的可以重新传，还挺方便的，大概50分钟能全部上传完成
+
+部署模型
+
+回到DSW控制台，闲置关机的话启动需要花点时间
+在notebook页面直接读取oss文件
+import oss2
+auth = oss2.Auth(&#39;&lt;your_AccessKey_ID&gt;&#39;, &#39;&lt;your_AccessKey_Secret&gt;&#39;)
+bucket = oss2.Bucket(auth, &#39;http://oss-cn-beijing-internal.aliyuncs.com&#39;, &#39;&lt;your_bucket_name&gt;&#39;)
+
+阿里云物联网accessKeyID 和 accessSecret 获取 方法
+首先登录阿里云网站www.aliyun.com
+然后网页右侧点击控制台
+进入控制台后，右侧的头像，鼠标移动上去，就会有下拉菜单。点击 AccessKey 管理
+在这里就能复制获取accessKeyID 和 accessSecret
+在服务器上安装ossutil
+教程
+config时：
+
+accesskeyIS和secret是必须的
+endpoint就是oss域名，参考
+OSS域名。需要根据实例的地域选择对应的OSS域名：
+华北2（北京）后付费实例：oss-cn-beijing.aliyuncs.com
+华北2（北京）预付费实例：oss-cn-beijing-internal.aliyuncs.com
+华东2（上海）GPU P100实例或CPU实例：oss-cn-shanghai.aliyuncs.com
+华东2（上海）GPU M40实例：oss-cn-shanghai-internal.aliyuncs.com
+
+
+下载整个文件
+教程
+省流版：
+下载文件夹（包含子目录）
+下载某一个文件夹（包含子目录）下所有文件的示例如下：
+ossutil64 cp -r oss://examplebucket/destfolder/ localfolder/
+文件夹名字自己写
+
+
+
+懒得搞了，一堆bug&hellip;..">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/%E7%99%BD%E5%AB%96%E9%98%BF%E9%87%8C%E4%BA%91%E9%83%A8%E7%BD%B2chatglm%E8%B8%A9%E5%9D%91%E6%8C%87%E5%8D%97/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/%E7%99%BD%E5%AB%96%E9%98%BF%E9%87%8C%E4%BA%91%E9%83%A8%E7%BD%B2chatglm%E8%B8%A9%E5%9D%91%E6%8C%87%E5%8D%97/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      白嫖阿里云部署ChatGLM踩坑指南
+    </h1>
+    <div class="post-meta">
+
+<span title='2023-12-14 10:44:05 +0000 UTC'>December 14, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>自己电脑跑不动，白嫖阿里云一个服务器试试</p>
+<h1 id="服务器">服务器<a hidden class="anchor" aria-hidden="true" href="#服务器">#</a></h1>
+<ol>
+<li>领取阿里云资源
+<a href="https://free.aliyun.com/">地址</a>
+只要没有申请过PAI-DSW资源的新老用户皆可申请5000CU的免费额度，3个月内使用。
+找“交互式建模 PAI-DSW 5000CU”的那个点试用
+如果想玩Stable Diffusion来做AI画图可以试试<a href="https://help.aliyun.com/document_detail/615220.html">官方教程</a></li>
+<li>开通控制台
+在阿里云页面内搜索PAI平台，点击立即开通，开通PAI控制台
+我选了默认的设置项，这个拿来玩玩</li>
+<li>创建实例
+进入控制台，交互式建模（DSW）页面，创建实例
+资源配额如果没有显示的话要先进行授权
+选取资源，注意选择GPU资源，并选择支持资源包抵扣的资源。比如下图的ecs.gn6v-c8g1.2xlarg。可以看到他们的价格里，写明了每小时消耗的CU，你可以大致计算一下，5000CU可以用多久，ecs.gn6v-c8g1.2xlarg这个型号可以跑333小时，大概连续13天。</li>
+<li>创建实例
+等待加载一段时间</li>
+<li>打开
+进入操作页面</li>
+</ol>
+<h1 id="模型准备">模型准备<a hidden class="anchor" aria-hidden="true" href="#模型准备">#</a></h1>
+<ol>
+<li>下载
+模型较大（13G左右）小文件下载不麻烦，主要是几个大文件LFS很麻烦
+<a href="https://github.com/THUDM/ChatGLM-6B">官方仓库</a>
+可以去镜像站[https://hf-mirror.com/]找
+（不过我没有下载成功，最后还是用u盘蹭别人的）
+为什么要下载到本地：因为</li>
+<li>创建OSS
+先开通<a href="https://www.aliyun.com/product/oss?accounttraceid=21f21e4f42574157a5b33538561c0402sigr">oss</a>
+进入<a href="https://oss.console.aliyun.com/overview">控制台</a>
+创建OSS bucket
+<ul>
+<li>名字自己记得就行</li>
+<li>地域要选和PAI一致的，我当时是“华东2-上海”
+反正是拿来练手的，随便创……</li>
+</ul>
+</li>
+<li>上传文件
+扫描很快，上传需要花点时间
+中间断了的可以重新传，还挺方便的，大概50分钟能全部上传完成</li>
+</ol>
+<h1 id="部署模型">部署模型<a hidden class="anchor" aria-hidden="true" href="#部署模型">#</a></h1>
+<ol>
+<li>回到DSW控制台，闲置关机的话启动需要花点时间</li>
+<li>在notebook页面直接<a href="https://help.aliyun.com/zh/pai/user-guide/read-data-from-and-write-data-to-oss">读取oss文件</a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> oss2
+</span></span><span style="display:flex;"><span>auth <span style="color:#f92672">=</span> oss2<span style="color:#f92672">.</span>Auth(<span style="color:#e6db74">&#39;&lt;your_AccessKey_ID&gt;&#39;</span>, <span style="color:#e6db74">&#39;&lt;your_AccessKey_Secret&gt;&#39;</span>)
+</span></span><span style="display:flex;"><span>bucket <span style="color:#f92672">=</span> oss2<span style="color:#f92672">.</span>Bucket(auth, <span style="color:#e6db74">&#39;http://oss-cn-beijing-internal.aliyuncs.com&#39;</span>, <span style="color:#e6db74">&#39;&lt;your_bucket_name&gt;&#39;</span>)
+</span></span></code></pre></div><ol>
+<li>阿里云物联网accessKeyID 和 accessSecret 获取 方法
+首先登录阿里云网站www.aliyun.com
+然后网页右侧点击控制台
+进入控制台后，右侧的头像，鼠标移动上去，就会有下拉菜单。点击 AccessKey 管理
+在这里就能复制获取accessKeyID 和 accessSecret</li>
+<li>在服务器上安装ossutil
+<a href="https://help.aliyun.com/zh/oss/developer-reference/install-ossutil?spm=a2c4g.11186623.0.i2#concept-303829">教程</a>
+config时：
+<ol>
+<li>accesskeyIS和secret是必须的</li>
+<li>endpoint就是oss域名，参考
+OSS域名。需要根据实例的地域选择对应的OSS域名：
+华北2（北京）后付费实例：oss-cn-beijing.aliyuncs.com
+华北2（北京）预付费实例：oss-cn-beijing-internal.aliyuncs.com
+华东2（上海）GPU P100实例或CPU实例：oss-cn-shanghai.aliyuncs.com
+华东2（上海）GPU M40实例：oss-cn-shanghai-internal.aliyuncs.com</li>
+</ol>
+</li>
+<li>下载整个文件
+<a href="https://help.aliyun.com/zh/oss/developer-reference/download-objects-5?spm=a2c4g.11186623.0.i1#li-26c-fiu-tyx">教程</a>
+省流版：
+下载文件夹（包含子目录）
+下载某一个文件夹（包含子目录）下所有文件的示例如下：
+<code>ossutil64 cp -r oss://examplebucket/destfolder/ localfolder/</code>
+文件夹名字自己写</li>
+</ol>
+</li>
+</ol>
+<p>懒得搞了，一堆bug&hellip;..</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/undone/">Undone</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
