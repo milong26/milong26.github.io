@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Survey on 我的博客</title>
-    <link>https://example.com/tags/survey/</link>
+    <link>http://localhost:1313/tags/survey/</link>
     <description>Recent content in Survey on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 28 Oct 2025 15:52:55 +0000</lastBuildDate>
-    <atom:link href="https://example.com/tags/survey/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/survey/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pure Vision Language Action (VLA) Models:  A Comprehensive Survey</title>
-      <link>https://example.com/post/pure-vision-language-action-vla-models-a-comprehensive-surve/</link>
+      <link>http://localhost:1313/post/pure-vision-language-action-vla-models-a-comprehensive-surve/</link>
       <pubDate>Tue, 28 Oct 2025 15:52:55 +0000</pubDate>
-      <guid>https://example.com/post/pure-vision-language-action-vla-models-a-comprehensive-surve/</guid>
+      <guid>http://localhost:1313/post/pure-vision-language-action-vla-models-a-comprehensive-surve/</guid>
       <description>&lt;p&gt;比较新的综述，2025年9月25日发的&lt;/p&gt;
 &lt;p&gt;写了不整理相当于没写。&lt;/p&gt;
 &lt;p&gt;这篇文章里面好多分类错误的东西:P，别全信，可以提供思路&lt;/p&gt;
@@ -20,9 +20,9 @@
     </item>
     <item>
       <title>Generative Artificial Intelligence in Robotic Manipulation: A Survey</title>
-      <link>https://example.com/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</link>
+      <link>http://localhost:1313/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</link>
       <pubDate>Thu, 13 Mar 2025 15:59:45 +0000</pubDate>
-      <guid>https://example.com/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</guid>
+      <guid>http://localhost:1313/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</guid>
       <description>&lt;p&gt;(16/100)&lt;/p&gt;
 &lt;p&gt;what i want to get&lt;/p&gt;
 &lt;ol&gt;
@@ -33,9 +33,9 @@
     </item>
     <item>
       <title>Vision-Language-Action Models for Robotics: A Review Towards Real-World Applications</title>
-      <link>https://example.com/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/</link>
+      <link>http://localhost:1313/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/</guid>
+      <guid>http://localhost:1313/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/</guid>
       <description>&lt;p&gt;一篇综述
 2025-11-06 16:15:25 开始看&lt;/p&gt;
 &lt;ul&gt;
@@ -54,16 +54,16 @@ Q:&lt;/li&gt;
     </item>
     <item>
       <title>VLA们</title>
-      <link>https://example.com/post/vla%E4%BB%AC/</link>
+      <link>http://localhost:1313/post/vla%E4%BB%AC/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/vla%E4%BB%AC/</guid>
+      <guid>http://localhost:1313/post/vla%E4%BB%AC/</guid>
       <description>&lt;p&gt;还是很混沌，多看论文吧&lt;/p&gt;</description>
     </item>
     <item>
       <title>vla综述们</title>
-      <link>https://example.com/post/vla%E7%BB%BC%E8%BF%B0%E4%BB%AC/</link>
+      <link>http://localhost:1313/post/vla%E7%BB%BC%E8%BF%B0%E4%BB%AC/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/vla%E7%BB%BC%E8%BF%B0%E4%BB%AC/</guid>
+      <guid>http://localhost:1313/post/vla%E7%BB%BC%E8%BF%B0%E4%BB%AC/</guid>
       <description>&lt;p&gt;若干综述的集合，看就完事&lt;/p&gt;</description>
     </item>
   </channel>

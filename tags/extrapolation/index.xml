@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Extrapolation on 我的博客</title>
+    <link>http://localhost:1313/tags/extrapolation/</link>
+    <description>Recent content in Extrapolation on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 26 Jun 2026 15:24:05 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/extrapolation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>内插和外推</title>
+      <link>http://localhost:1313/post/%E5%86%85%E6%8F%92%E5%92%8C%E5%A4%96%E6%8E%A8/</link>
+      <pubDate>Fri, 26 Jun 2026 15:24:05 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E5%86%85%E6%8F%92%E5%92%8C%E5%A4%96%E6%8E%A8/</guid>
+      <description>&lt;p&gt;深度学习模型都是有一定的插值能力，但是要面对ood就需要外推能力&lt;/p&gt;
+&lt;p&gt;很多内容直接ai复制粘贴的，当个导读&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

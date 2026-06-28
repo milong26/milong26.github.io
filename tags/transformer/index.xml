@@ -2,25 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Transformer on 我的博客</title>
-    <link>https://example.com/tags/transformer/</link>
+    <link>http://localhost:1313/tags/transformer/</link>
     <description>Recent content in Transformer on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 13 Sep 2024 10:12:29 +0000</lastBuildDate>
-    <atom:link href="https://example.com/tags/transformer/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/transformer/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>TRANSFORMER EXPLAINER: Interactive Learning of Text-Generative Models</title>
-      <link>https://example.com/post/transformer-explainer-interactive-learning-of-text-generative-models/</link>
+      <link>http://localhost:1313/post/transformer-explainer-interactive-learning-of-text-generative-models/</link>
       <pubDate>Fri, 13 Sep 2024 10:12:29 +0000</pubDate>
-      <guid>https://example.com/post/transformer-explainer-interactive-learning-of-text-generative-models/</guid>
+      <guid>http://localhost:1313/post/transformer-explainer-interactive-learning-of-text-generative-models/</guid>
       <description>&lt;p&gt;百篇paper计划(7/100)，很短，才2页，重点在code和其project，理解transformer。论文是没啥创新点了，写得也比较拉，看看项目吧。&lt;/p&gt;
 &lt;p&gt;这一篇写完啦！^^&lt;/p&gt;</description>
     </item>
     <item>
       <title>transformer</title>
-      <link>https://example.com/post/transformer/</link>
+      <link>http://localhost:1313/post/transformer/</link>
       <pubDate>Tue, 05 Mar 2024 21:17:53 +0000</pubDate>
-      <guid>https://example.com/post/transformer/</guid>
+      <guid>http://localhost:1313/post/transformer/</guid>
       <description>&lt;p&gt;Transformer是一个利用注意力机制来提高模型训练速度的神经网络架构。&lt;/p&gt;
 &lt;p&gt;#文本生成的架构 这一部分确定完成了，其它部分未完全完成，以后有空再补&lt;/p&gt;
 &lt;p&gt;唯一的问题：那个贼大的框架图每一步怎么走的？&lt;/p&gt;
@@ -56,16 +56,16 @@ $$&lt;/p&gt;
     </item>
     <item>
       <title>diffusion transformer</title>
-      <link>https://example.com/post/diffusion-transformer/</link>
+      <link>http://localhost:1313/post/diffusion-transformer/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/diffusion-transformer/</guid>
+      <guid>http://localhost:1313/post/diffusion-transformer/</guid>
       <description>&lt;p&gt;想学习，但没找到好的教程，学的时候复盘一下diffusion,transformer和DiT是用来干啥的吧。&lt;/p&gt;</description>
     </item>
     <item>
       <title>条件transformer</title>
-      <link>https://example.com/post/%E6%9D%A1%E4%BB%B6transformer/</link>
+      <link>http://localhost:1313/post/%E6%9D%A1%E4%BB%B6transformer/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/%E6%9D%A1%E4%BB%B6transformer/</guid>
+      <guid>http://localhost:1313/post/%E6%9D%A1%E4%BB%B6transformer/</guid>
       <description>&lt;p&gt;什么是条件transformer？它能做到什么？什么情况下使用它？怎么样能看出来这是一个条件transformer？&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 整理文本&lt;/li&gt;

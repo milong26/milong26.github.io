@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>VLA们 | 我的博客</title>
 <meta name="keywords" content="vla, survey">
 <meta name="description" content="还是很混沌，多看论文吧">
-<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
-<link rel="canonical" href="https://example.com/post/vla%E4%BB%AC/">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/vla%E4%BB%AC/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://example.com/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
-<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://example.com/post/vla%E4%BB%AC/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/vla%E4%BB%AC/">
 <noscript>
     <style>
         #theme-toggle,
@@ -64,80 +64,13 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://example.com/post/vla%E4%BB%AC/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="VLA们">
-  <meta property="og:description" content="还是很混沌，多看论文吧">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:tag" content="Vla">
-    <meta property="article:tag" content="Survey">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="VLA们">
-  <meta name="twitter:description" content="还是很混沌，多看论文吧">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://example.com/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "VLA们",
-      "item": "https://example.com/post/vla%E4%BB%AC/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "VLA们",
-  "name": "VLA们",
-  "description": "还是很混沌，多看论文吧\n",
-  "keywords": [
-    "vla", "survey"
-  ],
-  "articleBody": "还是很混沌，多看论文吧\n结构 当我想设计一个VLA的时候：\nVLA 要解决什么问题？ 我希望机器人能做什么？（任务目标） 当前系统为什么做不到？（痛点） 我的VLA系统能在哪些方面改进现有方案？（贡献点） 怎么设计思路去解决，也就是一个总体策略 模块化设计还是端到端设计？ 强调大规模预训练还是数据高效学习？ 用哪种范式（transformer-based? diffusion-based? RL-based?） 系统内部怎么实现这种思路，用什么模块 视觉编码器（Vision Encoder）：提取环境视觉特征。 语言编码器（Language Encoder）：解析任务命令。 多模态融合模块（Fusion Module）：让视觉、语言信息对齐。 动作生成模块（Action Decoder / Policy Head）：输出动作指令或控制信号。 记忆与状态模块（Memory / Context）：处理时序与上下文信息。 模型具体怎么训练和运行：我打算用什么学习机制，让模型学会执行任务？ 监督学习（supervised learning）：从配对数据中学习。 模仿学习（imitation learning）：学习人类演示的动作。 强化学习（reinforcement learning）：在交互中学习策略。 自监督预训练（self-supervised pretraining）：用未标注数据学习模态间对齐。 多阶段训练：预训练 + 微调（pretrain + fine-tune）。 评估：“我的系统在真实世界中表现如何？” 定义指标 选择平台 survey Vision-Language-Action Models for Robotics: A Review Towards Real-World Applications,2025.9:本文提供了一个系统的审查的VLA，包括他们的战略和架构过渡，架构和积木，特定于模态的处理技术，学习范式，常用的机器人平台，数据收集策略，公开可用的数据集，数据增强方法和评估基准。 架构 基础模型 仿真平台 一篇coppeliasim-vs-gazebo-vs-nvidia-isaac-sim\ncoppliasim 有edu版本，windows和linux都可以 不知道为什么windows的只能安装在c盘 尝试用了一下确实还可以，但是精度不太够 数据集 benchmark rlbench CALVIN ",
-  "wordCount" : "68",
-  "inLanguage": "en",
-  "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "0001-01-01T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://example.com/post/vla%E4%BB%AC/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "我的博客",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://example.com/favicon.ico"
-    }
-  }
-}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
@@ -163,22 +96,22 @@
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="https://example.com/" title="首页">
+                <a href="http://localhost:1313/" title="首页">
                     <span>首页</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/about/" title="关于我">
+                <a href="http://localhost:1313/about/" title="关于我">
                     <span>关于我</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/categories/" title="分类">
+                <a href="http://localhost:1313/categories/" title="分类">
                     <span>分类</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/tags/" title="标签">
+                <a href="http://localhost:1313/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li>
@@ -195,7 +128,7 @@
     </h1>
     <div class="post-meta">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
 
 </div>
   </header> 
@@ -270,15 +203,15 @@
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://example.com/tags/vla/">Vla</a></li>
-      <li><a href="https://example.com/tags/survey/">Survey</a></li>
+      <li><a href="http://localhost:1313/tags/vla/">Vla</a></li>
+      <li><a href="http://localhost:1313/tags/survey/">Survey</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
 
     
     

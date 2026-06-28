@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>视角重建 | 我的博客</title>
 <meta name="keywords" content="">
 <meta name="description" content="试错过程">
-<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
-<link rel="canonical" href="https://example.com/post/%E8%A7%86%E8%A7%92%E9%87%8D%E5%BB%BA/">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/%E8%A7%86%E8%A7%92%E9%87%8D%E5%BB%BA/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://example.com/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
-<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://example.com/post/%E8%A7%86%E8%A7%92%E9%87%8D%E5%BB%BA/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/%E8%A7%86%E8%A7%92%E9%87%8D%E5%BB%BA/">
 <noscript>
     <style>
         #theme-toggle,
@@ -64,78 +64,13 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://example.com/post/%E8%A7%86%E8%A7%92%E9%87%8D%E5%BB%BA/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="视角重建">
-  <meta property="og:description" content="试错过程">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="视角重建">
-  <meta name="twitter:description" content="试错过程">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://example.com/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "视角重建",
-      "item": "https://example.com/post/%E8%A7%86%E8%A7%92%E9%87%8D%E5%BB%BA/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "视角重建",
-  "name": "视角重建",
-  "description": "试错过程\n",
-  "keywords": [
-    
-  ],
-  "articleBody": "试错过程\n传统方法 获取before和after的视角编换矩阵 import cv2 import numpy as np # ====== 第一步：计算单应性矩阵 ====== # 读取旧位置图像和新位置图像（第一次采集） img_old = cv2.imread('old.jpg') img_new = cv2.imread('new.jpg') # 使用 ORB 检测特征点 orb = cv2.ORB_create(5000) kp1, des1 = orb.detectAndCompute(img_old, None) kp2, des2 = orb.detectAndCompute(img_new, None) # 特征点匹配 bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True) matches = bf.match(des1, des2) matches = sorted(matches, key=lambda x: x.distance) # 提取匹配点 src_pts = np.float32([kp2[m.trainIdx].pt for m in matches]).reshape(-1,1,2) # 新位置 dst_pts = np.float32([kp1[m.queryIdx].pt for m in matches]).reshape(-1,1,2) # 旧位置 # 计算单应性矩阵 H H, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC) # 可以保存 H，方便下次使用 np.save('homography.npy', H) # 测试：将新位置图像映射到旧位置视角 h, w = img_old.shape[:2] warped = cv2.warpPerspective(img_new, H, (w, h)) cv2.imwrite('warped_test.jpg', warped) print(\"单应性矩阵 H:\\n\", H) # ====== 第二步：未来新图像复原 ====== # 假设下次拍摄了另一张新位置图像 new_image_future.jpg img_future = cv2.imread('new_image_future.jpg') # 加载之前计算的 H H_loaded = np.load('homography.npy') # 将未来图像映射到旧视角 warped_future = cv2.warpPerspective(img_future, H_loaded, (w, h)) cv2.imwrite('warped_future.jpg', warped_future) 利用矩阵复原图像，实时 # save as realsense_warp.py import pyrealsense2 as rs import numpy as np import cv2 # ====== 1. 加载之前计算好的单应性矩阵 ====== H = np.load(\"homography.npy\") # shape (3,3) # ====== 2. 配置 Realsense 相机 ====== pipeline = rs.pipeline() config = rs.config() config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30) # 30 FPS # 开启相机 pipeline.start(config) try: while True: # 获取帧 frames = pipeline.wait_for_frames() color_frame = frames.get_color_frame() if not color_frame: continue # 转换为 numpy array img = np.asanyarray(color_frame.get_data()) # ====== 显示原始图像 ====== cv2.imshow(\"Original\", img) # ====== 应用单应性矩阵 ====== h, w = img.shape[:2] warped = cv2.warpPerspective(img, H, (w, h)) cv2.imshow(\"Warped\", warped) # 按 q 键退出 if cv2.waitKey(1) \u0026 0xFF == ord('q'): break finally: pipeline.stop() cv2.destroyAllWindows() 先不管视角复原的精确度的问题，黑边的产生原理？黑色区域其实是 二维透视变换 warp 后常见的现象 用单应性矩阵 H 的逆映射找到对应原图中的位置：$$ \\begin{bmatrix} x \\ y \\ 1 \\end{bmatrix} = H^{-1} \\begin{bmatrix} x’ \\ y’ \\ 1 \\end{bmatrix}$$ 从原图中取对应位置的像素值（通常做双线性插值）。 黑色区域出现的原因： warp 后的目标像素位置在原图对应位置 超出了原图范围。 例如 H 会把图像向左、上、旋转或者拉伸。 输出图像边缘部分的像素在原图中没有对应值。 OpenCV 默认填充这些“无对应值”的像素为 0，即黑色 [0,0,0][0,0,0][0,0,0]。 怎样模拟这个黑色边缘？遵循透视编换 边缘形状 四个角可能变形，形成梯形、三角形或不规则多边形。 取决于 H 对图像的旋转、缩放、平移效果。 分布 warp 后黑色区域在图像外围最多。 如果 H 包含大旋转或平移，黑色区域可能出现在上、下、左、右边缘甚至斜角。 和原图尺寸的关系 如果 warp 输出尺寸固定 (w, h)，超出原图的部分必然黑色。 如果输出尺寸很大，黑色区域更多；输出尺寸刚好包住映射区域，黑色区域最小。 模拟重建后的黑边\nsaved_mask_debug_count = 0 # 用于计数 def random_wrap_mask_gpu(image: torch.Tensor, max_offset_ratio=0.4, debug_dir=\"./debug_mask\", save_limit=10) -\u003e torch.Tensor: \"\"\" image: H x W x C, torch.float32, CUDA tensor 返回 masked_image: H x W x C, 彩色区域保持原样，黑边随机生成（梯形/透视效果） \"\"\" global saved_mask_debug_count H, W, C = image.shape device = image.device # ================== 1. 定义原始四角 ================== corners = torch.tensor([[0,0],[W-1,0],[W-1,H-1],[0,H-1]], device=device, dtype=torch.float32) # ================== 2. 生成梯形/透视随机黑边 ================== # 上下左右随机偏移 offsets_top = (torch.rand(2, device=device)*2 - 1) * W * max_offset_ratio offsets_bottom = (torch.rand(2, device=device)*2 - 1) * W * max_offset_ratio offsets_left = (torch.rand(2, device=device)*2 - 1) * H * max_offset_ratio offsets_right = (torch.rand(2, device=device)*2 - 1) * H * max_offset_ratio poly = torch.stack([ corners[0] + torch.tensor([offsets_top[0], offsets_left[0]], device=device), corners[1] + torch.tensor([offsets_top[1], offsets_right[0]], device=device), corners[2] + torch.tensor([offsets_bottom[1], offsets_right[1]], device=device), corners[3] + torch.tensor([offsets_bottom[0], offsets_left[1]], device=device) ], dim=0) # 4 x 2 # ================== 3. 构建坐标网格 ================== yy, xx = torch.meshgrid(torch.arange(H, device=device), torch.arange(W, device=device), indexing='ij') coords = torch.stack([xx, yy], dim=-1).float() # H x W x 2 # ================== 4. 使用向量叉乘判断凸多边形内部 ================== def cross2d(a,b): return a[...,0]*b[...,1] - a[...,1]*b[...,0] v0 = poly[1] - poly[0] v1 = poly[2] - poly[1] v2 = poly[3] - poly[2] v3 = poly[0] - poly[3] mask = ( (cross2d(v0, coords - poly[0]) \u003e= 0) \u0026 (cross2d(v1, coords - poly[1]) \u003e= 0) \u0026 (cross2d(v2, coords - poly[2]) \u003e= 0) \u0026 (cross2d(v3, coords - poly[3]) \u003e= 0) ) # ================== 5. 应用 mask ================== masked_image = image.clone() masked_image[~mask] = 0.0 # ================== 6. debug 保存原图和 mask ================== if saved_mask_debug_count \u003c save_limit: import os from torchvision.transforms.functional import to_pil_image os.makedirs(debug_dir, exist_ok=True) mask_pixel_count = (~mask).sum().item() ratio = mask_pixel_count / (H * W) print(f\"[DEBUG {saved_mask_debug_count}] Mask ratio={ratio:.3f}\") # 转 CPU img_to_save = image.clamp(0,1).permute(2,0,1).cpu() masked_to_save = masked_image.clamp(0,1).permute(2,0,1).cpu() # 文件名带编号 to_pil_image(img_to_save).save( os.path.join(debug_dir, f\"original_{saved_mask_debug_count:02d}.png\") ) to_pil_image(masked_to_save).save( os.path.join(debug_dir, f\"masked_{saved_mask_debug_count:02d}.png\") ) saved_mask_debug_count += 1 return masked_image 如何调用\nfor i in range(imgs.shape[0]): if random.random() \u003c 0.5: # 50%概率应用mask ratio = random.uniform(0.2, 0.5) # mask ratio随机 20~50% imgs[i] = random_wrap_mask_gpu( imgs[i].permute(1, 2, 0), # 对 masked_image 做索引 [H, W]，要求 前两个维度是 H, W，所以这里要变成[H, W, C] max_offset_ratio=ratio, save_limit=0 # 测试的时候设置 ).permute(2, 0, 1) #返回的是H,W,C要变成C,H,W进模型 ",
-  "wordCount" : "622",
-  "inLanguage": "en",
-  "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "0001-01-01T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://example.com/post/%E8%A7%86%E8%A7%92%E9%87%8D%E5%BB%BA/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "我的博客",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://example.com/favicon.ico"
-    }
-  }
-}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
@@ -161,22 +96,22 @@
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="https://example.com/" title="首页">
+                <a href="http://localhost:1313/" title="首页">
                     <span>首页</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/about/" title="关于我">
+                <a href="http://localhost:1313/about/" title="关于我">
                     <span>关于我</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/categories/" title="分类">
+                <a href="http://localhost:1313/categories/" title="分类">
                     <span>分类</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/tags/" title="标签">
+                <a href="http://localhost:1313/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li>
@@ -193,7 +128,7 @@
     </h1>
     <div class="post-meta">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
 
 </div>
   </header> 
@@ -522,7 +457,7 @@
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
 
     
     

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Prompt on 我的博客</title>
-    <link>https://example.com/tags/prompt/</link>
+    <link>http://localhost:1313/tags/prompt/</link>
     <description>Recent content in Prompt on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 16 Apr 2024 21:39:51 +0000</lastBuildDate>
-    <atom:link href="https://example.com/tags/prompt/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/prompt/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</title>
-      <link>https://example.com/post/chain-of-thought-prompting-elicits-reasoning-in-large-language-models/</link>
+      <link>http://localhost:1313/post/chain-of-thought-prompting-elicits-reasoning-in-large-language-models/</link>
       <pubDate>Tue, 16 Apr 2024 21:39:51 +0000</pubDate>
-      <guid>https://example.com/post/chain-of-thought-prompting-elicits-reasoning-in-large-language-models/</guid>
+      <guid>http://localhost:1313/post/chain-of-thought-prompting-elicits-reasoning-in-large-language-models/</guid>
       <description>&lt;p&gt;思维链论文阅读，百篇paper计划(4/100)，思维链这个技术还是prompt这个部分里面的，所以这篇论文还是算prompt&lt;/p&gt;</description>
     </item>
   </channel>

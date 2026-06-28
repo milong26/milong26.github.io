@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>mediapipe | 我的博客</title>
 <meta name="keywords" content="">
 <meta name="description" content="midiapipe是一个实时计算机视觉框架">
-<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
-<link rel="canonical" href="https://example.com/post/mediapipe/">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/mediapipe/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://example.com/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
-<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://example.com/post/mediapipe/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/mediapipe/">
 <noscript>
     <style>
         #theme-toggle,
@@ -64,80 +64,13 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://example.com/post/mediapipe/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="mediapipe">
-  <meta property="og:description" content="midiapipe是一个实时计算机视觉框架">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2025-03-06T10:46:08+00:00">
-    <meta property="article:modified_time" content="2025-03-06T10:46:08+00:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="mediapipe">
-  <meta name="twitter:description" content="midiapipe是一个实时计算机视觉框架">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://example.com/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "mediapipe",
-      "item": "https://example.com/post/mediapipe/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "mediapipe",
-  "name": "mediapipe",
-  "description": "midiapipe是一个实时计算机视觉框架\n",
-  "keywords": [
-    
-  ],
-  "articleBody": "midiapipe是一个实时计算机视觉框架\n能够高效处理 手势识别、姿态估计、物体检测、语音处理 等任务 用计算图进行数据处理 预训练模型有这些： 手部跟踪\tMediaPipe Hands 人体姿势估计\tMediaPipe Pose 面部检测\tMediaPipe Face Detection 面部网格\tMediaPipe Face Mesh 物体检测\tMediaPipe Objectron语音处理\tMediaPipe Audio 主要看手部跟踪部分\nMediaPipe Hands 是一个 高效的手部关键点检测模型，可检测 21 个关键点，用于手势识别。\nimport cv2 import mediapipe as mp mp_hands = mp.solutions.hands mp_draw = mp.solutions.drawing_utils hands = mp_hands.Hands() cap = cv2.VideoCapture(0) while cap.isOpened(): success, frame = cap.read() if not success: continue frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB) results = hands.process(frame_rgb) if results.multi_hand_landmarks: for hand_landmarks in results.multi_hand_landmarks: mp_draw.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS) cv2.imshow('MediaPipe Hands', frame) if cv2.waitKey(1) \u0026 0xFF == ord('q'): break cap.release() cv2.destroyAllWindows() ",
-  "wordCount" : "88",
-  "inLanguage": "en",
-  "datePublished": "2025-03-06T10:46:08Z",
-  "dateModified": "2025-03-06T10:46:08Z",
-  "author":{
-    "@type": "Person",
-    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://example.com/post/mediapipe/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "我的博客",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://example.com/favicon.ico"
-    }
-  }
-}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
@@ -163,22 +96,22 @@
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="https://example.com/" title="首页">
+                <a href="http://localhost:1313/" title="首页">
                     <span>首页</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/about/" title="关于我">
+                <a href="http://localhost:1313/about/" title="关于我">
                     <span>关于我</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/categories/" title="分类">
+                <a href="http://localhost:1313/categories/" title="分类">
                     <span>分类</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/tags/" title="标签">
+                <a href="http://localhost:1313/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li>
@@ -195,7 +128,7 @@
     </h1>
     <div class="post-meta">
 
-<span title='2025-03-06 10:46:08 +0000 UTC'>March 6, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+<span title='2025-03-06 10:46:08 +0000 UTC'>March 6, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
 
 </div>
   </header> 
@@ -254,7 +187,7 @@
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
 
     
     

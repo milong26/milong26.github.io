@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>Data Scaling Laws for Imitation Learning-Based End-to-End Autonomous Driving | 我的博客</title>
 <meta name="keywords" content="">
 <meta name="description" content="14:21:30开始，这篇论文只能看20分钟
 快速了解：
 这篇论文是否可以扩展到vla方面？">
-<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
-<link rel="canonical" href="https://example.com/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://example.com/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
-<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://example.com/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/">
 <noscript>
     <style>
         #theme-toggle,
@@ -66,78 +66,13 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://example.com/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="Data Scaling Laws for Imitation Learning-Based End-to-End Autonomous Driving">
-  <meta property="og:description" content="14:21:30开始，这篇论文只能看20分钟 快速了解： 这篇论文是否可以扩展到vla方面？">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Data Scaling Laws for Imitation Learning-Based End-to-End Autonomous Driving">
-  <meta name="twitter:description" content="14:21:30开始，这篇论文只能看20分钟 快速了解： 这篇论文是否可以扩展到vla方面？">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://example.com/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Data Scaling Laws for Imitation Learning-Based End-to-End Autonomous Driving",
-      "item": "https://example.com/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Data Scaling Laws for Imitation Learning-Based End-to-End Autonomous Driving",
-  "name": "Data Scaling Laws for Imitation Learning-Based End-to-End Autonomous Driving",
-  "description": "14:21:30开始，这篇论文只能看20分钟 快速了解： 这篇论文是否可以扩展到vla方面？\n",
-  "keywords": [
-    
-  ],
-  "articleBody": "14:21:30开始，这篇论文只能看20分钟 快速了解： 这篇论文是否可以扩展到vla方面？\nhttps://zhuanlan.zhihu.com/p/15333349697 在imitation learning中是否存在scaling law\n通过实验证明，本文证明了log-log scaling law存在，数据分布对模型训练结果有影响。scaling law能够提升模型的泛化能力。\n看这篇文章最终的目标是：这篇文章能否扩展到vision language action 领域，做机械臂针对小样本抓取的fine-tune，想要研究尽可能少的示范数据实现模型成功率饱和\n一、这篇论文在干什么？ 1️⃣ 核心问题是什么？ 这篇论文关心的不是“模型结构还能不能再 fancy 一点”，而是一个非常基础但之前没人系统回答的问题：\n模仿学习（IL）驱动的端到端自动驾驶，是否存在“数据 scaling law”？\n数据到底该“越多越好”，还是“分布更重要”？\n大数据是否真的带来泛化？\n更具体拆成三个问题\n是否存在数据量 vs 性能的 scaling law？\n为什么 open-loop 和 closed-loop 的结论不一致？\n大规模数据是否让模型学到“组合泛化（combinatorial generalization）”？\n2️⃣ 方法是怎么做的？ (1) 数据层面：第一次真的“够大” 他们搞了一个工业级数据集 ONE-Drive：\n4M demonstrations\n30,000+ 小时\n覆盖 23 种驾驶场景类型\n真·真实世界（不是 CARLA）\n👉 这是这篇 paper 能谈 scaling law 的前提条件。\n(2) 模型层面：不是重点，但要“稳定可扩展” 基于 PARA-Drive 的 并行端到端架构\n多模态输入（多相机 + LiDAR）\nBEV 表示\n多任务并行 decoder（地图 / occupancy / detection / prediction / planning）\n⚠️ 关键点：\n模型结构保持不变，只 scale 数据量\n否则 scaling law 会被 confound。\n(3) 实验设计：非常“干净” 他们做了三组关键实验：\nA. Open-loop scaling 指标：ADE（预测轨迹 vs GT）\n数据量：10k → 4M\n结果：幂律关系（power law）\nB. Closed-loop scaling 用 3D-GS 重建环境\n指标：安全 / 舒适 / 规则 / 效率 / 导航\n结果：不是幂律，且早早饱和\nC. 数据分布 \u0026 长尾 固定总数据量\n只增加某个长尾场景的数据\n性能提升巨大（9%～30%）\n3️⃣ 最终结论是什么？ 我用一句话版本 + 拆解版。\n一句话版本 端到端模仿学习确实 obey scaling law，但“数据分布”比“数据总量”重要得多；\n真正的泛化来自对“可组合技能”的覆盖，而不是暴力堆样本。\n拆解结论（非常关键） ✅ 结论 1：Open-loop 有 power law，closed-loop 没有 Open-loop ≈ 函数拟合 → 数据越多越好\nClosed-loop ≈ 因果+分布偏移 → 很快进入收益递减\n👉 真实部署不该只看 open-loop\n✅ 结论 2：长尾数据的“边际价值”极高 给 rare scenario 多几百 / 几千条\n效果 \u003e 随机加几十万条常见数据\n👉 targeted data beats brute-force scaling\n✅ 结论 3：大数据带来“组合泛化” 模型并不是记住新场景，而是学会：\n把“已见过的子技能”组合成“未见过的整体行为”\n比如：\n学过「高速行驶」\n学过「低速避障」\n→ 泛化到「高速避障（没见过）」\n这点对你后面的问题 极其重要。\n二、扩展到 Vision-Language-Action + 机械臂小样本抓取：怎么做？ 你问的是一个非常对口、而且很前沿的问题：\n如何在 VLA 机械臂抓取中，用尽量少的示范数据，让 fine-tune 成功率尽快饱和？\n我直接给你一个研究级别的思路框架，不是“工程 tricks”。\n三、把这篇 paper 的 insight 映射到 VLA 抓取 🔁 对应关系先对齐 自动驾驶论文 机械臂 VLA 抓取 demonstration 抓取 episode scenario type 抓取子技能 / 条件 open-loop ADE 离线 action loss / imitation loss closed-loop score 实际抓取成功率 combinatorial generalization 新物体 / 新摆放 / 新语言组合 四、核心结论先给你 **小样本下成功率想“快饱和”，关键不是多收 demo，而是：\n让每条 demo 覆盖“最大可组合子技能空间”\n下面是可直接写 proposal / paper 的 5 条路线。\n五、具体研究思路（强烈推荐 ①②③） ⭐ 思路 ①：抓取任务的「子技能分解 + 覆盖最小基」 核心想法（来自 combinatorial generalization）：\n不要按“物体种类”或“任务名”收数据，\n而是按 可组合子技能（skill basis） 收。\n抓取可拆成哪些原子维度？ 举例（不是唯一）：\n视觉：\n对称 vs 非对称\n凸 vs 凹\n遮挡 vs 清晰\n几何：\n顶抓 / 侧抓\n单接触 / 多接触\n交互：\n刚体 / 可形变\n稳定 / 滚动\n语言：\n“抓红色的”\n“把最左边那个拿起来”\n👉 目标：\n用最少 demo 覆盖 每个维度的极端点\n📌 这本质上是在构造一个 抓取的“basis set”\n⭐ 思路 ②：像论文一样，刻意放大“抓取长尾” 和 ONE-Drive 一模一样的逻辑：\n统计当前模型失败最多的 5% 情况\n只补这些 failure mode\n固定总 demo 数，比较：\nrandom sampling vs targeted long-tail sampling\n你甚至可以直接复现他们的 Table III 风格实验。\n⭐ 思路 ③：先 VLA 预训练，再「极低步数对齐」 论文 future work 提到：\nself-supervised / foundation model 会改变 scaling law\n在抓取里更明显：\n推荐 pipeline 冻结视觉-语言 backbone\nCLIP / SigLIP / VLM 只 fine-tune action head 或 low-rank adapter\n每条 demo 的作用从：\n“教你怎么看世界”\n变成：\n“教你怎么把 perception → action”\n👉 这样一来，demo 的信息密度暴增\n⭐ 思路 ④：用语言做“分布控制器” 这是 VLA 独有优势，自动驾驶做不到。\n你可以：\n同一个 demo\n用多种 language prompt 重放\n“pick the red block”\n“grasp the object on the left”\n“grab the cube carefully”\n➡️ 等价于数据分布扩展，而非动作扩展\n这在小样本下非常值钱。\n⭐ 思路 ⑤：成功率饱和 ≠ imitation loss 饱和 和论文 open-loop vs closed-loop 一样：\n不要用 offline loss 作为 stopping criterion\n用：\n成功率-vs-demo 数曲线\nfailure 类型熵\n新组合条件下的 zero-shot success\n否则你会被假饱和骗了。\nok来看vla的问题\n数据分布缺失 这篇论文做的研究就是 他们其实做了三件事：\n固定模型 控制数据量 操纵数据分布 → 看性能变化 ",
-  "wordCount" : "445",
-  "inLanguage": "en",
-  "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "0001-01-01T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://example.com/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "我的博客",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://example.com/favicon.ico"
-    }
-  }
-}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
@@ -163,22 +98,22 @@
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="https://example.com/" title="首页">
+                <a href="http://localhost:1313/" title="首页">
                     <span>首页</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/about/" title="关于我">
+                <a href="http://localhost:1313/about/" title="关于我">
                     <span>关于我</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/categories/" title="分类">
+                <a href="http://localhost:1313/categories/" title="分类">
                     <span>分类</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/tags/" title="标签">
+                <a href="http://localhost:1313/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li>
@@ -195,7 +130,7 @@
     </h1>
     <div class="post-meta">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
 
 </div>
   </header> 
@@ -582,7 +517,7 @@
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
 
     
     

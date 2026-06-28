@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>内插和外推 | 我的博客</title>
+<meta name="keywords" content="Interpolation, extrapolation">
+<meta name="description" content="深度学习模型都是有一定的插值能力，但是要面对ood就需要外推能力
+很多内容直接ai复制粘贴的，当个导读">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/%E5%86%85%E6%8F%92%E5%92%8C%E5%A4%96%E6%8E%A8/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/%E5%86%85%E6%8F%92%E5%92%8C%E5%A4%96%E6%8E%A8/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      内插和外推
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h1>
+    <div class="post-meta">
+
+<span title='2026-06-26 15:24:05 +0000 UTC'>June 26, 2026</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>深度学习模型都是有一定的插值能力，但是要面对ood就需要外推能力</p>
+<p>很多内容直接ai复制粘贴的，当个导读</p>
+<p>插值：在已知的数据点“之间”进行预测。
+如果你见过 10 厘米的杯子和 20 厘米的杯子，让你去抓 15 厘米的杯子，这就是插值。</p>
+<ul>
+<li>VLA 表现：模型对此非常擅长。Transformer 架构通过注意力机制，能很好地在已知特征之间进行“平滑过渡”。</li>
+</ul>
+<p>但是</p>
+<blockquote>
+<p><strong>“Transformer 通过注意力机制，能够在已知样本之间进行平滑过渡（smooth interpolation）”</strong> 目前<strong>不是一个正式定理</strong>，而是一种经验性描述。真正对应的理论主要来自以下几个方向：</p>
+</blockquote>
+<ol>
+<li>Attention 的连续性（continuity）与 Lipschitz 性；</li>
+<li>Transformer 的函数逼近与平滑映射理论；</li>
+<li>In-context learning 被解释为一种局部插值或核回归（kernel regression）过程。
+有一些相关的可以理论证明的
+有，而且近几年已经开始形成一个比较明确的理论方向。不过需要指出一点：</li>
+</ol>
+<blockquote>
+<p><strong>“Transformer 通过注意力机制，能够在已知样本之间进行平滑过渡（smooth interpolation）”</strong> 目前<strong>不是一个正式定理</strong>，而是一种经验性描述。真正对应的理论主要来自以下几个方向：</p>
+</blockquote>
+<ol>
+<li>
+<p>Attention 的连续性（continuity）与 Lipschitz 性；</p>
+</li>
+<li>
+<p>Transformer 的函数逼近与平滑映射理论；</p>
+</li>
+<li>
+<p>In-context learning 被解释为一种局部插值或核回归（kernel regression）过程。</p>
+</li>
+</ol>
+<p>如果你的这句话是写论文，建议引用下面几类工作。</p>
+<hr>
+<h2 id="1-最直接attention-的平滑性推荐">1. 最直接：Attention 的平滑性（推荐）<a hidden class="anchor" aria-hidden="true" href="#1-最直接attention-的平滑性推荐">#</a></h2>
+<h3 id="1-how-smooth-is-attention-icml-2024">(1) How Smooth Is Attention? (ICML 2024)<a hidden class="anchor" aria-hidden="true" href="#1-how-smooth-is-attention-icml-2024">#</a></h3>
+<blockquote>
+<p>Castin, Ablin, Peyré.<br>
+<strong>How Smooth Is Attention?</strong><br>
+ICML 2024. (<a href="https://proceedings.mlr.press/v235/castin24a.html?utm_source=chatgpt.com" title="How Smooth Is Attention?">Proceedings of Machine Learning Research</a>)</p>
+</blockquote>
+<p>这是目前与你这句话<strong>最对应</strong>的一篇理论论文。</p>
+<p>主要结果：</p>
+<ul>
+<li>
+<p>分析 Self-Attention 的 Lipschitz 常数；</p>
+</li>
+<li>
+<p>证明 Attention 在有界输入空间内具有连续性；</p>
+</li>
+<li>
+<p>给出了随 sequence length 增长的理论界；</p>
+</li>
+<li>
+<p>说明 Attention 本身是一种<strong>平滑映射（smooth mapping）</strong>。</p>
+</li>
+</ul>
+<p>论文中讨论的是</p>
+<p>[<br>
+x\rightarrow \text{Attention}(x)<br>
+]</p>
+<p>具有局部连续性，因此输入发生小变化，输出一般不会剧烈变化。</p>
+<p>这正是很多人所说</p>
+<blockquote>
+<p>Transformer 在 feature space 中具有 interpolation 的能力</p>
+</blockquote>
+<p>背后的数学依据。</p>
+<hr>
+<h2 id="2-self-attention-的-lipschitz-理论">2. Self-Attention 的 Lipschitz 理论<a hidden class="anchor" aria-hidden="true" href="#2-self-attention-的-lipschitz-理论">#</a></h2>
+<h3 id="2-the-lipschitz-constant-of-self-attention">(2) The Lipschitz Constant of Self-Attention<a hidden class="anchor" aria-hidden="true" href="#2-the-lipschitz-constant-of-self-attention">#</a></h3>
+<p>Kim, Papamakarios, Mnih</p>
+<p>ICML 2021. (<a href="https://proceedings.mlr.press/v139/kim21i.html?utm_source=chatgpt.com" title="The Lipschitz Constant of Self-Attention">Proceedings of Machine Learning Research</a>)</p>
+<p>这是第一篇系统分析 Self-Attention Lipschitz 性质的论文。</p>
+<p>主要结论：</p>
+<ul>
+<li>
+<p>标准 dot-product attention 在整个无界空间不是 Lipschitz；</p>
+</li>
+<li>
+<p>但经过适当修改（L2 attention）可以得到 Lipschitz Attention；</p>
+</li>
+<li>
+<p>给出了理论 Lipschitz 上界。</p>
+</li>
+</ul>
+<p>如果你写：</p>
+<blockquote>
+<p>Transformer 对邻近状态具有较好的连续泛化能力。</p>
+</blockquote>
+<p>引用这篇非常合适。</p>
+<hr>
+<h2 id="3-attention-为什么容易做插值">3. Attention 为什么容易做插值<a hidden class="anchor" aria-hidden="true" href="#3-attention-为什么容易做插值">#</a></h2>
+<p>很多论文把 Attention 写成</p>
+<p>[<br>
+y=\sum_i\alpha_i(x)v_i<br>
+]</p>
+<p>其中</p>
+<p>[<br>
+\alpha_i=\operatorname{softmax}(q^\top k_i).<br>
+]</p>
+<p>注意：</p>
+<ul>
+<li>
+<p>softmax 权重连续变化；</p>
+</li>
+<li>
+<p>Query 连续变化；</p>
+</li>
+<li>
+<p>输出就是 Value 的加权平均。</p>
+</li>
+</ul>
+<p>因此</p>
+<blockquote>
+<p>输出天然就是一个<strong>连续加权插值（continuous weighted interpolation）</strong></p>
+</blockquote>
+<p>虽然很多论文没有直接写 interpolation，但都会提到：</p>
+<blockquote>
+<p>attention computes weighted averaging</p>
+</blockquote>
+<p>而 weighted averaging 本质就是 interpolation。</p>
+<hr>
+<h2 id="4-transformer-与-kernel-regression">4. Transformer 与 Kernel Regression<a hidden class="anchor" aria-hidden="true" href="#4-transformer-与-kernel-regression">#</a></h2>
+<p>这一方向与你说的&quot;平滑过渡&quot;其实关系更紧密。</p>
+<p>典型代表：</p>
+<ul>
+<li>
+<p>Transformer ≈ Kernel Regression</p>
+</li>
+<li>
+<p>Attention ≈ Nadaraya–Watson Estimator</p>
+</li>
+<li>
+<p>Attention ≈ Adaptive Kernel</p>
+</li>
+</ul>
+<p>思想是：</p>
+<p>如果 Query 接近两个训练样本</p>
+<p>[<br>
+q\approx q_1,q_2,<br>
+]</p>
+<p>那么</p>
+<p>[<br>
+\alpha_1\approx0.6,\qquad<br>
+\alpha_2\approx0.4.<br>
+]</p>
+<p>输出自然就是</p>
+<p>[<br>
+0.6v_1+0.4v_2.<br>
+]</p>
+<p>也就是说</p>
+<p>Transformer 实际上就在两个样本之间进行了<strong>连续插值</strong>。</p>
+<p>很多 In-context Learning 理论都采用这种解释。</p>
+<hr>
+<h2 id="5-in-context-learning-理论">5. In-context Learning 理论<a hidden class="anchor" aria-hidden="true" href="#5-in-context-learning-理论">#</a></h2>
+<p>例如：</p>
+<ul>
+<li>
+<p>von Oswald et al., <em>Transformers Learn In-Context by Gradient Descent</em></p>
+</li>
+<li>
+<p>Akyürek et al., <em>What Learning Algorithm Is In-Context Learning?</em></p>
+</li>
+<li>
+<p>Garg et al., <em>What Can Transformers Learn In-Context?</em></p>
+</li>
+</ul>
+<p>这些工作证明：</p>
+<p>Transformer 学到的策略非常接近</p>
+<ul>
+<li>
+<p>最近邻</p>
+</li>
+<li>
+<p>核回归</p>
+</li>
+<li>
+<p>Ridge Regression</p>
+</li>
+</ul>
+<p>而这些算法本身就是连续插值器。</p>
+<p>近期关于 Transformer 理论的综述也将 Attention 的平滑性（Lipschitz continuity）作为理解其泛化能力的重要工具。(<a href="https://proceedings.iclr.cc/paper_files/paper/2025/file/c9028f7874df04843e7bf435ee4cd3c3-Paper-Conference.pdf?utm_source=chatgpt.com" title="Published as a conference paper at ICLR 2025TRANSFORMERS ARE UNIVERSAL">ICLR Proceedings</a>)</p>
+<hr>
+<h2 id="6-如果你的对象是-vla">6. 如果你的对象是 VLA<a hidden class="anchor" aria-hidden="true" href="#6-如果你的对象是-vla">#</a></h2>
+<p>若写的是</p>
+<blockquote>
+<p><strong>VLA 模型对此非常擅长。Transformer 的注意力机制能够在训练数据覆盖的状态空间内，对相邻视觉—动作特征进行连续加权，因此通常表现出良好的插值（interpolation）能力。</strong></p>
+</blockquote>
+<p>建议引用：</p>
+<ol>
+<li>
+<p><strong>Castin et al., ICML 2024</strong><br>
+<em>How Smooth Is Attention?</em>（理论支持“平滑映射”）(<a href="https://proceedings.mlr.press/v235/castin24a.html?utm_source=chatgpt.com" title="How Smooth Is Attention?">Proceedings of Machine Learning Research</a>)</p>
+</li>
+<li>
+<p><strong>Kim et al., ICML 2021</strong><br>
+<em>The Lipschitz Constant of Self-Attention</em>（理论支持连续性和稳定性）(<a href="https://proceedings.mlr.press/v139/kim21i.html?utm_source=chatgpt.com" title="The Lipschitz Constant of Self-Attention">Proceedings of Machine Learning Research</a>)</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>Extrapolation（外推/外插/OOD）：</p>
+<ul>
+<li>定义：在已知数据点的范围“之外”进行预测。</li>
+<li>直观理解：如果你只见过 10-20 厘米的杯子，让你去抓一个 2 米宽的油桶。</li>
+<li>VLA 表现：模型对此非常差。一旦脱离了训练分布的“支撑集（Support）”，模型的输出会变得随机且不可靠。</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/interpolation/">Interpolation</a></li>
+      <li><a href="http://localhost:1313/tags/extrapolation/">Extrapolation</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

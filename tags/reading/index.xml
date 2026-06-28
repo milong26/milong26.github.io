@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Reading on 我的博客</title>
-    <link>https://example.com/tags/reading/</link>
+    <link>http://localhost:1313/tags/reading/</link>
     <description>Recent content in Reading on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Mon, 09 Jun 2025 14:24:55 +0000</lastBuildDate>
-    <atom:link href="https://example.com/tags/reading/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/reading/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>阅读复健</title>
-      <link>https://example.com/post/%E9%98%85%E8%AF%BB%E5%A4%8D%E5%81%A5/</link>
+      <link>http://localhost:1313/post/%E9%98%85%E8%AF%BB%E5%A4%8D%E5%81%A5/</link>
       <pubDate>Mon, 09 Jun 2025 14:24:55 +0000</pubDate>
-      <guid>https://example.com/post/%E9%98%85%E8%AF%BB%E5%A4%8D%E5%81%A5/</guid>
+      <guid>http://localhost:1313/post/%E9%98%85%E8%AF%BB%E5%A4%8D%E5%81%A5/</guid>
       <description>&lt;p&gt;上次看文学书还是在高中？（or电子小说）&lt;/p&gt;</description>
     </item>
   </channel>

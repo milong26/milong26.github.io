@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>运动学 | 我的博客</title>
 <meta name="keywords" content="3d">
 <meta name="description" content="kinematics，包括正向与逆向。用于joint-space和end-effector Cartesian-space的转换">
-<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
-<link rel="canonical" href="https://example.com/post/%E8%BF%90%E5%8A%A8%E5%AD%A6/">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/%E8%BF%90%E5%8A%A8%E5%AD%A6/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://example.com/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
-<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://example.com/post/%E8%BF%90%E5%8A%A8%E5%AD%A6/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/%E8%BF%90%E5%8A%A8%E5%AD%A6/">
 <noscript>
     <style>
         #theme-toggle,
@@ -64,81 +64,13 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://example.com/post/%E8%BF%90%E5%8A%A8%E5%AD%A6/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="运动学">
-  <meta property="og:description" content="kinematics，包括正向与逆向。用于joint-space和end-effector Cartesian-space的转换">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2025-01-08T10:05:53+00:00">
-    <meta property="article:modified_time" content="2025-01-08T10:05:53+00:00">
-    <meta property="article:tag" content="3d">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="运动学">
-  <meta name="twitter:description" content="kinematics，包括正向与逆向。用于joint-space和end-effector Cartesian-space的转换">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://example.com/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "运动学",
-      "item": "https://example.com/post/%E8%BF%90%E5%8A%A8%E5%AD%A6/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "运动学",
-  "name": "运动学",
-  "description": "kinematics，包括正向与逆向。用于joint-space和end-effector Cartesian-space的转换\n",
-  "keywords": [
-    "3d"
-  ],
-  "articleBody": "kinematics，包括正向与逆向。用于joint-space和end-effector Cartesian-space的转换\n正向运动学 逆向运动学 在机器人的逆运动学的数值解法中，有两种常用的方法：\ndifferential inverse kinematics (微分逆运动学，differential ik) inverse kinematics (为了与微分逆运动学区分开来，我们叫direct inverse kinematics，direct ik) 为了比较二者差别，用末端位姿ik问题举例 direct ik就是直接求出一组关节角度，使得末端位姿精确达到目标。先算好终点，然后慢慢插值“搬过去”。如果目标和当前姿态差距大，中间轨迹可能不平滑甚至奇怪。 differential ik：求每时刻的关节速度​，让末端位姿残差指数衰减，边执行边优化 Differential IK 可以看作 用 Gauss-Newton 方法迭代求解 Direct IK 的一种在线实现。 用differential ik的时候，必须要必须以执行动作后的当前 joint 状态作为参考或初始条件。\nquaternion四元数 四元数定义：q=w+xi+yj+zk\nw,x,y,z是实数，ijk是虚数\n当用一个四元数乘以一个向量时，实际上就是让该向量围绕着这个四元数所描述的旋转轴，转动这个四元数所描述的角度而得到的向量。\nw表示旋转角度 w=cos(theta/2)，其中theta是旋转角，(xyz)是旋转轴：(x,y,z)=sin(theta/2)*(x,y,z)旋转轴\n比如绕y轴逆时针旋转90度，quat=(0.7,0,0.7,0)，绕x轴旋转90度，quat=(0.7,0.7,0,0)，复合起来的结果可以看错是(w+xi+yj+zk)的矢量计算\n算法 lerobot用的是placo issac用的是Differential inverse kinematics (lk) controller，算是一个比较通用的吧？ mplib是什么？\n",
-  "wordCount" : "49",
-  "inLanguage": "en",
-  "datePublished": "2025-01-08T10:05:53Z",
-  "dateModified": "2025-01-08T10:05:53Z",
-  "author":{
-    "@type": "Person",
-    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://example.com/post/%E8%BF%90%E5%8A%A8%E5%AD%A6/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "我的博客",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://example.com/favicon.ico"
-    }
-  }
-}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
@@ -164,22 +96,22 @@
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="https://example.com/" title="首页">
+                <a href="http://localhost:1313/" title="首页">
                     <span>首页</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/about/" title="关于我">
+                <a href="http://localhost:1313/about/" title="关于我">
                     <span>关于我</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/categories/" title="分类">
+                <a href="http://localhost:1313/categories/" title="分类">
                     <span>分类</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/tags/" title="标签">
+                <a href="http://localhost:1313/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li>
@@ -196,7 +128,7 @@
     </h1>
     <div class="post-meta">
 
-<span title='2025-01-08 10:05:53 +0000 UTC'>January 8, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+<span title='2025-01-08 10:05:53 +0000 UTC'>January 8, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
 
 </div>
   </header> 
@@ -232,14 +164,14 @@ Differential IK 可以看作 <strong>用 Gauss-Newton 方法迭代求解 Direct
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://example.com/tags/3d/">3d</a></li>
+      <li><a href="http://localhost:1313/tags/3d/">3d</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
 
     
     

@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>相机标定 | 我的博客</title>
 <meta name="keywords" content="calibration, camera">
 <meta name="description" content="相机标定 - 我的博客">
-<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
-<link rel="canonical" href="https://example.com/post/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://example.com/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
-<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://example.com/post/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/">
 <noscript>
     <style>
         #theme-toggle,
@@ -64,78 +64,13 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://example.com/post/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="相机标定">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:tag" content="Calibration">
-    <meta property="article:tag" content="Camera">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="相机标定">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://example.com/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "相机标定",
-      "item": "https://example.com/post/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "相机标定",
-  "name": "相机标定",
-  "description": "",
-  "keywords": [
-    "calibration", "camera"
-  ],
-  "articleBody": " 标定的二维码应该贴在什么位置？ 标定需要理解的3个坐标系 3d的和2d的 相机外参标定 二维码如何获取？说实话不一定要贴，贴的只能说方便多次，但是肯定影像画面。我后来想出来的方法是用https://docs.cbteeple.com/robot/april-tags#make-a-printable-grid-of-april-tags-in-pdf-form 里面的30mm，36h11 family的，一页里面可以有6个。\na4打印的时候一定要origin size不然会缩放，保证打印出来的直径和之前的一致\n打印出来以后尽量跟坐标轴对齐摆放好（不要歪），6个tag之间的举例和边上的空白距离都量一下，记录备用。\n只要计算这个纸离base原点的距离就能直接得到所有center的\n3个坐标系列\n相机：一般图像原点在左上角，向右是x，向下是y，z轴是向外（景深），一般不用管这个\ntag坐标系：不知道为什么Detector只按照右下、右上、左上、左下的顺序检测corner（所以最好先画corner）\nbase坐标系：我想要的坐标系\n写代码先查看corner corner四个角落的base坐标（只要得到这个a4纸的就能得到所有tag） 计算并画图 代码如下：\n",
-  "wordCount" : "19",
-  "inLanguage": "en",
-  "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "0001-01-01T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://example.com/post/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "我的博客",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://example.com/favicon.ico"
-    }
-  }
-}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
@@ -161,22 +96,22 @@
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="https://example.com/" title="首页">
+                <a href="http://localhost:1313/" title="首页">
                     <span>首页</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/about/" title="关于我">
+                <a href="http://localhost:1313/about/" title="关于我">
                     <span>关于我</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/categories/" title="分类">
+                <a href="http://localhost:1313/categories/" title="分类">
                     <span>分类</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/tags/" title="标签">
+                <a href="http://localhost:1313/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li>
@@ -193,7 +128,7 @@
     </h1>
     <div class="post-meta">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
 
 </div>
   </header> 
@@ -221,15 +156,15 @@
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://example.com/tags/calibration/">Calibration</a></li>
-      <li><a href="https://example.com/tags/camera/">Camera</a></li>
+      <li><a href="http://localhost:1313/tags/calibration/">Calibration</a></li>
+      <li><a href="http://localhost:1313/tags/camera/">Camera</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
 
     
     

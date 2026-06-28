@@ -2,17 +2,52 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Paper on 我的博客</title>
-    <link>https://example.com/categories/paper/</link>
+    <link>http://localhost:1313/categories/paper/</link>
     <description>Recent content in Paper on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 25 Feb 2026 17:52:40 +0000</lastBuildDate>
-    <atom:link href="https://example.com/categories/paper/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Jun 2026 17:03:22 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/paper/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>efficient data collection review of myself</title>
+      <link>http://localhost:1313/post/efficient-data-collection-review-of-myself/</link>
+      <pubDate>Fri, 26 Jun 2026 17:03:22 +0000</pubDate>
+      <guid>http://localhost:1313/post/efficient-data-collection-review-of-myself/</guid>
+      <description>&lt;p&gt;我自己瞎写的综述，确定efficient data collection 是方向了？
+2026年6月26日17:04:00开始，希望28日可以完结&lt;/p&gt;
+&lt;p&gt;可以说，就看vla对什么数据能泛化表现好，不需要太看重ood的&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Towards Generalizable Robotic Data Flywheel High-Dimensional Factorization and Composition</title>
+      <link>http://localhost:1313/post/towards-generalizable-robotic-data-flywheel-high-dimensional-factorization-and-composition/</link>
+      <pubDate>Wed, 24 Jun 2026 16:57:24 +0000</pubDate>
+      <guid>http://localhost:1313/post/towards-generalizable-robotic-data-flywheel-high-dimensional-factorization-and-composition/</guid>
+      <description>&lt;p&gt;讲得很有意思而且很贴切的一个论文，就是很多词我看不懂。这一篇要是ai直接看会很浪费
+24号开始，然后迅速提出了40多个雷霆问题。25号偷懒，26号终于都回答了。
+它帮我更加确立我的方向，
+大方向确实还是 efficient data collection
+但是iterative learning不行
+而且factor不需要分这么多，因为我是给定环境的
+那我就相当于要在object和action这两个区域里面做更细致的generalization
+可以通过什么方法 Implicit，但我不知道能不能做&lt;/p&gt;
+&lt;p&gt;总结这篇论文，让我以后写相关工作的时候可以直接看：
+to 目的 &amp;ndash; efficient data collection to generalize
+this work 怎么做&amp;ndash; design factor composition and use iteractive learning
+get 结果 nearly 5-10/1 data requirement reduction
+but 局限性 need to design factor humanly and iterative need much work&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>tinyvla</title>
+      <link>http://localhost:1313/post/tinyvla/</link>
+      <pubDate>Wed, 24 Jun 2026 15:29:28 +0000</pubDate>
+      <guid>http://localhost:1313/post/tinyvla/</guid>
+      <description>&lt;p&gt;tinyvla用论文结构、内容上解读+代码复现&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Data Quality in Imitation Learning</title>
-      <link>https://example.com/post/data-quality-in-imitation-learning/</link>
+      <link>http://localhost:1313/post/data-quality-in-imitation-learning/</link>
       <pubDate>Wed, 25 Feb 2026 17:52:40 +0000</pubDate>
-      <guid>https://example.com/post/data-quality-in-imitation-learning/</guid>
+      <guid>http://localhost:1313/post/data-quality-in-imitation-learning/</guid>
       <description>&lt;p&gt;开年第一篇论文，讲模仿学习中的数据质量
 我想从这篇论文中得到的信息：
 数据质量怎么评估，只能训练吗？
@@ -20,17 +55,17 @@
     </item>
     <item>
       <title>Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy</title>
-      <link>https://example.com/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/</link>
+      <link>http://localhost:1313/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/</link>
       <pubDate>Tue, 09 Dec 2025 22:03:50 +0000</pubDate>
-      <guid>https://example.com/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/</guid>
+      <guid>http://localhost:1313/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/</guid>
       <description>&lt;p&gt;ee形式的action从机器人坐标系转移到相机坐标系可以提到对相机的泛化性。&lt;/p&gt;
 &lt;p&gt;也就是利用“空间对齐”带来泛化提升&lt;/p&gt;</description>
     </item>
     <item>
       <title>RoboKeyGen: Robot Pose and Joint Angles Estimation via  Diffusion-based 3D Keypoint Generation</title>
-      <link>https://example.com/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/</link>
+      <link>http://localhost:1313/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/</link>
       <pubDate>Mon, 08 Dec 2025 16:09:53 +0000</pubDate>
-      <guid>https://example.com/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/</guid>
+      <guid>http://localhost:1313/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/</guid>
       <description>&lt;p&gt;这篇文章用的英文单词好拗口，但是写得挺清晰的，还挺喜欢&lt;/p&gt;
 &lt;p&gt;解决什么问题？pose estimation，以前的要么慢，要么不够精确。这篇文章首先检测2d关键点，然后cross-camera（用内参计算）规范化，然后扩散模型生成3d（相机坐标），然后MLP推理出joint angle，用fk算出eepose等。
 对我有什么启发？相机的归一化能不能拓展到外参？Intrinsic-&amp;gt;Extrinsic&lt;/p&gt;
@@ -38,9 +73,9 @@
     </item>
     <item>
       <title>Foundation Feature-Driven Online End-Effector Pose Estimation: A Marker-Free and Learning-Free Approach</title>
-      <link>https://example.com/post/foundation-feature-driven-online-end-effector-pose-estimation-a-marker-free-and-learning-free-approach/</link>
+      <link>http://localhost:1313/post/foundation-feature-driven-online-end-effector-pose-estimation-a-marker-free-and-learning-free-approach/</link>
       <pubDate>Mon, 24 Nov 2025 22:03:50 +0000</pubDate>
-      <guid>https://example.com/post/foundation-feature-driven-online-end-effector-pose-estimation-a-marker-free-and-learning-free-approach/</guid>
+      <guid>http://localhost:1313/post/foundation-feature-driven-online-end-effector-pose-estimation-a-marker-free-and-learning-free-approach/</guid>
       <description>&lt;p&gt;看标题后产生的疑问：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;为什么需要估计ee姿态？&lt;/li&gt;
@@ -53,9 +88,9 @@
     </item>
     <item>
       <title>Pure Vision Language Action (VLA) Models:  A Comprehensive Survey</title>
-      <link>https://example.com/post/pure-vision-language-action-vla-models-a-comprehensive-surve/</link>
+      <link>http://localhost:1313/post/pure-vision-language-action-vla-models-a-comprehensive-surve/</link>
       <pubDate>Tue, 28 Oct 2025 15:52:55 +0000</pubDate>
-      <guid>https://example.com/post/pure-vision-language-action-vla-models-a-comprehensive-surve/</guid>
+      <guid>http://localhost:1313/post/pure-vision-language-action-vla-models-a-comprehensive-surve/</guid>
       <description>&lt;p&gt;比较新的综述，2025年9月25日发的&lt;/p&gt;
 &lt;p&gt;写了不整理相当于没写。&lt;/p&gt;
 &lt;p&gt;这篇文章里面好多分类错误的东西:P，别全信，可以提供思路&lt;/p&gt;
@@ -63,37 +98,37 @@
     </item>
     <item>
       <title>pi0</title>
-      <link>https://example.com/post/pi0/</link>
+      <link>http://localhost:1313/post/pi0/</link>
       <pubDate>Mon, 20 Oct 2025 16:08:55 +0000</pubDate>
-      <guid>https://example.com/post/pi0/</guid>
+      <guid>http://localhost:1313/post/pi0/</guid>
       <description>&lt;p&gt;好方法，一直没看，2025/10/20上午2小时，下午1小时看完论文主要结构，测试没仔细看，代码也没看，主要是我想先比较一下pi0和pi0.5。&lt;/p&gt;</description>
     </item>
     <item>
       <title>pi0.5</title>
-      <link>https://example.com/post/pi0.5/</link>
+      <link>http://localhost:1313/post/pi0.5/</link>
       <pubDate>Mon, 20 Oct 2025 15:05:54 +0000</pubDate>
-      <guid>https://example.com/post/pi0.5/</guid>
+      <guid>http://localhost:1313/post/pi0.5/</guid>
       <description>&lt;p&gt;pi0.5也开源了，看一下原文&lt;/p&gt;</description>
     </item>
     <item>
       <title>TinyVLA: Toward Fast, Data-Efficient Vision-Language-Action Models for Robotic Manipulation</title>
-      <link>https://example.com/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</link>
+      <link>http://localhost:1313/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</link>
       <pubDate>Mon, 29 Sep 2025 15:19:42 +0000</pubDate>
-      <guid>https://example.com/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</guid>
+      <guid>http://localhost:1313/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</guid>
       <description>&lt;p&gt;我要看这篇文章能否复现&lt;/p&gt;</description>
     </item>
     <item>
       <title>smolvla</title>
-      <link>https://example.com/post/smolvla/</link>
+      <link>http://localhost:1313/post/smolvla/</link>
       <pubDate>Sun, 17 Aug 2025 22:39:53 +0000</pubDate>
-      <guid>https://example.com/post/smolvla/</guid>
+      <guid>http://localhost:1313/post/smolvla/</guid>
       <description>&lt;p&gt;主要是代码理解和修改&lt;/p&gt;</description>
     </item>
     <item>
       <title>RoboGen: Towards Unleashing Infinite Data for  Automated Robot Learning via Generative Simulation</title>
-      <link>https://example.com/post/robogen-towards-unleashing-infinite-data-for-automated-robot-learning-via-generative-simulation/</link>
+      <link>http://localhost:1313/post/robogen-towards-unleashing-infinite-data-for-automated-robot-learning-via-generative-simulation/</link>
       <pubDate>Tue, 01 Apr 2025 15:56:36 +0000</pubDate>
-      <guid>https://example.com/post/robogen-towards-unleashing-infinite-data-for-automated-robot-learning-via-generative-simulation/</guid>
+      <guid>http://localhost:1313/post/robogen-towards-unleashing-infinite-data-for-automated-robot-learning-via-generative-simulation/</guid>
       <description>&lt;p&gt;看上去是那种一句话生成仿真环境的。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;一句话-&amp;gt;llm生成代码？assets还是得自己搞吧-&amp;gt;传到环境里面这个流程？
@@ -115,30 +150,30 @@
     </item>
     <item>
       <title>DIFFTACTILE: A PHYSICS-BASED DIFFERENTIABLE  TACTILE SIMULATOR FOR CONTACT-RICH ROBOTIC  MANIPULATION</title>
-      <link>https://example.com/post/difftactile-a-physics-based-differentiable-tactile-simulator-for-contact-rich-robotic-manipulation/</link>
+      <link>http://localhost:1313/post/difftactile-a-physics-based-differentiable-tactile-simulator-for-contact-rich-robotic-manipulation/</link>
       <pubDate>Tue, 25 Mar 2025 15:08:42 +0000</pubDate>
-      <guid>https://example.com/post/difftactile-a-physics-based-differentiable-tactile-simulator-for-contact-rich-robotic-manipulation/</guid>
+      <guid>http://localhost:1313/post/difftactile-a-physics-based-differentiable-tactile-simulator-for-contact-rich-robotic-manipulation/</guid>
       <description>&lt;p&gt;2夹，tactile，精细操作(其实也就4种)。(19/100)&lt;/p&gt;</description>
     </item>
     <item>
       <title>CALVIN: A Benchmark for Language-Conditioned  Policy Learning for Long-Horizon Robot  Manipulation Tasks</title>
-      <link>https://example.com/post/calvin-a-benchmark-for-language-conditioned-policy-learning-for-long-horizon-robot-manipulation-tasks/</link>
+      <link>http://localhost:1313/post/calvin-a-benchmark-for-language-conditioned-policy-learning-for-long-horizon-robot-manipulation-tasks/</link>
       <pubDate>Sun, 23 Mar 2025 17:22:30 +0000</pubDate>
-      <guid>https://example.com/post/calvin-a-benchmark-for-language-conditioned-policy-learning-for-long-horizon-robot-manipulation-tasks/</guid>
+      <guid>http://localhost:1313/post/calvin-a-benchmark-for-language-conditioned-policy-learning-for-long-horizon-robot-manipulation-tasks/</guid>
       <description>&lt;p&gt;来不及自己看了，量子速读，发动！&lt;/p&gt;</description>
     </item>
     <item>
       <title>VideoWorld: Exploring Knowledge Learning from Unlabeled Videos</title>
-      <link>https://example.com/post/videoworld-exploring-knowledge-learning-from-unlabeled-videos/</link>
+      <link>http://localhost:1313/post/videoworld-exploring-knowledge-learning-from-unlabeled-videos/</link>
       <pubDate>Sun, 23 Mar 2025 16:23:09 +0000</pubDate>
-      <guid>https://example.com/post/videoworld-exploring-knowledge-learning-from-unlabeled-videos/</guid>
+      <guid>http://localhost:1313/post/videoworld-exploring-knowledge-learning-from-unlabeled-videos/</guid>
       <description>&lt;p&gt;做的是从视频数据中获得action的工作。(17/100)&lt;/p&gt;</description>
     </item>
     <item>
       <title>Generative Artificial Intelligence in Robotic Manipulation: A Survey</title>
-      <link>https://example.com/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</link>
+      <link>http://localhost:1313/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</link>
       <pubDate>Thu, 13 Mar 2025 15:59:45 +0000</pubDate>
-      <guid>https://example.com/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</guid>
+      <guid>http://localhost:1313/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</guid>
       <description>&lt;p&gt;(16/100)&lt;/p&gt;
 &lt;p&gt;what i want to get&lt;/p&gt;
 &lt;ol&gt;
@@ -149,124 +184,124 @@
     </item>
     <item>
       <title>Multi-Goal Reinforcement Learning: Challenging Robotics Environments and Request for Research</title>
-      <link>https://example.com/post/multi-goal-reinforcement-learning-challenging-robotics-environments-and-request-for-research/</link>
+      <link>http://localhost:1313/post/multi-goal-reinforcement-learning-challenging-robotics-environments-and-request-for-research/</link>
       <pubDate>Fri, 07 Mar 2025 20:57:09 +0000</pubDate>
-      <guid>https://example.com/post/multi-goal-reinforcement-learning-challenging-robotics-environments-and-request-for-research/</guid>
+      <guid>http://localhost:1313/post/multi-goal-reinforcement-learning-challenging-robotics-environments-and-request-for-research/</guid>
       <description>&lt;p&gt;好久没看论文了orz，这篇是从 &lt;a href=&#34;https://robotics.farama.org/envs/shadow_dexterous_hand/reach/&#34;&gt;gymnasium-robotics关于shadow hand的操作&lt;/a&gt;里翻出来的。借助gymm这个平台给单个灵巧手做强化学习。&lt;/p&gt;
 &lt;p&gt;(15/100)&lt;/p&gt;</description>
     </item>
     <item>
       <title>A Comprehensive Survey of LLM Alignment Techniques: RLHF, RLAIF, PPO, DPO and More</title>
-      <link>https://example.com/post/a-comprehensive-survey-of-llm-alignment-techniques-rlhf-rlaif-ppo-dpo-and-more/</link>
+      <link>http://localhost:1313/post/a-comprehensive-survey-of-llm-alignment-techniques-rlhf-rlaif-ppo-dpo-and-more/</link>
       <pubDate>Mon, 03 Mar 2025 10:20:54 +0000</pubDate>
-      <guid>https://example.com/post/a-comprehensive-survey-of-llm-alignment-techniques-rlhf-rlaif-ppo-dpo-and-more/</guid>
+      <guid>http://localhost:1313/post/a-comprehensive-survey-of-llm-alignment-techniques-rlhf-rlaif-ppo-dpo-and-more/</guid>
       <description>&lt;p&gt;时过境迁，当时怎么看的已经忘记了。现在我的问题变成了：什么是llm的对齐？vlm也有对齐吗？怎样实现对齐的？从这篇文章出发的话，我应该怎么做
 重看论文(1)&lt;/p&gt;</description>
     </item>
     <item>
       <title>Aligner: Efficient Alignment by Learning to Correct</title>
-      <link>https://example.com/post/aligner-efficient-alignment-by-learning-to-correct/</link>
+      <link>http://localhost:1313/post/aligner-efficient-alignment-by-learning-to-correct/</link>
       <pubDate>Mon, 03 Mar 2025 10:18:23 +0000</pubDate>
-      <guid>https://example.com/post/aligner-efficient-alignment-by-learning-to-correct/</guid>
+      <guid>http://localhost:1313/post/aligner-efficient-alignment-by-learning-to-correct/</guid>
       <description>&lt;p&gt;以前看论文的方式好糟糕，看完以后完全没印象，一句话形容：对预训练的llm微调对齐，利用通过小模型学习偏好与不偏好答案之间的纠正残差&lt;/p&gt;
 &lt;p&gt;所以LLM的方向实际上就两种：微调和压缩？&lt;/p&gt;</description>
     </item>
     <item>
       <title>robotic grasp相关文献整理</title>
-      <link>https://example.com/post/robotic-grasp%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86/</link>
+      <link>http://localhost:1313/post/robotic-grasp%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86/</link>
       <pubDate>Mon, 03 Mar 2025 10:17:03 +0000</pubDate>
-      <guid>https://example.com/post/robotic-grasp%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86/</guid>
+      <guid>http://localhost:1313/post/robotic-grasp%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86/</guid>
       <description>&lt;p&gt;开始看文献了，2025/2/24-2025/3/2。&lt;/p&gt;</description>
     </item>
     <item>
       <title>MANISKILL3: GPU PARALLELIZED ROBOTICS  SIMULATION AND RENDERING FOR  GENERALIZABLE EMBODIED AI</title>
-      <link>https://example.com/post/maniskill3-gpu-parallelized-robotics-simulation-and-rendering-for-generalizable-embodied-ai/</link>
+      <link>http://localhost:1313/post/maniskill3-gpu-parallelized-robotics-simulation-and-rendering-for-generalizable-embodied-ai/</link>
       <pubDate>Mon, 25 Nov 2024 20:55:43 +0000</pubDate>
-      <guid>https://example.com/post/maniskill3-gpu-parallelized-robotics-simulation-and-rendering-for-generalizable-embodied-ai/</guid>
+      <guid>http://localhost:1313/post/maniskill3-gpu-parallelized-robotics-simulation-and-rendering-for-generalizable-embodied-ai/</guid>
       <description>&lt;p&gt;一个机器人模拟平台的论文&lt;/p&gt;
 &lt;p&gt;paper(12/100)&lt;/p&gt;</description>
     </item>
     <item>
       <title>GR-2: A Generative Video-Language-Action Model with Web-Scale Knowledge for Robot Manipulation</title>
-      <link>https://example.com/post/gr-2-a-generative-video-language-action-model-with-web-scale-knowledge-for-robot-manipulation/</link>
+      <link>http://localhost:1313/post/gr-2-a-generative-video-language-action-model-with-web-scale-knowledge-for-robot-manipulation/</link>
       <pubDate>Sun, 24 Nov 2024 20:39:30 +0000</pubDate>
-      <guid>https://example.com/post/gr-2-a-generative-video-language-action-model-with-web-scale-knowledge-for-robot-manipulation/</guid>
+      <guid>http://localhost:1313/post/gr-2-a-generative-video-language-action-model-with-web-scale-knowledge-for-robot-manipulation/</guid>
       <description>&lt;p&gt;这是啥时候看的论文，我怎么毫无印象(11/100)&lt;/p&gt;</description>
     </item>
     <item>
       <title>Kubric: A scalable dataset generator</title>
-      <link>https://example.com/post/kubric-a-scalable-dataset-generator/</link>
+      <link>http://localhost:1313/post/kubric-a-scalable-dataset-generator/</link>
       <pubDate>Fri, 22 Nov 2024 19:48:12 +0000</pubDate>
-      <guid>https://example.com/post/kubric-a-scalable-dataset-generator/</guid>
+      <guid>http://localhost:1313/post/kubric-a-scalable-dataset-generator/</guid>
       <description>&lt;p&gt;到了新环境，安排我看的论文，说是了解一下就行。&lt;/p&gt;
 &lt;p&gt;这个是百篇计划(10/100)&lt;/p&gt;</description>
     </item>
     <item>
       <title>AN EMULATOR FOR FINE-TUNING LARGE LANGUAGE  MODELS USING SMALL LANGUAGE MODELS</title>
-      <link>https://example.com/post/an-emulator-for-fine-tuning-large-language-models-using-small-language-models/</link>
+      <link>http://localhost:1313/post/an-emulator-for-fine-tuning-large-language-models-using-small-language-models/</link>
       <pubDate>Mon, 04 Nov 2024 16:20:53 +0000</pubDate>
-      <guid>https://example.com/post/an-emulator-for-fine-tuning-large-language-models-using-small-language-models/</guid>
+      <guid>http://localhost:1313/post/an-emulator-for-fine-tuning-large-language-models-using-small-language-models/</guid>
       <description>&lt;p&gt;百篇paper计划(9/100)，用小模型微调大模型。&lt;/p&gt;</description>
     </item>
     <item>
       <title>CLLMs: Consistency Large Language Models</title>
-      <link>https://example.com/post/cllms-consistency-large-language-models/</link>
+      <link>http://localhost:1313/post/cllms-consistency-large-language-models/</link>
       <pubDate>Tue, 22 Oct 2024 15:59:04 +0000</pubDate>
-      <guid>https://example.com/post/cllms-consistency-large-language-models/</guid>
+      <guid>http://localhost:1313/post/cllms-consistency-large-language-models/</guid>
       <description>&lt;p&gt;百篇paper计划(8/100)，关于持续性，不知道对我有没有启发，先看看吧。&lt;/p&gt;
 &lt;p&gt;这一篇的实验要求比较高，不精读了，看思想。它有个前提是jacobi方法，没这个基础的话看不太懂。&lt;/p&gt;</description>
     </item>
     <item>
       <title>TRANSFORMER EXPLAINER: Interactive Learning of Text-Generative Models</title>
-      <link>https://example.com/post/transformer-explainer-interactive-learning-of-text-generative-models/</link>
+      <link>http://localhost:1313/post/transformer-explainer-interactive-learning-of-text-generative-models/</link>
       <pubDate>Fri, 13 Sep 2024 10:12:29 +0000</pubDate>
-      <guid>https://example.com/post/transformer-explainer-interactive-learning-of-text-generative-models/</guid>
+      <guid>http://localhost:1313/post/transformer-explainer-interactive-learning-of-text-generative-models/</guid>
       <description>&lt;p&gt;百篇paper计划(7/100)，很短，才2页，重点在code和其project，理解transformer。论文是没啥创新点了，写得也比较拉，看看项目吧。&lt;/p&gt;
 &lt;p&gt;这一篇写完啦！^^&lt;/p&gt;</description>
     </item>
     <item>
       <title>LISA: Layerwise Importance Sampling for Memory-Efficient Large Language Model Fine-Tuning</title>
-      <link>https://example.com/post/lisa-layerwise-importance-sampling-for-memory-efficient-large-language-model-fine-tuning/</link>
+      <link>http://localhost:1313/post/lisa-layerwise-importance-sampling-for-memory-efficient-large-language-model-fine-tuning/</link>
       <pubDate>Mon, 01 Jul 2024 11:45:24 +0000</pubDate>
-      <guid>https://example.com/post/lisa-layerwise-importance-sampling-for-memory-efficient-large-language-model-fine-tuning/</guid>
+      <guid>http://localhost:1313/post/lisa-layerwise-importance-sampling-for-memory-efficient-large-language-model-fine-tuning/</guid>
       <description>&lt;p&gt;百篇paper计划(6/100)，好像是LoRA的改进，随便找的，而且这篇还没投会议呢。&lt;/p&gt;
 &lt;p&gt;这一篇也是微调，改lora&lt;/p&gt;
 &lt;p&gt;我以前看论文居然这么龟毛orz我的百篇paper计划创业未半而中道崩殂啊&lt;/p&gt;</description>
     </item>
     <item>
       <title>paper reading</title>
-      <link>https://example.com/post/paper-reading/</link>
+      <link>http://localhost:1313/post/paper-reading/</link>
       <pubDate>Tue, 21 May 2024 11:22:52 +0000</pubDate>
-      <guid>https://example.com/post/paper-reading/</guid>
+      <guid>http://localhost:1313/post/paper-reading/</guid>
       <description>&lt;p&gt;把看过的论文做一个总结，防止我忘掉&lt;/p&gt;</description>
     </item>
     <item>
       <title>FlexGen: high-throughput generative inference of large language models with a single GPU</title>
-      <link>https://example.com/post/flexgen-high-throughput-generative-inference-of-large-language-models-with-a-single-gpu/</link>
+      <link>http://localhost:1313/post/flexgen-high-throughput-generative-inference-of-large-language-models-with-a-single-gpu/</link>
       <pubDate>Tue, 21 May 2024 10:37:15 +0000</pubDate>
-      <guid>https://example.com/post/flexgen-high-throughput-generative-inference-of-large-language-models-with-a-single-gpu/</guid>
+      <guid>http://localhost:1313/post/flexgen-high-throughput-generative-inference-of-large-language-models-with-a-single-gpu/</guid>
       <description>&lt;p&gt;推理llm里面搞卸载的。百篇阅读计划(5/100)。看到和以前有点相关联的地方了，卸载和内存优化都是偏系统的。&lt;/p&gt;
 &lt;p&gt;因为大的背景过于重复了，以后论文注解只记录小的背景了。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</title>
-      <link>https://example.com/post/chain-of-thought-prompting-elicits-reasoning-in-large-language-models/</link>
+      <link>http://localhost:1313/post/chain-of-thought-prompting-elicits-reasoning-in-large-language-models/</link>
       <pubDate>Tue, 16 Apr 2024 21:39:51 +0000</pubDate>
-      <guid>https://example.com/post/chain-of-thought-prompting-elicits-reasoning-in-large-language-models/</guid>
+      <guid>http://localhost:1313/post/chain-of-thought-prompting-elicits-reasoning-in-large-language-models/</guid>
       <description>&lt;p&gt;思维链论文阅读，百篇paper计划(4/100)，思维链这个技术还是prompt这个部分里面的，所以这篇论文还是算prompt&lt;/p&gt;</description>
     </item>
     <item>
       <title>TinyLLM: Learning a Small Student from Multiple Large Language Models</title>
-      <link>https://example.com/post/tinyllm-learning-a-small-student-from-multiple-large-language-models/</link>
+      <link>http://localhost:1313/post/tinyllm-learning-a-small-student-from-multiple-large-language-models/</link>
       <pubDate>Sun, 24 Mar 2024 20:41:50 +0000</pubDate>
-      <guid>https://example.com/post/tinyllm-learning-a-small-student-from-multiple-large-language-models/</guid>
+      <guid>http://localhost:1313/post/tinyllm-learning-a-small-student-from-multiple-large-language-models/</guid>
       <description>&lt;p&gt;小样本llm论文阅读，百篇paper计划(3/100)&lt;/p&gt;</description>
     </item>
     <item>
       <title>Towards A Unified View Of Parameter-Efficient Transfer Learning</title>
-      <link>https://example.com/post/towards-a-unified-view-of-parameter-efficient-transfer-learning/</link>
+      <link>http://localhost:1313/post/towards-a-unified-view-of-parameter-efficient-transfer-learning/</link>
       <pubDate>Mon, 18 Mar 2024 16:16:31 +0000</pubDate>
-      <guid>https://example.com/post/towards-a-unified-view-of-parameter-efficient-transfer-learning/</guid>
+      <guid>http://localhost:1313/post/towards-a-unified-view-of-parameter-efficient-transfer-learning/</guid>
       <description>&lt;p&gt;高效参数微调的综述类论文阅读&lt;/p&gt;
 &lt;p&gt;百篇paper计划(2/100)，对【高效参数】迁移学习的总结。&lt;/p&gt;
 &lt;p&gt;由于我也不怎么会选论文，就按照会议选了这篇比较近的(ps现在是2024年初)。光从标题看，这一篇应该是综述，正好我补一下几个经典的高效参数方法。&lt;/p&gt;
@@ -310,9 +345,9 @@
     </item>
     <item>
       <title>FULL PARAMETER FINE-TUNING FOR LARGE LANGUAGE MODELS WITH LIMITED RESOURCES</title>
-      <link>https://example.com/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/</link>
+      <link>http://localhost:1313/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/</link>
       <pubDate>Fri, 24 Nov 2023 17:10:38 +0000</pubDate>
-      <guid>https://example.com/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/</guid>
+      <guid>http://localhost:1313/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/</guid>
       <description>&lt;p&gt;百篇paper计划(1/100)，推荐阅读的，没有选择趋向。内容是：用有限的资源（主要是内存）进行全参数大模型微调，研究重点集中在微调部分，做的是内存优化的工作。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;论文标题：Full Parameter Fine-tuning for Large Language Models with Limited Resources&lt;/li&gt;
@@ -410,25 +445,25 @@
     </item>
     <item>
       <title>CoT-VLA: Visual Chain-of-Thought Reasoning for  Vision-Language-Action Models</title>
-      <link>https://example.com/post/cot-vla-visual-chain-of-thought-reasoning-for-vision-language-action-models/</link>
+      <link>http://localhost:1313/post/cot-vla-visual-chain-of-thought-reasoning-for-vision-language-action-models/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/cot-vla-visual-chain-of-thought-reasoning-for-vision-language-action-models/</guid>
+      <guid>http://localhost:1313/post/cot-vla-visual-chain-of-thought-reasoning-for-vision-language-action-models/</guid>
       <description>&lt;p&gt;怎么感觉这又是个插值？&lt;/p&gt;</description>
     </item>
     <item>
       <title>Data Scaling Laws for Imitation Learning-Based End-to-End Autonomous Driving</title>
-      <link>https://example.com/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/</link>
+      <link>http://localhost:1313/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/</guid>
+      <guid>http://localhost:1313/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/</guid>
       <description>&lt;p&gt;14:21:30开始，这篇论文只能看20分钟
 快速了解：
 这篇论文是否可以扩展到vla方面？&lt;/p&gt;</description>
     </item>
     <item>
       <title>Efficient Data Collection for Robotic Manipulation  via Compositional Generalization</title>
-      <link>https://example.com/post/efficient-data-collection-for-robotic-manipulation--via-compositional-generalization/</link>
+      <link>http://localhost:1313/post/efficient-data-collection-for-robotic-manipulation--via-compositional-generalization/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/efficient-data-collection-for-robotic-manipulation--via-compositional-generalization/</guid>
+      <guid>http://localhost:1313/post/efficient-data-collection-for-robotic-manipulation--via-compositional-generalization/</guid>
       <description>&lt;p&gt;为什么要看这篇：感觉跟我想做的有一点像。所以看完这一篇以后我要得到的是：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;这篇能否作为横向对比？&lt;/li&gt;
@@ -449,23 +484,23 @@
     </item>
     <item>
       <title>FAST:Efficient Action Tokenization for  Vision-Language-Action Models</title>
-      <link>https://example.com/post/fast-efficient-action-tokenization-for-vision-language-action-models/</link>
+      <link>http://localhost:1313/post/fast-efficient-action-tokenization-for-vision-language-action-models/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/fast-efficient-action-tokenization-for-vision-language-action-models/</guid>
+      <guid>http://localhost:1313/post/fast-efficient-action-tokenization-for-vision-language-action-models/</guid>
       <description>&lt;p&gt;pi0.5的时候用到这个方法：post-train里面用这个方法，说是因为这个论文发现了用离散的token训练更快。有点好奇是怎么把动作给离散化的，又不能分词，既然它能离散化的话，那图像也能离散化吗？&lt;/p&gt;</description>
     </item>
     <item>
       <title>simPLE: a visuotactile method learned in simulation  to precisely pick, localize, regrasp, and place objects</title>
-      <link>https://example.com/post/simple-a-visuotactile-method-learned-in-simulation-to-precisely-pick-localize-regrasp-and-place-objects/</link>
+      <link>http://localhost:1313/post/simple-a-visuotactile-method-learned-in-simulation-to-precisely-pick-localize-regrasp-and-place-objects/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/simple-a-visuotactile-method-learned-in-simulation-to-precisely-pick-localize-regrasp-and-place-objects/</guid>
+      <guid>http://localhost:1313/post/simple-a-visuotactile-method-learned-in-simulation-to-precisely-pick-localize-regrasp-and-place-objects/</guid>
       <description>&lt;p&gt;在仿真中学到的视觉触觉方法&lt;/p&gt;</description>
     </item>
     <item>
       <title>Vision-Language-Action Models for Robotics: A Review Towards Real-World Applications</title>
-      <link>https://example.com/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/</link>
+      <link>http://localhost:1313/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/</guid>
+      <guid>http://localhost:1313/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/</guid>
       <description>&lt;p&gt;一篇综述
 2025-11-06 16:15:25 开始看&lt;/p&gt;
 &lt;ul&gt;
@@ -484,23 +519,23 @@ Q:&lt;/li&gt;
     </item>
     <item>
       <title>VLA-OS: Structuring and Dissecting Planning Representations and Paradigms in Vision-Language-Action Models</title>
-      <link>https://example.com/post/vla-os-structuring-and-dissecting-planning-representations-and-paradigms-in-vision-language-action-models/</link>
+      <link>http://localhost:1313/post/vla-os-structuring-and-dissecting-planning-representations-and-paradigms-in-vision-language-action-models/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/vla-os-structuring-and-dissecting-planning-representations-and-paradigms-in-vision-language-action-models/</guid>
+      <guid>http://localhost:1313/post/vla-os-structuring-and-dissecting-planning-representations-and-paradigms-in-vision-language-action-models/</guid>
       <description>&lt;p&gt;看起来还不错，没有正式发表&lt;/p&gt;</description>
     </item>
     <item>
       <title>vla综述们</title>
-      <link>https://example.com/post/vla%E7%BB%BC%E8%BF%B0%E4%BB%AC/</link>
+      <link>http://localhost:1313/post/vla%E7%BB%BC%E8%BF%B0%E4%BB%AC/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/vla%E7%BB%BC%E8%BF%B0%E4%BB%AC/</guid>
+      <guid>http://localhost:1313/post/vla%E7%BB%BC%E8%BF%B0%E4%BB%AC/</guid>
       <description>&lt;p&gt;若干综述的集合，看就完事&lt;/p&gt;</description>
     </item>
     <item>
       <title>安全抓取思路</title>
-      <link>https://example.com/post/%E5%AE%89%E5%85%A8%E6%8A%93%E5%8F%96%E6%80%9D%E8%B7%AF/</link>
+      <link>http://localhost:1313/post/%E5%AE%89%E5%85%A8%E6%8A%93%E5%8F%96%E6%80%9D%E8%B7%AF/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/%E5%AE%89%E5%85%A8%E6%8A%93%E5%8F%96%E6%80%9D%E8%B7%AF/</guid>
+      <guid>http://localhost:1313/post/%E5%AE%89%E5%85%A8%E6%8A%93%E5%8F%96%E6%80%9D%E8%B7%AF/</guid>
       <description>&lt;p&gt;要求：对不同材料的柔体（比如布料）或者比较脆弱的刚体（鸡蛋）操作，保证抓取的安全，稳定，考虑力 force。VLA+物体摩擦系数提示&lt;/p&gt;</description>
     </item>
   </channel>

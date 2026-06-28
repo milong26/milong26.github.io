@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Cross-Camera-Generalization on 我的博客</title>
-    <link>https://example.com/tags/cross-camera-generalization/</link>
+    <link>http://localhost:1313/tags/cross-camera-generalization/</link>
     <description>Recent content in Cross-Camera-Generalization on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Mon, 08 Dec 2025 16:09:53 +0000</lastBuildDate>
-    <atom:link href="https://example.com/tags/cross-camera-generalization/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/cross-camera-generalization/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>RoboKeyGen: Robot Pose and Joint Angles Estimation via  Diffusion-based 3D Keypoint Generation</title>
-      <link>https://example.com/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/</link>
+      <link>http://localhost:1313/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/</link>
       <pubDate>Mon, 08 Dec 2025 16:09:53 +0000</pubDate>
-      <guid>https://example.com/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/</guid>
+      <guid>http://localhost:1313/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/</guid>
       <description>&lt;p&gt;这篇文章用的英文单词好拗口，但是写得挺清晰的，还挺喜欢&lt;/p&gt;
 &lt;p&gt;解决什么问题？pose estimation，以前的要么慢，要么不够精确。这篇文章首先检测2d关键点，然后cross-camera（用内参计算）规范化，然后扩散模型生成3d（相机坐标），然后MLP推理出joint angle，用fk算出eepose等。
 对我有什么启发？相机的归一化能不能拓展到外参？Intrinsic-&amp;gt;Extrinsic&lt;/p&gt;

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Conf on 我的博客</title>
-    <link>https://example.com/tags/conf/</link>
+    <link>http://localhost:1313/tags/conf/</link>
     <description>Recent content in Conf on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 12 Sep 2024 11:34:24 +0000</lastBuildDate>
-    <atom:link href="https://example.com/tags/conf/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/conf/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>nodejs</title>
-      <link>https://example.com/post/nodejs/</link>
+      <link>http://localhost:1313/post/nodejs/</link>
       <pubDate>Thu, 12 Sep 2024 11:34:24 +0000</pubDate>
-      <guid>https://example.com/post/nodejs/</guid>
+      <guid>http://localhost:1313/post/nodejs/</guid>
       <description>&lt;p&gt;安装、配置、更新nodejs的流程&lt;/p&gt;
 &lt;p&gt;但是我现在更新不了……重新配置一遍算了&lt;/p&gt;</description>
     </item>

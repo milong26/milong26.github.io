@@ -2,56 +2,56 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Llm on 我的博客</title>
-    <link>https://example.com/tags/llm/</link>
+    <link>http://localhost:1313/tags/llm/</link>
     <description>Recent content in Llm on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Mon, 03 Mar 2025 10:20:54 +0000</lastBuildDate>
-    <atom:link href="https://example.com/tags/llm/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/llm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A Comprehensive Survey of LLM Alignment Techniques: RLHF, RLAIF, PPO, DPO and More</title>
-      <link>https://example.com/post/a-comprehensive-survey-of-llm-alignment-techniques-rlhf-rlaif-ppo-dpo-and-more/</link>
+      <link>http://localhost:1313/post/a-comprehensive-survey-of-llm-alignment-techniques-rlhf-rlaif-ppo-dpo-and-more/</link>
       <pubDate>Mon, 03 Mar 2025 10:20:54 +0000</pubDate>
-      <guid>https://example.com/post/a-comprehensive-survey-of-llm-alignment-techniques-rlhf-rlaif-ppo-dpo-and-more/</guid>
+      <guid>http://localhost:1313/post/a-comprehensive-survey-of-llm-alignment-techniques-rlhf-rlaif-ppo-dpo-and-more/</guid>
       <description>&lt;p&gt;时过境迁，当时怎么看的已经忘记了。现在我的问题变成了：什么是llm的对齐？vlm也有对齐吗？怎样实现对齐的？从这篇文章出发的话，我应该怎么做
 重看论文(1)&lt;/p&gt;</description>
     </item>
     <item>
       <title>LISA: Layerwise Importance Sampling for Memory-Efficient Large Language Model Fine-Tuning</title>
-      <link>https://example.com/post/lisa-layerwise-importance-sampling-for-memory-efficient-large-language-model-fine-tuning/</link>
+      <link>http://localhost:1313/post/lisa-layerwise-importance-sampling-for-memory-efficient-large-language-model-fine-tuning/</link>
       <pubDate>Mon, 01 Jul 2024 11:45:24 +0000</pubDate>
-      <guid>https://example.com/post/lisa-layerwise-importance-sampling-for-memory-efficient-large-language-model-fine-tuning/</guid>
+      <guid>http://localhost:1313/post/lisa-layerwise-importance-sampling-for-memory-efficient-large-language-model-fine-tuning/</guid>
       <description>&lt;p&gt;百篇paper计划(6/100)，好像是LoRA的改进，随便找的，而且这篇还没投会议呢。&lt;/p&gt;
 &lt;p&gt;这一篇也是微调，改lora&lt;/p&gt;
 &lt;p&gt;我以前看论文居然这么龟毛orz我的百篇paper计划创业未半而中道崩殂啊&lt;/p&gt;</description>
     </item>
     <item>
       <title>FlexGen: high-throughput generative inference of large language models with a single GPU</title>
-      <link>https://example.com/post/flexgen-high-throughput-generative-inference-of-large-language-models-with-a-single-gpu/</link>
+      <link>http://localhost:1313/post/flexgen-high-throughput-generative-inference-of-large-language-models-with-a-single-gpu/</link>
       <pubDate>Tue, 21 May 2024 10:37:15 +0000</pubDate>
-      <guid>https://example.com/post/flexgen-high-throughput-generative-inference-of-large-language-models-with-a-single-gpu/</guid>
+      <guid>http://localhost:1313/post/flexgen-high-throughput-generative-inference-of-large-language-models-with-a-single-gpu/</guid>
       <description>&lt;p&gt;推理llm里面搞卸载的。百篇阅读计划(5/100)。看到和以前有点相关联的地方了，卸载和内存优化都是偏系统的。&lt;/p&gt;
 &lt;p&gt;因为大的背景过于重复了，以后论文注解只记录小的背景了。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</title>
-      <link>https://example.com/post/chain-of-thought-prompting-elicits-reasoning-in-large-language-models/</link>
+      <link>http://localhost:1313/post/chain-of-thought-prompting-elicits-reasoning-in-large-language-models/</link>
       <pubDate>Tue, 16 Apr 2024 21:39:51 +0000</pubDate>
-      <guid>https://example.com/post/chain-of-thought-prompting-elicits-reasoning-in-large-language-models/</guid>
+      <guid>http://localhost:1313/post/chain-of-thought-prompting-elicits-reasoning-in-large-language-models/</guid>
       <description>&lt;p&gt;思维链论文阅读，百篇paper计划(4/100)，思维链这个技术还是prompt这个部分里面的，所以这篇论文还是算prompt&lt;/p&gt;</description>
     </item>
     <item>
       <title>TinyLLM: Learning a Small Student from Multiple Large Language Models</title>
-      <link>https://example.com/post/tinyllm-learning-a-small-student-from-multiple-large-language-models/</link>
+      <link>http://localhost:1313/post/tinyllm-learning-a-small-student-from-multiple-large-language-models/</link>
       <pubDate>Sun, 24 Mar 2024 20:41:50 +0000</pubDate>
-      <guid>https://example.com/post/tinyllm-learning-a-small-student-from-multiple-large-language-models/</guid>
+      <guid>http://localhost:1313/post/tinyllm-learning-a-small-student-from-multiple-large-language-models/</guid>
       <description>&lt;p&gt;小样本llm论文阅读，百篇paper计划(3/100)&lt;/p&gt;</description>
     </item>
     <item>
       <title>FULL PARAMETER FINE-TUNING FOR LARGE LANGUAGE MODELS WITH LIMITED RESOURCES</title>
-      <link>https://example.com/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/</link>
+      <link>http://localhost:1313/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/</link>
       <pubDate>Fri, 24 Nov 2023 17:10:38 +0000</pubDate>
-      <guid>https://example.com/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/</guid>
+      <guid>http://localhost:1313/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/</guid>
       <description>&lt;p&gt;百篇paper计划(1/100)，推荐阅读的，没有选择趋向。内容是：用有限的资源（主要是内存）进行全参数大模型微调，研究重点集中在微调部分，做的是内存优化的工作。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;论文标题：Full Parameter Fine-tuning for Large Language Models with Limited Resources&lt;/li&gt;

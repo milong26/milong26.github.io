@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>VLA-OS: Structuring and Dissecting Planning Representations and Paradigms in Vision-Language-Action Models | 我的博客</title>
 <meta name="keywords" content="vla, structure">
 <meta name="description" content="看起来还不错，没有正式发表">
-<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
-<link rel="canonical" href="https://example.com/post/vla-os-structuring-and-dissecting-planning-representations-and-paradigms-in-vision-language-action-models/">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/vla-os-structuring-and-dissecting-planning-representations-and-paradigms-in-vision-language-action-models/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://example.com/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
-<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://example.com/post/vla-os-structuring-and-dissecting-planning-representations-and-paradigms-in-vision-language-action-models/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/vla-os-structuring-and-dissecting-planning-representations-and-paradigms-in-vision-language-action-models/">
 <noscript>
     <style>
         #theme-toggle,
@@ -64,80 +64,13 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://example.com/post/vla-os-structuring-and-dissecting-planning-representations-and-paradigms-in-vision-language-action-models/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="VLA-OS: Structuring and Dissecting Planning Representations and Paradigms in Vision-Language-Action Models">
-  <meta property="og:description" content="看起来还不错，没有正式发表">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:tag" content="Vla">
-    <meta property="article:tag" content="Structure">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="VLA-OS: Structuring and Dissecting Planning Representations and Paradigms in Vision-Language-Action Models">
-  <meta name="twitter:description" content="看起来还不错，没有正式发表">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://example.com/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "VLA-OS: Structuring and Dissecting Planning Representations and Paradigms in Vision-Language-Action Models",
-      "item": "https://example.com/post/vla-os-structuring-and-dissecting-planning-representations-and-paradigms-in-vision-language-action-models/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "VLA-OS: Structuring and Dissecting Planning Representations and Paradigms in Vision-Language-Action Models",
-  "name": "VLA-OS: Structuring and Dissecting Planning Representations and Paradigms in Vision-Language-Action Models",
-  "description": "看起来还不错，没有正式发表\n",
-  "keywords": [
-    "vla", "structure"
-  ],
-  "articleBody": "看起来还不错，没有正式发表\nVLA-OS模型家族直接输出末端执行器的位姿增量（delta end-effector pose）作为动作空间。但是双臂还是用joint\n有一个贡献是把以前的vla分成了四个级别\nPlanningOnly-VLA（仅规划范式） 核心思想：模型（通常是预训练好的大语言模型LLM或视觉语言模型VLM）只负责进行高层任务推理和规划，不生成底层动作。规划结果（如子任务序列、目标图像、代码等）会被传递给预设的技能库或优化器来执行。 工作方式：将复杂任务分解为可由预定义技能执行的子任务，或输出用于运动规划的参数。 缺点：由于模型和底层技能通常无法利用现有的动作标注数据集进行联合训练，性能往往不如其他可以端到端训练的范式。因此，本文的研究未包含此范式。 ActionOnly-VLA（仅动作范式） 核心思想：端到端方法。模型直接将从视觉和语言输入中学习到的信息映射到机器人动作，没有显式的、独立的“规划”阶段或表示。 工作方式：单一的多模态网络接收观察（图像、语言指令）并直接输出动作序列。 代表模型：RT-1, RT-2, Octo等早期基础模型。本文中对应的模型是 VLA-OS-A。 特点：结构简单，推理速度快。但在处理需要复杂推理的长视野任务时可能表现不佳。 Integrated-VLA（集成范式） 核心思想：单一模型同时完成任务规划和动作生成。规划过程可以是“显式”的，也可以是“隐式”的。 工作方式： 显式规划：模型先生成可解释的规划表示（如语言推理链、目标图像），然后基于此生成动作。动作生成过程依赖于规划的嵌入。 隐式规划：将规划作为辅助训练目标（如预测目标图像、未来状态），但推理时不需要执行规划步骤，直接输出动作，以此避免规划误差累积。 代表模型：EmbodiedCoT（显式），MDT（隐式）。本文中对应的模型是 VLA-OS-I，并进一步分为显式（VLA-OS-I-E）和隐式（VLA-OS-I-I）变体。 特点：保持了单一模型的简洁性，同时引入了规划能力，希望提升推理性能。 Hierarchical-VLA（分层范式） 核心思想：使用两个独立的模型分别处理任务规划和策略学习（动作生成）。两个模型之间没有梯度连接。 工作方式：高层模型（规划器）接收指令和观察，输出规划结果；低层模型（策略）接收原始观察、指令以及高层模型的规划结果，生成执行动作。 代表模型：RT-H。本文中对应的模型是 VLA-OS-H。 特点： 优点：规划与执行解耦，规划误差不会反向传播到策略网络，规划模型可以独立地在大规模无动作数据上预训练，通常展现出更好的泛化能力和规划性能。 缺点：训练和推理成本更高，需要维护两个模型。 本文的对比研究焦点 本文的研究主要集中在后三种范式上，即 ActionOnly-VLA (VLA-OS-A)、Integrated-VLA (VLA-OS-I)和 Hierarchical-VLA (VLA-OS-H)。文章通过设计的VLA-OS模型系列，在保持其他因素（如主干网络、训练数据）一致的情况下，对这三种范式进行了公平、系统的对比。 核心发现总结 文章通过大量实验得出关键结论：Hierarchical-VLA（分层范式）在绝大多数任务性能、泛化能力、可扩展性和持续学习能力上均达到最优或与Integrated-VLA相当的水平，但其代价是更高的训练和推理成本。而引入任务规划（无论是集成还是分层）的模型，通常优于纯粹的端到端ActionOnly-VLA模型。\n其中，集成和分层的区别在于：关键区别在于，生成动作的低级策略所依赖的“世界模型”信息是直接来自规划输出的抽象表示，还是同时来自原始输入和规划输出。\n集成范式：串联式管道 如您所说，集成范式（对应模型 VLA-OS-I）是一个单一模型内部的串联式流程： 输入：模型接收原始的视觉和语言输入。 规划：模型内部的“规划头”先生成规划表示（如语言推理、视觉推理或目标图像）。 动作生成：模型内部的“动作头”在生成动作时，其输入严重依赖于上一步规划头的输出。具体来说，动作头的每一层都会接收来自VLM主干和规划头相应层的键值对作为条件。 核心特征：动作生成模块无法直接接触到原始的视觉和语言输入。它所见到的“世界”是经过VLM和规划头处理后的抽象嵌入。这形成了一个紧密耦合但也是单向依赖的管道：原始输入 → 规划表示 → 动作。 文档3.3节指出，在显式规划下，“the action head also attends to the keys and values from each layer of the planning heads, and during inference, the VLA must first perform task planning before generating actions.” 分层范式：并联式协作 而分层范式（对应模型 VLA-OS-H）则是由两个独立的模型并联协作： 高层模型（规划器）： 输入：原始的视觉和语言输入。 输出：可解释的规划表示（与集成范式相同）。 功能：专注于任务推理。 低层模型（策略/动作生成器）： 输入：这是一个关键区别！低层策略的输入是多元的，包括： 原始输入：它自己能“看到”原始的视觉观察（图像）和语言指令。 高层模型的输出：同时，它也接收高层模型生成的规划结果作为指导。 补充信息：文档提到，为了补偿高层VLM可能丢失的细节，他们还会为低层模型提供冻结的图像和语言特征作为额外输入。 动作生成：低层模型基于所有这些信息的融合来生成动作。 核心特征：规划与动作生成是解耦的。动作策略拥有独立感知世界的能力，规划结果对它而言更像是一个“高级顾问”或“任务说明书”，而不是它感知世界的唯一通道。其流程是：[原始输入 → 规划表示]和 [原始输入 + 规划表示 → 动作]并行发生。\n",
-  "wordCount" : "105",
-  "inLanguage": "en",
-  "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "0001-01-01T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://example.com/post/vla-os-structuring-and-dissecting-planning-representations-and-paradigms-in-vision-language-action-models/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "我的博客",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://example.com/favicon.ico"
-    }
-  }
-}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
@@ -163,22 +96,22 @@
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="https://example.com/" title="首页">
+                <a href="http://localhost:1313/" title="首页">
                     <span>首页</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/about/" title="关于我">
+                <a href="http://localhost:1313/about/" title="关于我">
                     <span>关于我</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/categories/" title="分类">
+                <a href="http://localhost:1313/categories/" title="分类">
                     <span>分类</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/tags/" title="标签">
+                <a href="http://localhost:1313/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li>
@@ -195,7 +128,7 @@
     </h1>
     <div class="post-meta">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
 
 </div>
   </header> 
@@ -257,15 +190,15 @@
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://example.com/tags/vla/">Vla</a></li>
-      <li><a href="https://example.com/tags/structure/">Structure</a></li>
+      <li><a href="http://localhost:1313/tags/vla/">Vla</a></li>
+      <li><a href="http://localhost:1313/tags/structure/">Structure</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
 
     
     

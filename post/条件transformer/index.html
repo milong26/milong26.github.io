@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>条件transformer | 我的博客</title>
 <meta name="keywords" content="transformer">
 <meta name="description" content="什么是条件transformer？它能做到什么？什么情况下使用它？怎么样能看出来这是一个条件transformer？
@@ -13,17 +13,17 @@
  有哪些经典的实际上就是条件transformer
  和最基本的transformer对比
 ">
-<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
-<link rel="canonical" href="https://example.com/post/%E6%9D%A1%E4%BB%B6transformer/">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/%E6%9D%A1%E4%BB%B6transformer/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://example.com/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
-<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://example.com/post/%E6%9D%A1%E4%BB%B6transformer/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/%E6%9D%A1%E4%BB%B6transformer/">
 <noscript>
     <style>
         #theme-toggle,
@@ -69,81 +69,13 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://example.com/post/%E6%9D%A1%E4%BB%B6transformer/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="条件transformer">
-  <meta property="og:description" content="什么是条件transformer？它能做到什么？什么情况下使用它？怎么样能看出来这是一个条件transformer？
-整理文本 有哪些经典的实际上就是条件transformer 和最基本的transformer对比">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:tag" content="Transformer">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="条件transformer">
-  <meta name="twitter:description" content="什么是条件transformer？它能做到什么？什么情况下使用它？怎么样能看出来这是一个条件transformer？
-整理文本 有哪些经典的实际上就是条件transformer 和最基本的transformer对比">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://example.com/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "条件transformer",
-      "item": "https://example.com/post/%E6%9D%A1%E4%BB%B6transformer/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "条件transformer",
-  "name": "条件transformer",
-  "description": "什么是条件transformer？它能做到什么？什么情况下使用它？怎么样能看出来这是一个条件transformer？\n整理文本 有哪些经典的实际上就是条件transformer 和最基本的transformer对比 ",
-  "keywords": [
-    "transformer"
-  ],
-  "articleBody": "什么是条件transformer？它能做到什么？什么情况下使用它？怎么样能看出来这是一个条件transformer？\n整理文本 有哪些经典的实际上就是条件transformer 和最基本的transformer对比 条件 Transformer就是：\n在 Transformer 工作时，额外给它一个“条件/背景/要求”，让它“按这个条件来想和生成”。\n这个“额外加的要求”，就是 condition（条件）。\n回忆：transformer在做什么\nattention的本质，“我这个词（Q），应该重点看哪些别的词（K），然后把它们的信息（V）拿过来用”\n普通 Transformer 只在“同一段输入”里互相参考\n条件 = 额外的信息来源，指导模型怎么理解 / 怎么生成，条件不是模型要预测的对象，而是“背景设定”\n怎么加条件的？把条件当成“额外的 token”，一起喂进去。Transformer 并不知道哪是条件、哪是正文\n但 attention 会自动学会：\n“生成正文时，要多关注这些‘条件 token’”\n更高级的方式，让正文的 Q，去看“条件的 K / V”\n也就是：\n正文：负责提问（Q）\n条件：提供参考信息（K / V） 这叫 Cross-Attention（交叉注意力）\n让同一个模型，在不同“要求/背景”下，做不同的事\n什么时候用条件transformer\n用一句判断标准： 当“输出”不只依赖于自身历史，而是依赖于“额外信息”时\n判断是不是transformer： 输入是不是两部分条件 + 要生成的内容 或者看到\n也就是说，corss-attention就是条件transformer\n说白了就是有外部输入的就是条件transformer，普通transformer是只有self-attention，并且注意力只看自己的历史token输出\n如果是有encoder和decoder就差不多是条件transformer了\n",
-  "wordCount" : "53",
-  "inLanguage": "en",
-  "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "0001-01-01T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://example.com/post/%E6%9D%A1%E4%BB%B6transformer/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "我的博客",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://example.com/favicon.ico"
-    }
-  }
-}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
@@ -169,22 +101,22 @@
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="https://example.com/" title="首页">
+                <a href="http://localhost:1313/" title="首页">
                     <span>首页</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/about/" title="关于我">
+                <a href="http://localhost:1313/about/" title="关于我">
                     <span>关于我</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/categories/" title="分类">
+                <a href="http://localhost:1313/categories/" title="分类">
                     <span>分类</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/tags/" title="标签">
+                <a href="http://localhost:1313/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li>
@@ -201,7 +133,7 @@
     </h1>
     <div class="post-meta">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
 
 </div>
   </header> 
@@ -253,14 +185,14 @@
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://example.com/tags/transformer/">Transformer</a></li>
+      <li><a href="http://localhost:1313/tags/transformer/">Transformer</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
 
     
     

@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Website on 我的博客</title>
-    <link>https://example.com/tags/website/</link>
+    <link>http://localhost:1313/tags/website/</link>
     <description>Recent content in Website on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <atom:link href="https://example.com/tags/website/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/website/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>hugo使用指南</title>
-      <link>https://example.com/post/hugo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link>
+      <link>http://localhost:1313/post/hugo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/hugo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</guid>
+      <guid>http://localhost:1313/post/hugo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</guid>
       <description>&lt;p&gt;hugo配置日志&lt;/p&gt;</description>
     </item>
   </channel>

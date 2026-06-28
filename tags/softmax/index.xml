@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Softmax on 我的博客</title>
-    <link>https://example.com/tags/softmax/</link>
+    <link>http://localhost:1313/tags/softmax/</link>
     <description>Recent content in Softmax on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 06 Mar 2024 16:37:12 +0000</lastBuildDate>
-    <atom:link href="https://example.com/tags/softmax/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/softmax/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>softmax</title>
-      <link>https://example.com/post/softmax/</link>
+      <link>http://localhost:1313/post/softmax/</link>
       <pubDate>Wed, 06 Mar 2024 16:37:12 +0000</pubDate>
-      <guid>https://example.com/post/softmax/</guid>
+      <guid>http://localhost:1313/post/softmax/</guid>
       <description>&lt;p&gt;之前学的时候把softmax当作在公式里的点缀，现在来研究一下整个函数&lt;/p&gt;</description>
     </item>
   </channel>

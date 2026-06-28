@@ -8,7 +8,7 @@
 <title>tinyvla | 我的博客</title>
 <meta name="keywords" content="">
 <meta name="description" content="tinyvla用论文结构、内容上解读&#43;代码复现">
-<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
 <link rel="canonical" href="http://localhost:1313/post/tinyvla/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
@@ -134,7 +134,7 @@
     </h1>
     <div class="post-meta">
 
-<span title='2026-06-24 15:29:28 +0000 UTC'>June 24, 2026</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+<span title='2026-06-24 15:29:28 +0000 UTC'>June 24, 2026</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
 
 </div>
   </header> 
@@ -229,23 +229,406 @@
 <p>&ldquo;We identify two key factors in existing VLA models that contribute to their high inference latency: (1) they are built on large vision-language models, often exceeding 7 billion parameters, and (2) they generate discrete action tokens autoregressively, requiring repetitive inference for each degree of freedom.&ldquo;这一段方法里面没有验证，难道是实验部分才有？引言中的这句话确实是引出本文方法的“核心动机（Motivation）”，但它并不只是一个纯理论假设，作者在<strong>消融实验的 V.C 小节（Which Part of TinyVLA Makes it Fast?）结合 Table IV 进行了严谨的控制变量证明</strong> 5。</p>
 <h1 id="复现">复现<a hidden class="anchor" aria-hidden="true" href="#复现">#</a></h1>
 <p>要求：做完metaworld，能复现它的结果吗？
-<a href="https://github.com/liyaxuanliyaxuan/TinyVLA">https://github.com/liyaxuanliyaxuan/TinyVLA</a>
-我的环境：linux无头服务器，所以不能直接看图形窗口</p>
-<h2 id="配置">配置<a hidden class="anchor" aria-hidden="true" href="#配置">#</a></h2>
-<p>git clone <a href="https://github.com/liyaxuanliyaxuan/TinyVLA">https://github.com/liyaxuanliyaxuan/TinyVLA</a>
+<a href="https://github.com/liyaxuanliyaxuan/TinyVLA">https://github.com/liyaxuanliyaxuan/TinyVLA</a></p>
+<p>我的环境：linux无头服务器，所以不能直接看图形窗口</p>
+<p>因为tinyvla的代码没有直接搞metaworld，所以改成参考代码</p>
+<p><a href="https://github.com/jun000716/TinyVLA-MetaWorld">https://github.com/jun000716/TinyVLA-MetaWorld</a></p>
+<pre tabindex="0"><code>git clone git@github.com:jun000716/TinyVLA-MetaWorld.git
+</code></pre><h2 id="配置">配置<a hidden class="anchor" aria-hidden="true" href="#配置">#</a></h2>
+<p>基础配置
 conda create -n tinyvla python=3.10 -y
 conda activate tinyvla
-pip install &ndash;upgrade pip  #
+pip install &ndash;upgrade pip  
+下载比较慢，有cu11相关的whl
 pip install -r requirements.txt</p>
-<p>cd policy_heads
-pip install -e .
-cd ../llava-pythia
-pip install -e .</p>
-<p>pip install metaworld
-无头服务器上 MuJoCo 渲染需要配置 EGL：export MUJOCO_GL=egl</p>
-<p>准备模型
-hf download lesjie/Llava-Pythia-400M &ndash;local-dir ./pretrained_vlm/llava_pythia_400M</p>
-<p>准备数据</p>
+<p>cd policy_heads</p>
+<p>pip install -e .</p>
+<p>cd ../llava-pythia</p>
+<p>pip install -e .</p>
+<p>metaworld相关的
+pip install metaworld</p>
+<h2 id="模型">模型<a hidden class="anchor" aria-hidden="true" href="#模型">#</a></h2>
+<p>无头服务器上 MuJoCo 渲染需要配置 EGL：export MUJOCO_GL=egl</p>
+<p>先安装hf download</p>
+<p>安装/更新最新版 huggingface-hub（必须）</p>
+<p>pip install -U &ndash;force-reinstall huggingface-hub</p>
+<p>准备模型</p>
+<p>hf download lesjie/Llava-Pythia-400M &ndash;local-dir ./pretrained_vlm/llava_pythia_400M</p>
+<p>会把模型下载到/pretrained_vlm/llava_pythia_400M 这个文件夹里面</p>
+<h2 id="数据">数据<a hidden class="anchor" aria-hidden="true" href="#数据">#</a></h2>
+<p>mt50数据集下载</p>
+<p>改constants.py里面的路径</p>
+<p>只跑 easy 28 个任务，每任务约 35 demos</p>
+<p>MUJOCO_GL=egl CUDA_VISIBLE_DEVICES=1 python collect_metaworld_data.py <br>
+&ndash;output_dir ./mtdata <br>
+&ndash;difficulty easy</p>
+<p>下载好了。</p>
+<h2 id="训练">训练<a hidden class="anchor" aria-hidden="true" href="#训练">#</a></h2>
+<p>写一个bash</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span>export MUJOCO_GL<span style="color:#f92672">=</span>egl
+</span></span><span style="display:flex;"><span>export TOKENIZERS_PARALLELISM<span style="color:#f92672">=</span>false
+</span></span><span style="display:flex;"><span>export CUDA_VISIBLE_DEVICES<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>        <span style="color:#75715e"># ← 只用 GPU 0，改成你想用的编号</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 先试试</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>VLM<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./pretrained_vlm/llava_pythia_400M&#34;</span>
+</span></span><span style="display:flex;"><span>TASK<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;reach-v3&#34;</span>
+</span></span><span style="display:flex;"><span>OUTPUT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./output/tinyvla_</span><span style="color:#e6db74">${</span>TASK<span style="color:#e6db74">}</span><span style="color:#e6db74">_llava_pythia_lora&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>python train_tinyvla.py <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --model_name_or_path $VLM <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --output_dir $OUTPUT <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --task_name $TASK <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --action_head_type droid_diffusion <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --action_dim <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --state_dim <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --chunk_size <span style="color:#ae81ff">20</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --lora_enable True <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --lora_r <span style="color:#ae81ff">64</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --lora_alpha <span style="color:#ae81ff">256</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --bf16 True <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --per_device_train_batch_size <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --gradient_accumulation_steps <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --learning_rate 2e-4 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --non_lora_lr 3e-5 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --max_steps <span style="color:#ae81ff">10000</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --save_steps <span style="color:#ae81ff">2000</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --logging_steps <span style="color:#ae81ff">20</span>
+</span></span></code></pre></div><p>nohup bash test_train.sh &gt; logs/test_train.log 2&gt;&amp;1 &amp;
+运行起来好像有点问题，报错</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Traceback <span style="color:#f92672">(</span>most recent call last<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/code/TinyVLA-MetaWorld/train_tinyvla.py&#34;</span>, line 302, in &lt;module&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    main<span style="color:#f92672">(</span>config<span style="color:#f92672">=</span>config, llava_pythia_config<span style="color:#f92672">=</span>llava_pythia_config<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/code/TinyVLA-MetaWorld/train_tinyvla.py&#34;</span>, line 269, in main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    model, data_args <span style="color:#f92672">=</span> LlavaUtils.load_llava_pythia<span style="color:#f92672">(</span>config<span style="color:#f92672">=</span>config, llava_pythia_config<span style="color:#f92672">=</span>llava_pythia_config, rank0_print<span style="color:#f92672">=</span>rank0_print, tokenizer<span style="color:#f92672">=</span>tokenizer<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/code/TinyVLA-MetaWorld/llava-pythia/llava_pythia/llava_pythia_utils.py&#34;</span>, line 277, in load_llava_pythia
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    model.initialize_vision_tokenizer<span style="color:#f92672">(</span>model_args, tokenizer<span style="color:#f92672">=</span>tokenizer<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/code/TinyVLA-MetaWorld/llava-pythia/llava_pythia/model/llava_arch.py&#34;</span>, line 209, in initialize_vision_tokenizer
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    self.resize_token_embeddings<span style="color:#f92672">(</span>len<span style="color:#f92672">(</span>tokenizer<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/application/miniconda3/envs/tinyvla/lib/python3.10/site-packages/transformers/modeling_utils.py&#34;</span>, line 1813, in resize_token_embeddings
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    model_embeds <span style="color:#f92672">=</span> self._resize_token_embeddings<span style="color:#f92672">(</span>new_num_tokens, pad_to_multiple_of<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/application/miniconda3/envs/tinyvla/lib/python3.10/site-packages/transformers/modeling_utils.py&#34;</span>, line 1849, in _resize_token_embeddings
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    new_lm_head <span style="color:#f92672">=</span> self._get_resized_lm_head<span style="color:#f92672">(</span>old_lm_head, new_num_tokens<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/application/miniconda3/envs/tinyvla/lib/python3.10/site-packages/transformers/modeling_utils.py&#34;</span>, line 1997, in _get_resized_lm_head
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    old_lm_head.weight.size<span style="color:#f92672">()</span> <span style="color:#66d9ef">if</span> not transposed <span style="color:#66d9ef">else</span> old_lm_head.weight.t<span style="color:#f92672">()</span>.size<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/application/miniconda3/envs/tinyvla/lib/python3.10/site-packages/torch/nn/modules/module.py&#34;</span>, line 1614, in __getattr__
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    raise AttributeError<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#39;{}&#39; object has no attribute &#39;{}&#39;&#34;</span>.format<span style="color:#f92672">(</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>AttributeError: <span style="color:#e6db74">&#39;ConditionalUnet1D&#39;</span> object has no attribute <span style="color:#e6db74">&#39;weight&#39;</span>
+</span></span></code></pre></div><p>需要修改代码：<code>TinyVLA-MetaWorld/llava-pythia/llava_pythia/model/llava_arch.py</code>这个文件的209行</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>self<span style="color:#f92672">.</span>resize_token_embeddings(len(tokenizer))
+</span></span></code></pre></div><p>替换成</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># ── MetaWorld fix: resize_token_embeddings 会把 embed_out 当 lm_head 处理，</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 但 droid_diffusion 模式下 embed_out 已经是 ConditionalUnet1D（没有 .weight），</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 临时藏起来让 resize 只处理输入 embedding（image token 需要），再恢复。</span>
+</span></span><span style="display:flex;"><span>_saved_embed_out <span style="color:#f92672">=</span> getattr(self, <span style="color:#e6db74">&#39;embed_out&#39;</span>, <span style="color:#66d9ef">None</span>)
+</span></span><span style="display:flex;"><span>_is_action_head <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>    _saved_embed_out <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> isinstance(_saved_embed_out, torch<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>Linear)
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> _is_action_head:
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>embed_out <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>  <span style="color:#75715e"># 临时隐藏扩散头</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>self<span style="color:#f92672">.</span>resize_token_embeddings(len(tokenizer))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> _is_action_head:
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>embed_out <span style="color:#f92672">=</span> _saved_embed_out  <span style="color:#75715e"># 恢复</span>
+</span></span></code></pre></div><p>好像可以运行了，怎么还有wandb，还好我之前注册过。现在又报错了，应该是数据问题</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Data from: <span style="color:#f92672">[</span><span style="color:#e6db74">&#39;./mtdata/reach-v3&#39;</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- Train on <span style="color:#f92672">[</span>33<span style="color:#f92672">]</span> episodes
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- Test on <span style="color:#f92672">[</span>2<span style="color:#f92672">]</span> episodes
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Found <span style="color:#ae81ff">35</span> hdf5 files
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Norm stats from: <span style="color:#f92672">[</span><span style="color:#e6db74">&#39;./mtdata/reach-v3&#39;</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>train_episode_len_l: <span style="color:#f92672">[[</span>31, 36, 27, 25, 29, 19, 24, 23, 30, 45, 24, 26, 16, 19, 25, 26, 25, 28, 30, 32, 27, 24, 21, 25, 30, 21, 25, 35, 35, 25, 36, 27, 24<span style="color:#f92672">]]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">########################Current Image Size is [180,320]; maybe due to the pretrain data image size###################################</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Initializing transformations
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">########################Current Image Size is [180,320]; maybe due to the pretrain data image size###################################</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Initializing transformations
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  0%|          | 0/10000 <span style="color:#f92672">[</span>00:00&lt;?, ?it/s<span style="color:#f92672">]</span>Traceback <span style="color:#f92672">(</span>most recent call last<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/code/TinyVLA-MetaWorld/train_tinyvla.py&#34;</span>, line 302, in &lt;module&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    main<span style="color:#f92672">(</span>config<span style="color:#f92672">=</span>config, llava_pythia_config<span style="color:#f92672">=</span>llava_pythia_config<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/code/TinyVLA-MetaWorld/train_tinyvla.py&#34;</span>, line 282, in main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    best_ckpt_info <span style="color:#f92672">=</span> train_bc<span style="color:#f92672">(</span>train_dataset<span style="color:#f92672">=</span>train_dataset, model<span style="color:#f92672">=</span>model, val_dataset<span style="color:#f92672">=</span>val_dataset, config<span style="color:#f92672">=</span>config, sampler_params<span style="color:#f92672">=</span>sampler_params, tokenizer<span style="color:#f92672">=</span>tokenizer<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/code/TinyVLA-MetaWorld/train_tinyvla.py&#34;</span>, line 206, in train_bc
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    trainer.train<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/application/miniconda3/envs/tinyvla/lib/python3.10/site-packages/transformers/trainer.py&#34;</span>, line 1539, in train
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> inner_training_loop<span style="color:#f92672">(</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/application/miniconda3/envs/tinyvla/lib/python3.10/site-packages/transformers/trainer.py&#34;</span>, line 1869, in _inner_training_loop
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    tr_loss_step <span style="color:#f92672">=</span> self.training_step<span style="color:#f92672">(</span>model, inputs<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/application/miniconda3/envs/tinyvla/lib/python3.10/site-packages/transformers/trainer.py&#34;</span>, line 2768, in training_step
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    loss <span style="color:#f92672">=</span> self.compute_loss<span style="color:#f92672">(</span>model, inputs<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/application/miniconda3/envs/tinyvla/lib/python3.10/site-packages/transformers/trainer.py&#34;</span>, line 2791, in compute_loss
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    outputs <span style="color:#f92672">=</span> model<span style="color:#f92672">(</span>**inputs<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/application/miniconda3/envs/tinyvla/lib/python3.10/site-packages/torch/nn/modules/module.py&#34;</span>, line 1501, in _call_impl
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> forward_call<span style="color:#f92672">(</span>*args, **kwargs<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/application/miniconda3/envs/tinyvla/lib/python3.10/site-packages/accelerate/utils/operations.py&#34;</span>, line 581, in forward
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> model_forward<span style="color:#f92672">(</span>*args, **kwargs<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/application/miniconda3/envs/tinyvla/lib/python3.10/site-packages/accelerate/utils/operations.py&#34;</span>, line 569, in __call__
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> convert_to_fp32<span style="color:#f92672">(</span>self.model_forward<span style="color:#f92672">(</span>*args, **kwargs<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/application/miniconda3/envs/tinyvla/lib/python3.10/site-packages/torch/amp/autocast_mode.py&#34;</span>, line 14, in decorate_autocast
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> func<span style="color:#f92672">(</span>*args, **kwargs<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/application/miniconda3/envs/tinyvla/lib/python3.10/site-packages/peft/peft_model.py&#34;</span>, line 922, in forward
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> self.base_model<span style="color:#f92672">(</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/application/miniconda3/envs/tinyvla/lib/python3.10/site-packages/torch/nn/modules/module.py&#34;</span>, line 1501, in _call_impl
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> forward_call<span style="color:#f92672">(</span>*args, **kwargs<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/code/TinyVLA-MetaWorld/llava-pythia/llava_pythia/model/language_model/pythia/llava_pythia.py&#34;</span>, line 179, in forward
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    input_ids, attention_mask, past_key_values, inputs_embeds, labels <span style="color:#f92672">=</span> self.prepare_inputs_labels_for_multimodal<span style="color:#f92672">(</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/code/TinyVLA-MetaWorld/llava-pythia/llava_pythia/model/llava_arch.py&#34;</span>, line 101, in prepare_inputs_labels_for_multimodal
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    image_features <span style="color:#f92672">=</span> self.get_image_fusion_embedding<span style="color:#f92672">(</span>visual_concat<span style="color:#f92672">=</span>visual_concat, images<span style="color:#f92672">=</span>images, images_r<span style="color:#f92672">=</span>images_r, images_top<span style="color:#f92672">=</span>images_top, states<span style="color:#f92672">=</span>states<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/code/TinyVLA-MetaWorld/llava-pythia/llava_pythia/model/language_model/pythia/llava_pythia.py&#34;</span>, line 104, in get_image_fusion_embedding
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    image_features <span style="color:#f92672">=</span> self.encode_images<span style="color:#f92672">(</span>images<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/code/TinyVLA-MetaWorld/llava-pythia/llava_pythia/model/language_model/pythia/llava_pythia.py&#34;</span>, line 80, in encode_images
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    image_features <span style="color:#f92672">=</span> self.get_model<span style="color:#f92672">()</span>.get_vision_tower<span style="color:#f92672">()(</span>images<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/application/miniconda3/envs/tinyvla/lib/python3.10/site-packages/torch/nn/modules/module.py&#34;</span>, line 1501, in _call_impl
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> forward_call<span style="color:#f92672">(</span>*args, **kwargs<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/code/TinyVLA-MetaWorld/llava-pythia/llava_pythia/model/multimodal_encoder/clip_encoder.py&#34;</span>, line 43, in forward
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    image_forward_outs <span style="color:#f92672">=</span> self.vision_model<span style="color:#f92672">(</span>images.to<span style="color:#f92672">(</span>device<span style="color:#f92672">=</span>self.device, dtype<span style="color:#f92672">=</span>self.dtype<span style="color:#f92672">)</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/application/miniconda3/envs/tinyvla/lib/python3.10/site-packages/torch/nn/modules/module.py&#34;</span>, line 1501, in _call_impl
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> forward_call<span style="color:#f92672">(</span>*args, **kwargs<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/application/miniconda3/envs/tinyvla/lib/python3.10/site-packages/transformers/models/clip/modeling_clip.py&#34;</span>, line 841, in forward
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    hidden_states <span style="color:#f92672">=</span> self.embeddings<span style="color:#f92672">(</span>pixel_values<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/application/miniconda3/envs/tinyvla/lib/python3.10/site-packages/torch/nn/modules/module.py&#34;</span>, line 1501, in _call_impl
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> forward_call<span style="color:#f92672">(</span>*args, **kwargs<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;/data/zhonglinye/application/miniconda3/envs/tinyvla/lib/python3.10/site-packages/transformers/models/clip/modeling_clip.py&#34;</span>, line 187, in forward
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    embeddings <span style="color:#f92672">=</span> embeddings + self.position_embedding<span style="color:#f92672">(</span>self.position_ids<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>RuntimeError: The size of tensor a <span style="color:#f92672">(</span>1009<span style="color:#f92672">)</span> must match the size of tensor b <span style="color:#f92672">(</span>577<span style="color:#f92672">)</span> at non-singleton dimension <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>原因：<strong>CLIP vision tower 的 position embedding 长度和实际输入 patch token 数不匹配</strong>。
+排查项目1：先确认 HDF5 里存的图片尺寸。在python环境下执行</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>import h5py,glob
+</span></span><span style="display:flex;"><span>f <span style="color:#f92672">=</span> h5py.File<span style="color:#f92672">(</span>sorted<span style="color:#f92672">(</span>glob.glob<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;./mtdata/reach-v3/*.hdf5&#39;</span><span style="color:#f92672">))[</span>0<span style="color:#f92672">])</span>
+</span></span><span style="display:flex;"><span>print<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;image shape in HDF5:&#39;</span>, f<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;observations/images/top&#39;</span><span style="color:#f92672">]</span>.shape<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>f.close<span style="color:#f92672">()</span>
+</span></span></code></pre></div><p>结果是image shape in HDF5: (25, 480, 480, 3)，所以原图大小没问题。</p>
+<p>排查项目2：预处理的时候有问题。先检查train的数据流，什么时候对图片大小做了改变，以及这个改变是否符合预期</p>
+<pre tabindex="0"><code>流程摘要（简短）：
+
+- train_tinyvla.main
+    - 调用 load_data(...) 创建 train_dataset (EpisodicDataset) 和 llava_pythia_process (LlavaPythiaProcess)。
+- EpisodicDataset.**getitem**
+    - 从 hdf5 读出单帧每个 camera 的 raw image (H,W,3)。
+    - 如果 self.imsize != 原图宽，做 cv2.resize(image, (320, 180))（注意 cv2.resize 的参数是 (width, height)）。
+    - 将每个 camera 的图像 np.stack -&gt; torch.Tensor，BGR-&gt;RGB（如果包含 &#39;top&#39;），再 einsum -&gt; (k, c, h, w)。
+    - 如果 policy_class 包含 &#39;diffusion&#39;，self.augment_images = True，初始化 self.transformations，然后执行：  
+        for transform in self.transformations:  
+        image_data = transform(image_data)  
+        （这里把 torchvision.transforms 直接作用在一个 4D tensor (k,c,h,w) 上）
+    - image_data /= 255，构造 sample 并交给 llava_pythia_process.forward_process(sample)。
+- LlavaPythiaProcess.forward_process / parse_image
+    - parse_image 将 (k,c,h,w) -&gt; permute -&gt; (k,h,w,c).numpy()，并交给 self.processor.preprocess(...)（transformers 的 CLIPImageProcessor / SiglipImageProcessor）。
+    - processor 返回 pixel_values (B, C, H2, W2)，这些 H2,W2 是 processor 或前面 transforms 最终产生的大小（在你的 run 中是 336×597）。
+    - 后续把 image chunk 给 model -&gt; 导致 CLIP 的 position embedding mismatch。
+
+哪里导致 shape 异常（结论）：
+
+- 两处会改变尺寸：cv2.resize(..., (320,180))（把原 480×480 -&gt; 180×320），以及 Llava 的 image processor（可能会 resize 到模型预期）。
+- 但你看到的异常尺寸 336×597 主要来源于在 EpisodicDataset 中对整批 (k,c,h,w) 应用 torchvision.transforms 的那一段。torchvision 的图像变换通常作用于单张 (C,H,W) 或 PIL.Image，而把它直接作用在 4D tensor 上会产生未定义/意外的行为（导致大小被错误放大/重排），最后传入 processor 得到奇怪的 H×W（336×597）。
+
+建议修复（最小改动） — 在 [datasets.py](vscode-file://vscode-app/d:/application/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-browser/workbench/workbench.html) 中把 augment transforms 应用到每个 view（每个 camera）单图上，而不是把 transforms 直接作用于 shape=(k,c,h,w) 的 tensor。修改示例：
+
+- 
+- 
+- 
+- 
+
+补充注意点（简短）：
+
+- 确保 torchvision.transforms 中的 Resize/RandomCrop/RandomRotation 支持 tensor 输入（C,H,W）；若使用 PIL 操作，请把单张 Tensor 转为 PIL 再变换，或用 torchvision.transforms.functional 接口。
+- 也可改为在 LlavaPythiaProcess.parse_image 中让 processor 负责 resize：把 EpisodicDataset 输出固定为 (k,c,pre_h,pre_w)（例如 180×320），并避免在 EpisodicDataset 上对整个 batch 做 transforms。
+</code></pre><p>好吧，我知道了，我没设置image_aspect_ratio=pad，示例代码设置了。重新写sh</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># scripts/smoke_test.sh</span>
+</span></span><span style="display:flex;"><span>export MUJOCO_GL<span style="color:#f92672">=</span>egl
+</span></span><span style="display:flex;"><span>export TOKENIZERS_PARALLELISM<span style="color:#f92672">=</span>false
+</span></span><span style="display:flex;"><span>export WANDB_DISABLED<span style="color:#f92672">=</span>true
+</span></span><span style="display:flex;"><span>export CUDA_VISIBLE_DEVICES<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>   <span style="color:#75715e"># 冒烟只用一张卡</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>python train_tinyvla.py <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --model_name_or_path ./pretrained_vlm/llava_pythia_400M <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --output_dir ./output/smoke_test <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --task_name reach-v3 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --pretrain_image_size <span style="color:#ae81ff">480</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --image_aspect_ratio pad <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --mm_use_im_start_end False <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --mm_use_im_patch_token False <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --action_head_type droid_diffusion <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --action_dim <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --state_dim <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --chunk_size <span style="color:#ae81ff">20</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --use_state True <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --concat <span style="color:#e6db74">&#34;token_cat&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --window_size <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --lora_enable True <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --lora_module <span style="color:#e6db74">&#34;vit llm&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --lora_r <span style="color:#ae81ff">64</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --lora_alpha <span style="color:#ae81ff">256</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --tune_mm_mlp_adapter True <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --freeze_vision_tower True <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --freeze_backbone True <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --bf16 True <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --per_device_train_batch_size <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --gradient_accumulation_steps <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --learning_rate 2e-4 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --non_lora_lr 2e-5 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --max_steps <span style="color:#ae81ff">20</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --logging_steps <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --report_to none
+</span></span></code></pre></div><p>测试这个小的，能运行就可以尝试完整的了</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># scripts/train_reach.sh</span>
+</span></span><span style="display:flex;"><span>export MUJOCO_GL<span style="color:#f92672">=</span>egl
+</span></span><span style="display:flex;"><span>export TOKENIZERS_PARALLELISM<span style="color:#f92672">=</span>false
+</span></span><span style="display:flex;"><span>export WANDB_DISABLED<span style="color:#f92672">=</span>true
+</span></span><span style="display:flex;"><span>export CUDA_VISIBLE_DEVICES<span style="color:#f92672">=</span>0,1,2   <span style="color:#75715e"># 只用这3张卡</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>OUTPUT<span style="color:#f92672">=</span>./output/tinyvla_reach-v3_3gpu
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mkdir -p <span style="color:#e6db74">&#34;</span>$OUTPUT<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>deepspeed --master_port <span style="color:#ae81ff">29601</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>          --num_gpus<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  train_tinyvla.py <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --deepspeed ./llava-pythia/scripts/zero2.json <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --model_name_or_path ./pretrained_vlm/llava_pythia_400M <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --output_dir <span style="color:#e6db74">&#34;</span>$OUTPUT<span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --task_name reach-v3 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --pretrain_image_size <span style="color:#ae81ff">480</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --image_aspect_ratio pad <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --mm_use_im_start_end False <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --mm_use_im_patch_token False <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --action_head_type droid_diffusion <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --action_dim <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --state_dim <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --chunk_size <span style="color:#ae81ff">20</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --use_state True <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --concat <span style="color:#e6db74">&#34;token_cat&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --window_size <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --lora_enable True <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --lora_module <span style="color:#e6db74">&#34;vit llm&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --lora_r <span style="color:#ae81ff">64</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --lora_alpha <span style="color:#ae81ff">256</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --tune_mm_mlp_adapter True <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --freeze_vision_tower True <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --freeze_backbone True <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --bf16 True <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --tf32 True <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --per_device_train_batch_size <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --gradient_accumulation_steps <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --learning_rate 2e-4 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --non_lora_lr 2e-5 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --weight_decay 0.0 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --warmup_ratio 0.005 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --lr_scheduler_type cosine <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --max_steps <span style="color:#ae81ff">10000</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --save_strategy steps <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --save_steps <span style="color:#ae81ff">1000</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --save_total_limit <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --logging_steps <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --gradient_checkpointing True <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --dataloader_num_workers <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --model_max_length <span style="color:#ae81ff">2048</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --lazy_preprocess True <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --report_to none <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --logging_dir <span style="color:#e6db74">&#34;</span>$OUTPUT<span style="color:#e6db74">/log&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 把 preprocessor_config 复制到各 checkpoint（eval 时需要）</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> dir in <span style="color:#e6db74">&#34;</span>$OUTPUT<span style="color:#e6db74">&#34;</span>/checkpoint-*/; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>  cp ./llava-pythia/preprocessor_config.json <span style="color:#e6db74">&#34;</span>$dir<span style="color:#e6db74">&#34;</span> 2&gt;/dev/null
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;训练完成，checkpoint 在 </span>$OUTPUT<span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><p>看到日志里面能正常输出，nvidia-smi也良好，那就ok了</p>
+<hr>
+<p>如果执行完了就可以测试，训练上面的在3卡的情况下需要大概6h</p>
+<h2 id="测试">测试<a hidden class="anchor" aria-hidden="true" href="#测试">#</a></h2>
+<p>如果能成功运行，就能评估</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export MUJOCO_GL<span style="color:#f92672">=</span>egl
+</span></span><span style="display:flex;"><span>python eval_metaworld.py <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --model_path ./output/tinyvla_reach-v3_llava_pythia_lora/checkpoint-10000 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --model_base ./pretrained_vlm/llava_pythia_400M <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --stats_dir ./output/tinyvla_reach-v3_llava_pythia_lora <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --num_rollouts <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --difficulty easy <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --enable_lora
+</span></span></code></pre></div>
 
   </div>
 

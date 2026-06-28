@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tactile on 我的博客</title>
-    <link>https://example.com/tags/tactile/</link>
+    <link>http://localhost:1313/tags/tactile/</link>
     <description>Recent content in Tactile on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 25 Mar 2025 15:08:42 +0000</lastBuildDate>
-    <atom:link href="https://example.com/tags/tactile/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/tactile/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DIFFTACTILE: A PHYSICS-BASED DIFFERENTIABLE  TACTILE SIMULATOR FOR CONTACT-RICH ROBOTIC  MANIPULATION</title>
-      <link>https://example.com/post/difftactile-a-physics-based-differentiable-tactile-simulator-for-contact-rich-robotic-manipulation/</link>
+      <link>http://localhost:1313/post/difftactile-a-physics-based-differentiable-tactile-simulator-for-contact-rich-robotic-manipulation/</link>
       <pubDate>Tue, 25 Mar 2025 15:08:42 +0000</pubDate>
-      <guid>https://example.com/post/difftactile-a-physics-based-differentiable-tactile-simulator-for-contact-rich-robotic-manipulation/</guid>
+      <guid>http://localhost:1313/post/difftactile-a-physics-based-differentiable-tactile-simulator-for-contact-rich-robotic-manipulation/</guid>
       <description>&lt;p&gt;2夹，tactile，精细操作(其实也就4种)。(19/100)&lt;/p&gt;</description>
     </item>
     <item>
       <title>simPLE: a visuotactile method learned in simulation  to precisely pick, localize, regrasp, and place objects</title>
-      <link>https://example.com/post/simple-a-visuotactile-method-learned-in-simulation-to-precisely-pick-localize-regrasp-and-place-objects/</link>
+      <link>http://localhost:1313/post/simple-a-visuotactile-method-learned-in-simulation-to-precisely-pick-localize-regrasp-and-place-objects/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/simple-a-visuotactile-method-learned-in-simulation-to-precisely-pick-localize-regrasp-and-place-objects/</guid>
+      <guid>http://localhost:1313/post/simple-a-visuotactile-method-learned-in-simulation-to-precisely-pick-localize-regrasp-and-place-objects/</guid>
       <description>&lt;p&gt;在仿真中学到的视觉触觉方法&lt;/p&gt;</description>
     </item>
   </channel>

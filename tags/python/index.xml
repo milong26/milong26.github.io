@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Python on 我的博客</title>
-    <link>https://example.com/tags/python/</link>
+    <link>http://localhost:1313/tags/python/</link>
     <description>Recent content in Python on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Mon, 24 Mar 2025 20:59:10 +0000</lastBuildDate>
-    <atom:link href="https://example.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>python压缩pdf</title>
-      <link>https://example.com/post/python%E5%8E%8B%E7%BC%A9pdf/</link>
+      <link>http://localhost:1313/post/python%E5%8E%8B%E7%BC%A9pdf/</link>
       <pubDate>Mon, 24 Mar 2025 20:59:10 +0000</pubDate>
-      <guid>https://example.com/post/python%E5%8E%8B%E7%BC%A9pdf/</guid>
+      <guid>http://localhost:1313/post/python%E5%8E%8B%E7%BC%A9pdf/</guid>
       <description>&lt;p&gt;有个需求是压缩pdf，没有wps，又不想泄露源文件，用python写吧。代码是抄了然后改的
 有时候这个功能还挺好用，什么时候整理成一个exe应用就好了&lt;/p&gt;</description>
     </item>

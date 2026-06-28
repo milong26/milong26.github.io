@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>AN EMULATOR FOR FINE-TUNING LARGE LANGUAGE  MODELS USING SMALL LANGUAGE MODELS | 我的博客</title>
 <meta name="keywords" content="fine-tune">
 <meta name="description" content="百篇paper计划(9/100)，用小模型微调大模型。">
-<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
-<link rel="canonical" href="https://example.com/post/an-emulator-for-fine-tuning-large-language-models-using-small-language-models/">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/an-emulator-for-fine-tuning-large-language-models-using-small-language-models/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://example.com/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
-<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://example.com/post/an-emulator-for-fine-tuning-large-language-models-using-small-language-models/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/an-emulator-for-fine-tuning-large-language-models-using-small-language-models/">
 <noscript>
     <style>
         #theme-toggle,
@@ -64,81 +64,13 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://example.com/post/an-emulator-for-fine-tuning-large-language-models-using-small-language-models/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="AN EMULATOR FOR FINE-TUNING LARGE LANGUAGE  MODELS USING SMALL LANGUAGE MODELS">
-  <meta property="og:description" content="百篇paper计划(9/100)，用小模型微调大模型。">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2024-11-04T16:20:53+00:00">
-    <meta property="article:modified_time" content="2024-11-04T16:20:53+00:00">
-    <meta property="article:tag" content="Fine Tune">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="AN EMULATOR FOR FINE-TUNING LARGE LANGUAGE  MODELS USING SMALL LANGUAGE MODELS">
-  <meta name="twitter:description" content="百篇paper计划(9/100)，用小模型微调大模型。">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://example.com/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "AN EMULATOR FOR FINE-TUNING LARGE LANGUAGE  MODELS USING SMALL LANGUAGE MODELS",
-      "item": "https://example.com/post/an-emulator-for-fine-tuning-large-language-models-using-small-language-models/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "AN EMULATOR FOR FINE-TUNING LARGE LANGUAGE  MODELS USING SMALL LANGUAGE MODELS",
-  "name": "AN EMULATOR FOR FINE-TUNING LARGE LANGUAGE  MODELS USING SMALL LANGUAGE MODELS",
-  "description": "百篇paper计划(9/100)，用小模型微调大模型。\n",
-  "keywords": [
-    "fine-tune"
-  ],
-  "articleBody": "百篇paper计划(9/100)，用小模型微调大模型。\n论文标题：AN EMULATOR FOR FINE-TUNING LARGE LANGUAGE MODELS USING SMALL LANGUAGE MODELS rank：NeurIPS 2023 poster 打标签：微调，小模型 时间：2023年10月19日 abstract 目前：LMs通常2个训练管道 第一个预训练阶段：用很大、多样化的文本数据集 第二个微调（有时候是对齐）：用有针对性地例子或其他期望行为的规范 问题：lm的知识和技能到底是来自预训练还是微调？ 解决：引入一个方法：模拟微调 emulated fine-tune 目的：解耦lm在预训练时和微调学到的知识 测试：如果我们在预训练时将一个大模型学习到的知识与在微调(反之亦然)时将一个小模型学习到的知识结合起来会发生什么? 来源：从人类偏好学习中发展出来的基于RL的框架 是啥：从分布中采样的方法 效果：在不同尺度上近似与训练和微调的结果。 实验 在EFT上的实验表明，增加微调倾向于提高有用性，而增加预训练倾向于提高事实性。 在去耦尺度之外，证明了EFT可以在不需要额外训练的情况下，对有用性和无害性等相互竞争的行为特质进行测试时间调整。 最后，仿真微调的一个特例，我们称之为LM尺度扩展，通过将大的预训练模型与小的微调模型集成，避免了大的预训练模型的资源密集型微调，本质上是模仿大的预训练模型微调的结果。 尺度扩展在Llama、Llama - 2和Falcon系列中不断提高指令跟随模型的有用性和真实性，无需额外的超参数或训练。 INTRODUCTION 前面重复叙述的就不说了，就是拓展abstract里面的背景和问题，老生常谈。但是EFT部分扩充了许多。\n功能（可以实现什么，下文的”阶段”是预训练或者微调） 直接研究当一个阶段被放大或缩小时变化的能力 在不增加计算成本的情况下逼近大模型微调结果的实际效益； 在测试时刻修改微调目标(例如,有益性和无害性之间的权衡)的能力，无需额外训练。 怎么做的 基于简单因式分解，将微调后的语言模型的logits分解为 预训练的基模型的基对数概率 base log probabilities “行为delta “，或基模型与微调模型的对数概率之差。该delta是微调中学习到的行为变化的紧凑表示，可以通过强化学习或贝叶斯推理框架进行验证。 EFT可以模拟在一个尺度上预训练、在另一个尺度上微调的结果，通过增加模型在一个尺寸上计算的基对数概率和在另一个不同尺寸的模型上计算的行为delta。 例如，使用Llama - 2家族的模型，我们可以模拟70B尺度下的预训练和7B尺度下的微调结果，通过执行对数概率代数Llama-2-base 70B + (Llama-2-chat 7B - Llama-2-base 7B)，其中第一个项是基本对数概率，括号中的项是行为delta。 实验分析 实验：利用eft，对多个模型族和数据集在不同尺度下的预训练和微调结果进行了分析。 结果：在规模上进行预训练可以获得更多的原始知识积累(提高了事实正确性)，而在更大的规模上进行微调可以获得更多的有用性(提高了用户满意度) 其它结果： 还发现EFT可以通过一个我们称之为升尺度（up-scaling）的过程来提高小微调模型的性能，本质上是将小微调模型与一个更大的预训练模型集成在一起，而不需要对任何一个模型进行任何微调或修改。 我们的实验表明，在微调一个小的语言模型是可行的(如Falcon - 7B)，但微调一个大的语言模型不是由于资源限制(如Falcon - 180B)的场景中，上缩可以捕获微调大模型的大部分好处，而不需要执行任何模型微调。 最后，我们证明了EFT还可以通过混合不同权重的行为delta来模拟在测试时刻对微调目标的修改。 总结贡献 EFT框架 实验证明了缩放预训练导致事实性知识的提高，而缩放微调导致任务依从性的提高 模型升尺度技术，该技术使得一个小的微调模型和一个大的基模型能够近似微调一个大的基模型的计算密集型结果。 RELATED WORK 之前工作 通过无监督生成建模预训练的语言模型可以进行微调以进行通用对话生成很好的模型。 增加模型规模 和本文相关的3个 对比解码 以前的：改进语言模型采样，将小语言模型(用一个小的常数超参数来刻度)的对数概率从大语言模型的对数概率中减去。 我们的：于将这种对数概率差异解释为对数重要度权重，并将其用于二次加权中另一个模型的对数概率，而不需要增加缩放超参数。 尺度对RLHF期间使用的奖励模型的影响，这可以解释为在我们的工作中对微调阶段进行缩放；然而，他们没有探索预训练规模，也没有调查任何一个规模对独立模型能力的影响。 训练了一个模型在抽样过程中对基模型的条件分布重新加权。我们的工作不同之处在于，EFT不需要训练新的奖赏模型，在强化学习中具有原则性的基础，并且由于将奖赏参数化为对数概率(拉斐洛夫等, 2023)的比例，因此可以更有效地根据词汇量进行扩展。 EMULATED FINE-TUNING: DECOUPLING PRE-TRAINING \u0026 FINE-TUNING 包含以下内容\n描述模拟微调( EFT )的框架 它如何使预训练和微调的规模解耦 在实际中特别有用的模拟微调的特例——升尺度 Preliminaries eft将微调过程视为具有KL散度约束的强化学习( RL )，以防止从参考模型中发散，在这种情况下，参考模型指预训练模型。也就是说，我们把微调π ft的结果看成是问题的解\n$$\\pi_{\\mathfrak{l}}=\\pi^*(r,\\pi_{\\mathrm{ref}})=\\arg\\max_{\\pi}\\mathbb{E}{x\\sim p(x),y\\sim\\pi(\\cdot|x)}\\left[r(x,y)-\\beta\\mathrm{KL}(\\pi(\\cdot\\mid x)|\\pi{\\mathrm{ref}}(\\cdot\\mid x))\\right]$$\n目标函数：公式右侧的部分表示一个最大化问题，这里的argmax 表示我们要找到使得整个表达式达到最大值的策略𝜋 期望：E表示对随机变量x和y的期望，x是按照p(x)采样的，P (x)是一个固定的提示分布(或数据集) 奖励函数：r(x,y) 是一个奖励函数，它根据状态 x 和动作 y 计算得到奖励。目标是最大化这个奖励。 KL 散度：Kullback-Leibler 散度，用于测量策略 π 与参考策略 π_ref之间的差异。这个项的存在通常是为了引入某种正则化，使得优化的策略不会偏离参考策略太远。 超参数：β控制KL对预训练模型（参考模型）的约束强度 之前已经有工作求出来这个解了： $$\\pi^{*}(r,\\pi_{\\mathrm{ref}})(y\\mid x)={\\frac{1}{Z(x)}}\\pi_{\\mathrm{ref}}(y\\mid x)\\exp\\left({\\frac{1}{\\beta}}r(x,y)\\right)$$\n其中$Z(x)\\ =\\ \\sum_{y}\\pi_{\\mathrm{ref}}(y\\ \\mid\\ x)\\exp\\Big(\\frac{1}{\\beta}r(x,y)\\Big)$\n关键的是，虽然EFT框架是基于RL的微调解释的，但它适用于任何微调模型，因为任何语言模型都可以看作是对KL约束的RL的解决方案，并对预训练模型进行约束。\n具体来说，任何微调的语言模型π ft和预训练模型π Ref都可以通过一个奖励函数来建立映射关系，这个函数是$r_{π_{ft}}(x,y)$，使得KL约束的RL问题的解是微调模型 $$\\pi^{*}(r_{\\pi_{\\mathrm{ft}}},\\pi_{\\mathrm{ref}})=\\pi_{\\mathrm{ft}}$$ 其中\n$$r_{\\pi_{\\mathrm{ft}}}(x,y)=\\beta\\log\\frac{\\pi_\\mathrm{ft}(y|x)}{\\pi_\\mathrm{ref}(y|x)}$$\n表示微调模型$\\pi_{ft}$和参考模型$\\pi_{ref}$在给定输入x下生成输出y的相对概率关系\n利用语言模型和奖励之间的这种对偶性，对于任何从预训练模型π ref微调过来的语言模型π ft，我们都可以重写\n$$\\pi_{\\mathrm{ft}}(y\\mid x)=\\pi_{\\mathrm{ref}}(y\\mid x)\\exp\\left(\\underbrace{\\log\\frac{\\pi_{\\mathrm{ft}}(y\\mid x)}{\\pi_{\\mathrm{ref}}(y\\mid x)}}{\\mathrm{Implicit~reward}}\\right)=\\pi{\\mathrm{ref}}(y\\mid x)\\exp\\left(r_{\\pi_{\\mathrm{ft}}}(x,y)\\right)$$\n换句话说，微调模型π ft是以π ref为参考模型的KL约束报酬最大化问题的最优策略，其报酬函数为 $$r_{\\pi_\\mathrm{ft}}(x,y)=\\log{\\frac{\\pi_\\mathrm{ft}(y|x)}{\\pi_\\mathrm{ref}(y|x)}}$$ 我们现在已经清楚地描述了从预训练和微调中获得的信息的位置：预训练知识以基本的对数概率表示，而从微调中获得的能力则在奖励(从微调后的模型对数概率中减去基本对数概率的行为差值)中捕获。这种划分使得这些成分可以独立缩放，我们将在下面介绍。\n这一节总共可以看成2部分，也就是之前用分割线画出来的2部分。\n第一部分讲述EFT强调用RL约束下的微调后的模型用参考模型求解的计算公式。\n第二部分对所有参考-\u003e微调模型来说，也可以看作屎用一个RL约束求最优策略。（虽然这部分的公式写得很混乱，作者真的推导出来了吗？）\nScale Decoupling with EFT 给上一节最后的公式增加上下标，以明确用于计算相应条件句的模型大小，表示用于计算每个数量的模型的规模：\n$$\\pi_{M}^{N}(y\\mid x)=\\frac{1}{Z_{M}^{N}(x)}\\pi_{\\mathrm{pef}}^{N}(y\\mid x)\\exp\\Bigl(r_{\\pi}^{M}(x,y)\\Bigr)\\propto\\pi_{\\mathrm{ef}}^{N}(y\\mid x)\\frac{\\pi^{M}(y\\mid x)}{\\pi_{\\mathrm{nf}}^{M}(y\\mid x)}$$\n公式解读：\nM规模的reward函数$r_{\\pi}^{M}(x,y)=\\mathrm{log},\\frac{\\pi^{M}(y|x)}{\\pi_{\\mathrm{ref}}^{M}(y|x)}$ $\\propto$是近似的意思 尺度解耦的配分函数是$Z_{M}^{N}(x):=:\\sum_{y}\\pi_{\\mathrm{ref}}^{N}(y:\\mid x)\\exp\\left(r^{M}(x,y)\\right).$，它和上节最后一个公式不同，因为参考模型的大小不一样。 也就是说，$\\pi^N_M$对应于模拟混合大小为N的模型在预训练时学习到的知识和大小为M的模型在微调时学习到的知识。（这个是根据公式定义给出来的，因为公式的上标）\n而设定N = M对应的是对原政策的简单抽样，在本文中，我们特别探讨N 不等于 M的设定。\n对于N \u003c M，我们模拟将小参考(预训练)模型的知识与大模型在微调过程中学习到的知识混合； 对于N \u003e M，我们模拟将一个大的预训练模型的知识与一个小模型在微调过程中学习到的知识混合。 模拟微调采样 我们的实验依赖于从EFT模型中抽取样本。为此，我们根据eq4(就是Scale Decoupling with EFT开头的第一个公式)计算每个token的条件，但使用了一个(难以解决的)序列级配分函数的逐时步近似a per-timestep approximation of the (intractable) sequence-level partition function：\n$$\\tilde{\\pi}(y t\\mid x,y_{",
-  "wordCount" : "463",
-  "inLanguage": "en",
-  "datePublished": "2024-11-04T16:20:53Z",
-  "dateModified": "2024-11-04T16:20:53Z",
-  "author":{
-    "@type": "Person",
-    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://example.com/post/an-emulator-for-fine-tuning-large-language-models-using-small-language-models/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "我的博客",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://example.com/favicon.ico"
-    }
-  }
-}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
@@ -164,22 +96,22 @@
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="https://example.com/" title="首页">
+                <a href="http://localhost:1313/" title="首页">
                     <span>首页</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/about/" title="关于我">
+                <a href="http://localhost:1313/about/" title="关于我">
                     <span>关于我</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/categories/" title="分类">
+                <a href="http://localhost:1313/categories/" title="分类">
                     <span>分类</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/tags/" title="标签">
+                <a href="http://localhost:1313/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li>
@@ -196,7 +128,7 @@
     </h1>
     <div class="post-meta">
 
-<span title='2024-11-04 16:20:53 +0000 UTC'>November 4, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+<span title='2024-11-04 16:20:53 +0000 UTC'>November 4, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
 
 </div>
   </header> 
@@ -459,14 +391,14 @@ $$r_{\pi_\mathrm{ft}}(x,y)=\log{\frac{\pi_\mathrm{ft}(y|x)}{\pi_\mathrm{ref}(y|x
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://example.com/tags/fine-tune/">Fine Tune</a></li>
+      <li><a href="http://localhost:1313/tags/fine-tune/">Fine-Tune</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
 
     
     

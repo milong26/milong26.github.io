@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Optimization on 我的博客</title>
-    <link>https://example.com/tags/optimization/</link>
+    <link>http://localhost:1313/tags/optimization/</link>
     <description>Recent content in Optimization on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 02 Apr 2024 20:14:43 +0000</lastBuildDate>
-    <atom:link href="https://example.com/tags/optimization/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/optimization/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>局部最优和鞍点</title>
-      <link>https://example.com/post/%E5%B1%80%E9%83%A8%E6%9C%80%E4%BC%98%E5%92%8C%E9%9E%8D%E7%82%B9/</link>
+      <link>http://localhost:1313/post/%E5%B1%80%E9%83%A8%E6%9C%80%E4%BC%98%E5%92%8C%E9%9E%8D%E7%82%B9/</link>
       <pubDate>Tue, 02 Apr 2024 20:14:43 +0000</pubDate>
-      <guid>https://example.com/post/%E5%B1%80%E9%83%A8%E6%9C%80%E4%BC%98%E5%92%8C%E9%9E%8D%E7%82%B9/</guid>
+      <guid>http://localhost:1313/post/%E5%B1%80%E9%83%A8%E6%9C%80%E4%BC%98%E5%92%8C%E9%9E%8D%E7%82%B9/</guid>
       <description>&lt;p&gt;局部最优和鞍点都是处在grandient为0的位置，首先是找到这个位置，然后判断它是局部最优还是鞍点，利用海森矩阵从数学公式上就能判定。最后为了让损失函数更新能逃离鞍点，可以用海森矩阵或者动量两种方法。&lt;/p&gt;
 &lt;p&gt;太长不看版：&lt;strong&gt;文章总结&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;

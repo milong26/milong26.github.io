@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>pip安装产生的隔离环境问题 | 我的博客</title>
 <meta name="keywords" content="pip, pytorch">
 <meta name="description" content="conda创建了一个环境，已经安装了pytorch，import torch也正常
 但是pip install torch3d这种的时候，报错说no module named torch">
-<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
-<link rel="canonical" href="https://example.com/post/pip%E5%AE%89%E8%A3%85%E4%BA%A7%E7%94%9F%E7%9A%84%E9%9A%94%E7%A6%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98/">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/pip%E5%AE%89%E8%A3%85%E4%BA%A7%E7%94%9F%E7%9A%84%E9%9A%94%E7%A6%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://example.com/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
-<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://example.com/post/pip%E5%AE%89%E8%A3%85%E4%BA%A7%E7%94%9F%E7%9A%84%E9%9A%94%E7%A6%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/pip%E5%AE%89%E8%A3%85%E4%BA%A7%E7%94%9F%E7%9A%84%E9%9A%94%E7%A6%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98/">
 <noscript>
     <style>
         #theme-toggle,
@@ -65,80 +65,13 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://example.com/post/pip%E5%AE%89%E8%A3%85%E4%BA%A7%E7%94%9F%E7%9A%84%E9%9A%94%E7%A6%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="pip安装产生的隔离环境问题">
-  <meta property="og:description" content="conda创建了一个环境，已经安装了pytorch，import torch也正常 但是pip install torch3d这种的时候，报错说no module named torch">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:tag" content="Pip">
-    <meta property="article:tag" content="Pytorch">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="pip安装产生的隔离环境问题">
-  <meta name="twitter:description" content="conda创建了一个环境，已经安装了pytorch，import torch也正常 但是pip install torch3d这种的时候，报错说no module named torch">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://example.com/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "pip安装产生的隔离环境问题",
-      "item": "https://example.com/post/pip%E5%AE%89%E8%A3%85%E4%BA%A7%E7%94%9F%E7%9A%84%E9%9A%94%E7%A6%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "pip安装产生的隔离环境问题",
-  "name": "pip安装产生的隔离环境问题",
-  "description": "conda创建了一个环境，已经安装了pytorch，import torch也正常 但是pip install torch3d这种的时候，报错说no module named torch\n",
-  "keywords": [
-    "pip", "pytorch"
-  ],
-  "articleBody": "conda创建了一个环境，已经安装了pytorch，import torch也正常 但是pip install torch3d这种的时候，报错说no module named torch\n在后面加–no-build-isolation\n什么原因导致的 pip安装的时候会有隔离\n怎么解决，我也不知道，现在就只有no-build-isolation解君愁，如果不行那就是环境出了问题\n",
-  "wordCount" : "12",
-  "inLanguage": "en",
-  "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "0001-01-01T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://example.com/post/pip%E5%AE%89%E8%A3%85%E4%BA%A7%E7%94%9F%E7%9A%84%E9%9A%94%E7%A6%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "我的博客",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://example.com/favicon.ico"
-    }
-  }
-}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
@@ -164,22 +97,22 @@
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="https://example.com/" title="首页">
+                <a href="http://localhost:1313/" title="首页">
                     <span>首页</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/about/" title="关于我">
+                <a href="http://localhost:1313/about/" title="关于我">
                     <span>关于我</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/categories/" title="分类">
+                <a href="http://localhost:1313/categories/" title="分类">
                     <span>分类</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/tags/" title="标签">
+                <a href="http://localhost:1313/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li>
@@ -196,7 +129,7 @@
     </h1>
     <div class="post-meta">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
 
 </div>
   </header> 
@@ -210,15 +143,15 @@
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://example.com/tags/pip/">Pip</a></li>
-      <li><a href="https://example.com/tags/pytorch/">Pytorch</a></li>
+      <li><a href="http://localhost:1313/tags/pip/">Pip</a></li>
+      <li><a href="http://localhost:1313/tags/pytorch/">Pytorch</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
 
     
     

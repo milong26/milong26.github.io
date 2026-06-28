@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Peft on 我的博客</title>
-    <link>https://example.com/tags/peft/</link>
+    <link>http://localhost:1313/tags/peft/</link>
     <description>Recent content in Peft on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Mon, 18 Mar 2024 16:16:31 +0000</lastBuildDate>
-    <atom:link href="https://example.com/tags/peft/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/peft/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Towards A Unified View Of Parameter-Efficient Transfer Learning</title>
-      <link>https://example.com/post/towards-a-unified-view-of-parameter-efficient-transfer-learning/</link>
+      <link>http://localhost:1313/post/towards-a-unified-view-of-parameter-efficient-transfer-learning/</link>
       <pubDate>Mon, 18 Mar 2024 16:16:31 +0000</pubDate>
-      <guid>https://example.com/post/towards-a-unified-view-of-parameter-efficient-transfer-learning/</guid>
+      <guid>http://localhost:1313/post/towards-a-unified-view-of-parameter-efficient-transfer-learning/</guid>
       <description>&lt;p&gt;高效参数微调的综述类论文阅读&lt;/p&gt;
 &lt;p&gt;百篇paper计划(2/100)，对【高效参数】迁移学习的总结。&lt;/p&gt;
 &lt;p&gt;由于我也不怎么会选论文，就按照会议选了这篇比较近的(ps现在是2024年初)。光从标题看，这一篇应该是综述，正好我补一下几个经典的高效参数方法。&lt;/p&gt;

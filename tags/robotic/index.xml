@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Robotic on 我的博客</title>
-    <link>https://example.com/tags/robotic/</link>
+    <link>http://localhost:1313/tags/robotic/</link>
     <description>Recent content in Robotic on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Mon, 29 Sep 2025 15:19:42 +0000</lastBuildDate>
-    <atom:link href="https://example.com/tags/robotic/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/robotic/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>TinyVLA: Toward Fast, Data-Efficient Vision-Language-Action Models for Robotic Manipulation</title>
-      <link>https://example.com/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</link>
+      <link>http://localhost:1313/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</link>
       <pubDate>Mon, 29 Sep 2025 15:19:42 +0000</pubDate>
-      <guid>https://example.com/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</guid>
+      <guid>http://localhost:1313/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</guid>
       <description>&lt;p&gt;我要看这篇文章能否复现&lt;/p&gt;</description>
     </item>
     <item>
       <title>RoboGen: Towards Unleashing Infinite Data for  Automated Robot Learning via Generative Simulation</title>
-      <link>https://example.com/post/robogen-towards-unleashing-infinite-data-for-automated-robot-learning-via-generative-simulation/</link>
+      <link>http://localhost:1313/post/robogen-towards-unleashing-infinite-data-for-automated-robot-learning-via-generative-simulation/</link>
       <pubDate>Tue, 01 Apr 2025 15:56:36 +0000</pubDate>
-      <guid>https://example.com/post/robogen-towards-unleashing-infinite-data-for-automated-robot-learning-via-generative-simulation/</guid>
+      <guid>http://localhost:1313/post/robogen-towards-unleashing-infinite-data-for-automated-robot-learning-via-generative-simulation/</guid>
       <description>&lt;p&gt;看上去是那种一句话生成仿真环境的。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;一句话-&amp;gt;llm生成代码？assets还是得自己搞吧-&amp;gt;传到环境里面这个流程？
@@ -41,9 +41,9 @@
     </item>
     <item>
       <title>Generative Artificial Intelligence in Robotic Manipulation: A Survey</title>
-      <link>https://example.com/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</link>
+      <link>http://localhost:1313/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</link>
       <pubDate>Thu, 13 Mar 2025 15:59:45 +0000</pubDate>
-      <guid>https://example.com/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</guid>
+      <guid>http://localhost:1313/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</guid>
       <description>&lt;p&gt;(16/100)&lt;/p&gt;
 &lt;p&gt;what i want to get&lt;/p&gt;
 &lt;ol&gt;
@@ -54,23 +54,23 @@
     </item>
     <item>
       <title>genesis平台</title>
-      <link>https://example.com/post/genesis%E5%B9%B3%E5%8F%B0/</link>
+      <link>http://localhost:1313/post/genesis%E5%B9%B3%E5%8F%B0/</link>
       <pubDate>Thu, 19 Dec 2024 14:51:53 +0000</pubDate>
-      <guid>https://example.com/post/genesis%E5%B9%B3%E5%8F%B0/</guid>
+      <guid>http://localhost:1313/post/genesis%E5%B9%B3%E5%8F%B0/</guid>
       <description>&lt;p&gt;一个比robosuite更简洁的物理平台，专为通用机器人/人工智能/物理AI应用而设计。&lt;/p&gt;</description>
     </item>
     <item>
       <title>robosuite平台</title>
-      <link>https://example.com/post/robosuite%E5%B9%B3%E5%8F%B0/</link>
+      <link>http://localhost:1313/post/robosuite%E5%B9%B3%E5%8F%B0/</link>
       <pubDate>Mon, 02 Dec 2024 14:22:27 +0000</pubDate>
-      <guid>https://example.com/post/robosuite%E5%B9%B3%E5%8F%B0/</guid>
+      <guid>http://localhost:1313/post/robosuite%E5%B9%B3%E5%8F%B0/</guid>
       <description>&lt;p&gt;机器人模拟平台robosuite ，最后还是不用了。&lt;/p&gt;</description>
     </item>
     <item>
       <title>genesis平台</title>
-      <link>https://example.com/post/genesis-%E5%B9%B3%E5%8F%B0/</link>
+      <link>http://localhost:1313/post/genesis-%E5%B9%B3%E5%8F%B0/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/genesis-%E5%B9%B3%E5%8F%B0/</guid>
+      <guid>http://localhost:1313/post/genesis-%E5%B9%B3%E5%8F%B0/</guid>
       <description>&lt;p&gt;新物理平台https://genesis-world.readthedocs.io/en/latest/&lt;/p&gt;</description>
     </item>
   </channel>

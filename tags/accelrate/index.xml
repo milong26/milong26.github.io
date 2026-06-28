@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Accelrate on 我的博客</title>
-    <link>https://example.com/tags/accelrate/</link>
+    <link>http://localhost:1313/tags/accelrate/</link>
     <description>Recent content in Accelrate on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <atom:link href="https://example.com/tags/accelrate/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/accelrate/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>多gpu的accelerate</title>
-      <link>https://example.com/post/%E5%A4%9Agpu%E7%9A%84acclerate/</link>
+      <link>http://localhost:1313/post/%E5%A4%9Agpu%E7%9A%84acclerate/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/%E5%A4%9Agpu%E7%9A%84acclerate/</guid>
+      <guid>http://localhost:1313/post/%E5%A4%9Agpu%E7%9A%84acclerate/</guid>
       <description></description>
     </item>
   </channel>

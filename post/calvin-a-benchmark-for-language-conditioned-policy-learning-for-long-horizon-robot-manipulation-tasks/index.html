@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>CALVIN: A Benchmark for Language-Conditioned  Policy Learning for Long-Horizon Robot  Manipulation Tasks | 我的博客</title>
 <meta name="keywords" content="robot">
 <meta name="description" content="来不及自己看了，量子速读，发动！">
-<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
-<link rel="canonical" href="https://example.com/post/calvin-a-benchmark-for-language-conditioned-policy-learning-for-long-horizon-robot-manipulation-tasks/">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/calvin-a-benchmark-for-language-conditioned-policy-learning-for-long-horizon-robot-manipulation-tasks/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://example.com/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
-<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://example.com/post/calvin-a-benchmark-for-language-conditioned-policy-learning-for-long-horizon-robot-manipulation-tasks/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/calvin-a-benchmark-for-language-conditioned-policy-learning-for-long-horizon-robot-manipulation-tasks/">
 <noscript>
     <style>
         #theme-toggle,
@@ -64,81 +64,13 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://example.com/post/calvin-a-benchmark-for-language-conditioned-policy-learning-for-long-horizon-robot-manipulation-tasks/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="CALVIN: A Benchmark for Language-Conditioned  Policy Learning for Long-Horizon Robot  Manipulation Tasks">
-  <meta property="og:description" content="来不及自己看了，量子速读，发动！">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2025-03-23T17:22:30+00:00">
-    <meta property="article:modified_time" content="2025-03-23T17:22:30+00:00">
-    <meta property="article:tag" content="Robot">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="CALVIN: A Benchmark for Language-Conditioned  Policy Learning for Long-Horizon Robot  Manipulation Tasks">
-  <meta name="twitter:description" content="来不及自己看了，量子速读，发动！">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://example.com/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "CALVIN: A Benchmark for Language-Conditioned  Policy Learning for Long-Horizon Robot  Manipulation Tasks",
-      "item": "https://example.com/post/calvin-a-benchmark-for-language-conditioned-policy-learning-for-long-horizon-robot-manipulation-tasks/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "CALVIN: A Benchmark for Language-Conditioned  Policy Learning for Long-Horizon Robot  Manipulation Tasks",
-  "name": "CALVIN: A Benchmark for Language-Conditioned  Policy Learning for Long-Horizon Robot  Manipulation Tasks",
-  "description": "来不及自己看了，量子速读，发动！\n",
-  "keywords": [
-    "robot"
-  ],
-  "articleBody": "来不及自己看了，量子速读，发动！\n(18/100)\nwhat do i need from it?\n数据集什么样：包含24小时的远程操作“玩耍”数据和20,000条语言指令，这些数据通过无脚本的互动收集，具有任务无关性和多样性。 数据集怎么采集的 CALVIN 的数据集通过以下方式收集，主要分为两部分：​无脚本的远程操作“玩耍”数据和语言指令标注。\n​无脚本的远程操作“玩耍”数据 数据收集方式：使用 HTC Vive VR 头显进行远程操作，操作者在四个不同的环境中自由探索和互动，不受预定义任务的限制。 ​数据量：共收集了 24 小时的数据，每个环境约 6 小时，总计约 240 万次交互步骤和 4000 万个短时程窗口（每个窗口持续 1-2 秒）。 ​操作者：由三名未受过专门训练的操作者完成，他们被要求“在不将物体从桌子上掉落的前提下探索环境”。 ​互动内容：包括拾取和放置物体、打开和关闭抽屉、滑动门、按下按钮、操作开关等无目标导向的行为。 ​语言指令标注 ​标注方式：通过众包平台收集了 400 多条自然语言指令，对应 34 个具体任务。这些指令与机器人交互数据对齐。 ​标注比例：仅对 1% 的机器人交互数据进行语言标注，以模拟现实场景中无法为所有数据提供语言标注的情况。 语言嵌入：提供了预计算的语言嵌入（使用 MiniLM 模型），将句子映射为 384 维向量。 任务示例：例如“旋转红色方块向右”、“将蓝色方块推入抽屉”、“打开滑动门”等。 ",
-  "wordCount" : "46",
-  "inLanguage": "en",
-  "datePublished": "2025-03-23T17:22:30Z",
-  "dateModified": "2025-03-23T17:22:30Z",
-  "author":{
-    "@type": "Person",
-    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://example.com/post/calvin-a-benchmark-for-language-conditioned-policy-learning-for-long-horizon-robot-manipulation-tasks/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "我的博客",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://example.com/favicon.ico"
-    }
-  }
-}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
@@ -164,22 +96,22 @@
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="https://example.com/" title="首页">
+                <a href="http://localhost:1313/" title="首页">
                     <span>首页</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/about/" title="关于我">
+                <a href="http://localhost:1313/about/" title="关于我">
                     <span>关于我</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/categories/" title="分类">
+                <a href="http://localhost:1313/categories/" title="分类">
                     <span>分类</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/tags/" title="标签">
+                <a href="http://localhost:1313/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li>
@@ -196,7 +128,7 @@
     </h1>
     <div class="post-meta">
 
-<span title='2025-03-23 17:22:30 +0000 UTC'>March 23, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+<span title='2025-03-23 17:22:30 +0000 UTC'>March 23, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
 
 </div>
   </header> 
@@ -231,14 +163,14 @@
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://example.com/tags/robot/">Robot</a></li>
+      <li><a href="http://localhost:1313/tags/robot/">Robot</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
 
     
     

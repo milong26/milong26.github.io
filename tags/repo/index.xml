@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Repo on 我的博客</title>
-    <link>https://example.com/tags/repo/</link>
+    <link>http://localhost:1313/tags/repo/</link>
     <description>Recent content in Repo on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 21 May 2024 11:22:52 +0000</lastBuildDate>
-    <atom:link href="https://example.com/tags/repo/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/repo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>paper reading</title>
-      <link>https://example.com/post/paper-reading/</link>
+      <link>http://localhost:1313/post/paper-reading/</link>
       <pubDate>Tue, 21 May 2024 11:22:52 +0000</pubDate>
-      <guid>https://example.com/post/paper-reading/</guid>
+      <guid>http://localhost:1313/post/paper-reading/</guid>
       <description>&lt;p&gt;把看过的论文做一个总结，防止我忘掉&lt;/p&gt;</description>
     </item>
   </channel>

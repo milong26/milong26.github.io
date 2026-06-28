@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Fine Tune on 我的博客</title>
-    <link>https://example.com/tags/fine-tune/</link>
-    <description>Recent content in Fine Tune on 我的博客</description>
+    <title>Fine-Tune on 我的博客</title>
+    <link>http://localhost:1313/tags/fine-tune/</link>
+    <description>Recent content in Fine-Tune on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Mon, 04 Nov 2024 16:20:53 +0000</lastBuildDate>
-    <atom:link href="https://example.com/tags/fine-tune/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/fine-tune/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AN EMULATOR FOR FINE-TUNING LARGE LANGUAGE  MODELS USING SMALL LANGUAGE MODELS</title>
-      <link>https://example.com/post/an-emulator-for-fine-tuning-large-language-models-using-small-language-models/</link>
+      <link>http://localhost:1313/post/an-emulator-for-fine-tuning-large-language-models-using-small-language-models/</link>
       <pubDate>Mon, 04 Nov 2024 16:20:53 +0000</pubDate>
-      <guid>https://example.com/post/an-emulator-for-fine-tuning-large-language-models-using-small-language-models/</guid>
+      <guid>http://localhost:1313/post/an-emulator-for-fine-tuning-large-language-models-using-small-language-models/</guid>
       <description>&lt;p&gt;百篇paper计划(9/100)，用小模型微调大模型。&lt;/p&gt;</description>
     </item>
     <item>
       <title>LISA: Layerwise Importance Sampling for Memory-Efficient Large Language Model Fine-Tuning</title>
-      <link>https://example.com/post/lisa-layerwise-importance-sampling-for-memory-efficient-large-language-model-fine-tuning/</link>
+      <link>http://localhost:1313/post/lisa-layerwise-importance-sampling-for-memory-efficient-large-language-model-fine-tuning/</link>
       <pubDate>Mon, 01 Jul 2024 11:45:24 +0000</pubDate>
-      <guid>https://example.com/post/lisa-layerwise-importance-sampling-for-memory-efficient-large-language-model-fine-tuning/</guid>
+      <guid>http://localhost:1313/post/lisa-layerwise-importance-sampling-for-memory-efficient-large-language-model-fine-tuning/</guid>
       <description>&lt;p&gt;百篇paper计划(6/100)，好像是LoRA的改进，随便找的，而且这篇还没投会议呢。&lt;/p&gt;
 &lt;p&gt;这一篇也是微调，改lora&lt;/p&gt;
 &lt;p&gt;我以前看论文居然这么龟毛orz我的百篇paper计划创业未半而中道崩殂啊&lt;/p&gt;</description>
     </item>
     <item>
       <title>FULL PARAMETER FINE-TUNING FOR LARGE LANGUAGE MODELS WITH LIMITED RESOURCES</title>
-      <link>https://example.com/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/</link>
+      <link>http://localhost:1313/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/</link>
       <pubDate>Fri, 24 Nov 2023 17:10:38 +0000</pubDate>
-      <guid>https://example.com/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/</guid>
+      <guid>http://localhost:1313/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/</guid>
       <description>&lt;p&gt;百篇paper计划(1/100)，推荐阅读的，没有选择趋向。内容是：用有限的资源（主要是内存）进行全参数大模型微调，研究重点集中在微调部分，做的是内存优化的工作。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;论文标题：Full Parameter Fine-tuning for Large Language Models with Limited Resources&lt;/li&gt;

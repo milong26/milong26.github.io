@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Rl on 我的博客</title>
-    <link>https://example.com/tags/rl/</link>
+    <link>http://localhost:1313/tags/rl/</link>
     <description>Recent content in Rl on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 07 Mar 2025 20:57:09 +0000</lastBuildDate>
-    <atom:link href="https://example.com/tags/rl/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/rl/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Multi-Goal Reinforcement Learning: Challenging Robotics Environments and Request for Research</title>
-      <link>https://example.com/post/multi-goal-reinforcement-learning-challenging-robotics-environments-and-request-for-research/</link>
+      <link>http://localhost:1313/post/multi-goal-reinforcement-learning-challenging-robotics-environments-and-request-for-research/</link>
       <pubDate>Fri, 07 Mar 2025 20:57:09 +0000</pubDate>
-      <guid>https://example.com/post/multi-goal-reinforcement-learning-challenging-robotics-environments-and-request-for-research/</guid>
+      <guid>http://localhost:1313/post/multi-goal-reinforcement-learning-challenging-robotics-environments-and-request-for-research/</guid>
       <description>&lt;p&gt;好久没看论文了orz，这篇是从 &lt;a href=&#34;https://robotics.farama.org/envs/shadow_dexterous_hand/reach/&#34;&gt;gymnasium-robotics关于shadow hand的操作&lt;/a&gt;里翻出来的。借助gymm这个平台给单个灵巧手做强化学习。&lt;/p&gt;
 &lt;p&gt;(15/100)&lt;/p&gt;</description>
     </item>

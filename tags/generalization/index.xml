@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Generalization on 我的博客</title>
-    <link>https://example.com/tags/generalization/</link>
+    <link>http://localhost:1313/tags/generalization/</link>
     <description>Recent content in Generalization on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 27 Jan 2026 14:38:07 +0000</lastBuildDate>
-    <atom:link href="https://example.com/tags/generalization/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/generalization/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>VLA需要验证吗</title>
-      <link>https://example.com/post/vla%E9%9C%80%E8%A6%81%E9%AA%8C%E8%AF%81%E5%90%97/</link>
+      <link>http://localhost:1313/post/vla%E9%9C%80%E8%A6%81%E9%AA%8C%E8%AF%81%E5%90%97/</link>
       <pubDate>Tue, 27 Jan 2026 14:38:07 +0000</pubDate>
-      <guid>https://example.com/post/vla%E9%9C%80%E8%A6%81%E9%AA%8C%E8%AF%81%E5%90%97/</guid>
+      <guid>http://localhost:1313/post/vla%E9%9C%80%E8%A6%81%E9%AA%8C%E8%AF%81%E5%90%97/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://hf-mirror.com/blog/m1b/validation-loss-robotics&#34;&gt;Is using a validation set useful for end-to-end learning in robotics?&lt;/a&gt; huggingface上的一篇文章解释了，回答了我长久以来的一个问题&lt;/p&gt;
 &lt;p&gt;并且Lerobot之前有人实现过验证但是最终没有合并 &lt;a href=&#34;https://github.com/huggingface/lerobot/issues/250&#34;&gt;#250&lt;/a&gt;  &lt;a href=&#34;https://github.com/huggingface/lerobot/pull/283&#34;&gt;#283&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -21,17 +21,17 @@
     </item>
     <item>
       <title>Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy</title>
-      <link>https://example.com/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/</link>
+      <link>http://localhost:1313/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/</link>
       <pubDate>Tue, 09 Dec 2025 22:03:50 +0000</pubDate>
-      <guid>https://example.com/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/</guid>
+      <guid>http://localhost:1313/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/</guid>
       <description>&lt;p&gt;ee形式的action从机器人坐标系转移到相机坐标系可以提到对相机的泛化性。&lt;/p&gt;
 &lt;p&gt;也就是利用“空间对齐”带来泛化提升&lt;/p&gt;</description>
     </item>
     <item>
       <title>RoboKeyGen: Robot Pose and Joint Angles Estimation via  Diffusion-based 3D Keypoint Generation</title>
-      <link>https://example.com/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/</link>
+      <link>http://localhost:1313/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/</link>
       <pubDate>Mon, 08 Dec 2025 16:09:53 +0000</pubDate>
-      <guid>https://example.com/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/</guid>
+      <guid>http://localhost:1313/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/</guid>
       <description>&lt;p&gt;这篇文章用的英文单词好拗口，但是写得挺清晰的，还挺喜欢&lt;/p&gt;
 &lt;p&gt;解决什么问题？pose estimation，以前的要么慢，要么不够精确。这篇文章首先检测2d关键点，然后cross-camera（用内参计算）规范化，然后扩散模型生成3d（相机坐标），然后MLP推理出joint angle，用fk算出eepose等。
 对我有什么启发？相机的归一化能不能拓展到外参？Intrinsic-&amp;gt;Extrinsic&lt;/p&gt;

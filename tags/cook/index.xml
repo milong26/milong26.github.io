@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Cook on 我的博客</title>
-    <link>https://example.com/tags/cook/</link>
+    <link>http://localhost:1313/tags/cook/</link>
     <description>Recent content in Cook on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Mon, 01 Jul 2024 10:25:15 +0000</lastBuildDate>
-    <atom:link href="https://example.com/tags/cook/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/cook/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>开伙</title>
-      <link>https://example.com/post/%E5%BC%80%E4%BC%99/</link>
+      <link>http://localhost:1313/post/%E5%BC%80%E4%BC%99/</link>
       <pubDate>Mon, 01 Jul 2024 10:25:15 +0000</pubDate>
-      <guid>https://example.com/post/%E5%BC%80%E4%BC%99/</guid>
+      <guid>http://localhost:1313/post/%E5%BC%80%E4%BC%99/</guid>
       <description>&lt;p&gt;关于在家里做饭的备忘录&lt;/p&gt;</description>
     </item>
   </channel>

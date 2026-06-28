@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>vla数据集 | 我的博客</title>
 <meta name="keywords" content="daatset, benchmark, dataset">
 <meta name="description" content="看论文的时候一些数据集记录下来
 有个问题：vla为啥还能有benchmark，不都是本地部署吗？">
-<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
-<link rel="canonical" href="https://example.com/post/vla%E6%95%B0%E6%8D%AE%E9%9B%86/">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/vla%E6%95%B0%E6%8D%AE%E9%9B%86/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://example.com/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
-<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://example.com/post/vla%E6%95%B0%E6%8D%AE%E9%9B%86/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/vla%E6%95%B0%E6%8D%AE%E9%9B%86/">
 <noscript>
     <style>
         #theme-toggle,
@@ -65,83 +65,13 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://example.com/post/vla%E6%95%B0%E6%8D%AE%E9%9B%86/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="vla数据集">
-  <meta property="og:description" content="看论文的时候一些数据集记录下来
-有个问题：vla为啥还能有benchmark，不都是本地部署吗？">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:tag" content="Daatset">
-    <meta property="article:tag" content="Benchmark">
-    <meta property="article:tag" content="Dataset">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="vla数据集">
-  <meta name="twitter:description" content="看论文的时候一些数据集记录下来
-有个问题：vla为啥还能有benchmark，不都是本地部署吗？">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://example.com/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "vla数据集",
-      "item": "https://example.com/post/vla%E6%95%B0%E6%8D%AE%E9%9B%86/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "vla数据集",
-  "name": "vla数据集",
-  "description": "看论文的时候一些数据集记录下来\n有个问题：vla为啥还能有benchmark，不都是本地部署吗？\n",
-  "keywords": [
-    "daatset", "benchmark", "dataset"
-  ],
-  "articleBody": "看论文的时候一些数据集记录下来\n有个问题：vla为啥还能有benchmark，不都是本地部署吗？\ndroid https://arxiv.org/html/2403.12945v2 这个数据集很大，有很多操作 ds = tfds.load(“droid”, data_dir=“gs://gresearch/robotics”, split=“train”)\nfor episode in ds.take(5): for step in episode[“steps”]: image = step[“observation”][“exterior_image_1_left”] wrist_image = step[“observation”][“wrist_image_left”] action = step[“action”] instruction = step[“language_instruction”]\n没有state吗？24年3月的，lerobot上面好像也有，可以拿过来训练吧?就是不知道它的state在哪里\n代表性数据集包括Open X-Embodiment（OXE）[8]，它整合了来自21个机构的22个机器人数据集，涵盖527项技能和160,266个任务，以及BridgeData[23]，包括跨多个领域10个环境的71个任务。\nTHOR [24]、Habitat [25]、MuJoCo [26]、Isaac Gym [27] 和 CARLA [28] 等模拟器\nvla的终极目标是向通用具身智能\nhttps://huggingface.co/KarlP/droid\n比较各种新的和经典的怎文它们的action是什么？怎样获得末端位置的3d坐标。上面只是数据集，也不用花太多时间，因为并不是重要的改进方法 ",
-  "wordCount" : "46",
-  "inLanguage": "en",
-  "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "0001-01-01T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://example.com/post/vla%E6%95%B0%E6%8D%AE%E9%9B%86/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "我的博客",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://example.com/favicon.ico"
-    }
-  }
-}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
@@ -167,22 +97,22 @@
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="https://example.com/" title="首页">
+                <a href="http://localhost:1313/" title="首页">
                     <span>首页</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/about/" title="关于我">
+                <a href="http://localhost:1313/about/" title="关于我">
                     <span>关于我</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/categories/" title="分类">
+                <a href="http://localhost:1313/categories/" title="分类">
                     <span>分类</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/tags/" title="标签">
+                <a href="http://localhost:1313/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li>
@@ -199,7 +129,7 @@
     </h1>
     <div class="post-meta">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
 
 </div>
   </header> 
@@ -230,16 +160,16 @@ instruction = step[&ldquo;language_instruction&rdquo;]</p>
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://example.com/tags/daatset/">Daatset</a></li>
-      <li><a href="https://example.com/tags/benchmark/">Benchmark</a></li>
-      <li><a href="https://example.com/tags/dataset/">Dataset</a></li>
+      <li><a href="http://localhost:1313/tags/daatset/">Daatset</a></li>
+      <li><a href="http://localhost:1313/tags/benchmark/">Benchmark</a></li>
+      <li><a href="http://localhost:1313/tags/dataset/">Dataset</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
 
     
     

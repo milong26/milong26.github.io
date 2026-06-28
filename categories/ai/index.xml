@@ -2,32 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Ai on 我的博客</title>
-    <link>https://example.com/categories/ai/</link>
+    <link>http://localhost:1313/categories/ai/</link>
     <description>Recent content in Ai on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 19 Sep 2025 16:40:21 +0000</lastBuildDate>
-    <atom:link href="https://example.com/categories/ai/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/categories/ai/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>embed</title>
-      <link>https://example.com/post/embed/</link>
+      <link>http://localhost:1313/post/embed/</link>
       <pubDate>Fri, 19 Sep 2025 16:40:21 +0000</pubDate>
-      <guid>https://example.com/post/embed/</guid>
+      <guid>http://localhost:1313/post/embed/</guid>
       <description>&lt;p&gt;这个词语太抽象了，学习一下&lt;/p&gt;
 &lt;p&gt;原来说白了就是投影……&lt;/p&gt;</description>
     </item>
     <item>
       <title>思维链</title>
-      <link>https://example.com/post/%E6%80%9D%E7%BB%B4%E9%93%BE/</link>
+      <link>http://localhost:1313/post/%E6%80%9D%E7%BB%B4%E9%93%BE/</link>
       <pubDate>Wed, 17 Apr 2024 11:30:14 +0000</pubDate>
-      <guid>https://example.com/post/%E6%80%9D%E7%BB%B4%E9%93%BE/</guid>
+      <guid>http://localhost:1313/post/%E6%80%9D%E7%BB%B4%E9%93%BE/</guid>
       <description>&lt;p&gt;思维链针对的是大模型搞推理问题，让它直接从直接输出一个结果变成写推理过程+结果的形式。&lt;/p&gt;</description>
     </item>
     <item>
       <title>transformer</title>
-      <link>https://example.com/post/transformer/</link>
+      <link>http://localhost:1313/post/transformer/</link>
       <pubDate>Tue, 05 Mar 2024 21:17:53 +0000</pubDate>
-      <guid>https://example.com/post/transformer/</guid>
+      <guid>http://localhost:1313/post/transformer/</guid>
       <description>&lt;p&gt;Transformer是一个利用注意力机制来提高模型训练速度的神经网络架构。&lt;/p&gt;
 &lt;p&gt;#文本生成的架构 这一部分确定完成了，其它部分未完全完成，以后有空再补&lt;/p&gt;
 &lt;p&gt;唯一的问题：那个贼大的框架图每一步怎么走的？&lt;/p&gt;
@@ -63,16 +63,16 @@ $$&lt;/p&gt;
     </item>
     <item>
       <title>注意力机制</title>
-      <link>https://example.com/post/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</link>
+      <link>http://localhost:1313/post/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</link>
       <pubDate>Tue, 05 Mar 2024 16:49:09 +0000</pubDate>
-      <guid>https://example.com/post/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</guid>
+      <guid>http://localhost:1313/post/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</guid>
       <description>&lt;p&gt;注意力机制是transformer的核心，有三个关键的计算QKV&lt;/p&gt;</description>
     </item>
     <item>
       <title>编码器和解码器</title>
-      <link>https://example.com/post/%E7%BC%96%E7%A0%81%E5%99%A8%E5%92%8C%E8%A7%A3%E7%A0%81%E5%99%A8/</link>
+      <link>http://localhost:1313/post/%E7%BC%96%E7%A0%81%E5%99%A8%E5%92%8C%E8%A7%A3%E7%A0%81%E5%99%A8/</link>
       <pubDate>Mon, 04 Mar 2024 16:36:10 +0000</pubDate>
-      <guid>https://example.com/post/%E7%BC%96%E7%A0%81%E5%99%A8%E5%92%8C%E8%A7%A3%E7%A0%81%E5%99%A8/</guid>
+      <guid>http://localhost:1313/post/%E7%BC%96%E7%A0%81%E5%99%A8%E5%92%8C%E8%A7%A3%E7%A0%81%E5%99%A8/</guid>
       <description>&lt;p&gt;写完之后发现编码器和解码器这个框架不是很麻烦，就是一种思想，但是要扯上transformer就很麻烦orz。&lt;/p&gt;
 &lt;p&gt;一句话总结一下：编码器是可变-&amp;gt;固定，解码器是固定-&amp;gt;可变&lt;/p&gt;
 &lt;p&gt;encoder-decoder是seq2seq的一种实现，是深度学习中常见的模型框架。&lt;/p&gt;

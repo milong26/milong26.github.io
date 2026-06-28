@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Dexterous on 我的博客</title>
-    <link>https://example.com/tags/dexterous/</link>
+    <link>http://localhost:1313/tags/dexterous/</link>
     <description>Recent content in Dexterous on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 01 Apr 2025 16:54:39 +0000</lastBuildDate>
-    <atom:link href="https://example.com/tags/dexterous/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/dexterous/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>灵巧手抓取示例</title>
-      <link>https://example.com/post/%E7%81%B5%E5%B7%A7%E6%89%8B%E6%8A%93%E5%8F%96%E7%A4%BA%E4%BE%8B/</link>
+      <link>http://localhost:1313/post/%E7%81%B5%E5%B7%A7%E6%89%8B%E6%8A%93%E5%8F%96%E7%A4%BA%E4%BE%8B/</link>
       <pubDate>Tue, 01 Apr 2025 16:54:39 +0000</pubDate>
-      <guid>https://example.com/post/%E7%81%B5%E5%B7%A7%E6%89%8B%E6%8A%93%E5%8F%96%E7%A4%BA%E4%BE%8B/</guid>
+      <guid>http://localhost:1313/post/%E7%81%B5%E5%B7%A7%E6%89%8B%E6%8A%93%E5%8F%96%E7%A4%BA%E4%BE%8B/</guid>
       <description>&lt;p&gt;要求：灵巧手（手臂尽可能简单）抓取不同摩擦力的常见物体（能抓到就行，不需要用模型）&lt;/p&gt;</description>
     </item>
     <item>
       <title>dexgrasp类数据集收集</title>
-      <link>https://example.com/post/dexgrasp%E7%B1%BB%E6%95%B0%E6%8D%AE%E9%9B%86%E6%94%B6%E9%9B%86/</link>
+      <link>http://localhost:1313/post/dexgrasp%E7%B1%BB%E6%95%B0%E6%8D%AE%E9%9B%86%E6%94%B6%E9%9B%86/</link>
       <pubDate>Wed, 26 Mar 2025 10:15:30 +0000</pubDate>
-      <guid>https://example.com/post/dexgrasp%E7%B1%BB%E6%95%B0%E6%8D%AE%E9%9B%86%E6%94%B6%E9%9B%86/</guid>
+      <guid>http://localhost:1313/post/dexgrasp%E7%B1%BB%E6%95%B0%E6%8D%AE%E9%9B%86%E6%94%B6%E9%9B%86/</guid>
       <description>&lt;p&gt;收集的一些数据集&lt;/p&gt;</description>
     </item>
   </channel>

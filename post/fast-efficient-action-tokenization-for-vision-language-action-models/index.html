@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>FAST:Efficient Action Tokenization for  Vision-Language-Action Models | 我的博客</title>
 <meta name="keywords" content="tokenizer, vla, pi0">
 <meta name="description" content="pi0.5的时候用到这个方法：post-train里面用这个方法，说是因为这个论文发现了用离散的token训练更快。有点好奇是怎么把动作给离散化的，又不能分词，既然它能离散化的话，那图像也能离散化吗？">
-<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
-<link rel="canonical" href="https://example.com/post/fast-efficient-action-tokenization-for-vision-language-action-models/">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/fast-efficient-action-tokenization-for-vision-language-action-models/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://example.com/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
-<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://example.com/post/fast-efficient-action-tokenization-for-vision-language-action-models/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/fast-efficient-action-tokenization-for-vision-language-action-models/">
 <noscript>
     <style>
         #theme-toggle,
@@ -64,81 +64,13 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://example.com/post/fast-efficient-action-tokenization-for-vision-language-action-models/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="FAST:Efficient Action Tokenization for  Vision-Language-Action Models">
-  <meta property="og:description" content="pi0.5的时候用到这个方法：post-train里面用这个方法，说是因为这个论文发现了用离散的token训练更快。有点好奇是怎么把动作给离散化的，又不能分词，既然它能离散化的话，那图像也能离散化吗？">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:tag" content="Tokenizer">
-    <meta property="article:tag" content="Vla">
-    <meta property="article:tag" content="Pi0">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="FAST:Efficient Action Tokenization for  Vision-Language-Action Models">
-  <meta name="twitter:description" content="pi0.5的时候用到这个方法：post-train里面用这个方法，说是因为这个论文发现了用离散的token训练更快。有点好奇是怎么把动作给离散化的，又不能分词，既然它能离散化的话，那图像也能离散化吗？">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://example.com/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "FAST:Efficient Action Tokenization for  Vision-Language-Action Models",
-      "item": "https://example.com/post/fast-efficient-action-tokenization-for-vision-language-action-models/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "FAST:Efficient Action Tokenization for  Vision-Language-Action Models",
-  "name": "FAST:Efficient Action Tokenization for  Vision-Language-Action Models",
-  "description": "pi0.5的时候用到这个方法：post-train里面用这个方法，说是因为这个论文发现了用离散的token训练更快。有点好奇是怎么把动作给离散化的，又不能分词，既然它能离散化的话，那图像也能离散化吗？\n",
-  "keywords": [
-    "tokenizer", "vla", "pi0"
-  ],
-  "articleBody": "pi0.5的时候用到这个方法：post-train里面用这个方法，说是因为这个论文发现了用离散的token训练更快。有点好奇是怎么把动作给离散化的，又不能分词，既然它能离散化的话，那图像也能离散化吗？\n看这篇文章只想了解：\n结论怎么得到的：离散的训练更快，不是FAST，而是理论上的结果有吗 本来的工作是直接用离散的训练和输出吗，那它的效果应该比较慢 FAST怎么给动作编码的，连续的怎么变成离散？ 其它可能的问题？希望没有了 abstract里面看到一句话：Our tokenization approach, Frequency-space Action Sequence Tokenization (FAST), enables us to train autoregressive VLAs for highly dexterous and high-frequency tasks where standard discretization methods fail completely. 现在FAST是一个分词方法我明白了，自回归​​指的是一种序列生成模型的工作方式：模型在生成一个序列（如文本、动作令牌）时，会​​根据之前已经生成的所有内容来预测下一个单元​​。它是一个“一步接一步”的过程。一个自回归的Vision-Language-Action (VLA) 模型接收图像和语言指令作为输入，然后以自回归的方式生成一系列​​动作令牌​​。首先，它根据输入预测第一个动作令牌；然后，结合输入和第一个令牌预测第二个令牌，以此类推，直到生成完整的动作序列。\nFAST本质上就是一种​​针对自回归VLA模型设计的、全新的动作令牌化方案​​。它的提出，正是为了解决传统令牌化方法在高频、灵巧任务上训练自回归VLA时遇到的瓶颈。 Flow Matching（以及更广泛的扩散模型）是一种非自回归的方法，并不涉及下一个令牌预测。\n为什么要在pi0上用FAST实验，pi0不是用flow matching的吗 可以纯粹地比较​​“扩散解码”和“FAST自回归解码”​​ 这两种范式的优劣。实验结果（训练速度提升5倍）的说服力非常强。\nflow matching不是自回归，所以不会用历史动作，虽然也不是不行\nFAST怎么做到连续-离散的：归一化连续动作→应用离散余弦变换（DCT）到频域→量化和压缩→使用BPE生成离散令牌\n然后根据文章内容看\n离散的训练更快 相关工作怎么分action的： 方法：基于离散余弦变换的基于压缩的机器人动作标记化方案 结果 和pi0，pi0.5的比较 拓展\nfast是分词方式，特别适合用来给vla的动作分词（因为用自回归？flow matching不是自回归吧，pi0不就是用自回归的吗）？是这样的吗，可以给别的分吗 ",
-  "wordCount" : "54",
-  "inLanguage": "en",
-  "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "0001-01-01T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://example.com/post/fast-efficient-action-tokenization-for-vision-language-action-models/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "我的博客",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://example.com/favicon.ico"
-    }
-  }
-}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
@@ -164,22 +96,22 @@
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="https://example.com/" title="首页">
+                <a href="http://localhost:1313/" title="首页">
                     <span>首页</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/about/" title="关于我">
+                <a href="http://localhost:1313/about/" title="关于我">
                     <span>关于我</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/categories/" title="分类">
+                <a href="http://localhost:1313/categories/" title="分类">
                     <span>分类</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/tags/" title="标签">
+                <a href="http://localhost:1313/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li>
@@ -196,7 +128,7 @@
     </h1>
     <div class="post-meta">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
 
 </div>
   </header> 
@@ -236,16 +168,16 @@ Flow Matching（以及更广泛的扩散模型）是一种非自回归的方法�
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://example.com/tags/tokenizer/">Tokenizer</a></li>
-      <li><a href="https://example.com/tags/vla/">Vla</a></li>
-      <li><a href="https://example.com/tags/pi0/">Pi0</a></li>
+      <li><a href="http://localhost:1313/tags/tokenizer/">Tokenizer</a></li>
+      <li><a href="http://localhost:1313/tags/vla/">Vla</a></li>
+      <li><a href="http://localhost:1313/tags/pi0/">Pi0</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
 
     
     

@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>pi0 | 我的博客</title>
 <meta name="keywords" content="">
 <meta name="description" content="好方法，一直没看，2025/10/20上午2小时，下午1小时看完论文主要结构，测试没仔细看，代码也没看，主要是我想先比较一下pi0和pi0.5。">
-<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
-<link rel="canonical" href="https://example.com/post/pi0/">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/pi0/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://example.com/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
-<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://example.com/post/pi0/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/pi0/">
 <noscript>
     <style>
         #theme-toggle,
@@ -64,80 +64,13 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://example.com/post/pi0/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="pi0">
-  <meta property="og:description" content="好方法，一直没看，2025/10/20上午2小时，下午1小时看完论文主要结构，测试没仔细看，代码也没看，主要是我想先比较一下pi0和pi0.5。">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2025-10-20T16:08:55+00:00">
-    <meta property="article:modified_time" content="2025-10-20T16:08:55+00:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="pi0">
-  <meta name="twitter:description" content="好方法，一直没看，2025/10/20上午2小时，下午1小时看完论文主要结构，测试没仔细看，代码也没看，主要是我想先比较一下pi0和pi0.5。">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://example.com/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "pi0",
-      "item": "https://example.com/post/pi0/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "pi0",
-  "name": "pi0",
-  "description": "好方法，一直没看，2025/10/20上午2小时，下午1小时看完论文主要结构，测试没仔细看，代码也没看，主要是我想先比较一下pi0和pi0.5。\n",
-  "keywords": [
-    
-  ],
-  "articleBody": "好方法，一直没看，2025/10/20上午2小时，下午1小时看完论文主要结构，测试没仔细看，代码也没看，主要是我想先比较一下pi0和pi0.5。\n看完以后还记得的：\n自己预训练一个vlm的，用网络数据，作为知识，结果表示用vlm的更好 基础模型实用混杂数据训练的，混杂数据有不同的权重，然后用高质量数据post train 训练动作专家用的是flowmatching 目的是训练一个泛化性好的模型 冻结vlm+action expert结构 这么一看这个工作好像没有高什么创新，但是工作量是挺大的。\n上面应该已经是整篇文章的重点了，还有一些补充：\npre-train（不是vlm了，已经是vla）用的数据集是各种机器人的，所以有一个数据异构问题，和rdt类似 为了将流量匹配与 VLM 相结合，我们使用了一种新颖的动作专家，该专家通过基于流量的输出来增强标准 VLM。这个专家和smolvla的专家是一样的吗？为啥论文里面没有仔细讲这个专家结构-.- 加几个阅读文章：\npi0论文解读 pi0源代码 pi0+lerobot 看的时候的笔记\npi0也是冻结vlm+action expert\nflow matching\nbase on prompt\n“The model can then be used directly to perform tasks based on a prompt, or fine-tuned on high-quality data to enable complex multi-stage tasks” (Black et al., 2024, p. 1)\n我感觉基本就这两种改法了？\n一、基于 Prompt 的方法（Prompt-based Adaptation） “The model can then be used directly to perform tasks based on a prompt …”\n这类方法不改动模型权重，只通过输入指令或结构性提示(prompt) 来提升模型在新任务上的表现。\n例如：\n指令增强（Instruction Enhancement）：改变语言描述方式\n上下文引导（Contextual Prompting）：通过加入少量示例（in-context examples）或环境描述，让模型理解任务目标。\n视觉提示（Visual Prompting）：在输入图像上添加标记、框选区域或辅助通道，帮助模型理解关键视觉区域。\n这类方法的优点是：\n不需要重新训练；\n适合资源受限的场景；\n易于泛化和快速迁移。\n但缺点是：\n性能提升受限；\n对任务复杂度和prompt质量敏感。\n二、基于微调的方向（Fine-tuning / Adaptation-based Methods） “… or fine-tuned on high-quality data to enable complex multi-stage tasks.”\n这类方法在预训练VLA的基础上，通过**额外训练（fine-tuning）或适配层（adapter tuning）**使模型学到特定任务或策略。\n常见形式包括：\n全量微调（Full Fine-tuning）：重新训练整个模型；\n参数高效微调（PEFT，如LoRA、Adapter）：只训练部分参数；\n强化学习式微调（RLHF、behavior cloning）：用高质量示范数据或反馈优化策略。\n优点：\n能显著提升复杂任务（尤其是多阶段任务）的表现；\n可以弥补prompt-based方法在“操作序列生成”上的不足。\n缺点：\n需要大量高质量数据；\n计算成本高；\n泛化能力可能下降。\n那我之前做的应该更接近上下文引导？In-context Learning (ICL\n比如说改模型结构这种方案算哪种？举例：加空间感知和理解模块：\n输入里面加\naction head加？\n先回到这篇文章\n解决的问题是提高泛化性\n发现训练数据多样化然后微调或者提示比单一训练有效。也就是微调或者提示通才模型。\n“for effective specialized robot systems, it is more effective to first pre-train on highly diverse robot data, and then fine-tune or prompt for the desired task” (Black et al., 2024, p. 2)\n所以大问题是要训练一个足够泛化的通才模型，把这个问题拆解到三个挑战里面：\n“First, any such research must be done at a very large scale, because the full benefits of large-scale pre-training are often not present at smaller scales [54]. Second, it requires developing the right model architectures that can effectively make use of diverse data sources, while at the same time being able to represent the intricate and subtle behaviors necessary to interact with complex physical scenes. Third, it requires the right training recipe. This is perhaps the most important ingredient, as much of the recent progress with large models in NLP and computer vision has relied heavily on delicate strategies for curating pre-training and post-training data [35]” (Black et al., 2024, p. 2)\n大规模训练\n正确的模型架构能有效地利用不同的数据源，同时能够表示与复杂物理场景交互所需的复杂而微妙的行为\n正确的训练方法（最重要）\n怎么做的：\n冻结vlm，导入互联网规模的数据？继承了语言和视觉语言模型的常识、语义推理和解决问题的能力\n整合action，训练出vla模型\n为了用不同机器人资源，用“crossembodiment training” (Black et al., 2024, p. 3)\nflow matching\n新的动作专家，通过基于流量的输出增强标准 VLM\n所以pi0整个架构搞了5个创新点，从数据来源、预处理、到训练方式\n训练方式：“pre-training/post-training separation\nwhy：仅对高质量数据进行训练并不能教会模型如何从错误中恢复，因为在此类数据中很少出现错误。仅对较低质量的预训练数据进行训练并不能教会模型高效、稳健地行动。将两者结合起来提供了所需的行为：模型尽可能尝试以类似于高质量数据的方式行事，但仍然具有一系列恢复和纠正，可以在发生错误时部署。\n所以可以有那个，精细操作然后校正？那这样问题变成精确task上的成功率\n“We evaluate our model out of the box with language commands, with fine-tuning to downstream tasks, and in combination with a high-level semantic policy that outputs intermediate language commands to perform complex and temporally extended tasks.” (Black et al., 2024, p. 3)\n后半句话：\nhigh-level semantic policy：一个智能决策系统/策略层，它负责 把整体任务分解成可操作的步骤\nintermediate language commands：不是最终动作，而是 中间步骤的语言指令。\n类似于对下层模型或系统说：“先去拿杯子，再倒水”，而不是直接控制手臂动作。\n看完introduction的问题：\ninternet-scale数据集是用来训练vlm的？为什么不用人家已经预训练完的？它得到的vlm是用来处理什么东西？\n所以它是先用internet数据集训练一个vlm作为知识库，然后用开放的具甚至能数据训练action expert，这一部分是pre training，然后post training就是做下游任务这个结构？其中prompt执行任务还用了一个高层-中层-低层的分层模式\nOverview\n在这一章节我的目的：增强对模型的了解程度。看来这一章还是总括，总结了一些技术细节，方法还是在下一章\n框架图里面的action expert看不懂\npaligemma为什么要用这个初始化\n预训练vlm数据集里面的多种语言标签，子轨迹的细粒度标签这些是什么\n什么是段注释？这个注释是加在哪里的，视频？图片？还是一个额外的输入标签？训练的时候可以这样搞，那测试咋办\n原来高质量数据不是用来预训练而是post-train to adapt downstream\n它的轨迹是以秒为单位？\n“PaliGemma” (Black et al., 2024, p. 4)是什么\ndata mixture有什么特殊工作？不可能直接混合吧\n整个流程\npre train+post train\n训练目标不一样所以数据集质量也不一样\n数据集有不同的加权\nvlm语义推断，高级策略\n实验：\nbase model：用full dataset train一下\nparity：该版本仅针对 160k 步进行训练（而我们的主模型为 700k 步）\npi0-small：没有经过vlm的版本\n实践：准备pi0和pi0.5用pusht数据微调一下\n",
-  "wordCount" : "401",
-  "inLanguage": "en",
-  "datePublished": "2025-10-20T16:08:55Z",
-  "dateModified": "2025-10-20T16:08:55Z",
-  "author":{
-    "@type": "Person",
-    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://example.com/post/pi0/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "我的博客",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://example.com/favicon.ico"
-    }
-  }
-}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
@@ -163,22 +96,22 @@
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="https://example.com/" title="首页">
+                <a href="http://localhost:1313/" title="首页">
                     <span>首页</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/about/" title="关于我">
+                <a href="http://localhost:1313/about/" title="关于我">
                     <span>关于我</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/categories/" title="分类">
+                <a href="http://localhost:1313/categories/" title="分类">
                     <span>分类</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/tags/" title="标签">
+                <a href="http://localhost:1313/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li>
@@ -195,7 +128,7 @@
     </h1>
     <div class="post-meta">
 
-<span title='2025-10-20 16:08:55 +0000 UTC'>October 20, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+<span title='2025-10-20 16:08:55 +0000 UTC'>October 20, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
 
 </div>
   </header> 
@@ -436,7 +369,7 @@
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
 
     
     

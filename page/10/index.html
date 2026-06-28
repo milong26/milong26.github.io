@@ -2,25 +2,25 @@
 <html lang="en" dir="auto" data-theme="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.157.0"><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.157.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>我的博客</title>
 
 <meta name="description" content="">
-<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
-<link rel="canonical" href="https://example.com/">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://example.com/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
-<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://example.com/index.xml" title="rss">
-<link rel="alternate" hreflang="en" href="https://example.com/">
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/index.xml" title="rss">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/">
 <noscript>
     <style>
         #theme-toggle,
@@ -66,34 +66,13 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://example.com/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="我的博客">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="website">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="我的博客">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "我的博客",
-  "url": "https://example.com/",
-  "description": "",
-  "logo": "https://example.com/favicon.ico",
-  "sameAs": [
-      
-  ]
-}
 </script>
 </head>
 <body class="list" id="top">
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
@@ -119,22 +98,22 @@
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="https://example.com/" title="首页">
+                <a href="http://localhost:1313/" title="首页">
                     <span class="active">首页</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/about/" title="关于我">
+                <a href="http://localhost:1313/about/" title="关于我">
                     <span>关于我</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/categories/" title="分类">
+                <a href="http://localhost:1313/categories/" title="分类">
                     <span>分类</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/tags/" title="标签">
+                <a href="http://localhost:1313/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li>
@@ -145,179 +124,220 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">
+    <h2 class="entry-hint-parent">TinyLLM: Learning a Small Student from Multiple Large Language Models
     </h2>
   </header>
   <div class="entry-content">
-    <p>创新点与结果分析 【Big】创新点一：基于状态信息覆盖（SIC）的示范数据分析框架 核心问题 轻量化 VLA 的下游微调数据采集面临一个实践难题：不同的位置-姿态采集配置与重复次数组合，会导致模型获得截然不同的泛化能力，但评估代价极高。现有主动学习方法（FPS、k-center）只能解决&#34;覆盖哪些状态&#34;，无法解决&#34;有限预算下重复次数如何分配&#34;这一同等重要的问题。SIC 框架正是为此而设计的。
-方法 将数据质量评估转化为冻结 VLM 嵌入空间中的覆盖密度问题。以最小全覆盖集 $B_0$ 构建锚点参考系，锚点由全局首帧嵌入（刻画初始位置姿态）与腕部中段均值嵌入（刻画操作动态）双视角互补表示。
-SIC 函数融合三个机制：
-$$\text{SIC}(\mathcal{D}) = \sum_{a \in \mathcal{A}} \frac{\sigma_\text{global}(a,\mathcal{D})}{1&#43;\sigma_\text{global}} &#43; \lambda \cdot \sum_{a \in \mathcal{A}} \frac{\sigma_\text{wrist}(a,\mathcal{D})}{1&#43;\sigma_\text{wrist}}$$
-Laplacian 空间接近度：带宽由最近邻距离自适应确定，无额外超参数； 对数次数软化权重 $\tau(t) = \alpha \log\frac{t&#43;1}{t}$：对重复采集的边际贡献建模，使 SIC 能感知重复次数的合理性； 锚点级饱和变换：将已充分覆盖区域的边际收益压至趋零，为贪心算法提供理论保障（SIC 具有单调性与边际递减性）。 在 SIC 的基础上，以 $B_0$ 为起点运行前向贪心规划，每步追加边际增益最大的配置，输出&#34;位置-姿态-次数&#34;采集清单。
-关键结果 📊 图示参考：fig:ch3_siv_scatter——SIC 分数与真实任务成功率散点图（Spearman ρ=0.8336，p=0.0008），正相关趋势清晰；留一法检验 ρ 均值 0.8292，最差 0.7836，结论稳健。
-📊 图示参考：fig:ch3_greedy_curve &#43; fig:ch3_heatmap——贪心迭代 SIC 增长曲线与最终采集方案热力图，呈现非均匀异构分配：高信息量配置获得 3-4 次，已饱和区域仅保留 1 次。
-144 集预算下核心对比：
-策略 SR (%) 最小覆盖基线 $B_0$（72 集） 78±0.7 均匀双倍 / FPS / k-center（均为 144 集） 84±0.4 固定结构最优（B144-diagonal） 86±1.3 SIC 引导（本文，144 集） 93±1.0 全量数据（288 集） 96±1.2 FPS 和 k-center 在 $B_0$ 已全覆盖的条件下均退化为均匀分配，说明传统空间采样方法对重复次数分配问题完全无效。SIC 引导方案以 50% 的数据量将性能差距控制在 3 个百分点内。
+    <p>小样本llm论文阅读，百篇paper计划(3/100)
 ...</p>
   </div>
   <footer class="entry-footer">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to " href="https://example.com/post/analysis_v2/"></a>
+<span title='2024-03-24 20:41:50 +0000 UTC'>March 24, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to TinyLLM: Learning a Small Student from Multiple Large Language Models" href="http://localhost:1313/post/tinyllm-learning-a-small-student-from-multiple-large-language-models/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">
+    <h2 class="entry-hint-parent">Towards A Unified View Of Parameter-Efficient Transfer Learning
     </h2>
   </header>
   <div class="entry-content">
-    <p>git clone git@github.com:RLinf/RLinf.git 文档里面只写了venv安装，那conda环境怎么搞？ conda create -n rlinf python=3.11 conda activate rlinf
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to " href="https://example.com/post/rlinf/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>做一件事时要完全专注于当下，不同时想着其他任务，切换到下一件事时也尽量让情绪和思维归零，不带着上一件事的干扰。为了帮助实现这种切换，可以利用物理环境或工具的变化，比如换地点、换设备、换软件，甚至用不同空间来区分不同任务，从而给大脑明确的“结束与开始”的信号。同时，建议将脑力和体力任务交替安排，避免连续高消耗，从而减少疲劳感。整体想表达的是，通过人为设计“切换机制”，让注意力更集中、内耗更少，使多任务生活变得更可持续，而不是同时分心处理多件事。
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to " href="https://example.com/post/%E5%BF%83%E7%90%86/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p></p>
-  </div>
-  <footer class="entry-footer">
-
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to " href="https://example.com/post/%E6%9C%AA%E5%91%BD%E5%90%8D/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>2026年6月7日大清理：
-BIlibili历史记录：网页版关闭保存历史记录的功能。 app端历史记录已清除。 还留下若干收藏夹，稍后再看。这一波清理干净之前不再增加 一周内清理干净 手机端缓存视频若干 ipad端缓存视频活干 长毛象上面的收藏稍微清理了一些，还是有很多。 难受啊，怎么会有这么多马了的。 看看能不能把“马了就是忘了”那里做一个单独的工具箱页面
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to " href="https://example.com/post/%E6%B8%85%E7%90%86/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>ZLY@3090# 查看磁盘占用情况
-主要的home du -sh ~/* /.??* 2&gt;/dev/null | sort -hr 主要是/.cache这个文件夹，可以过段时间再删
-然后是主要的工作文件夹 /data/zhonglinye du -sh /data/zhonglinye 2&gt;/dev/null 查看总占用，但是没啥用 du -sh /data/zhonglinye/* 2&gt;/dev/null 查看一级子目录，有用 du -ah /data/zhonglinye 2&gt;/dev/null | sort -rh | head -20 查看前20个最大文件和目录
-好像差不多了，以后再看lerobot的还有hfdata，太乱了看不懂
-cd ~ du -sh ~/* ~/.??* 2&gt;/dev/null | sort -hr 感觉.cache文件夹过大了，删掉 然后是/data/zhonglinye
-du -sh /data/zhonglinye/* 2&gt;/dev/null wandb文件夹可以清空 然后hfdata 和code太大了 cache里面主要是pip的，等我安装完再删除 code和hfdata比较大 du -sh /data/zhonglinye/hfdata/* 2&gt;/dev/null 主要是datasets文件夹很大，但我又不知道哪些数据重要orz 还有hub，huggingface，lerobot这几个文件夹比较大。 那把自己采集的数据集做一个存档吧 之前的数据都上传到哪里了？ /data/zhonglinye/hfdata/huggingface/lerobot 其他的都是后来下载的，不用管
-…/hfdata/huggingface$ tar -czvf lerobot.tar.gz lerobot 打包需要一点时间，压缩以后还15.72G，等下载到windows以后就把hfdata里面的内容清理掉
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to " href="https://example.com/post/%E6%B8%85%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>2026年6月24日20元购入小米无线键鼠套装3，蓝牙，需要5号电池，鼠标和键盘都需要。usb-A连接器不能乱丢。
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to " href="https://example.com/post/%E7%89%A9%E6%96%BD%E4%BA%8E%E4%BA%BA/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">_日记2026
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to _日记2026" href="https://example.com/post/%E6%97%A5%E8%AE%B02026/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">action space
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>joint-level与end-effector-Cartesian-level
+    <p>高效参数微调的综述类论文阅读
+百篇paper计划(2/100)，对【高效参数】迁移学习的总结。
+由于我也不怎么会选论文，就按照会议选了这篇比较近的(ps现在是2024年初)。光从标题看，这一篇应该是综述，正好我补一下几个经典的高效参数方法。
+论文标题：Towards a Unified View of Parameter-Efficient Transfer Learning arxiv地址：链接 code：github rank: ICLR 2022 (spotlight presentation) abstract 大背景： 在下游任务上微调大规模的、预训练的模型 在NLP领域里面用得很多。但是传统方法全参数微调，当模型参数和任务个数增加时变得很难搞。 小背景（现在工作）： 高效参数迁移学习(parameter-efficient transfer learning)方法只微调小规模参数，但是几种方法之间缺少系统的联系 贡献 分析了几种最先进的高效参数迁移学习方案，给出一个统一的框架。 具体： 将这几种方法概括为修改预训练模型中特定的隐藏状态，并定义一组设计维度来总括性地设计方法。 通过跨机器翻译、文本摘要、语言理解和文本分类基准的综合实证研究，我们利用统一的观点来识别以前方法中的重要设计选择。 实验： 统一框架实现了设计元素在不同方法之间的迁移，因此我们能够实例化新的参数高效的微调方法，这些方法比以前的方法调整更少的参数，同时更有效，在所有四个任务上都能获得与所有参数微调相当的结果。 introduction 大背景 在预训练的语言模型PLMs基础上进行迁移学习在NLP领域比较流行。 为什么不要全参数微调：模型越来越大&#43;需要对每个任务都微调。
+小背景 一些方法更新小部分参数，让大部分参数不变。
+adapter tuning 在预训练网络每层中插入一些小的神经模块adapters 微调时只训练adapters
+prefix tuning 和 prompt tuning 从 通过文本提示控制PLM的提示方法(prompting methods that control PLMs through textual prompts) 出发，给输入或者隐含层预置了一个额外的可调前缀标记l，并且在下游任务中预训练时，只训练这些soft prompt (这个soft prompt应该是刚刚预置的可调标记)
+LoRA（low-rank matrices to approximate parameter updates） 学习低秩矩阵来近似参数更新。
+总结 这些方法在不同的任务集上表现出与全微调相当的性能，通常通过更新不到1%的原始模型参数来实现。 除了节省参数外，高效参数的调整使其能够快速适应新任务而不会遗忘。并且在分布外评估(out-of-distribution evaluation)中表现出优异的健壮性。
 ...</p>
   </div>
   <footer class="entry-footer">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to action space" href="https://example.com/post/action-space/"></a>
+<span title='2024-03-18 16:16:31 +0000 UTC'>March 18, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to Towards A Unified View Of Parameter-Efficient Transfer Learning" href="http://localhost:1313/post/towards-a-unified-view-of-parameter-efficient-transfer-learning/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">affordance模型
+    <h2 class="entry-hint-parent">softmax
     </h2>
   </header>
   <div class="entry-content">
-    <p>看论文看到一个概念 functional affordance model,一开始还以为是affordable（给得起的）还在想这论文这么节俭，后面才发现是一个专有概念orz
+    <p>之前学的时候把softmax当作在公式里的点缀，现在来研究一下整个函数
 ...</p>
   </div>
   <footer class="entry-footer">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to affordance模型" href="https://example.com/post/affordance%E6%A8%A1%E5%9E%8B/"></a>
+<span title='2024-03-06 16:37:12 +0000 UTC'>March 6, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to softmax" href="http://localhost:1313/post/softmax/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">transformer
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Transformer是一个利用注意力机制来提高模型训练速度的神经网络架构。
+#文本生成的架构 这一部分确定完成了，其它部分未完全完成，以后有空再补
+唯一的问题：那个贼大的框架图每一步怎么走的？
+前提 编码器&#43;解码器 自注意力 解析 image 一个盒子，以文本翻译为例，输入中文句子，输出英文句子。
+解码器和编码器 这个盒子有两部分：解码器和编码器。 编码器之间：每一个的小编码器的输入是前一个小编码器的输出，而每一个小解码器的输入不光是它的前一个解码器的输出，还包括了整个编码部分的输出。 解析编码器：自注意力&#43;前馈神经网络 解析解码器：同样的，在decoder中使用的也是同样的结构。也是首先对输出（machine learning）计算自注意力得分，不同的地方在于，进行过自注意力机制后，将self-attention的输出再与Decoders模块的输出计算一遍注意力机制得分
+残差神经网络 为了解决梯度消失的问题，在Encoders和Decoder中都是用了残差神经网络的结构
+softmax 回归最初的问题，将“机器学习”翻译成“machine learing”，解码器输出本来是一个浮点型的向量，怎么转化成“machine learing”这两个词呢？
+最后的线性层接上一个softmax，其中线性层是一个简单的全连接神经网络，它将解码器产生的向量投影到一个更高维度的向量（logits）上，假设我们模型的词汇表是10000个词，那么logits就有10000个维度，每个维度对应一个惟一的词的得分。之后的softmax层将这些分数转换为概率。选择概率最大的维度，并对应地生成与之关联的单词作为此时间步的输出就是最终的输出
+位置编码 把词向量输入变成携带位置信息的输入：
+我们可以给每个词向量加上一个有顺序特征的向量，发现sin和cos函数能够很好的表达这种特征，所以通常位置向量用以下公式来表示： $$ PE (pos,2i)= sin(\frac{pos}{10000^{2i/d_{model}}}) \ PE (pos,2i&#43; 1)= cos(\frac{pos}{10000^{2i/d_{model}}}) $$
+结构 Transformer 的内部结构图，左侧为 Encoder block，右侧为 Decoder block。 红色圈中的部分为 Multi-Head Attention，可以看到 Encoder block 包含一个 Multi-Head Attention，而 Decoder block 包含两个 Multi-Head Attention (其中有一个用到 Masked)。
+Multi-Head Attention 上方还包括一个 Add &amp; Norm 层，Add 表示残差连接 (Residual Connection) 用于防止网络退化，Norm 表示 Layer Normalization，用于对每一层的激活值进行归一化。
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2024-03-05 21:17:53 +0000 UTC'>March 5, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to transformer" href="http://localhost:1313/post/transformer/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">注意力机制
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>注意力机制是transformer的核心，有三个关键的计算QKV
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2024-03-05 16:49:09 +0000 UTC'>March 5, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 注意力机制" href="http://localhost:1313/post/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">编码器和解码器
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>写完之后发现编码器和解码器这个框架不是很麻烦，就是一种思想，但是要扯上transformer就很麻烦orz。
+一句话总结一下：编码器是可变-&gt;固定，解码器是固定-&gt;可变
+encoder-decoder是seq2seq的一种实现，是深度学习中常见的模型框架。
+定义 Encoder将可变长度的输入序列编码成一个固定长度的向量； Decoder将固定长度的向量解码成一个可变长度的输出序列； Encoder-Decoder阶段的编码与解码的方式可以是CNN、RNN、LSTM、GRU等 （所以encoder和decoder中间的向量长度是固定的，这也是它的一个缺陷）
+为什么是缺陷，长度固定的&#43;缺点体现在哪里
+RNN的编码器解码器 该结构来自论文Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation RNN编码-解码器 ，该模型包含两个RNN，分别位于编码器和解码器中。 编码器中的RNN负责将变长的输入序列映射到一个固定长度的向量中，解码器中的RNN则负责将向量映射到一个变长的输出序列中。 定性的来讲，这个模型可以学习语言短语的有意义的的语义和句法表示。
+编码器 编码器部分的隐藏层状态用 $h_t$表示，隐含层更新公式为 $$ h_t=f(h_{t-1},x_t) $$ f是一个函数，可以是简单的sigmoid，也可以是复杂的LSTM，上文提到的论文里面用的是GRU C 是中间语义表示，可以是h总和也可以是最后一个h，看用的什么方法。这里描述的是用RNN，RNN的信息会流到最后，所以这篇paper里用的是最后一个h
+解码器 解码器的隐含层更新为 $$ s_t=g(s_{t-1},y_{t-1},c) $$ 最后模型的输出预测为 $$ P(y_t|y_{t-1},y_{t-2},…y_1,c)=g(s_t,y_{t-1},c) $$
+训练 对解码阶段每个时间步骤i，解码器输出$y_i$的条件概率为$P(y_i|y_1…y_{i-1},c)$，输出序列的联合概率函数为 $$ P(y_1,…y_{T’}|x_1,…x_T)=\prod_{i=1}^{T’}P(y_i|y_1…y_{i-1},c) $$
+想要最大化输出序列的联合概率，根据最大似然估计
+$$ max_\theta \frac{1}{N} \sum_{n=1}^N logp_\theta(y_n|x_n) $$
+引入注意力 在普通的编码器-解码器模型中，有一个很大的局限性。那就是上下文变量对于 Decoding 阶段每个时间步都是一样的，这可能是模型性能的一个瓶颈。
+我们希望不同时间步的解码能够依赖于与之更相关的上下文信息，换句话说，Decoding 往往并不需要整个输入序列的信息，而是要有所侧重。于是，Bengio 团队的 Bahdanau 在 2014年首次在编码器-解码器模型中引入了注意力机制 (Attention Mechanism)
+具体做法： 在解码器过程中，在时间步i，将c泛化为$c_i$ 注意力机制的目标是让解码器在每一时间步对输入序列中不同时间步编码的信息分配不同的注意力。那么体现在上下文变量中， $c_i$就是 Encoder 中不同时间步的隐藏状态的加权平均。
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2024-03-04 16:36:10 +0000 UTC'>March 4, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 编码器和解码器" href="http://localhost:1313/post/%E7%BC%96%E7%A0%81%E5%99%A8%E5%92%8C%E8%A7%A3%E7%A0%81%E5%99%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">hexo
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>hexo&#43;github pages 生成个人网站。不知道hexo我还愿意用几年。
+估计下次更新就变成使用hugo了，尽管我还没写几篇，等写到100篇的时候换hugo吧
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2024-03-04 15:26:28 +0000 UTC'>March 4, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to hexo" href="http://localhost:1313/post/hexo/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">FULL PARAMETER FINE-TUNING FOR LARGE LANGUAGE MODELS WITH LIMITED RESOURCES
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>百篇paper计划(1/100)，推荐阅读的，没有选择趋向。内容是：用有限的资源（主要是内存）进行全参数大模型微调，研究重点集中在微调部分，做的是内存优化的工作。
+论文标题：Full Parameter Fine-tuning for Large Language Models with Limited Resources arxiv地址：链接 code：github abstract 背景：LLMs给NLP问题带来了革命性变化，but需要大量GPU资源
+已有：高效参数微调（PEFT），没有彻底解决 PEFT参考文档
+parameter-efficient fine-tuning vs full-parameter fine-tune
+创新：提出了新的优化器 LOw-Memory-Optimization 内容：在一个步骤融合了梯度计算和参数更新
+怎么融合(fuse)？
+效果：和标准方法（DeepSpeed解决方案）相比，我们将内存使用量减少到10.8%。 因此，我们的方法可以在一台拥有8×RTX 3090的机器上对65B模型进行全参数微调，每台机器都有24GB内存
+introduction 感觉就是把摘要扩写了一遍
+背景：LLMs 厉害，但是要钱。
+目前：有效参数微调方法 比如：LoRA,Prefix-tuning 但是：没有全参数的
+解决问题：我们要找个办法实现全参数微调
+干了啥
+分析LLMs里面内存使用的四个主要方面： 激活，优化器状态，梯度张量和参数 从三个方面优化了训练过程： SGD-优化器：由于SGD不存储任何中间状态，可以删除整个优化器状态部分SGD是什么 LOMO把梯度tensor的内存使用降到了O(1) 为了稳定使用混合精度训练：集成梯度归一化和损失缩放，并将某些计算过渡到全精度 结果 内存使用量等于参数使用量加上激活量和最大梯度张量。
+分析了：
+内存和吞吐量 下游表现 贡献
+SGD LOMO 验证 related work 都是节省内存的技术
+Activation Checkpointing 计算图中策略性地选择的检查点节点的激活变量在正向阶段后保留在内存中，而其余节点的激活变量在梯度计算时最多重新计算一次。激活内存可以降低原始内存使用量的平方根，代价是需要多一次正向传递。 在前向传播过程中，有选择性的丢弃一些产生的中间激活值，当反向传播需要使用这些激活值时，再依据上一个保存的激活值来计算出这些需要的激活值来帮助完成反向传播。这样一来，便可以大大减少训练过程中所需要的存储空间。
+Mixed-Precision Training 混合精度，32位浮点数和16位浮点数混合使用
+Heterogeneous Training System 通过利用异构内存（如CPU和NVMe内存）来减少GPU内存消耗
+但是怎么做？？
+method 优化器 adam和SGD比起来哪里不好了！ 参考https://blog.csdn.net/S20144144/article/details/103417502
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-11-24 17:10:38 +0000 UTC'>November 24, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to FULL PARAMETER FINE-TUNING FOR LARGE LANGUAGE MODELS WITH LIMITED RESOURCES" href="http://localhost:1313/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">用c&#43;&#43;实现电梯自动控制有限状态机
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>课程作业，gcc实现电梯前后感应器的状态转换
+要求 graph TB closed[closed] --&gt;|front| open[open] open --&gt;|neither|closed closed --&gt; |neither,rear,both| closed open --&gt; |rear,front,both| open fsm包含以下：
+状态集合：{closed,open} 输入集合：{neither,rear,both,front} 状态转换：{closed&#43;neither=open这样类似的一共8个状态转换函数} 开整 #include&lt;iostream&gt; #include&lt;random&gt; using namespace std; //门状态 typedef enum { CLOSED, OPEN } State; // 输入 typedef enum { FRONT, REAR, BOTH, NEITHER } Input; class Gate { private: State state; public: //构造函数，初始化 Gate(State initial) { state = initial; } //状态转移 void transition(Input input) { State now = this-&gt;state; if (now == CLOSED) { if (input == REAR || input == NEITHER) { this-&gt;state=CLOSED; } else if (input == FRONT || input == BOTH) { this-&gt;state = OPEN; } } else if ( now == OPEN) { if (input == FRONT || input == REAR || input == BOTH) { this-&gt;state=OPEN; } else if (input == NEITHER) { this-&gt;state=CLOSED; } } } //输出 void print() { State now = this-&gt;state; if (now == CLOSED)cout &lt;&lt; &#34;closed&#34;&lt;&lt;endl; else cout &lt;&lt; &#34;open&#34;&lt;&lt;endl; } }; void printInput(Input input) { switch (input) { case FRONT: cout&lt;&lt;&#34;front &#34;; break; case REAR: cout&lt;&lt;&#34;rear &#34;; break; case BOTH: cout&lt;&lt;&#34;Both &#34;; break; case NEITHER: cout&lt;&lt;&#34;Neither &#34;; break; } } int main() { //初始状态 Gate a(CLOSED); a.print(); for (int i = 0;i &lt; 50;i&#43;&#43;) { //[0,4)随机数 int random = (rand() % 4); Input realinput = Input(random); printInput(realinput); a.transition(realinput); a.print(); } return 0; } </p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-10-12 20:54:21 +0000 UTC'>October 12, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 用c&#43;&#43;实现电梯自动控制有限状态机" href="http://localhost:1313/post/%E7%94%A8c&#43;&#43;%E5%AE%9E%E7%8E%B0%E7%94%B5%E6%A2%AF%E8%87%AA%E5%8A%A8%E6%8E%A7%E5%88%B6%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">马了就是忘了
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>放了一下暂时没用到的东西
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-03-06 15:53:11 +0000 UTC'>March 6, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 马了就是忘了" href="http://localhost:1313/post/%E9%A9%AC%E4%BA%86%E5%B0%B1%E6%98%AF%E5%BF%98%E4%BA%86/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
-    <a class="prev" href="https://example.com/page/9/">
+    <a class="prev" href="http://localhost:1313/page/9/">
       «&nbsp;Prev&nbsp;
     </a>
-    <a class="next" href="https://example.com/page/11/">Next&nbsp;&nbsp;»
+    <a class="next" href="http://localhost:1313/page/11/">Next&nbsp;&nbsp;»
     </a>
   </nav>
 </footer>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
 
     
     

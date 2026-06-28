@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>pose estimation | 我的博客</title>
 <meta name="keywords" content="">
 <meta name="description" content="感觉对VLA挺重要，尤其是camera pose estimation">
-<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
-<link rel="canonical" href="https://example.com/post/pose-estimation/">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/pose-estimation/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://example.com/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
-<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://example.com/post/pose-estimation/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/pose-estimation/">
 <noscript>
     <style>
         #theme-toggle,
@@ -64,78 +64,13 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://example.com/post/pose-estimation/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="pose estimation">
-  <meta property="og:description" content="感觉对VLA挺重要，尤其是camera pose estimation">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="pose estimation">
-  <meta name="twitter:description" content="感觉对VLA挺重要，尤其是camera pose estimation">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://example.com/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "pose estimation",
-      "item": "https://example.com/post/pose-estimation/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "pose estimation",
-  "name": "pose estimation",
-  "description": "感觉对VLA挺重要，尤其是camera pose estimation\n",
-  "keywords": [
-    
-  ],
-  "articleBody": "感觉对VLA挺重要，尤其是camera pose estimation\n会用到什么技术？ 在 pose estimation 里，尤其是 keypoint detection 阶段，确实会用到一些不同的技术，但要区分哪些是“必需的核心技术”，哪些是“可选的辅助技术”。我给你梳理一下：\n1️⃣ 核心技术（必用/主流） 卷积神经网络（CNN）\nHeatmap-based 方法几乎都是基于 CNN。\n常见网络：ResNet、HRNet、Hourglass Network。\n作用：从图像中提取特征并生成关键点热力图。\nHeatmap 回归\n核心思想：为每个关键点生成二维概率分布图（heatmap），峰值位置就是关键点。\n优点：比直接回归坐标更稳定、精度高。\nLoss：MSE（mean squared error）或者 focal loss。\nTop-down / Bottom-up 策略\nTop-down：先检测人体框，再做 keypoint detection。\nBottom-up：先检测所有关键点，再组装成人体实例。\n决定了网络输入/输出结构和后处理方法。\nPost-processing\nNMS（非极大值抑制）去掉重复预测。\nPAF（Part Affinity Fields，OpenPose）用于 bottom-up 方法将关键点连接成骨架。\n2️⃣ 可选/增强技术（提高精度或多样性） Segmentation（语义分割/实例分割）\n不是必须，但可以辅助：\nMask R-CNN 等方法中，用人体 mask 辅助 keypoint 定位。\n可以减少背景干扰，提高关键点检测精度。\n用途：\n人体实例分割 → 提供更精确的人体区域。\n特别在多人场景中有用。\nPositional Embedding（位置编码）\n主要出现在 Transformer-based pose estimation 中，如 TokenPose、HRFormer。\n作用：\n告诉网络每个特征的空间位置。\n弥补纯 self-attention 缺少位置信息的缺点。\nCNN-based 传统方法一般不需要。\nAttention / Transformer\n对复杂姿态、多人体交互场景有用。\n结合 positional embedding，可以更好地捕捉全局结构。\n数据增强和正则化\n随机旋转、缩放、水平翻转。\nheatmap 高斯模糊增强稳定性。\n",
-  "wordCount" : "88",
-  "inLanguage": "en",
-  "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "0001-01-01T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://example.com/post/pose-estimation/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "我的博客",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://example.com/favicon.ico"
-    }
-  }
-}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
@@ -161,22 +96,22 @@
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="https://example.com/" title="首页">
+                <a href="http://localhost:1313/" title="首页">
                     <span>首页</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/about/" title="关于我">
+                <a href="http://localhost:1313/about/" title="关于我">
                     <span>关于我</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/categories/" title="分类">
+                <a href="http://localhost:1313/categories/" title="分类">
                     <span>分类</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/tags/" title="标签">
+                <a href="http://localhost:1313/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li>
@@ -193,7 +128,7 @@
     </h1>
     <div class="post-meta">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
 
 </div>
   </header> 
@@ -343,7 +278,7 @@
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
 
     
     

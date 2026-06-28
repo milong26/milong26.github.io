@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>解读smolvla代码 | 我的博客</title>
 <meta name="keywords" content="vla, code">
 <meta name="description" content="一个比较小的模型smovla，但里面涉及的还挺多，当扫盲
 看代码不能看单词的含义而是看整体结构orz">
-<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]">
-<link rel="canonical" href="https://example.com/post/%E8%A7%A3%E8%AF%BBsmolvla%E4%BB%A3%E7%A0%81/">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/%E8%A7%A3%E8%AF%BBsmolvla%E4%BB%A3%E7%A0%81/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://example.com/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://example.com/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://example.com/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
-<link rel="mask-icon" href="https://example.com/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://example.com/post/%E8%A7%A3%E8%AF%BBsmolvla%E4%BB%A3%E7%A0%81/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/%E8%A7%A3%E8%AF%BBsmolvla%E4%BB%A3%E7%A0%81/">
 <noscript>
     <style>
         #theme-toggle,
@@ -65,82 +65,13 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://example.com/post/%E8%A7%A3%E8%AF%BBsmolvla%E4%BB%A3%E7%A0%81/">
-  <meta property="og:site_name" content="我的博客">
-  <meta property="og:title" content="解读smolvla代码">
-  <meta property="og:description" content="一个比较小的模型smovla，但里面涉及的还挺多，当扫盲
-看代码不能看单词的含义而是看整体结构orz">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:tag" content="Vla">
-    <meta property="article:tag" content="Code">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="解读smolvla代码">
-  <meta name="twitter:description" content="一个比较小的模型smovla，但里面涉及的还挺多，当扫盲
-看代码不能看单词的含义而是看整体结构orz">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://example.com/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "解读smolvla代码",
-      "item": "https://example.com/post/%E8%A7%A3%E8%AF%BBsmolvla%E4%BB%A3%E7%A0%81/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "解读smolvla代码",
-  "name": "解读smolvla代码",
-  "description": "一个比较小的模型smovla，但里面涉及的还挺多，当扫盲\n看代码不能看单词的含义而是看整体结构orz\n",
-  "keywords": [
-    "vla", "code"
-  ],
-  "articleBody": "一个比较小的模型smovla，但里面涉及的还挺多，当扫盲\n看代码不能看单词的含义而是看整体结构orz\n2026年2月28日11:24:41开始写，今天写完\n省流 看完代码忘光光了\n从lerobot_train开始，符合一般深度学习的模型训练流程。\n前向传播： 调用 model(input)，计算模型的输出和损失（loss）。 反向传播： 调用 loss.backward()，计算损失对模型参数的梯度。 优化器更新： 调用 optimizer.step()，根据梯度更新模型参数。 梯度清零： 调用 optimizer.zero_grad()，清除上一轮的梯度，避免累积。 学习率更新（可选）： 如果使用学习率调度器，调用 lr_scheduler.step() 更新学习率。 记录指标： 记录损失、梯度范数、学习率等指标，用于监控训练过程 前向传播用的是SmolVLAPolicy的forward，这个类是一个包装类，用于封装 VLAFlowMatching 模型，并提供接口（如 forward、predict_action_chunk 等）以便在训练和推理中使用。在forward里面，它做了\n数据预处理 图片：resize、归一化 指令：preprocessor处理好了，现在是token化的指令 state和action：填充到max_dim 调用 VLAFlowMatching.forward 去掉填充部分的损失，并计算返回平均损失 VLAFlowMatching类\n生成噪声动作nosed_action和目标动作差值ut\nembed生成\nprefix image：vlm的vision_model然后connector language：因为之前已经分词过了，所以vlm的text_model就行，而且我要对齐image和language就设置它们的attention能互相看见 state：state_proj，可训练 suffix I jave a noised_action-\u003eproj_action,I have a time-\u003e正弦余弦-\u003eembed_time, 合并，然后mlp一下 调用forward\n返回loss\n对每一层处理，output=cross-attention还是self-attention 残差连接和特征提取：output-\u003eo_proj-\u003e+input_embeds(此时output_save)-\u003enorm-\u003emlp-\u003e+output_save=output_emb output_emb这个结果再norm一下就返回 推理：\n具体 名词解释 隐藏层的大小、层数和中间层 什么是\"隐藏层\"？ 在Transformer中，“隐藏层\"指的是整个Transformer层的数量，不是单个层内部的维度 隐藏层的层数 = 有多少个transformer = attention+FFN的组合数量\n1. 隐藏层的大小（hidden_size） 定义：\nhidden_size 是 Transformer 模型中每一层隐藏状态的维度。 输入 token 的形状是 batch_size, seq_len, hidden_size，表示每个 token 的特征向量维度是 hidden_size。 矩阵运算的关系：\n在 Transformer 的多头注意力机制和前馈神经网络（FFN）中，隐藏状态会参与矩阵运算。 例如： 如果输入的形状是 [batch_size, seq_len, hidden_size]，则权重矩阵的形状是 [hidden_size, output_size]。 输出的形状是 [batch_size, seq_len, output_size]。 为什么所有层的 hidden_size 都一样？\nTransformer 的架构设计要求每一层的隐藏状态维度保持一致，以便层与层之间的输出和输入能够匹配。 如果 hidden_size 不一致，层与层之间的矩阵运算就无法进行。 减小 hidden_size 的作用：\n如果将 hidden_size 减半（例如通过 expert_width_multiplier），会减少模型的参数量和计算量。 同时，这也会限制输入 token 的特征维度，从而控制模型的复杂度。 2. 中间层的大小（intermediate_size） 定义：\n中间层的大小是前馈神经网络（FFN）中的隐藏层维度，通常比 hidden_size 大。 在 FFN 中，输入的形状是 [batch_size, seq_len, hidden_size]，经过第一层线性变换后，形状变为 [batch_size, seq_len, intermediate_size]。 统一的架构：\n所有 FFN 的中间层大小（intermediate_size）是统一的。 例如，如果 hidden_size 是 512，intermediate_size 通常是 4 * hidden_size = 2048。 这种设计是 Transformer 的标准架构，确保每一层的 FFN 都有足够的容量来学习复杂的特征。 为什么中间层的大小是固定的？\n固定的 intermediate_size 提供了一种统一的架构，便于模型的设计和优化。 增大 intermediate_size 可以提高模型的表达能力，但也会增加计算量。 lm_expert_config.num_hidden_layers = self.num_vlm_layers 为什么要用文本模型的总层数赋值文本模型的隐藏层层数？\n",
-  "wordCount" : "162",
-  "inLanguage": "en",
-  "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "0001-01-01T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/username"}],"name":"Milong"}
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://example.com/post/%E8%A7%A3%E8%AF%BBsmolvla%E4%BB%A3%E7%A0%81/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "我的博客",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://example.com/favicon.ico"
-    }
-  }
-}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="https://example.com/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
@@ -166,22 +97,22 @@
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="https://example.com/" title="首页">
+                <a href="http://localhost:1313/" title="首页">
                     <span>首页</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/about/" title="关于我">
+                <a href="http://localhost:1313/about/" title="关于我">
                     <span>关于我</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/categories/" title="分类">
+                <a href="http://localhost:1313/categories/" title="分类">
                     <span>分类</span>
                 </a>
             </li>
             <li>
-                <a href="https://example.com/tags/" title="标签">
+                <a href="http://localhost:1313/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li>
@@ -198,7 +129,7 @@
     </h1>
     <div class="post-meta">
 
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/username]] name:Milong]</span>
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
 
 </div>
   </header> 
@@ -362,15 +293,15 @@
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://example.com/tags/vla/">Vla</a></li>
-      <li><a href="https://example.com/tags/code/">Code</a></li>
+      <li><a href="http://localhost:1313/tags/vla/">Vla</a></li>
+      <li><a href="http://localhost:1313/tags/code/">Code</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://example.com/">我的博客</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
 
     
     

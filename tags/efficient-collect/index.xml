@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Efficient-Collect on 我的博客</title>
+    <link>http://localhost:1313/tags/efficient-collect/</link>
+    <description>Recent content in Efficient-Collect on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 26 Jun 2026 17:03:22 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/efficient-collect/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>efficient data collection review of myself</title>
+      <link>http://localhost:1313/post/efficient-data-collection-review-of-myself/</link>
+      <pubDate>Fri, 26 Jun 2026 17:03:22 +0000</pubDate>
+      <guid>http://localhost:1313/post/efficient-data-collection-review-of-myself/</guid>
+      <description>&lt;p&gt;我自己瞎写的综述，确定efficient data collection 是方向了？
+2026年6月26日17:04:00开始，希望28日可以完结&lt;/p&gt;
+&lt;p&gt;可以说，就看vla对什么数据能泛化表现好，不需要太看重ood的&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -2,38 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Life on 我的博客</title>
-    <link>https://example.com/categories/life/</link>
+    <link>http://localhost:1313/categories/life/</link>
     <description>Recent content in Life on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 22 Oct 2025 10:43:37 +0000</lastBuildDate>
-    <atom:link href="https://example.com/categories/life/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 18 Jun 2026 16:10:48 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/life/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>歌单</title>
+      <link>http://localhost:1313/post/%E6%AD%8C%E5%8D%95/</link>
+      <pubDate>Thu, 18 Jun 2026 16:10:48 +0000</pubDate>
+      <guid>http://localhost:1313/post/%E6%AD%8C%E5%8D%95/</guid>
+      <description>&lt;p&gt;来欣赏我的极高品位！&lt;/p&gt;</description>
+    </item>
     <item>
       <title>英语</title>
-      <link>https://example.com/post/%E8%8B%B1%E8%AF%AD/</link>
+      <link>http://localhost:1313/post/%E8%8B%B1%E8%AF%AD/</link>
       <pubDate>Wed, 22 Oct 2025 10:43:37 +0000</pubDate>
-      <guid>https://example.com/post/%E8%8B%B1%E8%AF%AD/</guid>
+      <guid>http://localhost:1313/post/%E8%8B%B1%E8%AF%AD/</guid>
       <description>&lt;p&gt;虽然已经学了二十多年了但肯定还有不会的&lt;/p&gt;</description>
     </item>
     <item>
       <title>看房要看什么</title>
-      <link>https://example.com/post/%E7%9C%8B%E6%88%BF%E8%A6%81%E7%9C%8B%E4%BB%80%E4%B9%88/</link>
+      <link>http://localhost:1313/post/%E7%9C%8B%E6%88%BF%E8%A6%81%E7%9C%8B%E4%BB%80%E4%B9%88/</link>
       <pubDate>Sat, 11 Oct 2025 14:20:25 +0000</pubDate>
-      <guid>https://example.com/post/%E7%9C%8B%E6%88%BF%E8%A6%81%E7%9C%8B%E4%BB%80%E4%B9%88/</guid>
+      <guid>http://localhost:1313/post/%E7%9C%8B%E6%88%BF%E8%A6%81%E7%9C%8B%E4%BB%80%E4%B9%88/</guid>
       <description>&lt;p&gt;列举下来&lt;/p&gt;</description>
     </item>
     <item>
       <title>阅读复健</title>
-      <link>https://example.com/post/%E9%98%85%E8%AF%BB%E5%A4%8D%E5%81%A5/</link>
+      <link>http://localhost:1313/post/%E9%98%85%E8%AF%BB%E5%A4%8D%E5%81%A5/</link>
       <pubDate>Mon, 09 Jun 2025 14:24:55 +0000</pubDate>
-      <guid>https://example.com/post/%E9%98%85%E8%AF%BB%E5%A4%8D%E5%81%A5/</guid>
+      <guid>http://localhost:1313/post/%E9%98%85%E8%AF%BB%E5%A4%8D%E5%81%A5/</guid>
       <description>&lt;p&gt;上次看文学书还是在高中？（or电子小说）&lt;/p&gt;</description>
     </item>
     <item>
       <title>大象无形</title>
-      <link>https://example.com/post/%E5%A4%A7%E8%B1%A1%E6%97%A0%E5%BD%A2/</link>
+      <link>http://localhost:1313/post/%E5%A4%A7%E8%B1%A1%E6%97%A0%E5%BD%A2/</link>
       <pubDate>Mon, 24 Mar 2025 20:59:10 +0000</pubDate>
-      <guid>https://example.com/post/%E5%A4%A7%E8%B1%A1%E6%97%A0%E5%BD%A2/</guid>
+      <guid>http://localhost:1313/post/%E5%A4%A7%E8%B1%A1%E6%97%A0%E5%BD%A2/</guid>
       <description>&lt;p&gt;感觉用名字分类不是很好，有别的分类方式吗？
 年份也不太妙。
 想到了我可能需要一个年份历之类的？看看能不能做成数据库形式&lt;/p&gt;
@@ -47,66 +54,66 @@
     </item>
     <item>
       <title>风之万里</title>
-      <link>https://example.com/post/%E9%A3%8E%E4%B9%8B%E4%B8%87%E9%87%8C/</link>
+      <link>http://localhost:1313/post/%E9%A3%8E%E4%B9%8B%E4%B8%87%E9%87%8C/</link>
       <pubDate>Sun, 05 Jan 2025 22:25:05 +0000</pubDate>
-      <guid>https://example.com/post/%E9%A3%8E%E4%B9%8B%E4%B8%87%E9%87%8C/</guid>
+      <guid>http://localhost:1313/post/%E9%A3%8E%E4%B9%8B%E4%B8%87%E9%87%8C/</guid>
       <description>&lt;p&gt;刚看完十二国记，名字取自那里。留存作为我在这儿学习的记录.&lt;/p&gt;</description>
     </item>
     <item>
       <title>开伙</title>
-      <link>https://example.com/post/%E5%BC%80%E4%BC%99/</link>
+      <link>http://localhost:1313/post/%E5%BC%80%E4%BC%99/</link>
       <pubDate>Mon, 01 Jul 2024 10:25:15 +0000</pubDate>
-      <guid>https://example.com/post/%E5%BC%80%E4%BC%99/</guid>
+      <guid>http://localhost:1313/post/%E5%BC%80%E4%BC%99/</guid>
       <description>&lt;p&gt;关于在家里做饭的备忘录&lt;/p&gt;</description>
     </item>
     <item>
       <title>马了就是忘了</title>
-      <link>https://example.com/post/%E9%A9%AC%E4%BA%86%E5%B0%B1%E6%98%AF%E5%BF%98%E4%BA%86/</link>
+      <link>http://localhost:1313/post/%E9%A9%AC%E4%BA%86%E5%B0%B1%E6%98%AF%E5%BF%98%E4%BA%86/</link>
       <pubDate>Mon, 06 Mar 2023 15:53:11 +0000</pubDate>
-      <guid>https://example.com/post/%E9%A9%AC%E4%BA%86%E5%B0%B1%E6%98%AF%E5%BF%98%E4%BA%86/</guid>
+      <guid>http://localhost:1313/post/%E9%A9%AC%E4%BA%86%E5%B0%B1%E6%98%AF%E5%BF%98%E4%BA%86/</guid>
       <description>&lt;p&gt;放了一下暂时没用到的东西&lt;/p&gt;</description>
     </item>
     <item>
       <title>_日记2026</title>
-      <link>https://example.com/post/%E6%97%A5%E8%AE%B02026/</link>
+      <link>http://localhost:1313/post/%E6%97%A5%E8%AE%B02026/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/%E6%97%A5%E8%AE%B02026/</guid>
+      <guid>http://localhost:1313/post/%E6%97%A5%E8%AE%B02026/</guid>
       <description></description>
     </item>
     <item>
       <title>如何提高精力</title>
-      <link>https://example.com/post/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E7%B2%BE%E5%8A%9B/</link>
+      <link>http://localhost:1313/post/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E7%B2%BE%E5%8A%9B/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E7%B2%BE%E5%8A%9B/</guid>
+      <guid>http://localhost:1313/post/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E7%B2%BE%E5%8A%9B/</guid>
       <description>&lt;p&gt;2025年2月说得最多的词汇是困，确实。每天吃完晚饭就没精力继续学，有ddl还好，但我自己的ddl欲望都不高。于是3月打算改进。&lt;/p&gt;
 &lt;p&gt;这一篇初稿要在5月15日之前完成完成&lt;/p&gt;</description>
     </item>
     <item>
       <title>租房技巧</title>
-      <link>https://example.com/post/%E7%A7%9F%E6%88%BF%E6%8A%80%E5%B7%A7/</link>
+      <link>http://localhost:1313/post/%E7%A7%9F%E6%88%BF%E6%8A%80%E5%B7%A7/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/%E7%A7%9F%E6%88%BF%E6%8A%80%E5%B7%A7/</guid>
+      <guid>http://localhost:1313/post/%E7%A7%9F%E6%88%BF%E6%8A%80%E5%B7%A7/</guid>
       <description>&lt;p&gt;从各种地方扒拉过来的信息&lt;/p&gt;</description>
     </item>
     <item>
       <title>能否自愈</title>
-      <link>https://example.com/post/%E8%83%BD%E5%90%A6%E8%87%AA%E6%84%88/</link>
+      <link>http://localhost:1313/post/%E8%83%BD%E5%90%A6%E8%87%AA%E6%84%88/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/%E8%83%BD%E5%90%A6%E8%87%AA%E6%84%88/</guid>
+      <guid>http://localhost:1313/post/%E8%83%BD%E5%90%A6%E8%87%AA%E6%84%88/</guid>
       <description>&lt;p&gt;生病自理简述&lt;/p&gt;</description>
     </item>
     <item>
       <title>被玩坏的魔法少年题材</title>
-      <link>https://example.com/post/%E8%A2%AB%E7%8E%A9%E5%9D%8F%E7%9A%84%E9%AD%94%E6%B3%95%E5%B0%91%E5%B9%B4%E9%A2%98%E6%9D%90/</link>
+      <link>http://localhost:1313/post/%E8%A2%AB%E7%8E%A9%E5%9D%8F%E7%9A%84%E9%AD%94%E6%B3%95%E5%B0%91%E5%B9%B4%E9%A2%98%E6%9D%90/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/%E8%A2%AB%E7%8E%A9%E5%9D%8F%E7%9A%84%E9%AD%94%E6%B3%95%E5%B0%91%E5%B9%B4%E9%A2%98%E6%9D%90/</guid>
+      <guid>http://localhost:1313/post/%E8%A2%AB%E7%8E%A9%E5%9D%8F%E7%9A%84%E9%AD%94%E6%B3%95%E5%B0%91%E5%B9%B4%E9%A2%98%E6%9D%90/</guid>
       <description>&lt;p&gt;记录看过的魔法少年题材的作品&lt;/p&gt;</description>
     </item>
     <item>
       <title>魔法世界观下生产力会发展吗</title>
-      <link>https://example.com/post/%E9%AD%94%E6%B3%95%E4%B8%96%E7%95%8C%E8%A7%82%E4%B8%8B%E7%94%9F%E4%BA%A7%E5%8A%9B%E4%BC%9A%E5%8F%91%E5%B1%95%E5%90%97/</link>
+      <link>http://localhost:1313/post/%E9%AD%94%E6%B3%95%E4%B8%96%E7%95%8C%E8%A7%82%E4%B8%8B%E7%94%9F%E4%BA%A7%E5%8A%9B%E4%BC%9A%E5%8F%91%E5%B1%95%E5%90%97/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.com/post/%E9%AD%94%E6%B3%95%E4%B8%96%E7%95%8C%E8%A7%82%E4%B8%8B%E7%94%9F%E4%BA%A7%E5%8A%9B%E4%BC%9A%E5%8F%91%E5%B1%95%E5%90%97/</guid>
+      <guid>http://localhost:1313/post/%E9%AD%94%E6%B3%95%E4%B8%96%E7%95%8C%E8%A7%82%E4%B8%8B%E7%94%9F%E4%BA%A7%E5%8A%9B%E4%BC%9A%E5%8F%91%E5%B1%95%E5%90%97/</guid>
       <description>&lt;p&gt;看异世界类型的动画看多了脑子里冒出来的诡异想法，异世界为什么大多都是封建君主专制？按道理说生产力足够了+思想变革会促进革命拜托封建专制那动画里面的魔法世界观为什么没有。说道理，革命的必要条件是什么，既然有魔法世界观了生产力会得到相应的发展吗&lt;/p&gt;</description>
     </item>
   </channel>
