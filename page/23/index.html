@@ -124,81 +124,6 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">ubuntu系统中安装klee
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>docker安装
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2021-04-15 23:49:26 +0000 UTC'>April 15, 2021</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to ubuntu系统中安装klee" href="http://localhost:1313/post/ubuntu%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%AE%89%E8%A3%85klee/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">自定义组件事件传递
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>微信小程序一个自定义组件Component，调用它的事件传递过程
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2021-04-14 23:00:15 +0000 UTC'>April 14, 2021</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 自定义组件事件传递" href="http://localhost:1313/post/%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">node
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>安装nodejs
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2021-04-14 17:32:06 +0000 UTC'>April 14, 2021</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to node" href="http://localhost:1313/post/node/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">微信小程序本地存储数据
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>编写微信小程序应用，本地存储数据避免重复加载
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2021-04-12 23:51:21 +0000 UTC'>April 12, 2021</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 微信小程序本地存储数据" href="http://localhost:1313/post/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">hexo搭建
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>hexo搭建个人blog，相关配置信息
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2021-04-12 20:47:54 +0000 UTC'>April 12, 2021</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to hexo搭建" href="http://localhost:1313/post/hexo%E6%90%AD%E5%BB%BA/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
     <h2 class="entry-hint-parent">Java
     </h2>
   </header>
@@ -350,6 +275,119 @@ logistic回归属于分类算法，只能做二值分类
 
 <span title='2020-02-26 13:00:24 +0000 UTC'>February 26, 2020</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
   <a class="entry-link" aria-label="post link to 机器学习导论" href="http://localhost:1313/post/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AF%BC%E8%AE%BA/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">哈夫曼树
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>哈夫曼树 #include&lt;iostream&gt; #include&lt;string&gt; #include&lt;map&gt; using namespace std; typedef struct node { node *lchild; node *rchild; int weight; char show; }treenode; void findlittle(int *x1, int *x2, treenode**parr, int n) { int k1, k2; k1 = -1; for (int i = 0; i &lt; n; i&#43;&#43;) { if (parr[i] != NULL &amp;&amp;k1 == -1) { k1 = i; continue; } if (parr[i] != NULL) { k2 = i; break; } } for (int i = k2; i &lt; n; i&#43;&#43;) { if (parr[i] != NULL) { if (parr[i]-&gt;weight &lt; parr[k1]-&gt;weight) { k2 = k1; k1 = i; } else if (parr[i]-&gt;weight &lt; parr[k2]-&gt;weight) { k2 = i; } } } *x1 = k1; *x2 = k2; } treenode *bulid(int a[],char b[], int n) { treenode **parr = new treenode*[n]; treenode *p = NULL; int small1, small2; for (int i = 0; i &lt; n; i&#43;&#43;) { parr[i] = new treenode; parr[i]-&gt;weight = a[i]; parr[i]-&gt;show = b[i]; parr[i]-&gt;lchild = NULL; parr[i]-&gt;rchild = NULL; } for (int i = 0; i &lt; n - 1; i&#43;&#43;) { findlittle(&amp;small1, &amp;small2, parr, n); p = new treenode; p-&gt;weight = parr[small1]-&gt;weight &#43; parr[small2]-&gt;weight; p-&gt;show = &#39;#&#39;; p-&gt;rchild = parr[small2]; p-&gt;lchild = parr[small1]; parr[small1] = p; parr[small2] = NULL; } delete[]parr; return p; } void bianma(treenode *root,string &amp;pre,map&lt;char, string&gt; &amp;out) { string temp = pre; if (root-&gt;lchild == NULL) return; pre &#43;= &#39;0&#39;; if (root-&gt;lchild-&gt;lchild == NULL) { out[root-&gt;lchild-&gt;show] = pre; cout &lt;&lt; root-&gt;lchild-&gt;show &lt;&lt; &#34;:&#34; &lt;&lt; pre &lt;&lt; endl; } else bianma(root-&gt;lchild,pre,out); pre = temp; pre &#43;= &#39;1&#39;; if (root-&gt;rchild-&gt;rchild == NULL) { out[root-&gt;rchild-&gt;show] = pre; cout &lt;&lt; root-&gt;rchild-&gt;show &lt;&lt; &#34;:&#34; &lt;&lt; pre &lt;&lt; endl; } else bianma(root-&gt;rchild,pre,out); } int main() { int number; int *num; char *str; cin &gt;&gt; number; num = new int[number]; str = new char[number]; for (int i = 0; i &lt; number; i&#43;&#43;) cin &gt;&gt; str[i] &gt;&gt; num[i]; treenode *p = bulid(num, str, number); string pre; map&lt;char, string&gt; out; bianma(p,pre,out); return 0; } </p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2020-01-05 20:12:10 +0000 UTC'>January 5, 2020</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 哈夫曼树" href="http://localhost:1313/post/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">求最短路径
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>题目描述 有N个城市，在每两个城市之间可以有一条交通道相连或者没有交通道连接. 现在有一些货物要从一座城市被转运到另一座城市，运输费由两部分组成： 1） 在途经的每两个城市之间的路上的运输花费。 2） 货物通过一座城市所要支付的某些税费，出发城市和目的地城市不必纳税。 请你编写一个程序，求出最小花费的路线。 输入： 在输入文件中，路上的花费、城市的税费、出发城市和目的地城市以如下的形式给出：
+第一项输入：N，城市个数。程序序号下标从0开始。
+第二项输入：Cost（N，N）的运输花费矩阵，花费为非负值，-1代表无路径。
+第三项输入：Tax(N)每个城市的税费，非负值。
+第四项输入：M，需要计算最小运输城市对的个数。
+第五项输入：M对不超过N-1的整数，需要计算的最小花费的两个城市序号。
+输出：
+第一行输出路径，输出格式为i-&gt;j-&gt;m。下标序号加-&gt;。中间无空格。
+第二行输出花费费用。
+如果不存在路径，输出 No Path
+测试数据：
+T1
+输入:
+0 3 22 -1 4 3 0 5 -1 -1 22 5 0 9 20 -1 -1 9 0 4 4 -1 20 4 0 5 17 8 3 1 3 0 2 2 4 1 3 输出:
+21 2-&gt;3-&gt;4 16 1-&gt;0-&gt;4-&gt;3 17 T2
+输入:
+0 -1 6 0 10 22 1 0 1 输出:
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2020-01-03 19:28:01 +0000 UTC'>January 3, 2020</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 求最短路径" href="http://localhost:1313/post/%E6%B1%82%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">散列
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 抽象数据类型Dictionary{ 实例 具有不同关键字的元素集合 操作 Create()：创建一个空字典 Search(k, x)：搜索关键字为k的元素，结果放入x； 如果没找到，则返回false，否则返回true Insert(x)：向字典中插入元素x Delete(k, x)：删除关键字为k的元素，并将其放入x } 操作 随机访问：
+在编译器中定义用户标识符的符号表（symbol table）——重复元素字典
+定义标识符-&gt;建立一个记录并插入到符号表中 同样的标识符名可以定义多次(在不同的程序块中)-&gt;相同关键字的记录 搜索结果——最新插入的元素 删除——程序块的结尾（标识符作用域结束） SortedChain类 template&lt;class E, class K&gt; class SortedChain { public: SortedChain() {first = 0;} ~SortedChain(); bool IsEmpty() const {return first == 0;} int Length() const; bool Search(const K&amp; k, E&amp; e) const; SortedChain&lt;E,K&gt;&amp; Delete(const K&amp; k, E&amp; e); SortedChain&lt;E,K&gt;&amp; Insert(const E&amp; e); SortedChain&lt;E,K&gt;&amp; DistinctInsert(const E&amp; e); void Output(ostream&amp; out) const; private: SortedChainNode&lt;E,K&gt; *first; }; //搜索 template&lt;class E, class K&gt; bool SortedChain&lt;E,K&gt;::Search(const K&amp; k, E&amp; e) const { SortedChainNode&lt;E,K&gt; *p = first; while (p &amp;&amp; p-&gt;data &lt; k) p = p-&gt;link; // 判断是否匹配 if (p &amp;&amp; p-&gt;data == k) // 如果链表尚不为空且数据匹配 {e = p-&gt;data; return true;} return false; // 链表已经为空，或当前数据大于k } //删除 template&lt;class E, class K&gt; SortedChain&lt;E,K&gt;&amp; SortedChain&lt;E,K&gt;::Delete(const K&amp; k, E&amp; e) { SortedChainNode&lt;E,K&gt; *p = first, *tp = 0; // search for match with k while (p &amp;&amp; p-&gt;data &lt; k) { tp = p; p = p-&gt;link; } if (p &amp;&amp; p-&gt;data == k) //找到了要删的节点 { e = p-&gt;data; if (tp) tp-&gt;link = p-&gt;link; //p是普通节点 else first = p-&gt;link; //p是首节点 delete p; return *this; } throw BadInput(); //没有可删的节点 return *this; } //插入（允许重复） template&lt;class E, class K&gt; SortedChain&lt;E,K&gt;&amp; SortedChain&lt;E,K&gt;::Insert(const E&amp; e) { SortedChainNode&lt;E,K&gt; *p = first, *tp = 0; while (p &amp;&amp; p-&gt;data &lt; e) { tp = p; p = p-&gt;link; } SortedChainNode&lt;E,K&gt; *q = new SortedChainNode&lt;E,K&gt;; q-&gt;data = e; q-&gt;link = p; if (tp) tp-&gt;link = q; else first = q; return *this; } //插入（不允许重复） template&lt;class E, class K&gt; SortedChain&lt;E,K&gt;&amp; SortedChain&lt;E,K&gt; ::DistinctInsert(const E&amp; e) {// Insert e only if no element with same key SortedChainNode&lt;E,K&gt; *p = first, *tp = 0; while (p &amp;&amp; p-&gt;data &lt; e) { tp = p; p = p-&gt;link; } // check if duplicate if (p &amp;&amp; p-&gt;data == e) throw BadInput(); // not duplicate, set up node for e SortedChainNode&lt;E,K&gt; *q = new SortedChainNode&lt;E,K&gt;; q-&gt;data = e; // insert node just after tp q-&gt;link = p; if (tp) tp-&gt;link = q; else first = q; return *this; } 散列表的适用范围
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2019-12-19 18:21:27 +0000 UTC'>December 19, 2019</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 散列" href="http://localhost:1313/post/%E6%95%A3%E5%88%97/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">矩阵
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 抽象数据类型Array{ 实例 形如(index,value)的数据对集合，其中任意两对数据的index值都各不相同 操作 Create()：创建一个空的数组 Store(index,value)：添加数据(index,value)，并删除具有相同index值的数据对（若存在） Retrieve(index)：返回索引值为index的数据对 } 多维数组的保存方式：
+计算机内存是一维连续存储
+会有行主映射和列主映射，默认是行
+#include&lt;iostream&gt; using namespace std; class matrix { public: matrix(int a, int b);//构造 看一下二维数组 ~matrix();//析构 matrix operator&#43;(matrix &amp;mat);//加法 matrix operator=(matrix &amp;mat);//等于,没写拷贝构造函数还没法用 matrix(const matrix &amp;mat);//拷贝构造函数 friend ostream&amp; operator&lt;&lt;(ostream&amp;out, matrix &amp;mat);//输出 friend istream&amp; operator&gt;&gt;(istream&amp;in, matrix &amp;mat);//输入 private: int rows; int cols; int** p; }; matrix::matrix(int n, int m)//初始化 { rows = n; cols = m; p = new int*[rows]; for (int i = 0; i &lt; rows; i&#43;&#43;) p[i] = new int[cols]; } matrix::~matrix()//析构函数，主要是看删除二维数组 { for (int i = 0; i &lt; rows; i&#43;&#43;) delete p[i]; delete p; } matrix::matrix(const matrix &amp;mat) { rows = mat.rows; cols = mat.cols; p = new int*[rows]; for (int i = 0; i &lt; rows; i&#43;&#43;) { p[i] = new int[cols]; for (int j = 0; j &lt; cols; j&#43;&#43;) p[i][j] = mat.p[i][j]; } } matrix matrix::operator&#43;(matrix &amp;mat) { matrix matsum(rows, cols);//定义一个新的 for (int i = 0; i &lt; rows; i&#43;&#43;) for (int j = 0; j &lt; cols; j&#43;&#43;) matsum.p[i][j] = p[i][j] &#43; mat.p[i][j]; return matsum; } matrix matrix::operator=( matrix &amp;mat) { for (int i = 0; i &lt; mat.rows; i&#43;&#43;) for (int j = 0; j &lt; mat.cols; j&#43;&#43;) p[i][j] = mat.p[i][j]; //cout &lt;&lt; &#34;ok&#34; &lt;&lt; endl; return (*this); } ostream&amp; operator&lt;&lt;(ostream &amp;out, matrix &amp;mat) { for (int i = 0; i &lt; mat.rows; i&#43;&#43;) { for (int j = 0; j &lt; mat.cols; j&#43;&#43;) out &lt;&lt; mat.p[i][j]&lt;&lt;&#34; &#34;; out &lt;&lt; endl; } return out; } istream&amp; operator&gt;&gt;(istream&amp;in, matrix &amp;mat) { for (int i = 0; i &lt; mat.rows; i&#43;&#43;) for (int j = 0; j &lt; mat.cols; j&#43;&#43;) in &gt;&gt; mat.p[i][j]; return in; } int main() { int n, m; cin &gt;&gt; n &gt;&gt; m; matrix mat1(n, m),mat2(n,m),mat3(n,m); cin &gt;&gt; mat1; cout &lt;&lt;&#34;mat1:&#34;&lt;&lt;endl&lt;&lt;mat1&lt;&lt;endl; cin &gt;&gt; mat2; cout &lt;&lt;&#34;mat2:&#34;&lt;&lt;endl&lt;&lt;mat2 &lt;&lt; endl; mat3=mat1; cout &lt;&lt;&#34;mat3:&#34;&lt;&lt;endl&lt;&lt;mat3 &lt;&lt; endl; } 下对角线：i-j=1 ；元素数n-1；M(i, j)－a[i-2]
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2019-12-18 22:45:30 +0000 UTC'>December 18, 2019</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 矩阵" href="http://localhost:1313/post/%E7%9F%A9%E9%98%B5/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">队列
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 先入先出
+front恒等于0，队列长度rear&#43;1；队列空：rear=-1
+静态，删除需要Θ(n)
+删除：front&#43;&#43;， Θ(1)
+队列逐渐向数组尾部“移动”
+队列空——front &gt; rear
+队尾到达数组尾时，即rear==MaxSize – 1时进行Add操作
+front &gt; 0：队列移动到数组头部（front&lt;-0），再Add，Θ(n)
+front==0，失败
+最坏情况下仍为Θ(n)
+最后一个元素之后是第一个元素
+location(i)=(location(1)&#43;i–1) % MaxSize
+front——location(1) – 1
+rear——最后一个元素在数组中的位置
+插入、删除均为Θ(1)
+缺陷：数组长度固定，但是也有其应用，例如固定最大值的线程池的描述等
+队列空和队列满的区分：只允许最多MaxSize-1个元素
+队列空：front == rear 队列满：front == (rear &#43; 1) % MaxSize 代码
+template&lt;class T&gt; class Queue {// FIFO objects public: Queue(int MaxQueueSize = 10); ~Queue() {delete [] queue;} bool IsEmpty() const {return front == rear;} bool IsFull() const { return (((rear &#43; 1) % MaxSize == front) ? 1 : 0);} T First() const; // return front element T Last() const; // return last element Queue&lt;T&gt;&amp; Add(const T&amp; x); Queue&lt;T&gt;&amp; Delete(T&amp; x); private: int front; //队首 int rear; // 队尾 int MaxSize; // 队列容量 T *queue; // element array }; //构造函数 template&lt;class T&gt; Queue&lt;T&gt;::Queue(int MaxQueueSize) {// Create an empty queue whose capacity MaxSize = MaxQueueSize &#43; 1;//留出1个额外空间 queue = new T[MaxSize]; front = rear = 0; } //队首元素 template&lt;class T&gt; T Queue&lt;T&gt;::First() const {// Return first element of queue. Throw // OutOfBounds exception if the queue is empty. if (IsEmpty()) throw OutOfBounds(); return queue[(front &#43; 1) % MaxSize]; } //队尾元素 template&lt;class T&gt; T Queue&lt;T&gt;::Last() const {// Return last element of queue. Throw // OutOfBounds exception if the queue is empty. if (IsEmpty()) throw OutOfBounds(); return queue[rear]; } //插入 template&lt;class T&gt; Queue&lt;T&gt;&amp; Queue&lt;T&gt;::Add(const T&amp; x) {// Add x to the rear of the queue. Throw // NoMem exception if the queue is full. if (IsFull()) throw NoMem(); rear = (rear &#43; 1) % MaxSize; queue[rear] = x; return *this; } //删除 template&lt;class T&gt; Queue&lt;T&gt;&amp; Queue&lt;T&gt;::Delete(T&amp; x) {// Delete first element and put in x. Throw // OutOfBounds exception if the queue is empty. if (IsEmpty()) throw OutOfBounds(); front = (front &#43; 1) % MaxSize; x = queue[front];//？ return *this; } 两种指针方向：
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2019-12-07 10:38:34 +0000 UTC'>December 7, 2019</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 队列" href="http://localhost:1313/post/%E9%98%9F%E5%88%97/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

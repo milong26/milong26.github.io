@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Don&#39;t Blind Your VLA Aligning Visual Representations for OOD Generalization | 我的博客</title>
+<meta name="keywords" content="representation">
+<meta name="description" content="Don&#39;t Blind Your VLA Aligning Visual Representations for OOD Generalization - 我的博客">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/dont-blind-your-vla-aligning-visual-representations-for-ood-generalization/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/dont-blind-your-vla-aligning-visual-representations-for-ood-generalization/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Don&#39;t Blind Your VLA Aligning Visual Representations for OOD Generalization
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h1>
+    <div class="post-meta">
+
+<span title='2026-06-29 16:50:36 +0000 UTC'>June 29, 2026</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><h1 id="第一遍边看边问">第一遍边看边问<a hidden class="anchor" aria-hidden="true" href="#第一遍边看边问">#</a></h1>
+<p>标题：对其视觉表示，align其实我之前纠结过，但vla论文基本没怎么提到这个，确实算vlm的问题，所以这篇文章是对齐visual representation内部的？还是对其visual和action？</p>
+<p>摘要：</p>
+<ol>
+<li>Yet when these VLMs are adapted to the action modality, it remains unclear to what extent their original VL representations and knowledge are preserved. In this work, we conduct a systematic study of representation retention during VLA fine-tuning, showing that naive action fine-tuning leads to degradation of visual representations.当这些视觉-语言模型被应用于动作处理任务时，其原有的视觉-语言表征和知识在多大程度上能够被保留下来，目前尚不清楚。在这项研究中，我们对视觉-语言-动作模型在微调过程中的表征保留情况进行了系统分析。 <strong>这句话里面的during VLA fine-tuning是freeze vlm，only fine-tune action expert吗</strong></li>
+<li>我们将视觉表征与语言信息相结合，提出了一种简单而有效的方法，该方法能够有效避免视觉表征的退化现象，同时提升模型在未知数据场景下的泛化能力。<strong>视觉表征退化是什么现象，怎么观察得到的</strong></li>
+</ol>
+<p>introduction</p>
+<ol>
+<li>为回答这个问题，我们首先比较了 VLA 模型与 VLM 模型在机器人技术领域中，针对相同图像-指令对时的注意力分布和特征激活情况。对注意力分布的分析表明：虽然预训练后的 VLM 能够准确识别与任务相关的物体，但经过微调后的 VLA 模型往往会产生模糊或错误的特征激活，无法有效识别那些属于“分布外”情况的物体（见图 4）。接着，我们对 VLM 和 VLA 模型各层中的中间表示进行了 t-SNE 分析。分析结果显示，VLA 模型存在明显的表示能力下降现象（Barbero 等人，2024 年；Arefin 等人，2024 年）。这说明，标准的动作微调过程会将各种复杂的内部特征压缩到有限的表示空间中，从而降低模型的表示多样性和泛化能力。最后，我们在第 4 节提出了 VL-Think 任务集，以进一步探讨这一问题。我们评估了从视觉语言模型向视觉语言架构模型的知识迁移情况，对几款性能出色的视觉语言模型进行了基准测试。同时，我们将 OpenVLA–7B（Kim 等人，2024 年）与其预训练版本 PrismaticVLM（Karamcheti 等人，2024 年）进行了比较。研究发现，在经过微调后，视觉语言架构会系统性地遗忘与机器人技术相关的领域知识，这说明视觉语言架构会丢失那些在机器人微调数据中未出现的领域的知识。<strong>写其它东西的时候我也用过t-sne，但是没有这么用，为什么要对VLM和VLA模型各层德中间表示分析？那各层就是一层的transformer？中间表示就是指transformer的结果？</strong></li>
+<li>引言里面虽然没有写具体的实验数据，但是引入了一张图4用于解释自己的方法与实验结果，这个安排在逻辑上合理吗？</li>
+<li>大型视觉和语言模型倾向于趋同于一个共同的潜在表征空间，该空间能够涵盖各种通用模型中的视觉与语义信息。我们的方法在微调过程中，始终确保视觉表征与通用视觉模型保持一致。通过保持这种关联，视觉表征对齐模型能够在调整其行为策略以适应新任务的同时，依然保持语义上的连贯性。<strong>方法的效果，真的能保持一致吗？</strong></li>
+</ol>
+<p>相关工作</p>
+<ol>
+<li>表征对齐是什么？为什么把它写在相关工作里面。</li>
+<li>随着模型在参数、数据量和处理任务方面的规模不断扩大，不同架构和不同模态下的模型表现越来越趋于一致。这个现象是真的吗？我看了论文，对应的是The  Platonic Representation Hypothesis.这篇论文，柏拉图表征假说：它认为在人工智能（AI）模型中，尤其是深度神经网络，随着模型规模的扩大和训练任务的多样化，不同的模型在表示数据的方式上越来越趋于一致。这种趋同指向一个共享的统计模型，这个模型能够捕捉到现实世界的基本结构，类似于古希腊哲学家柏拉图关于理想现实的概念。世界（Z）可以用许多不同的方式来看待，如：图像（X），文本（Y）等。在每种模态上学习的表征将收敛到 Z 的类似表征。这一假说与柏拉图的洞穴寓言相联系，其中真实世界被视为理想的形式，而我们通过感官体验到的是这些理想形式的影子或映射。<strong>这个论文主要是依据这个假说当作切入点的？还是只是当作一个论证依据</strong></li>
+<li>列举了一些表示学习方法，虽然论文里面没有写自己的方法和别的方法，<strong>但是我应该可以根据后面的内容做一个总结？</strong></li>
+</ol>
+<p>preliminary部分</p>
+<ol>
+<li>为什么还用自回归函数，这个论文会不会只适用于自回归，<strong>万一不适用于别的动作生成方法比如流匹配这种怎么办？</strong></li>
+</ol>
+<p>方法部分？还是实验部分？：VL-Think Task Suite</p>
+<ol>
+<li>为了量化视觉语言能力方面的差距，我们对 VLA 和 VLM 模型都进行了评估。怎么就开始perform evaluations了，<strong>这里不是方法章吗？</strong></li>
+<li>VLA的评估说直接反映了模型将语言信息与视觉信息相关联的能力，不是操作技能，那中途操作失败，<strong>但是控制方面的，比如没对齐，怎么办？</strong></li>
+<li>vlm的评估是通过询问来判断的，也就是语义理解，<strong>那vla是用这个被评估的vlm冻结的当作特征降维工具，然后接入自回归生成动作吗？</strong></li>
+</ol>
+<p>VL表示分析</p>
+<ol>
+<li>想探讨：在经过微调之后，VLA 模型中的 VL 表示和知识会发生怎样的变化？从 VLM 到 VLA 的知识转移是否真的发生了？此外，模型是否还能保留较强的语义关联？这个是研究目的吧，前面啰嗦了一堆</li>
+<li>首先，我们利用 t-SNE 可视化技术来评估模型是否能够为与指令相关的元素保留出结构清晰、易于区分的潜在空间。其次，我们分析注意力分布图，以评估模型在处理输入指令中提到的对象时，其聚焦程度如何。<strong>这两个操作都是怎么做的？它们当作论证&lt;在经过微调之后，VLA 模型中的 VL 表示和知识会发生怎样的变化？从 VLM 到 VLA 的知识转移是否真的发生了？&gt;的可视化工具是合理的吗？因为t-SNE是降维工具吧，直接降没事？VLM的注意力分布图能表示什么？</strong></li>
+<li>为了进一步研究微调对 VLA 模型视觉定位能力的影响，我们分析了它们的注意力分布图。这些分布图揭示了模型在文本指令中指定对象的识别效果如何。 <strong>和VLM的注意力分布图相比，VLA的会有什么区别，这个区别体现了什么含义</strong></li>
+<li>对于每一个模型，我们可视化了中间层视觉 patches 的注意力分布图。<strong>为什么只可视化这一段？前面说VL-Think Task Suite是看能不能成功对齐图片和指令，但是这里只看视觉的？而且VLA怎么只看视觉的？</strong></li>
+<li>图 4. 注意力图对比：最强的、最具语义依据的注意力分布出现在中间层区域。使用我们提出的方法进行微调后的 OpenVLA（OpenVLA Align）在注意力图中仍能保持对物体的有效识别；而默认设置的 OpenVLA SFT 则呈现出混乱且无序的注意力分布，这说明其失去了视觉与语言之间的关联性（更多结果请参见附录中的图 6）。<strong>中间层视觉patches的注意力分布图能说明什么，注意力值在某一块区域比较高，说明模型对图上这些像素怎么了？</strong></li>
+<li>图 5 展示了 Qwen2.5-VL、PrismaticVLM 和 OpenVLA 的词元嵌入在 t-SNE 坐标系中的分布情况。虽然 PrismaticVLM 和 Qwen2.5-VL 能够将不同目标对象清晰地区分开来，但 OpenVLA 各类别之间的重叠程度很高，这说明在经过动作相关的微调后，这些词的表示形式变得混乱不堪了。<strong>这个t-SNE是怎么画的，的词元嵌入在 t-SNE 坐标系中的分布情况怎么计算的？只看指令？只看采集到的数据？还是模型？结论是虽然VLM能将不同目标对象区分但是VLA不同类别重叠程度高</strong>我们使用了 COCO 数据集（Lin 等人，2014 年），并选取了杯子、瓶子和刀子这三个常见家用物品作为分析对象。对于每张图片，模型会接收形式为“你看到‘物体名称’吗？”的文本查询。随后，我们从 Transformer 模型中提取与“物体名称”相关的嵌入向量，再利用 t-SNE 算法将这些向量投影到二维空间中。</li>
+<li>有一个问题，只可视化图片模型的patch注意力分布，但是实验中是动态的，也就是应该是包含时序逻辑的，但是论文完全当作vlm和动作模块分开了吧？那还算端到端吗，虽然论文没有介绍vla是端到端，但是主流说法都是端到端吧，它真的端到端吗？</li>
+</ol>
+<p>method怎么method在这里，前面又放实验结果，逻辑有点混乱吧</p>
+<ol>
+<li>那些性能出色的视觉、语言和多模态模型，往往会趋同于一个共同的潜在表征空间。这个空间能够捕捉不同模态之间共有的语义和感知结构。每种模态都为这个共同空间提供了独特但相互补充的视角，从而共同体现了相同的底层规律。从这个角度来看，视觉语言模型可以被视作一种决策机制，其决策过程基于这些多模态表征中的某一部分。不过，在针对特定任务的微调过程中，该决策机制的内部特征可能会偏离这个通用表征空间，从而导致其无法再与那些具有普遍适用性的语义信息相联系。为减轻这种影响，我们引入了“视觉表征对齐”这一目标函数，该函数将 VLA 的视觉表征与某个稳定的外部参考编码相联系，从而确保视觉表征具有统一且通用的语义含义。<strong>总结就是：好的vlm固然好，但是vla微调以后会破坏vlm的好，所以要设计一个能保证vlm对齐的目标函数，在动作生成模块里面，不直接用以前那个自回归？</strong></li>
+<li>我们提出了一种轻量级的视觉对齐方法。该方法通过规范 VLA 模型内部的嵌入表示，使其更接近于那些经过预训练的“视觉教师”模型的嵌入表示，从而在 VLA 模型中实现通用且语义上一致的视觉表示。确保 VLA 的潜在特征空间中所隐藏的表征能够与教师的通用视觉表征保持一致。<strong>也就是外接了一个更好的vlm用来规范这个vla的vlm？怎么规范的</strong></li>
+<li>总损失将标准的自回归行为目标与对齐项结合在了一起，<strong>直接相加？然后用了一个lambda，为什么不用别的方式比如乘、log？，lambda是外部超参数？</strong></li>
+</ol>
+<p>实验</p>
+<ol>
+<li>测试目标是
+<ol>
+<li>对视觉干扰的适应</li>
+<li>语义干扰</li>
+<li>随机初始state，动作层面的</li>
+</ol>
+</li>
+<li>每种模型变体都在 128 个随机种子条件下进行了测试。我们以平均值±标准差来表示测试结果。在第 8 节中，我们采用了 Wilcoxon 符号秩检验法（Wilcoxon, 1945），并报告了相应的 p 值。<strong>Wilcoxon 符号秩检验法是什么，为什么要用，为了报告置信度？只用平均值和标准差不够吗？</strong></li>
+<li>在监督式微调过程中，我们利用 MPLib 运动规划器（Guo 等人，2025 年）收集了 1400 条专家示范轨迹。<strong>这个MPLib是不是做ikfk这种的，在环境中指定目标物体的6D姿态，然后agent生成控制机器人的关节动作轨迹？</strong></li>
+<li>在所有的微调过程中，VLA 的所有线性层都应用了 LoRA 适配器。<strong>什么叫vla的所有先行层都应用LoRA</strong></li>
+<li>openvla居然不是冻结vlm的，也就是default的时候也要finetune vlm啊</li>
+<li>a linear probing analysis是什么意思，为什么要做？而且还是ImageNet-100 数据集</li>
+</ol>
+<p>消融</p>
+<ol>
+<li>目的是研究在大规模、多样化且包含多视角的数据上训练得到的基础模型，是否能够带来更好的对齐效果和更强的迁移能力，所以怎么设计实验的？</li>
+</ol>
+<p>总结：</p>
+<ul>
+<li>问题</li>
+<li>创新点</li>
+<li>得到的结果</li>
+<li>局限性</li>
+<li>实验：列表格，得到4列，分别是实验目的（简写）、实验设计、结果的分析、对应的图和表格的编号，</li>
+</ul>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/representation/">Representation</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

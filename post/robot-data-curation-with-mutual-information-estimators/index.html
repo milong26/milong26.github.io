@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Robot Data Curation with Mutual Information Estimators | 我的博客</title>
+<meta name="keywords" content="data-curation">
+<meta name="description" content="离线数据质量估计，但是没有用vla。只是模仿学习。而且只估计单个demonstraion相对于整个数据集的贡献，是在已有数据里筛掉低质量样本，从而让下游 BC 更好。">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="http://localhost:1313/post/robot-data-curation-with-mutual-information-estimators/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/post/robot-data-curation-with-mutual-information-estimators/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Robot Data Curation with Mutual Information Estimators
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h1>
+    <div class="post-meta">
+
+<span title='2026-06-28 22:46:37 +0000 UTC'>June 28, 2026</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>离线数据质量估计，但是没有用vla。只是模仿学习。而且只估计单个demonstraion相对于整个数据集的贡献，是在已有数据里筛掉低质量样本，从而让下游 BC 更好。</p>
+<p>这个论文的rank是这个</p>
+<p>@INPROCEEDINGS{HejnaJ-RSS-25,
+AUTHOR    = {Joey Hejna AND Suvir Mirchandani AND Ashwin Balakrishna AND Annie Xie AND Ayzaan Wahid AND Jonathan Tompson AND Pannag R. Sanketi AND Dhruv Shah AND Coline Manon Devin AND Dorsa Sadigh},
+TITLE     = {{Robot Data Curation with Mutual Information Estimators}},
+BOOKTITLE = {Proceedings of Robotics: Science and Systems},
+YEAR      = {2025},
+ADDRESS   = {LosAngeles, CA, USA},
+MONTH     = {June},
+DOI       = {10.15607/RSS.2025.XXI.023}
+}</p>
+<p>没时间了，量子速读一下
+模仿学习策略的性能通常取决于它们所训练的数据集。因此，机器人数据收集的投资在工业和学术实验室中都在增长。然而，尽管收集的演示数量显著增加，但很少有工作寻求评估这些数据的质量，尽管有越来越多的证据表明其在视觉和语言等其他领域的重要性。在这项工作中，我们朝着解决机器人数据质量问题迈出了关键一步。给定一个演示数据集，我们的目标是以动作多样性和可预测性为标准来估计每个演示的相对质量。为此，我们估计一个轨迹对整个数据集中状态和动作之间互信息的平均贡献，这既捕捉了边缘动作分布的熵，也捕捉了状态条件下的动作熵。尽管常用的互信息估计器通常需要大量数据，这些数据往往超出了机器人可用的规模，我们引入了一种基于简单状态和动作VAE嵌入顶部k最近邻互信息估计的新型技术。从经验上讲，我们证明我们的方法能够根据跨越模拟和真实世界环境的多样化基准上的人类专家评分，按质量对演示数据集进行划分。此外，基于我们方法过滤的数据训练的策略在RoboMimic上带来了5-10%的改进，并在真实的ALOHA和Franka设置上表现更好。</p>
+<p>这个跟我工作的区别是模拟的？
+VAE这个有用吗
+为什么能连到VAE上面去？<strong>先用 VAE 学习 state 和 action chunk 的 latent representation，再用 KSG 的 k-nearest-neighbor 互信息估计器做打分，最后按互信息筛选示范</strong>。所以，<strong>VAE 在这里不是创新点本身，而是“互信息估计前的表征压缩/降维工具”</strong>。 论文选择它的理由，是因为作者要估计的是高维机器人轨迹里的状态—动作互信息，而直接在原始高维空间上做 kNN 互信息估计会更难稳定处理；因此先把 state 和 action chunk 映射到 latent space，再做估计更可行。从这点看，VAE 只是整个 <strong>DemInf</strong> पाइपलाइन中的一个前置模块，而不是“论文突然从 SIC 跳到 VAE”。</p>
+<p>这篇论文提出了 <strong>DemInf（Demonstration Information Estimation）</strong>，核心目标是用 <strong>mutual information</strong> 来衡量机器人模仿学习中单条示范数据的质量，并据此对示范进行排序和筛选。作者指出，机器人学习里数据质量比单纯数据数量更重要，而现有用于视觉和语言的数据筛选方法并不适合机器人场景。 他们进一步说明，互信息可以刻画状态与动作之间“既有多样性、又有可预测性”的关系，因此适合作为示范质量指标。</p>
+<p><strong>研究目的</strong>方面，论文主要想回答四个问题：DemInf 能否有效筛选机器人数据、不同互信息估计器会如何影响效果、基于互信息的数据筛选能否提升下游策略学习、以及 DemInf 性能的关键因素是什么。 作者还强调，他们希望方法能同时适用于低数据和高数据场景，并能处理机器人中常见的 50–300 条示范数据规模。</p>
+<p><strong>创新点</strong>主要有三点。第一，论文把 <strong>mutual information</strong> 直接作为机器人模仿学习数据质量的衡量标准。 第二，DemInf 先用 <strong>variational autoencoders</strong> 学习状态和动作的低维结构表示，再用基于 <strong>k-nearest neighbors</strong> 的非参数互信息估计器评估质量。 第三，作者特别指出这些非参数估计器在机器人常见的小规模数据集上更稳定，这是他们方法设计的重要动机。</p>
+<p><strong>结果</strong>显示，DemInf 在多个数据集上都能更好地区分高质量和低质量示范，并且整体优于现有基线与其他互信息估计器。 在 <strong>state-based RoboMimic</strong> 上，DemInf 在所有环境中都能达到与基线相当或更好的表现，但与 VIP 的差距不算特别大。在 <strong>image-based settings</strong> 中，DemInf 表现更强，在 RoboMimic 和 Franka 上都超过了所有方法；其中在 <strong>DishRack</strong> 任务上，DemInf 甚至能和 oracle 完全一致。 论文还报告，在 RoboCrowd 的 crowdsourced 数据上，DemInf 也能最稳定地过滤掉低质量数据，而 InfoNCE 和 MINE 在高维输入和小数据条件下方差更高、效果更差。 另外，作者发现用 DemInf 筛选后的数据训练策略，通常比使用全部数据或随机子集能得到更好的 imitation learning 表现。</p>
+<p><strong>局限性</strong>方面，作者明确列出了几条。首先，DemInf 关注的是轨迹中状态与动作的<strong>整体互信息</strong>，而没有充分处理这种量在序列环境动态中的时间演化关系。其次，由于它基于轨迹平均互信息，可能偏好“很可预测但并不能真正完成任务”的数据，例如机器人长时间停顿的轨迹。 第三，DemInf 的筛选过程是 <strong>greedy</strong> 的，不是全局最优；作者说明如果每删一条示范都重新在整个数据集上估计互信息，计算代价会高得多。最后，DemInf 默认所有示范都是成功完成任务的。</p>
+<p>下面开始真正看</p>
+<p>我的要求：准备写论文，所以需要找和我论文接近的工作。下面会记录我看论文时候的思考，对下面的问题，如果不是问题，就评估我写的方案，如果是问题，就回答。因为我在按照顺序看论文，所以前面会有问题会在论文后面得到回答，尽管我在后面可能也会写，但也需要回答的时候根据文章回答。按照下面的分类分别回答，也就是摘要部分1. 2. 3. 引言部分：…… 回答的时候逐个回答。</p>
+<p>摘要部分</p>
+<ol>
+<li>很少有研究致力于评估这些数据的质量，这一篇是做data quality的，应该会提到很多参考文献，可以拿过来用，而且也可以看一下这个方法是怎么做的。但是参考文献里面的基本都是别的方向的，比如图片这种，但没有vla的。所以这个论文是<strong>离线评分函数</strong>来给单条演示打分，并且用这个分数去筛数据。</li>
+<li>给定一组演示数据，我们试图从动作的多样性和可预测性两个方面来评估每个演示数据的相对质量。为此，我们计算了每个轨迹对整个数据集中状态与动作之间互信息的贡献程度。这一指标既反映了动作分布的熵值，也体现了基于状态的动作熵值。这篇论文后面做了VLA吗？不会是纯模仿学习吧？还真的，没有用到vla。</li>
+<li>常用的互信息估计方法需要大量数据，而这些数据量往往超出了机器人技术所能处理的范围。为什么超过范围了？基于VAE就能减少需要处理的数据量？不是VAE减少数据量，是这个作者的方法能选择，但最后不是落点于减少数据量。VAE的作用只是降维。</li>
+</ol>
+<p>引言部分</p>
+<ol>
+<li>好吧写了训练openvla了，所以这个工作还是VLA，不是纯模仿学习，也就是用到vlm了。但论文本身研究目标仍然是<strong>机器人数据质量评估</strong>，不是训练一个新的 VLA 模型。</li>
+<li> little work has sought to measure it [<a href="https://arxiv.org/html/2502.08623v3#bib.bib6">6</a>] 6对应的论文是data quality in imitation learning，哈哈之前引用过，但是还没看orz，只知道是专注模仿学习的</li>
+<li>In contrast, we believe metrics for imitation learning should be able to measure the relative predictability of the state-action distribution directly, which affects how well a policy is able to fit the expert [<a href="https://arxiv.org/html/2502.08623v3#bib.bib6">6</a>]. In this work we explore how this desiderata can be captured by the mutual information between states and actions.说得很对啊，但是怎么做呢？可预测性又是什么，这里写的是当成一个公开的指标看的，还是当作论文专有的词（也就是作者自己定义了可预测性怎么评判？） measure the relative predictability of the state-action distribution directly作者定义的。</li>
+<li>Mutual information 通过观察另一个随机变量而能够了解关于第一个随机变量的信息量，实际上衡量的是一个随机变量的边际熵与另一个随机变量的条件熵之间的差异。较高的互信息会促使行为具有更大的多样性（即行为熵较高），但同时也会使得在给定某种状态时，行为的分布更加可预测（即行为熵较低）它跟可预测性是什么关系，二者如果不是两个正交维度的话就没必要计算了吧？对 state-action 来说，高互信息意味着动作分布更有多样性，同时在给定状态下又更可预测，所以它在本文里不是和可预测性正交，而是<strong>用一个指标同时反映两者</strong>。</li>
+<li>还没解释mutual information是什么，就突然开始说怎么解决了，为了解决这个问题，我们提出了“演示信息估计”方法，简称 DemInf。DemInf 旨在适用于机器人技术中数据量较少和较多的各种情况。为此，DemInf 首先利用变分自编码器来学习状态和动作空间的低维结构化表示。此外，DemInf 还利用基于最近邻算法的互信息估计方法来评估状态与动作组合的质量。方法上就是：先用 <strong>VAE 学低维结构化表示</strong>，再用 <strong>kNN-based MI estimator</strong> 去估计 state-action chunk pairs 的质量。</li>
+<li>发现该算法能够准确地区分出由人类专家所评估出的高质量数据和低质量数据。其性能优于现有的各种基准方法，也优于像 InfoNCE 这样的互信息估计算法，这么厉害？是怎么区分高低质量的？DemInf 能根据<strong>human expert annotators 的质量分数</strong>把高质量和低质量演示分开，而且在他们的实验里比 contemporaneous baselines 和 InfoNCE 这类 MI 方法更稳。它区分高低质量的方式，不是靠人工再打一次标签，而是靠<strong>离线质量评分函数 S(τ)</strong> 给每条演示打分，然后看筛出来的数据在专家标签和下游 policy performance 上是否更好。</li>
+</ol>
+<p>相关工作部分</p>
+<ul>
+<li>vision和language的数据质量</li>
+</ul>
+<ol>
+<li>列举了文本数据、数据整合、机器人技术这些方面的数据质量方法吗？怎么感觉怪怪的，我感觉这一部分的写作大纲应该是：问题（数据质量问题备受关注），然后分别列举文本和视觉、以及整合的，过渡倒vlm，然后说为什么这些技术不能直接用于机器人上面？这个论文的思路是先说 vision/language 的现成方法不行，再说机器人为什么需要单独方案</li>
+</ol>
+<ul>
+<li>机器人的数据质量</li>
+</ul>
+<ol>
+<li>这些方法并未考虑“在同一演示场景内，动作标签的准确性如何”，而动作标签的准确性直接影响到模仿学习方法的性能。对这个问题就是in-domain data quality，或者说是部署到下游任务时的性能？作者明确区分了<strong>inter-demonstration</strong> 和 <strong>intra-demonstration transition quality</strong>。他们指出，以往很多工作看的是跨演示的组成泛化，但<strong>没有考虑单条演示内部动作标签好不好</strong>，而这会直接影响 imitation learning 性能</li>
+<li>这一段分析了机器人数据集本身的数据质量，还有动作质量的分析。DemInf 则完全不需要人工标注，更加好奇这个论文怎么做的了？</li>
+</ol>
+<ul>
+<li>mutual信息估计</li>
+</ul>
+<ol>
+<li>这个领域听都没听过</li>
+</ol>
+<p>preliminaries部分</p>
+<ul>
+<li>模仿学习</li>
+</ul>
+<ol>
+<li>该策略能够有效地再现专家 πE 在具有状态空间 𝒮 、动作空间 𝒜 和时间范围 T 的特定环境中的行为。通常，我们通过比较该策略与专家的状态访问概率分布之间的差异来衡量两者之间的相似性。”通过比较该策略与专家的状态访问概率分布之间的差异来衡量两者之间的相似性。“是这样的吗？</li>
+<li>相反，模仿学习中最常见的方法——行为克隆法，实际上是将问题简化为标准的监督学习问题[63]。利用方程式 1 中 KL 散度的相反方向， πθ 完全可以通过离线方式来学习。行为克隆只是模仿学习中的一个方法吗？</li>
+<li>smolvla算是哪种方法？？？模仿学习吗？：用自己采集的机器人数据微调 SmolVLA 的动作模块，本质上属于模仿学习（Imitation Learning, IL）；如果你的数据是“人操作机器人完成任务 → 记录状态/图像 → 对应动作”，更准确地说是行为克隆（Behavior Cloning, BC），也叫克隆学习。行为克隆是模仿学习里面最简单的一种。它直接把专家数据当监督学习：</li>
+<li>在学习机器人控制策略时，我们可能只关心能否完成任务，但实际上有多种实现该任务的策略。即便使用相同的策略，不同的演示者在执行任务的方式上也可能存在细微差别。这些差异最终会影响我们对“专家”行为的实际评估。在机器人演示数据的整理过程中，我们需要思考如何更准确地定义所谓的“经验丰富的专家”。这个没错，不管黑猫白猫能抓到就行，但是怎么策略完全没有自主，全靠学习专家吗？那这样有点low，这个也是我之前一直在纠结的。vla这些现阶段都还是靠模仿学习的，难道都靠专家演示，拟合出现实场景和专家动作之间的策略？如果一个模型只提供了一个场景中8个位置的数据，模型就推不出第9个位置怎么操作？它讨论的是<strong>不同演示质量会不会影响训练出的 policy</strong>，没有涉及泛化问题。</li>
+</ol>
+<ul>
+<li>演示curation</li>
+</ul>
+<ol>
+<li>但在实际应用中，这一分布是由负责收集数据的用户和从业者所决定的。数据收集过程中的各种选择会影响到通过行为克隆训练出的模型的性能。确实，而且不仅是不同的数据收集者，数据收集的时候物体怎么放也值得研究吧，能用更少的数据采集条数实现更高的成功率这种课题。“物体怎么摆放、用更少采集条数实现更高成功率”这些问题，属于更细的 data collection design；</li>
+<li>Specifically, our goal is to determine a score function S⁢(τ) in a purely offline fashion that is able to predict the quality of demonstrations, where quality is determined by the performance of a policy trained with behavior cloning on the score-filtered demonstration dataset完全离线的方式确定评分函数，跟我的真的很接近，但是要看他的方法：“质量”则是由使用行为克隆技术训练出的策略在经过筛选后的演示数据集上的表现来决定的。也就是说，它的评价指标是成功率？</li>
+</ol>
+<p>Mutual Information as a Quality Metric部分</p>
+<ol>
+<li>我比较好奇这一节到底算什么结构，一般论文abstract-introduction-related works-method了，但是它不仅preliminaries，还有这一章，下一章才到method，正式投稿的也是这篇？看了一下正式的也长这样啊。这一部分更像是<strong>preliminaries + motivation</strong>，不是纯方法，也不是传统意义上简单的 related work。论文结构确实是先讲 imitation learning，再专门讲为什么 mutual information 适合做质量指标，然后再进入具体方法 DemInf</li>
+<li>互信息反映了通过观察另一个随机变量而能够获得的关于该随机变量的信息量，本质上就是对可预测性的度量。 所以一共就一个指标，互信息？核心指标基本就是<strong>mutual information</strong>。作者把它拆成 marginal entropy 和 conditional entropy 来解释，但最终用的还是 state-action mutual information 这个量</li>
+<li>结合机器人数据管理的背景来解释互信息的这种分解方式。robot data curation是什么？之前没听过。<code>robot data curation</code> 在本文里就是：对机器人演示数据做<strong>offline 的质量评估与筛选</strong>，使最终训练出来的行为克隆策略更好</li>
+<li>首先，我们将探讨为何通过最小化条件动作熵能够得到更精确的策略。其次，我们会说明为何需要通过最大化边际动作熵来学习良好的策略。这一部分还算preliminaries的吧，这是什么领域的知识，模仿学习的目标函数嘛？解释：为什么<strong>低条件动作熵</strong>意味着更好的 expert fit，以及为什么<strong>高边际动作熵</strong>也重要。</li>
+</ol>
+<p>A. 最小化条件动作熵部分</p>
+<ol>
+<li>虽然没有标号，但是 we can bound the distribution matching objective from <a href="https://arxiv.org/html/2502.08623v3#S3.E1" title="In III-A Imitation Learning ‣ III Preliminaries ‣ Robot Data Curation with Mutual Information Estimators">Eq. 1</a> using the log-sum inequality in terms of the divergence between the learned policy and expert policy at each time step:这个公式是哪儿来的，什么理论？应该不是作者推导的。论文这里的表述是：他们可以用 <strong>log-sum inequality</strong> 从 Eq.1 的 distribution matching objective 得到一个上界，来联系 learned policy 和 expert policy 在每个时间步的 divergence。</li>
+<li>然后解释为什么较低的条件行动熵 H⁢(A∣S) （即方程式 4 中的第 2 项）能带来更好的 BC 性能，为什么要写这一部分？它算是解释为什么要用模仿学习吗？为了说明：如果动作在给定状态下更可预测，那么 BC 更容易拟合专家，因此较低的条件动作熵有助于更好的 imitation learning 性能。所以这部分的作用是解释<strong>为什么质量指标应该和可预测性有关</strong>，不是单纯在重复“为什么要用模仿学习”。</li>
+</ol>
+<p>B. 最大化边际行动熵
+我们认为，互信息是一种衡量数据质量的有效指标。不过，在机器人技术领域，从业者们通常更倾向于使用一些更简单的指标来作为数据质量的评估标准。例如，人们常常选择某个指标作为衡量数据泛化能力的替代指标。互信息这一指标其实可以进一步分解为另一个指标，从而更清晰地理解其背后的原理。不过，后一个指标的含义相对较难理解。由于我们最终会针对整个数据轨迹来计算互信息的平均值，因此 DemInf 实际上并不是在刻意优化初始状态的多样性，而是着眼于数据的可预测性。</p>
+<p>方法部分</p>
+<ol>
+<li>感情原来前面两章都是在说理论</li>
+<li>前面讲了一堆说互信息是用于数据筛选的理想标准但很难精确估算，所以提出演示信息估算。but我看了前面也没懂，为什么”互信息是用于数据筛选的理想标准“，互信息是什么我都没看懂。那为什么提出的方法又能计算演示数据中的互信息了？论文不是先“证明互信息能算”，而是先说“互信息是个好指标”，再提出 DemInf 去<strong>近似估计</strong>它。做法就是 VAE 表示学习 + kNN MI estimator。</li>
+<li>虽然互信息通常是在整个数据集或分布层面来考虑的，但在这里，我们更关注的是对单个演示数据的评估。什么意思？他们不是只给整个数据集一个总分，而是要给<strong>每条 demonstration / trajectory</strong> 评分。</li>
+<li>因为大多数互信息估算方法都可以分解为对各个样本的估算结果的平均值。为什么？<strong>沿时间把 MI estimates 平均</strong>，用来得到一条轨迹的质量分数，但没有细讲</li>
+<li>演示信息估算”方法，该方法利用基于最近邻的互信息估算方式。我们的方法包含三个步骤：数据表示学习、互信息估算以及结果评估，具体细节如下。这个里面数据表示学习大概是一个什么步骤？这里的数据表示学习就是把 state 和 action 先映射到一个<strong>低维结构化 latent representation</strong>，以便后面的 kNN 距离和密度估计有意义。</li>
+</ol>
+<p>A. 表示学习</p>
+<ol>
+<li>这个概念是什么？解释一下。表示学习就是<strong>representation learning</strong>：学习一个更适合后续估计任务的特征空间，而不是直接在原始高维图像/传感器上算距离。</li>
+<li>机器人技术领域的数据集往往包含多张图像和多种传感器数据。如果直接将 k -NN 估计方法应用于原始图像数据，由于“维度灾难”现象，距离度量将失去意义，从而导致算法性能不佳。确实，所以为什么要自己训练VAE，不能用VLM吗？自己训练的这个适用于其它任务吗？训练的时候需要标记数据吗？作为<strong>无监督表示学习</strong>组件使用的</li>
+<li>选择使用 VAE，因为它们会对潜在分布 p⁢(z) 施加各向同性的高斯约束。那为什么需要对潜在分布施加各向同性的高斯约束才能将原始图像数据压缩到”好“的程度？对潜在分布施加先验约束能确保嵌入状态与动作之间的距离具有实际意义，看不懂这个逻辑关系。论文给出的逻辑是：VAE 对 latent prior 施加 <strong>isotropic Gaussian</strong> 约束，从而学到“structured low-dimensional representation”，让后续状态-动作距离更有意义。你可以把它理解成一种“把表示空间规整化”的做法，但这篇论文没有在你给的结果里展开更深理论证明，所以别把它写成论文外部的强结论。</li>
+</ol>
+<p>B. KNN MI 估计</p>
+<ol>
+<li>MI估计是什么MI Estimation？全称是什么？<code>MI Estimation</code> 就是 <strong>Mutual Information Estimation</strong>，即互信息估计</li>
+<li>给定状态和动作的潜在表示形式后，我们可以利用基于最近邻的估计方法，来计算每对状态-动作组合对整个数据集的互信息所做出的贡献。这个意图看懂了</li>
+<li>这些估计方法的基本原理是：某个样本周围的概率密度函数大小，与该样本附近有多少其他数据点有关。这一关系可以通过计算最近邻数据点的数量来体现。如果某个数据点周围的概率密度较高，那么说明该点周围有较多的样本，此时对应的最近邻距离就较小；反之，如果概率密度较低，则最近邻距离较大。通过平均这些概率密度估计值，我们就可以计算出熵值[39]，进而推导出互信息。有点绕，解释一下这个论文是怎么演变的逻辑关系？目的是从原始数据得到一个数据质量评估函数。作者认为互信息这个指标可以，然后就要定义原始数据怎么变成互信息。首先原始数据维度太高了，所以用表示学习，采用VAE降维，为什么用VAE这个降维方式好？然后搞MI估计，为什么？选择的是什么方案，为什么用这个方案？关于为什么要排序，论文这里给出的原因是：随着数据集规模变大，kNN 计算会越来越难，所以他们用<strong>大 batch 多次迭代，并对数据重新排序</strong>来随机化处理。</li>
+<li>由于随着数据集规模的增加，计算 k -NN 的难度会急剧上升，因此我们采用了随机化处理方式。我们使用较大的批量大小，对数据集进行多次迭代处理，每次迭代时都采用不同的数据排序方式。为什么需要排序？</li>
+</ol>
+<p>C. 评分</p>
+<ol>
+<li>评分就是总结之前的吧</li>
+<li>看到图才想起来，论文前面写的原始数据是哪些？图片、动作状态、指令，时间呢？时间怎么考虑的？时间直接平均</li>
+<li>需要想办法把整个论文的思路串起来，现在只知道有这些，但是不知道怎么跳跃的？机器人数据贵且质量参差不齐 → 现有视觉/语言筛选法不适用 → 用互信息刻画 state-action 的可预测性与多样性 → 但直接估 MI 很难 → 用 VAE 降维 + kNN 估计 → 得到每条演示的分数 → 用这个分数筛数据，提升下游 BC 性能</li>
+</ol>
+<p>实验部分</p>
+<ol>
+<li>选择的是robomimic平台，它的实验数据怎么来的？</li>
+<li>:Average quality of demonstrations remaining in datasets after filtering with different choices of S 所以是选择它当作数据集采样的方法？</li>
+<li>总结一下实验，汇总成表格，需要：做了什么实验，期望的结果是什么？</li>
+</ol>
+<p>自己盘一遍：
+给定一组演示数据，我们试图从动作的多样性和可预测性两个方面来评估每个演示数据的相对质量。
+所以选择”轨迹对整个数据集中状态和动作之间互信息的平均贡献“当作指标。
+这个指标优点：既捕捉了边缘动作分布的熵，也捕捉了状态条件下的动作熵
+边缘动作分布的熵越&ndash;高？丰富的动作多样性
+状态条件下的动作熵&ndash;低？给定特定状态时，动作应该是确定且可预测的
+<strong>为什么高的边缘动作分布更好？</strong>
+<strong>高的边缘动作熵 $H(A)$ 相当于一种正则化</strong>，它强制要求整个数据集中的动作必须是丰富多样的，从而迫使模型在预测时必须真正去关注当前的状态（state），这对闭环控制是非常理想的</p>
+<p><strong>但是能看到这两个熵的指标为什么能评估数据的质量？</strong></p>
+<ul>
+<li><strong>低 $H(A|S)$（状态条件下的动作熵低）：</strong> 意味着在某个具体状态下，专家的动作是非常确定且可预测的。分布越简单（单峰），模型越容易拟合 。此外，这也排除了“特权信息”（比如操作员看到了机器人摄像头看不到的角度而做出的“匪夷所思”的动作，这会让模型极其困惑，对应高条件熵） 。</li>
+<li><strong>高 $H(A)$：</strong> 保证了动作有意义，如上所述。两者结合成的互信息 $I(S;A)$ 完美捕捉了“整体动作丰富，但局部极度可预测”的高质量数据特征。
+这个论文后面做得实验是行为克隆、diffusion policy和act，没有真正用到具有vlm的vla</li>
+</ul>
+<p>然后方法可以看作：目的是demonstration-&gt;要计算这个轨迹对整个数据集中状态和动作之间互信息的平均贡献。</p>
+<p>因为维度太高，不能直接降维，选择表示学习，自己训练VAE。因为VAE在降维的同时，会对其潜在分布 p(z)施加各向同性的高斯先验约束，这保证了在潜在空间中使用 L2 距离来寻找最近邻是合理且有意义的。但是为什么这个降维以后就能用，别的降维方式就不行？选择降维方式的时候看重什么需求？之所以选择 VAE 而不是其他降维方式（如普通的自编码器或预训练视觉模型），是因为后续要使用 $k$-NN（K近邻）算法。论文强调，VAE 会对潜在空间的分布 $p(z)$ 施加<strong>各向同性的高斯约束（isotropic Gaussian constraint）</strong> 。 看重这个需求有两个原因：第一，高斯先验确保了在潜在空间中，各个点之间的 L2 距离是具有实际数学意义的（这是使用近邻算法的绝对前提）；第二，$k$-NN 互信息估计器在理论上被证明对高斯分布的数据表现最好 。</p>
+<p>通过VAE降为以后，因为轨迹算小样本，所以考虑小样本MI估计？没懂怎么跳到估计的。我的理解还停留在：想从轨迹计算互信息的平均贡献，第一个问题是维度，所以选择VAE降维，降维以后还要算平均贡献，为什么要进入估计不是直接算？要“精确计算”连续变量的互信息，必须知道真实世界数据绝对准确的概率密度函数公式 $P(s,a)$、$P(s)$、$P(a)$ 。对于高维的机器人图像和连续控制动作，这是根本无法获知的。因此，只能通过有限的“小样本”数据点，利用非参数的数学统计方法（如本文用的 KSG $k$-NN 算法）去**估算（Estimate）**这个值。</p>
+<p>最终计算评分：将一条轨迹内包含的所有时间步 t 的“状态-动作”互信息估计值进行平均。有个问题，直接平均的话没事吗？因为这个图Figure 2:The average estimated I^⁢(s;a) per timestep for high quality data (“better” demonstrators) in “Square MH” from RoboMimic [<a href="https://arxiv.org/html/2502.08623v3#bib.bib50">50</a>]. Notice that at the start of the trajectory and after the grasp (75-100 steps), I^ is highest, while it is low during the grasp period (50-75 steps).能看到轨迹中途的值是有区分的。回答：像“自由移动”这种阶段，动作很好预测（互信息高）；但“刚好闭合夹爪”那一瞬间，本质上就是很难预测的（互信息极低）。如果不用平均值，而是按每个时间步过滤，就会把“抓取”这种低互信息但对完成任务<strong>极其关键</strong>的帧全删掉 。通过在整个轨迹的长度 $T$ 上求平均 $\frac{1}{T}\sum \hat{I}$，相当于对整个演示的总体质量进行打分，保留了难预测但关键的局部动作 。同时，为了防止异常值干扰，作者对数值进行了 1st 到 99th 百分位的裁剪 。</p>
+<p>实验要回答这几个问题</p>
+<ul>
+<li>Ours 在整理机器人数据方面的表现如何？&mdash;对比实验</li>
+<li>不同的互信息估算方法会对性能产生怎样的影响？&ndash;内部消融：互信息估算方法</li>
+<li>利用互信息来整理数据是否有助于提升后续的策略学习效果？&mdash;内部消融：去掉互信息</li>
+<li>是什么因素影响了 DemInf 的性能？&mdash;内部消融：</li>
+</ul>
+<p>评估标准选择：</p>
+<ul>
+<li>Uncertainty：借鉴了在模仿学习领域的主动学习相关研究[18, 31]，我们根据 5 种策略组合所带来的不确定性来选择数据。<strong>什么意思</strong></li>
+<li>Compatibility：如果某个演示行为的“新颖性”较高——即通过集成模型的预测方差来衡量——或者其新颖性较低但可靠性较高——即通过平均损失来衡量——那么该演示行为就被视为与整体策略相兼容的。</li>
+<li>VIP：隐式价值预训练”[46]，是一种无需执行任何具体操作的方法。该方法利用了基于目标条件的强化学习问题的对偶形式，从而能够学习出一种“通用”的价值函数。我们利用 VIP 来评估数据质量，具体方法是计算在某次演示过程中所预测的总奖励值。
+对比基线？</li>
+<li>InfoNCE（MI）。我们采用了用于训练 CLIP的对称型 InfoNCE目标函数，该函数最终能得到互信息的估计值。我们选择与 InfoNCE 进行比较，因为 CLIP 在视觉和语言领域的数据集构建中得到了广泛应用。</li>
+<li>MINE (MI)。MINE[4]利用 KL 散度的双重形式，通过训练得到的评估函数来计算互信息。</li>
+</ul>
+<p>也就是说，不是按照成功率当作评估标准的？就是用之前别人提出来的指标，而且这些指标不一定适用于离线学习。。。评价指标斗士评价指标是<strong>平均专家质量标签（Average Quality Score）</strong>，即利用人工给出的 ground truth 分数</p>
+<p>实验整理一下</p>
+<table>
+  <thead>
+      <tr>
+          <th>实验目的</th>
+          <th>描述</th>
+          <th>期望结果</th>
+          <th>对应结果</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>1. Ours 在整理机器人数据方面的表现如何？</strong></td>
+          <td>在含有不同质量人类演示的基准（RoboMimic, RoboCrowd, Franka）中，使用 DemInf 及其他对比基线（Uncertainty, VIP, Compatibility）设置不同的过滤阈值。评价指标：过滤后剩余数据集的<strong>人类专家质量标签的平均得分</strong>。</td>
+          <td>DemInf 的筛选曲线应最接近 Oracle（即完全按真实专家标签筛选的完美曲线），有效剔除劣质数据并保留高质量数据。</td>
+          <td>图4 (RoboMimic)<!-- raw HTML omitted -->图5 (RoboCrowd)<!-- raw HTML omitted -->图6 (Franka)</td>
+      </tr>
+      <tr>
+          <td><strong>2. 不同的互信息估算方法会对性能产生怎样的影响？</strong></td>
+          <td>保持框架不变，将非参数的 $k$-NN 互信息估计（DemInf）替换为参数化的深度学习估计器（InfoNCE, MINE）。评价指标同上。</td>
+          <td>由于机器人数据集较小（小样本）且涉及高维图像，参数化的 InfoNCE 和 MINE 可能会因为数据量不足而崩溃或出现极大方差；DemInf 应保持稳定。</td>
+          <td>图7 (跨数据集对比)</td>
+      </tr>
+      <tr>
+          <td><strong>3. 互信息整理数据是否有助于提升后续策略的学习效果？</strong></td>
+          <td>在经过 DemInf 和表现最好的基线筛选后的数据子集上，训练真实的模仿学习策略（如图像版的 BC、ACT、Diffusion Policy）。评价指标：<strong>机器人在真实/仿真环境中的任务成功率</strong>。</td>
+          <td>使用 DemInf 筛选的高质量数据训练的模型，其成功率应高于“使用全部未过滤数据”和“使用随机选取同等数量数据”训练的模型。</td>
+          <td>图8 (RoboMimic BC)<!-- raw HTML omitted -->图9 (RoboCrowd ACT, Franka Diffusion)</td>
+      </tr>
+      <tr>
+          <td><strong>4. 是什么因素影响了 DemInf 的性能？(消融实验)</strong></td>
+          <td>针对 DemInf 内部机制进行消融：1. 改变 $k$-NN 算法中的 $k$ 值范围；2. 更换不同的最近邻估计算法（KSG, BiKSG, KL）。评价指标同实验1（专家打分）。</td>
+          <td>算法对 $k$ 值的选择应具有较强的鲁棒性；但对选择的非参数估计器类型（KSG效果最好）以及潜在空间的质量较为敏感。</td>
+          <td>图10 (不同 $k$ 值)<!-- raw HTML omitted -->图11 (不同估计器)</td>
+      </tr>
+  </tbody>
+</table>
+<p>不确定性。借鉴了在模仿学习领域的主动学习相关研究[18, 31]
+其中，18是 Uncertainty-aware data aggregation for deep imitation learning.
+31是ThriftyDAgger: Budget-aware novelty and risk gating for interactive imitation learning.</p>
+<p>这个论文实验部分用到的可以评价数据质量高/低的到底是人工给的评分，还是用这些数据训练出来的模型，再用模型测试任务成功率？用来判断高/低质量的，<strong>主要是人工专家给的质量标签</strong>，作者在 RoboMimic 上使用了 benchmark 自带的 <strong>human expert quality labels</strong>，并把它们映射成 1、2、3 分来评估各个数据筛选方法的好坏。他们<strong>也做了下游验证</strong>：会用筛选后的数据去训练 BC policy，再看 policy 的任务表现；论文明确说“最终关心的是 downstream BC policies 的 performance”</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/data-curation/">Data-Curation</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

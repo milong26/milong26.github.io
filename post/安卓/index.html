@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
 <title>安卓 | 我的博客</title>
-<meta name="keywords" content="">
-<meta name="description" content="安卓 - 我的博客">
+<meta name="keywords" content="OS">
+<meta name="description" content="纠结了一下还是分类到it了，但可能以后还是放到life里面？">
 <meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
 <link rel="canonical" href="http://localhost:1313/post/%E5%AE%89%E5%8D%93/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
@@ -132,7 +132,8 @@
 
 </div>
   </header> 
-  <div class="post-content md-content"><p>adb卸载一堆</p>
+  <div class="post-content md-content"><p>纠结了一下还是分类到it了，但可能以后还是放到life里面？</p>
+<p>得到新手机以后adb卸载一堆</p>
 <p>安装</p>
 <ol>
 <li>输入法，用的雨燕但是切换很难受，有没有符号切换比较自然不搞九宫格的？</li>
@@ -140,11 +141,26 @@
 <li>照片：感觉不是很好用</li>
 <li>日历：一般，希望不联网，能添加日程比较好，还没找到合适的</li>
 </ol>
+<p>我之前没有安装过adb嘛？
+<a href="https://developer.android.google.cn/tools/releases/platform-tools?hl=zh-cn">https://developer.android.google.cn/tools/releases/platform-tools?hl=zh-cn</a>
+点击下载适用于 Windows 的 SDK Platform-Tools
+提取到application/adb这个文件夹里面
+为了以后方便，配置个环境变量
+选择Path，将ADB的安装路径（即安装目录D:\application\adb\platform-tools）添加至path中即可。
+cmd中 adb version有结果就行</p>
+<p>然后尝试关闭振动，嫌烦
+adb shell settings put system haptic_feedback_enabled 0
+没用，→ 关闭的是 <strong>Android 系统级“触摸触感反馈”开关</strong>，其实我系统里面已经关掉了
+然后看是不是obsidian的问题
+adb shell pm list packages | findstr obsidian 检查包名得到package:md.obsidian
+adb shell appops set md.obsidian VIBRATE ignore
+终于关掉了，是调用马达的</p>
 
   </div>
 
   <footer class="post-footer">
     <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/os/">OS</a></li>
     </ul>
   </footer>
 </article>

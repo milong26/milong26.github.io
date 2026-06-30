@@ -124,64 +124,6 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">树
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 高度：点到叶子节点，最长
-若二叉树的高度为h，h≥0，则它最少有h个节点，最多有2^h^-1个节点
-包含n个节点的二叉树的高度最大为n，最小为 ⌈log2 (n&#43;1)⌉
-设完全二叉树中一节点的序号为i, 1≤i≤n。则有以下关系成立：
-1)当i = 1时，该元素为二叉树的根。若i &gt; 1，则该元素父节点的编号为⌈i/2⌉
-2)当2i&gt;n时，该元素无左孩子。否则，其左孩子的编号为2i
-3)若2i &#43; 1&gt;n，该元素无右孩子。否则，其右孩子编号为2i &#43; 1
-设二叉树中度为2的节点有n2个，度为1的节点有n1个，度为0的节点有n0个，则n0=n2&#43;1
-高度为h，节点数2h-1
-BinaryTreeNode类 template &lt;class T&gt; class BinaryTreeNode{ public: BinaryTreeNode() {LeftChild = RightChild = 0;} BinaryTreeNode(const T&amp; e) {data = e; LeftChild = RightChild = 0;} BinaryTreeNode(const T&amp; e, BinaryTreeNode *l, BinaryTreeNode *r){data = e; LeftChild = l; RightChild = r;} private: T data; BinaryTreeNode&lt;T&gt; *LeftChild,*RightChild; }; BinaryTree类 template&lt;class T&gt; class BinaryTree { public: BinaryTree() {root = 0;} ~BinaryTree(){} bool IsEmpty() const {return ((root) ? false : true);} bool Root(T&amp; x) const; void MakeTree(const T&amp; element,BinaryTree&lt;T&gt;&amp; left, BinaryTree&lt;T&gt;&amp; right); void BreakTree(T&amp; element, BinaryTree&lt;T&gt;&amp; left,BinaryTree&lt;T&gt;&amp; right); void PreOrder(void(*Visit)(BinaryTreeNode&lt;T&gt; *u)) {PreOrder(Visit, root);} void InOrder(void(*Visit)(BinaryTreeNode&lt;T&gt; *u)) {InOrder(Visit, root);} void PostOrder(void(*Visit)(BinaryTreeNode&lt;T&gt; *u)) {PostOrder(Visit, root);} void LevelOrder(void(*Visit)(BinaryTreeNode&lt;T&gt; *u)); private: BinaryTreeNode&lt;T&gt; *root; // pointer to root void PreOrder(void(*Visit) (BinaryTreeNode&lt;T&gt; *u), BinaryTreeNode&lt;T&gt; *t); void InOrder(void(*Visit) (BinaryTreeNode&lt;T&gt; *u), BinaryTreeNode&lt;T&gt; *t); void PostOrder(void(*Visit) (BinaryTreeNode&lt;T&gt; *u), BinaryTreeNode&lt;T&gt; *t); }; //获取根节点数据 template&lt;class T&gt; bool BinaryTree&lt;T&gt;::Root(T&amp; x) const {// Return root data in x. // Return false if no root. if (root) {x = root-&gt;data; return true;} else return false; // no root } //创建树 template&lt;class T&gt; void BinaryTree&lt;T&gt;::MakeTree(const T&amp; element,BinaryTree&lt;T&gt;&amp; left, BinaryTree&lt;T&gt;&amp; right) {// Combine left, right, and element to make new tree. // left, right, and this must be different trees. // create combined tree root = new BinaryTreeNode&lt;T&gt; (element, left.root, right.root); // deny access from trees left and right left.root = right.root = 0; } //分裂树 template&lt;class T&gt; void BinaryTree&lt;T&gt;::BreakTree(T&amp; element,BinaryTree&lt;T&gt;&amp; left, BinaryTree&lt;T&gt;&amp; right) {// left, right, and this must be different trees. // check if empty if (!root) throw BadInput(); // tree empty // break the tree element = root-&gt;data; left.root = root-&gt;LeftChild; right.root = root-&gt;RightChild; delete root; root = 0; } //获得树高 template &lt;class T&gt; int BinaryTree&lt;T&gt;::Height(BinaryTreeNode&lt;T&gt; *t) const {// Return height of tree *t. if (!t) return 0; // empty tree int hl = Height(t-&gt;LeftChild); // height of left int hr = Height(t-&gt;RightChild); // height of right if (hl &gt; hr) return &#43;&#43;hl; else return &#43;&#43;hr; } 在上述存储方式下，寻找某一节点孩子的复杂度是O(1)，寻找其父亲的复杂度是O(n)
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2019-10-29 15:26:18 +0000 UTC'>October 29, 2019</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 树" href="http://localhost:1313/post/%E6%A0%91/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>git合并分支
-我从master搞下来的分支
-现在要写到zly分支里
-然后再merge到master
-先做好备份
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/post/git%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>git clone git@github.com:RLinf/RLinf.git 文档里面只写了venv安装，那conda环境怎么搞？ conda create -n rlinf python=3.11 conda activate rlinf
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/post/rlinf/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
     <h2 class="entry-hint-parent">
     </h2>
   </header>
@@ -290,6 +232,51 @@ du -sh /data/zhonglinye/* 2&gt;/dev/null wandb文件夹可以清空 然后hfdata
 
 <span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
   <a class="entry-link" aria-label="post link to breadwinner的日常生活" href="http://localhost:1313/post/breadwinner%E7%9A%84%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">calibration
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>校准，有点硬件的活。
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to calibration" href="http://localhost:1313/post/calibration/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">CoT-VLA: Visual Chain-of-Thought Reasoning for  Vision-Language-Action Models
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>怎么感觉这又是个插值？
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to CoT-VLA: Visual Chain-of-Thought Reasoning for  Vision-Language-Action Models" href="http://localhost:1313/post/cot-vla-visual-chain-of-thought-reasoning-for-vision-language-action-models/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Data Scaling Laws for Imitation Learning-Based End-to-End Autonomous Driving
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>14:21:30开始，这篇论文只能看20分钟 快速了解： 这篇论文是否可以扩展到vla方面？
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to Data Scaling Laws for Imitation Learning-Based End-to-End Autonomous Driving" href="http://localhost:1313/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

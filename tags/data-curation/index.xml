@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Data-Curation on 我的博客</title>
+    <link>http://localhost:1313/tags/data-curation/</link>
+    <description>Recent content in Data-Curation on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 28 Jun 2026 22:46:37 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/data-curation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Robot Data Curation with Mutual Information Estimators</title>
+      <link>http://localhost:1313/post/robot-data-curation-with-mutual-information-estimators/</link>
+      <pubDate>Sun, 28 Jun 2026 22:46:37 +0000</pubDate>
+      <guid>http://localhost:1313/post/robot-data-curation-with-mutual-information-estimators/</guid>
+      <description>&lt;p&gt;离线数据质量估计，但是没有用vla。只是模仿学习。而且只估计单个demonstraion相对于整个数据集的贡献，是在已有数据里筛掉低质量样本，从而让下游 BC 更好。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

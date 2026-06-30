@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Lstm on 我的博客</title>
+    <title>LSTM on 我的博客</title>
     <link>http://localhost:1313/tags/lstm/</link>
-    <description>Recent content in Lstm on 我的博客</description>
+    <description>Recent content in LSTM on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 26 Oct 2023 18:36:13 +0000</lastBuildDate>

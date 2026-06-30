@@ -6,16 +6,28 @@
     <description>Recent content on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 26 Jun 2026 17:03:22 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 29 Jun 2026 16:50:36 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>efficient data collection review of myself</title>
-      <link>http://localhost:1313/post/efficient-data-collection-review-of-myself/</link>
-      <pubDate>Fri, 26 Jun 2026 17:03:22 +0000</pubDate>
-      <guid>http://localhost:1313/post/efficient-data-collection-review-of-myself/</guid>
-      <description>&lt;p&gt;我自己瞎写的综述，确定efficient data collection 是方向了？
-2026年6月26日17:04:00开始，希望28日可以完结&lt;/p&gt;
-&lt;p&gt;可以说，就看vla对什么数据能泛化表现好，不需要太看重ood的&lt;/p&gt;</description>
+      <title>Don&#39;t Blind Your VLA Aligning Visual Representations for OOD Generalization</title>
+      <link>http://localhost:1313/post/dont-blind-your-vla-aligning-visual-representations-for-ood-generalization/</link>
+      <pubDate>Mon, 29 Jun 2026 16:50:36 +0000</pubDate>
+      <guid>http://localhost:1313/post/dont-blind-your-vla-aligning-visual-representations-for-ood-generalization/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Robot Data Curation with Mutual Information Estimators</title>
+      <link>http://localhost:1313/post/robot-data-curation-with-mutual-information-estimators/</link>
+      <pubDate>Sun, 28 Jun 2026 22:46:37 +0000</pubDate>
+      <guid>http://localhost:1313/post/robot-data-curation-with-mutual-information-estimators/</guid>
+      <description>&lt;p&gt;离线数据质量估计，但是没有用vla。只是模仿学习。而且只估计单个demonstraion相对于整个数据集的贡献，是在已有数据里筛掉低质量样本，从而让下游 BC 更好。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>TinyVLA-Toward-Fast-Data-Efficient-Vision-Language-Action-Models-for-Robotic-Manipulation</title>
+      <link>http://localhost:1313/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</link>
+      <pubDate>Sun, 28 Jun 2026 17:34:03 +0000</pubDate>
+      <guid>http://localhost:1313/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</guid>
+      <description></description>
     </item>
     <item>
       <title>内插和外推</title>
@@ -24,13 +36,6 @@
       <guid>http://localhost:1313/post/%E5%86%85%E6%8F%92%E5%92%8C%E5%A4%96%E6%8E%A8/</guid>
       <description>&lt;p&gt;深度学习模型都是有一定的插值能力，但是要面对ood就需要外推能力&lt;/p&gt;
 &lt;p&gt;很多内容直接ai复制粘贴的，当个导读&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>未命名 1</title>
-      <link>http://localhost:1313/post/%E8%8D%89%E7%A8%BF/</link>
-      <pubDate>Fri, 26 Jun 2026 14:43:35 +0000</pubDate>
-      <guid>http://localhost:1313/post/%E8%8D%89%E7%A8%BF/</guid>
-      <description>&lt;p&gt;0&lt;/p&gt;</description>
     </item>
     <item>
       <title>airpods4使用</title>
@@ -64,13 +69,6 @@ to 目的 &amp;ndash; efficient data collection to generalize
 this work 怎么做&amp;ndash; design factor composition and use iteractive learning
 get 结果 nearly 5-10/1 data requirement reduction
 but 局限性 need to design factor humanly and iterative need much work&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>tinyvla</title>
-      <link>http://localhost:1313/post/tinyvla/</link>
-      <pubDate>Wed, 24 Jun 2026 15:29:28 +0000</pubDate>
-      <guid>http://localhost:1313/post/tinyvla/</guid>
-      <description>&lt;p&gt;tinyvla用论文结构、内容上解读+代码复现&lt;/p&gt;</description>
     </item>
     <item>
       <title>双拼</title>
@@ -219,13 +217,6 @@ but 局限性 need to design factor humanly and iterative need much work&lt;/p&g
       <pubDate>Fri, 10 Oct 2025 18:26:10 +0000</pubDate>
       <guid>http://localhost:1313/post/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/</guid>
       <description>&lt;p&gt;它跟vla啥关系啊，怎么感觉哪哪都能听到这个词语&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>TinyVLA: Toward Fast, Data-Efficient Vision-Language-Action Models for Robotic Manipulation</title>
-      <link>http://localhost:1313/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</link>
-      <pubDate>Mon, 29 Sep 2025 15:19:42 +0000</pubDate>
-      <guid>http://localhost:1313/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</guid>
-      <description>&lt;p&gt;我要看这篇文章能否复现&lt;/p&gt;</description>
     </item>
     <item>
       <title>Task Reconstruction and Extrapolation for π0 using Text Latent</title>
@@ -570,13 +561,6 @@ extrapolation，相比interpolation
       <description>&lt;p&gt;一个比robosuite更简洁的物理平台，专为通用机器人/人工智能/物理AI应用而设计。&lt;/p&gt;</description>
     </item>
     <item>
-      <title>todo app测评</title>
-      <link>http://localhost:1313/post/todo-app%E6%B5%8B%E8%AF%84/</link>
-      <pubDate>Mon, 09 Dec 2024 14:19:09 +0000</pubDate>
-      <guid>http://localhost:1313/post/todo-app%E6%B5%8B%E8%AF%84/</guid>
-      <description>&lt;p&gt;受不了这种全用脑子记录事情的状态了，测评一下几个todo软件。&lt;/p&gt;</description>
-    </item>
-    <item>
       <title>robosuite平台</title>
       <link>http://localhost:1313/post/robosuite%E5%B9%B3%E5%8F%B0/</link>
       <pubDate>Mon, 02 Dec 2024 14:22:27 +0000</pubDate>
@@ -651,13 +635,6 @@ extrapolation，相比interpolation
       <guid>http://localhost:1313/post/nodejs/</guid>
       <description>&lt;p&gt;安装、配置、更新nodejs的流程&lt;/p&gt;
 &lt;p&gt;但是我现在更新不了……重新配置一遍算了&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>看过的动画目录</title>
-      <link>http://localhost:1313/post/%E7%9C%8B%E8%BF%87%E7%9A%84%E5%8A%A8%E7%94%BB%E7%9B%AE%E5%BD%95/</link>
-      <pubDate>Wed, 10 Jul 2024 16:44:26 +0000</pubDate>
-      <guid>http://localhost:1313/post/%E7%9C%8B%E8%BF%87%E7%9A%84%E5%8A%A8%E7%94%BB%E7%9B%AE%E5%BD%95/</guid>
-      <description>&lt;p&gt;动画目录&lt;/p&gt;</description>
     </item>
     <item>
       <title>latex</title>
@@ -994,13 +971,6 @@ $$&lt;/p&gt;
 &lt;p&gt;参考这一篇&lt;a href=&#34;https://zhuanlan.zhihu.com/p/55791843&#34;&gt;hehe&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     <item>
-      <title>双拼入门</title>
-      <link>http://localhost:1313/post/%E5%8F%8C%E6%8B%BC%E5%85%A5%E9%97%A8/</link>
-      <pubDate>Thu, 29 Feb 2024 21:21:26 +0000</pubDate>
-      <guid>http://localhost:1313/post/%E5%8F%8C%E6%8B%BC%E5%85%A5%E9%97%A8/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>npm</title>
       <link>http://localhost:1313/post/npm/</link>
       <pubDate>Thu, 29 Feb 2024 17:30:15 +0000</pubDate>
@@ -1012,35 +982,6 @@ $$&lt;/p&gt;
 &lt;p&gt;2、清空缓存：npm cache clean &amp;ndash;force&lt;/p&gt;
 &lt;p&gt;3、然后修改镜像即可：npm config set registry &lt;a href=&#34;https://registry.npmmirror.com&#34;&gt;https://registry.npmmirror.com&lt;/a&gt; 一般国内用户还是建议使用淘宝镜像，所以推荐还是设置成用淘宝镜像
 4、再次运行： npm config list，查看 registry 已经被更改为默认的 npm 公共镜像地址。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>寒假之前搞定的aimax配置</title>
-      <link>http://localhost:1313/post/%E5%AF%92%E5%81%87%E4%B9%8B%E5%89%8D%E6%90%9E%E5%AE%9A%E7%9A%84aimax%E9%85%8D%E7%BD%AE/</link>
-      <pubDate>Sat, 06 Jan 2024 16:47:14 +0000</pubDate>
-      <guid>http://localhost:1313/post/%E5%AF%92%E5%81%87%E4%B9%8B%E5%89%8D%E6%90%9E%E5%AE%9A%E7%9A%84aimax%E9%85%8D%E7%BD%AE/</guid>
-      <description>&lt;p&gt;目标：在aimax平台上面部署MedicalGPT&lt;/p&gt;
-&lt;h1 id=&#34;aimax平台&#34;&gt;aimax平台&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;连校园网，http://10.60.81.153/index.html#/login&lt;/li&gt;
-&lt;li&gt;账户名 general07 密码 ner@507 登录，多端登录会下线之前的&lt;/li&gt;
-&lt;li&gt;(选)右上角有用户手册&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id=&#34;私有数据目录&#34;&gt;私有数据目录&lt;/h1&gt;
-&lt;p&gt;数据存储-私有数据-创建目录，名字随便写&lt;/p&gt;
-&lt;h1 id=&#34;创建环境&#34;&gt;创建环境&lt;/h1&gt;
-&lt;p&gt;还是在aimax平台
-侧边栏：模型训练-交互式开发-创建&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;名字随便，自己记得&lt;/li&gt;
-&lt;li&gt;选terminal&lt;/li&gt;
-&lt;li&gt;密码也要自己记得，密码只能由字母数字和特殊字符（!@#$%^&amp;amp;*）组成，且6~20位字符。&lt;/li&gt;
-&lt;li&gt;工作空间选刚才创建的私有数据目录&lt;/li&gt;
-&lt;li&gt;最长运行时间没法加，认命吧&lt;/li&gt;
-&lt;li&gt;绑定的分区看不懂&lt;/li&gt;
-&lt;li&gt;加速器选3090&lt;/li&gt;
-&lt;li&gt;选择GPU个数&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;xshell&#34;&gt;xshell&lt;/h1&gt;</description>
     </item>
     <item>
       <title>xshell和xftp指北</title>
@@ -5567,6 +5508,13 @@ u = 邻接于w 的下一个顶点；
     </item>
     <item>
       <title></title>
+      <link>http://localhost:1313/post/6-30/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/6-30/</guid>
+      <description>&lt;p&gt;中行卡还有20468.5元，什么时候去线下转账到交行卡里面&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
       <link>http://localhost:1313/post/git%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/post/git%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF/</guid>
@@ -5585,6 +5533,29 @@ u = 邻接于w 的下一个顶点；
 文档里面只写了venv安装，那conda环境怎么搞？
 conda create -n rlinf python=3.11
 conda activate rlinf&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/untitled/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/untitled/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://wcn5nr4htkrb.feishu.cn/wiki/PL60wO9poi6Q8KkImZacgCBanrf?from=from_copylink&#34;&gt;https://wcn5nr4htkrb.feishu.cn/wiki/PL60wO9poi6Q8KkImZacgCBanrf?from=from_copylink&lt;/a&gt;   这个是那个“张工的车库”，线下的培训课程，学完这个能找到工作吗？
+想玩mc模拟大都市这个模组了&lt;/p&gt;
+&lt;p&gt;宝能城西区有个游泳馆，大概30一次&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://m.weibo.cn/detail/5272104221021545&#34;&gt;https://m.weibo.cn/detail/5272104221021545&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;明天做什么&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 实验做完&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 写完第二稿&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 搞定hugo&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 大论文&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 搜索一个锻炼项目 屁股疼&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;练了这个【康复跟练12min｜缓解坐骨神经压迫、屁股痛、腿麻等不适状况｜改善久坐下肢循环差-哔哩哔哩】 &lt;a href=&#34;https://b23.tv/UjbhuSa&#34;&gt;https://b23.tv/UjbhuSa&lt;/a&gt;
+拉伸感很强&lt;/p&gt;
+&lt;p&gt;我要晒被子，今天研究一下去哪儿晒。今天15-23度，晴天，中午回去的时候看是不是3楼可以晒&lt;/p&gt;
+&lt;p&gt;vibe coding是什么？&lt;/p&gt;
+&lt;p&gt;![[IMG_20260603_162538.jpg]]&lt;/p&gt;</description>
     </item>
     <item>
       <title></title>
@@ -5726,7 +5697,7 @@ du -sh /data/zhonglinye/hfdata/* 2&amp;gt;/dev/null
     MONTH     = {July}, 
     DOI       = {10.15607/RSS.2024.XX.013} 
 }
-&lt;/code&gt;&lt;/pre&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;原来只要实验也行啊，早知道我就只写实验结果了orz&lt;/p&gt;</description>
     </item>
     <item>
       <title>Evaluating Uncertainty and Quality of Visual Language Action-enabled Robots</title>
@@ -5741,13 +5712,6 @@ du -sh /data/zhonglinye/hfdata/* 2&amp;gt;/dev/null
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/post/fast-efficient-action-tokenization-for-vision-language-action-models/</guid>
       <description>&lt;p&gt;pi0.5的时候用到这个方法：post-train里面用这个方法，说是因为这个论文发现了用离散的token训练更快。有点好奇是怎么把动作给离散化的，又不能分词，既然它能离散化的话，那图像也能离散化吗？&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>flow matching</title>
-      <link>http://localhost:1313/post/flow-matching/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/flow-matching/</guid>
-      <description></description>
     </item>
     <item>
       <title>genesis平台</title>
@@ -5800,20 +5764,6 @@ du -sh /data/zhonglinye/hfdata/* 2&amp;gt;/dev/null
       <description>&lt;p&gt;hugo配置日志&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Language-Conditioned Imitation Learning with Base Skill Priors under Unstructured Data</title>
-      <link>http://localhost:1313/post/language-conditioned-imitation-learning-with-base-skill-priors-under-unstructured-data/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/language-conditioned-imitation-learning-with-base-skill-priors-under-unstructured-data/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Language-Guided Dexterous Functional Grasping by LLM Generated Grasp Functionality and Synergy for Humanoid Manipulation</title>
-      <link>http://localhost:1313/post/language-guided-dexterous-functional-grasping-by-llm-generated-grasp-functionality-and-synergy-for-humanoid-manipulation/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/language-guided-dexterous-functional-grasping-by-llm-generated-grasp-functionality-and-synergy-for-humanoid-manipulation/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>maniskill</title>
       <link>http://localhost:1313/post/maniskill/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -5833,13 +5783,6 @@ du -sh /data/zhonglinye/hfdata/* 2&amp;gt;/dev/null
       <link>http://localhost:1313/post/onnx/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/post/onnx/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>PaliGemma</title>
-      <link>http://localhost:1313/post/paligemma/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/paligemma/</guid>
       <description></description>
     </item>
     <item>
@@ -6012,21 +5955,7 @@ Q:&lt;/li&gt;
       <link>http://localhost:1313/post/%E5%AE%89%E5%8D%93/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/post/%E5%AE%89%E5%8D%93/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>异构</title>
-      <link>http://localhost:1313/post/%E5%BC%82%E6%9E%84/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/%E5%BC%82%E6%9E%84/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>拓扑</title>
-      <link>http://localhost:1313/post/%E6%8B%93%E6%89%91/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/%E6%8B%93%E6%89%91/</guid>
-      <description></description>
+      <description>&lt;p&gt;纠结了一下还是分类到it了，但可能以后还是放到life里面？&lt;/p&gt;</description>
     </item>
     <item>
       <title>条件transformer</title>
@@ -6118,20 +6047,6 @@ Q:&lt;/li&gt;
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/post/%E8%BF%90%E5%8A%A8%E7%B1%BB%E5%8A%A8%E7%94%BB%E7%82%B9%E8%AF%84/</guid>
       <description>&lt;p&gt;给之前看过的动画做个总结&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>逆运动学</title>
-      <link>http://localhost:1313/post/%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/%E9%80%86%E8%BF%90%E5%8A%A8%E5%AD%A6/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>骨盆前倾</title>
-      <link>http://localhost:1313/post/%E9%AA%A8%E7%9B%86%E5%89%8D%E5%80%BE/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/%E9%AA%A8%E7%9B%86%E5%89%8D%E5%80%BE/</guid>
-      <description></description>
     </item>
     <item>
       <title>魔法世界观下生产力会发展吗</title>

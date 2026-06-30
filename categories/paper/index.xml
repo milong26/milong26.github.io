@@ -6,16 +6,28 @@
     <description>Recent content in Paper on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 26 Jun 2026 17:03:22 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 29 Jun 2026 16:50:36 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/paper/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>efficient data collection review of myself</title>
-      <link>http://localhost:1313/post/efficient-data-collection-review-of-myself/</link>
-      <pubDate>Fri, 26 Jun 2026 17:03:22 +0000</pubDate>
-      <guid>http://localhost:1313/post/efficient-data-collection-review-of-myself/</guid>
-      <description>&lt;p&gt;我自己瞎写的综述，确定efficient data collection 是方向了？
-2026年6月26日17:04:00开始，希望28日可以完结&lt;/p&gt;
-&lt;p&gt;可以说，就看vla对什么数据能泛化表现好，不需要太看重ood的&lt;/p&gt;</description>
+      <title>Don&#39;t Blind Your VLA Aligning Visual Representations for OOD Generalization</title>
+      <link>http://localhost:1313/post/dont-blind-your-vla-aligning-visual-representations-for-ood-generalization/</link>
+      <pubDate>Mon, 29 Jun 2026 16:50:36 +0000</pubDate>
+      <guid>http://localhost:1313/post/dont-blind-your-vla-aligning-visual-representations-for-ood-generalization/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Robot Data Curation with Mutual Information Estimators</title>
+      <link>http://localhost:1313/post/robot-data-curation-with-mutual-information-estimators/</link>
+      <pubDate>Sun, 28 Jun 2026 22:46:37 +0000</pubDate>
+      <guid>http://localhost:1313/post/robot-data-curation-with-mutual-information-estimators/</guid>
+      <description>&lt;p&gt;离线数据质量估计，但是没有用vla。只是模仿学习。而且只估计单个demonstraion相对于整个数据集的贡献，是在已有数据里筛掉低质量样本，从而让下游 BC 更好。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>TinyVLA-Toward-Fast-Data-Efficient-Vision-Language-Action-Models-for-Robotic-Manipulation</title>
+      <link>http://localhost:1313/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</link>
+      <pubDate>Sun, 28 Jun 2026 17:34:03 +0000</pubDate>
+      <guid>http://localhost:1313/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</guid>
+      <description></description>
     </item>
     <item>
       <title>Towards Generalizable Robotic Data Flywheel High-Dimensional Factorization and Composition</title>
@@ -35,13 +47,6 @@ to 目的 &amp;ndash; efficient data collection to generalize
 this work 怎么做&amp;ndash; design factor composition and use iteractive learning
 get 结果 nearly 5-10/1 data requirement reduction
 but 局限性 need to design factor humanly and iterative need much work&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>tinyvla</title>
-      <link>http://localhost:1313/post/tinyvla/</link>
-      <pubDate>Wed, 24 Jun 2026 15:29:28 +0000</pubDate>
-      <guid>http://localhost:1313/post/tinyvla/</guid>
-      <description>&lt;p&gt;tinyvla用论文结构、内容上解读+代码复现&lt;/p&gt;</description>
     </item>
     <item>
       <title>Data Quality in Imitation Learning</title>
@@ -109,13 +114,6 @@ but 局限性 need to design factor humanly and iterative need much work&lt;/p&g
       <pubDate>Mon, 20 Oct 2025 15:05:54 +0000</pubDate>
       <guid>http://localhost:1313/post/pi0.5/</guid>
       <description>&lt;p&gt;pi0.5也开源了，看一下原文&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>TinyVLA: Toward Fast, Data-Efficient Vision-Language-Action Models for Robotic Manipulation</title>
-      <link>http://localhost:1313/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</link>
-      <pubDate>Mon, 29 Sep 2025 15:19:42 +0000</pubDate>
-      <guid>http://localhost:1313/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</guid>
-      <description>&lt;p&gt;我要看这篇文章能否复现&lt;/p&gt;</description>
     </item>
     <item>
       <title>smolvla</title>
@@ -830,7 +828,7 @@ $$&lt;/p&gt;</description>
     MONTH     = {July}, 
     DOI       = {10.15607/RSS.2024.XX.013} 
 }
-&lt;/code&gt;&lt;/pre&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;原来只要实验也行啊，早知道我就只写实验结果了orz&lt;/p&gt;</description>
     </item>
     <item>
       <title>FAST:Efficient Action Tokenization for  Vision-Language-Action Models</title>

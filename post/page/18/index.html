@@ -128,104 +128,6 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">codelab
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>本科学移动智能开发的时候用codelab学的，当时的作业也有要求，但是我比较懒所以请同学帮忙提交的，现在重新学一下。
-官网 参考文档 遇事不决走官网，华为也有一个可以参考，本文所学习的主要是谷歌的。 但是为什么官网没有教怎么写codelabs，如果有的话记得删掉这句
-配置 go-language Node.js-v10&#43;以及npm claat 写 先找到准备存放codelabs项目的文件夹 下载工具(?个人理解是类似hexo搞的环境依赖)
-git clone https://github.com/googlecodelabs/tools 慢的话试试镜像
-git clone https://github.com.cnpmjs.org/googlecodelabs/tools 在该文件夹里信件md文件即可写了，markdown语法都一样 开头可以有几个配置
-summary: 测试，第一个codelab id: first_codelab categories: Android tags: android status: Published authors: kk Feedback Link: https://github.com/wkk-knight/ 如果在Windows系统写这个md 文件，使用的编辑器一定要用unix 的换行格式 ，否则你会发现输出的格式会有异常。这个换行符在vs code 等编辑器可以修改的。
-执行命令
-claat export FileName.md html文件可以看了，后面部署以后有空再写，我懒=)
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2023-09-07 22:49:09 +0000 UTC'>September 7, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to codelab" href="http://localhost:1313/post/codelab/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">python里@的作用
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>看文献的时候看到里面有一句x=a@x，遂搜索
-修饰符 用做函数的修饰符，可以在模块或者类的定义层内对函数进行修饰 函数前面有两个及以上装饰器时倒着来
-#Example 2 def FA(fn): def warp(): return &#34;&lt;a&gt;&#34;&#43;fn()&#43;&#34;&lt;a&gt;&#34; return warp def FB(fn): def warp(): return &#34;&lt;b&gt;&#34;&#43;fn()&#43;&#34;&lt;b&gt;&#34; return warp @FA #相当于makebold(test1),也就是把当前函数作为入参传过去 def test1(): return &#34;test1&#34; @FB def test2(): return &#34;test2&#34; @FA @FB def test3(): #函数和装饰器是倒着执行的，从下往上，从内而外，一层层执行 return &#34;test3&#34; print(test1()) print(test2()) print(test3()) 结果：
-&lt;a&gt;test1&lt;a&gt; &lt;b&gt;test2&lt;b&gt; &lt;a&gt;&lt;b&gt;test3&lt;b&gt;&lt;a&gt; 矩阵乘法 运算符*在矩阵运算中的功能是逐元素的乘法（称为Hadamard积（Hadamard product，数学符号⊙） @在矩阵运算中的功能是矩阵乘法。也即，在矩阵乘法中，b矩阵右乘的作用是交换被乘矩阵的1、2两列，结果即是。其实@运算符和numpy的matmul是一样的
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2023-06-25 17:14:52 +0000 UTC'>June 25, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to python里@的作用" href="http://localhost:1313/post/python%E9%87%8C@%E7%9A%84%E4%BD%9C%E7%94%A8/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">在神经网络里初始化权重
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>其实我还没明白怎么就到这里了 参考
-为什么要初始化权重 权重初始化的目的是防止层激活输出在深度神经网络前向传播过程中爆炸或消失。如果发生任何一种情况，损失梯度要么太大要么太小而无法有益地向后流动，并且网络将需要更长的时间才能收敛（即使它能够收敛）。 一句话概括：权重太大导致梯度爆炸（torch.isnan()可判断是否是空值），权重太小导致输出不明显
-如何找到最佳权重 从权重定义开始 输出与权重、输入 输出y是输入向量x和权重矩阵a之间的矩阵乘积，即 $Y_{i}=\sum_{k=0}^{n-1}a_{i,k}*x_{k}$ 其中i是权重矩阵a的给定行索引，k是权重矩阵a中的给定列索引和输入向量x中的元素索引，n是x中元素的范围或总数。这也可以在 Python 中定义为：
-y[i] = sum([c*d for c,d in zip(a[i], x)]) 标准差相近 在给定的层，我们从标准正态分布初始化的输入x和权重矩阵a的矩阵乘积，平均而言，标准偏差非常接近输入通道的平方根
-代码证明 import math import torch mean = 0. var = 0. for i in range(10000): x = torch.randn(512) a = torch.randn(512, 512) y = a @ x mean &#43;= y.mean().item() var &#43;= y.pow(2).mean().item() print(mean/10000, math.sqrt(var/10000)) 数学方法 为了计算y，我们将输入x的一列元素与权重a的一行的元素相乘的512个乘积累加。其中，x服从标准正态分布，a服从标准正态分布，且互相独立。 对于a中的点与x中点相乘，可以粗略看完两个正态分布相乘。 对于两个独立的正态分布相乘。 令$X ∼ N ( μ_1 , σ_1^2 ) ,Y ∼ N ( μ_2 , σ_2^2 ) $，XY独立 $\operatorname{var}(X Y)=E\left[(X Y)^{2}\right]-(E[X Y])^{2}=E\left[X^{2} Y^{2}\right]-(E[X Y])^{2}$
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2023-06-25 17:03:24 +0000 UTC'>June 25, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 在神经网络里初始化权重" href="http://localhost:1313/post/%E5%9C%A8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E9%87%8C%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9D%83%E9%87%8D/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">embedding层
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>学rnn的时候遇到过，看名字也没能看出来是干什么用的
-one-hot编码 用稀疏矩阵来存储一个变量特征，优点计算快，缺点是变量太多的时候占空间。 为了解决这个，就要把矩阵缩小点
-embedding层功能 降维 embedding层，在某种程度上，就是用来降维的，降维的原理就是矩阵乘法。在卷积网络中，可以理解为特殊全连接层操作，跟1x1卷积核异曲同工
-升维 同理
-embedding用于NLP 这个例子挺形象的 把文字的one-hot编码，从稀疏态变成了密集态，并且让相互独立向量变成了有内在联系的关系向量 从稀疏矩阵到密集矩阵的过程，叫做embedding，很多人也把它叫做查表，因为他们之间也是一个一一映射的关系。
-更重要的是，这种关系在反向传播的过程中，是一直在更新的，因此能在多次epoch后，使得这个关系变成相对成熟，即：正确的表达整个语义以及各个语句之间的关系。这个成熟的关系，就是embedding层的所有权重参数。
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2023-06-01 22:31:53 +0000 UTC'>June 1, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to embedding层" href="http://localhost:1313/post/embedding%E5%B1%82/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">springboot从头开始
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>以前学过的springboot全忘光了。。 从头学起来，就当是复习java了
-新建项目 本地创建 我用的intellij idea community没有这个功能，跳过
-外部导入 spring initializer
-几个选项 project Gradle
-Maven
-Project Metadata</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2023-05-26 15:07:22 +0000 UTC'>May 26, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to springboot从头开始" href="http://localhost:1313/post/springboot%E4%BB%8E%E5%A4%B4%E5%BC%80%E5%A7%8B/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
     <h2 class="entry-hint-parent">配置java
     </h2>
   </header>
@@ -321,6 +223,100 @@ pytorch nn.rnn()参数说明 nn.RNN(input_size, hidden_size, num_layers=1, nonli
 
 <span title='2023-05-17 16:55:45 +0000 UTC'>May 17, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
   <a class="entry-link" aria-label="post link to 部署latex" href="http://localhost:1313/post/%E9%83%A8%E7%BD%B2latex/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">重装系统之前和之后我要干什么
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>遇到问题睡大觉× 遇到问题重装√
+之前：
+导出chrome的用户名和密码 导出收藏夹 qq文件 d盘中的文件相关 桌面上可能有的文件残留 单机游戏的存档 重装系统ing
+之后：
+设置一下配色，防止闪瞎 修改桌面布局、卸载掉不用的软件 chrome下载回来 darkreader拓展 佛跳墙 屏蔽广告的拓展和tampermonkey 导入密码和收藏夹 7z、vscode、tim等软件安装和配置 显示器的驱动找intel assiat它会补全 指纹的驱动在这，指纹是这个Goodix GF3208 指纹传感器驱动程序 腾讯的翻译拓展挺好用的，不需要登录，比谷歌快 </p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-05-17 16:49:37 +0000 UTC'>May 17, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 重装系统之前和之后我要干什么" href="http://localhost:1313/post/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B9%8B%E5%89%8D%E5%92%8C%E4%B9%8B%E5%90%8E%E6%88%91%E8%A6%81%E5%B9%B2%E4%BB%80%E4%B9%88/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">RLHF是什么
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>大型语言模型 (Large Language Model，LLM) 生成领域的新训练范式：RLHF (Reinforcement Learning from Human Feedback) ，即以强化学习方式依据人类反馈优化语言模型。
+LLM：根据人类输入提示 (prompt) 生成多样化文本，but主观和依赖上下文。现有的模型通常以预测下一个单词的方式和简单的损失函数 (如交叉熵) 来建模，没有显式地引入人的偏好和主观意见。
+RLHF 的思想：使用强化学习的方式直接优化带有人类反馈的语言模型
+步骤：
+预训练一个语言模型 (LM) ； 使用经典的预训练目标训练一个语言模型
+聚合问答数据并训练一个奖励模型 (Reward Model，RM) ； 输入：文本，输出：标量奖励，对应的就是人的偏好
+这一模型接收一系列文本并返回一个标量奖励，数值上对应人的偏好。我们可以用端到端的方式用 LM 建模，或者用模块化的系统建模 (比如对输出进行排名，再将排名转换为奖励) 。这一奖励数值将对后续无缝接入现有的 RL 算法至关重要。
+关于模型选择方面，RM 可以是另一个经过微调的 LM，也可以是根据偏好数据从头开始训练的 LM。例如 Anthropic 提出了一种特殊的预训练方式，即用偏好模型预训练 (Preference Model Pretraining，PMP) 来替换一般预训练后的微调过程。因为前者被认为对样本数据的利用率更高。但对于哪种 RM 更好尚无定论。
+关于训练文本方面，RM 的提示 - 生成对文本是从预定义数据集中采样生成的，并用初始的 LM 给这些提示生成文本。Anthropic 的数据主要是通过 Amazon Mechanical Turk 上的聊天工具生成的，并在 Hub 上可用 (https://huggingface.co/datasets/Anthropic/hh-rlhf)，而 OpenAI 使用了用户提交给 GPT API 的 prompt。
+关于训练奖励数值方面，这里需要人工对 LM 生成的回答进行排名。起初我们可能会认为应该直接对文本标注分数来训练 RM，但是由于标注者的价值观不同导致这些分数未经过校准并且充满噪音。通过排名可以比较多个模型的输出并构建更好的规范数据集。
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-05-04 15:59:12 +0000 UTC'>May 4, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to RLHF是什么" href="http://localhost:1313/post/rlhf%E6%98%AF%E4%BB%80%E4%B9%88/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">马尔科夫链
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>随机过程 简单来说，通过已经有的数据，预测未来
+马尔科夫链 无记忆性：后面的只能根据前一个状态，类似自然数后面的数只比前面的大1
+转移概率矩阵 状态之间转移，也就是做概率矩阵的点乘运算（多次即幂） 稳定性：经过一定有限次数序列的转换，最终一定可以得到一个稳定的概率分布 ，且与初始状态概率分布无关
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-05-01 21:46:31 +0000 UTC'>May 1, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 马尔科夫链" href="http://localhost:1313/post/%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">马尔科夫随机场
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>马尔可夫随机场（Markov Random Field）或马尔可夫网络（ Markov Network）是一类在随机变量之间具有无向图的图形模型。该图的结构决定了随机变量之间的相关性或独立性。
+定义：MRF是一种无向图模型。图中每个结点表示一个或一组变量，结点之间的边表示两个变量的依赖关系。MRF有一组势函数，也可称为“因子”，这是定义在变量子集上的非负实函数，主要用于定义概率分布函数。
+对于一个结点子集，其中任意两点都有边连接，则称该结点子集为“团”。
+若在一个图中加入任何一个结点均不再构成团，则称该团为&#34;极大团&#34;。
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-04-26 18:27:49 +0000 UTC'>April 26, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 马尔科夫随机场" href="http://localhost:1313/post/%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%9A%8F%E6%9C%BA%E5%9C%BA/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">只要饿不死
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>就往死里饿
+下饺子
+包好的 放水煮，沸腾了把饺子下锅 煮到泡沫变多的时候把饺子翻一下防止粘锅 浮上来后关火，焖一段时间 炒菠菜
+洗好了，根太长的就去了 锅里放点油（怕油炸的话可以先不点火 先把菠菜梗那段下锅炒会 再上其它的 炒到瘪了就差不多 </p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-04-25 18:10:02 +0000 UTC'>April 25, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 只要饿不死" href="http://localhost:1313/post/%E5%8F%AA%E8%A6%81%E9%A5%BF%E4%B8%8D%E6%AD%BB/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

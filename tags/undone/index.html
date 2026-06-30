@@ -144,20 +144,6 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">双拼入门
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p></p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2024-02-29 21:21:26 +0000 UTC'>February 29, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 双拼入门" href="http://localhost:1313/post/%E5%8F%8C%E6%8B%BC%E5%85%A5%E9%97%A8/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
     <h2 class="entry-hint-parent">npm
     </h2>
   </header>
@@ -172,23 +158,6 @@
 
 <span title='2024-02-29 17:30:15 +0000 UTC'>February 29, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
   <a class="entry-link" aria-label="post link to npm" href="http://localhost:1313/post/npm/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">寒假之前搞定的aimax配置
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>目标：在aimax平台上面部署MedicalGPT
-aimax平台 连校园网，http://10.60.81.153/index.html#/login 账户名 general07 密码 ner@507 登录，多端登录会下线之前的 (选)右上角有用户手册 私有数据目录 数据存储-私有数据-创建目录，名字随便写
-创建环境 还是在aimax平台 侧边栏：模型训练-交互式开发-创建
-名字随便，自己记得 选terminal 密码也要自己记得，密码只能由字母数字和特殊字符（!@#$%^&amp;*）组成，且6~20位字符。 工作空间选刚才创建的私有数据目录 最长运行时间没法加，认命吧 绑定的分区看不懂 加速器选3090 选择GPU个数 xshell</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2024-01-06 16:47:14 +0000 UTC'>January 6, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 寒假之前搞定的aimax配置" href="http://localhost:1313/post/%E5%AF%92%E5%81%87%E4%B9%8B%E5%89%8D%E6%90%9E%E5%AE%9A%E7%9A%84aimax%E9%85%8D%E7%BD%AE/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
@@ -301,6 +270,40 @@ SGD SGD没有动量（vanilla SGD），即上面公式里面 $m_t=g_t,v_t=I^2$
 
 <span title='2023-12-21 11:48:49 +0000 UTC'>December 21, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
   <a class="entry-link" aria-label="post link to 数据的稀疏性" href="http://localhost:1313/post/%E6%95%B0%E6%8D%AE%E7%9A%84%E7%A8%80%E7%96%8F%E6%80%A7/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">FlexMoE：基于动态设备放置的大规模稀疏预训练模型训练
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>动态设备放置是其方法，内容是对大规模稀疏预训练模型的训练。其中预训练模型是在GPT体系里的，现在是预训练-提示语句-微调的结构。 一句话：改进moe
+论文地址：arxiv Comments:	Accepted by SIGMOD 2023 Subjects:	Distributed, Parallel, and Cluster Computing (cs.DC); Machine Learning (cs.LG) Cite as:	arXiv:2304.03946 [cs.DC] (or arXiv:2304.03946v1 [cs.DC] for this version)
+https://doi.org/10.48550/arXiv.2304.03946 Focus to learn more Journal reference:	Proc. ACM Manag. Data, Vol. 1, No. 1, Article 110. Publication date: May 2023
+摘要 背景 使用大规模预训练模型，在训练中需要用很多参数，包含许多稀疏代数，很占硬件资源。 稀疏门专家混合sparsely-gated Mixture-of-Experts (MoEs)在很多下游任务里展示了令人印象深刻的预训练可扩展性。 但是，由于路由不平衡和波动问题，这种稀疏的条件计算在实际系统中可能并不像预期的那样有效。 总结一下：问题大背景是大规模预训练模型，主要方向是使用MoEs，但是它有两个问题：路由不平衡和波动。那这篇文章主要就是解决这两个问题的。
+工作 提出了一种新的DNN训练框架，FlexMoE，它系统地、透明地解决了动态数据流引起的效率低下问题。 步骤：
+对训练MoE模型进行分析 通过动态的专家管理和设备放置机制来克服路由不平衡和波动问题 改进DNN 引入了一个新的调度模块来监视数据流、制定调度计划，并根据实时数据流量动态调整模型到硬件的映射。 启发式算法 为了在训练时动态地最优化设备放置 实验 在NLP和图像模型上都训练了 结果 FlexMoE比DeepSpeed平均提升1.70 ×，最高提升2.10 ×，比FasterMoE平均提升1.30 ×，最高提升1.45 ×。 介绍 前提 大背景：大规模预训练模型Large-scale pre-trained models (PTMs) 1是应用广泛 2是可以微调（基准模型） 3问题：模型质量与数据规模呈指数关系，要得到好的模型需要相当多的参数，因此也消耗大量训练时间。 小方向：稀疏门混合专家sparsely-gated Mixture-of-Experts (MoE) 目的当然是减少消耗哈，怎么实现的： 保持计算预算稳定的情况下，通过扩展专家网络来扩大模型参数规模。 具体来说，每个MoE层由一个门网络&#43;一堆专家构成。门网络仅将输入令牌发送给少数专家，而不是所有，以提高计算效率。 MoE应用广泛，但有问题 大的MoE模型不仅需要很多数据，还要很多计算资源 有必要解决现有系统中隐藏的数据管理问题 怎么解决 因为i一个单独的MoE层就能轻易超过GPU内存限制，之前的分布式训练技术已经不够用了。 专家分布技术： 将专家分布到多个GPU中，以适应有限的GPU内存 对于每个训练令牌，在门网络确定路由后，将其发送给其目标专家所在的GPU。 由于它适应了MoE结构的特点，专家并行已经成为在几个著名的框架中训练基于MoE的模型的最广泛使用的技术之一。 工作量不平衡的挑战 问题：由MoE层的稀疏性和条件性计算性质带来的负载不均衡 来源：MoE层稀疏、且有条件的计算性质带来的 具体：输入的token被组织在一个细粒度的水平，并通过门控网络路由到个人的专家。 表现：输入token显示出对专家的高度不均匀偏好，并且路由结果在训练过程中不断变化。 结果：这种工作量不平衡可能导致效率显著下降和严重的资源利用不足。
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-12-18 10:44:54 +0000 UTC'>December 18, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to FlexMoE：基于动态设备放置的大规模稀疏预训练模型训练" href="http://localhost:1313/post/flexmoe%E5%9F%BA%E4%BA%8E%E5%8A%A8%E6%80%81%E8%AE%BE%E5%A4%87%E6%94%BE%E7%BD%AE%E7%9A%84%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%A8%80%E7%96%8F%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">ZeRO：为训练万亿参数模型而进行的内存优化
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p></p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-12-16 11:06:58 +0000 UTC'>December 16, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to ZeRO：为训练万亿参数模型而进行的内存优化" href="http://localhost:1313/post/zero%E4%B8%BA%E8%AE%AD%E7%BB%83%E4%B8%87%E4%BA%BF%E5%8F%82%E6%95%B0%E6%A8%A1%E5%9E%8B%E8%80%8C%E8%BF%9B%E8%A1%8C%E7%9A%84%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

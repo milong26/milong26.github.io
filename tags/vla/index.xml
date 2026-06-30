@@ -6,16 +6,14 @@
     <description>Recent content in Vla on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 26 Jun 2026 17:03:22 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 28 Jun 2026 17:34:03 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/vla/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>efficient data collection review of myself</title>
-      <link>http://localhost:1313/post/efficient-data-collection-review-of-myself/</link>
-      <pubDate>Fri, 26 Jun 2026 17:03:22 +0000</pubDate>
-      <guid>http://localhost:1313/post/efficient-data-collection-review-of-myself/</guid>
-      <description>&lt;p&gt;我自己瞎写的综述，确定efficient data collection 是方向了？
-2026年6月26日17:04:00开始，希望28日可以完结&lt;/p&gt;
-&lt;p&gt;可以说，就看vla对什么数据能泛化表现好，不需要太看重ood的&lt;/p&gt;</description>
+      <title>TinyVLA-Toward-Fast-Data-Efficient-Vision-Language-Action-Models-for-Robotic-Manipulation</title>
+      <link>http://localhost:1313/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</link>
+      <pubDate>Sun, 28 Jun 2026 17:34:03 +0000</pubDate>
+      <guid>http://localhost:1313/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</guid>
+      <description></description>
     </item>
     <item>
       <title>Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy</title>
@@ -31,13 +29,6 @@
       <pubDate>Fri, 10 Oct 2025 18:26:10 +0000</pubDate>
       <guid>http://localhost:1313/post/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/</guid>
       <description>&lt;p&gt;它跟vla啥关系啊，怎么感觉哪哪都能听到这个词语&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>TinyVLA: Toward Fast, Data-Efficient Vision-Language-Action Models for Robotic Manipulation</title>
-      <link>http://localhost:1313/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</link>
-      <pubDate>Mon, 29 Sep 2025 15:19:42 +0000</pubDate>
-      <guid>http://localhost:1313/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</guid>
-      <description>&lt;p&gt;我要看这篇文章能否复现&lt;/p&gt;</description>
     </item>
     <item>
       <title>vla</title>

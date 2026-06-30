@@ -128,120 +128,6 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">paperen_Aspect Detection using Word and Char Embeddings with (Bi)LSTM and CRF
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>搞不懂这个embedding怎么运作的
-paper 论文地址 目前只要搞懂input的句子怎么通过embedding层的就可以了
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2023-10-26 18:36:13 +0000 UTC'>October 26, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to paperen_Aspect Detection using Word and Char Embeddings with (Bi)LSTM and CRF" href="http://localhost:1313/post/paperen-aspect-detection-using-word-and-char-embeddings-with-bi-lstm-and-crf/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">自注意力机制
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Self-Attention 是 Transformer最核心的思想
-基础 公式 $$ Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})V $$ 其本质是$softmax(XX^T)X$
-XX^T 一个矩阵乘以它自己的转置，会得到什么结果，有什么意义？
-我们知道，矩阵可以看作由一些向量组成，一个矩阵乘以它自己转置的运算，其实可以看成这些向量分别与其他向量计算内积。向量的内积，其几何意义是什么？
-答：表征两个向量的夹角，表征一个向量在另一个向量上的投影
-举例说明：$X = [x_1^T;x_2^T;x_3^T]$，模拟字向量的计算过程 行向量$x_i$分别与自己和其他两个行向量做内积（“早&#34;分别与&#34;上&#34;“好&#34;计算内积），得到了一个新的向量。
-投影的值大，说明两个向量相关度高。
-更进一步，这个向量是词向量，是词在高维空间的数值映射。词向量之间相关度高表示什么？是不是在一定程度上（不是完全）表示，在关注词A的时候，应当给予词B更多的关注？
-矩阵 $XX^T$是一个方阵，我们以行向量的角度理解，里面保存了每个向量与自己和其他向量进行内积运算的结果。 每一行可以看作是每个向量与所有向量的相关度
-softmax $$ softmax(z_i)=\frac{e^{z_i}}{\sum_{c=1}^Ce^{z_c}} $$ 主要干的是归一化的工作，Softmax之后，这些数字的和为1了 为什么要softmax?
-反方观点： 这篇用了线性attention，也就是去掉softmax，文章结论认为去掉softmax是可行的 这一篇也是线性attention 正方观点： attention的本质就是加权求和 softmax之后的数值就是权重 softmax(XX^T)X 从上文的$XX^T$继续看 一个行向量*X的一个列向量，得到： 在新的向量中，每一个维度的数值都是由三个词向量在这一维度的数值加权求和得来的，这个新的行向量就是&#34;早&#34;字词向量经过注意力机制加权求和之后的表示。
-Q,K,T Q K V矩阵都是从X线性变化来的，为了提升模型的拟合能力 sqrt(d_k) 假设Q,K里的元素的均值为0，方差为1，那么$A^T=Q^TK$中元素的均值为0，方差为d. 当d变得很大时，A中的元素的方差也会变得很大，如果 A中的元素方差很大，那么softmax(A)的分布会趋于陡峭(分布的方差大，分布集中在绝对值大的区域)。
-总结一下就是softmax(A)的分布会和d有关。因此A中每一个元素除以 $\sqrt{d_k}$后，方差又变为1。这使得softmax(A)的分布“陡峭”程度与d解耦，从而使得训练过程中梯度值保持稳定。
-最后再补充一点，对self-attention来说，它跟每一个input vector都做attention，所以没有考虑到input sequence的顺序。更通俗来讲，大家可以发现我们前文的计算每一个词向量都与其他词向量计算内积，得到的结果丢失了我们原来文本的顺序信息。对比来说，LSTM是对于文本顺序信息的解释是输出词向量的先后顺序，而我们上文的计算对sequence的顺序这一部分则完全没有提及，你打乱词向量的顺序，得到的结果仍然是相同的。
-这就牵扯到Transformer的位置编码了，具体在transformer里面看。
-代码 不着急写，以后看
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2023-10-25 21:36:31 +0000 UTC'>October 25, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 自注意力机制" href="http://localhost:1313/post/%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Bi-LSTM
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>LSTM的全称是Long Short-Term Memory，它是递归神经网络RNN（Recurrent Neural Network）的一种。 LSTM由于其设计的特点，非常适合用于对时序数据的建模，如文本数据。 BiLSTM是Bi-directional Long Short-Term Memory的缩写，是由前向LSTM与后向LSTM组合而成。两者在自然语言处理任务中都常被用来建模上下文信息。
-RNN RNN可以这么表示 递归神经网络在许多情况下运行良好，特别是在对短时间序列数据的分析时十分方便。
-上图所示的简单递归神经网络存在一个“硬伤“，长期依赖问题：递归神经网络只能处理我们需要较接近的上下文的情况。 不但如此，相比于一般的神经网络，这种简单的RNN还很容易出现两种在神经网络中臭名昭著的问题：梯度消失问题（神经网络的权重/偏置梯度极小，导致神经网络参数调整速率急剧下降）和梯度爆炸问题（神经网络的权重/偏置梯度极大，导致神经网络参数调整幅度过大，矫枉过正）。
-根据微分链式法则，在RNN中，神经元的权重的梯度可以被表示为一系列函数的微分的连乘。因为神经元的参数（权重与偏置）都是基于学习速率（一般为常数）和参数梯度相反数（使得神经网络输出最快逼近目标输出）得到的，一个过小或过大的梯度会导致我们要么需要极长的训练时间
-LSTM LSTM从被设计之初就被用于解决一般递归神经网络中普遍存在的长期依赖问题，使用LSTM可以有效的传递和表达长时间序列中的信息并且不会导致长时间前的有用信息被忽略（遗忘）。与此同时，LSTM还可以解决RNN中的梯度消失/爆炸问题。
-“长短期记忆”的概念——只有一部分的信息需要长期的记忆，而有的信息可以不记下来。同时，我们还需要一套机制可以动态的处理神经网络的“记忆”，因为有的信息可能一开始价值很高，后面价值逐渐衰减，这时候我们也需要让神经网络学会“遗忘”特定的信息。
-流程图 上图中，每一个红色圆形代表对向量做出的操作（pointwise operation， 对位操作），而黄色的矩形代表一个神经网络层，上面的字符代表神经网络所使用的激活函数。
-遗忘 用来扔掉一些没用的 每一次输入一个新的输入，LSTM会先根据新的输入和上一时刻的输出决定遗忘掉之前的哪些记忆——输入和上一步的输出会整合为一个单独的向量，然后通过sigmoid神经层，最后点对点的乘在单元状态上。 因为sigmoid会将任意输入压缩到(0,1)上， 如果整合后的向量某个分量在通过sigmoid层后变为0，那么显然单元状态在对位相乘后对应的分量也会变成0，换句话说，“遗忘”了这个分量上的信息；如果某个分量通过sigmoid层后为1，单元状态会“保持完整记忆”。不同的sigmoid输出会带来不同信息的记忆与遗忘。通过这种方式，LSTM可以长期记忆重要信息，并且记忆可以随着输入进行动态调整。
-公式： $$ f_t=sigmoid(W_f·[h_{t-1},x_t]&#43;b_f) $$
-最基础的就是y=wx&#43;b
-如何判断这个分量上的信息需要被遗忘/记住
-记忆 用来控制是否将在t时刻（现在）的数据并入单元状态中的控制单位。首先，用tanh函数层将现在的向量中的有效信息提取出来，然后使用（图上tanh函数层左侧）的sigmoid函数来控制这些记忆要放“多少”进入单元状态。这两者结合起来就可以做到： 从当前输入中提取有效信息 $$ \tilde{C}t=tanh(W_c·[h{t-1},x_t]&#43;b_c) $$ 对提取的有效信息做出筛选，为每个分量做出评级(0 ~ 1)，评级越高的最后会有越多的记忆进入单元状态 $$ i_t=sigmoid(W_t · [h_{t-1,x_t}]&#43;b_i) $$ LSTM的关键：单元状态 用$C_t$表示神经元在t时刻过后的“记忆”，这个向量涵盖了在t&#43;1时刻前神经网络对于所有输入信息的“概括总结” $$ C_t=f_tC_{t-1}&#43;i_t\tilde{C}_t $$
-输出 输出层会先将当前输入值与上一时刻输出值整合后的向量（即$[h_{t-1},x_t]$）用sigmoid函数提取其中的信息，接着，会将当前的单元状态通过tanh函数压缩映射到区间(-1, 1)中
-为什么我们要在LSTM的输出门上使用tanh函数？ 以下引用自Stack Overflow上问题 What is the intuition of using tanh in LSTM 中的最佳答案： https://stackoverflow.com/questions/40761185/what-is-the-intuition-of-using-tanh-in-lstm 在LSTM的输入和输出门中使用tanh函数有以下几个原因：
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2023-10-24 19:34:14 +0000 UTC'>October 24, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to Bi-LSTM" href="http://localhost:1313/post/bi-lstm/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">基于对比学习的大型语言模型反向词典任务提示生成方法
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>2023年10月才发的中文paper，看了之后感觉是大杂烩，学一下它的结构吧 感觉没什么特别厉害的创意
-paper 论文地址
-introduction introduction里面怎么没有介绍反向词典？
-反向词典 输入释义，输出表示这个意思的词汇列表
-大规模语言模型 对GPT-3测试之后，发现prompt中含有期望词汇时输出正确率会大大提高
-这篇文章 目的：自动生成prompt 模型：基于对比学习的反向词典模型RDMCL 数据集 Oxford 方法 用RDMCL生成单词 用生成的单词创建prompt 创新点 RDMCL比较高级 语义信息捕捉 Bi-LSTM cnn(卷积神经网络) 自注意力机制 融合语义信息，并映射到目标单词的语义空间 (新)提出有监督对比损失函数 引入负例，提高泛化性 相关工作 反向词典 从多尺度上考虑了定义的不同于一层次的信息（在说什么鬼话）
-对比学习 为了提高反向词典的准确性，就是个辅助 关于如何构建负例样本
-研究方法 目的：自动生成高质量的prompt 方法：基于对比学习的promp生成方法 步骤：1. RDMCL生成候选词汇；2. 根据词汇生成prompt
-语义信息 该文章把一段话分成三个语义层次，但我不知道为什么
-句子 输入的就是普通句子 先经过embedding层（嵌入层）我没看懂这篇paper里怎么得到embs的得到$emb_s$
-然后经过Bi-LSTM 得到两个输出 $$ v_{sen}=\mathop{h}\limits^\rightarrow&#43;\mathop{h}\limits^\leftarrow \ E_{emb_s}=\mathop{E}\limits^\rightarrow&#43;\mathop{E}\limits^\leftarrow $$
-短语 主要是cnn（卷积神经网络）&#43;self-attention 卷积神经网络比较熟就不重复了 自注意力 也写了 先卷积 $$ c_{r,k}=tanh(\sum_{i,j}(F_rE_{emb_s}^{k:k&#43;l-1}){i,j})\ c_r=(c{r,1},c_{r,2},…c_{t,n-l&#43;1})\ C=(c_1,c_2,…c_t) $$ 再用自注意力 $$ i=softmax(tanh(W_1E_{emb_s}^T&#43;b_1)) $$ i广播操作(torch、numpy里面都有，其实就是合并到同一个维度)得到I 最后得到 $$ V_{phrase}=(IE_{emb_s}^T) $$
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2023-10-24 16:21:15 +0000 UTC'>October 24, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 基于对比学习的大型语言模型反向词典任务提示生成方法" href="http://localhost:1313/post/%E5%9F%BA%E4%BA%8E%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8F%8D%E5%90%91%E8%AF%8D%E5%85%B8%E4%BB%BB%E5%8A%A1%E6%8F%90%E7%A4%BA%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">好用的浏览器拓展
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p></p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2023-10-18 20:48:20 +0000 UTC'>October 18, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 好用的浏览器拓展" href="http://localhost:1313/post/%E5%A5%BD%E7%94%A8%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8B%93%E5%B1%95/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
     <h2 class="entry-hint-parent">notion搭建blog
     </h2>
   </header>
@@ -325,6 +211,88 @@ spoil 没想到漫画里一点点的spoil篇动画做了这么长，受不了了
 
 <span title='2023-10-10 20:43:13 +0000 UTC'>October 10, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
   <a class="entry-link" aria-label="post link to 给予最幸运的死亡" href="http://localhost:1313/post/%E7%BB%99%E4%BA%88%E6%9C%80%E5%B9%B8%E8%BF%90%E7%9A%84%E6%AD%BB%E4%BA%A1/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">latex手册
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>几个常用的latex语法
+公式 下标 正下方 \mathop{max}{a} $\mathop{max}\limits{a}f$ 正上方 \tilde{A} $\tilde{A}$ 特殊符号 点 \cdot $AAA\cdot AAAA$ \cdots $AAA\cdots AAA$ \vdots $\vdots$ 空格 \space $a\space b$ 比较 小于等于 \leq =less&#43;equal $\leq$ 大于等于 \geq =great&#43;equal $\geq$ 分式 上下分式 \frac{}{} =fraction按照分子 分母的先后顺序 $\frac{a}{b}$ 微分 \partial $\partial$ 矩阵 纯粹表示 \left [ \begin{matrix} 1&amp; 3 \ 2&amp; 4 \ \end{matrix} \right] $$ \left [ \begin{matrix} 1&amp; 3 \ 2&amp; 4 \ \end{matrix} \right] $$ 带三个点的 \ddots $$ \ddots $$ </p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-24 21:29:19 +0000 UTC'>September 24, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to latex手册" href="http://localhost:1313/post/latex%E6%89%8B%E5%86%8C/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">gcc的turple
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p></p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-24 21:06:43 +0000 UTC'>September 24, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to gcc的turple" href="http://localhost:1313/post/gcc%E7%9A%84turple/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">visualstudio
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>c&#43;&#43;还是vs好用，vscode配置太麻烦了 注：这个是专门写c&#43;&#43;等的vs，和vscode不一样
+下载 在vs文件夹下创建3个子文件夹：ide、下载缓存、共享组件工具和SDK 其它默认安装就行 空间要足够用 下载时间比较长
+报错：
+很抱歉出现问题，无法安装Win10SDK_10.0.19041 看了一下日志，嗯，它要在我D盘里找windows kits
+咱直接下载 看这里
+安装的时候发现报错 Invalid Drive: E:\，看来主要还是以前的残留。
+去注册表里边搜E:\，搜到一个，把它的值改到C盘去（我windows kits装c盘了）
+vs修复工具
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-24 19:19:24 +0000 UTC'>September 24, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to visualstudio" href="http://localhost:1313/post/visualstudio/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">字符串匹配
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>kmp算法参考https://zhuanlan.zhihu.com/p/43418549 代码参考
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-22 13:25:51 +0000 UTC'>September 22, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 字符串匹配" href="http://localhost:1313/post/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">vscode
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Visual Studio Code永远的神！
+安装 售后问题 Error loading webview: Error: Could not register service worker: InvalidStateError: Failed to register a ServiceWorker: The document is in an invalid state.. 1、关闭vscode 2、按WIN &#43; R，输入cmd，打开终端，然后输入命令 code --no-sandbox 3、重启vscode，就可以正常使用了。 修改文件显示顺序 在setting里面搜索sort order,explore对应的就是vs工作区的文件显示，写blog最好还是把文件按修改时间排序比较好。
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-21 20:10:15 +0000 UTC'>September 21, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to vscode" href="http://localhost:1313/post/vscode/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
