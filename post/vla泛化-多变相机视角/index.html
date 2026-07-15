@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>vla泛化-多变相机视角 | 我的博客</title>
+<meta name="keywords" content="">
+<meta name="description" content="当作研究记录。希望能早点确定下来。
+目标是：同一机械臂同一场景下更改相机位置仍然能zero-shot使用某一相机视角采集&#43;微调后的模型
+说好听一点：在固定场景中实现机械臂策略对相机位置变化的零样本鲁棒性的研究？通过学习视角不变的视觉表征实现机器人操作策略的跨相机泛化">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/vla%E6%B3%9B%E5%8C%96-%E5%A4%9A%E5%8F%98%E7%9B%B8%E6%9C%BA%E8%A7%86%E8%A7%92/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/vla%E6%B3%9B%E5%8C%96-%E5%A4%9A%E5%8F%98%E7%9B%B8%E6%9C%BA%E8%A7%86%E8%A7%92/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/vla%E6%B3%9B%E5%8C%96-%E5%A4%9A%E5%8F%98%E7%9B%B8%E6%9C%BA%E8%A7%86%E8%A7%92/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="vla泛化-多变相机视角">
+  <meta property="og:description" content="当作研究记录。希望能早点确定下来。 目标是：同一机械臂同一场景下更改相机位置仍然能zero-shot使用某一相机视角采集&#43;微调后的模型 说好听一点：在固定场景中实现机械臂策略对相机位置变化的零样本鲁棒性的研究？通过学习视角不变的视觉表征实现机器人操作策略的跨相机泛化">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="vla泛化-多变相机视角">
+  <meta name="twitter:description" content="当作研究记录。希望能早点确定下来。 目标是：同一机械臂同一场景下更改相机位置仍然能zero-shot使用某一相机视角采集&#43;微调后的模型 说好听一点：在固定场景中实现机械臂策略对相机位置变化的零样本鲁棒性的研究？通过学习视角不变的视觉表征实现机器人操作策略的跨相机泛化">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "vla泛化-多变相机视角",
+      "item": "https://milong26.github.io/post/vla%E6%B3%9B%E5%8C%96-%E5%A4%9A%E5%8F%98%E7%9B%B8%E6%9C%BA%E8%A7%86%E8%A7%92/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "vla泛化-多变相机视角",
+  "name": "vla泛化-多变相机视角",
+  "description": "当作研究记录。希望能早点确定下来。 目标是：同一机械臂同一场景下更改相机位置仍然能zero-shot使用某一相机视角采集+微调后的模型 说好听一点：在固定场景中实现机械臂策略对相机位置变化的零样本鲁棒性的研究？通过学习视角不变的视觉表征实现机器人操作策略的跨相机泛化\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "当作研究记录。希望能早点确定下来。 目标是：同一机械臂同一场景下更改相机位置仍然能zero-shot使用某一相机视角采集+微调后的模型 说好听一点：在固定场景中实现机械臂策略对相机位置变化的零样本鲁棒性的研究？通过学习视角不变的视觉表征实现机器人操作策略的跨相机泛化\n刚开始的时候，gpt了一个研究主线\n主线：解决“视角变化导致的分布偏移” 即：\n相机位置改变 → 观测图像分布变化 → 原模型无法直接泛化\n你研究的核心是如何让模型跨视角不崩 —— 即\n让策略对相机视角不敏感 / 能自动对齐不同视角的视觉特征。\n🔧 实现这一目标通常需要的步骤 / 技术路径（主线结构） 可以概括为 “构建跨视角不变的视觉表征 → 将其用于下游策略”：\n1. 统一视觉表征（View-invariant Representation Learning） 目的：\n让模型学到与相机位置无关的任务相关特征。\n可能的手段包括：\n多视角一致性约束（contrastive / alignment）\n视角不变的视觉 encoder（例如使用预训练的大模型 ViT/CLIP 再加 domain adaptation）\n通过空间重建/3D repr 把不同视角映射到统一空间（如 NeRF-based, 3D latent code）\n2. 视角变化的对齐（Cross-view Calibration / Domain Adaptation） 如果不能提供多视角数据，也可以采用：\n数据增强模拟不同视角（camera pose augmentation）\n图像到图像的视角规范化（image canonicalization）\nstyle / domain adaptation 使新相机视角看起来像旧的\n3. Zero-shot 迁移到新相机 你的关键目标：\n不重新采数据、不重新微调，在新相机视角下直接工作。\n做到这点需要确保：\n策略输入特征在不同视角等价\n策略部分能够处理已经统一后的 latent embedding\n视觉模块与策略解耦（encoder 冻结 or adapter）\n4. 实验验证线路 需要说明如何证明 zero-shot：\n用相机 A 采集数据微调策略\n换到相机 B（完全不同位置）\n不做额外微调\n检验任务成功率\n阶段一：最简单的初步验证（快速 - 目的：证明现象 \u0026 baseline） 目标：确认“同一模型在换相机后性能下降”的量级，并观测失败模式（完全失效或只是性能下降）。\n步骤（可在一两天内完成）：\n任务选择（越简单越好）：例如“抓取一个方块并放到目标点”（pick-and-place），或“将物体推到指定位置”。\n数据采集：\n在相机 A（固定位置）用机械臂采集 N 条演示轨迹（N 可小，100–500 条演示或几百到几千帧，取决任务）。\n再在相机 B（不同位置，横/纵/高度偏移、绕臂旋转等）仅用于测试（不用于训练）。\nBaseline 模型（最简单）：\n端到端视觉-动作：卷积 encoder + MLP policy（或行为克隆 / BC）；\n使用 RGB 输入，不加入外参。\n训练：在相机 A 的数据上训练直到收敛（或固定 epoch）。\n测试（zero-shot）：直接在相机 B 上运行模型，记录指标。\n需要记录与验证的东西：\n成功率（成功/失败次数）——主指标。\n任务完成时间 / 步数（若 relevant）。\n位置误差（目标 vs 实际放置位置）——连续指标。\n失败模式（看视频）：是部分失误（定位偏差）还是根本看不懂（动作无关）？\n可视化：在 A 与 B 的若干样本输入图像 + 模型中间特征图（若可得）。\n预期与判断：\n若成功率从训练相机的 90% 跌到 10%：说明视角 shift 很严重，需要视角鲁棒策略。\n若跌到 60-70%：问题存在但可通过轻量方法改善（augment / pretrain）。\n阶段二：简易修复尝试（工程化、快速试错） 目的：用简单方法看能否把性能回升到可接受水平（或显著改善）。每个方法单独做 ablation。\n方法（优先级从高到低）：\nA. 相机位姿作为输入（若能获取外参）\n在视觉 encoder 后拼接 camera extrinsics（或相机相对任务参考系的位姿）到 policy 的输入。\n验证点：是否直接改善 zero-shot 成功率？\nB. 数据增强 / 相机 pose augmentation\n训练时对 RGB 做仿射 / 透视变换、裁剪/缩放、亮度/色彩扰动，或用随机 homography 模拟小视角变换。\n验证点：Aug vs no-aug 的差距；找出能承受的视角偏差范围。\nC. 域随机化（Domain Randomization）\n在采集/训练时随机修改相机高度、角度（在仿真中容易做，现实中可通过渲染或多相机采集）。\n验证点：是否能泛化到 B（如果训练时覆盖了 B 附近），以及覆盖需求有多大。\nD. 使用预训练视觉特征（如用 ImageNet / CLIP encoder）\n把 encoder 换成固定的预训练特征提取器（或微调小学习率），然后训练 policy。\n验证点：预训练特征是否更稳健（常常能带来较好 zero-shot）。\nE. 输入深度或稀疏关键点而非整图\n若能得到深度或语义分割 / keypoints（例如手工 2D 标注或开源检测器），把这些作为输入试验。\n验证点：结构化表示是否更鲁棒于视角变化。\n实验设计建议：\n每个方法做 3 个随机 seed，保留训练/测试相同。\n对比表格：Train@A Test@A vs Train@A Test@B。\n可视化性能随相机位移大小的曲线（横轴为相机位移/旋转量，纵轴为成功率）。\n成功判据（初步）：\n若某方法使 Test@B 成功率 ≥ Test@A 的 80%（相对保留率≥0.8），可视为“较好零样本泛化”。\n若成功率显著提升但仍远低于 Train@A，可继续更复杂方法。\n阶段三：中级方法（有一定设计） 目的：系统性解决视角变化，不只是工程 trick。\n方法建议：\n视角规范化（Canonicalization）\n学一个小网络把任意相机图像转换成“规范视角”图像（或规范化 feature），训练对照损失或用 paired data（若可得到相同场景从不同相机的对齐帧）。\n若能做成 image-to-image（像素级）或 feature-to-feature，policy 仍在规范视角上训练/运行。\nContrastive 多视角表征学习\n若能收集相同时刻多个相机图像（或仿真生成），用对比学习（SimCLR/MoCo 风格）把不同视角的同一时刻映射到相近 embedding。\n这样 policy 在 embedding 上训练，更不受视角影响。\n基于几何的重投影\n如果有相机内外参，可以把像素或深度投影到 3D（或鸟瞰图 BEV），在 3D/BEV 空间上做决策。\n这通常是强鲁棒的方法，但需要额外传感器或准确标定。\n多视角联合训练（或模拟器辅助）\n在训练时使用来自多个不同位姿的图像（采集或模拟），让模型见到多视角。\n或在仿真中做大量随机化然后在真实中少量 fine-tune。\n评估与 ablation：\n对比 canonicalization vs contrastive vs reproject 方法。\n考察样本效率（达到某成功率需要多少训练数据）。\n考察对未知相机位姿的泛化能力（插值 vs 外推）。\n阶段四：复杂/前沿方案（研究价值高） 这些可以作为后续论文和扩展项：\nNeRF / 3D scene representation + policy on 3D latent：用少量视角或视频构建场景隐式表示，策略直接在 3D 表征上决策。\nGroup-equivariant networks（SE(3) equivariant）：模型在结构上对位姿变化有不变/可控响应。\nMeta-learning for camera adapt：训练模型能快速通过少量新相机样本自适应（few-shot），但你强调 zero-shot，仍可作为 fallback。\nSim2Real + domain randomization scaling：在模拟中大规模随机化相机并训练 robust policy。\n实验细节 \u0026 数字化建议（让结果可信） 数据量：初步 BC：100–1000 demos；若用 RL，建议千次以上采样。\n相机差异量化：定义位移（cm）与旋转（deg）范围；例如测试若干档：平移 5cm / 15cm / 30cm，旋转 5° / 15° / 30°。\n测试相机数量：至少 3 个测试位置（one near, one medium, one far）以证明泛化。\n随机 seed：每个 setting 做 3–5 次随机种子，报告均值与 std。\n指标：成功率（主）、平均放置误差、步骤数、失败类型统计。\n可视化：性能-位移曲线、混淆/失败原因分布、样例成功/失败视频截图。\n初步验证你必须回答的问题（核心验收项） 有没有分布偏移？（Train@A vs Test@B 的性能差异）\n偏移是可纠正的还是根本性？（通过 augment/CLIP/extrinsics 等方法能否部分恢复）\n哪个简单方法最有效？（外参输入 vs augment vs pretrained features）\n模型失败的主要原因是什么？（定位误差 / 物体看不见 / 颜色/遮挡）\n泛化能力与相机偏移量的关系（多少位移会导致彻底失效？）\n回答这些问题就能构成一篇初步结果完整的实验部分（可直接写入开题或投稿初稿）。\n再整理一下思路，写一个大概的主线和时间线出来(@2026-03-25 10:50) 2025-11-25 15:04:48 在一切开始之前做的计划\n主线（训练-优先）：11/25 训练之前就加上mask？ 分支：11/25 测试side-camera-only下的joint和ee成功率比较（200次）-clear data 主线：11/25 测试稍微平移相机之后的成功率比较（200次） 实现步骤 0. 已经用clear 数据训练好了eaes和jajs的data\n因为训练需要时间，优先训练side-camera-only下的eae和jajs图像加入mask，怎么训练？ 复原mask 问题：换句话说，VLM 的特征对 warp 黑边（black holes / missing regions）不敏感 尝试在训练数据里增加随机mask和部分缺失 发现问题：复原图size不匹配，也有一定变形，那我训练数据集怎样增强？ 多少比例？ ",
+  "wordCount" : "398",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/vla%E6%B3%9B%E5%8C%96-%E5%A4%9A%E5%8F%98%E7%9B%B8%E6%9C%BA%E8%A7%86%E8%A7%92/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      vla泛化-多变相机视角
+    </h1>
+    <div class="post-meta">
+
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>当作研究记录。希望能早点确定下来。
+目标是：同一机械臂同一场景下更改相机位置仍然能zero-shot使用某一相机视角采集+微调后的模型
+说好听一点：在固定场景中实现机械臂策略对相机位置变化的零样本鲁棒性的研究？通过学习视角不变的视觉表征实现机器人操作策略的跨相机泛化</p>
+<p>刚开始的时候，gpt了一个研究主线</p>
+<h3 id="主线解决视角变化导致的分布偏移"><strong>主线：解决“视角变化导致的分布偏移”</strong><a hidden class="anchor" aria-hidden="true" href="#主线解决视角变化导致的分布偏移">#</a></h3>
+<p>即：<br>
+<strong>相机位置改变 → 观测图像分布变化 → 原模型无法直接泛化</strong><br>
+你研究的核心是如何让模型跨视角不崩 —— 即<br>
+<strong>让策略对相机视角不敏感 / 能自动对齐不同视角的视觉特征。</strong></p>
+<h2 id="-实现这一目标通常需要的步骤--技术路径主线结构">🔧 <strong>实现这一目标通常需要的步骤 / 技术路径（主线结构）</strong><a hidden class="anchor" aria-hidden="true" href="#-实现这一目标通常需要的步骤--技术路径主线结构">#</a></h2>
+<p>可以概括为 <strong>“构建跨视角不变的视觉表征 → 将其用于下游策略”</strong>：</p>
+<h3 id="1-统一视觉表征view-invariant-representation-learning"><strong>1. 统一视觉表征（View-invariant Representation Learning）</strong><a hidden class="anchor" aria-hidden="true" href="#1-统一视觉表征view-invariant-representation-learning">#</a></h3>
+<p>目的：<br>
+让模型学到与相机位置无关的任务相关特征。</p>
+<p>可能的手段包括：</p>
+<ul>
+<li>
+<p>多视角一致性约束（contrastive / alignment）</p>
+</li>
+<li>
+<p>视角不变的视觉 encoder（例如使用预训练的大模型 ViT/CLIP 再加 domain adaptation）</p>
+</li>
+<li>
+<p>通过空间重建/3D repr 把不同视角映射到统一空间（如 NeRF-based, 3D latent code）</p>
+</li>
+</ul>
+<h3 id="2-视角变化的对齐cross-view-calibration--domain-adaptation"><strong>2. 视角变化的对齐（Cross-view Calibration / Domain Adaptation）</strong><a hidden class="anchor" aria-hidden="true" href="#2-视角变化的对齐cross-view-calibration--domain-adaptation">#</a></h3>
+<p>如果不能提供多视角数据，也可以采用：</p>
+<ul>
+<li>
+<p><strong>数据增强模拟不同视角</strong>（camera pose augmentation）</p>
+</li>
+<li>
+<p><strong>图像到图像的视角规范化</strong>（image canonicalization）</p>
+</li>
+<li>
+<p><strong>style / domain adaptation</strong> 使新相机视角看起来像旧的</p>
+</li>
+</ul>
+<h3 id="3-zero-shot-迁移到新相机"><strong>3. Zero-shot 迁移到新相机</strong><a hidden class="anchor" aria-hidden="true" href="#3-zero-shot-迁移到新相机">#</a></h3>
+<p>你的关键目标：</p>
+<blockquote>
+<p><strong>不重新采数据、不重新微调，在新相机视角下直接工作。</strong></p>
+</blockquote>
+<p>做到这点需要确保：</p>
+<ul>
+<li>
+<p>策略输入特征在不同视角等价</p>
+</li>
+<li>
+<p>策略部分能够处理已经统一后的 latent embedding</p>
+</li>
+<li>
+<p>视觉模块与策略解耦（encoder 冻结 or adapter）</p>
+</li>
+</ul>
+<h3 id="4-实验验证线路"><strong>4. 实验验证线路</strong><a hidden class="anchor" aria-hidden="true" href="#4-实验验证线路">#</a></h3>
+<p>需要说明如何证明 zero-shot：</p>
+<ul>
+<li>
+<p>用相机 A 采集数据微调策略</p>
+</li>
+<li>
+<p>换到相机 B（完全不同位置）</p>
+</li>
+<li>
+<p>不做额外微调</p>
+</li>
+<li>
+<p>检验任务成功率</p>
+</li>
+</ul>
+<h1 id="阶段一最简单的初步验证快速---目的证明现象--baseline">阶段一：<strong>最简单的初步验证（快速 - 目的：证明现象 &amp; baseline）</strong><a hidden class="anchor" aria-hidden="true" href="#阶段一最简单的初步验证快速---目的证明现象--baseline">#</a></h1>
+<p>目标：确认“同一模型在换相机后性能下降”的量级，并观测失败模式（完全失效或只是性能下降）。</p>
+<p>步骤（可在一两天内完成）：</p>
+<ol>
+<li>
+<p>任务选择（越简单越好）：例如“抓取一个方块并放到目标点”（pick-and-place），或“将物体推到指定位置”。</p>
+</li>
+<li>
+<p>数据采集：</p>
+<ul>
+<li>
+<p>在相机 A（固定位置）用机械臂采集 N 条演示轨迹（N 可小，100–500 条演示或几百到几千帧，取决任务）。</p>
+</li>
+<li>
+<p>再在相机 B（不同位置，横/纵/高度偏移、绕臂旋转等）仅用于<strong>测试</strong>（不用于训练）。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Baseline 模型（最简单）：</p>
+<ul>
+<li>
+<p>端到端视觉-动作：卷积 encoder + MLP policy（或行为克隆 / BC）；</p>
+</li>
+<li>
+<p>使用 RGB 输入，不加入外参。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>训练：在相机 A 的数据上训练直到收敛（或固定 epoch）。</p>
+</li>
+<li>
+<p>测试（zero-shot）：直接在相机 B 上运行模型，记录指标。</p>
+</li>
+</ol>
+<p>需要记录与验证的东西：</p>
+<ul>
+<li>
+<p>成功率（成功/失败次数）——主指标。</p>
+</li>
+<li>
+<p>任务完成时间 / 步数（若 relevant）。</p>
+</li>
+<li>
+<p>位置误差（目标 vs 实际放置位置）——连续指标。</p>
+</li>
+<li>
+<p>失败模式（看视频）：是部分失误（定位偏差）还是根本看不懂（动作无关）？</p>
+</li>
+<li>
+<p>可视化：在 A 与 B 的若干样本输入图像 + 模型中间特征图（若可得）。</p>
+</li>
+</ul>
+<p>预期与判断：</p>
+<ul>
+<li>
+<p>若成功率从训练相机的 90% 跌到 10%：说明视角 shift 很严重，需要视角鲁棒策略。</p>
+</li>
+<li>
+<p>若跌到 60-70%：问题存在但可通过轻量方法改善（augment / pretrain）。</p>
+</li>
+</ul>
+<hr>
+<h1 id="阶段二简易修复尝试工程化快速试错">阶段二：<strong>简易修复尝试（工程化、快速试错）</strong><a hidden class="anchor" aria-hidden="true" href="#阶段二简易修复尝试工程化快速试错">#</a></h1>
+<p>目的：用简单方法看能否把性能回升到可接受水平（或显著改善）。每个方法单独做 ablation。</p>
+<p>方法（优先级从高到低）：</p>
+<p>A. <strong>相机位姿作为输入</strong>（若能获取外参）</p>
+<ul>
+<li>
+<p>在视觉 encoder 后拼接 camera extrinsics（或相机相对任务参考系的位姿）到 policy 的输入。</p>
+</li>
+<li>
+<p>验证点：是否直接改善 zero-shot 成功率？</p>
+</li>
+</ul>
+<p>B. <strong>数据增强 / 相机 pose augmentation</strong></p>
+<ul>
+<li>
+<p>训练时对 RGB 做仿射 / 透视变换、裁剪/缩放、亮度/色彩扰动，或用随机 homography 模拟小视角变换。</p>
+</li>
+<li>
+<p>验证点：Aug vs no-aug 的差距；找出能承受的视角偏差范围。</p>
+</li>
+</ul>
+<p>C. <strong>域随机化（Domain Randomization）</strong></p>
+<ul>
+<li>
+<p>在采集/训练时随机修改相机高度、角度（在仿真中容易做，现实中可通过渲染或多相机采集）。</p>
+</li>
+<li>
+<p>验证点：是否能泛化到 B（如果训练时覆盖了 B 附近），以及覆盖需求有多大。</p>
+</li>
+</ul>
+<p>D. <strong>使用预训练视觉特征（如用 ImageNet / CLIP encoder）</strong></p>
+<ul>
+<li>
+<p>把 encoder 换成固定的预训练特征提取器（或微调小学习率），然后训练 policy。</p>
+</li>
+<li>
+<p>验证点：预训练特征是否更稳健（常常能带来较好 zero-shot）。</p>
+</li>
+</ul>
+<p>E. <strong>输入深度或稀疏关键点而非整图</strong></p>
+<ul>
+<li>
+<p>若能得到深度或语义分割 / keypoints（例如手工 2D 标注或开源检测器），把这些作为输入试验。</p>
+</li>
+<li>
+<p>验证点：结构化表示是否更鲁棒于视角变化。</p>
+</li>
+</ul>
+<p>实验设计建议：</p>
+<ul>
+<li>
+<p>每个方法做 3 个随机 seed，保留训练/测试相同。</p>
+</li>
+<li>
+<p>对比表格：Train@A Test@A vs Train@A Test@B。</p>
+</li>
+<li>
+<p>可视化性能随相机位移大小的曲线（横轴为相机位移/旋转量，纵轴为成功率）。</p>
+</li>
+</ul>
+<p>成功判据（初步）：</p>
+<ul>
+<li>
+<p>若某方法使 Test@B 成功率 ≥ Test@A 的 80%（相对保留率≥0.8），可视为“较好零样本泛化”。</p>
+</li>
+<li>
+<p>若成功率显著提升但仍远低于 Train@A，可继续更复杂方法。</p>
+</li>
+</ul>
+<hr>
+<h1 id="阶段三中级方法有一定设计">阶段三：<strong>中级方法（有一定设计）</strong><a hidden class="anchor" aria-hidden="true" href="#阶段三中级方法有一定设计">#</a></h1>
+<p>目的：系统性解决视角变化，不只是工程 trick。</p>
+<p>方法建议：</p>
+<ol>
+<li>
+<p><strong>视角规范化（Canonicalization）</strong></p>
+<ul>
+<li>
+<p>学一个小网络把任意相机图像转换成“规范视角”图像（或规范化 feature），训练对照损失或用 paired data（若可得到相同场景从不同相机的对齐帧）。</p>
+</li>
+<li>
+<p>若能做成 image-to-image（像素级）或 feature-to-feature，policy 仍在规范视角上训练/运行。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Contrastive 多视角表征学习</strong></p>
+<ul>
+<li>
+<p>若能收集相同时刻多个相机图像（或仿真生成），用对比学习（SimCLR/MoCo 风格）把不同视角的同一时刻映射到相近 embedding。</p>
+</li>
+<li>
+<p>这样 policy 在 embedding 上训练，更不受视角影响。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>基于几何的重投影</strong></p>
+<ul>
+<li>
+<p>如果有相机内外参，可以把像素或深度投影到 3D（或鸟瞰图 BEV），在 3D/BEV 空间上做决策。</p>
+</li>
+<li>
+<p>这通常是强鲁棒的方法，但需要额外传感器或准确标定。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>多视角联合训练（或模拟器辅助）</strong></p>
+<ul>
+<li>
+<p>在训练时使用来自多个不同位姿的图像（采集或模拟），让模型见到多视角。</p>
+</li>
+<li>
+<p>或在仿真中做大量随机化然后在真实中少量 fine-tune。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>评估与 ablation：</p>
+<ul>
+<li>
+<p>对比 canonicalization vs contrastive vs reproject 方法。</p>
+</li>
+<li>
+<p>考察样本效率（达到某成功率需要多少训练数据）。</p>
+</li>
+<li>
+<p>考察对未知相机位姿的泛化能力（插值 vs 外推）。</p>
+</li>
+</ul>
+<hr>
+<h1 id="阶段四复杂前沿方案研究价值高">阶段四：<strong>复杂/前沿方案（研究价值高）</strong><a hidden class="anchor" aria-hidden="true" href="#阶段四复杂前沿方案研究价值高">#</a></h1>
+<p>这些可以作为后续论文和扩展项：</p>
+<ul>
+<li>
+<p><strong>NeRF / 3D scene representation + policy on 3D latent</strong>：用少量视角或视频构建场景隐式表示，策略直接在 3D 表征上决策。</p>
+</li>
+<li>
+<p><strong>Group-equivariant networks（SE(3) equivariant）</strong>：模型在结构上对位姿变化有不变/可控响应。</p>
+</li>
+<li>
+<p><strong>Meta-learning for camera adapt</strong>：训练模型能快速通过少量新相机样本自适应（few-shot），但你强调 zero-shot，仍可作为 fallback。</p>
+</li>
+<li>
+<p><strong>Sim2Real + domain randomization scaling</strong>：在模拟中大规模随机化相机并训练 robust policy。</p>
+</li>
+</ul>
+<hr>
+<h1 id="实验细节--数字化建议让结果可信">实验细节 &amp; 数字化建议（让结果可信）<a hidden class="anchor" aria-hidden="true" href="#实验细节--数字化建议让结果可信">#</a></h1>
+<ul>
+<li>
+<p><strong>数据量</strong>：初步 BC：100–1000 demos；若用 RL，建议千次以上采样。</p>
+</li>
+<li>
+<p><strong>相机差异量化</strong>：定义位移（cm）与旋转（deg）范围；例如测试若干档：平移 5cm / 15cm / 30cm，旋转 5° / 15° / 30°。</p>
+</li>
+<li>
+<p><strong>测试相机数量</strong>：至少 3 个测试位置（one near, one medium, one far）以证明泛化。</p>
+</li>
+<li>
+<p><strong>随机 seed</strong>：每个 setting 做 3–5 次随机种子，报告均值与 std。</p>
+</li>
+<li>
+<p><strong>指标</strong>：成功率（主）、平均放置误差、步骤数、失败类型统计。</p>
+</li>
+<li>
+<p><strong>可视化</strong>：性能-位移曲线、混淆/失败原因分布、样例成功/失败视频截图。</p>
+</li>
+</ul>
+<hr>
+<h1 id="初步验证你必须回答的问题核心验收项">初步验证你必须回答的问题（核心验收项）<a hidden class="anchor" aria-hidden="true" href="#初步验证你必须回答的问题核心验收项">#</a></h1>
+<ol>
+<li>
+<p><strong>有没有分布偏移？</strong>（Train@A vs Test@B 的性能差异）</p>
+</li>
+<li>
+<p><strong>偏移是可纠正的还是根本性？</strong>（通过 augment/CLIP/extrinsics 等方法能否部分恢复）</p>
+</li>
+<li>
+<p><strong>哪个简单方法最有效？</strong>（外参输入 vs augment vs pretrained features）</p>
+</li>
+<li>
+<p><strong>模型失败的主要原因是什么？</strong>（定位误差 / 物体看不见 / 颜色/遮挡）</p>
+</li>
+<li>
+<p><strong>泛化能力与相机偏移量的关系</strong>（多少位移会导致彻底失效？）</p>
+</li>
+</ol>
+<p>回答这些问题就能构成一篇初步结果完整的实验部分（可直接写入开题或投稿初稿）。</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 再整理一下思路，写一个大概的主线和时间线出来(@2026-03-25 10:50)</li>
+</ul>
+<p>2025-11-25 15:04:48 在一切开始之前做的计划</p>
+<ul>
+<li>主线（训练-优先）：11/25 训练之前就加上mask？</li>
+<li>分支：11/25 测试side-camera-only下的joint和ee成功率比较（200次）-clear data</li>
+<li>主线：11/25 测试稍微平移相机之后的成功率比较（200次）</li>
+</ul>
+<p>实现步骤
+0. 已经用clear 数据训练好了eaes和jajs的data</p>
+<ol>
+<li>因为训练需要时间，优先训练side-camera-only下的eae和jajs图像加入mask，怎么训练？</li>
+</ol>
+<h1 id="复原mask">复原mask<a hidden class="anchor" aria-hidden="true" href="#复原mask">#</a></h1>
+<ol>
+<li>问题：换句话说，VLM 的特征对 warp 黑边（black holes / missing regions）不敏感</li>
+<li>尝试在训练数据里增加随机mask和部分缺失</li>
+<li>发现问题：复原图size不匹配，也有一定变形，那我训练数据集怎样增强？</li>
+<li>多少比例？</li>
+</ol>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Matrix on 我的博客</title>
+    <link>https://milong26.github.io/tags/matrix/</link>
+    <description>Recent content in Matrix on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 26 Dec 2023 16:50:35 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/matrix/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>矩阵in线性代数</title>
+      <link>https://milong26.github.io/post/%E7%9F%A9%E9%98%B5in%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/</link>
+      <pubDate>Tue, 26 Dec 2023 16:50:35 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E7%9F%A9%E9%98%B5in%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/</guid>
+      <description>&lt;p&gt;包含正定矩阵、&lt;/p&gt;
+&lt;h1 id=&#34;正定矩阵&#34;&gt;正定矩阵&lt;/h1&gt;
+&lt;p&gt;正定矩阵的定义是从正定二次型来的&lt;/p&gt;
+&lt;h2 id=&#34;判断&#34;&gt;判断&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;求出A的所有&lt;strong&gt;特征值&lt;/strong&gt;
+若A的特征值均为正数，则A是正定的；
+若A的特征值均为负数，则A为负定的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;计算A的&lt;strong&gt;各阶主子式&lt;/strong&gt;。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;顺序主子式的计算方式： 在n 阶方阵中，选取行号i，再选取与行号相同的列号i，行与列均取i个元素的行列式即为n阶行列式的i阶顺序主子式。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;若A的各阶主子式均大于零，则A是正定的；
+若A的各阶主子式中，奇数阶主子式为负，偶数阶为正，则A为负定的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这俩方法里面2稍微简单点。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

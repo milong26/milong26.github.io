@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Layer on 我的博客</title>
+    <link>https://milong26.github.io/tags/layer/</link>
+    <description>Recent content in Layer on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 01 Jun 2023 22:31:53 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/layer/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>embedding层</title>
+      <link>https://milong26.github.io/post/embedding%E5%B1%82/</link>
+      <pubDate>Thu, 01 Jun 2023 22:31:53 +0000</pubDate>
+      <guid>https://milong26.github.io/post/embedding%E5%B1%82/</guid>
+      <description>&lt;p&gt;学rnn的时候遇到过，看名字也没能看出来是干什么用的&lt;/p&gt;
+&lt;h1 id=&#34;one-hot编码&#34;&gt;one-hot编码&lt;/h1&gt;
+&lt;p&gt;用稀疏矩阵来存储一个变量特征，优点计算快，缺点是变量太多的时候占空间。
+为了解决这个，就要把矩阵缩小点&lt;/p&gt;
+&lt;h1 id=&#34;embedding层功能&#34;&gt;embedding层功能&lt;/h1&gt;
+&lt;h2 id=&#34;降维&#34;&gt;降维&lt;/h2&gt;
+&lt;p&gt;embedding层，在某种程度上，就是用来降维的，降维的原理就是矩阵乘法。在卷积网络中，可以理解为特殊全连接层操作，跟1x1卷积核异曲同工&lt;/p&gt;
+&lt;h2 id=&#34;升维&#34;&gt;升维&lt;/h2&gt;
+&lt;p&gt;同理&lt;/p&gt;
+&lt;h1 id=&#34;embedding用于nlp&#34;&gt;embedding用于NLP&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/weixin_42078618/article/details/84553940&#34;&gt;这个例子挺形象的&lt;/a&gt;
+把文字的one-hot编码，从稀疏态变成了密集态，并且让相互独立向量变成了有内在联系的关系向量
+从稀疏矩阵到密集矩阵的过程，叫做embedding，很多人也把它叫做查表，因为他们之间也是一个一一映射的关系。&lt;/p&gt;
+&lt;p&gt;更重要的是，这种关系在反向传播的过程中，是一直在更新的，因此能在多次epoch后，使得这个关系变成相对成熟，即：正确的表达整个语义以及各个语句之间的关系。这个成熟的关系，就是embedding层的所有权重参数。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

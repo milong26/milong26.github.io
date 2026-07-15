@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Vla on 我的博客</title>
+    <link>https://milong26.github.io/tags/vla/</link>
+    <description>Recent content in Vla on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 28 Jun 2026 17:34:03 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/vla/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TinyVLA-Toward-Fast-Data-Efficient-Vision-Language-Action-Models-for-Robotic-Manipulation</title>
+      <link>https://milong26.github.io/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</link>
+      <pubDate>Sun, 28 Jun 2026 17:34:03 +0000</pubDate>
+      <guid>https://milong26.github.io/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy</title>
+      <link>https://milong26.github.io/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/</link>
+      <pubDate>Tue, 09 Dec 2025 22:03:50 +0000</pubDate>
+      <guid>https://milong26.github.io/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/</guid>
+      <description>&lt;p&gt;ee形式的action从机器人坐标系转移到相机坐标系可以提到对相机的泛化性。&lt;/p&gt;
+&lt;p&gt;也就是利用“空间对齐”带来泛化提升&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>具身智能</title>
+      <link>https://milong26.github.io/post/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/</link>
+      <pubDate>Fri, 10 Oct 2025 18:26:10 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/</guid>
+      <description>&lt;p&gt;它跟vla啥关系啊，怎么感觉哪哪都能听到这个词语&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>vla</title>
+      <link>https://milong26.github.io/post/vla/</link>
+      <pubDate>Mon, 29 Sep 2025 15:17:34 +0000</pubDate>
+      <guid>https://milong26.github.io/post/vla/</guid>
+      <description>&lt;p&gt;直觉告诉我这肯定是一大坨一直写不完的东西。&lt;/p&gt;
+&lt;p&gt;我对vla的畅想：
+用户输入自然语言文本，机器人自己准确执行操作
+那整个系统里面，用户输入文本，机器人得理解（结合vlm），视觉感知，
+准确动作就要有 空间理解？&lt;/p&gt;
+&lt;p&gt;一个教程https://zsc.github.io/vla_tutorial/html/index.html，内容一般，但是结构不错，可能是ai生成的？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>smolvla</title>
+      <link>https://milong26.github.io/post/smolvla/</link>
+      <pubDate>Sun, 17 Aug 2025 22:39:53 +0000</pubDate>
+      <guid>https://milong26.github.io/post/smolvla/</guid>
+      <description>&lt;p&gt;主要是代码理解和修改&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CoT-VLA: Visual Chain-of-Thought Reasoning for  Vision-Language-Action Models</title>
+      <link>https://milong26.github.io/post/cot-vla-visual-chain-of-thought-reasoning-for-vision-language-action-models/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/cot-vla-visual-chain-of-thought-reasoning-for-vision-language-action-models/</guid>
+      <description>&lt;p&gt;怎么感觉这又是个插值？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>FAST:Efficient Action Tokenization for  Vision-Language-Action Models</title>
+      <link>https://milong26.github.io/post/fast-efficient-action-tokenization-for-vision-language-action-models/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/fast-efficient-action-tokenization-for-vision-language-action-models/</guid>
+      <description>&lt;p&gt;pi0.5的时候用到这个方法：post-train里面用这个方法，说是因为这个论文发现了用离散的token训练更快。有点好奇是怎么把动作给离散化的，又不能分词，既然它能离散化的话，那图像也能离散化吗？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vision-Language-Action Models for Robotics: A Review Towards Real-World Applications</title>
+      <link>https://milong26.github.io/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/</guid>
+      <description>&lt;p&gt;一篇综述
+2025-11-06 16:15:25 开始看&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 看完 (@2026-04-06 02:33)
+希望从这篇综述中得到：一个综述应该从什么视角看vla，以及重点关注vla的泛化性和精确性的trade-off。vla的目标是什么？轻量？泛化？精确？还是什么？
+Q:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;一个综述应该从怎样的视角？&lt;/li&gt;
+&lt;li&gt;vla的目标、定义、来源、和别的模型的区分&lt;/li&gt;
+&lt;li&gt;技术层面的问题：核心架构、挑战、风险、目前的算法怎样应对&lt;/li&gt;
+&lt;li&gt;实际应用与如何评估&lt;/li&gt;
+&lt;li&gt;如果我自己来，能搞出什么东西？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;2025-11-06 17:16:47 确定好问题，可以开始看了&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>VLA-OS: Structuring and Dissecting Planning Representations and Paradigms in Vision-Language-Action Models</title>
+      <link>https://milong26.github.io/post/vla-os-structuring-and-dissecting-planning-representations-and-paradigms-in-vision-language-action-models/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/vla-os-structuring-and-dissecting-planning-representations-and-paradigms-in-vision-language-action-models/</guid>
+      <description>&lt;p&gt;看起来还不错，没有正式发表&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>VLA们</title>
+      <link>https://milong26.github.io/post/vla%E4%BB%AC/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/vla%E4%BB%AC/</guid>
+      <description>&lt;p&gt;还是很混沌，多看论文吧&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>vla综述们</title>
+      <link>https://milong26.github.io/post/vla%E7%BB%BC%E8%BF%B0%E4%BB%AC/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/vla%E7%BB%BC%E8%BF%B0%E4%BB%AC/</guid>
+      <description>&lt;p&gt;若干综述的集合，看就完事&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>vla里面的插值</title>
+      <link>https://milong26.github.io/post/vla%E9%87%8C%E9%9D%A2%E7%9A%84%E6%8F%92%E5%80%BC/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/vla%E9%87%8C%E9%9D%A2%E7%9A%84%E6%8F%92%E5%80%BC/</guid>
+      <description>&lt;p&gt;最近见到的有点多，搞一个看看&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>解读smolvla代码</title>
+      <link>https://milong26.github.io/post/%E8%A7%A3%E8%AF%BBsmolvla%E4%BB%A3%E7%A0%81/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E8%A7%A3%E8%AF%BBsmolvla%E4%BB%A3%E7%A0%81/</guid>
+      <description>&lt;p&gt;一个比较小的模型smovla，但里面涉及的还挺多，当扫盲&lt;/p&gt;
+&lt;p&gt;看代码不能看单词的含义而是看整体结构orz&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>轻量化vla</title>
+      <link>https://milong26.github.io/post/%E8%BD%BB%E9%87%8F%E5%8C%96vla/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E8%BD%BB%E9%87%8F%E5%8C%96vla/</guid>
+      <description>&lt;p&gt;感觉这方面论文挺少的&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

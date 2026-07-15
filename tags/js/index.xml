@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Js on 我的博客</title>
+    <link>https://milong26.github.io/tags/js/</link>
+    <description>Recent content in Js on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 08 Aug 2021 15:32:42 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/js/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>jqgrid</title>
+      <link>https://milong26.github.io/post/jqgrid/</link>
+      <pubDate>Sun, 08 Aug 2021 15:32:42 +0000</pubDate>
+      <guid>https://milong26.github.io/post/jqgrid/</guid>
+      <description>&lt;p&gt;js，显示表格&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

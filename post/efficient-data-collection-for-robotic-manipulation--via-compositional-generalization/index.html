@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Efficient Data Collection for Robotic Manipulation  via Compositional Generalization | 我的博客</title>
+<meta name="keywords" content="data-collection, robot, compositional-generalization">
+<meta name="description" content="为什么要看这篇：感觉跟我想做的有一点像。所以看完这一篇以后我要得到的是：
+
+这篇能否作为横向对比？
+要对比的话，哪些是有用的？
+这篇论文的结构有没有可参考之处
+rank：
+
+@INPROCEEDINGS{Gao-RSS-24, 
+    AUTHOR    = {Jensen Gao AND Annie Xie AND Ted Xiao AND Chelsea Finn AND Dorsa Sadigh}, 
+    TITLE     = {{Efficient Data Collection for Robotic Manipulation via Compositional Generalization}}, 
+    BOOKTITLE = {Proceedings of Robotics: Science and Systems}, 
+    YEAR      = {2024}, 
+    ADDRESS   = {Delft, Netherlands}, 
+    MONTH     = {July}, 
+    DOI       = {10.15607/RSS.2024.XX.013} 
+}
+原来只要实验也行啊，早知道我就只写实验结果了orz">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/efficient-data-collection-for-robotic-manipulation--via-compositional-generalization/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/efficient-data-collection-for-robotic-manipulation--via-compositional-generalization/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/efficient-data-collection-for-robotic-manipulation--via-compositional-generalization/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="Efficient Data Collection for Robotic Manipulation  via Compositional Generalization">
+  <meta property="og:description" content="为什么要看这篇：感觉跟我想做的有一点像。所以看完这一篇以后我要得到的是：
+这篇能否作为横向对比？ 要对比的话，哪些是有用的？ 这篇论文的结构有没有可参考之处 rank： @INPROCEEDINGS{Gao-RSS-24, AUTHOR = {Jensen Gao AND Annie Xie AND Ted Xiao AND Chelsea Finn AND Dorsa Sadigh}, TITLE = {{Efficient Data Collection for Robotic Manipulation via Compositional Generalization}}, BOOKTITLE = {Proceedings of Robotics: Science and Systems}, YEAR = {2024}, ADDRESS = {Delft, Netherlands}, MONTH = {July}, DOI = {10.15607/RSS.2024.XX.013} } 原来只要实验也行啊，早知道我就只写实验结果了orz">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:tag" content="Data-Collection">
+    <meta property="article:tag" content="Robot">
+    <meta property="article:tag" content="Compositional-Generalization">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Efficient Data Collection for Robotic Manipulation  via Compositional Generalization">
+  <meta name="twitter:description" content="为什么要看这篇：感觉跟我想做的有一点像。所以看完这一篇以后我要得到的是：
+这篇能否作为横向对比？ 要对比的话，哪些是有用的？ 这篇论文的结构有没有可参考之处 rank： @INPROCEEDINGS{Gao-RSS-24, AUTHOR = {Jensen Gao AND Annie Xie AND Ted Xiao AND Chelsea Finn AND Dorsa Sadigh}, TITLE = {{Efficient Data Collection for Robotic Manipulation via Compositional Generalization}}, BOOKTITLE = {Proceedings of Robotics: Science and Systems}, YEAR = {2024}, ADDRESS = {Delft, Netherlands}, MONTH = {July}, DOI = {10.15607/RSS.2024.XX.013} } 原来只要实验也行啊，早知道我就只写实验结果了orz">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Efficient Data Collection for Robotic Manipulation  via Compositional Generalization",
+      "item": "https://milong26.github.io/post/efficient-data-collection-for-robotic-manipulation--via-compositional-generalization/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Efficient Data Collection for Robotic Manipulation  via Compositional Generalization",
+  "name": "Efficient Data Collection for Robotic Manipulation  via Compositional Generalization",
+  "description": "为什么要看这篇：感觉跟我想做的有一点像。所以看完这一篇以后我要得到的是：\n这篇能否作为横向对比？ 要对比的话，哪些是有用的？ 这篇论文的结构有没有可参考之处 rank： @INPROCEEDINGS{Gao-RSS-24, AUTHOR = {Jensen Gao AND Annie Xie AND Ted Xiao AND Chelsea Finn AND Dorsa Sadigh}, TITLE = {{Efficient Data Collection for Robotic Manipulation via Compositional Generalization}}, BOOKTITLE = {Proceedings of Robotics: Science and Systems}, YEAR = {2024}, ADDRESS = {Delft, Netherlands}, MONTH = {July}, DOI = {10.15607/RSS.2024.XX.013} } 原来只要实验也行啊，早知道我就只写实验结果了orz\n",
+  "keywords": [
+    "data-collection", "robot", "compositional-generalization"
+  ],
+  "articleBody": "为什么要看这篇：感觉跟我想做的有一点像。所以看完这一篇以后我要得到的是：\n这篇能否作为横向对比？ 要对比的话，哪些是有用的？ 这篇论文的结构有没有可参考之处 rank： @INPROCEEDINGS{Gao-RSS-24, AUTHOR = {Jensen Gao AND Annie Xie AND Ted Xiao AND Chelsea Finn AND Dorsa Sadigh}, TITLE = {{Efficient Data Collection for Robotic Manipulation via Compositional Generalization}}, BOOKTITLE = {Proceedings of Robotics: Science and Systems}, YEAR = {2024}, ADDRESS = {Delft, Netherlands}, MONTH = {July}, DOI = {10.15607/RSS.2024.XX.013} } 原来只要实验也行啊，早知道我就只写实验结果了orz\n2026年6月11日16:25:20 开始阅读。看的时候我要回答\n标题里面的Compositional Generalization是什么 和我之前的工作像吗？ 它的创新点是什么？ 怎么验证结论的？ 摘要感觉写得挺好，可以抄抄 我擦这一篇还没看，赶紧看 真的是11号开始的？？？？？那我这十几天干啥了 😧 那重新开始吧。2026年6月26日17:20:38 今天\n边看边提问/记录重点的 噢之前应该看过但没有细看，导致我现在对这个论文已经没有印象了\nIf robot policies can compose environmental factors from their data to succeed when encountering unseen factor combinations, we can exploit this to avoid collecting data for situations that composition would address. 也就是认为有些场景是可以通过组合进行的，就不用额外的数据收集。所以后面就是为了验证，做了实证研究，就看assess whether visual imitation learning policies can compose environmental factors.怎么实证研究的？他们把环境因素拆成若干离散值，重点看策略能否处理未见过的因素组合，而不是只看单个因素变化。 论文在真实机器人上做了pairwise composition 实验：对每一对因素，评估所有组合值，一共得到 9 个组合/每对因素，覆盖 10 对因素，并比较不同数据策略下的成功率。 他们还做了转移到全新环境的测试，去看策略面对“完全新的因素组合”时是否还能成功。 我们提出了更有效的数据收集策略，这些策略能够充分利用数据的组合性特征。什么样子的数据收集策略：提出更偏向覆盖单个因素值的 in-domain 数据收集策略。文中给出的策略包括 Complete、Random、Single Factor、Diagonal、L、Stair 等，图 2 说明这些策略的区别在于：有的更强调覆盖“每个因素各自的值”，有的则更强调覆盖“完整组合”。作者总结说，Stair 通常最有效，因为它既能利用组合泛化，又能减少数据采集负担 We further demonstrate that a real robot policy trained on data from such a strategy achieves a success rate of 77.5% when transferred to entirely new environments that encompass unseen combinations of environmental factors, OOD这么强？ 这一篇的核心环境因素变化很多时，怎么更高效地收数据、并让策略学会组合泛化，主要关注的是in-domain data，目标是更高效地收集适合下游迁移的数据 我想知道它怎么组合的，因为之前看过：论文的组合对象是环境因素值，比如 object position、object type、table texture、table height、camera position、distractor objects 等 。 它关心的是：模型有没有学到单个因素的规律，从而在没见过的“因素值组合”上仍能成功，而不是只记住某个固定场景 。 论文还指出，物理因素之间的组合更难，比如 object position 和 table height 的组合就更弱 Compositional generalization has been previously studied in other machine learning domains [20, 1, 26, 23, 24, 44, 4, 52], with results often suggesting that end-to-end neural models can struggle to achieve this.这边这几个其它机器学习领域的研究有没有必要看：这里不用，主要是为了说明：组合泛化在视觉推理、图像生成、NLP、VQA 里都研究过，而且端到端神经网络常常不擅长组合 However, recent work has shown that large language models can exhibit strong compositional abilities, likely due to the diversity and scale of their training data [54, 13]. Ideally, prior datasets in robotics could also facilitate composition for robotics, but we currently lack much understanding as to where these datasets benefit generalization. 所以前面的意思是：在其它机器学习领域，组合式泛化能力被研究过，但是最终结果显示，端到端的神经网络上效果不是很好。但最新的研究又说，大型语言模型有很强的组合泛化能力，可能是因为训练数据的多样性和规模，所以想把这个迁移到机器人领域，但目前还不知道这些数据集在哪些方面有助于提升泛化能力。？但是目前的研究只专注提高数据规模，涵盖各种因素组合，没有真正考虑组合效应这个因素，所以这个论文就准备验证模仿学习策略也有组合泛化能力 我们考虑了多种与机器人操作相关的因素，这些因素都已被先前的研究所探讨过，包括物体位置、物体类型、桌面纹理、桌面高度、摄像机位置以及可能分散注意力的其他物体。研究发现，当这些因素发生变化时，模仿学习策略仍能保持良好的泛化能力。基于这些发现，我们提出了利用这种泛化能力的数据收集策略——这些策略能为机器人研究人员提供更系统的指导，从而减轻他们的数据收集工作负担。所以这个论文的创新点在哪？研究 in-domain data 的组合方式如何影响泛化，并据此设计更高效的数据收集策略。研究的是environmental factors 的组合，而很多先前机器人组合泛化工作更偏向语义层面，例如高层技能、文本指令、对象关系等 包含更多不同类型物体和任务的数据有助于提升机器人的鲁棒性。不过，这些研究也表明，基于这类数据训练出的模型在新场景中的表现往往不佳，这说明在实践中仍然需要收集与特定任务相关的专用数据。与以往的研究不同，我们的工作重点在于如何收集这类“领域内数据”。和其它数据收集工作相比，本文的创新点是领域内数据吗这个in-domain数据跟相关工作的数据有什么区别？因为我看到示意图里面有不同桌子、不同物体的，它这个域内就是指在一个固定的环境里面吗？很多已有工作虽然扩大了数据多样性，但它们常常把重点放在覆盖更多对象和任务，结果在新场景里仍可能 zero-shot 表现不好，因此实践中仍需要in-domain data。这里的 in-domain data 不是“只在一个完全固定环境里不变”，而是指：在目标任务相关的环境分布内，系统地采集足够有代表性的因素值及其组合，以支持下游泛化 第二个关于数据采集工作的对比是：其它研究关注于交互式模仿学习，Other works on data collection in imitation learning focus on expanding state coverage via interactive imitation learning [43, 27, 22], or more recently improving other notions of data quality [3]. These works mainly consider the impact of data on the distribution shift problem [43], to improve policy robustness to the state distribution the agent will encounter online. However, distribution shift in robotics can also occur due to environmental variations.我怎么感觉这个才是跟我的工作比较接近的，也就是说做不同状态分布的，那把相关的这几篇也拿出来阅读吗？ 这里面其它工作做的事：研究数据对状态分布变化的影响，提高agent在面对不同状态分布时的适应性，但问题是状态分布的变化可能由环境因素的变动引起。所以作者采用离线数据收集来应对环境导致的状态分布变化，具体方法是主动改变环境因素。什么叫离线数据收集？之前的方法不是离线的吗？为什么主动改变环境因素就是离线数据收集了？ 这几个相关工作好像都只在模仿学习上面做，没有做VLA模仿学习的 43:A reduction of imitation learning and structured prediction to no-regret online learning. 就是Dagger，做模仿学习的，通过让学习器在自己产生的轨迹上探索和犯错，并请求专家对这些新遇到的状态进行标注，从而显式地训练学习器如何从自身的错误中恢复。作者在理论上将模仿学习问题归约（Reduction）为了一个无悔在线学习（No-Regret Online Learning）问题。这种归约的理论意义是深远的：它允许研究者借用在线学习领域成熟的理论工具来分析模仿学习算法的性能。一个无悔（no-regret）算法能够保证其在多次迭代后的平均性能，与“事后诸葛亮”式的最佳固定策略相比，差距趋近于零。dagger能不能用在vla上面啊 27：Dart: Noise injection for robust imitation learning. 好像没有VLA 22：Hg-dagger: Interactive imitation learning with human experts。dagger的变体 3：Data quality in imitation learning.之前引用过 相关工作第二个分类是机器人学习中的泛化能力，例如通过使用预训练的视觉表征来辅助学习[37, 34, 31, 41, 11, 32, 21]，或利用多种类型的机器人数据来提升学习效果[36, 35]，感觉这里的相关工作也挺重要的，不知道，我看一下跟我的工作相关程度怎么样 37：The unsurprising effectiveness of pre-trained vision models for control.：我们重新审视并研究了预训练视觉表征在控制中的作用，特别是那些在大规模计算机视觉数据集上训练的表征。通过在不同控制领域（Habitat、DeepMind Control、Adroit、Franka Kitchen）进行广泛的实证评估，我们分离并研究了不同的表征训练方法、数据增强和特征层次结构的重要性。总体而言，我们发现预训练视觉表征在训练控制策略方面可以与真实状态表征竞争，甚至更好。也就是改了vla的vlm？ 34：R3m: A universal visual representation for robot manipulation.：如何在多样化的人类视频数据上预训练视觉表示，以实现下游机器人操作任务的效率数据学习。具体来说，我们使用时间对比学习、视频-语言对齐以及L1惩罚的组合来预训练视觉表示，以鼓励稀疏且紧凑的表示。得到的表示R3M可以作为冻结感知模块用于下游策略学习。 31：Vip: Towards universal visual reward and representation via value-implicit pre-training.我们引入 extbf{V}alue- extbf{I}mplicit extbf{P}re-training (VIP)，一种自监督预训练的视觉表示，能够为未见过的机器人任务生成密集和平滑的奖励函数。VIP将表示学习从人类视频中视为一个离线目标条件强化学习问题，并推导出一个不依赖于动作的自监督双重目标条件值函数目标，从而可以在未标记的人类视频上进行预训练。 41：Real-world robot learning with masked visual pre-training.：探索了在多样、非受控视频的图像上进行自监督视觉预训练，用于现实世界的机器人任务。与先前的工作类似，我们的视觉表征是通过掩码自动编码器（MAE）进行预训练的，然后冻结并传递到一个可学习的控制模块中。与先前的工作不同，我们证明了预训练的表征在一系列现实世界的机器人任务和本体中是有效的。 11：An unbiased look at datasets for visuomotor pre-training. 视觉表征学习对机器人领域具有巨大潜力，但严重受限于机器人数据集的稀少性和同质性。最近的研究通过在大规模但非领域数据（例如，第一人称交互视频）上预训练视觉表征，然后将它们迁移到目标机器人任务中来解决这个问题。虽然该领域高度关注开发更好的预训练算法，但我们发现数据集选择对该范式成功同样重要。毕竟，表征只能学习预训练数据集中存在的结构或先验。为此，我们转移了对算法的关注，而是对机器人预训练进行以数据集为中心的分析。我们的发现对领域内的一些常见观点提出了质疑。我们观察到传统视觉数据集（如图像Net、Kinetics和100天手部动作）对视觉运动表征学习而言出奇地具有竞争力，并且预训练数据集的图像分布比其大小更重要。最后，我们表明常见的模拟基准并不是现实世界性能的可靠代理，并且简单的正则化策略可以显着提高现实世界的策略学习。这个工作看起来稍微相关一点，但做的是公开数据集的分析？ 32：Where are we in the search for an artificial visual cortex for embodied intelligence? ：我们提出了迄今为止规模最大、最全面的关于嵌入式AI的预训练视觉表征（PVRs）或视觉’基础模型’的实证研究。首先，我们创建了CortexB，它包含17种不同任务，涵盖运动、导航、灵巧操作和移动操作。接下来，我们系统地评估了现有的PVRs，发现没有一种是普遍占优的。为了研究预训练数据规模和多样性的影响，我们结合了来自7个不同来源的超过4,000小时的自视角视频（以及超过4.3M张图像）和ImageNet，使用掩码自编码（MAE）在这一数据切片上训练不同规模的视觉Transformer。与先前工作的推断相反，我们发现扩大数据集规模和多样性并不普遍提升性能（但在平均情况下是有效的）。我们最大的模型VC-1，在平均性能上优于所有先前的PVRs，但并未普遍占优。接着，我们展示了针对特定任务或领域的VC-1适应性调整能带来显著提升，适应性调整的VC-1在CortexB的所有基准测试中均达到或超过当前最佳性能。最后，我们展示了实际硬件实验，其中VC-1和适应性调整的VC-1均优于最强的现有PVR。总体而言，本文并未提出新方法，而是一系列严格系统的评估、关于PVRs的广泛发现（在某些情况下驳斥了先前窄领域的研究结论），以及为了研究社区利益而开源的代码和模型（这些模型训练耗时超过10,000GPU小时）。 21：Language-driven representation learning for robotics. 上面这几个工作都只是利用预训练的vlm修改vla的模型，但是没有用vlm做数据采集的指导工作吧？也就是说，上面这几个工作的共同点是：研究什么样的vlm或者vlm对应什么样的a算法能更好。 第三个相关工作是组合泛化能力：端到端神经网络在处理组合问题时往往表现不佳。不过，有时它们比那些专门为解决组合问题而设计的方法表现得更好，比如无监督表示学习[44]。不过，最近的研究表明，大型语言模型具备很强的组合泛化能力，这很可能得益于它们在互联网规模上的预训练数据也就是前面引言说过的。相比之下，本文不仅探讨利用先验数据能否处理组合问题，还更关注环境因素的符合构建，也就是与这些研究不同，我们关注的是环境因素的复合体构建，这些因素可能会显著改变视觉观察结果，或者影响任务所需的低级物理动作。此外，我们还研究了现有端到端模仿学习方法的复合体构建问题。 到方法部分了，看introduction感觉这个工作也是重点展示实验结果的，以工程实验结果为证明的论文？可能理论性不强 问题陈述，看是不是跟我理解的smolvla模仿学习的问题formula差不多。 为简化问题，我们假设该元组的每个元素都有若干个离散值可选。比如，机器人可能遇到的物体类型有若干种。我们将这些离散值称为“因素值”。因此，该元组的每个元素都代表了环境中各种因素值的组合，比如机器人可能遇到的特定物体类型和桌子高度。 p⁢(f) 表示各种因素值组合的分布情况，而 ρ⁢(s0|f) 则是在给定某些因素值组合的条件下，系统的初始状态分布。我们采用这种表述方式来说明：环境中的各种因素值可以通过影响系统的初始状态，从而影响任务的执行结果。同样地， μ⁢(f):ℱN→S 是一个确定性函数，它将各种因素值组合映射到期望的目标状态 g∈S 上。因为因素值决定了任务的目标状态，所以 μ⁢(f):ℱN→S 的作用就是确定目标状态。我们的目标是学习一种以目标为条件的策略 π(⋅|s,g):S×S→Δ(𝒜) ，其中 Δ⁢(𝒜) 表示动作空间上的概率分布。我们的目标是在各种可能的因素值分布下，最大化达到期望目标的概率。差不多，因素设计就是给环境进行人为的物理分类 那数据收集策略是什么？在数据收集过程中，定期对环境中的各个因素进行赋值。所以也是不同条件测试？那怎么找到尽可能少的？ 用的仿真环境是Factor World，我没用过，留着当个纪念 做了哪些实验？仿真和真实的都怎么做的，期望得到什么结果？ 以及最后给这篇论文写一个中文总结，要求回答：to：表示这个论文的目标， this work表示这个论文的创新点，get 一句话总结最重要的成果，需要有数据。以及but局限性 2026年6月28日17:06:02看完了，感觉最有用的是相关工作部分，给我好好解释了一下，但是感觉方法没有很高级啊 果然其实只要我开始看的根本不用花太多时间的\n总结：这篇论文的核心问题是：机器人模仿学习策略能不能像“拼积木”一样，把训练数据里学到的不同环境因素组合起来，去处理没见过的组合场景，以及如果能做到，怎样的数据收集方式更省力。论文明确说他们做了模拟环境和真实机器人的系统实证研究，来检验 visual imitation learning policies 是否能对环境因素做组合泛化\nto： 研究视觉模仿学习策略能否对环境因素做组合泛化，并据此设计更高效的机器人 in-domain 数据收集方式，以减少收数成本。 this work：创新点而是系统分析环境因素的组合效应，提出利用组合泛化来指导 in-domain data collection 的策略（如 Stair、L 等）。 get： 在真实机器人上，基于这种策略训练的最好模型在转移到全新环境时达到了 77.5% 的成功率，而没有 prior data 时只有 27.5%，没有环境变化的 in-domain 数据时只有 2.5%。 but： 局限性是，论文主要考虑的是少量任务和一个 prior dataset，且对物理因素之间的组合仍然较难，作者也承认未来需要扩展到更多机器人平台、更多任务以及更大规模的数据收集。 实验类型 做了什么 具体怎么做 期望得到什么结果 仿真实验 在模拟环境里系统测试组合泛化和数据收集策略 3 使用 Factor World，做 Pick Place 和 Door Open 两个任务；考虑 5 个因素，包括 object texture、table texture、camera position、distractor objects、object position；设置 F[N] 为 10 个可能的因素对，另外也测试 N = 5 的全因素情形；每个因子采样 k = 10 个值；每个数据策略都用 scripted expert 采数据，并改变 factor changes 的总量来衡量 effort；每组 100 个 demonstrations（N=2）和 1000 个 demonstrations（N=5），训练 behavior cloning policy，并在 100 个 episodes 上评估 45 验证 robot policies 是否真的能对环境因素做 composition，以及 Stair / L / Diagonal 这类策略能不能在更少数据变化下达到接近 Complete 的效果 67 真实机器人实验 在真实厨房场景验证组合泛化是否成立，并测试 prior data 的作用 89 使用 WidowX 250 6DOF robot arm；任务是 putting a fork inside a container；主要因素是 object type、object position、container type、table height、table texture，每个因素有 k = 4 个值；只做 N = 5 的设置；主要比较 Stair 和 L，再加 No Variation；每个策略收集 16 个组合、每个组合 10 条演示，总共 160 条演示；数据都在 BaseKitch 这个厨房里收集；同时比较 from scratch 和 BridgeData V2 作为 prior data 的效果 101112 验证组合泛化能否迁移到真实机器人，尤其看 prior robot data 是否能增强组合能力，以及哪些因素更容易组合、哪些更难 13 额外真实实验 测试 frozen visual representations 对组合泛化是否有效 14 额外评估 R3M 和 VC-1 作为 frozen visual encoders，在部分 factor pairs 上测试；关注 object type + table texture、object position + table texture、object position + table height 这些组合 151617 验证现代 frozen visual representations 是否也能支持真实机器人上的组合泛化；作者的结果是它们表现不好 18 ",
+  "wordCount" : "699",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/efficient-data-collection-for-robotic-manipulation--via-compositional-generalization/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Efficient Data Collection for Robotic Manipulation  via Compositional Generalization
+    </h1>
+    <div class="post-meta">
+
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>为什么要看这篇：感觉跟我想做的有一点像。所以看完这一篇以后我要得到的是：</p>
+<ol>
+<li>这篇能否作为横向对比？</li>
+<li>要对比的话，哪些是有用的？</li>
+<li>这篇论文的结构有没有可参考之处</li>
+<li>rank：</li>
+</ol>
+<pre tabindex="0"><code>@INPROCEEDINGS{Gao-RSS-24, 
+    AUTHOR    = {Jensen Gao AND Annie Xie AND Ted Xiao AND Chelsea Finn AND Dorsa Sadigh}, 
+    TITLE     = {{Efficient Data Collection for Robotic Manipulation via Compositional Generalization}}, 
+    BOOKTITLE = {Proceedings of Robotics: Science and Systems}, 
+    YEAR      = {2024}, 
+    ADDRESS   = {Delft, Netherlands}, 
+    MONTH     = {July}, 
+    DOI       = {10.15607/RSS.2024.XX.013} 
+}
+</code></pre><p>原来只要实验也行啊，早知道我就只写实验结果了orz</p>
+<p>2026年6月11日16:25:20 开始阅读。看的时候我要回答</p>
+<ol>
+<li>标题里面的Compositional Generalization是什么</li>
+<li>和我之前的工作像吗？</li>
+<li>它的创新点是什么？</li>
+<li>怎么验证结论的？</li>
+</ol>
+<p>摘要感觉写得挺好，可以抄抄
+我擦这一篇还没看，赶紧看
+真的是11号开始的？？？？？那我这十几天干啥了 😧
+那重新开始吧。2026年6月26日17:20:38 今天</p>
+<p>边看边提问/记录重点的
+噢之前应该看过但没有细看，导致我现在对这个论文已经没有印象了</p>
+<ol>
+<li>If robot policies can compose environmental factors from their data to succeed when encountering unseen factor combinations, we can exploit this to avoid collecting data for situations that composition would address. 也就是认为有些场景是可以通过组合进行的，就不用额外的数据收集。所以后面就是为了验证，做了实证研究，就看assess whether visual imitation learning policies can compose environmental factors.怎么实证研究的？他们把环境因素拆成若干离散值，重点看策略能否处理<strong>未见过的因素组合</strong>，而不是只看单个因素变化。  论文在真实机器人上做了<strong>pairwise composition</strong> 实验：对每一对因素，评估所有组合值，一共得到 <strong>9 个组合/每对因素</strong>，覆盖 <strong>10 对因素</strong>，并比较不同数据策略下的成功率。  他们还做了<strong>转移到全新环境</strong>的测试，去看策略面对“完全新的因素组合”时是否还能成功。</li>
+<li>我们提出了更有效的数据收集策略，这些策略能够充分利用数据的组合性特征。什么样子的数据收集策略：提出<strong>更偏向覆盖单个因素值</strong>的 in-domain 数据收集策略。文中给出的策略包括 <strong>Complete、Random、Single Factor、Diagonal、L、Stair</strong> 等，图 2 说明这些策略的区别在于：有的更强调覆盖“每个因素各自的值”，有的则更强调覆盖“完整组合”。作者总结说，<strong>Stair</strong> 通常最有效，因为它既能利用组合泛化，又能减少数据采集负担</li>
+<li>We further demonstrate that a real robot policy trained on data from such a strategy achieves a success rate of 77.5% when transferred to entirely new environments that encompass unseen combinations of environmental factors, OOD这么强？</li>
+<li>这一篇的核心<strong>环境因素变化很多时，怎么更高效地收数据、并让策略学会组合泛化</strong>，主要关注的是<strong>in-domain data</strong>，目标是更高效地收集适合下游迁移的数据</li>
+<li>我想知道它怎么组合的，因为之前看过：论文的组合对象是<strong>环境因素值</strong>，比如 object position、object type、table texture、table height、camera position、distractor objects 等 。  它关心的是：模型有没有学到<strong>单个因素的规律</strong>，从而在没见过的“因素值组合”上仍能成功，而不是只记住某个固定场景 。  论文还指出，<strong>物理因素之间的组合更难</strong>，比如 object position 和 table height 的组合就更弱</li>
+<li>Compositional generalization has been previously studied in other machine learning domains [<a href="https://arxiv.org/html/2403.05110v2#bib.bib20">20</a>, <a href="https://arxiv.org/html/2403.05110v2#bib.bib1">1</a>, <a href="https://arxiv.org/html/2403.05110v2#bib.bib26">26</a>, <a href="https://arxiv.org/html/2403.05110v2#bib.bib23">23</a>, <a href="https://arxiv.org/html/2403.05110v2#bib.bib24">24</a>, <a href="https://arxiv.org/html/2403.05110v2#bib.bib44">44</a>, <a href="https://arxiv.org/html/2403.05110v2#bib.bib4">4</a>, <a href="https://arxiv.org/html/2403.05110v2#bib.bib52">52</a>], with results often suggesting that end-to-end neural models can struggle to achieve this.这边这几个其它机器学习领域的研究有没有必要看：这里不用，主要是为了说明：<strong>组合泛化在视觉推理、图像生成、NLP、VQA 里都研究过，而且端到端神经网络常常不擅长组合</strong></li>
+<li>However, recent work has shown that large language models can exhibit strong compositional abilities, likely due to the diversity and scale of their training data [<a href="https://arxiv.org/html/2403.05110v2#bib.bib54">54</a>, <a href="https://arxiv.org/html/2403.05110v2#bib.bib13">13</a>]. Ideally, prior datasets in robotics could also facilitate composition for robotics, but we currently lack much understanding as to where these datasets benefit generalization. 所以前面的意思是：在其它机器学习领域，组合式泛化能力被研究过，但是最终结果显示，端到端的神经网络上效果不是很好。但最新的研究又说，大型语言模型有很强的组合泛化能力，可能是因为训练数据的多样性和规模，所以想把这个迁移到机器人领域，但目前还不知道这些数据集在哪些方面有助于提升泛化能力。？但是目前的研究只专注提高数据规模，涵盖各种因素组合，没有真正考虑组合效应这个因素，所以这个论文就准备验证模仿学习策略也有组合泛化能力</li>
+<li>我们考虑了多种与机器人操作相关的因素，这些因素都已被先前的研究所探讨过，包括物体位置、物体类型、桌面纹理、桌面高度、摄像机位置以及可能分散注意力的其他物体。研究发现，当这些因素发生变化时，模仿学习策略仍能保持良好的泛化能力。基于这些发现，我们提出了利用这种泛化能力的数据收集策略——这些策略能为机器人研究人员提供更系统的指导，从而减轻他们的数据收集工作负担。所以这个论文的创新点在哪？<strong>研究 in-domain data 的组合方式如何影响泛化</strong>，并据此设计更高效的数据收集策略。研究的是<strong>environmental factors 的组合</strong>，而很多先前机器人组合泛化工作更偏向<strong>语义层面</strong>，例如高层技能、文本指令、对象关系等</li>
+<li>包含更多不同类型物体和任务的数据有助于提升机器人的鲁棒性。不过，这些研究也表明，基于这类数据训练出的模型在新场景中的表现往往不佳，这说明在实践中仍然需要收集与特定任务相关的专用数据。与以往的研究不同，我们的工作重点在于如何收集这类“领域内数据”。和其它数据收集工作相比，本文的创新点是领域内数据吗这个in-domain数据跟相关工作的数据有什么区别？因为我看到示意图里面有不同桌子、不同物体的，它这个域内就是指在一个固定的环境里面吗？很多已有工作虽然扩大了数据多样性，但它们常常把重点放在<strong>覆盖更多对象和任务</strong>，结果在新场景里仍可能 zero-shot 表现不好，因此实践中仍需要<strong>in-domain data</strong>。这里的 in-domain data 不是“只在一个完全固定环境里不变”，而是指：<strong>在目标任务相关的环境分布内，系统地采集足够有代表性的因素值及其组合</strong>，以支持下游泛化</li>
+<li>第二个关于数据采集工作的对比是：其它研究关注于交互式模仿学习，Other works on data collection in imitation learning focus on expanding state coverage via interactive imitation learning [<a href="https://arxiv.org/html/2403.05110v2#bib.bib43">43</a>, <a href="https://arxiv.org/html/2403.05110v2#bib.bib27">27</a>, <a href="https://arxiv.org/html/2403.05110v2#bib.bib22">22</a>], or more recently improving other notions of data quality [<a href="https://arxiv.org/html/2403.05110v2#bib.bib3">3</a>]. These works mainly consider the impact of data on the distribution shift problem [<a href="https://arxiv.org/html/2403.05110v2#bib.bib43">43</a>], to improve policy robustness to the state distribution the agent will encounter online. However, distribution shift in robotics can also occur due to environmental variations.我怎么感觉这个才是跟我的工作比较接近的，也就是说做不同状态分布的，那把相关的这几篇也拿出来阅读吗？
+<ol>
+<li>这里面其它工作做的事：研究数据对状态分布变化的影响，提高agent在面对不同状态分布时的适应性，但问题是状态分布的变化可能由环境因素的变动引起。所以作者采用离线数据收集来应对环境导致的状态分布变化，具体方法是主动改变环境因素。什么叫离线数据收集？之前的方法不是离线的吗？为什么主动改变环境因素就是离线数据收集了？</li>
+<li>这几个相关工作好像都只在模仿学习上面做，没有做VLA模仿学习的</li>
+<li>43:A  reduction of imitation learning and structured prediction to no-regret online learning. 就是Dagger，做模仿学习的，通过让学习器在自己产生的轨迹上探索和犯错，并请求专家对这些新遇到的状态进行标注，从而显式地训练学习器如何从自身的错误中恢复。作者在理论上将模仿学习问题归约（Reduction）为了一个无悔在线学习（No-Regret Online Learning）问题。这种归约的理论意义是深远的：它允许研究者借用在线学习领域成熟的理论工具来分析模仿学习算法的性能。一个无悔（no-regret）算法能够保证其在多次迭代后的平均性能，与“事后诸葛亮”式的最佳固定策略相比，差距趋近于零。dagger能不能用在vla上面啊</li>
+<li>27：Dart: Noise injection for robust imitation learning. 好像没有VLA</li>
+<li>22：Hg-dagger: Interactive imitation learning with human experts。dagger的变体</li>
+<li>3：Data  quality in imitation learning.之前引用过</li>
+</ol>
+</li>
+<li>相关工作第二个分类是机器人学习中的泛化能力，例如通过使用预训练的视觉表征来辅助学习[37, 34, 31, 41, 11, 32, 21]，或利用多种类型的机器人数据来提升学习效果[36, 35]，感觉这里的相关工作也挺重要的，不知道，我看一下跟我的工作相关程度怎么样
+<ol>
+<li>37：The unsurprising effectiveness of pre-trained vision models for control.：我们重新审视并研究了预训练视觉表征在控制中的作用，特别是那些在大规模计算机视觉数据集上训练的表征。通过在不同控制领域（Habitat、DeepMind Control、Adroit、Franka Kitchen）进行广泛的实证评估，我们分离并研究了不同的表征训练方法、数据增强和特征层次结构的重要性。总体而言，我们发现预训练视觉表征在训练控制策略方面可以与真实状态表征竞争，甚至更好。也就是改了vla的vlm？</li>
+<li>34：R3m: A universal visual representation for robot manipulation.：如何在多样化的人类视频数据上预训练视觉表示，以实现下游机器人操作任务的效率数据学习。具体来说，我们使用时间对比学习、视频-语言对齐以及L1惩罚的组合来预训练视觉表示，以鼓励稀疏且紧凑的表示。得到的表示R3M可以作为冻结感知模块用于下游策略学习。</li>
+<li>31：Vip: Towards universal visual reward and representation via value-implicit pre-training.我们引入 extbf{V}alue- extbf{I}mplicit extbf{P}re-training (VIP)，一种自监督预训练的视觉表示，能够为未见过的机器人任务生成密集和平滑的奖励函数。VIP将表示学习从人类视频中视为一个离线目标条件强化学习问题，并推导出一个不依赖于动作的自监督双重目标条件值函数目标，从而可以在未标记的人类视频上进行预训练。</li>
+<li>41：Real-world robot learning with masked visual pre-training.：探索了在多样、非受控视频的图像上进行自监督视觉预训练，用于现实世界的机器人任务。与先前的工作类似，我们的视觉表征是通过掩码自动编码器（MAE）进行预训练的，然后冻结并传递到一个可学习的控制模块中。与先前的工作不同，我们证明了预训练的表征在一系列现实世界的机器人任务和本体中是有效的。</li>
+<li>11：An unbiased look at datasets for visuomotor pre-training. 视觉表征学习对机器人领域具有巨大潜力，但严重受限于机器人数据集的稀少性和同质性。最近的研究通过在大规模但非领域数据（例如，第一人称交互视频）上预训练视觉表征，然后将它们迁移到目标机器人任务中来解决这个问题。虽然该领域高度关注开发更好的预训练算法，但我们发现数据集选择对该范式成功同样重要。毕竟，表征只能学习预训练数据集中存在的结构或先验。为此，我们转移了对算法的关注，而是对机器人预训练进行以数据集为中心的分析。我们的发现对领域内的一些常见观点提出了质疑。我们观察到传统视觉数据集（如图像Net、Kinetics和100天手部动作）对视觉运动表征学习而言出奇地具有竞争力，并且预训练数据集的图像分布比其大小更重要。最后，我们表明常见的模拟基准并不是现实世界性能的可靠代理，并且简单的正则化策略可以显着提高现实世界的策略学习。这个工作看起来稍微相关一点，但做的是公开数据集的分析？</li>
+<li>32：Where are we in the search for an artificial visual cortex for embodied intelligence? ：我们提出了迄今为止规模最大、最全面的关于嵌入式AI的预训练视觉表征（PVRs）或视觉&rsquo;基础模型&rsquo;的实证研究。首先，我们创建了CortexB，它包含17种不同任务，涵盖运动、导航、灵巧操作和移动操作。接下来，我们系统地评估了现有的PVRs，发现没有一种是普遍占优的。为了研究预训练数据规模和多样性的影响，我们结合了来自7个不同来源的超过4,000小时的自视角视频（以及超过4.3M张图像）和ImageNet，使用掩码自编码（MAE）在这一数据切片上训练不同规模的视觉Transformer。与先前工作的推断相反，我们发现扩大数据集规模和多样性并不普遍提升性能（但在平均情况下是有效的）。我们最大的模型VC-1，在平均性能上优于所有先前的PVRs，但并未普遍占优。接着，我们展示了针对特定任务或领域的VC-1适应性调整能带来显著提升，适应性调整的VC-1在CortexB的所有基准测试中均达到或超过当前最佳性能。最后，我们展示了实际硬件实验，其中VC-1和适应性调整的VC-1均优于最强的现有PVR。总体而言，本文并未提出新方法，而是一系列严格系统的评估、关于PVRs的广泛发现（在某些情况下驳斥了先前窄领域的研究结论），以及为了研究社区利益而开源的代码和模型（这些模型训练耗时超过10,000GPU小时）。</li>
+<li>21：Language-driven representation learning for robotics.</li>
+<li>上面这几个工作都只是利用预训练的vlm修改vla的模型，但是没有用vlm做数据采集的指导工作吧？也就是说，上面这几个工作的共同点是：研究什么样的vlm或者vlm对应什么样的a算法能更好。</li>
+</ol>
+</li>
+<li>第三个相关工作是组合泛化能力：端到端神经网络在处理组合问题时往往表现不佳。不过，有时它们比那些专门为解决组合问题而设计的方法表现得更好，比如无监督表示学习[44]。不过，最近的研究表明，大型语言模型具备很强的组合泛化能力，这很可能得益于它们在互联网规模上的预训练数据也就是前面引言说过的。相比之下，本文不仅探讨利用先验数据能否处理组合问题，还更关注环境因素的符合构建，也就是与这些研究不同，我们关注的是环境因素的复合体构建，这些因素可能会显著改变视觉观察结果，或者影响任务所需的低级物理动作。此外，我们还研究了现有端到端模仿学习方法的复合体构建问题。</li>
+<li>到方法部分了，看introduction感觉这个工作也是重点展示实验结果的，以工程实验结果为证明的论文？可能理论性不强</li>
+<li>问题陈述，看是不是跟我理解的smolvla模仿学习的问题formula差不多。</li>
+<li>为简化问题，我们假设该元组的每个元素都有若干个离散值可选。比如，机器人可能遇到的物体类型有若干种。我们将这些离散值称为“因素值”。因此，该元组的每个元素都代表了环境中各种因素值的组合，比如机器人可能遇到的特定物体类型和桌子高度。 p⁢(f) 表示各种因素值组合的分布情况，而 ρ⁢(s0|f) 则是在给定某些因素值组合的条件下，系统的初始状态分布。我们采用这种表述方式来说明：环境中的各种因素值可以通过影响系统的初始状态，从而影响任务的执行结果。同样地， μ⁢(f):ℱN→S 是一个确定性函数，它将各种因素值组合映射到期望的目标状态 g∈S 上。因为因素值决定了任务的目标状态，所以 μ⁢(f):ℱN→S 的作用就是确定目标状态。我们的目标是学习一种以目标为条件的策略 π(⋅|s,g):S×S→Δ(𝒜) ，其中 Δ⁢(𝒜) 表示动作空间上的概率分布。我们的目标是在各种可能的因素值分布下，最大化达到期望目标的概率。差不多，因素设计就是给环境进行人为的物理分类</li>
+<li>那数据收集策略是什么？在数据收集过程中，定期对环境中的各个因素进行赋值。所以也是不同条件测试？那怎么找到尽可能少的？</li>
+<li>用的仿真环境是Factor World，我没用过，留着当个纪念</li>
+<li>做了哪些实验？仿真和真实的都怎么做的，期望得到什么结果？</li>
+<li>以及最后给这篇论文写一个中文总结，要求回答：to：表示这个论文的目标， this work表示这个论文的创新点，get 一句话总结最重要的成果，需要有数据。以及but局限性</li>
+</ol>
+<p>2026年6月28日17:06:02看完了，感觉最有用的是相关工作部分，给我好好解释了一下，但是感觉方法没有很高级啊
+果然其实只要我开始看的根本不用花太多时间的</p>
+<p>总结：这篇论文的核心问题是：<strong>机器人模仿学习策略能不能像“拼积木”一样，把训练数据里学到的不同环境因素组合起来，去处理没见过的组合场景</strong>，以及<strong>如果能做到，怎样的数据收集方式更省力</strong>。论文明确说他们做了<strong>模拟环境和真实机器人</strong>的系统实证研究，来检验 visual imitation learning policies 是否能对环境因素做组合泛化</p>
+<ul>
+<li>to： 研究视觉模仿学习策略能否对环境因素做组合泛化，并据此设计更高效的机器人 in-domain 数据收集方式，以减少收数成本。</li>
+<li>this work：创新点而是系统分析环境因素的组合效应，提出利用组合泛化来指导 in-domain data collection 的策略（如 Stair、L 等）。</li>
+<li>get： 在真实机器人上，基于这种策略训练的最好模型在转移到全新环境时达到了 77.5% 的成功率，而没有 prior data 时只有 27.5%，没有环境变化的 in-domain 数据时只有 2.5%。</li>
+<li>but： 局限性是，论文主要考虑的是少量任务和一个 prior dataset，且对物理因素之间的组合仍然较难，作者也承认未来需要扩展到更多机器人平台、更多任务以及更大规模的数据收集。</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th>实验类型</th>
+          <th>做了什么</th>
+          <th>具体怎么做</th>
+          <th>期望得到什么结果</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>仿真实验</strong></td>
+          <td>在模拟环境里系统测试组合泛化和数据收集策略 3</td>
+          <td>使用 <strong>Factor World</strong>，做 <strong>Pick Place</strong> 和 <strong>Door Open</strong> 两个任务；考虑 <strong>5 个因素</strong>，包括 object texture、table texture、camera position、distractor objects、object position；设置 <strong>F[N]</strong> 为 10 个可能的因素对，另外也测试 <strong>N = 5</strong> 的全因素情形；每个因子采样 <strong>k = 10</strong> 个值；每个数据策略都用 scripted expert 采数据，并改变 factor changes 的总量来衡量 effort；每组 <strong>100 个 demonstrations</strong>（N=2）和 <strong>1000 个 demonstrations</strong>（N=5），训练 behavior cloning policy，并在 100 个 episodes 上评估 45</td>
+          <td>验证 robot policies 是否真的能对环境因素做 <strong>composition</strong>，以及 <strong>Stair / L / Diagonal</strong> 这类策略能不能在更少数据变化下达到接近 <strong>Complete</strong> 的效果 67</td>
+      </tr>
+      <tr>
+          <td><strong>真实机器人实验</strong></td>
+          <td>在真实厨房场景验证组合泛化是否成立，并测试 prior data 的作用 89</td>
+          <td>使用 <strong>WidowX 250 6DOF robot arm</strong>；任务是 <strong>putting a fork inside a container</strong>；主要因素是 <strong>object type、object position、container type、table height、table texture</strong>，每个因素有 <strong>k = 4</strong> 个值；只做 <strong>N = 5</strong> 的设置；主要比较 <strong>Stair</strong> 和 <strong>L</strong>，再加 <strong>No Variation</strong>；每个策略收集 <strong>16 个组合</strong>、每个组合 <strong>10</strong> 条演示，总共 <strong>160</strong> 条演示；数据都在 <strong>BaseKitch</strong> 这个厨房里收集；同时比较 <strong>from scratch</strong> 和 <strong>BridgeData V2</strong> 作为 prior data 的效果 101112</td>
+          <td>验证组合泛化能否迁移到真实机器人，尤其看 <strong>prior robot data</strong> 是否能增强组合能力，以及哪些因素更容易组合、哪些更难 13</td>
+      </tr>
+      <tr>
+          <td><strong>额外真实实验</strong></td>
+          <td>测试 frozen visual representations 对组合泛化是否有效 14</td>
+          <td>额外评估 <strong>R3M</strong> 和 <strong>VC-1</strong> 作为 frozen visual encoders，在部分 factor pairs 上测试；关注 object type + table texture、object position + table texture、object position + table height 这些组合 151617</td>
+          <td>验证现代 frozen visual representations 是否也能支持真实机器人上的组合泛化；作者的结果是它们表现不好 18</td>
+      </tr>
+  </tbody>
+</table>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/data-collection/">Data-Collection</a></li>
+      <li><a href="https://milong26.github.io/tags/robot/">Robot</a></li>
+      <li><a href="https://milong26.github.io/tags/compositional-generalization/">Compositional-Generalization</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

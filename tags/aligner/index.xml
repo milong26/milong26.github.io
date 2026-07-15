@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Aligner on 我的博客</title>
+    <link>https://milong26.github.io/tags/aligner/</link>
+    <description>Recent content in Aligner on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 03 Mar 2025 10:18:23 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/aligner/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Aligner: Efficient Alignment by Learning to Correct</title>
+      <link>https://milong26.github.io/post/aligner-efficient-alignment-by-learning-to-correct/</link>
+      <pubDate>Mon, 03 Mar 2025 10:18:23 +0000</pubDate>
+      <guid>https://milong26.github.io/post/aligner-efficient-alignment-by-learning-to-correct/</guid>
+      <description>&lt;p&gt;以前看论文的方式好糟糕，看完以后完全没印象，一句话形容：对预训练的llm微调对齐，利用通过小模型学习偏好与不偏好答案之间的纠正残差&lt;/p&gt;
+&lt;p&gt;所以LLM的方向实际上就两种：微调和压缩？&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

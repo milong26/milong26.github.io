@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Diffusion on 我的博客</title>
+    <link>https://milong26.github.io/tags/diffusion/</link>
+    <description>Recent content in Diffusion on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <atom:link href="https://milong26.github.io/tags/diffusion/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>diffusion transformer</title>
+      <link>https://milong26.github.io/post/diffusion-transformer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/diffusion-transformer/</guid>
+      <description>&lt;p&gt;想学习，但没找到好的教程，学的时候复盘一下diffusion,transformer和DiT是用来干啥的吧。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

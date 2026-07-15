@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Generative Artificial Intelligence in Robotic Manipulation: A Survey | 我的博客</title>
+<meta name="keywords" content="robotic, survey">
+<meta name="description" content="(16/100)
+what i want to get
+
+了解其所描述的通用机器人操作是否和我想的一样：qpos of robot
+找里面有没有我想要的数据集：text-guided robotic video task
+只要看dexterous部分
+">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="Generative Artificial Intelligence in Robotic Manipulation: A Survey">
+  <meta property="og:description" content="(16/100)
+what i want to get
+了解其所描述的通用机器人操作是否和我想的一样：qpos of robot 找里面有没有我想要的数据集：text-guided robotic video task 只要看dexterous部分">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-03-13T15:59:45+00:00">
+    <meta property="article:modified_time" content="2025-03-13T15:59:45+00:00">
+    <meta property="article:tag" content="Robotic">
+    <meta property="article:tag" content="Survey">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Generative Artificial Intelligence in Robotic Manipulation: A Survey">
+  <meta name="twitter:description" content="(16/100)
+what i want to get
+了解其所描述的通用机器人操作是否和我想的一样：qpos of robot 找里面有没有我想要的数据集：text-guided robotic video task 只要看dexterous部分">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Generative Artificial Intelligence in Robotic Manipulation: A Survey",
+      "item": "https://milong26.github.io/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Generative Artificial Intelligence in Robotic Manipulation: A Survey",
+  "name": "Generative Artificial Intelligence in Robotic Manipulation: A Survey",
+  "description": "(16/100)\nwhat i want to get\n了解其所描述的通用机器人操作是否和我想的一样：qpos of robot 找里面有没有我想要的数据集：text-guided robotic video task 只要看dexterous部分 ",
+  "keywords": [
+    "robotic", "survey"
+  ],
+  "articleBody": "(16/100)\nwhat i want to get\n了解其所描述的通用机器人操作是否和我想的一样：qpos of robot 找里面有没有我想要的数据集：text-guided robotic video task 只要看dexterous部分 综述论文看得好累。(/100)。粗略看了一遍味同嚼蜡，我还是需要看更多的论文，先满足需求：找dexterous相关。\n论文说了什么 看了一遍之后大致了解将ai in robotic manipulation分成好几层\nwhat i need 正文 在正文中检索dexterous ISAGrasp [78] 提出通过对应感知生成模型进行隐式形状增强抓取，以推断人类对灵巧作的演示 no dataset FOUNDATION LAYER,data generation,Data Augmentation using Generative Model part 用于证明：扩散模型通常用于修改或编辑纹理和形状以执行增强过程。 除了纯粹的机器人抓取之外，Wu等[192]将VAE的用途扩展到人类抓取的产生，重点关注全身交互。 不符合dexterous手抓取，pass POLICY LAYER,Grasp Generation，VAE-based methods. 该模型采用条件 VAE （CVAE） 共同生成静态抓取姿势和详细的接触图。 这种集成能够合成逼真和多样化的全身抓取动作，捕捉灵巧的手指运动和全身动态。 在灵巧抓取的背景下，Zhao et al. [194] 提出的 CVAE 框架预测每个手指的单独接触图，利用这些详细的表示来优化抓取配置。Wu等[195]将基于VAE的采样与双层优化相结合，以应对多样性和物理可行性的双重挑战。从 VAE 中采样初始抓取配置，捕获多模态抓取分布。然后，这些示例将构建一个双层优化框架，该框架强制执行碰撞避免、扳手闭合和摩擦稳定性等约束。总体而言，将 VAE 集成到抓取综合中强调了它们通过嵌入特定于任务的约束和利用潜在变量建模来有效捕获机器人和人类抓取任务的多模态和不确定性的能力。 POLICY LAYER,Grasp Generation，VAE-based methods. 上述工作主要将扩散模型应用于两指抓取任务，而最近的研究也广泛探索了使用多指末端执行器（包括灵巧的手）进行抓取。具体来说，Weng et al. [188] 使用基于去噪扩散概率模型 （DDPM） 的条件扩散模型来生成对部分点云的灵巧抓取。他们进一步利用Mayer等[200]进行质量评估，并采用改进策略来提高成功率。Zhang等[189]还使用DDPM在杂乱的场景中生成灵巧的抓取姿势，而条件基于从场景中提取的局部特征，目标是代表手腕姿势的12D向量，结合了平移和扁平旋转矩阵。为了将该方法推广到不同的硬件设备，Freiberg 等人 [64] 提出了一种使用等变扩散模型的抓取不可知的抓取方法，该方法对具有可抓取物体的场景进行编码，并通过集成抓手几何来解码抓取姿势，展示了从平行下颚到灵巧手的多个抓手的泛化性。 OLICY LAYER,Grasp Generation，Diffusion-based methods. 根据引用找对应的参考文献，问：是否有数据集。记录在其它log里面了 引用 引用中检索dexterous，还有什么已经漏掉的？ 看综述不能纯从头都尾看，先确定需求。这篇综述的重点在于将目前的研究按照ai的用法分成几个部分，然后对用法进行分析，因为是用法所以有点太深奥了。\n",
+  "wordCount" : "83",
+  "inLanguage": "en",
+  "datePublished": "2025-03-13T15:59:45Z",
+  "dateModified": "2025-03-13T15:59:45Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Generative Artificial Intelligence in Robotic Manipulation: A Survey
+    </h1>
+    <div class="post-meta">
+
+<span title='2025-03-13 15:59:45 +0000 UTC'>March 13, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>(16/100)</p>
+<p>what i want to get</p>
+<ol>
+<li>了解其所描述的通用机器人操作是否和我想的一样：qpos of robot</li>
+<li>找里面有没有我想要的数据集：text-guided robotic video task</li>
+<li>只要看dexterous部分</li>
+</ol>
+<p>综述论文看得好累。(/100)。粗略看了一遍味同嚼蜡，我还是需要看更多的论文，先满足需求：找dexterous相关。</p>
+<h1 id="论文说了什么">论文说了什么<a hidden class="anchor" aria-hidden="true" href="#论文说了什么">#</a></h1>
+<p>看了一遍之后大致了解将ai in robotic manipulation分成好几层</p>
+<h1 id="what-i-need">what i need<a hidden class="anchor" aria-hidden="true" href="#what-i-need">#</a></h1>
+<h2 id="正文">正文<a hidden class="anchor" aria-hidden="true" href="#正文">#</a></h2>
+<ol>
+<li>在正文中检索<code>dexterous</code>
+<ol>
+<li>ISAGrasp [78] 提出通过对应感知生成模型进行隐式形状增强抓取，以推断人类对灵巧作的演示 no dataset
+<ol>
+<li>FOUNDATION LAYER,data generation,Data Augmentation using Generative Model part</li>
+<li>用于证明：扩散模型通常用于修改或编辑纹理和形状以执行增强过程。</li>
+</ol>
+</li>
+<li>除了纯粹的机器人抓取之外，Wu等[192]将VAE的用途扩展到人类抓取的产生，重点关注全身交互。 不符合dexterous手抓取，pass
+<ol>
+<li>POLICY LAYER,Grasp Generation，VAE-based methods.</li>
+<li>该模型采用条件 VAE （CVAE） 共同生成静态抓取姿势和详细的接触图。</li>
+<li>这种集成能够合成逼真和多样化的全身抓取动作，捕捉灵巧的手指运动和全身动态。</li>
+</ol>
+</li>
+<li>在灵巧抓取的背景下，Zhao et al. [194] 提出的 CVAE 框架预测每个手指的单独接触图，利用这些详细的表示来优化抓取配置。Wu等[195]将基于VAE的采样与双层优化相结合，以应对多样性和物理可行性的双重挑战。从 VAE 中采样初始抓取配置，捕获多模态抓取分布。然后，这些示例将构建一个双层优化框架，该框架强制执行碰撞避免、扳手闭合和摩擦稳定性等约束。总体而言，将 VAE 集成到抓取综合中强调了它们通过嵌入特定于任务的约束和利用潜在变量建模来有效捕获机器人和人类抓取任务的多模态和不确定性的能力。
+<ol>
+<li>POLICY LAYER,Grasp Generation，VAE-based methods.</li>
+</ol>
+</li>
+<li>上述工作主要将扩散模型应用于两指抓取任务，而最近的研究也广泛探索了使用多指末端执行器（包括灵巧的手）进行抓取。具体来说，Weng et al. [188] 使用基于去噪扩散概率模型 （DDPM）  的条件扩散模型来生成对部分点云的灵巧抓取。他们进一步利用Mayer等[200]进行质量评估，并采用改进策略来提高成功率。Zhang等[189]还使用DDPM在杂乱的场景中生成灵巧的抓取姿势，而条件基于从场景中提取的局部特征，目标是代表手腕姿势的12D向量，结合了平移和扁平旋转矩阵。为了将该方法推广到不同的硬件设备，Freiberg 等人 [64] 提出了一种使用等变扩散模型的抓取不可知的抓取方法，该方法对具有可抓取物体的场景进行编码，并通过集成抓手几何来解码抓取姿势，展示了从平行下颚到灵巧手的多个抓手的泛化性。
+<ol>
+<li>OLICY LAYER,Grasp Generation，Diffusion-based methods.</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>根据引用找对应的参考文献，问：是否有数据集。记录在其它log里面了</li>
+</ol>
+<h2 id="引用">引用<a hidden class="anchor" aria-hidden="true" href="#引用">#</a></h2>
+<ol>
+<li>引用中检索<code>dexterous</code>，还有什么已经漏掉的？</li>
+</ol>
+<p>看综述不能纯从头都尾看，先确定需求。这篇综述的重点在于将目前的研究按照ai的用法分成几个部分，然后对用法进行分析，因为是用法所以有点太深奥了。</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/robotic/">Robotic</a></li>
+      <li><a href="https://milong26.github.io/tags/survey/">Survey</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

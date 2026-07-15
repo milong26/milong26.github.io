@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Camera-Space on 我的博客</title>
+    <link>https://milong26.github.io/tags/camera-space/</link>
+    <description>Recent content in Camera-Space on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 09 Dec 2025 22:03:50 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/camera-space/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy</title>
+      <link>https://milong26.github.io/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/</link>
+      <pubDate>Tue, 09 Dec 2025 22:03:50 +0000</pubDate>
+      <guid>https://milong26.github.io/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/</guid>
+      <description>&lt;p&gt;ee形式的action从机器人坐标系转移到相机坐标系可以提到对相机的泛化性。&lt;/p&gt;
+&lt;p&gt;也就是利用“空间对齐”带来泛化提升&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

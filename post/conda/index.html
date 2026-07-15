@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>conda | 我的博客</title>
+<meta name="keywords" content="conda">
+<meta name="description" content="conda。管理python环境的，很好用">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/conda/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/conda/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/conda/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="conda">
+  <meta property="og:description" content="conda。管理python环境的，很好用">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-12-19T18:40:56+00:00">
+    <meta property="article:modified_time" content="2024-12-19T18:40:56+00:00">
+    <meta property="article:tag" content="Conda">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="conda">
+  <meta name="twitter:description" content="conda。管理python环境的，很好用">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "conda",
+      "item": "https://milong26.github.io/post/conda/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "conda",
+  "name": "conda",
+  "description": "conda。管理python环境的，很好用\n",
+  "keywords": [
+    "conda"
+  ],
+  "articleBody": "conda。管理python环境的，很好用\n安装 linux 下载地址找自己喜欢的，选sh后缀的。也可以直接，最后得到的名字就是miniconda.sh下载大概要4分钟 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh 在放了这个sh文件的目录下输入命令安装（linux运行sh命令需要运行sh xxx.sh），一路回车，直到他要求输入yes，根据要求修改位置或者直接yes 退出conda 环境配置 修改/etc/profile(如果是服务器的话就不用这步) 先试一下能不能直接vim。如果能直接到step4 因为它是只读的，系统不让修改，换sudo vim /etc/profile 如果gedit说没有这个指令就sudo apt-get install gedit 在末尾添加环境变量export PATH=~/anaconda3/bin:$PATH（根据安装的位置来） 保存退出，gedit可能报错，直接保存 修改bashrc vim ~/.bashrc i，加上export PATH=~/anaconda3/bin:$PATH 保存:wq！退出 刷新环境变量 source /etc/profile（同1） source ~/.bashrc 使用 创建环境 conda create -n name python==xxx 删除环境 conda env list列出环境列表 conda remove --name env_name --all conda install和pip install的区别 conda install能装非python的库 这俩安装位置不一样 报错 PackagesNotFoundError 1.conda config --append channels conda-forge 2. 再conda install transforms3d试试 3. 但是用forge之后下载其它的会比较慢，用完之后还是删除吧 conda config --show channels 列出所有频道 conda config --remove channels NOT_WANTED 刚看到一个更好的解决方案：conda config --append channels conda-forge这样默认的还是在第一个 base环境是什么是 Conda 安装时自动创建的第一个环境\n··· conda clean –all 这个会清理索引缓存、包缓存、日志等。\n检查已经有的环境：conda env list\nminiconda有什么区别？ miniconda是什么？Anaconda是一个包含了conda、Python和超过150个科学包及其依赖项的科学Python发行版。它具有可视化图形用户界面（Anaconda Navigator）并且为了方便新手使用，预先包含了大量的库，如NumPy, Pandas, Scipy, Matplotlib等。\n相较之下，Miniconda更加轻量级。它只包含了Python和Conda，但并没有预装其他的库。Miniconda用户需要手动安装他们需要的包，这使得Miniconda的环境更为简洁，可以根据实际需求来安装必要的包，避免不必要的存储占用。\n已经安装了应该有的模块，在安装其他模块的时候报错 error: subprocess-exited-with-error\n× Getting requirements to build wheel did not run successfully. │ exit code: 1 ╰─\u003e [17 lines of output] Traceback (most recent call last): File “/home/user/.local/lib/python3.10/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py”, line 389, in main() File “/home/user/.local/lib/python3.10/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py”, line 373, in main json_out[“return_val”] = hook(**hook_input[“kwargs”]) File “/home/user/.local/lib/python3.10/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py”, line 143, in get_requires_for_build_wheel return hook(config_settings) File “/tmp/pip-build-env-shr2s24z/overlay/local/lib/python3.10/dist-packages/setuptools/build_meta.py”, line 331, in get_requires_for_build_wheel return self._get_build_requires(config_settings, requirements=[]) File “/tmp/pip-build-env-shr2s24z/overlay/local/lib/python3.10/dist-packages/setuptools/build_meta.py”, line 301, in _get_build_requires self.run_setup() File “/tmp/pip-build-env-shr2s24z/overlay/local/lib/python3.10/dist-packages/setuptools/build_meta.py”, line 512, in run_setup super().run_setup(setup_script=setup_script) File “/tmp/pip-build-env-shr2s24z/overlay/local/lib/python3.10/dist-packages/setuptools/build_meta.py”, line 317, in run_setup exec(code, locals()) File “”, line 15, in ModuleNotFoundError: No module named ’torch' [end of output]\nnote: This error originates from a subprocess, and is likely not a problem with pip. ERROR: Failed to build ‘pytorch3d’ when getting requirements to build wheel\n这种情况怎么办？ https://www.cnblogs.com/hxpp/p/18670422 参考这一篇\npip install -v –disable-pip-version-check –no-build-isolation –no-cache-dir ./\n遇到这个报错 conda create -n mskill python==3.9 Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by ‘ConnectTimeoutError(, ‘Connection to repo.anaconda.com timed out. (connect timeout=9.15)’)’: /pkgs/r/terms.json\nRetrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by ‘ConnectTimeoutError(, ‘Connection to repo.anaconda.com timed out. (connect timeout=9.15)’)’: /pkgs/r/terms.json\nRetrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by ‘ConnectTimeoutError(, ‘Connection to repo.anaconda.com timed out. (connect timeout=9.15)’)’: /pkgs/r/terms.json 网络问题\n清理默认源 conda config –remove-key channels\n添加清华镜像源\nconda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r/ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2/ conda config --set show_channel_urls yes conda创建的环境里面 pip和python指向不同的目录，python是虚拟环境，pip的是全局的 pip uninstall pip 先卸载掉全局的 python -m ensurepip –upgrade\n给环境重命名 conda create –name 新环境名 –clone 旧环境名\n报超时 conda config –set remote_connect_timeout_secs 30 conda config –set remote_read_timeout_secs 60 增加超时时间试试\n如果以前是pip install -e也就是从项目安装的环境，导致pip show的时候有一个Editable project location: 我准备给这个项目换位置，还想用之前的环境，怎么办？ 必须先卸载，然后重新安装 确定pip show的 Editable project location:换了位置\n怎么给完成的conda目录（里面有几个虚拟环境）换路径？参考\n万一我之前安装错位置了怎么搞，直接改路径不是很好的方案，但我还没彻底尝试因为我手贱把bashrc删了\n打包环境 for env in dita lerobot; do /data/zhonglinye/application/miniconda3/bin/conda-pack \\ -p /data/zhonglinye/application/miniconda3/envs/\"$env\" \\ -o ~/\"$env\".tar.gz done 但是conda-pack -p /data/zhonglinye/miniconda3_backup/envs/lerobot -o ~/lerobot.tar.gz /data/zhonglinye/application/miniconda3/lib/python3.13/site-packages/conda_pack/core.py:16: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools\u003c81. import pkg_resources Collecting packages… CondaPackError: Cannot pack an environment with editable packages installed (e.g. from python setup.py develop or pip install -e). Editable packages found:\n/data/zhonglinye/code/lerobot/sr 报错 解决方案： conda-pack -p /data/zhonglinye/miniconda3_backup/envs/lerobot -o ~/lerobot.tar.gz –ignore-editable-packages 然后解包后再从本地安装\n删除旧的（或者备份） 下载sh安装文件并安装到想要的目录 解包之前先安装解包工具 conda install -n base conda-pack\n2. 解包 ```shell for env in dita lerobot mskill; do mkdir -p /data/zhonglinye/application/miniconda3/envs/\"$env\" tar -xzf ~/\"$env\".tar.gz -C /data/zhonglinye/application/miniconda3/envs/\"$env\" /data/zhonglinye/application/miniconda3/envs/\"$env\"/bin/conda-unpack done 检查是不是自动激活conda：conda config –show auto_activate_base\n可以设置conda config –set auto_activate_base false\n出现一个报错\n2 channel Terms of Service accepted Retrieving notices: done Channels: - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main - defaults - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2 - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r Platform: linux-64 Collecting package metadata (repodata.json): failed CondaHTTPError: HTTP 403 Forbidden for url Elapsed: 00:00.273654 CF-RAY: a10a1324bf4d5b71-HKG You do not have permission to access this resource. This may indicate: - The channel requires authentication. Check your credentials. - You do not have access to this private channel or package. You will need to modify your conda configuration to proceed. Use `conda config --show` to view your configuration's current state. Further configuration help can be found at . 什么原因：conda 在访问 repo.anaconda.com 官方源时被拒绝（HTTP 403 Forbidden）。\n需要去掉defualt conda config –show-sources 看是不是有别的什么文件的配置覆盖掉了\n环境迁移 情况：之前从代码Aconda create 并 pip install了，然后发现有一个fork代码A并做了一点修改的代码B，但是配置没有变很多。所以clone了代码B，然后直接在原来的环境install了。现在的问题是：安装的环境尤其是代码相关的包，用的是代码B还是代码A？有没有办法在不完全删除环境的情况下，迁移到能使用代码B？ 如果你做的是类似：\npip install -e .（editable 安装） 应该是正确的 实在不确定，可以import 包然后查看包.path\n",
+  "wordCount" : "623",
+  "inLanguage": "en",
+  "datePublished": "2024-12-19T18:40:56Z",
+  "dateModified": "2024-12-19T18:40:56Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/conda/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      conda
+    </h1>
+    <div class="post-meta">
+
+<span title='2024-12-19 18:40:56 +0000 UTC'>December 19, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>conda。管理python环境的，很好用</p>
+<h1 id="安装">安装<a hidden class="anchor" aria-hidden="true" href="#安装">#</a></h1>
+<h2 id="linux">linux<a hidden class="anchor" aria-hidden="true" href="#linux">#</a></h2>
+<ol>
+<li>下载<a href="https://repo.anaconda.com/archive/index.html">地址</a>找自己喜欢的，选sh后缀的。也可以直接，最后得到的名字就是miniconda.sh下载大概要4分钟
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+</span></span></code></pre></div></li>
+<li>在放了这个sh文件的目录下输入命令安装（linux运行sh命令需要运行<code>sh xxx.sh</code>），一路回车，直到他要求输入yes，根据要求修改位置或者直接yes</li>
+<li>退出conda</li>
+<li>环境配置
+<ol>
+<li>修改/etc/profile(如果是服务器的话就不用这步)
+<ol>
+<li>先试一下能不能直接<code>vim</code>。如果能直接到step4</li>
+<li>因为它是只读的，系统不让修改，换<code>sudo vim /etc/profile</code></li>
+<li>如果gedit说没有这个指令就<code>sudo apt-get install gedit</code></li>
+<li>在末尾添加环境变量<code>export PATH=~/anaconda3/bin:$PATH</code>（根据安装的位置来）</li>
+<li>保存退出，gedit可能报错，直接保存</li>
+</ol>
+</li>
+<li>修改bashrc
+<ol>
+<li><code>vim ~/.bashrc</code></li>
+<li>i，加上<code>export PATH=~/anaconda3/bin:$PATH</code></li>
+<li>保存:wq！退出</li>
+</ol>
+</li>
+<li>刷新环境变量
+<ol>
+<li><code>source /etc/profile</code>（同1）</li>
+<li><code>source ~/.bashrc</code></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h1 id="使用">使用<a hidden class="anchor" aria-hidden="true" href="#使用">#</a></h1>
+<h2 id="创建环境">创建环境<a hidden class="anchor" aria-hidden="true" href="#创建环境">#</a></h2>
+<ol>
+<li><code>conda create -n name python==xxx</code></li>
+</ol>
+<h2 id="删除环境">删除环境<a hidden class="anchor" aria-hidden="true" href="#删除环境">#</a></h2>
+<ol>
+<li><code>conda env list</code>列出环境列表</li>
+<li><code>conda remove --name env_name --all</code></li>
+</ol>
+<h2 id="conda-install和pip-install的区别">conda install和pip install的区别<a hidden class="anchor" aria-hidden="true" href="#conda-install和pip-install的区别">#</a></h2>
+<ol>
+<li>conda install能装非python的库</li>
+<li>这俩安装位置不一样</li>
+</ol>
+<h1 id="报错">报错<a hidden class="anchor" aria-hidden="true" href="#报错">#</a></h1>
+<ol>
+<li>PackagesNotFoundError
+1.<code>conda config --append channels conda-forge</code>
+2. 再<code>conda install transforms3d</code>试试
+3. 但是用forge之后下载其它的会比较慢，用完之后还是删除吧
+<ol>
+<li><code>conda config --show channels</code> 列出所有频道</li>
+<li><code>conda config --remove channels NOT_WANTED</code></li>
+<li>刚看到一个更好的解决方案：<code>conda config --append channels conda-forge</code>这样默认的还是在第一个</li>
+</ol>
+</li>
+</ol>
+<p>base环境是什么是 Conda 安装时自动创建的第一个环境</p>
+<p>···
+conda clean &ndash;all
+这个会清理索引缓存、包缓存、日志等。</p>
+<p>检查已经有的环境：conda env list</p>
+<p>miniconda有什么区别？
+miniconda是什么？Anaconda是一个包含了conda、Python和超过150个科学包及其依赖项的科学Python发行版。它具有可视化图形用户界面（Anaconda Navigator）并且为了方便新手使用，预先包含了大量的库，如NumPy, Pandas, Scipy, Matplotlib等。</p>
+<p>相较之下，Miniconda更加轻量级。它只包含了Python和Conda，但并没有预装其他的库。Miniconda用户需要手动安装他们需要的包，这使得Miniconda的环境更为简洁，可以根据实际需求来安装必要的包，避免不必要的存储占用。</p>
+<p>已经安装了应该有的模块，在安装其他模块的时候报错
+error: subprocess-exited-with-error</p>
+<p>× Getting requirements to build wheel did not run successfully.
+│ exit code: 1
+╰─&gt; [17 lines of output]
+Traceback (most recent call last):
+File &ldquo;/home/user/.local/lib/python3.10/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py&rdquo;, line 389, in <!-- raw HTML omitted -->
+main()
+File &ldquo;/home/user/.local/lib/python3.10/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py&rdquo;, line 373, in main
+json_out[&ldquo;return_val&rdquo;] = hook(**hook_input[&ldquo;kwargs&rdquo;])
+File &ldquo;/home/user/.local/lib/python3.10/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py&rdquo;, line 143, in get_requires_for_build_wheel
+return hook(config_settings)
+File &ldquo;/tmp/pip-build-env-shr2s24z/overlay/local/lib/python3.10/dist-packages/setuptools/build_meta.py&rdquo;, line 331, in get_requires_for_build_wheel
+return self._get_build_requires(config_settings, requirements=[])
+File &ldquo;/tmp/pip-build-env-shr2s24z/overlay/local/lib/python3.10/dist-packages/setuptools/build_meta.py&rdquo;, line 301, in _get_build_requires
+self.run_setup()
+File &ldquo;/tmp/pip-build-env-shr2s24z/overlay/local/lib/python3.10/dist-packages/setuptools/build_meta.py&rdquo;, line 512, in run_setup
+super().run_setup(setup_script=setup_script)
+File &ldquo;/tmp/pip-build-env-shr2s24z/overlay/local/lib/python3.10/dist-packages/setuptools/build_meta.py&rdquo;, line 317, in run_setup
+exec(code, locals())
+File &ldquo;<!-- raw HTML omitted -->&rdquo;, line 15, in <!-- raw HTML omitted -->
+ModuleNotFoundError: No module named &rsquo;torch'
+[end of output]</p>
+<p>note: This error originates from a subprocess, and is likely not a problem with pip.
+ERROR: Failed to build &lsquo;pytorch3d&rsquo; when getting requirements to build wheel</p>
+<p>这种情况怎么办？
+<a href="https://www.cnblogs.com/hxpp/p/18670422">https://www.cnblogs.com/hxpp/p/18670422</a> 参考这一篇</p>
+<p>pip install -v &ndash;disable-pip-version-check &ndash;no-build-isolation &ndash;no-cache-dir ./</p>
+<p>遇到这个报错
+conda create -n mskill python==3.9
+Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by &lsquo;ConnectTimeoutError(&lt;urllib3.connection.HTTPSConnection object at 0x73c9bd117230&gt;, &lsquo;Connection to repo.anaconda.com timed out. (connect timeout=9.15)&rsquo;)&rsquo;: /pkgs/r/terms.json</p>
+<p>Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by &lsquo;ConnectTimeoutError(&lt;urllib3.connection.HTTPSConnection object at 0x73c9bd123750&gt;, &lsquo;Connection to repo.anaconda.com timed out. (connect timeout=9.15)&rsquo;)&rsquo;: /pkgs/r/terms.json</p>
+<p>Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by &lsquo;ConnectTimeoutError(&lt;urllib3.connection.HTTPSConnection object at 0x73c9bd123890&gt;, &lsquo;Connection to repo.anaconda.com timed out. (connect timeout=9.15)&rsquo;)&rsquo;: /pkgs/r/terms.json
+网络问题</p>
+<ol>
+<li>
+<p>清理默认源
+conda config &ndash;remove-key channels</p>
+</li>
+<li>
+<p>添加清华镜像源</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+</span></span><span style="display:flex;"><span>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r/
+</span></span><span style="display:flex;"><span>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2/
+</span></span><span style="display:flex;"><span>conda config --set show_channel_urls yes
+</span></span></code></pre></div><p>conda创建的环境里面 pip和python指向不同的目录，python是虚拟环境，pip的是全局的
+pip uninstall pip 先卸载掉全局的
+python -m ensurepip &ndash;upgrade</p>
+<p>给环境重命名
+conda create &ndash;name 新环境名 &ndash;clone 旧环境名</p>
+<p>报超时
+conda config &ndash;set remote_connect_timeout_secs 30
+conda config &ndash;set remote_read_timeout_secs 60
+增加超时时间试试</p>
+<p>如果以前是pip install -e也就是从项目安装的环境，导致pip show的时候有一个Editable project location:
+我准备给这个项目换位置，还想用之前的环境，怎么办？
+必须先卸载，然后重新安装
+确定pip show的 Editable project location:换了位置</p>
+<p>怎么给完成的conda目录（里面有几个虚拟环境）换路径？<a href="https://blog.csdn.net/2301_77554343/article/details/136505516">参考</a></p>
+<p>万一我之前安装错位置了怎么搞，直接改路径不是很好的方案，但我还没彻底尝试因为我手贱把bashrc删了</p>
+<ol>
+<li>打包环境</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> env in dita lerobot; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>  /data/zhonglinye/application/miniconda3/bin/conda-pack <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    -p /data/zhonglinye/application/miniconda3/envs/<span style="color:#e6db74">&#34;</span>$env<span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    -o ~/<span style="color:#e6db74">&#34;</span>$env<span style="color:#e6db74">&#34;</span>.tar.gz
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span></code></pre></div><p>但是conda-pack -p /data/zhonglinye/miniconda3_backup/envs/lerobot -o ~/lerobot.tar.gz
+/data/zhonglinye/application/miniconda3/lib/python3.13/site-packages/conda_pack/core.py:16: UserWarning: pkg_resources is deprecated as an API. See <a href="https://setuptools.pypa.io/en/latest/pkg_resources.html">https://setuptools.pypa.io/en/latest/pkg_resources.html</a>. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools&lt;81.
+import pkg_resources
+Collecting packages&hellip;
+CondaPackError: Cannot pack an environment with editable packages
+installed (e.g. from <code>python setup.py develop</code> or
+<code>pip install -e</code>). Editable packages found:</p>
+<ul>
+<li>/data/zhonglinye/code/lerobot/sr
+报错
+解决方案：
+conda-pack -p /data/zhonglinye/miniconda3_backup/envs/lerobot <br>
+-o ~/lerobot.tar.gz <br>
+&ndash;ignore-editable-packages</li>
+</ul>
+<p>然后解包后再从本地安装</p>
+<ol start="2">
+<li>删除旧的（或者备份）</li>
+<li>下载sh安装文件并安装到想要的目录</li>
+<li>解包之前先安装解包工具
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"></code></pre></div></li>
+</ol>
+<p>conda install -n base conda-pack</p>
+<pre tabindex="0"><code>2. 解包
+   ```shell
+for env in dita lerobot mskill; do
+
+  mkdir -p /data/zhonglinye/application/miniconda3/envs/&#34;$env&#34;
+
+  tar -xzf ~/&#34;$env&#34;.tar.gz -C /data/zhonglinye/application/miniconda3/envs/&#34;$env&#34;
+
+  /data/zhonglinye/application/miniconda3/envs/&#34;$env&#34;/bin/conda-unpack
+
+done
+</code></pre><p>检查是不是自动激活conda：conda config &ndash;show auto_activate_base</p>
+<p>可以设置conda config &ndash;set auto_activate_base false</p>
+<p>出现一个报错</p>
+<pre tabindex="0"><code>2 channel Terms of Service accepted
+Retrieving notices: done
+Channels:
+ - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free
+ - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+ - defaults
+ - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
+ - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
+Platform: linux-64
+Collecting package metadata (repodata.json): failed
+
+CondaHTTPError: HTTP 403 Forbidden for url &lt;https://repo.anaconda.com/pkgs/main/linux-64/repodata.json&gt;
+Elapsed: 00:00.273654
+CF-RAY: a10a1324bf4d5b71-HKG
+
+You do not have permission to access this resource.
+
+This may indicate:
+  - The channel requires authentication. Check your credentials.
+  - You do not have access to this private channel or package.
+
+You will need to modify your conda configuration to proceed.
+Use `conda config --show` to view your configuration&#39;s current state.
+Further configuration help can be found at &lt;https://conda.io/docs/config.html&gt;.
+</code></pre><p>什么原因：<strong>conda 在访问 <code>repo.anaconda.com</code> 官方源时被拒绝（HTTP 403 Forbidden）</strong>。</p>
+<p>需要去掉defualt
+conda config &ndash;show-sources
+看是不是有别的什么文件的配置覆盖掉了</p>
+<h1 id="环境迁移">环境迁移<a hidden class="anchor" aria-hidden="true" href="#环境迁移">#</a></h1>
+<p>情况：之前从代码Aconda create 并 pip install了，然后发现有一个fork代码A并做了一点修改的代码B，但是配置没有变很多。所以clone了代码B，然后直接在原来的环境install了。现在的问题是：安装的环境尤其是代码相关的包，用的是代码B还是代码A？有没有办法在不完全删除环境的情况下，迁移到能使用代码B？
+如果你做的是类似：</p>
+<ul>
+<li><code>pip install -e .</code>（editable 安装）</li>
+</ul>
+<p>应该是正确的
+实在不确定，可以import 包然后查看包.<strong>path</strong></p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/conda/">Conda</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

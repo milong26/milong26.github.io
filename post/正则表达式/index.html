@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>正则表达式 | 我的博客</title>
+<meta name="keywords" content="">
+<meta name="description" content="正则表达式">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="正则表达式">
+  <meta property="og:description" content="正则表达式">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2021-04-17T21:18:57+00:00">
+    <meta property="article:modified_time" content="2021-04-17T21:18:57+00:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="正则表达式">
+  <meta name="twitter:description" content="正则表达式">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "正则表达式",
+      "item": "https://milong26.github.io/post/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "正则表达式",
+  "name": "正则表达式",
+  "description": "正则表达式\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "正则表达式\n正则表达式(regular expression)描述了一种字符串匹配的模式（pattern），可以用来检查一个串是否含有某种子串、将匹配的子串替换或者从某个串中取出符合某个条件的子串等。\n普通字符 普通字符包括没有显式指定为元字符的所有可打印和不可打印字符。这包括所有大写和小写字母、所有数字、所有标点符号和一些其他符号。\n字符 描述 [ABC] 匹配 […] 中的所有字符，例如 [aeiou] 匹配字符串 “google runoob taobao” 中所有的 e o u a 字母。 [^ABC] 匹配除了 […] 中字符的所有字符，例如 [^aeiou] 匹配字符串 “google runoob taobao” 中除了 e o u a 字母的所有字母。 [A-Z] [A-Z] 表示一个区间，匹配所有大写字母，[a-z] 表示所有小写字母。 . 匹配除换行符（\\n、\\r）之外的任何单个字符，相等于 [^\\n\\r] [\\s\\S] 匹配所有。\\s 是匹配所有空白符，包括换行，\\S 非空白符，不包括换行。 \\w 匹配字母、数字、下划线。等价于 [A-Za-z0-9_] 非打印字符 非打印字符也可以是正则表达式的组成部分。下表列出了表示非打印字符的转义序列：\n字符 描述 \\cx 匹配由x指明的控制字符。例如， \\cM 匹配一个 Control-M 或回车符。x 的值必须为 A-Z 或 a-z 之一。否则，将 c 视为一个原义的 ‘c’ 字符。 \\f 匹配一个换页符。等价于 \\x0c 和 \\cL。 \\n 匹配一个换行符。等价于 \\x0a 和 \\cJ。 \\r 匹配一个回车符。等价于 \\x0d 和 \\cM。 \\s 匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \\f\\n\\r\\t\\v]。注意 Unicode 正则表达式会匹配全角空格符。 \\S 匹配任何非空白字符。等价于 [^ \\f\\n\\r\\t\\v]。 \\t 匹配一个制表符。等价于 \\x09 和 \\cI。 \\v 匹配一个垂直制表符。等价于 \\x0b 和 \\cK。 特殊字符 所谓特殊字符，就是一些有特殊含义的字符，如上面说的 runoo*b 中的 *****，简单的说就是表示任何字符串的意思。如果要查找字符串中的 ***** 符号，则需要对 ***** 进行转义，即在其前加一个 ****，runo*ob 匹配字符串 runo*ob。\n许多元字符要求在试图匹配它们时特别对待。若要匹配这些特殊字符，必须首先使字符\"转义\"，即，将反斜杠字符**** 放在它们前面。下表列出了正则表达式中的特殊字符：\n特别字符 描述 $ 匹配输入字符串的结尾位置。如果设置了 RegExp 对象的 Multiline 属性，则 $ 也匹配 ‘\\n’ 或 ‘\\r’。要匹配 $ 字符本身，请使用 $。 ( ) 标记一个子表达式的开始和结束位置。子表达式可以获取供以后使用。要匹配这些字符，请使用 ( 和 )。 * 匹配前面的子表达式零次或多次。要匹配 * 字符，请使用 *。 + 匹配前面的子表达式一次或多次。要匹配 + 字符，请使用 +。 . 匹配除换行符 \\n 之外的任何单字符。要匹配 . ，请使用 . 。 [ 标记一个中括号表达式的开始。要匹配 [，请使用 [。 ? 匹配前面的子表达式零次或一次，或指明一个非贪婪限定符。要匹配 ? 字符，请使用 ?。 \\ 将下一个字符标记为或特殊字符、或原义字符、或向后引用、或八进制转义符。例如， ’n’ 匹配字符 ’n’。’\\n’ 匹配换行符。序列 ‘\\’ 匹配 “\"，而 ‘(’ 则匹配 “(\"。 ^ 匹配输入字符串的开始位置，除非在方括号表达式中使用，当该符号在方括号表达式中使用时，表示不接受该方括号表达式中的字符集合。要匹配 ^ 字符本身，请使用 ^。 { 标记限定符表达式的开始。要匹配 {，请使用 {。 | 指明两项之间的一个选择。要匹配 |，请使用 |。 限定符 限定符用来指定正则表达式的一个给定组件必须要出现多少次才能满足匹配。有 ***** 或 + 或 ? 或 {n} 或 {n,} 或 {n,m} 共6种。\n正则表达式的限定符有：\n字符 描述 * 匹配前面的子表达式零次或多次。例如，zo* 能匹配 “z” 以及 “zoo”。* 等价于{0,}。 + 匹配前面的子表达式一次或多次。例如，‘zo+’ 能匹配 “zo” 以及 “zoo”，但不能匹配 “z”。+ 等价于 {1,}。 ? 匹配前面的子表达式零次或一次。例如，“do(es)?” 可以匹配 “do” 、 “does” 中的 “does” 、 “doxy” 中的 “do” 。? 等价于 {0,1}。 {n} n 是一个非负整数。匹配确定的 n 次。例如，‘o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。 {n,} n 是一个非负整数。至少匹配n 次。例如，‘o{2,}’ 不能匹配 “Bob” 中的 ‘o’，但能匹配 “foooood” 中的所有 o。‘o{1,}’ 等价于 ‘o+’。‘o{0,}’ 则等价于 ‘o*’。 {n,m} m 和 n 均为非负整数，其中n \u003c= m。最少匹配 n 次且最多匹配 m 次。例如，“o{1,3}” 将匹配 “fooooood” 中的前三个 o。‘o{0,1}’ 等价于 ‘o?’。请注意在逗号和两个数之间不能有空格。 **贪婪：**下面的表达式匹配从开始小于符号 (\u003c) 到关闭 h1 标记的大于符号 (\u003e) 之间的所有内容。\n/\u003c.*\u003e/ **非贪婪：**如果您只需要匹配开始和结束 h1 标签，下面的非贪婪表达式只匹配 。\n/\u003c.*?\u003e/ 也可以使用以下正则表达式来匹配 h1 标签，表达式则是：\n/\u003c\\w+?\u003e/ 通过在 *、+ 或 ? 限定符之后放置 ?，该表达式从\"贪婪\"表达式转换为\"非贪婪\"表达式或者最小匹配。\n定位符 定位符使您能够将正则表达式固定到行首或行尾。它们还使您能够创建这样的正则表达式，这些正则表达式出现在一个单词内、在一个单词的开头或者一个单词的结尾。\n定位符用来描述字符串或单词的边界，^ 和 $ 分别指字符串的开始与结束，\\b 描述单词的前或后边界，\\B 表示非单词边界。\n正则表达式的定位符有：\n字符 描述 ^ 匹配输入字符串开始的位置。如果设置了 RegExp 对象的 Multiline 属性，^ 还会与 \\n 或 \\r 之后的位置匹配。 $ 匹配输入字符串结尾的位置。如果设置了 RegExp 对象的 Multiline 属性，$ 还会与 \\n 或 \\r 之前的位置匹配。 \\b 匹配一个单词边界，即字与空格间的位置。 \\B 非单词边界匹配。 注意：不能将限定符与定位符一起使用。由于在紧靠换行或者单词边界的前面或后面不能有一个以上位置，因此不允许诸如 ^* 之类的表达式。\n若要匹配一行文本开始处的文本，请在正则表达式的开始使用 ^ 字符。不要将 ^ 的这种用法与中括号表达式内的用法混淆。\n若要匹配一行文本的结束处的文本，请在正则表达式的结束处使用 $ 字符。\n若要在搜索章节标题时使用定位点，下面的正则表达式匹配一个章节标题，该标题只包含两个尾随数字，并且出现在行首：\n/^Chapter [1-9][0-9]{0,1}/ 真正的章节标题不仅出现行的开始处，而且它还是该行中仅有的文本。它既出现在行首又出现在同一行的结尾。下面的表达式能确保指定的匹配只匹配章节而不匹配交叉引用。通过创建只匹配一行文本的开始和结尾的正则表达式，就可做到这一点。\n/^Chapter [1-9][0-9]{0,1}$/ 匹配单词边界稍有不同，但向正则表达式添加了很重要的能力。单词边界是单词和空格之间的位置。非单词边界是任何其他位置。下面的表达式匹配单词 Chapter 的开头三个字符，因为这三个字符出现在单词边界后面：\n/\\bCha/ \\b 字符的位置是非常重要的。如果它位于要匹配的字符串的开始，它在单词的开始处查找匹配项。如果它位于字符串的结尾，它在单词的结尾处查找匹配项。例如，下面的表达式匹配单词 Chapter 中的字符串 ter，因为它出现在单词边界的前面：\n/ter\\b/ 下面的表达式匹配 Chapter 中的字符串 apt，但不匹配 aptitude 中的字符串 apt：\n/\\Bapt/ 字符串 apt 出现在单词 Chapter 中的非单词边界处，但出现在单词 aptitude 中的单词边界处。对于 \\B 非单词边界运算符，位置并不重要，因为匹配不关心究竟是单词的开头还是结尾。\n选择 用圆括号 () 将所有选择项括起来，相邻的选择项之间用 | 分隔。\n() 表示捕获分组，() 会把每个分组里的匹配的值保存起来， 多个匹配值可以通过数字 n 来查看(n 是一个数字，表示第 n 个捕获组的内容)。\n但用圆括号会有一个副作用，使相关的匹配会被缓存，此时可用 ?: 放在第一个选项前来消除这种副作用。\n其中 ?: 是非捕获元之一，还有两个非捕获元是 ?= 和 ?!，这两个还有更多的含义，前者为正向预查，在任何开始匹配圆括号内的正则表达式模式的位置来匹配搜索字符串，后者为负向预查，在任何开始不匹配该正则表达式模式的位置来匹配搜索字符串。\n以下列出 ?=、?\u003c=、?!、?\u003c! 的使用区别\nexp1(?=exp2)：查找 exp2 前面的 exp1。\n(?\u003c=exp2)exp1：查找 exp2 后面的 exp1。\nexp1(?!exp2)：查找后面不是 exp2 的 exp1。\n(?\u003c!exp2)exp1：查找前面不是 exp2 的 exp1。\n更多内容可以参考：正则表达式的先行断言(lookahead)和后行断言(lookbehind)\n反向引用 对一个正则表达式模式或部分模式两边添加圆括号将导致相关匹配存储到一个临时缓冲区中，所捕获的每个子匹配都按照在正则表达式模式中从左到右出现的顺序存储。缓冲区编号从 1 开始，最多可存储 99 个捕获的子表达式。每个缓冲区都可以使用 \\n 访问，其中 n 为一个标识特定缓冲区的一位或两位十进制数。\n可以使用非捕获元字符 ?:、?= 或 ?! 来重写捕获，忽略对相关匹配的保存。\n反向引用的最简单的、最有用的应用之一，是提供查找文本中两个相同的相邻单词的匹配项的能力。\nvar str = \"Is is the cost of of gasoline going up up\"; var patt1 = /\\b([a-z]+) \\1\\b/ig; document.write(str.match(patt1)); 输出：Is is,of of,up up\n正则表达式中/i,/g,/ig,/gi,/m的区别和含义 /i (忽略大小写) /g (全文查找出现的所有匹配字符) /m (多行查找) /gi(全文查找、忽略大小写) /ig(全文查找、忽略大小写)\n",
+  "wordCount" : "481",
+  "inLanguage": "en",
+  "datePublished": "2021-04-17T21:18:57Z",
+  "dateModified": "2021-04-17T21:18:57Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      正则表达式
+    </h1>
+    <div class="post-meta">
+
+<span title='2021-04-17 21:18:57 +0000 UTC'>April 17, 2021</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>正则表达式</p>
+<p>正则表达式(regular expression)描述了一种字符串匹配的模式（pattern），可以用来检查一个串是否含有某种子串、将匹配的子串替换或者从某个串中取出符合某个条件的子串等。</p>
+<h1 id="普通字符">普通字符<a hidden class="anchor" aria-hidden="true" href="#普通字符">#</a></h1>
+<p>普通字符包括没有显式指定为元字符的所有可打印和不可打印字符。这包括所有大写和小写字母、所有数字、所有标点符号和一些其他符号。</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">字符</th>
+          <th style="text-align: left">描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">[ABC]</td>
+          <td style="text-align: left">匹配 <strong>[&hellip;]</strong> 中的所有字符，例如 <strong>[aeiou]</strong> 匹配字符串 &ldquo;google runoob taobao&rdquo; 中所有的 e o u a 字母。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">[^ABC]</td>
+          <td style="text-align: left">匹配除了 <strong>[&hellip;]</strong> 中字符的所有字符，例如 <strong>[^aeiou]</strong> 匹配字符串 &ldquo;google runoob taobao&rdquo; 中除了 e o u a 字母的所有字母。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">[A-Z]</td>
+          <td style="text-align: left">[A-Z] 表示一个区间，匹配所有大写字母，[a-z] 表示所有小写字母。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">.</td>
+          <td style="text-align: left">匹配除换行符（\n、\r）之外的任何单个字符，相等于 [^\n\r]</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">[\s\S]</td>
+          <td style="text-align: left">匹配所有。\s 是匹配所有空白符，包括换行，\S 非空白符，不包括换行。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">\w</td>
+          <td style="text-align: left">匹配字母、数字、下划线。等价于 [A-Za-z0-9_]</td>
+      </tr>
+  </tbody>
+</table>
+<h1 id="非打印字符">非打印字符<a hidden class="anchor" aria-hidden="true" href="#非打印字符">#</a></h1>
+<p>非打印字符也可以是正则表达式的组成部分。下表列出了表示非打印字符的转义序列：</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">字符</th>
+          <th style="text-align: left">描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">\cx</td>
+          <td style="text-align: left">匹配由x指明的控制字符。例如， \cM 匹配一个 Control-M 或回车符。x 的值必须为 A-Z 或 a-z 之一。否则，将 c 视为一个原义的 &lsquo;c&rsquo; 字符。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">\f</td>
+          <td style="text-align: left">匹配一个换页符。等价于 \x0c 和 \cL。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">\n</td>
+          <td style="text-align: left">匹配一个换行符。等价于 \x0a 和 \cJ。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">\r</td>
+          <td style="text-align: left">匹配一个回车符。等价于 \x0d 和 \cM。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">\s</td>
+          <td style="text-align: left">匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]。注意 Unicode 正则表达式会匹配全角空格符。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">\S</td>
+          <td style="text-align: left">匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">\t</td>
+          <td style="text-align: left">匹配一个制表符。等价于 \x09 和 \cI。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">\v</td>
+          <td style="text-align: left">匹配一个垂直制表符。等价于 \x0b 和 \cK。</td>
+      </tr>
+  </tbody>
+</table>
+<h1 id="特殊字符">特殊字符<a hidden class="anchor" aria-hidden="true" href="#特殊字符">#</a></h1>
+<p>所谓特殊字符，就是一些有特殊含义的字符，如上面说的 <strong>runoo*b</strong> 中的 *****，简单的说就是表示任何字符串的意思。如果要查找字符串中的 ***** 符号，则需要对 ***** 进行转义，即在其前加一个 ****，<strong>runo*ob</strong> 匹配字符串 <strong>runo*ob</strong>。</p>
+<p>许多元字符要求在试图匹配它们时特别对待。若要匹配这些特殊字符，必须首先使字符&quot;转义&quot;，即，将反斜杠字符**** 放在它们前面。下表列出了正则表达式中的特殊字符：</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">特别字符</th>
+          <th style="text-align: left">描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">$</td>
+          <td style="text-align: left">匹配输入字符串的结尾位置。如果设置了 RegExp 对象的 Multiline 属性，则 $ 也匹配 &lsquo;\n&rsquo; 或 &lsquo;\r&rsquo;。要匹配 $ 字符本身，请使用 $。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">( )</td>
+          <td style="text-align: left">标记一个子表达式的开始和结束位置。子表达式可以获取供以后使用。要匹配这些字符，请使用 ( 和 )。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">*</td>
+          <td style="text-align: left">匹配前面的子表达式零次或多次。要匹配 * 字符，请使用 *。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">+</td>
+          <td style="text-align: left">匹配前面的子表达式一次或多次。要匹配 + 字符，请使用 +。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">.</td>
+          <td style="text-align: left">匹配除换行符 \n 之外的任何单字符。要匹配 . ，请使用 . 。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">[</td>
+          <td style="text-align: left">标记一个中括号表达式的开始。要匹配 [，请使用 [。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">?</td>
+          <td style="text-align: left">匹配前面的子表达式零次或一次，或指明一个非贪婪限定符。要匹配 ? 字符，请使用 ?。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">\</td>
+          <td style="text-align: left">将下一个字符标记为或特殊字符、或原义字符、或向后引用、或八进制转义符。例如， &rsquo;n&rsquo; 匹配字符 &rsquo;n&rsquo;。&rsquo;\n&rsquo; 匹配换行符。序列 &lsquo;\&rsquo; 匹配 &ldquo;&quot;，而 &lsquo;(&rsquo; 则匹配 &ldquo;(&quot;。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">^</td>
+          <td style="text-align: left">匹配输入字符串的开始位置，除非在方括号表达式中使用，当该符号在方括号表达式中使用时，表示不接受该方括号表达式中的字符集合。要匹配 ^ 字符本身，请使用 ^。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">{</td>
+          <td style="text-align: left">标记限定符表达式的开始。要匹配 {，请使用 {。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">|</td>
+          <td style="text-align: left">指明两项之间的一个选择。要匹配 |，请使用 |。</td>
+      </tr>
+  </tbody>
+</table>
+<h1 id="限定符">限定符<a hidden class="anchor" aria-hidden="true" href="#限定符">#</a></h1>
+<p>限定符用来指定正则表达式的一个给定组件必须要出现多少次才能满足匹配。有 ***** 或 <strong>+</strong> 或 <strong>?</strong> 或 <strong>{n}</strong> 或 <strong>{n,}</strong> 或 <strong>{n,m}</strong> 共6种。</p>
+<p>正则表达式的限定符有：</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">字符</th>
+          <th style="text-align: left">描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">*</td>
+          <td style="text-align: left">匹配前面的子表达式零次或多次。例如，zo* 能匹配 &ldquo;z&rdquo; 以及 &ldquo;zoo&rdquo;。* 等价于{0,}。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">+</td>
+          <td style="text-align: left">匹配前面的子表达式一次或多次。例如，&lsquo;zo+&rsquo; 能匹配 &ldquo;zo&rdquo; 以及 &ldquo;zoo&rdquo;，但不能匹配 &ldquo;z&rdquo;。+ 等价于 {1,}。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">?</td>
+          <td style="text-align: left">匹配前面的子表达式零次或一次。例如，&ldquo;do(es)?&rdquo; 可以匹配 &ldquo;do&rdquo; 、 &ldquo;does&rdquo; 中的 &ldquo;does&rdquo; 、 &ldquo;doxy&rdquo; 中的 &ldquo;do&rdquo; 。? 等价于 {0,1}。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">{n}</td>
+          <td style="text-align: left">n 是一个非负整数。匹配确定的 n 次。例如，&lsquo;o{2}&rsquo; 不能匹配 &ldquo;Bob&rdquo; 中的 &lsquo;o&rsquo;，但是能匹配 &ldquo;food&rdquo; 中的两个 o。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">{n,}</td>
+          <td style="text-align: left">n 是一个非负整数。至少匹配n 次。例如，&lsquo;o{2,}&rsquo; 不能匹配 &ldquo;Bob&rdquo; 中的 &lsquo;o&rsquo;，但能匹配 &ldquo;foooood&rdquo; 中的所有 o。&lsquo;o{1,}&rsquo; 等价于 &lsquo;o+&rsquo;。&lsquo;o{0,}&rsquo; 则等价于 &lsquo;o*&rsquo;。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">{n,m}</td>
+          <td style="text-align: left">m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。例如，&ldquo;o{1,3}&rdquo; 将匹配 &ldquo;fooooood&rdquo; 中的前三个 o。&lsquo;o{0,1}&rsquo; 等价于 &lsquo;o?&rsquo;。请注意在逗号和两个数之间不能有空格。</td>
+      </tr>
+  </tbody>
+</table>
+<p>**贪婪：**下面的表达式匹配从开始小于符号 (&lt;) 到关闭 h1 标记的大于符号 (&gt;) 之间的所有内容。</p>
+<pre tabindex="0"><code>/&lt;.*&gt;/
+</code></pre><p><img alt="img" loading="lazy" src="https://www.runoob.com/wp-content/uploads/2014/03/AD8F3320-2F2E-4513-9BB5-84450D62783D.jpg"></p>
+<p>**非贪婪：**如果您只需要匹配开始和结束 h1 标签，下面的非贪婪表达式只匹配 &lt;h1&gt;。</p>
+<pre tabindex="0"><code>/&lt;.*?&gt;/
+</code></pre><p><img alt="img" loading="lazy" src="https://www.runoob.com/wp-content/uploads/2014/03/A6E72665-CE61-46F4-A72B-A34BC13F5820.jpg"></p>
+<p>也可以使用以下正则表达式来匹配 h1 标签，表达式则是：</p>
+<pre tabindex="0"><code>/&lt;\w+?&gt;/
+</code></pre><p><img alt="img" loading="lazy" src="https://www.runoob.com/wp-content/uploads/2014/03/C6E89F76-D059-4600-A507-74C42306A790.jpg"></p>
+<p>通过在 *<strong><strong>、</strong>+</strong> 或 <strong>?</strong> 限定符之后放置 <strong>?</strong>，该表达式从&quot;贪婪&quot;表达式转换为&quot;非贪婪&quot;表达式或者最小匹配。</p>
+<h1 id="定位符">定位符<a hidden class="anchor" aria-hidden="true" href="#定位符">#</a></h1>
+<p>定位符使您能够将正则表达式固定到行首或行尾。它们还使您能够创建这样的正则表达式，这些正则表达式出现在一个单词内、在一个单词的开头或者一个单词的结尾。</p>
+<p>定位符用来描述字符串或单词的边界，<strong>^</strong> 和 <strong>$</strong> 分别指字符串的开始与结束，<strong>\b</strong> 描述单词的前或后边界，<strong>\B</strong> 表示非单词边界。</p>
+<p>正则表达式的定位符有：</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">字符</th>
+          <th style="text-align: left">描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">^</td>
+          <td style="text-align: left">匹配输入字符串开始的位置。如果设置了 RegExp 对象的 Multiline 属性，^ 还会与 \n 或 \r 之后的位置匹配。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">$</td>
+          <td style="text-align: left">匹配输入字符串结尾的位置。如果设置了 RegExp 对象的 Multiline 属性，$ 还会与 \n 或 \r 之前的位置匹配。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">\b</td>
+          <td style="text-align: left">匹配一个单词边界，即字与空格间的位置。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">\B</td>
+          <td style="text-align: left">非单词边界匹配。</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>注意</strong>：不能将限定符与定位符一起使用。由于在紧靠换行或者单词边界的前面或后面不能有一个以上位置，因此不允许诸如 <strong>^*</strong> 之类的表达式。</p>
+<p>若要匹配一行文本开始处的文本，请在正则表达式的开始使用 <strong>^</strong> 字符。不要将 <strong>^</strong> 的这种用法与中括号表达式内的用法混淆。</p>
+<p>若要匹配一行文本的结束处的文本，请在正则表达式的结束处使用 <strong>$</strong> 字符。</p>
+<p>若要在搜索章节标题时使用定位点，下面的正则表达式匹配一个章节标题，该标题只包含两个尾随数字，并且出现在行首：</p>
+<pre tabindex="0"><code>/^Chapter [1-9][0-9]{0,1}/
+</code></pre><p>真正的章节标题不仅出现行的开始处，而且它还是该行中仅有的文本。它既出现在行首又出现在同一行的结尾。下面的表达式能确保指定的匹配只匹配章节而不匹配交叉引用。通过创建只匹配一行文本的开始和结尾的正则表达式，就可做到这一点。</p>
+<pre tabindex="0"><code>/^Chapter [1-9][0-9]{0,1}$/
+</code></pre><p>匹配单词边界稍有不同，但向正则表达式添加了很重要的能力。单词边界是单词和空格之间的位置。非单词边界是任何其他位置。下面的表达式匹配单词 Chapter 的开头三个字符，因为这三个字符出现在单词边界后面：</p>
+<pre tabindex="0"><code>/\bCha/
+</code></pre><p><strong>\b</strong> 字符的位置是非常重要的。如果它位于要匹配的字符串的开始，它在单词的开始处查找匹配项。如果它位于字符串的结尾，它在单词的结尾处查找匹配项。例如，下面的表达式匹配单词 Chapter 中的字符串 ter，因为它出现在单词边界的前面：</p>
+<pre tabindex="0"><code>/ter\b/
+</code></pre><p>下面的表达式匹配 Chapter 中的字符串 apt，但不匹配 aptitude 中的字符串 apt：</p>
+<pre tabindex="0"><code>/\Bapt/
+</code></pre><p>字符串 apt 出现在单词 Chapter 中的非单词边界处，但出现在单词 aptitude 中的单词边界处。对于 <strong>\B</strong> 非单词边界运算符，位置并不重要，因为匹配不关心究竟是单词的开头还是结尾。</p>
+<h1 id="选择">选择<a hidden class="anchor" aria-hidden="true" href="#选择">#</a></h1>
+<p>用圆括号 <strong>()</strong> 将所有选择项括起来，相邻的选择项之间用 <strong>|</strong> 分隔。</p>
+<p><strong>()</strong> 表示捕获分组，<strong>()</strong> 会把每个分组里的匹配的值保存起来， 多个匹配值可以通过数字 n 来查看(<strong>n</strong> 是一个数字，表示第 n 个捕获组的内容)。</p>
+<p><img alt="img" loading="lazy" src="https://www.runoob.com/wp-content/uploads/2014/03/366574CC-3706-4B4C-8782-1BFF4CF57582.jpg"></p>
+<p><img alt="img" loading="lazy" src="https://www.runoob.com/wp-content/uploads/2014/03/82A7298A-2A94-49E3-AA27-A7778EE89711.jpg"></p>
+<p>但用圆括号会有一个副作用，使相关的匹配会被缓存，此时可用 <strong>?:</strong> 放在第一个选项前来消除这种副作用。</p>
+<p>其中 <strong>?:</strong> 是非捕获元之一，还有两个非捕获元是 <strong>?=</strong> 和 <strong>?!</strong>，这两个还有更多的含义，前者为正向预查，在任何开始匹配圆括号内的正则表达式模式的位置来匹配搜索字符串，后者为负向预查，在任何开始不匹配该正则表达式模式的位置来匹配搜索字符串。</p>
+<p>以下列出 ?=、?&lt;=、?!、?&lt;! 的使用区别</p>
+<p><strong>exp1(?=exp2)</strong>：查找 exp2 前面的 exp1。</p>
+<p><img alt="img" loading="lazy" src="https://www.runoob.com/wp-content/uploads/2014/03/reg-111.jpg"></p>
+<p><strong>(?&lt;=exp2)exp1</strong>：查找 exp2 后面的 exp1。</p>
+<p><img alt="img" loading="lazy" src="https://www.runoob.com/wp-content/uploads/2014/03/reg-222.jpg"></p>
+<p><strong>exp1(?!exp2)</strong>：查找后面不是 exp2 的 exp1。</p>
+<p><img alt="img" loading="lazy" src="https://www.runoob.com/wp-content/uploads/2014/03/reg-333.jpg"></p>
+<p><strong>(?&lt;!exp2)exp1</strong>：查找前面不是 exp2 的 exp1。</p>
+<p><img alt="img" loading="lazy" src="https://www.runoob.com/wp-content/uploads/2014/03/reg-444.jpg"></p>
+<blockquote>
+<p>更多内容可以参考：<a href="https://www.runoob.com/w3cnote/reg-lookahead-lookbehind.html">正则表达式的先行断言(lookahead)和后行断言(lookbehind)</a></p>
+</blockquote>
+<h1 id="反向引用">反向引用<a hidden class="anchor" aria-hidden="true" href="#反向引用">#</a></h1>
+<p>对一个正则表达式模式或部分模式两边添加圆括号将导致相关匹配存储到一个临时缓冲区中，所捕获的每个子匹配都按照在正则表达式模式中从左到右出现的顺序存储。缓冲区编号从 1 开始，最多可存储 99 个捕获的子表达式。每个缓冲区都可以使用 <strong>\n</strong> 访问，其中 n 为一个标识特定缓冲区的一位或两位十进制数。</p>
+<p>可以使用非捕获元字符 <strong>?:</strong>、<strong>?=</strong> 或 <strong>?!</strong> 来重写捕获，忽略对相关匹配的保存。</p>
+<p>反向引用的最简单的、最有用的应用之一，是提供查找文本中两个相同的相邻单词的匹配项的能力。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">str</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Is is the cost of of gasoline going up up&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">patt1</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">/\b([a-z]+) \1\b/ig</span>;
+</span></span><span style="display:flex;"><span>document.<span style="color:#a6e22e">write</span>(<span style="color:#a6e22e">str</span>.<span style="color:#a6e22e">match</span>(<span style="color:#a6e22e">patt1</span>));
+</span></span></code></pre></div><p>输出：Is is,of of,up up</p>
+<p>正则表达式中/i,/g,/ig,/gi,/m的区别和含义
+/i (忽略大小写)
+/g (全文查找出现的所有匹配字符)
+/m (多行查找)
+/gi(全文查找、忽略大小写)
+/ig(全文查找、忽略大小写)</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

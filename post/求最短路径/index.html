@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>求最短路径 | 我的博客</title>
+<meta name="keywords" content="c&#43;&#43;, 算法">
+<meta name="description" content="题目描述
+有N个城市，在每两个城市之间可以有一条交通道相连或者没有交通道连接. 现在有一些货物要从一座城市被转运到另一座城市，运输费由两部分组成：
+1） 在途经的每两个城市之间的路上的运输花费。
+2） 货物通过一座城市所要支付的某些税费，出发城市和目的地城市不必纳税。
+请你编写一个程序，求出最小花费的路线。
+输入：
+在输入文件中，路上的花费、城市的税费、出发城市和目的地城市以如下的形式给出：
+第一项输入：N，城市个数。程序序号下标从0开始。
+第二项输入：Cost（N，N）的运输花费矩阵，花费为非负值，-1代表无路径。
+第三项输入：Tax(N)每个城市的税费，非负值。
+第四项输入：M，需要计算最小运输城市对的个数。
+第五项输入：M对不超过N-1的整数，需要计算的最小花费的两个城市序号。
+输出：
+第一行输出路径，输出格式为i-&gt;j-&gt;m。下标序号加-&gt;。中间无空格。
+第二行输出花费费用。
+如果不存在路径，输出 No Path
+
+测试数据：
+T1
+输入:
+0 3 22 -1 4 
+3 0 5 -1 -1 
+22 5 0 9 20 
+-1 -1 9 0 4 
+4 -1 20 4 0 
+5 17 8 3 1 
+3 
+0 2 
+2 4 
+1 3 
+输出:
+21 
+2-&gt;3-&gt;4 
+16 
+1-&gt;0-&gt;4-&gt;3 
+17
+T2
+输入:
+0 -1 
+6 0 
+10 22 
+1 
+0 1 
+输出:">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/%E6%B1%82%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/%E6%B1%82%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/%E6%B1%82%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="求最短路径">
+  <meta property="og:description" content="题目描述 有N个城市，在每两个城市之间可以有一条交通道相连或者没有交通道连接. 现在有一些货物要从一座城市被转运到另一座城市，运输费由两部分组成： 1） 在途经的每两个城市之间的路上的运输花费。 2） 货物通过一座城市所要支付的某些税费，出发城市和目的地城市不必纳税。 请你编写一个程序，求出最小花费的路线。 输入： 在输入文件中，路上的花费、城市的税费、出发城市和目的地城市以如下的形式给出：
+第一项输入：N，城市个数。程序序号下标从0开始。
+第二项输入：Cost（N，N）的运输花费矩阵，花费为非负值，-1代表无路径。
+第三项输入：Tax(N)每个城市的税费，非负值。
+第四项输入：M，需要计算最小运输城市对的个数。
+第五项输入：M对不超过N-1的整数，需要计算的最小花费的两个城市序号。
+输出：
+第一行输出路径，输出格式为i-&gt;j-&gt;m。下标序号加-&gt;。中间无空格。
+第二行输出花费费用。
+如果不存在路径，输出 No Path
+测试数据：
+T1
+输入:
+0 3 22 -1 4 3 0 5 -1 -1 22 5 0 9 20 -1 -1 9 0 4 4 -1 20 4 0 5 17 8 3 1 3 0 2 2 4 1 3 输出:
+21 2-&gt;3-&gt;4 16 1-&gt;0-&gt;4-&gt;3 17 T2
+输入:
+0 -1 6 0 10 22 1 0 1 输出:">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2020-01-03T19:28:01+00:00">
+    <meta property="article:modified_time" content="2020-01-03T19:28:01+00:00">
+    <meta property="article:tag" content="C&#43;&#43;">
+    <meta property="article:tag" content="算法">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="求最短路径">
+  <meta name="twitter:description" content="题目描述 有N个城市，在每两个城市之间可以有一条交通道相连或者没有交通道连接. 现在有一些货物要从一座城市被转运到另一座城市，运输费由两部分组成： 1） 在途经的每两个城市之间的路上的运输花费。 2） 货物通过一座城市所要支付的某些税费，出发城市和目的地城市不必纳税。 请你编写一个程序，求出最小花费的路线。 输入： 在输入文件中，路上的花费、城市的税费、出发城市和目的地城市以如下的形式给出：
+第一项输入：N，城市个数。程序序号下标从0开始。
+第二项输入：Cost（N，N）的运输花费矩阵，花费为非负值，-1代表无路径。
+第三项输入：Tax(N)每个城市的税费，非负值。
+第四项输入：M，需要计算最小运输城市对的个数。
+第五项输入：M对不超过N-1的整数，需要计算的最小花费的两个城市序号。
+输出：
+第一行输出路径，输出格式为i-&gt;j-&gt;m。下标序号加-&gt;。中间无空格。
+第二行输出花费费用。
+如果不存在路径，输出 No Path
+测试数据：
+T1
+输入:
+0 3 22 -1 4 3 0 5 -1 -1 22 5 0 9 20 -1 -1 9 0 4 4 -1 20 4 0 5 17 8 3 1 3 0 2 2 4 1 3 输出:
+21 2-&gt;3-&gt;4 16 1-&gt;0-&gt;4-&gt;3 17 T2
+输入:
+0 -1 6 0 10 22 1 0 1 输出:">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "求最短路径",
+      "item": "https://milong26.github.io/post/%E6%B1%82%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "求最短路径",
+  "name": "求最短路径",
+  "description": "题目描述 有N个城市，在每两个城市之间可以有一条交通道相连或者没有交通道连接. 现在有一些货物要从一座城市被转运到另一座城市，运输费由两部分组成： 1） 在途经的每两个城市之间的路上的运输花费。 2） 货物通过一座城市所要支付的某些税费，出发城市和目的地城市不必纳税。 请你编写一个程序，求出最小花费的路线。 输入： 在输入文件中，路上的花费、城市的税费、出发城市和目的地城市以如下的形式给出：\n第一项输入：N，城市个数。程序序号下标从0开始。\n第二项输入：Cost（N，N）的运输花费矩阵，花费为非负值，-1代表无路径。\n第三项输入：Tax(N)每个城市的税费，非负值。\n第四项输入：M，需要计算最小运输城市对的个数。\n第五项输入：M对不超过N-1的整数，需要计算的最小花费的两个城市序号。\n输出：\n第一行输出路径，输出格式为i-\u0026gt;j-\u0026gt;m。下标序号加-\u0026gt;。中间无空格。\n第二行输出花费费用。\n如果不存在路径，输出 No Path\n测试数据：\nT1\n输入:\n0 3 22 -1 4 3 0 5 -1 -1 22 5 0 9 20 -1 -1 9 0 4 4 -1 20 4 0 5 17 8 3 1 3 0 2 2 4 1 3 输出:\n21 2-\u0026gt;3-\u0026gt;4 16 1-\u0026gt;0-\u0026gt;4-\u0026gt;3 17 T2\n输入:\n0 -1 6 0 10 22 1 0 1 输出:\n",
+  "keywords": [
+    "c++", "算法"
+  ],
+  "articleBody": "题目描述 有N个城市，在每两个城市之间可以有一条交通道相连或者没有交通道连接. 现在有一些货物要从一座城市被转运到另一座城市，运输费由两部分组成： 1） 在途经的每两个城市之间的路上的运输花费。 2） 货物通过一座城市所要支付的某些税费，出发城市和目的地城市不必纳税。 请你编写一个程序，求出最小花费的路线。 输入： 在输入文件中，路上的花费、城市的税费、出发城市和目的地城市以如下的形式给出：\n第一项输入：N，城市个数。程序序号下标从0开始。\n第二项输入：Cost（N，N）的运输花费矩阵，花费为非负值，-1代表无路径。\n第三项输入：Tax(N)每个城市的税费，非负值。\n第四项输入：M，需要计算最小运输城市对的个数。\n第五项输入：M对不超过N-1的整数，需要计算的最小花费的两个城市序号。\n输出：\n第一行输出路径，输出格式为i-\u003ej-\u003em。下标序号加-\u003e。中间无空格。\n第二行输出花费费用。\n如果不存在路径，输出 No Path\n测试数据：\nT1\n输入:\n0 3 22 -1 4 3 0 5 -1 -1 22 5 0 9 20 -1 -1 9 0 4 4 -1 20 4 0 5 17 8 3 1 3 0 2 2 4 1 3 输出:\n21 2-\u003e3-\u003e4 16 1-\u003e0-\u003e4-\u003e3 17 T2\n输入:\n0 -1 6 0 10 22 1 0 1 输出:\nNo Path bellman\nint n, nedge = 0, flag; int *tax, *dis, *pre, *answer; stack\u003cint\u003e *out; const int maxm = 1000; struct edge { int u, v; int weight = 0; }*laji; bool bell(int start, int end, int time) { int temp; for (int i = 0; i \u003c n; i++) { if (i == start)dis[i] = 0; else dis[i] = maxm; } for (int i = 0; i \u003c n - 1; i++) { for (int j = 0; j \u003c nedge; j++) { if (laji[j].u != start) temp = dis[laji[j].u] + laji[j].weight + tax[laji[j].u]; else temp = dis[laji[j].u] + laji[j].weight; if (dis[laji[j].v]\u003etemp) { dis[laji[j].v] = temp; pre[laji[j].v] = laji[j].u; } } } answer[time] = dis[end]; int j = end; while (j != start) { if (j \u003c 0) { return 0; } else { j = pre[j]; out[time].push(j); } } return 1; } int main() { int m, start, *end, cost; bool *result;//存储结果（判定是否有路径） cin \u003e\u003e n;//城市个数 tax = new int[n];//存储城市税 dis = new int[n]; pre = new int[n];//？ end = new int[n];//？ result = new bool[n]; out = new stack\u003cint\u003e[n]; answer = new int[n]; for (int i = 0; i \u003c n; i++) pre[i] = -1; laji = new edge[n*(n - 1)];//可能是有向图，另外自己到自己不需要记录 for (int i = 0; i \u003c n; i++) for (int j = 0; j \u003c n; j++) { cin \u003e\u003e cost; if (cost != -1)//代表有路径 { laji[nedge].u = i; laji[nedge].v = j; laji[nedge].weight = cost; nedge++; } }//运费矩阵输入完成 for (int i = 0; i \u003c n; i++) cin \u003e\u003e tax[i]; cin \u003e\u003e m; for (int i = 0; i \u003c m; i++) { cin \u003e\u003e start \u003e\u003e end[i]; result[i] = bell(start, end[i], i); } for (int i = 0; i \u003c m; i++) { if (result[i] == 0) cout \u003c\u003c \"No Path\" \u003c\u003c endl; else { while (!out[i].empty()) { cout \u003c\u003c out[i].top() \u003c\u003c \"-\u003e\"; out[i].pop(); } cout \u003c\u003c end[i] \u003c\u003c endl; cout \u003c\u003c answer[i] \u003c\u003c endl; } } return 0; } 求单源最短路径 Dijkstra算法：\n#include #include #include using namespace std; class EData { public: char start; // 边的起点 char end; // 边的终点 int weight; // 边的权重 public: EData() {} EData(char s, char e, int w) :start(s), end(e), weight(w) {} }; // 邻接表 class ListUDG { #define MAX 100 #define INF (~(0x1\u003c\u003c31)) // 最大值(即0X7FFFFFFF) private: // 内部类 // 邻接表中表对应的链表的顶点 class ENode { int ivex; // 该边所指向的顶点的位置 int weight; // 该边的权 ENode *nextEdge; // 指向下一条弧的指针 friend class ListUDG; }; // 邻接表中表的顶点 class VNode { char data; // 顶点信息 ENode *firstEdge; // 指向第一条依附该顶点的弧 friend class ListUDG; }; private: // 私有成员 int mVexNum; // 图的顶点的数目 int mEdgNum; // 图的边的数目 VNode mVexs[MAX]; public: // 创建邻接表对应的图(自己输入) ListUDG(); // 创建邻接表对应的图(用已提供的数据) ListUDG(char vexs[], int vlen, EData *edges[], int elen); ~ListUDG(); // 深度优先搜索遍历图 void DFS(); // 广度优先搜索（类似于树的层次遍历） void BFS(); // 打印邻接表图 void print(); // prim最小生成树 void prim(int start); // 克鲁斯卡尔（Kruskal)最小生成树 void kruskal(); // Dijkstra最短路径 void dijkstra(int vs, int vexs[], int dist[]); private: // 读取一个输入字符 char readChar(); // 返回ch的位置 int getPosition(char ch); // 深度优先搜索遍历图的递归实现 void DFS(int i, int *visited); // 将node节点链接到list的最后 void linkLast(ENode *list, ENode *node); // 获取边的权值；若start和end不是连通的，则返回无穷大。 int getWeight(int start, int end); // 获取图中的边 EData* getEdges(); // 对边按照权值大小进行排序(由小到大) void sortEdges(EData* edges, int elen); // 获取i的终点 int getEnd(int vends[], int i); }; /* * 创建邻接表对应的图(自己输入) */ ListUDG::ListUDG() { char c1, c2; int v, e; int i, p1, p2; int weight; ENode *node1, *node2; // 输入\"顶点数\"和\"边数\" cout \u003c\u003c \"input vertex number: \"; cin \u003e\u003e mVexNum; cout \u003c\u003c \"input edge number: \"; cin \u003e\u003e mEdgNum; if (mVexNum \u003c 1 || mEdgNum \u003c 1 || (mEdgNum \u003e(mVexNum * (mVexNum - 1)))) { cout \u003c\u003c \"input error: invalid parameters!\" \u003c\u003c endl; return; } // 初始化\"邻接表\"的顶点 for (i = 0; i\u003cmVexNum; i++) { cout \u003c\u003c \"vertex(\" \u003c\u003c i \u003c\u003c \"): \"; mVexs[i].data = readChar(); mVexs[i].firstEdge = NULL; } // 初始化\"邻接表\"的边 for (i = 0; i\u003cmEdgNum; i++) { // 读取边的起始顶点和结束顶点 cout \u003c\u003c \"edge(\" \u003c\u003c i \u003c\u003c \"): \"; c1 = readChar(); c2 = readChar(); cin \u003e\u003e weight; p1 = getPosition(c1); p2 = getPosition(c2); // 初始化node1 node1 = new ENode(); node1-\u003eivex = p2; node1-\u003eweight = weight; // 将node1链接到\"p1所在链表的末尾\" if (mVexs[p1].firstEdge == NULL) mVexs[p1].firstEdge = node1; else linkLast(mVexs[p1].firstEdge, node1); // 初始化node2 node2 = new ENode(); node2-\u003eivex = p1; node2-\u003eweight = weight; // 将node2链接到\"p2所在链表的末尾\" if (mVexs[p2].firstEdge == NULL) mVexs[p2].firstEdge = node2; else linkLast(mVexs[p2].firstEdge, node2); } } /* * 创建邻接表对应的图(用已提供的数据) */ ListUDG::ListUDG(char vexs[], int vlen, EData *edges[], int elen) { char c1, c2; int i, p1, p2; int weight; ENode *node1, *node2; // 初始化\"顶点数\"和\"边数\" mVexNum = vlen; mEdgNum = elen; // 初始化\"邻接表\"的顶点 for (i = 0; i\u003cmVexNum; i++) { mVexs[i].data = vexs[i]; mVexs[i].firstEdge = NULL; } // 初始化\"邻接表\"的边 for (i = 0; i\u003cmEdgNum; i++) { // 读取边的起始顶点和结束顶点 c1 = edges[i]-\u003estart; c2 = edges[i]-\u003eend; weight = edges[i]-\u003eweight; p1 = getPosition(c1); p2 = getPosition(c2); // 初始化node1 node1 = new ENode(); node1-\u003eivex = p2; node1-\u003eweight = weight; // 将node1链接到\"p1所在链表的末尾\" if (mVexs[p1].firstEdge == NULL) mVexs[p1].firstEdge = node1; else linkLast(mVexs[p1].firstEdge, node1); // 初始化node2 node2 = new ENode(); node2-\u003eivex = p1; node2-\u003eweight = weight; // 将node2链接到\"p2所在链表的末尾\" if (mVexs[p2].firstEdge == NULL) mVexs[p2].firstEdge = node2; else linkLast(mVexs[p2].firstEdge, node2); } } /* * 析构函数 */ ListUDG::~ListUDG() { } /* * 将node节点链接到list的最后 */ void ListUDG::linkLast(ENode *list, ENode *node) { ENode *p = list; while (p-\u003enextEdge) p = p-\u003enextEdge; p-\u003enextEdge = node; } /* * 返回ch的位置 */ int ListUDG::getPosition(char ch) { int i; for (i = 0; i\u003cmVexNum; i++) if (mVexs[i].data == ch) return i; return -1; } /* * 读取一个输入字符 */ char ListUDG::readChar() { char ch; do { cin \u003e\u003e ch; } while (!((ch \u003e= 'a'\u0026\u0026ch \u003c= 'z') || (ch \u003e= 'A'\u0026\u0026ch \u003c= 'Z'))); return ch; } /* * 深度优先搜索遍历图的递归实现 */ void ListUDG::DFS(int i, int *visited) { ENode *node; visited[i] = 1; cout \u003c\u003c mVexs[i].data \u003c\u003c \" \"; node = mVexs[i].firstEdge; while (node != NULL) { if (!visited[node-\u003eivex]) DFS(node-\u003eivex, visited); node = node-\u003enextEdge; } } /* * 深度优先搜索遍历图 */ void ListUDG::DFS() { int i; int visited[MAX]; // 顶点访问标记 // 初始化所有顶点都没有被访问 for (i = 0; i \u003c mVexNum; i++) visited[i] = 0; cout \u003c\u003c \"DFS: \"; for (i = 0; i \u003c mVexNum; i++) { if (!visited[i]) DFS(i, visited); } cout \u003c\u003c endl; } /* * 广度优先搜索（类似于树的层次遍历） */ void ListUDG::BFS() { int head = 0; int rear = 0; int queue[MAX]; // 辅组队列 int visited[MAX]; // 顶点访问标记 int i, j, k; ENode *node; for (i = 0; i \u003c mVexNum; i++) visited[i] = 0; cout \u003c\u003c \"BFS: \"; for (i = 0; i \u003c mVexNum; i++) { if (!visited[i]) { visited[i] = 1; cout \u003c\u003c mVexs[i].data \u003c\u003c \" \"; queue[rear++] = i; // 入队列 } while (head != rear) { j = queue[head++]; // 出队列 node = mVexs[j].firstEdge; while (node != NULL) { k = node-\u003eivex; if (!visited[k]) { visited[k] = 1; cout \u003c\u003c mVexs[k].data \u003c\u003c \" \"; queue[rear++] = k; } node = node-\u003enextEdge; } } } cout \u003c\u003c endl; } /* * 打印邻接表图 */ void ListUDG::print() { int i, j; ENode *node; cout \u003c\u003c \"List Graph:\" \u003c\u003c endl; for (i = 0; i \u003c mVexNum; i++) { cout \u003c\u003c i \u003c\u003c \"(\" \u003c\u003c mVexs[i].data \u003c\u003c \"): \"; node = mVexs[i].firstEdge; while (node != NULL) { cout \u003c\u003c node-\u003eivex \u003c\u003c \"(\" \u003c\u003c mVexs[node-\u003eivex].data \u003c\u003c \") \"; node = node-\u003enextEdge; } cout \u003c\u003c endl; } } /* * 获取边的权值；若start和end不是连通的，则返回无穷大。 */ int ListUDG::getWeight(int start, int end) { ENode *node; if (start == end) return 0; node = mVexs[start].firstEdge; while (node != NULL) { if (end == node-\u003eivex) return node-\u003eweight; node = node-\u003enextEdge; } return INF; } /* * prim最小生成树 * * 参数说明： * start -- 从图中的第start个元素开始，生成最小树 */ void ListUDG::prim(int start) { int min, i, j, k, m, n, tmp, sum; int index = 0; // prim最小树的索引，即prims数组的索引 char prims[MAX]; // prim最小树的结果数组 int weights[MAX]; // 顶点间边的权值 // prim最小生成树中第一个数是\"图中第start个顶点\"，因为是从start开始的。 prims[index++] = mVexs[start].data; // 初始化\"顶点的权值数组\"， // 将每个顶点的权值初始化为\"第start个顶点\"到\"该顶点\"的权值。 for (i = 0; i \u003c mVexNum; i++) weights[i] = getWeight(start, i); for (i = 0; i \u003c mVexNum; i++) { // 由于从start开始的，因此不需要再对第start个顶点进行处理。 if (start == i) continue; j = 0; k = 0; min = INF; // 在未被加入到最小生成树的顶点中，找出权值最小的顶点。 while (j \u003c mVexNum) { // 若weights[j]=0，意味着\"第j个节点已经被排序过\"(或者说已经加入了最小生成树中)。 if (weights[j] != 0 \u0026\u0026 weights[j] \u003c min) { min = weights[j]; k = j; } j++; } // 经过上面的处理后，在未被加入到最小生成树的顶点中，权值最小的顶点是第k个顶点。 // 将第k个顶点加入到最小生成树的结果数组中 prims[index++] = mVexs[k].data; // 将\"第k个顶点的权值\"标记为0，意味着第k个顶点已经排序过了(或者说已经加入了最小树结果中)。 weights[k] = 0; // 当第k个顶点被加入到最小生成树的结果数组中之后，更新其它顶点的权值。 for (j = 0; j \u003c mVexNum; j++) { // 获取第k个顶点到第j个顶点的权值 tmp = getWeight(k, j); // 当第j个节点没有被处理，并且需要更新时才被更新。 if (weights[j] != 0 \u0026\u0026 tmp \u003c weights[j]) weights[j] = tmp; } } // 计算最小生成树的权值 sum = 0; for (i = 1; i \u003c index; i++) { min = INF; // 获取prims[i]在矩阵表中的位置 n = getPosition(prims[i]); // 在vexs[0...i]中，找出到j的权值最小的顶点。 for (j = 0; j \u003c i; j++) { m = getPosition(prims[j]); tmp = getWeight(m, n); if (tmp \u003c min) min = tmp; } sum += min; } // 打印最小生成树 cout \u003c\u003c \"PRIM(\" \u003c\u003c mVexs[start].data \u003c\u003c \")=\" \u003c\u003c sum \u003c\u003c \": \"; for (i = 0; i \u003c index; i++) cout \u003c\u003c prims[i] \u003c\u003c \" \"; cout \u003c\u003c endl; } /* * 获取图中的边 */ EData* ListUDG::getEdges() { int i, j; int index = 0; ENode *node; EData *edges; edges = new EData[mEdgNum]; for (i = 0; i \u003c mVexNum; i++) { node = mVexs[i].firstEdge; while (node != NULL) { if (node-\u003eivex \u003e i) { edges[index].start = mVexs[i].data; // 起点 edges[index].end = mVexs[node-\u003eivex].data; // 终点 edges[index].weight = node-\u003eweight; // 权 index++; } node = node-\u003enextEdge; } } return edges; } /* * 对边按照权值大小进行排序(由小到大) */ void ListUDG::sortEdges(EData* edges, int elen) { int i, j; for (i = 0; i\u003celen; i++) { for (j = i + 1; j\u003celen; j++) { if (edges[i].weight \u003e edges[j].weight) { // 交换\"边i\"和\"边j\" swap(edges[i], edges[j]); } } } } /* * 获取i的终点 */ int ListUDG::getEnd(int vends[], int i) { while (vends[i] != 0) i = vends[i]; return i; } /* * 克鲁斯卡尔（Kruskal)最小生成树 */ void ListUDG::kruskal() { int i, m, n, p1, p2; int length; int index = 0; // rets数组的索引 int vends[MAX] = { 0 }; // 用于保存\"已有最小生成树\"中每个顶点在该最小树中的终点。 EData rets[MAX]; // 结果数组，保存kruskal最小生成树的边 EData *edges; // 图对应的所有边 // 获取\"图中所有的边\" edges = getEdges(); // 将边按照\"权\"的大小进行排序(从小到大) sortEdges(edges, mEdgNum); for (i = 0; i\u003cmEdgNum; i++) { p1 = getPosition(edges[i].start); // 获取第i条边的\"起点\"的序号 p2 = getPosition(edges[i].end); // 获取第i条边的\"终点\"的序号 m = getEnd(vends, p1); // 获取p1在\"已有的最小生成树\"中的终点 n = getEnd(vends, p2); // 获取p2在\"已有的最小生成树\"中的终点 // 如果m!=n，意味着\"边i\"与\"已经添加到最小生成树中的顶点\"没有形成环路 if (m != n) { vends[m] = n; // 设置m在\"已有的最小生成树\"中的终点为n rets[index++] = edges[i]; // 保存结果 } } delete[] edges; // 统计并打印\"kruskal最小生成树\"的信息 length = 0; for (i = 0; i \u003c index; i++) length += rets[i].weight; cout \u003c\u003c \"Kruskal=\" \u003c\u003c length \u003c\u003c \": \"; for (i = 0; i \u003c index; i++) cout \u003c\u003c \"(\" \u003c\u003c rets[i].start \u003c\u003c \",\" \u003c\u003c rets[i].end \u003c\u003c \") \"; cout \u003c\u003c endl; } /* * Dijkstra最短路径。 * 即，统计图中\"顶点vs\"到其它各个顶点的最短路径。 * * 参数说明： * vs -- 起始顶点(start vertex)。即计算\"顶点vs\"到其它顶点的最短路径。 * prev -- 前驱顶点数组。即，prev[i]的值是\"顶点vs\"到\"顶点i\"的最短路径所经历的全部顶点中，位于\"顶点i\"之前的那个顶点。 * dist -- 长度数组。即，dist[i]是\"顶点vs\"到\"顶点i\"的最短路径的长度。 */ void ListUDG::dijkstra(int vs, int prev[], int dist[]) { int i, j, k; int min; int tmp; int flag[MAX]; // flag[i]=1表示\"顶点vs\"到\"顶点i\"的最短路径已成功获取。 // 初始化 for (i = 0; i \u003c mVexNum; i++) { flag[i] = 0; // 顶点i的最短路径还没获取到。 prev[i] = 0; // 顶点i的前驱顶点为0。 dist[i] = getWeight(vs, i); // 顶点i的最短路径为\"顶点vs\"到\"顶点i\"的权。 } // 对\"顶点vs\"自身进行初始化 flag[vs] = 1; dist[vs] = 0; // 遍历mVexNum-1次；每次找出一个顶点的最短路径。 for (i = 1; i \u003c mVexNum; i++) { // 寻找当前最小的路径； // 即，在未获取最短路径的顶点中，找到离vs最近的顶点(k)。 min = INF; for (j = 0; j \u003c mVexNum; j++) { if (flag[j] == 0 \u0026\u0026 dist[j]\u003cmin) { min = dist[j]; k = j; } } // 标记\"顶点k\"为已经获取到最短路径 flag[k] = 1; // 修正当前最短路径和前驱顶点 // 即，当已经\"顶点k的最短路径\"之后，更新\"未获取最短路径的顶点的最短路径和前驱顶点\"。 for (j = 0; j \u003c mVexNum; j++) { tmp = getWeight(k, j); tmp = (tmp == INF ? INF : (min + tmp)); // 防止溢出 if (flag[j] == 0 \u0026\u0026 (tmp \u003c dist[j])) { dist[j] = tmp; prev[j] = k; } } } // 打印dijkstra最短路径的结果 cout \u003c\u003c \"dijkstra(\" \u003c\u003c mVexs[vs].data \u003c\u003c \"): \" \u003c\u003c endl; for (i = 0; i \u003c mVexNum; i++) cout \u003c\u003c \" shortest(\" \u003c\u003c mVexs[vs].data \u003c\u003c \", \" \u003c\u003c mVexs[i].data \u003c\u003c \")=\" \u003c\u003c dist[i] \u003c\u003c endl; } int main() { int prev[MAX] = { 0 }; int dist[MAX] = { 0 }; // 顶点 char vexs[] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G' }; // 边 EData *edges[] = { // 起点 终点 权 new EData('A', 'B', 12), new EData('A', 'F', 16), new EData('A', 'G', 14), new EData('B', 'C', 10), new EData('B', 'F', 7), new EData('C', 'D', 3), new EData('C', 'E', 5), new EData('C', 'F', 6), new EData('D', 'E', 4), new EData('E', 'F', 2), new EData('E', 'G', 8), new EData('F', 'G', 9), }; int vlen = sizeof(vexs) / sizeof(vexs[0]); int elen = sizeof(edges) / sizeof(edges[0]); ListUDG* pG; // 自定义\"图\"(输入矩阵队列) //pG = new ListUDG(); // 采用已有的\"图\" pG = new ListUDG(vexs, vlen, edges, elen); //pG-\u003eprint(); // 打印图 //pG-\u003eDFS(); // 深度优先遍历 //pG-\u003eBFS(); // 广度优先遍历 //pG-\u003eprim(0); // prim算法生成最小生成树 //pG-\u003ekruskal(); // Kruskal算法生成最小生成树 // dijkstra算法获取\"第4个顶点\"到其它各个顶点的最短距离 pG-\u003edijkstra(3, prev, dist); return 0; } ",
+  "wordCount" : "2167",
+  "inLanguage": "en",
+  "datePublished": "2020-01-03T19:28:01Z",
+  "dateModified": "2020-01-03T19:28:01Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/%E6%B1%82%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      求最短路径
+    </h1>
+    <div class="post-meta">
+
+<span title='2020-01-03 19:28:01 +0000 UTC'>January 3, 2020</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><h3 id="题目描述">题目描述<a hidden class="anchor" aria-hidden="true" href="#题目描述">#</a></h3>
+<p>有N个城市，在每两个城市之间可以有一条交通道相连或者没有交通道连接. 现在有一些货物要从一座城市被转运到另一座城市，运输费由两部分组成：
+1） 在途经的每两个城市之间的路上的运输花费。
+2） 货物通过一座城市所要支付的某些税费，出发城市和目的地城市不必纳税。
+请你编写一个程序，求出最小花费的路线。
+输入：
+在输入文件中，路上的花费、城市的税费、出发城市和目的地城市以如下的形式给出：</p>
+<p>第一项输入：N，城市个数。程序序号下标从0开始。</p>
+<p>第二项输入：Cost（N，N）的运输花费矩阵，花费为非负值，-1代表无路径。</p>
+<p>第三项输入：Tax(N)每个城市的税费，非负值。</p>
+<p>第四项输入：M，需要计算最小运输城市对的个数。</p>
+<p>第五项输入：M对不超过N-1的整数，需要计算的最小花费的两个城市序号。</p>
+<p>输出：</p>
+<p>第一行输出路径，输出格式为i-&gt;j-&gt;m。下标序号加-&gt;。中间无空格。</p>
+<p>第二行输出花费费用。</p>
+<p>如果不存在路径，输出 No Path</p>
+<hr>
+<p>测试数据：</p>
+<p>T1</p>
+<p>输入:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-5" data-lang="5"><span style="display:flex;"><span>0 3 22 -1 4 
+</span></span><span style="display:flex;"><span>3 0 5 -1 -1 
+</span></span><span style="display:flex;"><span>22 5 0 9 20 
+</span></span><span style="display:flex;"><span>-1 -1 9 0 4 
+</span></span><span style="display:flex;"><span>4 -1 20 4 0 
+</span></span><span style="display:flex;"><span>5 17 8 3 1 
+</span></span><span style="display:flex;"><span>3 
+</span></span><span style="display:flex;"><span>0 2 
+</span></span><span style="display:flex;"><span>2 4 
+</span></span><span style="display:flex;"><span>1 3 
+</span></span></code></pre></div><p>输出:</p>
+<pre tabindex="0"><code class="language-0->4->3->2" data-lang="0->4->3->2">21 
+2-&gt;3-&gt;4 
+16 
+1-&gt;0-&gt;4-&gt;3 
+17
+</code></pre><p>T2</p>
+<p>输入:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-2" data-lang="2"><span style="display:flex;"><span>0 -1 
+</span></span><span style="display:flex;"><span>6 0 
+</span></span><span style="display:flex;"><span>10 22 
+</span></span><span style="display:flex;"><span>1 
+</span></span><span style="display:flex;"><span>0 1 
+</span></span></code></pre></div><p>输出:</p>
+<pre tabindex="0"><code class="language-No" data-lang="No">No Path
+</code></pre><hr>
+<p><code>bellman</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n, nedge <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, flag;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>tax, <span style="color:#f92672">*</span>dis, <span style="color:#f92672">*</span>pre, <span style="color:#f92672">*</span>answer;
+</span></span><span style="display:flex;"><span>stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>out;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> maxm <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">edge</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> u, v;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> weight <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}<span style="color:#f92672">*</span>laji;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">bell</span>(<span style="color:#66d9ef">int</span> start, <span style="color:#66d9ef">int</span> end, <span style="color:#66d9ef">int</span> time)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> temp;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (i <span style="color:#f92672">==</span> start)dis[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">else</span> dis[i] <span style="color:#f92672">=</span> maxm;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> nedge; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (laji[j].u <span style="color:#f92672">!=</span> start) temp <span style="color:#f92672">=</span> dis[laji[j].u] <span style="color:#f92672">+</span> laji[j].weight <span style="color:#f92672">+</span> tax[laji[j].u];
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">else</span> temp <span style="color:#f92672">=</span> dis[laji[j].u] <span style="color:#f92672">+</span> laji[j].weight;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (dis[laji[j].v]<span style="color:#f92672">&gt;</span>temp)
+</span></span><span style="display:flex;"><span>			{
+</span></span><span style="display:flex;"><span>				dis[laji[j].v] <span style="color:#f92672">=</span> temp;
+</span></span><span style="display:flex;"><span>				pre[laji[j].v] <span style="color:#f92672">=</span> laji[j].u;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	answer[time] <span style="color:#f92672">=</span> dis[end];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> end;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">while</span> (j <span style="color:#f92672">!=</span> start)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (j <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			j <span style="color:#f92672">=</span> pre[j];
+</span></span><span style="display:flex;"><span>			out[time].push(j);
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> m, start, <span style="color:#f92672">*</span>end, cost;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">bool</span> <span style="color:#f92672">*</span>result;<span style="color:#75715e">//存储结果（判定是否有路径）
+</span></span></span><span style="display:flex;"><span>	cin <span style="color:#f92672">&gt;&gt;</span> n;<span style="color:#75715e">//城市个数
+</span></span></span><span style="display:flex;"><span>	tax <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[n];<span style="color:#75715e">//存储城市税
+</span></span></span><span style="display:flex;"><span>	dis <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[n];
+</span></span><span style="display:flex;"><span>	pre <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[n];<span style="color:#75715e">//？
+</span></span></span><span style="display:flex;"><span>	end <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[n];<span style="color:#75715e">//？
+</span></span></span><span style="display:flex;"><span>	result <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">bool</span>[n];
+</span></span><span style="display:flex;"><span>	out <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>[n];
+</span></span><span style="display:flex;"><span>	answer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[n];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) pre[i] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>	laji <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> edge[n<span style="color:#f92672">*</span>(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)];<span style="color:#75715e">//可能是有向图，另外自己到自己不需要记录
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			cin <span style="color:#f92672">&gt;&gt;</span> cost;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (cost <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#75715e">//代表有路径
+</span></span></span><span style="display:flex;"><span>			{
+</span></span><span style="display:flex;"><span>				laji[nedge].u <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>				laji[nedge].v <span style="color:#f92672">=</span> j;
+</span></span><span style="display:flex;"><span>				laji[nedge].weight <span style="color:#f92672">=</span> cost;
+</span></span><span style="display:flex;"><span>				nedge<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}<span style="color:#75715e">//运费矩阵输入完成
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		cin <span style="color:#f92672">&gt;&gt;</span> tax[i];
+</span></span><span style="display:flex;"><span>	cin <span style="color:#f92672">&gt;&gt;</span> m;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		cin <span style="color:#f92672">&gt;&gt;</span> start <span style="color:#f92672">&gt;&gt;</span> end[i];
+</span></span><span style="display:flex;"><span>		result[i] <span style="color:#f92672">=</span> bell(start, end[i], i);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (result[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;No Path&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>out[i].empty())
+</span></span><span style="display:flex;"><span>			{
+</span></span><span style="display:flex;"><span>				cout <span style="color:#f92672">&lt;&lt;</span> out[i].top() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;-&gt;&#34;</span>;
+</span></span><span style="display:flex;"><span>				out[i].pop();
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			cout <span style="color:#f92672">&lt;&lt;</span> end[i] <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>			cout <span style="color:#f92672">&lt;&lt;</span> answer[i] <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h3 id="求单源最短路径">求单源最短路径<a hidden class="anchor" aria-hidden="true" href="#求单源最短路径">#</a></h3>
+<p>Dijkstra算法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iomanip&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EData</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">char</span> start; <span style="color:#75715e">// 边的起点
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">char</span> end;   <span style="color:#75715e">// 边的终点
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> weight; <span style="color:#75715e">// 边的权重
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	EData() {}
+</span></span><span style="display:flex;"><span>	EData(<span style="color:#66d9ef">char</span> s, <span style="color:#66d9ef">char</span> e, <span style="color:#66d9ef">int</span> w) <span style="color:#f92672">:</span>start(s), end(e), weight(w) {}
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 邻接表
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ListUDG</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define MAX 100
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define INF         (~(0x1&lt;&lt;31))        </span><span style="color:#75715e">// 最大值(即0X7FFFFFFF)
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span> <span style="color:#75715e">// 内部类
+</span></span></span><span style="display:flex;"><span>		 <span style="color:#75715e">// 邻接表中表对应的链表的顶点
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ENode</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">int</span> ivex;           <span style="color:#75715e">// 该边所指向的顶点的位置
+</span></span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">int</span> weight;         <span style="color:#75715e">// 该边的权
+</span></span></span><span style="display:flex;"><span>		ENode <span style="color:#f92672">*</span>nextEdge;    <span style="color:#75715e">// 指向下一条弧的指针
+</span></span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">friend</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ListUDG</span>;
+</span></span><span style="display:flex;"><span>	};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 邻接表中表的顶点
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">VNode</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">char</span> data;          <span style="color:#75715e">// 顶点信息
+</span></span></span><span style="display:flex;"><span>		ENode <span style="color:#f92672">*</span>firstEdge;   <span style="color:#75715e">// 指向第一条依附该顶点的弧
+</span></span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">friend</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ListUDG</span>;
+</span></span><span style="display:flex;"><span>	};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span> <span style="color:#75715e">// 私有成员
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> mVexNum;             <span style="color:#75715e">// 图的顶点的数目
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> mEdgNum;             <span style="color:#75715e">// 图的边的数目
+</span></span></span><span style="display:flex;"><span>	VNode mVexs[MAX];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 创建邻接表对应的图(自己输入)
+</span></span></span><span style="display:flex;"><span>	ListUDG();
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 创建邻接表对应的图(用已提供的数据)
+</span></span></span><span style="display:flex;"><span>	ListUDG(<span style="color:#66d9ef">char</span> vexs[], <span style="color:#66d9ef">int</span> vlen, EData <span style="color:#f92672">*</span>edges[], <span style="color:#66d9ef">int</span> elen);
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">~</span>ListUDG();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 深度优先搜索遍历图
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">DFS</span>();
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 广度优先搜索（类似于树的层次遍历）
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">BFS</span>();
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 打印邻接表图
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print</span>();
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// prim最小生成树
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">prim</span>(<span style="color:#66d9ef">int</span> start);
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 克鲁斯卡尔（Kruskal)最小生成树
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">kruskal</span>();
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Dijkstra最短路径
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dijkstra</span>(<span style="color:#66d9ef">int</span> vs, <span style="color:#66d9ef">int</span> vexs[], <span style="color:#66d9ef">int</span> dist[]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 读取一个输入字符
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">char</span> readChar();
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 返回ch的位置
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getPosition</span>(<span style="color:#66d9ef">char</span> ch);
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 深度优先搜索遍历图的递归实现
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">DFS</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>visited);
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 将node节点链接到list的最后
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">linkLast</span>(ENode <span style="color:#f92672">*</span>list, ENode <span style="color:#f92672">*</span>node);
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 获取边&lt;start, end&gt;的权值；若start和end不是连通的，则返回无穷大。
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getWeight</span>(<span style="color:#66d9ef">int</span> start, <span style="color:#66d9ef">int</span> end);
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 获取图中的边
+</span></span></span><span style="display:flex;"><span>	EData<span style="color:#f92672">*</span> <span style="color:#a6e22e">getEdges</span>();
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 对边按照权值大小进行排序(由小到大)
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">sortEdges</span>(EData<span style="color:#f92672">*</span> edges, <span style="color:#66d9ef">int</span> elen);
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 获取i的终点
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getEnd</span>(<span style="color:#66d9ef">int</span> vends[], <span style="color:#66d9ef">int</span> i);
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">* 创建邻接表对应的图(自己输入)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span>ListUDG<span style="color:#f92672">::</span>ListUDG()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">char</span> c1, c2;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> v, e;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> i, p1, p2;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> weight;
+</span></span><span style="display:flex;"><span>	ENode <span style="color:#f92672">*</span>node1, <span style="color:#f92672">*</span>node2;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 输入&#34;顶点数&#34;和&#34;边数&#34;
+</span></span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;input vertex number: &#34;</span>;
+</span></span><span style="display:flex;"><span>	cin <span style="color:#f92672">&gt;&gt;</span> mVexNum;
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;input edge number: &#34;</span>;
+</span></span><span style="display:flex;"><span>	cin <span style="color:#f92672">&gt;&gt;</span> mEdgNum;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (mVexNum <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> mEdgNum <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> (mEdgNum <span style="color:#f92672">&gt;</span>(mVexNum <span style="color:#f92672">*</span> (mVexNum <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>))))
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;input error: invalid parameters!&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 初始化&#34;邻接表&#34;的顶点
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>mVexNum; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;vertex(&#34;</span> <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;): &#34;</span>;
+</span></span><span style="display:flex;"><span>		mVexs[i].data <span style="color:#f92672">=</span> readChar();
+</span></span><span style="display:flex;"><span>		mVexs[i].firstEdge <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 初始化&#34;邻接表&#34;的边
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>mEdgNum; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 读取边的起始顶点和结束顶点
+</span></span></span><span style="display:flex;"><span>		cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;edge(&#34;</span> <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;): &#34;</span>;
+</span></span><span style="display:flex;"><span>		c1 <span style="color:#f92672">=</span> readChar();
+</span></span><span style="display:flex;"><span>		c2 <span style="color:#f92672">=</span> readChar();
+</span></span><span style="display:flex;"><span>		cin <span style="color:#f92672">&gt;&gt;</span> weight;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		p1 <span style="color:#f92672">=</span> getPosition(c1);
+</span></span><span style="display:flex;"><span>		p2 <span style="color:#f92672">=</span> getPosition(c2);
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 初始化node1
+</span></span></span><span style="display:flex;"><span>		node1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ENode();
+</span></span><span style="display:flex;"><span>		node1<span style="color:#f92672">-&gt;</span>ivex <span style="color:#f92672">=</span> p2;
+</span></span><span style="display:flex;"><span>		node1<span style="color:#f92672">-&gt;</span>weight <span style="color:#f92672">=</span> weight;
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 将node1链接到&#34;p1所在链表的末尾&#34;
+</span></span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (mVexs[p1].firstEdge <span style="color:#f92672">==</span> NULL)
+</span></span><span style="display:flex;"><span>			mVexs[p1].firstEdge <span style="color:#f92672">=</span> node1;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">linkLast</span>(mVexs[p1].firstEdge, node1);
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 初始化node2
+</span></span></span><span style="display:flex;"><span>		node2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ENode();
+</span></span><span style="display:flex;"><span>		node2<span style="color:#f92672">-&gt;</span>ivex <span style="color:#f92672">=</span> p1;
+</span></span><span style="display:flex;"><span>		node2<span style="color:#f92672">-&gt;</span>weight <span style="color:#f92672">=</span> weight;
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 将node2链接到&#34;p2所在链表的末尾&#34;
+</span></span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (mVexs[p2].firstEdge <span style="color:#f92672">==</span> NULL)
+</span></span><span style="display:flex;"><span>			mVexs[p2].firstEdge <span style="color:#f92672">=</span> node2;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">linkLast</span>(mVexs[p2].firstEdge, node2);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">* 创建邻接表对应的图(用已提供的数据)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span>ListUDG<span style="color:#f92672">::</span>ListUDG(<span style="color:#66d9ef">char</span> vexs[], <span style="color:#66d9ef">int</span> vlen, EData <span style="color:#f92672">*</span>edges[], <span style="color:#66d9ef">int</span> elen)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">char</span> c1, c2;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> i, p1, p2;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> weight;
+</span></span><span style="display:flex;"><span>	ENode <span style="color:#f92672">*</span>node1, <span style="color:#f92672">*</span>node2;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 初始化&#34;顶点数&#34;和&#34;边数&#34;
+</span></span></span><span style="display:flex;"><span>	mVexNum <span style="color:#f92672">=</span> vlen;
+</span></span><span style="display:flex;"><span>	mEdgNum <span style="color:#f92672">=</span> elen;
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 初始化&#34;邻接表&#34;的顶点
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>mVexNum; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		mVexs[i].data <span style="color:#f92672">=</span> vexs[i];
+</span></span><span style="display:flex;"><span>		mVexs[i].firstEdge <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 初始化&#34;邻接表&#34;的边
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>mEdgNum; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 读取边的起始顶点和结束顶点
+</span></span></span><span style="display:flex;"><span>		c1 <span style="color:#f92672">=</span> edges[i]<span style="color:#f92672">-&gt;</span>start;
+</span></span><span style="display:flex;"><span>		c2 <span style="color:#f92672">=</span> edges[i]<span style="color:#f92672">-&gt;</span>end;
+</span></span><span style="display:flex;"><span>		weight <span style="color:#f92672">=</span> edges[i]<span style="color:#f92672">-&gt;</span>weight;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		p1 <span style="color:#f92672">=</span> getPosition(c1);
+</span></span><span style="display:flex;"><span>		p2 <span style="color:#f92672">=</span> getPosition(c2);
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 初始化node1
+</span></span></span><span style="display:flex;"><span>		node1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ENode();
+</span></span><span style="display:flex;"><span>		node1<span style="color:#f92672">-&gt;</span>ivex <span style="color:#f92672">=</span> p2;
+</span></span><span style="display:flex;"><span>		node1<span style="color:#f92672">-&gt;</span>weight <span style="color:#f92672">=</span> weight;
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 将node1链接到&#34;p1所在链表的末尾&#34;
+</span></span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (mVexs[p1].firstEdge <span style="color:#f92672">==</span> NULL)
+</span></span><span style="display:flex;"><span>			mVexs[p1].firstEdge <span style="color:#f92672">=</span> node1;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">linkLast</span>(mVexs[p1].firstEdge, node1);
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 初始化node2
+</span></span></span><span style="display:flex;"><span>		node2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ENode();
+</span></span><span style="display:flex;"><span>		node2<span style="color:#f92672">-&gt;</span>ivex <span style="color:#f92672">=</span> p1;
+</span></span><span style="display:flex;"><span>		node2<span style="color:#f92672">-&gt;</span>weight <span style="color:#f92672">=</span> weight;
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 将node2链接到&#34;p2所在链表的末尾&#34;
+</span></span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (mVexs[p2].firstEdge <span style="color:#f92672">==</span> NULL)
+</span></span><span style="display:flex;"><span>			mVexs[p2].firstEdge <span style="color:#f92672">=</span> node2;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">linkLast</span>(mVexs[p2].firstEdge, node2);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">* 析构函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span>ListUDG<span style="color:#f92672">::~</span>ListUDG()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">* 将node节点链接到list的最后
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ListUDG<span style="color:#f92672">::</span>linkLast(ENode <span style="color:#f92672">*</span>list, ENode <span style="color:#f92672">*</span>node)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	ENode <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> list;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">while</span> (p<span style="color:#f92672">-&gt;</span>nextEdge)
+</span></span><span style="display:flex;"><span>		p <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>nextEdge;
+</span></span><span style="display:flex;"><span>	p<span style="color:#f92672">-&gt;</span>nextEdge <span style="color:#f92672">=</span> node;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">* 返回ch的位置
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ListUDG<span style="color:#f92672">::</span>getPosition(<span style="color:#66d9ef">char</span> ch)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> i;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>mVexNum; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (mVexs[i].data <span style="color:#f92672">==</span> ch)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> i;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">* 读取一个输入字符
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">char</span> ListUDG<span style="color:#f92672">::</span>readChar()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">char</span> ch;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">do</span> {
+</span></span><span style="display:flex;"><span>		cin <span style="color:#f92672">&gt;&gt;</span> ch;
+</span></span><span style="display:flex;"><span>	} <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>((ch <span style="color:#f92672">&gt;=</span> <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">&amp;&amp;</span>ch <span style="color:#f92672">&lt;=</span> <span style="color:#e6db74">&#39;z&#39;</span>) <span style="color:#f92672">||</span> (ch <span style="color:#f92672">&gt;=</span> <span style="color:#e6db74">&#39;A&#39;</span><span style="color:#f92672">&amp;&amp;</span>ch <span style="color:#f92672">&lt;=</span> <span style="color:#e6db74">&#39;Z&#39;</span>)));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> ch;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">* 深度优先搜索遍历图的递归实现
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ListUDG<span style="color:#f92672">::</span>DFS(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>visited)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	ENode <span style="color:#f92672">*</span>node;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	visited[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> mVexs[i].data <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
+</span></span><span style="display:flex;"><span>	node <span style="color:#f92672">=</span> mVexs[i].firstEdge;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">while</span> (node <span style="color:#f92672">!=</span> NULL)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>visited[node<span style="color:#f92672">-&gt;</span>ivex])
+</span></span><span style="display:flex;"><span>			DFS(node<span style="color:#f92672">-&gt;</span>ivex, visited);
+</span></span><span style="display:flex;"><span>		node <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>nextEdge;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">* 深度优先搜索遍历图
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ListUDG<span style="color:#f92672">::</span>DFS()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> i;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> visited[MAX];       <span style="color:#75715e">// 顶点访问标记
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>							<span style="color:#75715e">// 初始化所有顶点都没有被访问
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> mVexNum; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		visited[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;DFS: &#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> mVexNum; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>visited[i])
+</span></span><span style="display:flex;"><span>			DFS(i, visited);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">* 广度优先搜索（类似于树的层次遍历）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ListUDG<span style="color:#f92672">::</span>BFS()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> head <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> rear <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> queue[MAX];     <span style="color:#75715e">// 辅组队列
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> visited[MAX];   <span style="color:#75715e">// 顶点访问标记
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> i, j, k;
+</span></span><span style="display:flex;"><span>	ENode <span style="color:#f92672">*</span>node;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> mVexNum; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		visited[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;BFS: &#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> mVexNum; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>visited[i])
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			visited[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>			cout <span style="color:#f92672">&lt;&lt;</span> mVexs[i].data <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
+</span></span><span style="display:flex;"><span>			queue[rear<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> i;  <span style="color:#75715e">// 入队列
+</span></span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">while</span> (head <span style="color:#f92672">!=</span> rear)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			j <span style="color:#f92672">=</span> queue[head<span style="color:#f92672">++</span>];  <span style="color:#75715e">// 出队列
+</span></span></span><span style="display:flex;"><span>			node <span style="color:#f92672">=</span> mVexs[j].firstEdge;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">while</span> (node <span style="color:#f92672">!=</span> NULL)
+</span></span><span style="display:flex;"><span>			{
+</span></span><span style="display:flex;"><span>				k <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>ivex;
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>visited[k])
+</span></span><span style="display:flex;"><span>				{
+</span></span><span style="display:flex;"><span>					visited[k] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>					cout <span style="color:#f92672">&lt;&lt;</span> mVexs[k].data <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
+</span></span><span style="display:flex;"><span>					queue[rear<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> k;
+</span></span><span style="display:flex;"><span>				}
+</span></span><span style="display:flex;"><span>				node <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>nextEdge;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">* 打印邻接表图
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ListUDG<span style="color:#f92672">::</span>print()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> i, j;
+</span></span><span style="display:flex;"><span>	ENode <span style="color:#f92672">*</span>node;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;List Graph:&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> mVexNum; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		cout <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;(&#34;</span> <span style="color:#f92672">&lt;&lt;</span> mVexs[i].data <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;): &#34;</span>;
+</span></span><span style="display:flex;"><span>		node <span style="color:#f92672">=</span> mVexs[i].firstEdge;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">while</span> (node <span style="color:#f92672">!=</span> NULL)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			cout <span style="color:#f92672">&lt;&lt;</span> node<span style="color:#f92672">-&gt;</span>ivex <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;(&#34;</span> <span style="color:#f92672">&lt;&lt;</span> mVexs[node<span style="color:#f92672">-&gt;</span>ivex].data <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;) &#34;</span>;
+</span></span><span style="display:flex;"><span>			node <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>nextEdge;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		cout <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">* 获取边&lt;start, end&gt;的权值；若start和end不是连通的，则返回无穷大。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ListUDG<span style="color:#f92672">::</span>getWeight(<span style="color:#66d9ef">int</span> start, <span style="color:#66d9ef">int</span> end)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	ENode <span style="color:#f92672">*</span>node;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (start <span style="color:#f92672">==</span> end)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	node <span style="color:#f92672">=</span> mVexs[start].firstEdge;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">while</span> (node <span style="color:#f92672">!=</span> NULL)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (end <span style="color:#f92672">==</span> node<span style="color:#f92672">-&gt;</span>ivex)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> node<span style="color:#f92672">-&gt;</span>weight;
+</span></span><span style="display:flex;"><span>		node <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>nextEdge;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> INF;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">* prim最小生成树
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">* 参数说明：
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*   start -- 从图中的第start个元素开始，生成最小树
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ListUDG<span style="color:#f92672">::</span>prim(<span style="color:#66d9ef">int</span> start)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> min, i, j, k, m, n, tmp, sum;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;         <span style="color:#75715e">// prim最小树的索引，即prims数组的索引
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">char</span> prims[MAX];     <span style="color:#75715e">// prim最小树的结果数组
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> weights[MAX];    <span style="color:#75715e">// 顶点间边的权值
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>						 <span style="color:#75715e">// prim最小生成树中第一个数是&#34;图中第start个顶点&#34;，因为是从start开始的。
+</span></span></span><span style="display:flex;"><span>	prims[index<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> mVexs[start].data;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 初始化&#34;顶点的权值数组&#34;，
+</span></span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 将每个顶点的权值初始化为&#34;第start个顶点&#34;到&#34;该顶点&#34;的权值。
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> mVexNum; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		weights[i] <span style="color:#f92672">=</span> getWeight(start, i);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> mVexNum; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 由于从start开始的，因此不需要再对第start个顶点进行处理。
+</span></span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (start <span style="color:#f92672">==</span> i)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>		k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>		min <span style="color:#f92672">=</span> INF;
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 在未被加入到最小生成树的顶点中，找出权值最小的顶点。
+</span></span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">while</span> (j <span style="color:#f92672">&lt;</span> mVexNum)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// 若weights[j]=0，意味着&#34;第j个节点已经被排序过&#34;(或者说已经加入了最小生成树中)。
+</span></span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (weights[j] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> weights[j] <span style="color:#f92672">&lt;</span> min)
+</span></span><span style="display:flex;"><span>			{
+</span></span><span style="display:flex;"><span>				min <span style="color:#f92672">=</span> weights[j];
+</span></span><span style="display:flex;"><span>				k <span style="color:#f92672">=</span> j;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			j<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 经过上面的处理后，在未被加入到最小生成树的顶点中，权值最小的顶点是第k个顶点。
+</span></span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 将第k个顶点加入到最小生成树的结果数组中
+</span></span></span><span style="display:flex;"><span>		prims[index<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> mVexs[k].data;
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 将&#34;第k个顶点的权值&#34;标记为0，意味着第k个顶点已经排序过了(或者说已经加入了最小树结果中)。
+</span></span></span><span style="display:flex;"><span>		weights[k] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 当第k个顶点被加入到最小生成树的结果数组中之后，更新其它顶点的权值。
+</span></span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> (j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> mVexNum; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// 获取第k个顶点到第j个顶点的权值
+</span></span></span><span style="display:flex;"><span>			tmp <span style="color:#f92672">=</span> getWeight(k, j);
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// 当第j个节点没有被处理，并且需要更新时才被更新。
+</span></span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (weights[j] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> tmp <span style="color:#f92672">&lt;</span> weights[j])
+</span></span><span style="display:flex;"><span>				weights[j] <span style="color:#f92672">=</span> tmp;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 计算最小生成树的权值
+</span></span></span><span style="display:flex;"><span>	sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> index; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		min <span style="color:#f92672">=</span> INF;
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 获取prims[i]在矩阵表中的位置
+</span></span></span><span style="display:flex;"><span>		n <span style="color:#f92672">=</span> getPosition(prims[i]);
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 在vexs[0...i]中，找出到j的权值最小的顶点。
+</span></span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> (j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> i; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			m <span style="color:#f92672">=</span> getPosition(prims[j]);
+</span></span><span style="display:flex;"><span>			tmp <span style="color:#f92672">=</span> getWeight(m, n);
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (tmp <span style="color:#f92672">&lt;</span> min)
+</span></span><span style="display:flex;"><span>				min <span style="color:#f92672">=</span> tmp;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		sum <span style="color:#f92672">+=</span> min;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 打印最小生成树
+</span></span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;PRIM(&#34;</span> <span style="color:#f92672">&lt;&lt;</span> mVexs[start].data <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;)=&#34;</span> <span style="color:#f92672">&lt;&lt;</span> sum <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;: &#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> index; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		cout <span style="color:#f92672">&lt;&lt;</span> prims[i] <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">* 获取图中的边
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span>EData<span style="color:#f92672">*</span> ListUDG<span style="color:#f92672">::</span>getEdges()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> i, j;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>	ENode <span style="color:#f92672">*</span>node;
+</span></span><span style="display:flex;"><span>	EData <span style="color:#f92672">*</span>edges;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	edges <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> EData[mEdgNum];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> mVexNum; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		node <span style="color:#f92672">=</span> mVexs[i].firstEdge;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">while</span> (node <span style="color:#f92672">!=</span> NULL)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (node<span style="color:#f92672">-&gt;</span>ivex <span style="color:#f92672">&gt;</span> i)
+</span></span><span style="display:flex;"><span>			{
+</span></span><span style="display:flex;"><span>				edges[index].start <span style="color:#f92672">=</span> mVexs[i].data;           <span style="color:#75715e">// 起点
+</span></span></span><span style="display:flex;"><span>				edges[index].end <span style="color:#f92672">=</span> mVexs[node<span style="color:#f92672">-&gt;</span>ivex].data;  <span style="color:#75715e">// 终点
+</span></span></span><span style="display:flex;"><span>				edges[index].weight <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>weight;            <span style="color:#75715e">// 权
+</span></span></span><span style="display:flex;"><span>				index<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			node <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>nextEdge;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> edges;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">* 对边按照权值大小进行排序(由小到大)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ListUDG<span style="color:#f92672">::</span>sortEdges(EData<span style="color:#f92672">*</span> edges, <span style="color:#66d9ef">int</span> elen)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> i, j;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>elen; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> (j <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; j<span style="color:#f92672">&lt;</span>elen; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (edges[i].weight <span style="color:#f92672">&gt;</span> edges[j].weight)
+</span></span><span style="display:flex;"><span>			{
+</span></span><span style="display:flex;"><span>				<span style="color:#75715e">// 交换&#34;边i&#34;和&#34;边j&#34;
+</span></span></span><span style="display:flex;"><span>				swap(edges[i], edges[j]);
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">* 获取i的终点
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ListUDG<span style="color:#f92672">::</span>getEnd(<span style="color:#66d9ef">int</span> vends[], <span style="color:#66d9ef">int</span> i)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">while</span> (vends[i] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>		i <span style="color:#f92672">=</span> vends[i];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> i;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">* 克鲁斯卡尔（Kruskal)最小生成树
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ListUDG<span style="color:#f92672">::</span>kruskal()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> i, m, n, p1, p2;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> length;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;          <span style="color:#75715e">// rets数组的索引
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> vends[MAX] <span style="color:#f92672">=</span> { <span style="color:#ae81ff">0</span> };     <span style="color:#75715e">// 用于保存&#34;已有最小生成树&#34;中每个顶点在该最小树中的终点。
+</span></span></span><span style="display:flex;"><span>	EData rets[MAX];        <span style="color:#75715e">// 结果数组，保存kruskal最小生成树的边
+</span></span></span><span style="display:flex;"><span>	EData <span style="color:#f92672">*</span>edges;           <span style="color:#75715e">// 图对应的所有边
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>							<span style="color:#75715e">// 获取&#34;图中所有的边&#34;
+</span></span></span><span style="display:flex;"><span>	edges <span style="color:#f92672">=</span> getEdges();
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 将边按照&#34;权&#34;的大小进行排序(从小到大)
+</span></span></span><span style="display:flex;"><span>	sortEdges(edges, mEdgNum);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>mEdgNum; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		p1 <span style="color:#f92672">=</span> getPosition(edges[i].start);      <span style="color:#75715e">// 获取第i条边的&#34;起点&#34;的序号
+</span></span></span><span style="display:flex;"><span>		p2 <span style="color:#f92672">=</span> getPosition(edges[i].end);        <span style="color:#75715e">// 获取第i条边的&#34;终点&#34;的序号
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		m <span style="color:#f92672">=</span> getEnd(vends, p1);                 <span style="color:#75715e">// 获取p1在&#34;已有的最小生成树&#34;中的终点
+</span></span></span><span style="display:flex;"><span>		n <span style="color:#f92672">=</span> getEnd(vends, p2);                 <span style="color:#75715e">// 获取p2在&#34;已有的最小生成树&#34;中的终点
+</span></span></span><span style="display:flex;"><span>											   <span style="color:#75715e">// 如果m!=n，意味着&#34;边i&#34;与&#34;已经添加到最小生成树中的顶点&#34;没有形成环路
+</span></span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (m <span style="color:#f92672">!=</span> n)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			vends[m] <span style="color:#f92672">=</span> n;                       <span style="color:#75715e">// 设置m在&#34;已有的最小生成树&#34;中的终点为n
+</span></span></span><span style="display:flex;"><span>			rets[index<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> edges[i];           <span style="color:#75715e">// 保存结果
+</span></span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">delete</span>[] edges;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 统计并打印&#34;kruskal最小生成树&#34;的信息
+</span></span></span><span style="display:flex;"><span>	length <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> index; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		length <span style="color:#f92672">+=</span> rets[i].weight;
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Kruskal=&#34;</span> <span style="color:#f92672">&lt;&lt;</span> length <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;: &#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> index; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;(&#34;</span> <span style="color:#f92672">&lt;&lt;</span> rets[i].start <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;,&#34;</span> <span style="color:#f92672">&lt;&lt;</span> rets[i].end <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;) &#34;</span>;
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">* Dijkstra最短路径。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">* 即，统计图中&#34;顶点vs&#34;到其它各个顶点的最短路径。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">* 参数说明：
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*       vs -- 起始顶点(start vertex)。即计算&#34;顶点vs&#34;到其它顶点的最短路径。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*     prev -- 前驱顶点数组。即，prev[i]的值是&#34;顶点vs&#34;到&#34;顶点i&#34;的最短路径所经历的全部顶点中，位于&#34;顶点i&#34;之前的那个顶点。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*     dist -- 长度数组。即，dist[i]是&#34;顶点vs&#34;到&#34;顶点i&#34;的最短路径的长度。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ListUDG<span style="color:#f92672">::</span>dijkstra(<span style="color:#66d9ef">int</span> vs, <span style="color:#66d9ef">int</span> prev[], <span style="color:#66d9ef">int</span> dist[])
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> i, j, k;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> min;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> tmp;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> flag[MAX];      <span style="color:#75715e">// flag[i]=1表示&#34;顶点vs&#34;到&#34;顶点i&#34;的最短路径已成功获取。
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>						<span style="color:#75715e">// 初始化
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> mVexNum; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		flag[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;                <span style="color:#75715e">// 顶点i的最短路径还没获取到。
+</span></span></span><span style="display:flex;"><span>		prev[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;                <span style="color:#75715e">// 顶点i的前驱顶点为0。
+</span></span></span><span style="display:flex;"><span>		dist[i] <span style="color:#f92672">=</span> getWeight(vs, i);  <span style="color:#75715e">// 顶点i的最短路径为&#34;顶点vs&#34;到&#34;顶点i&#34;的权。
+</span></span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 对&#34;顶点vs&#34;自身进行初始化
+</span></span></span><span style="display:flex;"><span>	flag[vs] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>	dist[vs] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 遍历mVexNum-1次；每次找出一个顶点的最短路径。
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> mVexNum; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 寻找当前最小的路径；
+</span></span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 即，在未获取最短路径的顶点中，找到离vs最近的顶点(k)。
+</span></span></span><span style="display:flex;"><span>		min <span style="color:#f92672">=</span> INF;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> (j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> mVexNum; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (flag[j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> dist[j]<span style="color:#f92672">&lt;</span>min)
+</span></span><span style="display:flex;"><span>			{
+</span></span><span style="display:flex;"><span>				min <span style="color:#f92672">=</span> dist[j];
+</span></span><span style="display:flex;"><span>				k <span style="color:#f92672">=</span> j;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 标记&#34;顶点k&#34;为已经获取到最短路径
+</span></span></span><span style="display:flex;"><span>		flag[k] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 修正当前最短路径和前驱顶点
+</span></span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 即，当已经&#34;顶点k的最短路径&#34;之后，更新&#34;未获取最短路径的顶点的最短路径和前驱顶点&#34;。
+</span></span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> (j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> mVexNum; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			tmp <span style="color:#f92672">=</span> getWeight(k, j);
+</span></span><span style="display:flex;"><span>			tmp <span style="color:#f92672">=</span> (tmp <span style="color:#f92672">==</span> INF <span style="color:#f92672">?</span> INF : (min <span style="color:#f92672">+</span> tmp)); <span style="color:#75715e">// 防止溢出
+</span></span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (flag[j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> (tmp  <span style="color:#f92672">&lt;</span> dist[j]))
+</span></span><span style="display:flex;"><span>			{
+</span></span><span style="display:flex;"><span>				dist[j] <span style="color:#f92672">=</span> tmp;
+</span></span><span style="display:flex;"><span>				prev[j] <span style="color:#f92672">=</span> k;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 打印dijkstra最短路径的结果
+</span></span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;dijkstra(&#34;</span> <span style="color:#f92672">&lt;&lt;</span> mVexs[vs].data <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;): &#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> mVexNum; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;  shortest(&#34;</span> <span style="color:#f92672">&lt;&lt;</span> mVexs[vs].data <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">&lt;&lt;</span> mVexs[i].data <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;)=&#34;</span> <span style="color:#f92672">&lt;&lt;</span> dist[i] <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> prev[MAX] <span style="color:#f92672">=</span> { <span style="color:#ae81ff">0</span> };
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> dist[MAX] <span style="color:#f92672">=</span> { <span style="color:#ae81ff">0</span> };
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 顶点
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">char</span> vexs[] <span style="color:#f92672">=</span> { <span style="color:#e6db74">&#39;A&#39;</span>, <span style="color:#e6db74">&#39;B&#39;</span>, <span style="color:#e6db74">&#39;C&#39;</span>, <span style="color:#e6db74">&#39;D&#39;</span>, <span style="color:#e6db74">&#39;E&#39;</span>, <span style="color:#e6db74">&#39;F&#39;</span>, <span style="color:#e6db74">&#39;G&#39;</span> };
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 边
+</span></span></span><span style="display:flex;"><span>	EData <span style="color:#f92672">*</span>edges[] <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 起点 终点 权
+</span></span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">new</span> EData(<span style="color:#e6db74">&#39;A&#39;</span>, <span style="color:#e6db74">&#39;B&#39;</span>, <span style="color:#ae81ff">12</span>),
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">new</span> EData(<span style="color:#e6db74">&#39;A&#39;</span>, <span style="color:#e6db74">&#39;F&#39;</span>, <span style="color:#ae81ff">16</span>),
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">new</span> EData(<span style="color:#e6db74">&#39;A&#39;</span>, <span style="color:#e6db74">&#39;G&#39;</span>, <span style="color:#ae81ff">14</span>),
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">new</span> EData(<span style="color:#e6db74">&#39;B&#39;</span>, <span style="color:#e6db74">&#39;C&#39;</span>, <span style="color:#ae81ff">10</span>),
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">new</span> EData(<span style="color:#e6db74">&#39;B&#39;</span>, <span style="color:#e6db74">&#39;F&#39;</span>,  <span style="color:#ae81ff">7</span>),
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">new</span> EData(<span style="color:#e6db74">&#39;C&#39;</span>, <span style="color:#e6db74">&#39;D&#39;</span>,  <span style="color:#ae81ff">3</span>),
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">new</span> EData(<span style="color:#e6db74">&#39;C&#39;</span>, <span style="color:#e6db74">&#39;E&#39;</span>,  <span style="color:#ae81ff">5</span>),
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">new</span> EData(<span style="color:#e6db74">&#39;C&#39;</span>, <span style="color:#e6db74">&#39;F&#39;</span>,  <span style="color:#ae81ff">6</span>),
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">new</span> EData(<span style="color:#e6db74">&#39;D&#39;</span>, <span style="color:#e6db74">&#39;E&#39;</span>,  <span style="color:#ae81ff">4</span>),
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">new</span> EData(<span style="color:#e6db74">&#39;E&#39;</span>, <span style="color:#e6db74">&#39;F&#39;</span>,  <span style="color:#ae81ff">2</span>),
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">new</span> EData(<span style="color:#e6db74">&#39;E&#39;</span>, <span style="color:#e6db74">&#39;G&#39;</span>,  <span style="color:#ae81ff">8</span>),
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">new</span> EData(<span style="color:#e6db74">&#39;F&#39;</span>, <span style="color:#e6db74">&#39;G&#39;</span>,  <span style="color:#ae81ff">9</span>),
+</span></span><span style="display:flex;"><span>	};
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> vlen <span style="color:#f92672">=</span> <span style="color:#66d9ef">sizeof</span>(vexs) <span style="color:#f92672">/</span> <span style="color:#66d9ef">sizeof</span>(vexs[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> elen <span style="color:#f92672">=</span> <span style="color:#66d9ef">sizeof</span>(edges) <span style="color:#f92672">/</span> <span style="color:#66d9ef">sizeof</span>(edges[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>	ListUDG<span style="color:#f92672">*</span> pG;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 自定义&#34;图&#34;(输入矩阵队列)
+</span></span></span><span style="display:flex;"><span>	<span style="color:#75715e">//pG = new ListUDG();
+</span></span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 采用已有的&#34;图&#34;
+</span></span></span><span style="display:flex;"><span>	pG <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ListUDG(vexs, vlen, edges, elen);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//pG-&gt;print();   // 打印图
+</span></span></span><span style="display:flex;"><span>	<span style="color:#75715e">//pG-&gt;DFS();     // 深度优先遍历
+</span></span></span><span style="display:flex;"><span>	<span style="color:#75715e">//pG-&gt;BFS();     // 广度优先遍历
+</span></span></span><span style="display:flex;"><span>	<span style="color:#75715e">//pG-&gt;prim(0);   // prim算法生成最小生成树
+</span></span></span><span style="display:flex;"><span>	<span style="color:#75715e">//pG-&gt;kruskal(); // Kruskal算法生成最小生成树
+</span></span></span><span style="display:flex;"><span>	<span style="color:#75715e">// dijkstra算法获取&#34;第4个顶点&#34;到其它各个顶点的最短距离
+</span></span></span><span style="display:flex;"><span>	pG<span style="color:#f92672">-&gt;</span>dijkstra(<span style="color:#ae81ff">3</span>, prev, dist);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+      <li><a href="https://milong26.github.io/tags/%E7%AE%97%E6%B3%95/">算法</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

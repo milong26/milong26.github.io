@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Trick on 我的博客</title>
+    <link>https://milong26.github.io/categories/trick/</link>
+    <description>Recent content in Trick on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 26 Jun 2021 13:57:31 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/categories/trick/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>微软输入法快速敲时间</title>
+      <link>https://milong26.github.io/post/%E5%BE%AE%E8%BD%AF%E8%BE%93%E5%85%A5%E6%B3%95%E5%BF%AB%E9%80%9F%E6%95%B2%E6%97%B6%E9%97%B4/</link>
+      <pubDate>Sat, 26 Jun 2021 13:57:31 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E5%BE%AE%E8%BD%AF%E8%BE%93%E5%85%A5%E6%B3%95%E5%BF%AB%E9%80%9F%E6%95%B2%E6%97%B6%E9%97%B4/</guid>
+      <description>&lt;p&gt;我想快速输入时间。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

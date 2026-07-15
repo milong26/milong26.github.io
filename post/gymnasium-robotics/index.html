@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Gymnasium-Robotics | 我的博客</title>
+<meta name="keywords" content="gym">
+<meta name="description" content="又来看新环境 Gymnasium-Robotics，看上了它提供的shadown hand">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/gymnasium-robotics/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/gymnasium-robotics/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/gymnasium-robotics/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="Gymnasium-Robotics">
+  <meta property="og:description" content="又来看新环境 Gymnasium-Robotics，看上了它提供的shadown hand">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-03-10T15:44:23+00:00">
+    <meta property="article:modified_time" content="2025-03-10T15:44:23+00:00">
+    <meta property="article:tag" content="Gym">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Gymnasium-Robotics">
+  <meta name="twitter:description" content="又来看新环境 Gymnasium-Robotics，看上了它提供的shadown hand">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Gymnasium-Robotics",
+      "item": "https://milong26.github.io/post/gymnasium-robotics/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Gymnasium-Robotics",
+  "name": "Gymnasium-Robotics",
+  "description": "又来看新环境 Gymnasium-Robotics，看上了它提供的shadown hand\n",
+  "keywords": [
+    "gym"
+  ],
+  "articleBody": "又来看新环境 Gymnasium-Robotics，看上了它提供的shadown hand\n说明书\n环境 linux服务器，cat /proc/version结果为Linux version 4.15.0-208-generic (buildd@lcy02-amd64-015) (gcc version 7.5.0 (Ubuntu 7.5.0-3ubuntu1~18.04)) #220-Ubuntu SMP Mon Mar 20 14:27:01 UTC 2023。 说明书写了支持Python 3.8, 3.9, 3.10 and 3.11 on Linux，选3.10 安装 conda create -n \"gym\" python==3.10 conda activate gym 新版本的mujoco自动匹配mujoco-py了，就直接安装新版本mujoco pip install mujoco pip install gymnasium-robotics 最好加–default-timeout=100 或者更换镜像源，不然会报超时错误 print (gym.version) 1.1.0 print (gymnasium_robotics.version) 1.3.1 使用 怎么控制shadow hand的，虽然知道大概是强化学习。 四个任务(环境) HandReach-v2：ShadowHand必须用拇指和选定的手指到达手掌上方的目标位置，直到它们相遇。 HandManipulateBlock-v1：ShadowHand必须操纵一个块，直到它达到所需的目标位置和旋转。 HandManipulateEgg-v1：ShadowHand必须操纵一个蛋，直到它达到所需的目标位置和旋转。 HandManipulatePen-v1：ShadowHand必须操纵一支笔，直到它达到所需的目标位置和旋转。 不需要运行代码，只要了解某一个任务 怎么控制hand dof？pos？angle？ 怎么判断是否完成任务？ 问题1，2其实就是强化学习的事儿 有什么数据集可以拿过来用 ？ ",
+  "wordCount" : "70",
+  "inLanguage": "en",
+  "datePublished": "2025-03-10T15:44:23Z",
+  "dateModified": "2025-03-10T15:44:23Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/gymnasium-robotics/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Gymnasium-Robotics
+    </h1>
+    <div class="post-meta">
+
+<span title='2025-03-10 15:44:23 +0000 UTC'>March 10, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>又来看新环境 Gymnasium-Robotics，看上了它提供的shadown hand</p>
+<p><a href="https://robotics.farama.org/content/installation/">说明书</a></p>
+<h1 id="环境">环境<a hidden class="anchor" aria-hidden="true" href="#环境">#</a></h1>
+<ol>
+<li>linux服务器，<code>cat /proc/version</code>结果为<code>Linux version 4.15.0-208-generic (buildd@lcy02-amd64-015) (gcc version 7.5.0 (Ubuntu 7.5.0-3ubuntu1~18.04)) #220-Ubuntu SMP Mon Mar 20 14:27:01 UTC 2023</code>。</li>
+<li>说明书写了支持<code>Python 3.8, 3.9, 3.10 and 3.11 on Linux</code>，选3.10</li>
+</ol>
+<h1 id="安装">安装<a hidden class="anchor" aria-hidden="true" href="#安装">#</a></h1>
+<ol>
+<li><code>conda create -n &quot;gym&quot; python==3.10</code></li>
+<li><code>conda activate gym</code></li>
+<li>新版本的mujoco自动匹配mujoco-py了，就直接安装新版本mujoco <code>pip install mujoco</code></li>
+<li><code>pip install gymnasium-robotics</code> 最好加&ndash;default-timeout=100 或者更换镜像源，不然会报超时错误</li>
+<li>print (gym.<strong>version</strong>) 1.1.0</li>
+<li>print (gymnasium_robotics.<strong>version</strong>) 1.3.1</li>
+</ol>
+<h1 id="使用">使用<a hidden class="anchor" aria-hidden="true" href="#使用">#</a></h1>
+<ol>
+<li>怎么控制shadow hand的，虽然知道大概是强化学习。</li>
+<li>四个任务(环境)
+<ol>
+<li>HandReach-v2：ShadowHand必须用拇指和选定的手指到达手掌上方的目标位置，直到它们相遇。</li>
+<li>HandManipulateBlock-v1：ShadowHand必须操纵一个块，直到它达到所需的目标位置和旋转。</li>
+<li>HandManipulateEgg-v1：ShadowHand必须操纵一个蛋，直到它达到所需的目标位置和旋转。</li>
+<li>HandManipulatePen-v1：ShadowHand必须操纵一支笔，直到它达到所需的目标位置和旋转。</li>
+</ol>
+</li>
+<li>不需要运行代码，只要了解某一个任务
+<ol>
+<li>怎么控制hand dof？pos？angle？</li>
+<li>怎么判断是否完成任务？ 问题1，2其实就是强化学习的事儿</li>
+<li>有什么数据集可以拿过来用 ？</li>
+</ol>
+</li>
+</ol>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/gym/">Gym</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

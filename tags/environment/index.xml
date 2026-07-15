@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Environment on 我的博客</title>
+    <link>https://milong26.github.io/tags/environment/</link>
+    <description>Recent content in Environment on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 07 Sep 2023 22:49:09 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/environment/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>codelab</title>
+      <link>https://milong26.github.io/post/codelab/</link>
+      <pubDate>Thu, 07 Sep 2023 22:49:09 +0000</pubDate>
+      <guid>https://milong26.github.io/post/codelab/</guid>
+      <description>&lt;p&gt;本科学移动智能开发的时候用codelab学的，当时的作业也有要求，但是我比较懒所以请同学帮忙提交的，现在重新学一下。&lt;/p&gt;
+&lt;h1&gt;&lt;/h1&gt;
+&lt;h2 id=&#34;官网&#34;&gt;官网&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/knight1996/article/details/111418822&#34;&gt;参考文档&lt;/a&gt;
+遇事不决走&lt;a href=&#34;https://developers.google.cn/codelabs&#34;&gt;官网&lt;/a&gt;，&lt;a href=&#34;https://developer.huawei.com/consumer/cn/codelabsPortal/home&#34;&gt;华为&lt;/a&gt;也有一个可以参考，本文所学习的主要是谷歌的。
+但是为什么官网没有教怎么写codelabs，如果有的话记得删掉这句&lt;/p&gt;
+&lt;h2 id=&#34;配置&#34;&gt;配置&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;%E9%85%8D%E7%BD%AEgo%E8%AF%AD%E8%A8%80.md&#34;&gt;go-language&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;&#34;&gt;Node.js-v10+&lt;/a&gt;以及&lt;a href=&#34;&#34;&gt;npm&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;%E9%85%8D%E7%BD%AEclaat.md&#34;&gt;claat&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;写&#34;&gt;写&lt;/h2&gt;
+&lt;p&gt;先找到准备存放codelabs项目的文件夹
+下载工具(?个人理解是类似hexo搞的环境依赖)&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git  clone https://github.com/googlecodelabs/tools
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;慢的话试试镜像&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone https://github.com.cnpmjs.org/googlecodelabs/tools
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在该文件夹里信件md文件即可写了，markdown语法都一样
+开头可以有几个配置&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;summary: 测试，第一个codelab
+id: first_codelab
+categories: Android
+tags: android
+status: Published 
+authors: kk
+Feedback Link: https://github.com/wkk-knight/
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果在Windows系统写这个md 文件，使用的编辑器一定要用unix 的换行格式
+，否则你会发现输出的格式会有异常。这个换行符在vs code 等编辑器可以修改的。&lt;/p&gt;
+&lt;p&gt;执行命令&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;claat export FileName.md 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;html文件可以看了，后面部署以后有空再写，我懒=)&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>强化学习 | 我的博客</title>
+<meta name="keywords" content="reinforcement learn, ai">
+<meta name="description" content="先根据课程梳理一条线，后面会把其它我觉得有类似的补充过来
+Course by David Silver
+本章内容出自UCL Course on RL by David Silver
+introduction of RL
+一句话：RL=非监督&#43;有奖励
+需要考虑如何设计奖励。
+这一章好多概念性的东西，so我进行了精简，看不懂可以参考
+学完可能会会过头来看看
+原理
+强化学习是一个序列决策（Sequential Decision Making）问题：连续选择一些行为，从这些行为完成后得到最大的收益作为最好的结果。
+先尝试实践，得到反馈之后调整。
+区别
+vs监督学习
+监督学习有标签；立刻反馈；输入时独立分布的
+RL没有标签；反馈有延时；输入变化
+强化学习具有时间相关性（作为序列决策问题，属于非独立同分布数据）。
+vs其它非监督学习
+非监督学习主要是为了挖掘无标签数据之间的内部关联（譬如聚类问题）
+RL是为了最大化reward。
+总结
+RL并不需要出现正确的输入/输出对，也不需要精确校正次优化的行为。RL更加专注于在线规划，需要在exploration和exploitation之间找到平衡。
+概念解释
+奖励rewards
+很重要，独家的
+$R_{t}$是一个标量反馈信号反映了智能体在时刻$t$行为的好坏
+Agent的目的即最大化累积回报
+RL奖励假设：所有目标都可以表示为最大化期望累计回报
+马尔可夫性 Markov Property
+随机过程的某事件只取决于它的上一事件，与初始状态无关。（以前写过，不赘述）
+这是强化学习的主要研究问题——马尔可夫决策过程 （Markov Decision Process，MDP）
+MDP问题组成
+策略（Policy）、值函数（value function）、模型（model）
+policy
+最终的目的就是找到一个策略，通过策略可以描述智能体的行为。
+由当前看到的observation来决定action，是从state到action的映射，直观上描述就是：当智能体在什么状态时应该做什么事。
+有两种表达形式：
+一种是Deterministic policy（确定策略）在某种状态下，一定会执行某个动作$a=\pi(s)$，a时action，s是状态
+一种是Stochastic policy（随机策略）它是在某种状态下执行某个动作的概率。$\pi(a|s)=P[A_t=a|S_t=s]$
+回报
+它预测了当前状态下未来可能获得的reward的期望，用来评价当前状态的好坏程度
+Return(回报):$G_t/U_t$为在一个马尔科夫奖励链上从t时刻开始往后所有的奖励的有衰减的收益总和。
+$$
+G(s_0,s_1,s_2&hellip;=)=\sum_{t=0}^\infty\gamma^tR(s_t)\
+\leq\sum_{t=0}^\infty\gamma^tR_{max}=\frac{R_{max}}{1-\gamma}
+$$
+这里s是状态，R是reward=奖励；
+第二个等式用的高数里面的幂级数展开
+强化学习的目的是最大化长期未来奖励，即寻找最大的 U
+其中的$\gamma\in[0,1]$ 指的是衰减因子，体现了未来的奖励在当前时刻的价值比例， 接近0，则表明趋向于“近视”性评估；接近1则表明偏重考虑远期的利益。">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="强化学习">
+  <meta property="og:description" content="先根据课程梳理一条线，后面会把其它我觉得有类似的补充过来
+Course by David Silver 本章内容出自UCL Course on RL by David Silver
+introduction of RL 一句话：RL=非监督&#43;有奖励 需要考虑如何设计奖励。 这一章好多概念性的东西，so我进行了精简，看不懂可以参考 学完可能会会过头来看看
+原理 强化学习是一个序列决策（Sequential Decision Making）问题：连续选择一些行为，从这些行为完成后得到最大的收益作为最好的结果。 先尝试实践，得到反馈之后调整。
+区别 vs监督学习 监督学习有标签；立刻反馈；输入时独立分布的 RL没有标签；反馈有延时；输入变化 强化学习具有时间相关性（作为序列决策问题，属于非独立同分布数据）。
+vs其它非监督学习 非监督学习主要是为了挖掘无标签数据之间的内部关联（譬如聚类问题） RL是为了最大化reward。
+总结 RL并不需要出现正确的输入/输出对，也不需要精确校正次优化的行为。RL更加专注于在线规划，需要在exploration和exploitation之间找到平衡。
+概念解释 奖励rewards 很重要，独家的 $R_{t}$是一个标量反馈信号反映了智能体在时刻$t$行为的好坏 Agent的目的即最大化累积回报 RL奖励假设：所有目标都可以表示为最大化期望累计回报
+马尔可夫性 Markov Property 随机过程的某事件只取决于它的上一事件，与初始状态无关。（以前写过，不赘述）
+这是强化学习的主要研究问题——马尔可夫决策过程 （Markov Decision Process，MDP）
+MDP问题组成 策略（Policy）、值函数（value function）、模型（model）
+policy 最终的目的就是找到一个策略，通过策略可以描述智能体的行为。
+由当前看到的observation来决定action，是从state到action的映射，直观上描述就是：当智能体在什么状态时应该做什么事。 有两种表达形式： 一种是Deterministic policy（确定策略）在某种状态下，一定会执行某个动作$a=\pi(s)$，a时action，s是状态 一种是Stochastic policy（随机策略）它是在某种状态下执行某个动作的概率。$\pi(a|s)=P[A_t=a|S_t=s]$
+回报 它预测了当前状态下未来可能获得的reward的期望，用来评价当前状态的好坏程度 Return(回报):$G_t/U_t$为在一个马尔科夫奖励链上从t时刻开始往后所有的奖励的有衰减的收益总和。
+$$ G(s_0,s_1,s_2…=)=\sum_{t=0}^\infty\gamma^tR(s_t)\ \leq\sum_{t=0}^\infty\gamma^tR_{max}=\frac{R_{max}}{1-\gamma} $$
+这里s是状态，R是reward=奖励； 第二个等式用的高数里面的幂级数展开 强化学习的目的是最大化长期未来奖励，即寻找最大的 U
+其中的$\gamma\in[0,1]$ 指的是衰减因子，体现了未来的奖励在当前时刻的价值比例， 接近0，则表明趋向于“近视”性评估；接近1则表明偏重考虑远期的利益。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-09-11T19:56:04+00:00">
+    <meta property="article:modified_time" content="2023-09-11T19:56:04+00:00">
+    <meta property="article:tag" content="Reinforcement Learn">
+    <meta property="article:tag" content="Ai">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="强化学习">
+  <meta name="twitter:description" content="先根据课程梳理一条线，后面会把其它我觉得有类似的补充过来
+Course by David Silver 本章内容出自UCL Course on RL by David Silver
+introduction of RL 一句话：RL=非监督&#43;有奖励 需要考虑如何设计奖励。 这一章好多概念性的东西，so我进行了精简，看不懂可以参考 学完可能会会过头来看看
+原理 强化学习是一个序列决策（Sequential Decision Making）问题：连续选择一些行为，从这些行为完成后得到最大的收益作为最好的结果。 先尝试实践，得到反馈之后调整。
+区别 vs监督学习 监督学习有标签；立刻反馈；输入时独立分布的 RL没有标签；反馈有延时；输入变化 强化学习具有时间相关性（作为序列决策问题，属于非独立同分布数据）。
+vs其它非监督学习 非监督学习主要是为了挖掘无标签数据之间的内部关联（譬如聚类问题） RL是为了最大化reward。
+总结 RL并不需要出现正确的输入/输出对，也不需要精确校正次优化的行为。RL更加专注于在线规划，需要在exploration和exploitation之间找到平衡。
+概念解释 奖励rewards 很重要，独家的 $R_{t}$是一个标量反馈信号反映了智能体在时刻$t$行为的好坏 Agent的目的即最大化累积回报 RL奖励假设：所有目标都可以表示为最大化期望累计回报
+马尔可夫性 Markov Property 随机过程的某事件只取决于它的上一事件，与初始状态无关。（以前写过，不赘述）
+这是强化学习的主要研究问题——马尔可夫决策过程 （Markov Decision Process，MDP）
+MDP问题组成 策略（Policy）、值函数（value function）、模型（model）
+policy 最终的目的就是找到一个策略，通过策略可以描述智能体的行为。
+由当前看到的observation来决定action，是从state到action的映射，直观上描述就是：当智能体在什么状态时应该做什么事。 有两种表达形式： 一种是Deterministic policy（确定策略）在某种状态下，一定会执行某个动作$a=\pi(s)$，a时action，s是状态 一种是Stochastic policy（随机策略）它是在某种状态下执行某个动作的概率。$\pi(a|s)=P[A_t=a|S_t=s]$
+回报 它预测了当前状态下未来可能获得的reward的期望，用来评价当前状态的好坏程度 Return(回报):$G_t/U_t$为在一个马尔科夫奖励链上从t时刻开始往后所有的奖励的有衰减的收益总和。
+$$ G(s_0,s_1,s_2…=)=\sum_{t=0}^\infty\gamma^tR(s_t)\ \leq\sum_{t=0}^\infty\gamma^tR_{max}=\frac{R_{max}}{1-\gamma} $$
+这里s是状态，R是reward=奖励； 第二个等式用的高数里面的幂级数展开 强化学习的目的是最大化长期未来奖励，即寻找最大的 U
+其中的$\gamma\in[0,1]$ 指的是衰减因子，体现了未来的奖励在当前时刻的价值比例， 接近0，则表明趋向于“近视”性评估；接近1则表明偏重考虑远期的利益。">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "强化学习",
+      "item": "https://milong26.github.io/post/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "强化学习",
+  "name": "强化学习",
+  "description": "先根据课程梳理一条线，后面会把其它我觉得有类似的补充过来\nCourse by David Silver 本章内容出自UCL Course on RL by David Silver\nintroduction of RL 一句话：RL=非监督+有奖励 需要考虑如何设计奖励。 这一章好多概念性的东西，so我进行了精简，看不懂可以参考 学完可能会会过头来看看\n原理 强化学习是一个序列决策（Sequential Decision Making）问题：连续选择一些行为，从这些行为完成后得到最大的收益作为最好的结果。 先尝试实践，得到反馈之后调整。\n区别 vs监督学习 监督学习有标签；立刻反馈；输入时独立分布的 RL没有标签；反馈有延时；输入变化 强化学习具有时间相关性（作为序列决策问题，属于非独立同分布数据）。\nvs其它非监督学习 非监督学习主要是为了挖掘无标签数据之间的内部关联（譬如聚类问题） RL是为了最大化reward。\n总结 RL并不需要出现正确的输入/输出对，也不需要精确校正次优化的行为。RL更加专注于在线规划，需要在exploration和exploitation之间找到平衡。\n概念解释 奖励rewards 很重要，独家的 $R_{t}$是一个标量反馈信号反映了智能体在时刻$t$行为的好坏 Agent的目的即最大化累积回报 RL奖励假设：所有目标都可以表示为最大化期望累计回报\n马尔可夫性 Markov Property 随机过程的某事件只取决于它的上一事件，与初始状态无关。（以前写过，不赘述）\n这是强化学习的主要研究问题——马尔可夫决策过程 （Markov Decision Process，MDP）\nMDP问题组成 策略（Policy）、值函数（value function）、模型（model）\npolicy 最终的目的就是找到一个策略，通过策略可以描述智能体的行为。\n由当前看到的observation来决定action，是从state到action的映射，直观上描述就是：当智能体在什么状态时应该做什么事。 有两种表达形式： 一种是Deterministic policy（确定策略）在某种状态下，一定会执行某个动作$a=\\pi(s)$，a时action，s是状态 一种是Stochastic policy（随机策略）它是在某种状态下执行某个动作的概率。$\\pi(a|s)=P[A_t=a|S_t=s]$\n回报 它预测了当前状态下未来可能获得的reward的期望，用来评价当前状态的好坏程度 Return(回报):$G_t/U_t$为在一个马尔科夫奖励链上从t时刻开始往后所有的奖励的有衰减的收益总和。\n$$ G(s_0,s_1,s_2\u0026hellip;=)=\\sum_{t=0}^\\infty\\gamma^tR(s_t)\\ \\leq\\sum_{t=0}^\\infty\\gamma^tR_{max}=\\frac{R_{max}}{1-\\gamma} $$\n这里s是状态，R是reward=奖励； 第二个等式用的高数里面的幂级数展开 强化学习的目的是最大化长期未来奖励，即寻找最大的 U\n其中的$\\gamma\\in[0,1]$ 指的是衰减因子，体现了未来的奖励在当前时刻的价值比例， 接近0，则表明趋向于“近视”性评估；接近1则表明偏重考虑远期的利益。\n",
+  "keywords": [
+    "reinforcement learn", "ai"
+  ],
+  "articleBody": "先根据课程梳理一条线，后面会把其它我觉得有类似的补充过来\nCourse by David Silver 本章内容出自UCL Course on RL by David Silver\nintroduction of RL 一句话：RL=非监督+有奖励 需要考虑如何设计奖励。 这一章好多概念性的东西，so我进行了精简，看不懂可以参考 学完可能会会过头来看看\n原理 强化学习是一个序列决策（Sequential Decision Making）问题：连续选择一些行为，从这些行为完成后得到最大的收益作为最好的结果。 先尝试实践，得到反馈之后调整。\n区别 vs监督学习 监督学习有标签；立刻反馈；输入时独立分布的 RL没有标签；反馈有延时；输入变化 强化学习具有时间相关性（作为序列决策问题，属于非独立同分布数据）。\nvs其它非监督学习 非监督学习主要是为了挖掘无标签数据之间的内部关联（譬如聚类问题） RL是为了最大化reward。\n总结 RL并不需要出现正确的输入/输出对，也不需要精确校正次优化的行为。RL更加专注于在线规划，需要在exploration和exploitation之间找到平衡。\n概念解释 奖励rewards 很重要，独家的 $R_{t}$是一个标量反馈信号反映了智能体在时刻$t$行为的好坏 Agent的目的即最大化累积回报 RL奖励假设：所有目标都可以表示为最大化期望累计回报\n马尔可夫性 Markov Property 随机过程的某事件只取决于它的上一事件，与初始状态无关。（以前写过，不赘述）\n这是强化学习的主要研究问题——马尔可夫决策过程 （Markov Decision Process，MDP）\nMDP问题组成 策略（Policy）、值函数（value function）、模型（model）\npolicy 最终的目的就是找到一个策略，通过策略可以描述智能体的行为。\n由当前看到的observation来决定action，是从state到action的映射，直观上描述就是：当智能体在什么状态时应该做什么事。 有两种表达形式： 一种是Deterministic policy（确定策略）在某种状态下，一定会执行某个动作$a=\\pi(s)$，a时action，s是状态 一种是Stochastic policy（随机策略）它是在某种状态下执行某个动作的概率。$\\pi(a|s)=P[A_t=a|S_t=s]$\n回报 它预测了当前状态下未来可能获得的reward的期望，用来评价当前状态的好坏程度 Return(回报):$G_t/U_t$为在一个马尔科夫奖励链上从t时刻开始往后所有的奖励的有衰减的收益总和。\n$$ G(s_0,s_1,s_2…=)=\\sum_{t=0}^\\infty\\gamma^tR(s_t)\\ \\leq\\sum_{t=0}^\\infty\\gamma^tR_{max}=\\frac{R_{max}}{1-\\gamma} $$\n这里s是状态，R是reward=奖励； 第二个等式用的高数里面的幂级数展开 强化学习的目的是最大化长期未来奖励，即寻找最大的 U\n其中的$\\gamma\\in[0,1]$ 指的是衰减因子，体现了未来的奖励在当前时刻的价值比例， 接近0，则表明趋向于“近视”性评估；接近1则表明偏重考虑远期的利益。\n关于Return的计算为什么要折扣系数？换句话，为什么不直接干脆地计算未来收益\n越未来的收益权越低 我看不懂，但是直觉上可以理解 目前貌似还没能找到更有效的表示方法 如果硬要死磕到底可以看看这篇论文 状态价值函数 $$ V(s)=E[U_t|S_t=s] $$ 为在t时刻状态s能获得的未来回报的期望。 加入动作选择策略之后变成 $V_\\pi(s)=E_\\pi[U_t|S_t=s]$ 其中$R_{t+1}+\\gamma R_{t+2}+…+\\gamma^{T-t-1}R_T$\n动作价值函数 $$ q_\\pi=E\\pi[U_t|S_t=s,A_t=a] $$ 表示在t时刻、s状态，选择a的动作后能获得回报的期望\nMarkov Decision Processes 状态转移矩阵 状态转移概率，指的是从一个马尔可夫状态s跳转到后继状态s’的概率 所有的状态组成行，所有的后继状态组成列，我们得到状态转移矩阵： 每行元素相加等于1,P代表了整个状态转移的集合 $$ P= \\left [ \\begin{matrix} P_{11} \u0026 \\cdots \u0026 P_{1n}\\ \\vdots \u0026 \\ddots \u0026\\vdots \\ P_{n1} \u0026 \\cdots \u0026 P_{nn} \\end{matrix} \\right] $$\n马尔科夫奖励过程（Markov Reward Process，MRP） MRP:{S,P,R,$\\gamma$} 不知道这里字母啥意思的往前翻\n对introduction里提到的状态价值函数：$V(s)=E[U_t|S_t=s]$再分析下： 进行分解：v=立即回报$R_{t+1}$和后续状态的折扣值函数$\\gamma v(S_{t+1})$ $$ v(s)=E[U_t|S_t=s]\\ =E[R_{t+1}+\\gamma R_{t+2}+…|S_t=s]\\ =E[R_{t+1}+\\gamma(R_{t+2}+\\gamma R_{t+3}+…)|S_t=s]\\ =E[R_{t+1}+\\gamma U_{t+1}|S_t=s]\\ $$ 在已知状态转移矩阵P的时候可以展开 $$ =E[R_{t+1}|S_t=s]+\\gamma E[v(S_{t+1})|S_t=s]\\ =R_s+\\gamma \\sum_{s’\\in S}P_{ss’}v(s’) $$ （最后的结果称为bellman方程） 附数学期望的定义：\n和的期望等于期望的和 离散型随机变量X有概率函数$P(X=x_k)=P_k(k=1,2,…)$，若级数$\\sum_{k=1}^\\infty x_k p_k$绝对收敛，则称这个级数为X的数学期望。 绝对收敛： 如果级数$\\sum_{n=1}^\\infty u_n$各项的绝对值所构成的级数$\\sum_{n=1}^\\infty|u_n|$收敛，则称级数绝对收敛\n引入Bellman方程 $v=R+\\gamma pv$ 其中v是状态价值函数，R是reward，p是状态转移矩阵 当状态集合为$S={s_1,s_2,s_3,…s_n}$时， $$ \\left[\\begin{matrix} v(s_1)\\ \\vdots\\ v(s_n) \\end{matrix}\\right]= \\left[\\begin{matrix} R(s_1)\\ \\vdots\\ R(s_n) \\end{matrix}\\right]+\\gamma \\left[\\begin{matrix} P_{s_1s_1} \u0026 \\cdots \u0026 P_{s_1s_n}\\ \\vdots \u0026 \u0026 \\vdots\\ R_{s_ns_1} \u0026 \\cdots \u0026 P_{s_ns_n} \\end{matrix}\\right] \\left[\\begin{matrix} v(s_1)\\ \\vdots\\ v(s_n) \\end{matrix}\\right] $$ 贝尔曼方程本质上是线性方程，通过矩阵求解： $$ (1-\\gamma P)v=R\\ v=(1-\\gamma P^{-1}R) $$ 逆向强化学习用的就是这个公式\n实际上，计算复杂度是O(n^3)，n是状态数量。因此直接求解仅适用于小规模的MRPs。大规模MRP的求解通常使用迭代法。常用的迭代方法有：动态规划（Dynamic Programming, DP）、蒙特卡洛评估（Monte-Carlo evaluation）、时序差分学习（Temporal-Difference, TD），后文会逐步讲解这些方法。\n马尔科夫决策过程（Markov Decision Process，MDP） 相比MRP，MDP多了一个动作集A，其它都一样 强化学习的终极目标是找到policy\n$$ P_{ss’}^\\pi=\\sum_{a\\in A}(a|s)P_{ss’}^a $$ 执行策略$\\pi$时，从状态s转移到s’的概率=概率（执行当前a策略时，做某一action的概率该action能让状态s-\u003es’的概率）和奖励函数： $$ R_s^\\pi=\\sum_{a\\in A}\\pi(a|s)R_s^a $$ 状态s时执行策略$\\pi$得到的reward=sum of（该策略下all可能action的reward该行为发生的概率）\n基于策略$\\pi$的价值函数：\n状态价值函数 $$ v_\\pi(s)=E_\\pi[U_t|S_t=s] $$ 策略是静态的、关于整体的概念，不随状态改变而改变；变化的是在某一个状态时，依据策略可能产生的具体行为，因为具体的行为是有一定的概率的，策略就是用来描述各个不同状态下执行各个不同行为的概率。\n行为价值函数 $$ q_\\pi(s,a)=E_\\pi[U_t|S_t=s,A_t=a] $$ 表示在执行策略$\\pi$时，对当前状态s执行某一具体行为a所能得到的收获的期望； 或者说在遵循当前策略$\\pi$时，衡量对当前状态执行行为a的价值大小。行为价值函数一般都是与某一特定的状态相对应的，更精细的描述是状态行为对价值函数。\nBellman期望方程 放了国庆假之后才继续学的，有点懵了回顾下之前的\nRL的目的：最大化reward $v(a|s)$是概率，状态s下执行动作a的概率，P是状态之间转移的概率矩阵 $\\pi$是选择的策略，通常放在下标 $U_t=R_{t+1}+\\gamma R_{t+2}+…$是t时刻开始往后所有的奖励的有衰减的收益总和，$\\gamma\\in[0,1]$\n状态价值函数（无策略） $v(s)=R_s+\\gamma\\sum_{s’\\in S}P_{ss’}v(s’)$ （但是这个公式是用来计算什么的呢…） 价值函数有2种：因为U有时效性，所以计算的时候可以用接近于递归的方法计算，而且计算的时候为了方便有几种变体，再看之前的说明吧 虽然没标出来，但这里俩公式都是基于$\\pi$的，最终的计算公式和不基于策略的不一样\n状态价值函数$v=E[U|s]$ 行为价值函数$q=E[U|s,a]$ MDP下的状态价值函数和行为价值函数与MRP下的价值函数类似，可以改用下一时刻状态价值函数或行为价值函数来表达 状态和行为价值函数分别如下： $$ 忘记了？U_t=R_{t+1}+\\gamma R_{t+2}+…\\ v_\\pi(s)=E_\\pi[R_{t+1}+\\gamma v_\\pi(S_{t+1})|S_t=s] \\ q_\\pi(s,a)=\\Bbb E_\\pi [R_{t+1}+\\gamma q_{\\pi}\\left( S_{t+1},A_{t+1} \\right)|{S_t}=s,{A_t}=a] $$\n基于策略的和之前相比，多出的是action 状态和行为价值函数互换： $$ {v_\\pi}(s)= \\sum \\limits_{a\\in \\cal A}π(a|s)q_\\pi(s,a) $$ 在遵循策略$\\pi$时，状态s的价值体现为：在该状态下遵循某一策略而采取所有可能行为的价值按行为发生概率的乘积求和 $$ {q_\\pi}(s,a)={\\cal R}{^a_s}+\\gamma \\sum \\limits_{s’\\in \\cal S}\\cal P{^a_{ss’}}v_\\pi(s’) $$ $q_\\pi$这个等式非常像MRP里面推到的$v(s)，只是在R和P增加了上标a\n卡酷一得修，那就来试试2.4.5学生MDP举例\n最优价值函数 $v_(s)=\\mathop{max}\\limits_{\\pi}v_\\pi(s)$ 最优行为价值函数差不多，不重复写了 为了找到$v_$,假设最优策略是确定性的策略，那么${\\pi_}(s,a)$是one-hot形式，so只要满足$q_{\\pi_}( s,a )$最大 $$ v_( s)=v_{\\pi_}( s )=\\sum \\limits_{a\\in A}\\pi_(a|s)q_{\\pi_}(s,a)=\\max_aq_{\\pi_}( s,a )=\\max_aq_( s,a ) $$\n针对$q_*$，在某个状态s下，采取某个行为的最优价值由2部分组成，一部分是离开状态 的即刻奖励，另一部分则是所有能到达的状态s’的最优状态价值按出现概率求和：\n",
+  "wordCount" : "306",
+  "inLanguage": "en",
+  "datePublished": "2023-09-11T19:56:04Z",
+  "dateModified": "2023-09-11T19:56:04Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      强化学习
+    </h1>
+    <div class="post-meta">
+
+<span title='2023-09-11 19:56:04 +0000 UTC'>September 11, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>先根据课程梳理一条线，后面会把其它我觉得有类似的补充过来</p>
+<h1 id="course-by-david-silver">Course by David Silver<a hidden class="anchor" aria-hidden="true" href="#course-by-david-silver">#</a></h1>
+<p>本章内容出自<a href="https://www.davidsilver.uk/teaching/">UCL Course on RL by David Silver</a></p>
+<h2 id="introduction-of-rl">introduction of RL<a hidden class="anchor" aria-hidden="true" href="#introduction-of-rl">#</a></h2>
+<p>一句话：RL=非监督+有奖励
+需要考虑如何设计奖励。
+这一章好多概念性的东西，so我进行了精简，看不懂可以<a href="https://zhuanlan.zhihu.com/p/50553186">参考</a>
+<strong>学完可能会会过头来看看</strong></p>
+<h3 id="原理">原理<a hidden class="anchor" aria-hidden="true" href="#原理">#</a></h3>
+<p>强化学习是一个序列决策（Sequential Decision Making）问题：连续选择一些行为，从这些行为完成后得到最大的收益作为最好的结果。
+先尝试实践，得到反馈之后调整。</p>
+<h3 id="区别">区别<a hidden class="anchor" aria-hidden="true" href="#区别">#</a></h3>
+<h4 id="vs监督学习">vs监督学习<a hidden class="anchor" aria-hidden="true" href="#vs监督学习">#</a></h4>
+<p>监督学习有标签；立刻反馈；输入时独立分布的
+RL没有标签；反馈有延时；输入变化
+强化学习具有时间相关性（作为序列决策问题，属于非独立同分布数据）。</p>
+<h4 id="vs其它非监督学习">vs其它非监督学习<a hidden class="anchor" aria-hidden="true" href="#vs其它非监督学习">#</a></h4>
+<p>非监督学习主要是为了挖掘无标签数据之间的内部关联（譬如聚类问题）
+RL是为了最大化reward。</p>
+<h4 id="总结">总结<a hidden class="anchor" aria-hidden="true" href="#总结">#</a></h4>
+<p>RL并不需要出现正确的输入/输出对，也不需要精确校正次优化的行为。RL更加专注于在线规划，需要在exploration和exploitation之间找到平衡。</p>
+<h3 id="概念解释">概念解释<a hidden class="anchor" aria-hidden="true" href="#概念解释">#</a></h3>
+<h4 id="奖励rewards">奖励rewards<a hidden class="anchor" aria-hidden="true" href="#奖励rewards">#</a></h4>
+<p>很重要，独家的
+$R_{t}$是一个标量反馈信号反映了智能体在时刻$t$行为的好坏
+Agent的目的即最大化累积回报
+RL奖励假设：所有目标都可以表示为最大化期望累计回报</p>
+<h4 id="马尔可夫性-markov-property">马尔可夫性 Markov Property<a hidden class="anchor" aria-hidden="true" href="#马尔可夫性-markov-property">#</a></h4>
+<p>随机过程的某事件只取决于它的上一事件，与初始状态无关。（以前写过，不赘述）</p>
+<p>这是强化学习的主要研究问题——马尔可夫决策过程 （Markov Decision Process，MDP）</p>
+<h3 id="mdp问题组成">MDP问题组成<a hidden class="anchor" aria-hidden="true" href="#mdp问题组成">#</a></h3>
+<p>策略（Policy）、值函数（value function）、模型（model）</p>
+<h4 id="policy">policy<a hidden class="anchor" aria-hidden="true" href="#policy">#</a></h4>
+<p>最终的目的就是找到一个策略，通过策略可以描述智能体的行为。</p>
+<p>由当前看到的observation来决定action，是从state到action的映射，直观上描述就是：当智能体在什么状态时应该做什么事。
+有两种表达形式：
+一种是Deterministic policy（确定策略）在某种状态下，一定会执行某个动作$a=\pi(s)$，a时action，s是状态
+一种是Stochastic policy（随机策略）它是在某种状态下执行某个动作的概率。$\pi(a|s)=P[A_t=a|S_t=s]$</p>
+<h4 id="回报">回报<a hidden class="anchor" aria-hidden="true" href="#回报">#</a></h4>
+<p>它预测了当前状态下未来可能获得的reward的期望，用来评价当前状态的好坏程度
+Return(回报):$G_t/U_t$为在一个马尔科夫奖励链上从t时刻开始往后所有的奖励的有衰减的收益总和。</p>
+<p>$$
+G(s_0,s_1,s_2&hellip;=)=\sum_{t=0}^\infty\gamma^tR(s_t)\
+\leq\sum_{t=0}^\infty\gamma^tR_{max}=\frac{R_{max}}{1-\gamma}
+$$</p>
+<p>这里s是状态，R是reward=奖励；
+第二个等式用的高数里面的幂级数展开
+强化学习的目的是最大化长期未来奖励，即寻找最大的 U</p>
+<p>其中的$\gamma\in[0,1]$ 指的是衰减因子，体现了未来的奖励在当前时刻的价值比例， 接近0，则表明趋向于“近视”性评估；接近1则表明偏重考虑远期的利益。</p>
+<p>关于Return的计算为什么要折扣系数？换句话，为什么不直接干脆地计算未来收益</p>
+<ul>
+<li>越未来的收益权越低</li>
+<li>我看不懂，但是直觉上可以理解</li>
+<li>目前貌似还没能找到更有效的表示方法</li>
+<li>如果硬要死磕到底可以看看<a href="https://arxiv.org/abs/1606.02647">这篇论文</a></li>
+</ul>
+<h4 id="状态价值函数">状态价值函数<a hidden class="anchor" aria-hidden="true" href="#状态价值函数">#</a></h4>
+<p>$$
+V(s)=E[U_t|S_t=s]
+$$
+为在t时刻状态s能获得的未来回报的期望。
+加入动作选择策略之后变成
+$V_\pi(s)=E_\pi[U_t|S_t=s]$
+其中$R_{t+1}+\gamma R_{t+2}+&hellip;+\gamma^{T-t-1}R_T$</p>
+<h4 id="动作价值函数">动作价值函数<a hidden class="anchor" aria-hidden="true" href="#动作价值函数">#</a></h4>
+<p>$$
+q_\pi=E\pi[U_t|S_t=s,A_t=a]
+$$
+表示在t时刻、s状态，选择a的动作后能获得回报的期望</p>
+<h2 id="markov-decision-processes">Markov Decision Processes<a hidden class="anchor" aria-hidden="true" href="#markov-decision-processes">#</a></h2>
+<h3 id="状态转移矩阵">状态转移矩阵<a hidden class="anchor" aria-hidden="true" href="#状态转移矩阵">#</a></h3>
+<p>状态转移概率，指的是从一个马尔可夫状态s跳转到后继状态s&rsquo;的概率
+所有的状态组成行，所有的后继状态组成列，我们得到状态转移矩阵：
+每行元素相加等于1,P代表了整个状态转移的集合
+$$
+P=  \left [ \begin{matrix}
+P_{11} &amp; \cdots &amp; P_{1n}\
+\vdots &amp; \ddots &amp;\vdots \
+P_{n1} &amp; \cdots &amp; P_{nn}
+\end{matrix} \right]
+$$</p>
+<h3 id="马尔科夫奖励过程markov-reward-processmrp">马尔科夫奖励过程（Markov Reward Process，MRP）<a hidden class="anchor" aria-hidden="true" href="#马尔科夫奖励过程markov-reward-processmrp">#</a></h3>
+<p>MRP:{S,P,R,$\gamma$} 不知道这里字母啥意思的往前翻</p>
+<p>对<a href="#introduction-of-rl"><strong>introduction</strong></a>里提到的状态价值函数：$V(s)=E[U_t|S_t=s]$再分析下：
+进行分解：v=立即回报$R_{t+1}$和后续状态的折扣值函数$\gamma v(S_{t+1})$
+$$
+v(s)=E[U_t|S_t=s]\
+=E[R_{t+1}+\gamma R_{t+2}+&hellip;|S_t=s]\
+=E[R_{t+1}+\gamma(R_{t+2}+\gamma R_{t+3}+&hellip;)|S_t=s]\
+=E[R_{t+1}+\gamma U_{t+1}|S_t=s]\
+$$
+在已知状态转移矩阵P的时候可以展开
+$$
+=E[R_{t+1}|S_t=s]+\gamma E[v(S_{t+1})|S_t=s]\
+=R_s+\gamma \sum_{s&rsquo;\in S}P_{ss&rsquo;}v(s&rsquo;)
+$$
+（最后的结果称为bellman方程）
+附数学期望的定义：</p>
+<blockquote>
+<p>和的期望等于期望的和
+离散型随机变量X有概率函数$P(X=x_k)=P_k(k=1,2,&hellip;)$，若级数$\sum_{k=1}^\infty x_k p_k$绝对收敛，则称这个级数为X的数学期望。
+绝对收敛：
+如果级数$\sum_{n=1}^\infty u_n$各项的绝对值所构成的级数$\sum_{n=1}^\infty|u_n|$收敛，则称级数绝对收敛</p>
+</blockquote>
+<p>引入Bellman方程
+$v=R+\gamma pv$
+其中v是状态价值函数，R是reward，p是状态转移矩阵
+当状态集合为$S={s_1,s_2,s_3,&hellip;s_n}$时，
+$$
+\left[\begin{matrix}
+v(s_1)\
+\vdots\
+v(s_n)
+\end{matrix}\right]=
+\left[\begin{matrix}
+R(s_1)\
+\vdots\
+R(s_n)
+\end{matrix}\right]+\gamma
+\left[\begin{matrix}
+P_{s_1s_1} &amp; \cdots &amp; P_{s_1s_n}\
+\vdots &amp; &amp; \vdots\
+R_{s_ns_1} &amp; \cdots &amp; P_{s_ns_n}
+\end{matrix}\right]
+\left[\begin{matrix}
+v(s_1)\
+\vdots\
+v(s_n)
+\end{matrix}\right]
+$$
+贝尔曼方程本质上是线性方程，通过矩阵求解：
+$$
+(1-\gamma P)v=R\
+v=(1-\gamma P^{-1}R)
+$$
+<a href="https://ai.stanford.edu/~ang/papers/icml00-irl.pdf">逆向强化学习</a>用的就是这个公式</p>
+<p>实际上，计算复杂度是O(n^3)，n是状态数量。因此直接求解仅适用于小规模的MRPs。大规模MRP的求解通常使用迭代法。常用的迭代方法有：动态规划（Dynamic Programming, DP）、蒙特卡洛评估（Monte-Carlo evaluation）、时序差分学习（Temporal-Difference, TD），后文会逐步讲解这些方法。</p>
+<h3 id="马尔科夫决策过程markov-decision-processmdp">马尔科夫决策过程（Markov Decision Process，MDP）<a hidden class="anchor" aria-hidden="true" href="#马尔科夫决策过程markov-decision-processmdp">#</a></h3>
+<p>相比MRP，MDP多了一个动作集A，其它都一样
+强化学习的终极目标是找到policy</p>
+<p>$$
+P_{ss&rsquo;}^\pi=\sum_{a\in A}(a|s)P_{ss&rsquo;}^a
+$$
+执行策略$\pi$时，从状态s转移到s&rsquo;的概率=概率（执行当前a策略时，做某一action的概率<em>该action能让状态s-&gt;s&rsquo;的概率）和奖励函数：
+$$
+R_s^\pi=\sum_{a\in A}\pi(a|s)R_s^a
+$$
+状态s时执行策略$\pi$得到的reward=sum of（该策略下all可能action的reward</em>该行为发生的概率）</p>
+<p>基于策略$\pi$的价值函数：</p>
+<ul>
+<li>
+<p>状态价值函数
+$$
+v_\pi(s)=E_\pi[U_t|S_t=s]
+$$
+策略是静态的、关于整体的概念，不随状态改变而改变；变化的是在某一个状态时，依据策略可能产生的具体行为，因为具体的行为是有一定的概率的，策略就是用来描述各个不同状态下执行各个不同行为的概率。</p>
+</li>
+<li>
+<p>行为价值函数
+$$
+q_\pi(s,a)=E_\pi[U_t|S_t=s,A_t=a]
+$$
+表示在执行策略$\pi$时，对当前状态s执行某一具体行为a所能得到的收获的期望；
+或者说在遵循当前策略$\pi$时，衡量对当前状态执行行为a的价值大小。行为价值函数一般都是与某一特定的状态相对应的，更精细的描述是状态行为对价值函数。</p>
+</li>
+</ul>
+<h3 id="bellman期望方程">Bellman期望方程<a hidden class="anchor" aria-hidden="true" href="#bellman期望方程">#</a></h3>
+<p>放了国庆假之后才继续学的，有点懵了回顾下之前的</p>
+<hr>
+<p>RL的目的：最大化reward
+$v(a|s)$是<strong>概率</strong>，状态s下执行动作a的概率，P是状态之间转移的概率矩阵
+$\pi$是选择的策略，通常放在下标
+$U_t=R_{t+1}+\gamma R_{t+2}+&hellip;$是t时刻开始往后所有的奖励的有衰减的收益总和，$\gamma\in[0,1]$</p>
+<p>状态价值函数（无策略）
+$v(s)=R_s+\gamma\sum_{s&rsquo;\in S}P_{ss&rsquo;}v(s&rsquo;)$
+（但是这个公式是用来计算什么的呢&hellip;）
+价值函数有2种：因为U有时效性，所以计算的时候可以用接近于递归的方法计算，而且计算的时候为了方便有几种变体，再看之前的说明吧
+虽然没标出来，但这里俩公式<strong>都是</strong>基于$\pi$的，最终的计算公式和不基于策略的不一样</p>
+<ul>
+<li>状态价值函数$v=E[U|s]$</li>
+<li>行为价值函数$q=E[U|s,a]$</li>
+</ul>
+<hr>
+<p>MDP下的状态价值函数和行为价值函数与MRP下的价值函数类似，可以改用下一时刻状态价值函数或行为价值函数来表达
+状态和行为价值函数分别如下：
+$$
+忘记了？U_t=R_{t+1}+\gamma R_{t+2}+&hellip;\
+v_\pi(s)=E_\pi[R_{t+1}+\gamma v_\pi(S_{t+1})|S_t=s] \
+q_\pi(s,a)=\Bbb E_\pi [R_{t+1}+\gamma q_{\pi}\left( S_{t+1},A_{t+1} \right)|{S_t}=s,{A_t}=a]
+$$</p>
+<p>基于策略的和之前相比，多出的是action
+状态和行为价值函数互换：
+$$
+{v_\pi}(s)= \sum \limits_{a\in \cal A}π(a|s)q_\pi(s,a)
+$$
+在遵循策略$\pi$时，状态s的价值体现为：在该状态下遵循某一策略而采取所有可能行为的价值按行为发生概率的乘积求和
+$$
+{q_\pi}(s,a)={\cal R}{^a_s}+\gamma \sum \limits_{s&rsquo;\in \cal S}\cal P{^a_{ss&rsquo;}}v_\pi(s&rsquo;)
+$$
+$q_\pi$这个等式非常像MRP里面推到的$v(s)，只是在R和P增加了上标a</p>
+<p>卡酷一得修，那就来试试<a href="https://zhuanlan.zhihu.com/p/85635442">2.4.5学生MDP举例</a></p>
+<h3 id="最优价值函数">最优价值函数<a hidden class="anchor" aria-hidden="true" href="#最优价值函数">#</a></h3>
+<p>$v_<em>(s)=\mathop{max}\limits_{\pi}v_\pi(s)$
+最优行为价值函数差不多，不重复写了
+为了找到$v_</em>$,假设最优策略是确定性的策略，那么${\pi_<em>}(s,a)$是one-hot形式，so只要满足$q_{\pi_</em>}( s,a )$最大
+$$
+v_<em>( s)=v_{\pi_</em>}( s )=\sum \limits_{a\in A}\pi_<em>(a|s)q_{\pi_</em>}(s,a)=\max_aq_{\pi_<em>}( s,a )=\max_aq_</em>( s,a )
+$$</p>
+<p>针对$q_*$，在某个状态s下，采取某个行为的最优价值由2部分组成，一部分是离开状态
+的即刻奖励，另一部分则是所有能到达的状态s&rsquo;的最优状态价值按出现概率求和：</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/reinforcement-learn/">Reinforcement Learn</a></li>
+      <li><a href="https://milong26.github.io/tags/ai/">Ai</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

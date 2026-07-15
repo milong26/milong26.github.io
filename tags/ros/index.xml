@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Ros on 我的博客</title>
+    <link>https://milong26.github.io/tags/ros/</link>
+    <description>Recent content in Ros on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 13 Nov 2025 10:04:05 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/ros/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ros</title>
+      <link>https://milong26.github.io/post/ros/</link>
+      <pubDate>Thu, 13 Nov 2025 10:04:05 +0000</pubDate>
+      <guid>https://milong26.github.io/post/ros/</guid>
+      <description>&lt;p&gt;原来是一个系统集成的框架，和Lerobot相比它侧重于真实场景的“系统”。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

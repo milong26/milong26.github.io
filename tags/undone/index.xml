@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Undone on 我的博客</title>
+    <link>https://milong26.github.io/tags/undone/</link>
+    <description>Recent content in Undone on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 03 Mar 2024 15:11:54 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/undone/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>最大似然估计</title>
+      <link>https://milong26.github.io/post/%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/</link>
+      <pubDate>Sun, 03 Mar 2024 15:11:54 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/</guid>
+      <description>&lt;p&gt;hello&lt;/p&gt;
+&lt;p&gt;参考这一篇&lt;a href=&#34;https://zhuanlan.zhihu.com/p/55791843&#34;&gt;hehe&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>npm</title>
+      <link>https://milong26.github.io/post/npm/</link>
+      <pubDate>Thu, 29 Feb 2024 17:30:15 +0000</pubDate>
+      <guid>https://milong26.github.io/post/npm/</guid>
+      <description>&lt;p&gt;淘宝镜像过期
+提示：request to &lt;a href=&#34;https://registry.npm.taobao.org/xxx&#34;&gt;https://registry.npm.taobao.org/xxx&lt;/a&gt; failed, reason: certificate has expired
+三、解决方案&lt;/p&gt;
+&lt;p&gt;1、查看当前的npm镜像设置：npm config list&lt;/p&gt;
+&lt;p&gt;2、清空缓存：npm cache clean &amp;ndash;force&lt;/p&gt;
+&lt;p&gt;3、然后修改镜像即可：npm config set registry &lt;a href=&#34;https://registry.npmmirror.com&#34;&gt;https://registry.npmmirror.com&lt;/a&gt; 一般国内用户还是建议使用淘宝镜像，所以推荐还是设置成用淘宝镜像
+4、再次运行： npm config list，查看 registry 已经被更改为默认的 npm 公共镜像地址。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>xshell和xftp指北</title>
+      <link>https://milong26.github.io/post/xshell%E6%8C%87%E5%8C%97/</link>
+      <pubDate>Sat, 06 Jan 2024 16:24:20 +0000</pubDate>
+      <guid>https://milong26.github.io/post/xshell%E6%8C%87%E5%8C%97/</guid>
+      <description>&lt;p&gt;XShell 是一种流行且简单的网络程序，旨在模拟虚拟终端。XShell可以在Windows界面下来访问远端不同系统下的服务器，从而比较好的达到远程控制终端的目的。它支持 RLOGIN、SFTP、SERIAL、TELNET、SSH2 和 SSH1，可以非常方便的对Linux主机进行远程管理。除此之外，其还有丰富的外观配色方案以及样式选择。
+xftp是用来上传和下载文件的&lt;/p&gt;
+&lt;h1 id=&#34;下载与安装&#34;&gt;下载与安装&lt;/h1&gt;
+&lt;p&gt;下载地址：https://www.xshell.com/zh/free-for-home-school/
+xshell和xftp都可以下载
+安装：直接无脑安装，但是不知道为啥它还要自己新建文件夹，不能自动创建吗
+注册：随便用个邮箱注册，它不是商用的&lt;/p&gt;
+&lt;h1 id=&#34;使用&#34;&gt;使用&lt;/h1&gt;
+&lt;h2 id=&#34;连接&#34;&gt;连接&lt;/h2&gt;</description>
+    </item>
+    <item>
+      <title>batch</title>
+      <link>https://milong26.github.io/post/batch/</link>
+      <pubDate>Tue, 26 Dec 2023 20:23:43 +0000</pubDate>
+      <guid>https://milong26.github.io/post/batch/</guid>
+      <description>&lt;p&gt;包含：mini-batch&lt;/p&gt;
+&lt;h1 id=&#34;batch&#34;&gt;batch&lt;/h1&gt;
+&lt;h1 id=&#34;mini-batch&#34;&gt;mini-batch&lt;/h1&gt;
+&lt;p&gt;在梯度下降中需要对所有样本进行处理过后然后走一步，那么如果我们的样本规模的特别大的话效率就会比较低。
+假如有500万，甚至5000万个样本的话走一轮迭代就会非常的耗时。这个时候的梯度下降叫做full batch。
+所以为了提高效率，我们可以把样本分成&lt;strong&gt;等量的子集&lt;/strong&gt;。
+例如我们把100万样本分成1000份， 每份1000个样本， 这些子集就称为mini batch。
+然后我们分别用一个for循环遍历这1000个子集。 针对每一个子集做一次梯度下降。 然后更新参数w和b的值。接着到下一个子集中继续进行梯度下降。
+这样在遍历完所有的mini batch之后我们相当于在梯度下降中做了1000次迭代。
+我们将遍历一次所有样本的行为叫做一个 epoch，也就是一个世代。 在mini batch下的梯度下降中做的事情其实跟full batch一样，只不过我们训练的数据不再是所有的样本，而是一个个的子集。
+这样在mini batch我们在一个epoch中就能进行1000次的梯度下降，而在full batch中只有一次。 这样就大大的提高了我们算法的运行速度。
+既然有了mini batch那就会有一个batch size的超参数，也就是块大小。代表着每一个mini batch中有多少个样本。 我们一般设置为2的n次方。 例如64,128,512,1024. 一般不会超过这个范围。不能太大，因为太大了会无限接近full batch的行为，速度会慢。 也不能太小，太小了以后可能算法永远不会收敛。 当然如果我们的数据比较小， 但也用不着mini batch了。 full batch的效果是最好的。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>训练具有次线性记忆代价的深度网络</title>
+      <link>https://milong26.github.io/post/%E8%AE%AD%E7%BB%83%E5%85%B7%E6%9C%89%E6%AC%A1%E7%BA%BF%E6%80%A7%E8%AE%B0%E5%BF%86%E4%BB%A3%E4%BB%B7%E7%9A%84%E6%B7%B1%E5%BA%A6%E7%BD%91%E7%BB%9C/</link>
+      <pubDate>Tue, 26 Dec 2023 20:11:12 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E8%AE%AD%E7%BB%83%E5%85%B7%E6%9C%89%E6%AC%A1%E7%BA%BF%E6%80%A7%E8%AE%B0%E5%BF%86%E4%BB%A3%E4%BB%B7%E7%9A%84%E6%B7%B1%E5%BA%A6%E7%BD%91%E7%BB%9C/</guid>
+      <description>&lt;p&gt;主要是激活检查点的技术，不精读了，论文比较古早&lt;/p&gt;
+&lt;h1 id=&#34;paper&#34;&gt;paper&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;标题：Training Deep Nets with Sublinear Memory Cost&lt;/li&gt;
+&lt;li&gt;地址：&lt;a href=&#34;https://arxiv.org/abs/1604.06174&#34;&gt;arxiv&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;摘要&#34;&gt;摘要&lt;/h1&gt;
+&lt;h2 id=&#34;文章结构&#34;&gt;文章结构&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;感觉这篇都是干货，都没提背景&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;贡献：设计了一个系统上的方法
+减少深度神经网络训练时的内存消耗。&lt;/li&gt;
+&lt;li&gt;具体：设计了一种算法
+训练n层网络时消耗$O(\sqrt{n})$的内存，只需要每一个mini-batch额外的foward计算成本。&lt;/li&gt;
+&lt;li&gt;大背景：
+模型达到GPU内存上限&lt;/li&gt;
+&lt;li&gt;目标：
+减少内存消耗
+什么样的：训练过程存储中间特征图和梯度的&lt;/li&gt;
+&lt;li&gt;小背景
+计算图分析Computation graph analysis
+用来：自动现场操作+内存共享优化
+我们证明了有可能以牺牲内存计算为代价，以较小的额外计算成本给出一个更高效的内存训练算法。&lt;/li&gt;
+&lt;li&gt;结果
+在极端情况下，我们的分析还表明，内存消耗可以降低到O ( log n )，而forward的额外开销只有O( nlogn)。
+我们的实验表明，在ImageNet问题上，我们可以将1，000层深度残差网络的内存开销从48G降低到7G。类似地，在非常长的序列上训练复杂的递归神经网络时，观察到显著的记忆成本降低。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;个人总结&#34;&gt;个人总结&lt;/h2&gt;
+&lt;p&gt;大背景是模型超过GPU上限，因为研究的时候大模型还不热（或者说还没出来）；
+采取了&lt;strong&gt;计算图分析&lt;/strong&gt;这个技术，利用其在自动现场操作+内存共享优化这两个方面的作用，以减少训练过程中存储中间特征图（中间结果？）和梯度的内存消耗；
+方法是用额外的forward计算赚回内存消耗，使得训练n层网络只要消耗$O(\sqrt{n})$的内存
+最后还有实际实验数据。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;结构比较另类，可能因为比较早。
+大概需要了解一下计算图分析是什么
+因为不是精读，了解一下后面论文干了什么&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;介绍&#34;&gt;介绍&lt;/h1&gt;
+&lt;p&gt;扩充了摘要部分，有几个问题&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;为什么要搞中间结果
+由于在许多常见的深度架构中，与中间特征图的大小相比，参数的大小相对较小。
+&lt;blockquote&gt;
+&lt;p&gt;中间特征图是什么？看起来像是训练过程中特征的可视化。。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;计算图分析技术
+来进行自动就地(in-place，现场？就地？)操作和内存共享优化。&lt;/li&gt;
+&lt;li&gt;结果写得更清楚
+提出了一种新的方法来用计算换换内存
+我们给出了一个用O (√n )的内存来训练一个n层网络的实用算法，只要两倍的forward计算。
+验证了：在极端情况下，对特征图使用尽可能少的O (log n)内存来训练一个n层网络是可能的。&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    <item>
+      <title>矩阵in线性代数</title>
+      <link>https://milong26.github.io/post/%E7%9F%A9%E9%98%B5in%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/</link>
+      <pubDate>Tue, 26 Dec 2023 16:50:35 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E7%9F%A9%E9%98%B5in%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/</guid>
+      <description>&lt;p&gt;包含正定矩阵、&lt;/p&gt;
+&lt;h1 id=&#34;正定矩阵&#34;&gt;正定矩阵&lt;/h1&gt;
+&lt;p&gt;正定矩阵的定义是从正定二次型来的&lt;/p&gt;
+&lt;h2 id=&#34;判断&#34;&gt;判断&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;求出A的所有&lt;strong&gt;特征值&lt;/strong&gt;
+若A的特征值均为正数，则A是正定的；
+若A的特征值均为负数，则A为负定的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;计算A的&lt;strong&gt;各阶主子式&lt;/strong&gt;。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;顺序主子式的计算方式： 在n 阶方阵中，选取行号i，再选取与行号相同的列号i，行与列均取i个元素的行列式即为n阶行列式的i阶顺序主子式。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;若A的各阶主子式均大于零，则A是正定的；
+若A的各阶主子式中，奇数阶主子式为负，偶数阶为正，则A为负定的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这俩方法里面2稍微简单点。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>SGD vs Adam</title>
+      <link>https://milong26.github.io/post/sgd-vs-adam/</link>
+      <pubDate>Thu, 21 Dec 2023 16:09:48 +0000</pubDate>
+      <guid>https://milong26.github.io/post/sgd-vs-adam/</guid>
+      <description>&lt;p&gt;比较一下SGD和Adam这两个优化器，时间顺序上Adam是对SGD的改进，但是在一些层面SGD还是很好用的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 只写了一点点，没空了，以后再搞
+参考：https://blog.csdn.net/S20144144/article/details/103417502
+参考：https://www.zhihu.com/question/422203931/answers/updated#:~:text=Adam%20%E7%AE%97%E6%B3%95%E5%8F%AF%E4%BB%A5%E7%9C%8B%E4%BD%9C%E6%98%AF%E5%9C%A8,SGD%20%E7%9A%84%E5%9F%BA%E7%A1%80%E4%B8%8A%E8%BF%9B%E8%A1%8C%E4%BA%86%E4%BC%98%E5%8C%96%EF%BC%8C%E5%AE%83%E7%BB%93%E5%90%88%E4%BA%86%E6%A2%AF%E5%BA%A6%E7%9A%84%E4%B8%80%E9%98%B6%E7%9F%A9%E4%BC%B0%E8%AE%A1%E5%92%8C%E4%BA%8C%E9%98%B6%E7%9F%A9%E4%BC%B0%E8%AE%A1%E6%9D%A5%E5%8A%A8%E6%80%81%E8%B0%83%E6%95%B4%E5%AD%A6%E4%B9%A0%E7%8E%87%EF%BC%8C%E4%BD%BF%E5%BE%97%E5%B0%8F%E7%90%83%E8%83%BD%E5%A4%9F%E6%9B%B4%E5%8A%A0%E6%99%BA%E8%83%BD%E5%9C%B0%E6%BB%9A%E5%8A%A8%E5%88%B0%E5%B1%B1%E8%B0%B7%E7%9A%84%E6%9C%80%E4%BD%8E%E7%82%B9%E3%80%82&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;优化算法总览&#34;&gt;优化算法总览&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;SGD.md&#34;&gt;SGD&lt;/a&gt;和&lt;a href=&#34;adam%E4%BC%98%E5%8C%96%E5%99%A8.md&#34;&gt;Adam&lt;/a&gt;的设定部分直接看原文，这里只做总结。&lt;/p&gt;
+&lt;p&gt;深度学习优化算法经历了 SGD -&amp;gt; SGDM -&amp;gt; NAG -&amp;gt;AdaGrad -&amp;gt; AdaDelta -&amp;gt; Adam -&amp;gt; Nadam 这样的发展历程。&lt;/p&gt;
+&lt;p&gt;优化问题：待优化参数w，目标函数f(w)，初始学习率$\alpha$，对该优化问题迭代优化。在每个epoch t：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;计算梯度$g_t=\nabla f(w_t)$&lt;/li&gt;
+&lt;li&gt;根据历史梯度计算一阶动$m_t$量和二阶动量$v_t$（一阶动量和二阶动量分别是历史梯度的一阶函数和二阶函数。）&lt;/li&gt;
+&lt;li&gt;计算当前时刻的下降梯度
+$$
+\Delta\theta_t=-\alpha\cdot \frac{m_t}{\sqrt{v_t}}
+$$&lt;/li&gt;
+&lt;li&gt;根据下降梯度更新
+$$
+w_{t+1}=w_t-\Delta\theta_t
+$$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;步骤3、4对于各个算法都是一致的，主要的差别就体现在1和2上。&lt;/p&gt;
+&lt;h1 id=&#34;sgd&#34;&gt;SGD&lt;/h1&gt;
+&lt;p&gt;SGD没有动量（vanilla SGD），即上面公式里面
+$m_t=g_t,v_t=I^2$&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>数据的稀疏性</title>
+      <link>https://milong26.github.io/post/%E6%95%B0%E6%8D%AE%E7%9A%84%E7%A8%80%E7%96%8F%E6%80%A7/</link>
+      <pubDate>Thu, 21 Dec 2023 11:48:49 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E6%95%B0%E6%8D%AE%E7%9A%84%E7%A8%80%E7%96%8F%E6%80%A7/</guid>
+      <description>&lt;p&gt;稀疏数据是指，数据框中绝大多数数值缺失或者为零的数据&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://kexue.fm/archives/9595&#34;&gt;抄的这一篇&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 没抄完，以后再写&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;狭义上来讲，“稀疏”就是指数据中有大量的零，所以最简单的稀疏性指标就是统计零的比例。但如果仅仅是这样的话，注意力矩阵就谈不上稀疏了，因为softmax出来的结果一定是正数。所以，有必要推广稀疏的概念。一个朴素的想法是统计绝对值不超过ϵ的元素比例，但这个ϵ怎么确定呢？&lt;/p&gt;
+&lt;h1 id=&#34;平均值指标&#34;&gt;平均值指标&lt;/h1&gt;
+&lt;p&gt;1相比于0.0001很大，但是相比10000又很小，所以大和小的概念不是绝对的。直观来想，稀疏的向量存在很多接近于零的数，那么它的绝对值的平均肯定会比较小，又因为大和小的概念是相对的，我们不妨将这个平均值跟最大值做除法，以获得相对结果，所以一个看上去比较合理的指标是
+$$
+S_0(\boldsymbol{x})=\frac{(|x_1|+|x_2|+\cdots+|x_n|)/n}{\max(|x_1|,|x_2|,\cdots,|x_n|)}
+$$&lt;/p&gt;
+&lt;p&gt;指标越小的向量越稀疏。不过，尽管这个指标有一定的合理性，但它却不够“光滑”，主要是max这个操作极易受到异常值的影响，不能很好地反应数据统计特性。&lt;/p&gt;
+&lt;h1 id=&#34;光滑&#34;&gt;光滑&lt;/h1&gt;</description>
+    </item>
+    <item>
+      <title>FlexMoE：基于动态设备放置的大规模稀疏预训练模型训练</title>
+      <link>https://milong26.github.io/post/flexmoe%E5%9F%BA%E4%BA%8E%E5%8A%A8%E6%80%81%E8%AE%BE%E5%A4%87%E6%94%BE%E7%BD%AE%E7%9A%84%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%A8%80%E7%96%8F%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/</link>
+      <pubDate>Mon, 18 Dec 2023 10:44:54 +0000</pubDate>
+      <guid>https://milong26.github.io/post/flexmoe%E5%9F%BA%E4%BA%8E%E5%8A%A8%E6%80%81%E8%AE%BE%E5%A4%87%E6%94%BE%E7%BD%AE%E7%9A%84%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%A8%80%E7%96%8F%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/</guid>
+      <description>&lt;p&gt;动态设备放置是其方法，内容是对大规模稀疏预训练模型的训练。其中预训练模型是在GPT体系里的，现在是预训练-提示语句-微调的结构。
+一句话：改进moe&lt;/p&gt;
+&lt;p&gt;论文地址：&lt;a href=&#34;https://arxiv.org/abs/2304.03946&#34;&gt;arxiv&lt;/a&gt;
+Comments:	Accepted by SIGMOD 2023
+Subjects:	Distributed, Parallel, and Cluster Computing (cs.DC); Machine Learning (cs.LG)
+Cite as:	arXiv:2304.03946 [cs.DC]
+(or arXiv:2304.03946v1 [cs.DC] for this version)&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://doi.org/10.48550/arXiv.2304.03946&#34;&gt;https://doi.org/10.48550/arXiv.2304.03946&lt;/a&gt;
+Focus to learn more
+Journal reference:	Proc. ACM Manag. Data, Vol. 1, No. 1, Article 110. Publication date: May 2023&lt;/p&gt;
+&lt;h1 id=&#34;摘要&#34;&gt;摘要&lt;/h1&gt;
+&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
+&lt;p&gt;使用大规模预训练模型，在训练中需要用很多参数，包含许多稀疏代数，很占硬件资源。
+稀疏门专家混合sparsely-gated Mixture-of-Experts (MoEs)在很多下游任务里展示了令人印象深刻的预训练可扩展性。
+但是，由于路由不平衡和波动问题，这种稀疏的条件计算在实际系统中可能并不像预期的那样有效。
+总结一下：问题大背景是大规模预训练模型，主要方向是使用MoEs，但是它有两个问题：路由不平衡和波动。那这篇文章主要就是解决这两个问题的。&lt;/p&gt;
+&lt;h2 id=&#34;工作&#34;&gt;工作&lt;/h2&gt;
+&lt;p&gt;提出了一种新的DNN训练框架，FlexMoE，它系统地、透明地解决了动态数据流引起的效率低下问题。
+步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;对训练MoE模型进行分析
+通过动态的专家管理和设备放置机制来克服路由不平衡和波动问题&lt;/li&gt;
+&lt;li&gt;改进DNN
+引入了一个新的调度模块来监视数据流、制定调度计划，并根据实时数据流量动态调整模型到硬件的映射。&lt;/li&gt;
+&lt;li&gt;启发式算法
+为了在训练时动态地最优化设备放置&lt;/li&gt;
+&lt;li&gt;实验
+在NLP和图像模型上都训练了&lt;/li&gt;
+&lt;li&gt;结果
+FlexMoE比DeepSpeed平均提升1.70 ×，最高提升2.10 ×，比FasterMoE平均提升1.30 ×，最高提升1.45 ×。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;介绍&#34;&gt;介绍&lt;/h1&gt;
+&lt;h2 id=&#34;前提&#34;&gt;前提&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;大背景：大规模预训练模型Large-scale pre-trained models (PTMs)
+1是应用广泛
+2是可以微调（基准模型）
+3问题：模型质量与数据规模呈指数关系，要得到好的模型需要相当多的参数，因此也消耗大量训练时间。&lt;/li&gt;
+&lt;li&gt;小方向：稀疏门混合专家sparsely-gated Mixture-of-Experts (MoE)
+目的当然是减少消耗哈，怎么实现的：
+保持计算预算稳定的情况下，通过扩展专家网络来扩大模型参数规模。
+具体来说，每个MoE层由一个门网络+一堆专家构成。门网络仅将输入令牌发送给少数专家，而不是所有，以提高计算效率。&lt;/li&gt;
+&lt;li&gt;MoE应用广泛，但有问题
+大的MoE模型不仅需要很多数据，还要很多计算资源
+有必要解决现有系统中隐藏的数据管理问题&lt;/li&gt;
+&lt;li&gt;怎么解决
+因为i一个单独的MoE层就能轻易超过GPU内存限制，之前的分布式训练技术已经不够用了。
+专家分布技术：
+将专家分布到多个GPU中，以适应有限的GPU内存
+对于每个训练令牌，在门网络确定路由后，将其发送给其目标专家所在的GPU。
+由于它适应了MoE结构的特点，专家并行已经成为在几个著名的框架中训练基于MoE的模型的最广泛使用的技术之一。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;工作量不平衡的挑战&#34;&gt;工作量不平衡的挑战&lt;/h2&gt;
+&lt;p&gt;问题：由MoE层的稀疏性和条件性计算性质带来的负载不均衡
+来源：MoE层稀疏、且有条件的计算性质带来的
+具体：输入的token被组织在一个细粒度的水平，并通过门控网络路由到个人的专家。
+表现：输入token显示出对专家的高度不均匀偏好，并且路由结果在训练过程中不断变化。
+结果：这种工作量不平衡可能导致效率显著下降和严重的资源利用不足。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>ZeRO：为训练万亿参数模型而进行的内存优化</title>
+      <link>https://milong26.github.io/post/zero%E4%B8%BA%E8%AE%AD%E7%BB%83%E4%B8%87%E4%BA%BF%E5%8F%82%E6%95%B0%E6%A8%A1%E5%9E%8B%E8%80%8C%E8%BF%9B%E8%A1%8C%E7%9A%84%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/</link>
+      <pubDate>Sat, 16 Dec 2023 11:06:58 +0000</pubDate>
+      <guid>https://milong26.github.io/post/zero%E4%B8%BA%E8%AE%AD%E7%BB%83%E4%B8%87%E4%BA%BF%E5%8F%82%E6%95%B0%E6%A8%A1%E5%9E%8B%E8%80%8C%E8%BF%9B%E8%A1%8C%E7%9A%84%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>白嫖阿里云部署ChatGLM踩坑指南</title>
+      <link>https://milong26.github.io/post/%E7%99%BD%E5%AB%96%E9%98%BF%E9%87%8C%E4%BA%91%E9%83%A8%E7%BD%B2chatglm%E8%B8%A9%E5%9D%91%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Thu, 14 Dec 2023 10:44:05 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E7%99%BD%E5%AB%96%E9%98%BF%E9%87%8C%E4%BA%91%E9%83%A8%E7%BD%B2chatglm%E8%B8%A9%E5%9D%91%E6%8C%87%E5%8D%97/</guid>
+      <description>&lt;p&gt;自己电脑跑不动，白嫖阿里云一个服务器试试&lt;/p&gt;
+&lt;h1 id=&#34;服务器&#34;&gt;服务器&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;领取阿里云资源
+&lt;a href=&#34;https://free.aliyun.com/&#34;&gt;地址&lt;/a&gt;
+只要没有申请过PAI-DSW资源的新老用户皆可申请5000CU的免费额度，3个月内使用。
+找“交互式建模 PAI-DSW 5000CU”的那个点试用
+如果想玩Stable Diffusion来做AI画图可以试试&lt;a href=&#34;https://help.aliyun.com/document_detail/615220.html&#34;&gt;官方教程&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;开通控制台
+在阿里云页面内搜索PAI平台，点击立即开通，开通PAI控制台
+我选了默认的设置项，这个拿来玩玩&lt;/li&gt;
+&lt;li&gt;创建实例
+进入控制台，交互式建模（DSW）页面，创建实例
+资源配额如果没有显示的话要先进行授权
+选取资源，注意选择GPU资源，并选择支持资源包抵扣的资源。比如下图的ecs.gn6v-c8g1.2xlarg。可以看到他们的价格里，写明了每小时消耗的CU，你可以大致计算一下，5000CU可以用多久，ecs.gn6v-c8g1.2xlarg这个型号可以跑333小时，大概连续13天。&lt;/li&gt;
+&lt;li&gt;创建实例
+等待加载一段时间&lt;/li&gt;
+&lt;li&gt;打开
+进入操作页面&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;模型准备&#34;&gt;模型准备&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;下载
+模型较大（13G左右）小文件下载不麻烦，主要是几个大文件LFS很麻烦
+&lt;a href=&#34;https://github.com/THUDM/ChatGLM-6B&#34;&gt;官方仓库&lt;/a&gt;
+可以去镜像站[https://hf-mirror.com/]找
+（不过我没有下载成功，最后还是用u盘蹭别人的）
+为什么要下载到本地：因为&lt;/li&gt;
+&lt;li&gt;创建OSS
+先开通&lt;a href=&#34;https://www.aliyun.com/product/oss?accounttraceid=21f21e4f42574157a5b33538561c0402sigr&#34;&gt;oss&lt;/a&gt;
+进入&lt;a href=&#34;https://oss.console.aliyun.com/overview&#34;&gt;控制台&lt;/a&gt;
+创建OSS bucket
+&lt;ul&gt;
+&lt;li&gt;名字自己记得就行&lt;/li&gt;
+&lt;li&gt;地域要选和PAI一致的，我当时是“华东2-上海”
+反正是拿来练手的，随便创……&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;上传文件
+扫描很快，上传需要花点时间
+中间断了的可以重新传，还挺方便的，大概50分钟能全部上传完成&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;部署模型&#34;&gt;部署模型&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;回到DSW控制台，闲置关机的话启动需要花点时间&lt;/li&gt;
+&lt;li&gt;在notebook页面直接&lt;a href=&#34;https://help.aliyun.com/zh/pai/user-guide/read-data-from-and-write-data-to-oss&#34;&gt;读取oss文件&lt;/a&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; oss2
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;auth &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; oss2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Auth(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;lt;your_AccessKey_ID&amp;gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;lt;your_AccessKey_Secret&amp;gt;&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bucket &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; oss2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Bucket(auth, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;http://oss-cn-beijing-internal.aliyuncs.com&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;lt;your_bucket_name&amp;gt;&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;阿里云物联网accessKeyID 和 accessSecret 获取 方法
+首先登录阿里云网站www.aliyun.com
+然后网页右侧点击控制台
+进入控制台后，右侧的头像，鼠标移动上去，就会有下拉菜单。点击 AccessKey 管理
+在这里就能复制获取accessKeyID 和 accessSecret&lt;/li&gt;
+&lt;li&gt;在服务器上安装ossutil
+&lt;a href=&#34;https://help.aliyun.com/zh/oss/developer-reference/install-ossutil?spm=a2c4g.11186623.0.i2#concept-303829&#34;&gt;教程&lt;/a&gt;
+config时：
+&lt;ol&gt;
+&lt;li&gt;accesskeyIS和secret是必须的&lt;/li&gt;
+&lt;li&gt;endpoint就是oss域名，参考
+OSS域名。需要根据实例的地域选择对应的OSS域名：
+华北2（北京）后付费实例：oss-cn-beijing.aliyuncs.com
+华北2（北京）预付费实例：oss-cn-beijing-internal.aliyuncs.com
+华东2（上海）GPU P100实例或CPU实例：oss-cn-shanghai.aliyuncs.com
+华东2（上海）GPU M40实例：oss-cn-shanghai-internal.aliyuncs.com&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;下载整个文件
+&lt;a href=&#34;https://help.aliyun.com/zh/oss/developer-reference/download-objects-5?spm=a2c4g.11186623.0.i1#li-26c-fiu-tyx&#34;&gt;教程&lt;/a&gt;
+省流版：
+下载文件夹（包含子目录）
+下载某一个文件夹（包含子目录）下所有文件的示例如下：
+&lt;code&gt;ossutil64 cp -r oss://examplebucket/destfolder/ localfolder/&lt;/code&gt;
+文件夹名字自己写&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;懒得搞了，一堆bug&amp;hellip;..&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>以后有钱了一定买</title>
+      <link>https://milong26.github.io/post/%E4%BB%A5%E5%90%8E%E6%9C%89%E9%92%B1%E4%BA%86%E4%B8%80%E5%AE%9A%E4%B9%B0/</link>
+      <pubDate>Tue, 12 Dec 2023 21:12:33 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E4%BB%A5%E5%90%8E%E6%9C%89%E9%92%B1%E4%BA%86%E4%B8%80%E5%AE%9A%E4%B9%B0/</guid>
+      <description>&lt;p&gt;随机看到的一些东西，但还没有买回来试过，以后有钱了买！好的话留着当礼物！&lt;/p&gt;
+&lt;h1 id=&#34;香水&#34;&gt;香水&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Maison margiela 的by the fireplace，像烤栗子&lt;/li&gt;
+&lt;li&gt;TF 的 oud wood，温暖的羊毛毯味&lt;/li&gt;
+&lt;li&gt;欧珑的赤霞橘光！闻起来就是橘子剥开的味道&lt;/li&gt;
+&lt;li&gt;lelabo的22号bergamote&lt;/li&gt;
+&lt;li&gt;祖玛珑的圣诞定番限定“苦橙”，是柑橘→檀香的发展&lt;/li&gt;
+&lt;li&gt;蒂菩提克的肌肤之花，特别适合用来喷衣服&lt;/li&gt;
+&lt;li&gt;香水还是蛮私人的，我感觉我可能给不到具体哪一瓶香水但是我可以给出一个思路？我冬天喷香水喜欢两个方向：一个是闻起来很冰冷就跟冬天一样冰天雪地，一个是闻起来很温暖会让人联觉到幸福的样子。前者对我而言就是广藿/雪松/檀香木之类的味道，后者的话是美食调（比如评论里说的马丁马吉拉的温暖壁炉）&lt;/li&gt;
+&lt;li&gt;卤蛋的香料糖果味，感觉玻璃纸之夜，摩洛哥热风，还有午时姜香都很适合秋冬。还有娇兰沙龙线的白芷香（好像叫这个，前调是皮革味&lt;/li&gt;
+&lt;li&gt;卤蛋氏的柏林少女 :0170: 有点辛辣的玫瑰味 很温暖&lt;/li&gt;
+&lt;li&gt;蒂菩提克的肌肤之花，特别适合用来喷衣服&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;花&#34;&gt;花&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;如果有武汉|云南的可以小程序“斗南花城”&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>autograd</title>
+      <link>https://milong26.github.io/post/autograd/</link>
+      <pubDate>Mon, 11 Dec 2023 16:38:31 +0000</pubDate>
+      <guid>https://milong26.github.io/post/autograd/</guid>
+      <description>&lt;p&gt;只有叶子节点可以写成.grad
+The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won&amp;rsquo;t be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>pytorch之hook</title>
+      <link>https://milong26.github.io/post/pytorch%E4%B9%8Bhook/</link>
+      <pubDate>Mon, 11 Dec 2023 16:26:36 +0000</pubDate>
+      <guid>https://milong26.github.io/post/pytorch%E4%B9%8Bhook/</guid>
+      <description>&lt;p&gt;hook，钩子。一般来说，“hook”是在特定事件之后自动执行的函数。&lt;/p&gt;
+&lt;p&gt;参考&lt;a href=&#34;https://pytorch.org/docs/stable/notes/autograd.html#backward-hooks-execution&#34;&gt;pytorch-hook文档&lt;/a&gt;
+前情提要&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; torch&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tensor([&lt;span style=&#34;color:#ae81ff&#34;&gt;2.&lt;/span&gt;], requires_grad&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;a&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;x&lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;b&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;a&lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;b&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;backward()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 求grad和back是在一起的，算出来就是db/dx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(x&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;grad)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;定义&#34;&gt;定义&lt;/h1&gt;
+&lt;p&gt;PyTorch提供四种Hook函数：
+1、torch.Tensor.register_hook(hook)
+2、torch.nn.Module.register_forward_hook
+3、torch.nn.Module.register_forward_pre_hook
+4、torch.nn.Module.register_backward_hook&lt;/p&gt;
+&lt;h2 id=&#34;torchtensorregister_hook&#34;&gt;torch.Tensor.register_hook&lt;/h2&gt;
+&lt;p&gt;功能：注册一个反向传播hook函数，Hook函数仅一个输入参数，为张量的梯度。Hook不应修改其参数梯度值，但可以选择返回一个新的梯度，该梯度将代替grad使用。&lt;/p&gt;
+&lt;p&gt;hook(grad) -&amp;gt; Tensor or None&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;hook_grad&lt;/span&gt;(grad):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    print(grad)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; torch&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tensor([&lt;span style=&#34;color:#ae81ff&#34;&gt;1.&lt;/span&gt;], requires_grad&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;a&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;x&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;b&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;a&lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;c&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;b&lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;handle &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; b&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;register_hook(hook_grad)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;c&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;backward()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;x.grad:&amp;#34;&lt;/span&gt;,x&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;grad)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在hook中输出的grad为dc/dc(backward/register)
+最后输出的x.grad为dc/dx(backward/requires_grad=True)
+更多内容看&lt;a href=&#34;autograd.md&#34;&gt;autograd&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;torchnnmoduleregister_forward_hook&#34;&gt;torch.nn.Module.register_forward_hook&lt;/h2&gt;
+&lt;p&gt;功能：注册module的前向传播Hook函数
+参数：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;module：当前网络层&lt;/li&gt;
+&lt;li&gt;input：当前网络层输入数据&lt;/li&gt;
+&lt;li&gt;output：当前网络层输出数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; torch
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; torch.nn &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; nn
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 构建网络，一个卷积层一个池化层&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Net&lt;/span&gt;(nn&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Module):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;__init__&lt;/span&gt;(self):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        super(Net,self)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;__init__&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;conv1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nn&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Conv2d(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pool1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nn&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;MaxPool2d(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;forward&lt;/span&gt;(self, x):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;# 卷积&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;conv1(x)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;# 池化&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pool1(x)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; x
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 初始化网络&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Net()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# detach将张量分离&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# fill_将tensor中的所有值都填充为指定的value&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# conv1的weight有2张，都是3x3，第一张全填充1，第二张全填充2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;conv1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;weight[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;detach()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;fill_(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;conv1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;weight[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;detach()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;fill_(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;conv1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;bias&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;detach()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zero_()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(net&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;conv1)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(net&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;conv1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;weight)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(net&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;conv1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;bias)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# fake_img bacth_size=1,input_channel=1,为4x4大小，每个格子都是1的二维&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;fake_img &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; torch&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ones(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 定义forward_hook&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# input：当前网络层输入数据&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# output：当前网络层输出数据&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;forward_hook&lt;/span&gt;(module, data_input, data_output):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;output&amp;#34;&lt;/span&gt;,data_output)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;input&amp;#34;&lt;/span&gt;,data_input)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 注册Hook&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;net&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;conv1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;register_forward_hook(forward_hook)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;output &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; net(fake_img)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最后显示的是卷积层进行了一次卷积的输入和输出。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>海森矩阵</title>
+      <link>https://milong26.github.io/post/%E6%B5%B7%E6%A3%AE%E7%9F%A9%E9%98%B5/</link>
+      <pubDate>Fri, 08 Dec 2023 11:24:20 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E6%B5%B7%E6%A3%AE%E7%9F%A9%E9%98%B5/</guid>
+      <description>&lt;p&gt;Hessian，黑塞矩阵（Hessian Matrix），是一个多元函数的二阶偏导数构成的方阵，描述了函数的局部曲率。黑塞矩阵常用于牛顿法解决优化问题，利用黑塞矩阵可判定多元函数的极值问题。在工程实际问题的优化设计中，所列的目标函数往往很复杂，为了使问题简化，常常将目标函数在某点邻域展开成泰勒多项式来逼近原函数，此时函数在某点泰勒展开式的矩阵形式中会涉及到黑塞矩阵。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;省流&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;定义：用损失函数和参数写出矩阵&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 以后学多少写多少，现在只要会定义就行&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 黑塞矩阵为什么可以判断鞍点？为什么损失函数可以近似写成f+梯度+黑塞？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;定义&#34;&gt;定义&lt;/h1&gt;
+&lt;p&gt;对一个多元函数f，如果其二阶导数都存在，定义海森矩阵为：
+$$
+H(f)(\boldsymbol{x}) =
+\left [
+\begin{matrix}
+\frac {\partial^2F} {\partial x_1^2} &amp;amp; \frac {\partial^F} {\partial x_1 \partial x_2} &amp;amp; \cdots &amp;amp; \frac {\partial^F} {\partial x_1 \partial x_n} \
+\frac {\partial^2F} {\partial x_2 \partial x_1} &amp;amp; \frac {\partial^F} {\partial x_2^2} &amp;amp; \cdots &amp;amp; \frac {\partial^F} {\partial x_2 \partial x_n} \
+\vdots &amp;amp; \vdots &amp;amp; \ddots &amp;amp; \vdots \
+\frac {\partial^2F} {\partial x_n \partial x_1} &amp;amp; \frac {\partial^F} {\partial x_n \partial x_2} &amp;amp; \cdots &amp;amp; \frac {\partial^F} {\partial x_n^2}
+\end{matrix}
+\right] \
+$$&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>有限资源大模型全参数微调</title>
+      <link>https://milong26.github.io/post/%E6%9C%89%E9%99%90%E8%B5%84%E6%BA%90%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%85%A8%E5%8F%82%E6%95%B0%E5%BE%AE%E8%B0%83/</link>
+      <pubDate>Fri, 24 Nov 2023 17:10:38 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E6%9C%89%E9%99%90%E8%B5%84%E6%BA%90%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%85%A8%E5%8F%82%E6%95%B0%E5%BE%AE%E8%B0%83/</guid>
+      <description>&lt;p&gt;论文标题：Full Parameter Fine-tuning for Large Language Models with Limited Resources
+arxiv地址：&lt;a href=&#34;https://arxiv.org/abs/2306.09782&#34;&gt;链接&lt;/a&gt;
+用有限的资源（主要是内存）进行全参数大模型微调
+code：&lt;a href=&#34;https://github.com/OpenLMLab/LOMO&#34;&gt;github&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;abstract&#34;&gt;abstract&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;背景：LLMs给NLP问题带来了革命性变化，but需要大量GPU资源&lt;/li&gt;
+&lt;li&gt;已有：高效参数微调（PEFT），没有彻底解决
+&lt;a href=&#34;%E9%AB%98%E6%95%88%E5%8F%82%E6%95%B0%E5%BE%AE%E8%B0%83.md&#34;&gt;PEFT参考文档&lt;/a&gt;
+&lt;blockquote&gt;
+&lt;p&gt;parameter-efficient fine-tuning vs full-parameter fine-tune&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;创新：提出了新的优化器 LOw-Memory-Optimization
+内容：在一个步骤融合了梯度计算和参数更新
+&lt;blockquote&gt;
+&lt;p&gt;怎么融合(fuse)？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;效果：和标准方法（DeepSpeed解决方案）相比，我们将内存使用量减少到10.8%。
+因此，我们的方法可以在一台拥有8×RTX 3090的机器上对65B模型进行全参数微调，每台机器都有24GB内存&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;introduction&#34;&gt;introduction&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;感觉就是把摘要扩写了一遍&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;背景：LLMs 厉害，但是要钱。&lt;/li&gt;
+&lt;li&gt;目前：有效参数微调方法
+比如：LoRA,Prefix-tuning
+但是：没有全参数的&lt;/li&gt;
+&lt;li&gt;解决问题：我们要找个办法实现全参数微调&lt;/li&gt;
+&lt;li&gt;干了啥
+&lt;ul&gt;
+&lt;li&gt;分析LLMs里面内存使用的四个主要方面：
+激活，优化器状态，梯度张量和参数&lt;/li&gt;
+&lt;li&gt;从三个方面优化了训练过程：
+&lt;ul&gt;
+&lt;li&gt;SGD-优化器：由于SGD不存储任何中间状态，可以删除整个优化器状态部分&lt;a href=&#34;SGD.md&#34;&gt;SGD是什么&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;LOMO把梯度tensor的内存使用降到了O(1)&lt;/li&gt;
+&lt;li&gt;为了稳定使用混合精度训练：集成梯度归一化和损失缩放，并将某些计算过渡到全精度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;结果
+内存使用量等于参数使用量加上激活量和最大梯度张量。
+分析了：
+&lt;ol&gt;
+&lt;li&gt;内存和吞吐量&lt;/li&gt;
+&lt;li&gt;下游表现&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;贡献
+&lt;ol&gt;
+&lt;li&gt;SGD&lt;/li&gt;
+&lt;li&gt;LOMO&lt;/li&gt;
+&lt;li&gt;验证&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;related-work&#34;&gt;related work&lt;/h1&gt;
+&lt;p&gt;都是节省内存的技术&lt;/p&gt;
+&lt;h2 id=&#34;activation-checkpointing&#34;&gt;Activation Checkpointing&lt;/h2&gt;
+&lt;p&gt;计算图中策略性地选择的检查点节点的激活变量在正向阶段后保留在内存中，而其余节点的激活变量在梯度计算时最多重新计算一次。激活内存可以降低原始内存使用量的平方根，代价是需要多一次正向传递。
+在前向传播过程中，有选择性的丢弃一些产生的中间激活值，当反向传播需要使用这些激活值时，再依据上一个保存的激活值来计算出这些需要的激活值来帮助完成反向传播。这样一来，便可以大大减少训练过程中所需要的存储空间。&lt;/p&gt;
+&lt;h2 id=&#34;mixed-precision-training&#34;&gt;Mixed-Precision Training&lt;/h2&gt;
+&lt;p&gt;混合精度，32位浮点数和16位浮点数混合使用&lt;/p&gt;
+&lt;h2 id=&#34;heterogeneous-training-system&#34;&gt;Heterogeneous Training System&lt;/h2&gt;
+&lt;p&gt;通过利用异构内存（如CPU和NVMe内存）来减少GPU内存消耗&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;但是怎么做？？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;method&#34;&gt;method&lt;/h1&gt;
+&lt;h2 id=&#34;优化器&#34;&gt;优化器&lt;/h2&gt;
+&lt;p&gt;adam和SGD比起来哪里不好了！
+参考https://blog.csdn.net/S20144144/article/details/103417502&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>操作系统环境与运行机制</title>
+      <link>https://milong26.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E4%B8%8E%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/</link>
+      <pubDate>Fri, 16 Apr 2021 16:52:07 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E4%B8%8E%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/</guid>
+      <description>&lt;p&gt;中断|异常&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>操作系统概述</title>
+      <link>https://milong26.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/</link>
+      <pubDate>Fri, 16 Apr 2021 15:42:58 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/</guid>
+      <description>&lt;p&gt;操作系统-概述&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

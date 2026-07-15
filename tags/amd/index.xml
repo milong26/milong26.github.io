@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Amd on 我的博客</title>
+    <link>https://milong26.github.io/tags/amd/</link>
+    <description>Recent content in Amd on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 17 Oct 2024 11:31:18 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/amd/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AMD修复</title>
+      <link>https://milong26.github.io/post/amd%E4%BF%AE%E5%A4%8D/</link>
+      <pubDate>Thu, 17 Oct 2024 11:31:18 +0000</pubDate>
+      <guid>https://milong26.github.io/post/amd%E4%BF%AE%E5%A4%8D/</guid>
+      <description>&lt;p&gt;想装cuda所以尝试看看电脑上到底有没有NVIDIA&lt;/p&gt;
+&lt;p&gt;平时用不到这个，以后有需要再整理吧。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

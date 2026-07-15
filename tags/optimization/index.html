@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Optimization | 我的博客</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/tags/optimization/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="https://milong26.github.io/tags/optimization/index.xml" title="rss">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/tags/optimization/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/tags/optimization/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="Optimization">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Optimization">
+
+</head>
+<body class="list" id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+<header class="page-header">
+  <h1>
+    Optimization
+  </h1>
+</header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">局部最优和鞍点
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>局部最优和鞍点都是处在grandient为0的位置，首先是找到这个位置，然后判断它是局部最优还是鞍点，利用海森矩阵从数学公式上就能判定。最后为了让损失函数更新能逃离鞍点，可以用海森矩阵或者动量两种方法。
+太长不看版：文章总结
+从gradient=0找到critical point的点 令gradent=0，就是求loss对参数的微分 利用海森矩阵判断这个点是局部最优（最大、最小）还是鞍点： 求海森矩阵的特征值，当有正有负的时候就是鞍点。 逃出鞍点： 海森矩阵 动量 critical point 也就是gradient=0时有几种情况
+局部最小值（local minima） 如果是卡在local minima,那可能就没有路可以走了，因为四周都比较高，你现在所在的位置已经是最低的点，loss最低的点了，往四周走 loss都会比较高，你会不知道怎么走到其他地方去。
+鞍点（saddle point） 如图可看出，左右是比红点高，前后比红点低，红点既不是local minima,也不是local maxima的地方。如果是卡在saddle point，saddle point旁边还是有其他路可以让你的loss更低的，你只要逃离saddle point，你就有可能让你的loss更低。 判断 怎么知道critical point的类型，到底是local minima,还是saddle point？ 对$L(\theta)$ 进行泰勒展开：$\theta’$在$\theta$附近。 $$ L(\theta)\approx L(\theta’)&#43;(\theta-\theta’)^Tg&#43;\frac{1}{2}(\theta-\theta’)^TH(\theta-\theta’) $$
+对公式相加的每一项分析：
+表示当$\theta’$离$\theta$很近的时候，L近似相等 g就是梯度Gradient。这个gradient会弥补θ跟θ′的差距，虽然我们刚才说θ跟θ′很接近，但它们之间还是有一定的差距。 第三项跟Hessian(海森)矩阵有关。这个H就是海森矩阵。第三项会再弥补θ跟θ′的差距。H里面放的是参数对L的二次微分。 当走到一个critical point，也就是说gradient为0，所以g这AAAAAAAA一项就可以去掉了。这时候的L(θ) ≈ L(θ′) &#43; 第三项。
+我们可以第三项来判断，在θ′附近的error surface（误差曲面），到底长什么样。知道error surface，我们就可以判断θ′是属于局部最小值点还是鞍点。
+为了符号方便起见,我们把(θ−θ′)用v这个向量来表示。所以公式可以写成： $$ L(\theta)\approx L(\theta’)&#43;\frac{1}{2}v^THv $$
+对每个v来说，当$v^THv&gt;0$时，$L(\theta)&gt;L(\theta’)$ 局部最小，也就是此时H是正定矩阵=特征值都是正数。
+相反的，当$v^THv&lt;0$时，$L(\theta)&lt;L(\theta’)$ 局部最大，也就是此时H特征值都是负数。
+特征值有正有负就表示它是鞍点。
+逃离鞍点 海森矩阵 由线性代数的知识：A为矩阵，α为特征向量，λ为特征值。有Aα=λα。我们假设u是H的特征向量，λ是u的特征值。所以有： $$ u^THu=u^T(\lambda u)=\lambda ||u||^2 $$
+又由鞍点的特征值有正有负，所以存在特征值λ使得λ‖u‖²&lt;0，所以$u^THu$小于0，也就是$L(\theta)&lt;L(\theta’)$。即假设$\theta-\theta’=u$，你在$\theta’$的位置加上u，沿着u的方向做update得到θ，你就可以让loss变小。
+对于saddle point，我们只需要找出特征值λ小于0的点，再找出它对应的特征向量u，用$u&#43;\theta’$，就可以找到一个新的点，这个点的loss比原来低
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2024-04-02 20:14:43 +0000 UTC'>April 2, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 局部最优和鞍点" href="https://milong26.github.io/post/%E5%B1%80%E9%83%A8%E6%9C%80%E4%BC%98%E5%92%8C%E9%9E%8D%E7%82%B9/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">模拟退火算法
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>准备pre，学习一下。计算智能课讲了一下但是印象不深，此外最近看过的论文里有提到一个“温度系数”，不知道概念是否相通。
+概念 适用场合：模拟退火是一种随机化算法。当一个问题的方案数量极大（甚至是无穷的）而且不是一个单峰函数时，我们常使用模拟退火求解。
+区别 蒙特卡洛模拟 原理 物理现象 金属退火是将金属加热到一定温度，保持足够时间，然后以适宜速度冷却(通常是缓慢冷却，有时是控制冷却)的一种金属热处理工艺。 模拟退火算法来源于固体退火原理，将固体加温至充分高，再让其徐徐冷却，加温时，固体内部粒子随温升变为无序状，内能增大，而徐徐冷却时粒子渐趋有序，在每个温度都达到平衡态，最后在常温时达到基态，内能减为最小。
+算法 它是基于Monte-Carlo 迭代求解策略的一种随机寻优算法，其出发点是基于物理中固体物质的退火过程与一般组合优化问题之间的相似性。 可以应用到组合优化问题中。
+爬山算法 爬山算法是一种简单的贪心搜索算法，该算法每次从当前解的临近解空间中选择一个最优解作为当前解，直到达到一个局部最优解。 爬山算法实现很简单，其主要缺点是会陷入局部最优解，而不一定能搜索到全局最优解。
+模拟退火 模拟退火算法从某一较高初温出发，伴随温度参数的不断下降,结合一定的概率突跳特性在解空间中随机寻找目标函数的全局最优解，即在局部最优解能概率性地跳出并最终趋于全局最优。如下图： 这里的“一定的概率”的计算参考了金属冶炼的退火过程，这也是模拟退火算法名称的由来。 将温度T当作控制参数，目标函数值f视为内能E，而固体在某温度T时的一个状态对应一个解 ，然后算法试图随着控制参数T的降低，使目标函数f(内能E)也逐渐降低，直至趋于全局最小值（退火中低温时的最低能量状态），就像金属退火过程一样。
+数学原理 从概念知道会结合概率突跳特性在解空间中随机寻找目标函数的全局最优解， 具体的更新解的机制是：如果新解比当前解更优，则接受新解，否则基于Metropolis准则判断是否接受新解。
+接受概率为： $$ P = \begin{cases} 1,~~~~~~~~~~~~~~~~~ E_{t&#43;1} \lt E_{t} \ e^{\frac{-(E_{t&#43;1} - E_{t})}{kT}},~~~~ E_{t&#43;1} \ge E_{t} \end{cases} $$
+为什么是这个公式
+如上公式，假设当前时刻搜索的解为$x_t$，对应的系统能量(目标函数)为$E_t$. 对搜索点施加随机扰动，产生新解$x_{t&#43;1}$，相应地，系统能量为$E_{t&#43;1}$. 那么系统对搜索点从$x_t$到$x_{t&#43;1}$转变的接受概率就为上公式。
+流程 由于算法初始温度比较高，这样，使E增大的新解在初始时也可能被接受，因而能跳出局部极小值，然后通过缓慢地降低温度，算法就最终可能收敛到全局最优解。
+$T=T_0$表示初始温度，随机产生一个初始解$x_0$，并计算$E(x_0)$ 令$T=kT$，$k\in(0,1)$为温度下降速率 对当前解$x_t$增加随机扰动，在其邻域内产生一个新解$x_{t&#43;1}$，并计算$E(x_{t&#43;1})$ 计算$\Delta E=E(x_{t&#43;1})-E(x_t)$ $\Delta E&lt;0$ 接受$x_{t&#43;1}$为新解 else 按照P的概率接受 在温度T下，重复L次扰动和接受过程，即执行步骤3-5 判断温度是否达到终止温度水平，若是则终止算法，否则返回步骤2. 改进 应用 模拟退火算法作为一种通用的随机搜索算法，现已广泛用于VLSI设计、图像识别和神经网计算机的研究。模拟退火算法的应用如下：
+作业 旅行商问题 描述 Develop a generic simulated annealing algorithm to solve the traveling salesman problem with 20 cities that are uniformly distributed within a unit square in a 2-dimensional plane. The coordinates of 20 cities are given below in a 2x20 matrix.
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-10-27 18:48:46 +0000 UTC'>October 27, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 模拟退火算法" href="https://milong26.github.io/post/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">PPO优化方法
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>准备拿来当素材 我炼我炼
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-19 20:21:17 +0000 UTC'>September 19, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to PPO优化方法" href="https://milong26.github.io/post/ppo%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/"></a>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

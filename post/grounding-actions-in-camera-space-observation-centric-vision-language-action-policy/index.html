@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy | 我的博客</title>
+<meta name="keywords" content="vla, camera-space, generalization">
+<meta name="description" content="ee形式的action从机器人坐标系转移到相机坐标系可以提到对相机的泛化性。
+也就是利用“空间对齐”带来泛化提升">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy">
+  <meta property="og:description" content="ee形式的action从机器人坐标系转移到相机坐标系可以提到对相机的泛化性。
+也就是利用“空间对齐”带来泛化提升">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-12-09T22:03:50+00:00">
+    <meta property="article:modified_time" content="2025-12-09T22:03:50+00:00">
+    <meta property="article:tag" content="Vla">
+    <meta property="article:tag" content="Camera-Space">
+    <meta property="article:tag" content="Generalization">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy">
+  <meta name="twitter:description" content="ee形式的action从机器人坐标系转移到相机坐标系可以提到对相机的泛化性。
+也就是利用“空间对齐”带来泛化提升">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy",
+      "item": "https://milong26.github.io/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy",
+  "name": "Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy",
+  "description": "ee形式的action从机器人坐标系转移到相机坐标系可以提到对相机的泛化性。\n也就是利用“空间对齐”带来泛化提升\n",
+  "keywords": [
+    "vla", "camera-space", "generalization"
+  ],
+  "articleBody": "ee形式的action从机器人坐标系转移到相机坐标系可以提到对相机的泛化性。\n也就是利用“空间对齐”带来泛化提升\n代码在OC-VLA，实际是在Dita那个仓库里面\n这个论文可以尝试复现一下，感觉挺有意思的。\nabstract VLA模型的观察空间与行动空间之间有gap，模型通常预测机器人基座坐标系内的端效器姿态，导致空间不一致。\n所以它针对的模型都是ee作为action的吧，如果是joint那更加难搞\n所以作者想出来的是以observation为中心的VKA框架，将action预测从基于robot base变成基于camera observation。就是直接用外参矩阵\n轻量的\n感觉这个和我的想法有点接近，不过我是反过来，想在训练之前就把observation归一化处理。这个是把输出结果映射到camera上面？ 看看我的思路有没有搞头。\nintroduction 预训练vlm是和相机viewpoint对齐的，但是机器人控制是基于底座（是ee控制啊）\n而且数据采集的时候也是异构的\n所以提出来的方案是：将末端执行器动作与机器人基坐标系解耦，直接预测第三人称摄像机坐标系中的动作，ObservationCentric VLA（OC-VLA）。\n具体来说，鉴于机器人底座与每个摄像头之间的外在变换，我们将机器人空间的终端执行器作用转换为其在摄像头坐标系中的等效表示，并采用这些作为预测目标。通过将动作目标锚定在与观察相同的空间（即图像平面），这种表述缓解了感知与动作模态之间的错位，并减轻了摄像机视角变化带来的歧义。此外，它明确鼓励模型学习机器人与摄像头之间的相对空间关系，从而增强其在不同视角和硬件配置间有效泛化的能力。\n那这个外参转换可以用于zero-shot推理吗？？？？ 这个有一个缺点是没有相机就做不了吧（障碍那种就没办法了） 能不能再结合机器人模型做更多？ 这个文章我光看摘要就知道咋做了，因为跟我想的比较接近，那这个办法有什么可以改进的地方吗？除了延展到其它机器人上面 既然已经有相机是叫了（类比人眼）那能不能基于视角做出自适应移动？ 那用这个办法岂不是能利用网络视频进行学习知识。但是定位还是依靠模型与delta？？？？\nrelated work 尽管VLA模型取得了巨大进展，但大多数模型依赖于特定的观测空间来预测动作。然而，数据收集过程中环境设置的差异使得直接使用大规模网络数据进行训练变得困难，这限制了其性能。与此同时，当前的作数据集涵盖了广泛的摄像头视角，而现有的VLA方法通常侧重于基于机器人基坐标的动作预测。行动预测与观察坐标之间的差异对政策学习构成重大挑战。\nmethod 实现起来简单吗？\n使用lightweight 300M的VLA模型来测试（DIta）我怎么找不到300M这个版本的模型 checkpoint 该系统仅用第三人称摄像机的图像和语言指令作为输入，已展现出竞争性能\nCLIP作为text encoder DINOv2处理第三视角图片 图像特征还通过配备FiLM[58]调节层的Q-Forform[57]进一步选择和调制。\n为什么还需要后面这两个\n“Current VLA models typically employ one of two types of action spaces for end-effector control: discrete action spaces [2], [1] and continuous action spaces [3], [5]. To thoroughly evaluate the effectiveness of our proposed approach, we conduct experiments on models using both types of action spaces. Based on the baseline architecture, we implement a variant specifically designed for discrete action prediction or continuous action prediction.” (Zhang et al., 2025, p. 3) 这篇文章说vla对ee的控制分成两种，离散和连续，我怎么没概念，速速了解一下 for end-effector control: discrete action spaces [2], [1] and continuous action spaces [3], [5] 离散的是Openvla和Rt-1 连续的是Octo和pi0 这部分看一个综述《面向具身智能的视觉-语言-动作模型动作表征和生成策略综述》\n它给的解释是 离散动作 = 把机器人动作“量化成 token”让 Transformer 预测，把控制问题 → 转成序列生成（language modeling）问题。因为 Transformer 和 LLM 最擅长处理 离散 token 序列。缺点是量化损失不可避免。离散方法适合粗粒度动作、多任务通用控制、大规模数据。 连续动作 = 直接在连续空间中建模动作的概率分布并生成连续控制量，直接在连续空间建模真实动作分布，用生成式模型（CVAE / Diffusion / Flow Matching）连续方法适合理想策略生成与精细操作\n然后有一个论文FAST，它做的是让自回归 Transformer（离散 token 方式）也能像连续模型一样解决高精度、高频率的灵巧操作任务。它仍然是 离散方法（tokenization） ，但使离散方法能处理 原本只有连续模型能处理的任务\n然后问题来了，既然连续动作这么好为什么不用？连续动作生成模型（例如 CVAE、Diffusion、Flow Matching）本质上是 在连续高维动作空间上学习概率分布。不太好泛化。 但是离散+自回归一个优点是很快，第二个是泛化能力更强。\n什么是自回归？逐步生成，非自回归（NonAR）就是模型一次性预测整个序列。\n所以VLA里面如果是离散的，后面基本都跟着自回归。\n这篇文章怎么在这两种动作空间上进行实验的？？？\n批评了以前的数据集，动作都是和机器人结合的，跟观察空间联系不大，so模型很难从图像里面推理出动作，尤其是对新相机视角。“especially for novel camera views with a large variance from the seen camera views in the training set” (Zhang et al., 2025, p. 3)\n首先需要将机器人坐标的动作转换到相机坐标系里面。\n感觉实现起来很简单啊\n特别地，变换矩阵T在不同机器人配置中存在差异。例如，Droid [9] 拥有1417个不同的摄像机视角，需要模型在内部推断每个视角的正确变换T，以准确预测机器人坐标系中的动作。\n“UV coordinate” (Zhang et al., 2025, p. 4) UV坐标 + 相机内参的作用是针对只知道水杯在图片上的像素 (u, v)，你需要焦距 f 和内参矩阵 K 才能算出相机坐标 (Xcam, Ycam, Zcam)。就是传统方法\nexperiment 我想知道怎样设计饰演的，zero-shot在其它位置是不是需要calibrate获得相机在世界坐标系下的位置？仿真环境好搞定，那实际呢？对比实验有哪些？ 我想了一下，按照刚才method的方法，在一个真实实验里面，需要用到的有：假定就用机械臂的base做世界坐标系的原点，这样可以减去计算ee，所以要记录的是相机捕获的image，state，cad或者urdf文件来做fk，相机在世界坐标系下的转换矩阵，action（关节值或者ee都行）。这样就能训练和推理？\n预训练采用Droid数据集，该数据集包含从1417个不同第三人称摄像机视角捕捉的机器人作轨迹及其对应的外部参数，提供广泛的视觉视角和运动\n择典型的轻量级VLM结构。\n连续，扩散，DiT 离散，填充零向量以对齐处理语言和图像输入后的动作大小。 优化细节\n连续：目标是最小化机器人动作（加标准高斯噪声增强）与预测噪声之间的MSE，使用DDPM [59]，100个时间步。 离散：最小化预测离散作用量与真实标签之间的交叉熵损失 仿真测试：数据集：ManiSkill2\n真机实验： 采集： camera1：固定位置的若干数据 camera2：轻微移动camera2，若干数据\n微调：\n模型 使用数据 说明 模型1 Camera 1 数据 + Droid 预训练模型 训练在固定视角下，基础模型是预训练好的 模型2 Camera 2 数据 + Droid 预训练模型 训练数据包含轻微视角扰动，提高对视角变化的鲁棒性 测试 模型 相机 说明 模型1 Camera 1（固定） 测试在训练相机相同视角下的性能（fixed camera viewpoint） 模型1 Camera 3（固定，novel） 测试 zero-shot 新视角的泛化能力（novel camera viewpoint） 模型2 Camera 2（固定） 测试在训练中有轻微扰动的相机下的鲁棒性（slight camera perturbations） 可能存在的问题 多视角相机怎么样？ 极端视角或遮挡场景，不过这个我觉得怪不到这个身上，本来就是个难点，但是可以考虑改进，比如已经换到相机坐标系了，那能不能加上自适应？ 这个转换重点是描述了机械臂尤其是ee的运动，那物体呢？ 实验复现 参考Dita\n代码 git clone https://github.com/RoboDita/Dita cd Dita 根据python3.10 and pytorch 2, tensorflow==2.15.0, CUDA 12.1安装 3.9的python环境 conda create -n dita python==3.10 conda activate dita pytorch2安装 选择的是2.5.1的 pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cu121 pytorch2检测 import torch print(torch.__version__) # 2.x.x print(torch.cuda.is_available()) # True tensorflow2.15.0 pip install tensorflow==2.15.0 安装cuda，要nvcc –version有结果 最终安装 pip install -r requirements.txt --no-build-isolation 有个报错是pyhash的，参考github issue，搜索pyhash，定位到一个解决方案 pip install setuptools==57.5.0 ``` 安装tensorflow-probability，但是我也不清楚需不需要If you only evaluate it on calvin, you might use requirements_calvin.txt. To avoid the conflicts, we suggest you install tensorflow-probability=0.22.0 independently. pip install tensorflow-probability==0.22.0 下载checkpoint：Diffusion Transformer Policy(Pretrained on Droid)，800MB左右 利用maniskill2准备数据。 利用代码生成，huggingface的，需要用镜像 下载两个文件夹放到dita的文件夹里面，执行mv 要移动的 目标位置 就行 assets默认位置在 ~/.maniskill/data/assets/ -\u003e dita/ManiSkill2/openx_utils/data/assets 要不直接把data整个文件夹转移过去？ demos在 ~/.maniskill/demo/-\u003eManiSkill2/openx_utils/demos 在 ManiSkill2/openx_utils/ 按照task生成数据 ~/Dita/ManiSkill2/openx_utils$ sh generate_pickcube.sh 执行的时候遇到报错ModuleNotFoundError: No module named 'petrel_client' 这个完全不重要，直接用None，所以注释掉import，然后把client=Client那个分支去掉，默认client是None 修改.py代码里面的PickCube-v相关的内容，和demos文件夹里面的一样，还有check_ceph_file_exist这个函数直接返回False 数据集比较新，所以要pop掉一些参数 ori_env_kwargs.pop(\"sim_backend\", None) 遇到报错说[error] GLFW error: X11: The DISPLAY environment variable is missing 这个不用管 报错_set_camera_shader_dir raise FileNotFoundError(shader_dir) FileNotFoundError: default把所有ori_env_kwargs = json_data[\"env_info\"][\"env_kwargs\"]后面加一句ori_env_kwargs.pop(\"shader_dir\", None) 报错AttributeError: 'TimeLimit' object has no attribute 'agent'，因为在 Gymnasium 中，当你用 gym.make(env_id, ...) 创建环境时，如果环境被 自动封装（wrapper） 了，比如 TimeLimit，那么直接访问 env.agent 就会报错，因为 TimeLimit wrapper 本身没有 agent 属性 复现-真机 learn from code use_baseframe_action=False：动作以相机/世界坐标系为参考，需要做坐标变换，将基座坐标转换为相机/世界坐标。\n训练之前的数据处理，simdataset里面\n创建类：设置use_baseframe_action为false 调用，用getitem 第一个调用的函数 def construct_traj(self, episode, episode_path): for i in range(self.traj_per_episode): for j in range(self.traj_length): if self.include_target: target_action = episode[\"step\"][current_frame_idx][\"action\"] action['pose'] = target_action[\"pose\"] action['gripper'] = target_action[\"gripper\"] if not self.use_baseframe_action: action = self.process_traj_v3(action, episode, current_frame_idx) traj[\"action\"]['pose'].append(action['pose']) traj[\"action\"]['gripper'].append(action['gripper']) trajs[\"action\"]['pose'] = torch.stack(traj[\"action\"]['pose'], dim=0) trajs[\"action\"]['gripper'] = torch.stack(traj[\"action\"]['gripper'], dim=0) return trajs ``` 调用process_traj_v3(action, episode, current_frame_idx)，此时输入的action是从轨迹里面来的： def process_traj_v3(self, action, episode, frame_idx): # 获取当前帧的相机外参 camera_extrinsic_cv = episode[\"step\"][frame_idx][\"observation\"][\"camera_extrinsic_cv\"] # 从世界坐标系变换到相机坐标系 # 计算相对增量 world_vector = action[\"pose\"] # 目标位姿 rotation_delta = camera_extrinsic_cv[:3, :3] @ (world_vector - camera_extrinsic_cv[:3, 3]) # 计算新的动作 action[\"pose\"] = rotation_delta + camera_extrinsic_cv[:3, 3] action[\"gripper\"] = action[\"gripper\"] # 可以根据需要处理抓取动作 return action ``` camera_extrinsic_cv 是一个 3x4 的矩阵，包含了相机的 旋转矩阵 和 平移向量： camera_extrinsic_cv = [R | t]\nR 是 3x3 的旋转矩阵，表示相机的旋转（相对于世界坐标系）。 t 是 3x1 的平移向量，表示相机的位移（相对于世界坐标系）。 反推\n@torch.no_grad() def get_pose_cam(world2cam, pose1, use_euler=0): rot_mat1 = quaternion_to_matrix(pose1[3:]) pose1_mat = torch.eye(4) pose1_mat[:3, :3] = rot_mat1 pose1_mat[:3, 3] = pose1[:3] pose1_transform = Transform3d(matrix=pose1_mat.T) world2cam_transform = Transform3d(matrix=world2cam.T) pose1_cam = pose1_transform.compose(world2cam_transform) vector = pose1_cam.get_matrix()[0, -1, :3] if use_euler: rotation = matrix_to_euler_angles(pose1_cam.get_matrix()[0, :3, :3].T, convention=\"XYZ\") else: rotation = matrix_to_quaternion(pose1_cam.get_matrix()[0, :3, :3].T) return torch.cat([vector, rotation]) camera_extrinsic_cv怎么获取，什么形态 camera_extrinsic_cv = torch.tensor(episode[“step”][0][“camera_extrinsic_cv”])\n生成数据那里有吗？原来success都失败了，只能先跳过\n思路 收集数据，包含action（相对base） 获得相机相对机械臂base坐标系的一个4x4的T。 用T计算action（相对base），得到action（相对相机坐标系） 其他内容保持不变训练 测试的时候推理出来的是action（相机坐标系），再用T计算出action（相对base） 获得相机相对机械臂base坐标系的一个4x4的T。 怎么实现？\n获得apriltag：https://tools.limelightvision.io/apriltag-generator 打印后贴在机械臂末端-等待打印机空 写代码要能记录末端ee和相机图片并保存，要求teleoperate 我现在突然想到了一个问题，我用的smolvla这种模型预训练的都是正常action，那我只one-shot一个岂不是没啥用？再说吧，到时候看看效果\n太乱了，自己复现吧，首先获取数据，搞定maniskill maniskill又了解了一下，现在知道它\ndownload_demo和download_asset 读取数据并replay 利用轨迹生成自己想要的 先用ms3的代码试一下，先准备数据，准备什么数据？ asset和demo我知道，但我不知道它们的对应关系,某些任务需要额外下载资产文件 看来不是所有任务都需要。 那用pickcude试一下dita的转换代码\n下载pickcube，得到的pickcube-v1文件夹里面有motionplanning,teleop和rl三个文件夹 pickcube-v1整个文件夹放到：Dita/ManiSkill2/openx_utils/demos 用generate_pickcube试试 其他generate呢？ grep -R “openxlab” .发现没有用到，直接删了不安装，省得一堆依赖报错\nBuilding wheel for flash-attn (pyproject.toml) … 很慢 怎么一堆用不到的东西\n原来dita代码用的v0是maniskill2的，之前下载错了 那来 hf download haosulab/ManiSkill2 –repo-type=dataset\n好吧我知道了，用以前的老代码无法下载v0的，直接手动下载一个看看效果，还是能成功的。 然后想办法复现到maniskill3也就是所有task的v1数据集上。 分析pickcube_bridge.py在做什么，一一复现到maniskill3上面\n加载数据集然后创建环境 我服了，原来是之前搞错版本了，直接下载maniskill2的就能下载资源了 下载好之后放到dita的目录里面\n出现x11报错，不影响，它会offscreen执行，不想看到报错的话，export MANISKILL_USE_GLFW=0\n有没有视频展现效果 数据是什么样的？ 可以改成ms3吗？还是用ms2就够了？毕竟ms2比较稳定还是用ms2？ ms2也可以做强化学习吧 貌似也不需要切换版本。。dita代码里面有\npython -m mani_skill2.utils.download_demo PickCube-v0 是用pinocchio进行运动学计算的，所以最后得到的应该还是6d+gripper\nCUDA_VISIBLE_DEVICES=1 torchrun –nproc_per_node=1 –nnodes=1 –node_rank=0 scripts/train_diffusion_sim.py batch_size=64 dataset.traj_length=11 num_pred_action=10 task_name=maniskill dataset.num_given_observation=2 use_close_loop_eval=True close_loop_eval.test_episodes_num=175 dataset.use_baseframe_action=False dataname=maniskill dataset.include_target=1\nCUDA_VISIBLE_DEVICES=2,3 torchrun –nproc_per_node=2 –nnodes=1 –node_rank=0 scripts/train_diffusion_sim.py batch_size=64 dataset.traj_length=7 num_pred_action=10 task_name=maniskill dataset.num_given_observation=2 use_close_loop_eval=True close_loop_eval.test_episodes_num=175 dataset.use_baseframe_action=False dataname=maniskill dataset.include_target=1 +pretrained_path=ptmodels/dit_policy_checkpoint.pth dataset.data_path=ManiSkill2/openx_utils/outputs/PickCube-v0\n运行的时候出现报错，是NLTK 分词资源缺失。缺少 NLTK 的 punkt_tab 资源，导致在处理自然语言指令时分词失败。\n********************************************************************** Resource punkt_tab not found. Please use the NLTK Downloader to obtain the resource: \u003e\u003e\u003e import nltk \u003e\u003e\u003e nltk.download('punkt_tab') For more information see: https://www.nltk.org/data.html Attempted to load tokenizers/punkt_tab/english/ Searched in: - '/home/zhonglinyue/nltk_data' - '/home/zhonglinyue/miniconda3/envs/dita/nltk_data' - '/home/zhonglinyue/miniconda3/envs/dita/share/nltk_data' - '/home/zhonglinyue/miniconda3/envs/dita/lib/nltk_data' - '/usr/share/nltk_data' - '/usr/local/share/nltk_data' - '/usr/lib/nltk_data' - '/usr/local/lib/nltk_data' ********************************************************************** 解决方案 终端里面执行(dita)python»\nimport nltk pkgs = [ \"punkt\", \"punkt_tab\", \"averaged_perceptron_tagger_eng\", \"wordnet\", \"omw-1.4\" ] for p in pkgs: nltk.download(p, download_dir=\"/home/zhonglinyue/miniconda3/envs/dita/nltk_data\") 执行后就可以了\nnatural_language_instruction这个关键字到底是啥 和language_instruction有什么区别？ self.use_language_instruction应该是true还是false？\n",
+  "wordCount" : "787",
+  "inLanguage": "en",
+  "datePublished": "2025-12-09T22:03:50Z",
+  "dateModified": "2025-12-09T22:03:50Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy
+    </h1>
+    <div class="post-meta">
+
+<span title='2025-12-09 22:03:50 +0000 UTC'>December 9, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>ee形式的action从机器人坐标系转移到相机坐标系可以提到对相机的泛化性。</p>
+<p>也就是利用“空间对齐”带来泛化提升</p>
+<p>代码在<a href="https://github.com/ZTY0213/OC-VLA">OC-VLA</a>，实际是在Dita那个仓库里面</p>
+<p>这个论文可以尝试复现一下，感觉挺有意思的。</p>
+<h1 id="abstract">abstract<a hidden class="anchor" aria-hidden="true" href="#abstract">#</a></h1>
+<p>VLA模型的观察空间与行动空间之间有gap，模型通常预测机器人基座坐标系内的端效器姿态，导致空间不一致。</p>
+<blockquote>
+<p>所以它针对的模型都是ee作为action的吧，如果是joint那更加难搞</p>
+</blockquote>
+<p>所以作者想出来的是以observation为中心的VKA框架，将action预测从基于robot base变成基于camera observation。就是直接用外参矩阵</p>
+<p>轻量的</p>
+<blockquote>
+<p>感觉这个和我的想法有点接近，不过我是反过来，想在训练之前就把observation归一化处理。这个是把输出结果映射到camera上面？
+看看我的思路有没有搞头。</p>
+</blockquote>
+<h1 id="introduction">introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h1>
+<p>预训练vlm是和相机viewpoint对齐的，但是机器人控制是基于底座（是ee控制啊）</p>
+<p>而且数据采集的时候也是异构的</p>
+<p>所以提出来的方案是：将末端执行器动作与机器人基坐标系解耦，直接预测第三人称摄像机坐标系中的动作，ObservationCentric VLA（OC-VLA）。</p>
+<p>具体来说，鉴于机器人底座与每个摄像头之间的外在变换，我们将机器人空间的终端执行器作用转换为其在摄像头坐标系中的等效表示，并采用这些作为预测目标。通过将动作目标锚定在与观察相同的空间（即图像平面），这种表述缓解了感知与动作模态之间的错位，并减轻了摄像机视角变化带来的歧义。此外，它明确鼓励模型学习机器人与摄像头之间的相对空间关系，从而增强其在不同视角和硬件配置间有效泛化的能力。</p>
+<blockquote>
+<p>那这个外参转换可以用于zero-shot推理吗？？？？
+这个有一个缺点是没有相机就做不了吧（障碍那种就没办法了）
+能不能再结合机器人模型做更多？
+这个文章我光看摘要就知道咋做了，因为跟我想的比较接近，那这个办法有什么可以改进的地方吗？除了延展到其它机器人上面
+既然已经有相机是叫了（类比人眼）那能不能基于视角做出自适应移动？
+那用这个办法岂不是能利用网络视频进行学习知识。但是定位还是依靠模型与delta？？？？</p>
+</blockquote>
+<h1 id="related-work">related work<a hidden class="anchor" aria-hidden="true" href="#related-work">#</a></h1>
+<p>尽管VLA模型取得了巨大进展，但大多数模型依赖于特定的观测空间来预测动作。然而，数据收集过程中环境设置的差异使得直接使用大规模网络数据进行训练变得困难，这限制了其性能。与此同时，当前的作数据集涵盖了广泛的摄像头视角，而现有的VLA方法通常侧重于基于机器人基坐标的动作预测。行动预测与观察坐标之间的差异对政策学习构成重大挑战。</p>
+<h1 id="method">method<a hidden class="anchor" aria-hidden="true" href="#method">#</a></h1>
+<p>实现起来简单吗？</p>
+<p>使用lightweight 300M的VLA模型来测试（DIta）我怎么找不到300M这个版本的模型 checkpoint 该系统仅用第三人称摄像机的图像和语言指令作为输入，已展现出竞争性能</p>
+<p>CLIP作为text encoder
+DINOv2处理第三视角图片
+图像特征还通过配备FiLM[58]调节层的Q-Forform[57]进一步选择和调制。</p>
+<blockquote>
+<p>为什么还需要后面这两个</p>
+</blockquote>
+<p>“Current VLA models typically employ one of two types of action spaces for end-effector control: discrete action spaces [2], [1] and continuous action spaces [3], [5]. To thoroughly evaluate the effectiveness of our proposed approach, we conduct experiments on models using both types of action spaces. Based on the baseline architecture, we implement a variant specifically designed for discrete action prediction or continuous action prediction.” (Zhang et al., 2025, p. 3)
+这篇文章说vla对ee的控制分成两种，离散和连续，我怎么没概念，速速了解一下
+for end-effector control: discrete action spaces [2], [1] and continuous action spaces [3], [5]
+离散的是Openvla和Rt-1
+连续的是Octo和pi0
+这部分看一个综述《面向具身智能的视觉-语言-动作模型动作表征和生成策略综述》</p>
+<p>它给的解释是
+离散动作 = 把机器人动作“量化成 token”让 Transformer 预测，把控制问题 → 转成序列生成（language modeling）问题。因为 Transformer 和 LLM 最擅长处理 <strong>离散 token 序列</strong>。缺点是量化损失不可避免。离散方法适合粗粒度动作、多任务通用控制、大规模数据。
+连续动作 = 直接在连续空间中建模动作的概率分布并生成连续控制量，直接在连续空间建模真实动作分布，用生成式模型（CVAE / Diffusion / Flow Matching）连续方法适合理想策略生成与精细操作</p>
+<p>然后有一个论文FAST，它做的是让自回归 Transformer（离散 token 方式）也能像连续模型一样解决高精度、高频率的灵巧操作任务。它仍然是 <strong>离散方法</strong>（tokenization）  ，但使离散方法能处理 <strong>原本只有连续模型能处理的任务</strong></p>
+<p>然后问题来了，既然连续动作这么好为什么不用？连续动作生成模型（例如 CVAE、Diffusion、Flow Matching）本质上是 <strong>在连续高维动作空间上学习概率分布</strong>。不太好泛化。
+但是离散+自回归一个优点是很快，第二个是泛化能力更强。</p>
+<p>什么是自回归？逐步生成，非自回归（NonAR）就是模型一次性预测整个序列。</p>
+<p>所以VLA里面如果是离散的，后面基本都跟着自回归。</p>
+<blockquote>
+<p>这篇文章怎么在这两种动作空间上进行实验的？？？</p>
+</blockquote>
+<p>批评了以前的数据集，动作都是和机器人结合的，跟观察空间联系不大，so模型很难从图像里面推理出动作，尤其是对新相机视角。“especially for novel camera views with a large variance from the seen camera views in the training set” (Zhang et al., 2025, p. 3)</p>
+<p>首先需要将机器人坐标的动作转换到相机坐标系里面。</p>
+<blockquote>
+<p>感觉实现起来很简单啊</p>
+</blockquote>
+<p>特别地，变换矩阵T在不同机器人配置中存在差异。例如，Droid [9] 拥有1417个不同的摄像机视角，需要模型在内部推断每个视角的正确变换T，以准确预测机器人坐标系中的动作。</p>
+<p>“UV coordinate” (Zhang et al., 2025, p. 4)
+<strong>UV坐标 + 相机内参的作用</strong>是针对只知道水杯在图片上的像素 <code>(u, v)</code>，你需要焦距 f 和内参矩阵 K 才能算出相机坐标 <code>(Xcam, Ycam, Zcam)</code>。就是传统方法</p>
+<h1 id="experiment">experiment<a hidden class="anchor" aria-hidden="true" href="#experiment">#</a></h1>
+<p>我想知道怎样设计饰演的，zero-shot在其它位置是不是需要calibrate获得相机在世界坐标系下的位置？仿真环境好搞定，那实际呢？对比实验有哪些？
+我想了一下，按照刚才method的方法，在一个真实实验里面，需要用到的有：假定就用机械臂的base做世界坐标系的原点，这样可以减去计算ee，所以要记录的是相机捕获的image，state，cad或者urdf文件来做fk，相机在世界坐标系下的转换矩阵，action（关节值或者ee都行）。这样就能训练和推理？</p>
+<p>预训练采用Droid数据集，该数据集包含从1417个不同第三人称摄像机视角捕捉的机器人作轨迹及其对应的外部参数，提供广泛的视觉视角和运动</p>
+<p>择典型的轻量级VLM结构。</p>
+<ol>
+<li>连续，扩散，DiT</li>
+<li>离散，填充零向量以对齐处理语言和图像输入后的动作大小。</li>
+</ol>
+<p>优化细节</p>
+<ol>
+<li>连续：目标是最小化机器人动作（加标准高斯噪声增强）与预测噪声之间的MSE，使用DDPM [59]，100个时间步。</li>
+<li>离散：最小化预测离散作用量与真实标签之间的交叉熵损失</li>
+</ol>
+<p>仿真测试：数据集：ManiSkill2</p>
+<p>真机实验：
+采集：
+camera1：固定位置的若干数据
+camera2：轻微移动camera2，若干数据</p>
+<p>微调：</p>
+<table>
+  <thead>
+      <tr>
+          <th>模型</th>
+          <th>使用数据</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>模型1</strong></td>
+          <td>Camera 1 数据 + Droid 预训练模型</td>
+          <td>训练在固定视角下，基础模型是预训练好的</td>
+      </tr>
+      <tr>
+          <td><strong>模型2</strong></td>
+          <td>Camera 2 数据 + Droid 预训练模型</td>
+          <td>训练数据包含轻微视角扰动，提高对视角变化的鲁棒性</td>
+      </tr>
+      <tr>
+          <td>测试</td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+      <tr>
+          <th>模型</th>
+          <th>相机</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>模型1</strong></td>
+          <td>Camera 1（固定）</td>
+          <td>测试在训练相机相同视角下的性能（fixed camera viewpoint）</td>
+      </tr>
+      <tr>
+          <td><strong>模型1</strong></td>
+          <td>Camera 3（固定，novel）</td>
+          <td>测试 zero-shot 新视角的泛化能力（novel camera viewpoint）</td>
+      </tr>
+      <tr>
+          <td><strong>模型2</strong></td>
+          <td>Camera 2（固定）</td>
+          <td>测试在训练中有轻微扰动的相机下的鲁棒性（slight camera perturbations）</td>
+      </tr>
+  </tbody>
+</table>
+<h1 id="可能存在的问题">可能存在的问题<a hidden class="anchor" aria-hidden="true" href="#可能存在的问题">#</a></h1>
+<ol>
+<li>多视角相机怎么样？</li>
+<li>极端视角或遮挡场景，不过这个我觉得怪不到这个身上，本来就是个难点，但是可以考虑改进，比如已经换到相机坐标系了，那能不能加上自适应？</li>
+<li>这个转换重点是描述了机械臂尤其是ee的运动，那物体呢？</li>
+</ol>
+<h1 id="实验复现">实验复现<a hidden class="anchor" aria-hidden="true" href="#实验复现">#</a></h1>
+<p>参考<a href="https://github.com/RoboDita/Dita">Dita</a></p>
+<ol>
+<li>代码
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/RoboDita/Dita
+</span></span><span style="display:flex;"><span>cd Dita
+</span></span></code></pre></div></li>
+<li>根据python3.10 and pytorch 2, tensorflow==2.15.0, CUDA 12.1安装
+<ol>
+<li>3.9的python环境
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> conda create -n dita python<span style="color:#f92672">==</span>3.10
+</span></span><span style="display:flex;"><span> conda activate dita
+</span></span></code></pre></div></li>
+<li>pytorch2安装 选择的是2.5.1的
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pip install torch<span style="color:#f92672">==</span>2.5.1 torchvision<span style="color:#f92672">==</span>0.20.1 torchaudio<span style="color:#f92672">==</span>2.5.1 --index-url https://download.pytorch.org/whl/cu121
+</span></span></code></pre></div></li>
+<li>pytorch2检测
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span> <span style="color:#f92672">import</span> torch
+</span></span><span style="display:flex;"><span> print(torch<span style="color:#f92672">.</span>__version__)          <span style="color:#75715e"># 2.x.x</span>
+</span></span><span style="display:flex;"><span> print(torch<span style="color:#f92672">.</span>cuda<span style="color:#f92672">.</span>is_available())  <span style="color:#75715e"># True</span>
+</span></span></code></pre></div></li>
+<li>tensorflow2.15.0
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pip install tensorflow<span style="color:#f92672">==</span>2.15.0
+</span></span></code></pre></div></li>
+<li>安装<a href="obsidian://open?vault=lilp&amp;file=load%2Fsource%2F_posts%2Fcuda">cuda</a>，要nvcc &ndash;version有结果</li>
+<li>最终安装
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pip install -r requirements.txt --no-build-isolation
+</span></span></code></pre></div></li>
+<li>有个报错是pyhash的，参考<a href="https://github.com/RoboDita/Dita/issues/25">github issue</a>，搜索pyhash，定位到一个解决方案
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>    pip install setuptools<span style="color:#f92672">==</span>57.5.0
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">```</span>
+</span></span></code></pre></div></li>
+<li>安装tensorflow-probability，但是我也不清楚需不需要If you only evaluate it on calvin, you might use requirements_calvin.txt. To avoid the conflicts, we suggest you install tensorflow-probability=0.22.0 independently.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>	   pip install tensorflow-probability<span style="color:#f92672">==</span>0.22.0
+</span></span></code></pre></div></li>
+</ol>
+</li>
+<li>下载checkpoint：Diffusion Transformer Policy(Pretrained on Droid)，800MB左右</li>
+<li>利用<a href="obsidian://open?vault=lilp&amp;file=load%2Fsource%2F_drafts%2Fmaniskill">maniskill2</a>准备数据。
+<ol>
+<li>利用代码生成，huggingface的，需要用镜像</li>
+<li>下载两个文件夹放到dita的文件夹里面，执行mv 要移动的 目标位置 就行
+<ol>
+<li>assets默认位置在 ~/.maniskill/data/assets/ -&gt; dita/ManiSkill2/openx_utils/data/assets 要不直接把data整个文件夹转移过去？</li>
+<li>demos在 ~/.maniskill/demo/-&gt;ManiSkill2/openx_utils/demos</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>在 <code>ManiSkill2/openx_utils/</code> 按照task生成数据
+<ol>
+<li>~/Dita/ManiSkill2/openx_utils$ sh generate_pickcube.sh</li>
+<li>执行的时候遇到报错<code>ModuleNotFoundError: No module named 'petrel_client'</code> 这个完全不重要，直接用None，所以注释掉import，然后把client=Client那个分支去掉，默认client是None</li>
+<li>修改.py代码里面的<code>PickCube-v</code>相关的内容，和demos文件夹里面的一样，还有check_ceph_file_exist这个函数直接返回False</li>
+<li>数据集比较新，所以要pop掉一些参数 <code>ori_env_kwargs.pop(&quot;sim_backend&quot;, None)</code></li>
+<li>遇到报错说<code>[error] GLFW error: X11: The DISPLAY environment variable is missing</code> 这个不用管</li>
+<li>报错<code>_set_camera_shader_dir raise FileNotFoundError(shader_dir) FileNotFoundError: default</code>把所有<code>ori_env_kwargs = json_data[&quot;env_info&quot;][&quot;env_kwargs&quot;]</code>后面加一句<code>ori_env_kwargs.pop(&quot;shader_dir&quot;, None)</code></li>
+<li>报错<code>AttributeError: 'TimeLimit' object has no attribute 'agent'</code>，因为在 <strong>Gymnasium</strong> 中，当你用 <code>gym.make(env_id, ...)</code> 创建环境时，如果环境被 <strong>自动封装（wrapper）</strong> 了，比如 <code>TimeLimit</code>，那么直接访问 <code>env.agent</code> 就会报错，因为 <code>TimeLimit</code> wrapper 本身没有 <code>agent</code> 属性</li>
+</ol>
+</li>
+</ol>
+<h1 id="复现-真机">复现-真机<a hidden class="anchor" aria-hidden="true" href="#复现-真机">#</a></h1>
+<h2 id="learn-from-code">learn from code<a hidden class="anchor" aria-hidden="true" href="#learn-from-code">#</a></h2>
+<p>use_baseframe_action=<strong>False</strong>：动作以相机/世界坐标系为参考，需要做坐标变换，将基座坐标转换为相机/世界坐标。</p>
+<p>训练之前的数据处理，simdataset里面</p>
+<ol>
+<li>创建类：设置<code>use_baseframe_action</code>为false</li>
+<li>调用，用getitem
+<ol>
+<li>第一个调用的函数
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">construct_traj</span>(self, episode, episode_path):
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(self<span style="color:#f92672">.</span>traj_per_episode):
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(self<span style="color:#f92672">.</span>traj_length):
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>include_target:
+</span></span><span style="display:flex;"><span>             target_action <span style="color:#f92672">=</span> episode[<span style="color:#e6db74">&#34;step&#34;</span>][current_frame_idx][<span style="color:#e6db74">&#34;action&#34;</span>]
+</span></span><span style="display:flex;"><span>             action[<span style="color:#e6db74">&#39;pose&#39;</span>] <span style="color:#f92672">=</span> target_action[<span style="color:#e6db74">&#34;pose&#34;</span>]
+</span></span><span style="display:flex;"><span>             action[<span style="color:#e6db74">&#39;gripper&#39;</span>] <span style="color:#f92672">=</span> target_action[<span style="color:#e6db74">&#34;gripper&#34;</span>]
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> self<span style="color:#f92672">.</span>use_baseframe_action:
+</span></span><span style="display:flex;"><span>             action <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>process_traj_v3(action, episode, current_frame_idx)
+</span></span><span style="display:flex;"><span>         traj[<span style="color:#e6db74">&#34;action&#34;</span>][<span style="color:#e6db74">&#39;pose&#39;</span>]<span style="color:#f92672">.</span>append(action[<span style="color:#e6db74">&#39;pose&#39;</span>])
+</span></span><span style="display:flex;"><span>         traj[<span style="color:#e6db74">&#34;action&#34;</span>][<span style="color:#e6db74">&#39;gripper&#39;</span>]<span style="color:#f92672">.</span>append(action[<span style="color:#e6db74">&#39;gripper&#39;</span>])
+</span></span><span style="display:flex;"><span>     trajs[<span style="color:#e6db74">&#34;action&#34;</span>][<span style="color:#e6db74">&#39;pose&#39;</span>] <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>stack(traj[<span style="color:#e6db74">&#34;action&#34;</span>][<span style="color:#e6db74">&#39;pose&#39;</span>], dim<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>     trajs[<span style="color:#e6db74">&#34;action&#34;</span>][<span style="color:#e6db74">&#39;gripper&#39;</span>] <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>stack(traj[<span style="color:#e6db74">&#34;action&#34;</span>][<span style="color:#e6db74">&#39;gripper&#39;</span>], dim<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">return</span> trajs
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">```</span>
+</span></span></code></pre></div></li>
+<li>调用process_traj_v3(action, episode, current_frame_idx)，此时输入的action是从轨迹里面来的：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">process_traj_v3</span>(self, action, episode, frame_idx):
+</span></span><span style="display:flex;"><span> <span style="color:#75715e"># 获取当前帧的相机外参</span>
+</span></span><span style="display:flex;"><span> camera_extrinsic_cv <span style="color:#f92672">=</span> episode[<span style="color:#e6db74">&#34;step&#34;</span>][frame_idx][<span style="color:#e6db74">&#34;observation&#34;</span>][<span style="color:#e6db74">&#34;camera_extrinsic_cv&#34;</span>]
+</span></span><span style="display:flex;"><span> <span style="color:#75715e"># 从世界坐标系变换到相机坐标系</span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e"># 计算相对增量</span>
+</span></span><span style="display:flex;"><span> world_vector <span style="color:#f92672">=</span> action[<span style="color:#e6db74">&#34;pose&#34;</span>]  <span style="color:#75715e"># 目标位姿</span>
+</span></span><span style="display:flex;"><span> rotation_delta <span style="color:#f92672">=</span> camera_extrinsic_cv[:<span style="color:#ae81ff">3</span>, :<span style="color:#ae81ff">3</span>] <span style="color:#f92672">@</span> (world_vector <span style="color:#f92672">-</span> camera_extrinsic_cv[:<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e"># 计算新的动作</span>
+</span></span><span style="display:flex;"><span> action[<span style="color:#e6db74">&#34;pose&#34;</span>] <span style="color:#f92672">=</span> rotation_delta <span style="color:#f92672">+</span> camera_extrinsic_cv[:<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span> action[<span style="color:#e6db74">&#34;gripper&#34;</span>] <span style="color:#f92672">=</span> action[<span style="color:#e6db74">&#34;gripper&#34;</span>]  <span style="color:#75715e"># 可以根据需要处理抓取动作</span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">return</span> action
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">```</span>
+</span></span></code></pre></div></li>
+</ol>
+</li>
+</ol>
+<p><code>camera_extrinsic_cv</code> 是一个 3x4 的矩阵，包含了相机的 <strong>旋转矩阵</strong> 和 <strong>平移向量</strong>：
+<code>camera_extrinsic_cv = [R | t]</code></p>
+<ul>
+<li><code>R</code> 是 3x3 的旋转矩阵，表示相机的旋转（相对于世界坐标系）。</li>
+<li><code>t</code> 是 3x1 的平移向量，表示相机的位移（相对于世界坐标系）。</li>
+</ul>
+<p>反推</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a6e22e">@torch.no_grad</span>()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_pose_cam</span>(world2cam, pose1, use_euler<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    rot_mat1 <span style="color:#f92672">=</span> quaternion_to_matrix(pose1[<span style="color:#ae81ff">3</span>:])
+</span></span><span style="display:flex;"><span>    pose1_mat <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>eye(<span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    pose1_mat[:<span style="color:#ae81ff">3</span>, :<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> rot_mat1
+</span></span><span style="display:flex;"><span>    pose1_mat[:<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> pose1[:<span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    pose1_transform <span style="color:#f92672">=</span> Transform3d(matrix<span style="color:#f92672">=</span>pose1_mat<span style="color:#f92672">.</span>T)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    world2cam_transform <span style="color:#f92672">=</span> Transform3d(matrix<span style="color:#f92672">=</span>world2cam<span style="color:#f92672">.</span>T)
+</span></span><span style="display:flex;"><span>    pose1_cam <span style="color:#f92672">=</span> pose1_transform<span style="color:#f92672">.</span>compose(world2cam_transform)
+</span></span><span style="display:flex;"><span>    vector <span style="color:#f92672">=</span> pose1_cam<span style="color:#f92672">.</span>get_matrix()[<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, :<span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> use_euler:
+</span></span><span style="display:flex;"><span>        rotation <span style="color:#f92672">=</span> matrix_to_euler_angles(pose1_cam<span style="color:#f92672">.</span>get_matrix()[<span style="color:#ae81ff">0</span>, :<span style="color:#ae81ff">3</span>, :<span style="color:#ae81ff">3</span>]<span style="color:#f92672">.</span>T, convention<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;XYZ&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        rotation <span style="color:#f92672">=</span> matrix_to_quaternion(pose1_cam<span style="color:#f92672">.</span>get_matrix()[<span style="color:#ae81ff">0</span>, :<span style="color:#ae81ff">3</span>, :<span style="color:#ae81ff">3</span>]<span style="color:#f92672">.</span>T)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> torch<span style="color:#f92672">.</span>cat([vector, rotation])
+</span></span></code></pre></div><p>camera_extrinsic_cv怎么获取，什么形态
+camera_extrinsic_cv = torch.tensor(episode[&ldquo;step&rdquo;][0][&ldquo;camera_extrinsic_cv&rdquo;])</p>
+<p>生成数据那里有吗？原来success都失败了，只能先跳过</p>
+<h2 id="思路">思路<a hidden class="anchor" aria-hidden="true" href="#思路">#</a></h2>
+<ol>
+<li>收集数据，包含action（相对base）</li>
+<li>获得相机相对机械臂base坐标系的一个4x4的T。</li>
+<li>用T计算action（相对base），得到action（相对相机坐标系）</li>
+<li>其他内容保持不变训练</li>
+<li>测试的时候推理出来的是action（相机坐标系），再用T计算出action（相对base）</li>
+</ol>
+<p>获得相机相对机械臂base坐标系的一个4x4的T。 怎么实现？</p>
+<ol>
+<li>获得apriltag：https://tools.limelightvision.io/apriltag-generator</li>
+<li>打印后贴在机械臂末端-等待打印机空</li>
+<li>写代码要能记录末端ee和相机图片并保存，要求teleoperate</li>
+</ol>
+<p>我现在突然想到了一个问题，我用的smolvla这种模型预训练的都是正常action，那我只one-shot一个岂不是没啥用？再说吧，到时候看看效果</p>
+<p>太乱了，自己复现吧，首先获取数据，搞定maniskill
+maniskill又了解了一下，现在知道它</p>
+<ol>
+<li>download_demo和download_asset</li>
+<li>读取数据并replay</li>
+<li>利用轨迹生成自己想要的</li>
+</ol>
+<p>先用ms3的代码试一下，先准备数据，准备什么数据？
+asset和demo我知道，但我不知道它们的对应关系,某些任务需要额外下载资产文件
+看来不是所有任务都需要。
+那用pickcude试一下dita的转换代码</p>
+<ol>
+<li>下载pickcube，得到的pickcube-v1文件夹里面有motionplanning,teleop和rl三个文件夹</li>
+<li>pickcube-v1整个文件夹放到：<code>Dita/ManiSkill2/openx_utils/demos</code></li>
+<li>用generate_pickcube试试</li>
+<li>其他generate呢？</li>
+</ol>
+<p>grep -R &ldquo;openxlab&rdquo; .发现没有用到，直接删了不安装，省得一堆依赖报错</p>
+<p>Building wheel for flash-attn (pyproject.toml) &hellip; 很慢
+怎么一堆用不到的东西</p>
+<p>原来dita代码用的v0是maniskill2的，之前下载错了
+那来
+hf download haosulab/ManiSkill2 &ndash;repo-type=dataset</p>
+<p>好吧我知道了，用以前的老代码无法下载v0的，直接手动下载一个看看效果，还是能成功的。
+然后想办法复现到maniskill3也就是所有task的v1数据集上。
+分析pickcube_bridge.py在做什么，一一复现到maniskill3上面</p>
+<ol>
+<li>加载数据集然后创建环境</li>
+</ol>
+<p>我服了，原来是之前搞错版本了，直接下载maniskill2的就能下载资源了
+下载好之后放到dita的目录里面</p>
+<p>出现x11报错，不影响，它会offscreen执行，不想看到报错的话，export MANISKILL_USE_GLFW=0</p>
+<ol>
+<li>有没有视频展现效果</li>
+<li>数据是什么样的？</li>
+<li>可以改成ms3吗？还是用ms2就够了？毕竟ms2比较稳定还是用ms2？</li>
+<li>ms2也可以做强化学习吧</li>
+</ol>
+<p>貌似也不需要切换版本。。dita代码里面有</p>
+<ol>
+<li>python -m mani_skill2.utils.download_demo PickCube-v0</li>
+</ol>
+<p>是用pinocchio进行运动学计算的，所以最后得到的应该还是6d+gripper</p>
+<p>CUDA_VISIBLE_DEVICES=1 torchrun &ndash;nproc_per_node=1 &ndash;nnodes=1 &ndash;node_rank=0 scripts/train_diffusion_sim.py batch_size=64 dataset.traj_length=11 num_pred_action=10 task_name=maniskill dataset.num_given_observation=2 use_close_loop_eval=True close_loop_eval.test_episodes_num=175 dataset.use_baseframe_action=False dataname=maniskill dataset.include_target=1</p>
+<p>CUDA_VISIBLE_DEVICES=2,3 torchrun &ndash;nproc_per_node=2 &ndash;nnodes=1 &ndash;node_rank=0 scripts/train_diffusion_sim.py batch_size=64 dataset.traj_length=7 num_pred_action=10 task_name=maniskill dataset.num_given_observation=2 use_close_loop_eval=True close_loop_eval.test_episodes_num=175 dataset.use_baseframe_action=False dataname=maniskill dataset.include_target=1 +pretrained_path=ptmodels/dit_policy_checkpoint.pth dataset.data_path=ManiSkill2/openx_utils/outputs/PickCube-v0</p>
+<p>运行的时候出现报错，是NLTK 分词资源缺失。<strong>缺少 NLTK 的 <code>punkt_tab</code> 资源</strong>，导致在处理自然语言指令时分词失败。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>**********************************************************************
+</span></span><span style="display:flex;"><span>  Resource punkt_tab not found.
+</span></span><span style="display:flex;"><span>  Please use the NLTK Downloader to obtain the resource:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  &gt;&gt;&gt; import nltk
+</span></span><span style="display:flex;"><span>  &gt;&gt;&gt; nltk.download<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;punkt_tab&#39;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  For more information see: https://www.nltk.org/data.html
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  Attempted to load tokenizers/punkt_tab/english/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  Searched in:
+</span></span><span style="display:flex;"><span>    - <span style="color:#e6db74">&#39;/home/zhonglinyue/nltk_data&#39;</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#e6db74">&#39;/home/zhonglinyue/miniconda3/envs/dita/nltk_data&#39;</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#e6db74">&#39;/home/zhonglinyue/miniconda3/envs/dita/share/nltk_data&#39;</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#e6db74">&#39;/home/zhonglinyue/miniconda3/envs/dita/lib/nltk_data&#39;</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#e6db74">&#39;/usr/share/nltk_data&#39;</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#e6db74">&#39;/usr/local/share/nltk_data&#39;</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#e6db74">&#39;/usr/lib/nltk_data&#39;</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#e6db74">&#39;/usr/local/lib/nltk_data&#39;</span>
+</span></span><span style="display:flex;"><span>**********************************************************************
+</span></span></code></pre></div><p>解决方案 终端里面执行(dita)python&raquo;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>import nltk
+</span></span><span style="display:flex;"><span>pkgs <span style="color:#f92672">=</span> <span style="color:#f92672">[</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;punkt&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;punkt_tab&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;averaged_perceptron_tagger_eng&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;wordnet&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;omw-1.4&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> p in pkgs:
+</span></span><span style="display:flex;"><span>    nltk.download<span style="color:#f92672">(</span>p, download_dir<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/home/zhonglinyue/miniconda3/envs/dita/nltk_data&#34;</span><span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>执行后就可以了</p>
+<p>natural_language_instruction这个关键字到底是啥
+和language_instruction有什么区别？
+self.use_language_instruction应该是true还是false？</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/vla/">Vla</a></li>
+      <li><a href="https://milong26.github.io/tags/camera-space/">Camera-Space</a></li>
+      <li><a href="https://milong26.github.io/tags/generalization/">Generalization</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

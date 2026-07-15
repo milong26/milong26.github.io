@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Euler Graph on 我的博客</title>
+    <link>https://milong26.github.io/tags/euler-graph/</link>
+    <description>Recent content in Euler Graph on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 14 Sep 2023 21:11:37 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/euler-graph/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>欧拉图</title>
+      <link>https://milong26.github.io/post/%E6%AC%A7%E6%8B%89%E5%9B%BE/</link>
+      <pubDate>Thu, 14 Sep 2023 21:11:37 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E6%AC%A7%E6%8B%89%E5%9B%BE/</guid>
+      <description>&lt;p&gt;几百年不学离散数学了我都，这次遇到代码题正好复习一遍。&lt;/p&gt;
+&lt;h1 id=&#34;理论&#34;&gt;理论&lt;/h1&gt;
+&lt;h2 id=&#34;起源&#34;&gt;起源&lt;/h2&gt;
+&lt;p&gt;哥尼斯堡七桥问题：遍历七桥一次如何返回起点。这个是遍历所有&lt;strong&gt;点&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;定义&#34;&gt;定义&lt;/h2&gt;
+&lt;p&gt;图、路径和回路这些定义就不再重复了
+欧拉路径：图G上有一条经过所有顶点、所有边的简单路径（边不重复，&lt;em&gt;点可以重复&lt;/em&gt;）&lt;/p&gt;
+&lt;p&gt;欧拉回路：图G上有一条经过所有顶点、所有边的简单回路（边不重复，&lt;em&gt;点可以重复&lt;/em&gt;）&lt;/p&gt;
+&lt;p&gt;欧拉回路比欧拉路就是多了个回的区别，回路vs路径也就是回路的起点和终点是相同的点&lt;/p&gt;
+&lt;p&gt;欧拉图：有欧拉回路的连通无向图&lt;/p&gt;
+&lt;p&gt;欧拉有向图：有欧拉回路的连通有向图&lt;/p&gt;
+&lt;h2 id=&#34;定理&#34;&gt;定理&lt;/h2&gt;
+&lt;p&gt;复习一下&lt;strong&gt;欧拉图：有回路经过所有边一次，所有点至少一次的连通无向图&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;判断欧拉图&#34;&gt;判断欧拉图&lt;/h3&gt;
+&lt;p&gt;一个连通无向图G是欧拉图？=经过所有边一次，点至少一次
+当且仅当
+所有节点为偶节点&lt;/p&gt;
+&lt;h3 id=&#34;判断欧拉路径&#34;&gt;判断欧拉路径&lt;/h3&gt;
+&lt;p&gt;设G=&amp;lt;V，E&amp;gt;为连通无向图，且v1,v2∈V，则有一条从v1至v2的欧拉路径
+当且仅当
+恰有两个奇结点v1和v2。&lt;/p&gt;
+&lt;h3 id=&#34;判断欧拉有向图&#34;&gt;判断欧拉有向图&lt;/h3&gt;
+&lt;p&gt;设G为弱连通有向图。G是欧拉有向图，
+当且仅当
+所有结点的出度等于入度。&lt;/p&gt;
+&lt;h1 id=&#34;实践&#34;&gt;实践&lt;/h1&gt;</description>
+    </item>
+  </channel>
+</rss>

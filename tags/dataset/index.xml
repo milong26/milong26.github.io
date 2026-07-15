@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Dataset on 我的博客</title>
+    <link>https://milong26.github.io/tags/dataset/</link>
+    <description>Recent content in Dataset on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 26 Mar 2025 10:15:30 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/dataset/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>dexgrasp类数据集收集</title>
+      <link>https://milong26.github.io/post/dexgrasp%E7%B1%BB%E6%95%B0%E6%8D%AE%E9%9B%86%E6%94%B6%E9%9B%86/</link>
+      <pubDate>Wed, 26 Mar 2025 10:15:30 +0000</pubDate>
+      <guid>https://milong26.github.io/post/dexgrasp%E7%B1%BB%E6%95%B0%E6%8D%AE%E9%9B%86%E6%94%B6%E9%9B%86/</guid>
+      <description>&lt;p&gt;收集的一些数据集&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>vla数据集</title>
+      <link>https://milong26.github.io/post/vla%E6%95%B0%E6%8D%AE%E9%9B%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/vla%E6%95%B0%E6%8D%AE%E9%9B%86/</guid>
+      <description>&lt;p&gt;看论文的时候一些数据集记录下来&lt;/p&gt;
+&lt;p&gt;有个问题：vla为啥还能有benchmark，不都是本地部署吗？&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

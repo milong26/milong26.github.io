@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>海森矩阵 | 我的博客</title>
+<meta name="keywords" content="hessian matrix, undone">
+<meta name="description" content="Hessian，黑塞矩阵（Hessian Matrix），是一个多元函数的二阶偏导数构成的方阵，描述了函数的局部曲率。黑塞矩阵常用于牛顿法解决优化问题，利用黑塞矩阵可判定多元函数的极值问题。在工程实际问题的优化设计中，所列的目标函数往往很复杂，为了使问题简化，常常将目标函数在某点邻域展开成泰勒多项式来逼近原函数，此时函数在某点泰勒展开式的矩阵形式中会涉及到黑塞矩阵。
+省流
+
+定义：用损失函数和参数写出矩阵
+
+
+ 以后学多少写多少，现在只要会定义就行
+ 黑塞矩阵为什么可以判断鞍点？为什么损失函数可以近似写成f&#43;梯度&#43;黑塞？
+
+定义
+对一个多元函数f，如果其二阶导数都存在，定义海森矩阵为：
+$$
+H(f)(\boldsymbol{x}) =
+\left [
+\begin{matrix}
+\frac {\partial^2F} {\partial x_1^2} &amp; \frac {\partial^F} {\partial x_1 \partial x_2} &amp; \cdots &amp; \frac {\partial^F} {\partial x_1 \partial x_n} \
+\frac {\partial^2F} {\partial x_2 \partial x_1} &amp; \frac {\partial^F} {\partial x_2^2} &amp; \cdots &amp; \frac {\partial^F} {\partial x_2 \partial x_n} \
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \
+\frac {\partial^2F} {\partial x_n \partial x_1} &amp; \frac {\partial^F} {\partial x_n \partial x_2} &amp; \cdots &amp; \frac {\partial^F} {\partial x_n^2}
+\end{matrix}
+\right] \
+$$">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/%E6%B5%B7%E6%A3%AE%E7%9F%A9%E9%98%B5/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/%E6%B5%B7%E6%A3%AE%E7%9F%A9%E9%98%B5/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/%E6%B5%B7%E6%A3%AE%E7%9F%A9%E9%98%B5/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="海森矩阵">
+  <meta property="og:description" content="Hessian，黑塞矩阵（Hessian Matrix），是一个多元函数的二阶偏导数构成的方阵，描述了函数的局部曲率。黑塞矩阵常用于牛顿法解决优化问题，利用黑塞矩阵可判定多元函数的极值问题。在工程实际问题的优化设计中，所列的目标函数往往很复杂，为了使问题简化，常常将目标函数在某点邻域展开成泰勒多项式来逼近原函数，此时函数在某点泰勒展开式的矩阵形式中会涉及到黑塞矩阵。
+省流
+定义：用损失函数和参数写出矩阵 以后学多少写多少，现在只要会定义就行 黑塞矩阵为什么可以判断鞍点？为什么损失函数可以近似写成f&#43;梯度&#43;黑塞？ 定义 对一个多元函数f，如果其二阶导数都存在，定义海森矩阵为： $$ H(f)(\boldsymbol{x}) = \left [ \begin{matrix} \frac {\partial^2F} {\partial x_1^2} &amp; \frac {\partial^F} {\partial x_1 \partial x_2} &amp; \cdots &amp; \frac {\partial^F} {\partial x_1 \partial x_n} \ \frac {\partial^2F} {\partial x_2 \partial x_1} &amp; \frac {\partial^F} {\partial x_2^2} &amp; \cdots &amp; \frac {\partial^F} {\partial x_2 \partial x_n} \ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \ \frac {\partial^2F} {\partial x_n \partial x_1} &amp; \frac {\partial^F} {\partial x_n \partial x_2} &amp; \cdots &amp; \frac {\partial^F} {\partial x_n^2} \end{matrix} \right] \ $$">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-12-08T11:24:20+00:00">
+    <meta property="article:modified_time" content="2023-12-08T11:24:20+00:00">
+    <meta property="article:tag" content="Hessian Matrix">
+    <meta property="article:tag" content="Undone">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="海森矩阵">
+  <meta name="twitter:description" content="Hessian，黑塞矩阵（Hessian Matrix），是一个多元函数的二阶偏导数构成的方阵，描述了函数的局部曲率。黑塞矩阵常用于牛顿法解决优化问题，利用黑塞矩阵可判定多元函数的极值问题。在工程实际问题的优化设计中，所列的目标函数往往很复杂，为了使问题简化，常常将目标函数在某点邻域展开成泰勒多项式来逼近原函数，此时函数在某点泰勒展开式的矩阵形式中会涉及到黑塞矩阵。
+省流
+定义：用损失函数和参数写出矩阵 以后学多少写多少，现在只要会定义就行 黑塞矩阵为什么可以判断鞍点？为什么损失函数可以近似写成f&#43;梯度&#43;黑塞？ 定义 对一个多元函数f，如果其二阶导数都存在，定义海森矩阵为： $$ H(f)(\boldsymbol{x}) = \left [ \begin{matrix} \frac {\partial^2F} {\partial x_1^2} &amp; \frac {\partial^F} {\partial x_1 \partial x_2} &amp; \cdots &amp; \frac {\partial^F} {\partial x_1 \partial x_n} \ \frac {\partial^2F} {\partial x_2 \partial x_1} &amp; \frac {\partial^F} {\partial x_2^2} &amp; \cdots &amp; \frac {\partial^F} {\partial x_2 \partial x_n} \ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \ \frac {\partial^2F} {\partial x_n \partial x_1} &amp; \frac {\partial^F} {\partial x_n \partial x_2} &amp; \cdots &amp; \frac {\partial^F} {\partial x_n^2} \end{matrix} \right] \ $$">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "海森矩阵",
+      "item": "https://milong26.github.io/post/%E6%B5%B7%E6%A3%AE%E7%9F%A9%E9%98%B5/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "海森矩阵",
+  "name": "海森矩阵",
+  "description": "Hessian，黑塞矩阵（Hessian Matrix），是一个多元函数的二阶偏导数构成的方阵，描述了函数的局部曲率。黑塞矩阵常用于牛顿法解决优化问题，利用黑塞矩阵可判定多元函数的极值问题。在工程实际问题的优化设计中，所列的目标函数往往很复杂，为了使问题简化，常常将目标函数在某点邻域展开成泰勒多项式来逼近原函数，此时函数在某点泰勒展开式的矩阵形式中会涉及到黑塞矩阵。\n省流\n定义：用损失函数和参数写出矩阵 以后学多少写多少，现在只要会定义就行 黑塞矩阵为什么可以判断鞍点？为什么损失函数可以近似写成f+梯度+黑塞？ 定义 对一个多元函数f，如果其二阶导数都存在，定义海森矩阵为： $$ H(f)(\\boldsymbol{x}) = \\left [ \\begin{matrix} \\frac {\\partial^2F} {\\partial x_1^2} \u0026amp; \\frac {\\partial^F} {\\partial x_1 \\partial x_2} \u0026amp; \\cdots \u0026amp; \\frac {\\partial^F} {\\partial x_1 \\partial x_n} \\ \\frac {\\partial^2F} {\\partial x_2 \\partial x_1} \u0026amp; \\frac {\\partial^F} {\\partial x_2^2} \u0026amp; \\cdots \u0026amp; \\frac {\\partial^F} {\\partial x_2 \\partial x_n} \\ \\vdots \u0026amp; \\vdots \u0026amp; \\ddots \u0026amp; \\vdots \\ \\frac {\\partial^2F} {\\partial x_n \\partial x_1} \u0026amp; \\frac {\\partial^F} {\\partial x_n \\partial x_2} \u0026amp; \\cdots \u0026amp; \\frac {\\partial^F} {\\partial x_n^2} \\end{matrix} \\right] \\ $$\n",
+  "keywords": [
+    "hessian matrix", "undone"
+  ],
+  "articleBody": "Hessian，黑塞矩阵（Hessian Matrix），是一个多元函数的二阶偏导数构成的方阵，描述了函数的局部曲率。黑塞矩阵常用于牛顿法解决优化问题，利用黑塞矩阵可判定多元函数的极值问题。在工程实际问题的优化设计中，所列的目标函数往往很复杂，为了使问题简化，常常将目标函数在某点邻域展开成泰勒多项式来逼近原函数，此时函数在某点泰勒展开式的矩阵形式中会涉及到黑塞矩阵。\n省流\n定义：用损失函数和参数写出矩阵 以后学多少写多少，现在只要会定义就行 黑塞矩阵为什么可以判断鞍点？为什么损失函数可以近似写成f+梯度+黑塞？ 定义 对一个多元函数f，如果其二阶导数都存在，定义海森矩阵为： $$ H(f)(\\boldsymbol{x}) = \\left [ \\begin{matrix} \\frac {\\partial^2F} {\\partial x_1^2} \u0026 \\frac {\\partial^F} {\\partial x_1 \\partial x_2} \u0026 \\cdots \u0026 \\frac {\\partial^F} {\\partial x_1 \\partial x_n} \\ \\frac {\\partial^2F} {\\partial x_2 \\partial x_1} \u0026 \\frac {\\partial^F} {\\partial x_2^2} \u0026 \\cdots \u0026 \\frac {\\partial^F} {\\partial x_2 \\partial x_n} \\ \\vdots \u0026 \\vdots \u0026 \\ddots \u0026 \\vdots \\ \\frac {\\partial^2F} {\\partial x_n \\partial x_1} \u0026 \\frac {\\partial^F} {\\partial x_n \\partial x_2} \u0026 \\cdots \u0026 \\frac {\\partial^F} {\\partial x_n^2} \\end{matrix} \\right] \\ $$\n",
+  "wordCount" : "88",
+  "inLanguage": "en",
+  "datePublished": "2023-12-08T11:24:20Z",
+  "dateModified": "2023-12-08T11:24:20Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/%E6%B5%B7%E6%A3%AE%E7%9F%A9%E9%98%B5/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      海森矩阵
+    </h1>
+    <div class="post-meta">
+
+<span title='2023-12-08 11:24:20 +0000 UTC'>December 8, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>Hessian，黑塞矩阵（Hessian Matrix），是一个多元函数的二阶偏导数构成的方阵，描述了函数的局部曲率。黑塞矩阵常用于牛顿法解决优化问题，利用黑塞矩阵可判定多元函数的极值问题。在工程实际问题的优化设计中，所列的目标函数往往很复杂，为了使问题简化，常常将目标函数在某点邻域展开成泰勒多项式来逼近原函数，此时函数在某点泰勒展开式的矩阵形式中会涉及到黑塞矩阵。</p>
+<p><strong>省流</strong></p>
+<ol>
+<li>定义：用损失函数和参数写出矩阵</li>
+</ol>
+<ul>
+<li><input disabled="" type="checkbox"> 以后学多少写多少，现在只要会定义就行</li>
+<li><input disabled="" type="checkbox"> 黑塞矩阵为什么可以判断鞍点？为什么损失函数可以近似写成f+梯度+黑塞？</li>
+</ul>
+<h1 id="定义">定义<a hidden class="anchor" aria-hidden="true" href="#定义">#</a></h1>
+<p>对一个多元函数f，如果其二阶导数都存在，定义海森矩阵为：
+$$
+H(f)(\boldsymbol{x}) =
+\left [
+\begin{matrix}
+\frac {\partial^2F} {\partial x_1^2} &amp; \frac {\partial^F} {\partial x_1 \partial x_2} &amp; \cdots &amp; \frac {\partial^F} {\partial x_1 \partial x_n} \
+\frac {\partial^2F} {\partial x_2 \partial x_1} &amp; \frac {\partial^F} {\partial x_2^2} &amp; \cdots &amp; \frac {\partial^F} {\partial x_2 \partial x_n} \
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \
+\frac {\partial^2F} {\partial x_n \partial x_1} &amp; \frac {\partial^F} {\partial x_n \partial x_2} &amp; \cdots &amp; \frac {\partial^F} {\partial x_n^2}
+\end{matrix}
+\right] \
+$$</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/hessian-matrix/">Hessian Matrix</a></li>
+      <li><a href="https://milong26.github.io/tags/undone/">Undone</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Vision-Language-Action Models for Robotics: A Review Towards Real-World Applications | 我的博客</title>
+<meta name="keywords" content="vla, survey">
+<meta name="description" content="一篇综述
+2025-11-06 16:15:25 开始看
+
+ 看完 (@2026-04-06 02:33)
+希望从这篇综述中得到：一个综述应该从什么视角看vla，以及重点关注vla的泛化性和精确性的trade-off。vla的目标是什么？轻量？泛化？精确？还是什么？
+Q:
+
+
+一个综述应该从怎样的视角？
+vla的目标、定义、来源、和别的模型的区分
+技术层面的问题：核心架构、挑战、风险、目前的算法怎样应对
+实际应用与如何评估
+如果我自己来，能搞出什么东西？
+
+2025-11-06 17:16:47 确定好问题，可以开始看了">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="Vision-Language-Action Models for Robotics: A Review Towards Real-World Applications">
+  <meta property="og:description" content="一篇综述 2025-11-06 16:15:25 开始看
+看完 (@2026-04-06 02:33) 希望从这篇综述中得到：一个综述应该从什么视角看vla，以及重点关注vla的泛化性和精确性的trade-off。vla的目标是什么？轻量？泛化？精确？还是什么？ Q: 一个综述应该从怎样的视角？ vla的目标、定义、来源、和别的模型的区分 技术层面的问题：核心架构、挑战、风险、目前的算法怎样应对 实际应用与如何评估 如果我自己来，能搞出什么东西？ 2025-11-06 17:16:47 确定好问题，可以开始看了">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:tag" content="Vla">
+    <meta property="article:tag" content="Survey">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Vision-Language-Action Models for Robotics: A Review Towards Real-World Applications">
+  <meta name="twitter:description" content="一篇综述 2025-11-06 16:15:25 开始看
+看完 (@2026-04-06 02:33) 希望从这篇综述中得到：一个综述应该从什么视角看vla，以及重点关注vla的泛化性和精确性的trade-off。vla的目标是什么？轻量？泛化？精确？还是什么？ Q: 一个综述应该从怎样的视角？ vla的目标、定义、来源、和别的模型的区分 技术层面的问题：核心架构、挑战、风险、目前的算法怎样应对 实际应用与如何评估 如果我自己来，能搞出什么东西？ 2025-11-06 17:16:47 确定好问题，可以开始看了">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Vision-Language-Action Models for Robotics: A Review Towards Real-World Applications",
+      "item": "https://milong26.github.io/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Vision-Language-Action Models for Robotics: A Review Towards Real-World Applications",
+  "name": "Vision-Language-Action Models for Robotics: A Review Towards Real-World Applications",
+  "description": "一篇综述 2025-11-06 16:15:25 开始看\n看完 (@2026-04-06 02:33) 希望从这篇综述中得到：一个综述应该从什么视角看vla，以及重点关注vla的泛化性和精确性的trade-off。vla的目标是什么？轻量？泛化？精确？还是什么？ Q: 一个综述应该从怎样的视角？ vla的目标、定义、来源、和别的模型的区分 技术层面的问题：核心架构、挑战、风险、目前的算法怎样应对 实际应用与如何评估 如果我自己来，能搞出什么东西？ 2025-11-06 17:16:47 确定好问题，可以开始看了\n",
+  "keywords": [
+    "vla", "survey"
+  ],
+  "articleBody": "一篇综述 2025-11-06 16:15:25 开始看\n看完 (@2026-04-06 02:33) 希望从这篇综述中得到：一个综述应该从什么视角看vla，以及重点关注vla的泛化性和精确性的trade-off。vla的目标是什么？轻量？泛化？精确？还是什么？ Q: 一个综述应该从怎样的视角？ vla的目标、定义、来源、和别的模型的区分 技术层面的问题：核心架构、挑战、风险、目前的算法怎样应对 实际应用与如何评估 如果我自己来，能搞出什么东西？ 2025-11-06 17:16:47 确定好问题，可以开始看了\nintroduction 这种章节会讲到vla的来源、定义、发展轨迹？\n一般综述的引言应该包括： 目的：告诉读者为什么这个领域值得综述。\n通常包含：\n研究领域的背景与重要性 当前的研究趋势或突破（如：VLA模型的兴起） 该领域存在的空白或挑战（why now? why this review?） 本综述与以往综述的区别（本综述的贡献点） 📌 你能从这一部分得到：\n为什么作者写这篇综述？ 当前领域在“什么阶段”？（新兴、成熟、混乱？） 我是否真的需要深入了解这个方向？ vla和别的？？？的区分有助于理解定义 来源：LLM 和 VLM 用于解释多模态输入、推理任务并执行上下文感知action 发展轨迹 早期将 LLM 和 VLM 与负责作生成的底层机器人策略解耦：机器人策略（Policy Module）：根据前两步的输出（文本描述 + 感知信息），调用预定义的动作集合或者模仿学习，所以没法推广到更加广泛的任务。它的难点是没法拓展到unseen task 后来的研究（VLA模型）把视觉、语言和动作放在一个端到端（end-to-end）的模型里联合学习（joint learning），关键词变成了 本文内容和其他总数的区别 重新定义了VLA：A Vision-Language-Action (VLA) model is a system that takes visual observations and natural language instructions as required inputs and may incorporate additional sensory modalities. It produces robot actions by directly generating control commands. Thus, models in which a high-level policy (e.g., a vision-language model backbone) merely selects an index from a set of pre-trained skills or control primitives are excluded from this definition.一个视觉+自然语言指令（和其它模态）作为输入，直接生成控制命令。不能是那种选择动作原语的模型，那位姿也可以啊 介绍结构，挑战一般就是问题了，策略、架构、训练分别对应：宏观策略 → 中观架构 → 微观训练。 仿照这个结构，对我的启发是：如果我要自己搞一个vla，按照这个思路：（这个思路目前还只是一个空壳子，后面看论文要往里面填） VLA 要解决什么问题 我希望机器人能做什么？（任务目标） 当前系统为什么做不到？（痛点） 我的VLA系统能在哪些方面改进现有方案？（贡献点） 怎么设计思路去解决，也就是一个总体策略 模块化设计还是端到端设计？ 强调通用性（generalist）还是任务特定优化？ 强调大规模预训练还是数据高效学习？ 用哪种范式（transformer-based? diffusion-based? RL-based?） 系统内部怎么实现这种思路，用什么模块 视觉编码器（Vision Encoder）：提取环境视觉特征。 语言编码器（Language Encoder）：解析任务命令。 多模态融合模块（Fusion Module）：让视觉、语言信息对齐。 动作生成模块（Action Decoder / Policy Head）：输出动作指令或控制信号。 记忆与状态模块（Memory / Context）：处理时序与上下文信息。 模型具体怎么训练和运行：我打算用什么学习机制，让模型学会执行任务？ 监督学习（supervised learning）：从配对数据中学习。 模仿学习（imitation learning）：学习人类演示的动作。 强化学习（reinforcement learning）：在交互中学习策略。 自监督预训练（self-supervised pretraining）：用未标注数据学习模态间对齐。 多阶段训练：预训练 + 微调（pretrain + fine-tune）。 评估：“我的系统在真实世界中表现如何？” 定义指标 选择平台 挑战 VLA 要解决什么问题\n数据 训练 VLA 模型需要“大规模、多样化、三模态（视觉、语言、动作）对齐”的数据集。\n跨机器人迁移 形态差异大，（action space）和感知空间（observation space）不同 策略（policy）也难直接迁移到其他机器人 现实数据和机器人行动有形式（form）和语义（semantics）上的差别，所以不能直接迁移 计算成本 Transformer计算复杂-\u003e预训练VLM 仍极其耗费算力，尤其在处理长时序、高分辨率或包含3D、身体感知等额外模态时更为严重 部署有问题 因此需要研究更高效的模型结构与蒸馏方法来降低资源需求 策略 研究者怎么设计思路去解决 但我感觉这篇写得怪怪的，不能直接分成这7种。上层策略是模型整体架构：早期transformer序列、预训练vlm、分层、基于视频。另外三种关注 如何从高层表示生成机器人动作通常依赖于上层骨干（VLM 或 Transformer序列）生成的特征或 token，所以可以 与上层策略并存\n早期CNN基础的序列模型 CLIPort：\n使用预训练的VLM 扩散 扩散Transformer结构 分层策略架构 基于视频的潜在动作学习 流匹配策略 架构 系统内部怎么实现这种思路\n训练 模型具体怎么训练和运行\n",
+  "wordCount" : "204",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Vision-Language-Action Models for Robotics: A Review Towards Real-World Applications
+    </h1>
+    <div class="post-meta">
+
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>一篇综述
+2025-11-06 16:15:25 开始看</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 看完 (@2026-04-06 02:33)
+希望从这篇综述中得到：一个综述应该从什么视角看vla，以及重点关注vla的泛化性和精确性的trade-off。vla的目标是什么？轻量？泛化？精确？还是什么？
+Q:</li>
+</ul>
+<ol>
+<li>一个综述应该从怎样的视角？</li>
+<li>vla的目标、定义、来源、和别的模型的区分</li>
+<li>技术层面的问题：核心架构、挑战、风险、目前的算法怎样应对</li>
+<li>实际应用与如何评估</li>
+<li>如果我自己来，能搞出什么东西？</li>
+</ol>
+<p>2025-11-06 17:16:47 确定好问题，可以开始看了</p>
+<h1 id="introduction">introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h1>
+<p>这种章节会讲到vla的来源、定义、发展轨迹？</p>
+<p>一般综述的引言应该包括：
+<strong>目的</strong>：告诉读者为什么这个领域值得综述。<br>
+<strong>通常包含：</strong></p>
+<ul>
+<li>研究领域的背景与重要性</li>
+<li>当前的研究趋势或突破（如：VLA模型的兴起）</li>
+<li>该领域存在的空白或挑战（why now? why this review?）</li>
+<li>本综述与以往综述的区别（本综述的贡献点）</li>
+</ul>
+<p>📌 <strong>你能从这一部分得到：</strong></p>
+<ul>
+<li>为什么作者写这篇综述？</li>
+<li>当前领域在“什么阶段”？（新兴、成熟、混乱？）</li>
+<li>我是否真的需要深入了解这个方向？</li>
+</ul>
+<ol>
+<li>vla和别的？？？的区分有助于理解定义</li>
+<li>来源：LLM 和 VLM 用于解释多模态输入、推理任务并执行上下文感知action</li>
+<li>发展轨迹
+<ol>
+<li>早期将 LLM 和 VLM 与负责作生成的底层机器人策略解耦：<strong>机器人策略（Policy Module）</strong>：根据前两步的输出（文本描述 + 感知信息），调用预定义的动作集合或者模仿学习，所以没法推广到更加广泛的任务。它的难点是没法拓展到unseen task</li>
+<li>后来的研究（VLA模型）把视觉、语言和动作放在一个端到端（end-to-end）的模型里联合学习（joint learning），关键词变成了</li>
+</ol>
+</li>
+<li>本文内容和其他总数的区别</li>
+<li>重新定义了VLA：A Vision-Language-Action (VLA) model is a system that takes visual observations and natural language instructions as required inputs and may incorporate additional sensory modalities. It produces robot actions by directly generating control commands. Thus, models in which a high-level policy (e.g., a vision-language model backbone) merely selects an index from a set of pre-trained skills or control primitives are excluded from this definition.一个视觉+自然语言指令（和其它模态）作为输入，直接生成控制命令。不能是那种选择动作原语的模型，那位姿也可以啊</li>
+<li>介绍结构，挑战一般就是问题了，策略、架构、训练分别对应：宏观策略 → 中观架构 → 微观训练。</li>
+<li>仿照这个结构，对我的启发是：如果我要自己搞一个vla，按照这个思路：（这个思路目前还只是一个空壳子，后面看论文要往里面填）
+<ol>
+<li>VLA 要解决什么问题
+<ol>
+<li>我希望机器人能做什么？（任务目标）</li>
+<li>当前系统为什么做不到？（痛点）</li>
+<li>我的VLA系统能在哪些方面改进现有方案？（贡献点）</li>
+</ol>
+</li>
+<li>怎么设计思路去解决，也就是一个总体策略
+<ol>
+<li>模块化设计还是端到端设计？</li>
+<li>强调通用性（generalist）还是任务特定优化？</li>
+<li>强调大规模预训练还是数据高效学习？</li>
+<li>用哪种范式（transformer-based? diffusion-based? RL-based?）</li>
+</ol>
+</li>
+<li>系统内部怎么实现这种思路，用什么模块
+<ol>
+<li><strong>视觉编码器（Vision Encoder）</strong>：提取环境视觉特征。</li>
+<li><strong>语言编码器（Language Encoder）</strong>：解析任务命令。</li>
+<li><strong>多模态融合模块（Fusion Module）</strong>：让视觉、语言信息对齐。</li>
+<li><strong>动作生成模块（Action Decoder / Policy Head）</strong>：输出动作指令或控制信号。</li>
+<li><strong>记忆与状态模块（Memory / Context）</strong>：处理时序与上下文信息。</li>
+</ol>
+</li>
+<li>模型具体怎么训练和运行：我打算用什么学习机制，让模型学会执行任务？
+<ol>
+<li>
+<ul>
+<li><strong>监督学习（supervised learning）</strong>：从配对数据中学习。</li>
+</ul>
+</li>
+<li><strong>模仿学习（imitation learning）</strong>：学习人类演示的动作。</li>
+<li><strong>强化学习（reinforcement learning）</strong>：在交互中学习策略。</li>
+<li><strong>自监督预训练（self-supervised pretraining）</strong>：用未标注数据学习模态间对齐。</li>
+<li><strong>多阶段训练</strong>：预训练 + 微调（pretrain + fine-tune）。</li>
+</ol>
+</li>
+<li>评估：“我的系统在真实世界中表现如何？”
+<ol>
+<li>定义指标</li>
+<li>选择平台</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h1 id="挑战">挑战<a hidden class="anchor" aria-hidden="true" href="#挑战">#</a></h1>
+<p>VLA 要解决什么问题</p>
+<h2 id="数据">数据<a hidden class="anchor" aria-hidden="true" href="#数据">#</a></h2>
+<p>训练 VLA 模型需要“大规模、多样化、三模态（视觉、语言、动作）对齐”的数据集。</p>
+<h2 id="跨机器人迁移">跨机器人迁移<a hidden class="anchor" aria-hidden="true" href="#跨机器人迁移">#</a></h2>
+<ol>
+<li>形态差异大，（action space）和感知空间（observation space）不同</li>
+<li>策略（policy）也难直接迁移到其他机器人</li>
+<li>现实数据和机器人行动有形式（form）和语义（semantics）上的差别，所以不能直接迁移</li>
+</ol>
+<h2 id="计算成本">计算成本<a hidden class="anchor" aria-hidden="true" href="#计算成本">#</a></h2>
+<ol>
+<li>Transformer计算复杂-&gt;预训练VLM</li>
+<li>仍极其耗费算力，尤其在处理长时序、高分辨率或包含3D、身体感知等额外模态时更为严重</li>
+<li>部署有问题
+因此需要研究更高效的模型结构与蒸馏方法来降低资源需求</li>
+</ol>
+<h1 id="策略">策略<a hidden class="anchor" aria-hidden="true" href="#策略">#</a></h1>
+<p>研究者怎么设计思路去解决
+但我感觉这篇写得怪怪的，不能直接分成这7种。上层策略是模型整体架构：早期transformer序列、预训练vlm、分层、基于视频。另外三种关注 如何从高层表示生成机器人动作通常依赖于上层骨干（VLM 或 Transformer序列）生成的特征或 token，所以可以 与上层策略并存</p>
+<h3 id="早期cnn基础的序列模型">早期CNN基础的序列模型<a hidden class="anchor" aria-hidden="true" href="#早期cnn基础的序列模型">#</a></h3>
+<p>CLIPort：</p>
+<h3 id="使用预训练的vlm">使用预训练的VLM<a hidden class="anchor" aria-hidden="true" href="#使用预训练的vlm">#</a></h3>
+<h3 id="扩散">扩散<a hidden class="anchor" aria-hidden="true" href="#扩散">#</a></h3>
+<h3 id="扩散transformer结构">扩散Transformer结构<a hidden class="anchor" aria-hidden="true" href="#扩散transformer结构">#</a></h3>
+<h3 id="分层策略架构">分层策略架构<a hidden class="anchor" aria-hidden="true" href="#分层策略架构">#</a></h3>
+<h3 id="基于视频的潜在动作学习">基于视频的潜在动作学习<a hidden class="anchor" aria-hidden="true" href="#基于视频的潜在动作学习">#</a></h3>
+<h3 id="流匹配策略">流匹配策略<a hidden class="anchor" aria-hidden="true" href="#流匹配策略">#</a></h3>
+<h1 id="架构">架构<a hidden class="anchor" aria-hidden="true" href="#架构">#</a></h1>
+<p>系统内部怎么实现这种思路</p>
+<h1 id="训练">训练<a hidden class="anchor" aria-hidden="true" href="#训练">#</a></h1>
+<p>模型具体怎么训练和运行</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/vla/">Vla</a></li>
+      <li><a href="https://milong26.github.io/tags/survey/">Survey</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

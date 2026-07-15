@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Optimization on 我的博客</title>
+    <link>https://milong26.github.io/tags/optimization/</link>
+    <description>Recent content in Optimization on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 02 Apr 2024 20:14:43 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/optimization/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>局部最优和鞍点</title>
+      <link>https://milong26.github.io/post/%E5%B1%80%E9%83%A8%E6%9C%80%E4%BC%98%E5%92%8C%E9%9E%8D%E7%82%B9/</link>
+      <pubDate>Tue, 02 Apr 2024 20:14:43 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E5%B1%80%E9%83%A8%E6%9C%80%E4%BC%98%E5%92%8C%E9%9E%8D%E7%82%B9/</guid>
+      <description>&lt;p&gt;局部最优和鞍点都是处在grandient为0的位置，首先是找到这个位置，然后判断它是局部最优还是鞍点，利用海森矩阵从数学公式上就能判定。最后为了让损失函数更新能逃离鞍点，可以用海森矩阵或者动量两种方法。&lt;/p&gt;
+&lt;p&gt;太长不看版：&lt;strong&gt;文章总结&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;从gradient=0找到critical point的点
+令gradent=0，就是求loss对参数的微分&lt;/li&gt;
+&lt;li&gt;利用海森矩阵判断这个点是局部最优（最大、最小）还是鞍点：
+求海森矩阵的特征值，当有正有负的时候就是鞍点。&lt;/li&gt;
+&lt;li&gt;逃出鞍点：
+&lt;ul&gt;
+&lt;li&gt;海森矩阵&lt;/li&gt;
+&lt;li&gt;动量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;critical-point&#34;&gt;critical point&lt;/h1&gt;
+&lt;p&gt;也就是gradient=0时有几种情况&lt;/p&gt;
+&lt;h2 id=&#34;局部最小值local-minima&#34;&gt;局部最小值（local minima）&lt;/h2&gt;
+&lt;p&gt;如果是卡在local minima,那可能就没有路可以走了，因为四周都比较高，你现在所在的位置已经是最低的点，loss最低的点了，往四周走 loss都会比较高，你会不知道怎么走到其他地方去。&lt;/p&gt;
+&lt;h2 id=&#34;鞍点saddle-point&#34;&gt;鞍点（saddle point）&lt;/h2&gt;
+&lt;p&gt;如图可看出，左右是比红点高，前后比红点低，红点既不是local minima,也不是local maxima的地方。如果是卡在saddle point，saddle point旁边还是有其他路可以让你的loss更低的，你只要逃离saddle point，你就有可能让你的loss更低。
+&lt;img alt=&#34;鞍点&#34; loading=&#34;lazy&#34; src=&#34;https://ooo.0x0.ooo/2024/04/03/OmWQFM.png&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;判断&#34;&gt;判断&lt;/h1&gt;
+&lt;p&gt;怎么知道critical point的类型，到底是local minima,还是saddle point？
+对$L(\theta)$ 进行泰勒展开：$\theta&amp;rsquo;$在$\theta$附近。
+$$
+L(\theta)\approx L(\theta&amp;rsquo;)+(\theta-\theta&amp;rsquo;)^Tg+\frac{1}{2}(\theta-\theta&amp;rsquo;)^TH(\theta-\theta&amp;rsquo;)
+$$&lt;/p&gt;
+&lt;p&gt;对公式相加的每一项分析：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;表示当$\theta&amp;rsquo;$离$\theta$很近的时候，L近似相等&lt;/li&gt;
+&lt;li&gt;g就是梯度Gradient。这个gradient会弥补θ跟θ′的差距，虽然我们刚才说θ跟θ′很接近，但它们之间还是有一定的差距。&lt;/li&gt;
+&lt;li&gt;第三项跟Hessian(海森)矩阵有关。这个H就是海森矩阵。第三项会再弥补θ跟θ′的差距。H里面放的是参数对L的二次微分。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;当走到一个critical point，也就是说gradient为0，所以g这AAAAAAAA一项就可以去掉了。这时候的L(θ) ≈ L(θ′) + 第三项。&lt;/p&gt;
+&lt;p&gt;我们可以第三项来判断，在θ′附近的error surface（误差曲面），到底长什么样。知道error surface，我们就可以判断θ′是属于局部最小值点还是鞍点。&lt;/p&gt;
+&lt;p&gt;为了符号方便起见,我们把(θ−θ′)用v这个向量来表示。所以公式可以写成：
+$$
+L(\theta)\approx L(\theta&amp;rsquo;)+\frac{1}{2}v^THv
+$$&lt;/p&gt;
+&lt;p&gt;对每个v来说，当$v^THv&amp;gt;0$时，$L(\theta)&amp;gt;L(\theta&amp;rsquo;)$ 局部最小，也就是此时H是正定矩阵=特征值都是正数。&lt;/p&gt;
+&lt;p&gt;相反的，当$v^THv&amp;lt;0$时，$L(\theta)&amp;lt;L(\theta&amp;rsquo;)$ 局部最大，也就是此时H特征值都是负数。&lt;/p&gt;
+&lt;p&gt;特征值有正有负就表示它是鞍点。&lt;/p&gt;
+&lt;h1 id=&#34;逃离鞍点&#34;&gt;逃离鞍点&lt;/h1&gt;
+&lt;h2 id=&#34;海森矩阵&#34;&gt;海森矩阵&lt;/h2&gt;
+&lt;p&gt;由线性代数的知识：A为矩阵，α为特征向量，λ为特征值。有Aα=λα。我们假设u是H的特征向量，λ是u的特征值。所以有：
+$$
+u^THu=u^T(\lambda u)=\lambda ||u||^2
+$$&lt;/p&gt;
+&lt;p&gt;又由鞍点的特征值有正有负，所以存在特征值λ使得λ‖u‖²&amp;lt;0，所以$u^THu$小于0，也就是$L(\theta)&amp;lt;L(\theta&amp;rsquo;)$。即假设$\theta-\theta&amp;rsquo;=u$，你在$\theta&amp;rsquo;$的位置加上u，沿着u的方向做update得到θ，你就可以让loss变小。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;对于saddle point，我们只需要找出特征值λ小于0的点，再找出它对应的特征向量u，用$u+\theta&amp;rsquo;$，就可以找到一个新的点，这个点的loss比原来低&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>模拟退火算法</title>
+      <link>https://milong26.github.io/post/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Fri, 27 Oct 2023 18:48:46 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/</guid>
+      <description>&lt;p&gt;准备pre，学习一下。计算智能课讲了一下但是印象不深，此外最近看过的论文里有提到一个“温度系数”，不知道概念是否相通。&lt;/p&gt;
+&lt;h1 id=&#34;概念&#34;&gt;概念&lt;/h1&gt;
+&lt;p&gt;适用场合：模拟退火是一种随机化算法。当一个问题的方案数量极大（甚至是无穷的）而且不是一个单峰函数时，我们常使用模拟退火求解。&lt;/p&gt;
+&lt;h2 id=&#34;区别&#34;&gt;区别&lt;/h2&gt;
+&lt;h3 id=&#34;蒙特卡洛模拟&#34;&gt;蒙特卡洛模拟&lt;/h3&gt;
+&lt;h1 id=&#34;原理&#34;&gt;原理&lt;/h1&gt;
+&lt;h2 id=&#34;物理现象&#34;&gt;物理现象&lt;/h2&gt;
+&lt;p&gt;金属退火是将金属加热到一定温度，保持足够时间，然后以适宜速度冷却(通常是缓慢冷却，有时是控制冷却)的一种金属热处理工艺。
+模拟退火算法来源于固体退火原理，将固体加温至充分高，再让其徐徐冷却，加温时，固体内部粒子随温升变为无序状，内能增大，而徐徐冷却时粒子渐趋有序，在每个温度都达到平衡态，最后在常温时达到基态，内能减为最小。&lt;/p&gt;
+&lt;h2 id=&#34;算法&#34;&gt;算法&lt;/h2&gt;
+&lt;p&gt;它是基于Monte-Carlo 迭代求解策略的一种随机寻优算法，其出发点是基于物理中固体物质的退火过程与一般组合优化问题之间的相似性。
+可以应用到组合优化问题中。&lt;/p&gt;
+&lt;h3 id=&#34;爬山算法&#34;&gt;爬山算法&lt;/h3&gt;
+&lt;p&gt;爬山算法是一种简单的贪心搜索算法，该算法每次从当前解的临近解空间中选择一个最优解作为当前解，直到达到一个局部最优解。
+&lt;img loading=&#34;lazy&#34; src=&#34;https://pic3.zhimg.com/80/v2-dc9922369b5cf664398149e6d983a5b6_1440w.webp&#34;&gt;&lt;/p&gt;
+&lt;p&gt;爬山算法实现很简单，其主要缺点是会陷入局部最优解，而不一定能搜索到全局最优解。&lt;/p&gt;
+&lt;h3 id=&#34;模拟退火&#34;&gt;模拟退火&lt;/h3&gt;
+&lt;p&gt;模拟退火算法从某一较高初温出发，伴随温度参数的不断下降,结合一定的概率突跳特性在解空间中随机寻找目标函数的全局最优解，即在局部最优解能概率性地跳出并最终趋于全局最优。如下图：
+&lt;img loading=&#34;lazy&#34; src=&#34;https://oi-wiki.org/misc/images/simulated-annealing.gif&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里的“一定的概率”的计算参考了金属冶炼的退火过程，这也是模拟退火算法名称的由来。
+将温度T当作控制参数，目标函数值f视为内能E，而固体在某温度T时的一个状态对应一个解
+，然后算法试图随着控制参数T的降低，使目标函数f(内能E)也逐渐降低，直至趋于全局最小值（退火中低温时的最低能量状态），就像金属退火过程一样。&lt;/p&gt;
+&lt;h4 id=&#34;数学原理&#34;&gt;数学原理&lt;/h4&gt;
+&lt;p&gt;从概念知道会结合概率突跳特性在解空间中随机寻找目标函数的全局最优解，
+具体的更新解的机制是：如果新解比当前解更优，则接受新解，否则基于Metropolis准则判断是否接受新解。&lt;/p&gt;
+&lt;p&gt;接受概率为：
+$$
+P =  	\begin{cases} 	1,~~~~~~~~~~~~~~~~~ E_{t+1} \lt E_{t} \ 	e^{\frac{-(E_{t+1} - E_{t})}{kT}},~~~~ E_{t+1} \ge E_{t} 	\end{cases}
+$$&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;为什么是这个公式&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如上公式，假设当前时刻搜索的解为$x_t$，对应的系统能量(目标函数)为$E_t$.
+对搜索点施加随机扰动，产生新解$x_{t+1}$，相应地，系统能量为$E_{t+1}$.
+那么系统对搜索点从$x_t$到$x_{t+1}$转变的接受概率就为上公式。&lt;/p&gt;
+&lt;h2 id=&#34;流程&#34;&gt;流程&lt;/h2&gt;
+&lt;p&gt;由于算法初始温度比较高，这样，使E增大的新解在初始时也可能被接受，因而能跳出局部极小值，然后通过缓慢地降低温度，算法就最终可能收敛到全局最优解。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$T=T_0$表示初始温度，随机产生一个初始解$x_0$，并计算$E(x_0)$&lt;/li&gt;
+&lt;li&gt;令$T=kT$，$k\in(0,1)$为温度下降速率&lt;/li&gt;
+&lt;li&gt;对当前解$x_t$增加随机扰动，在其邻域内产生一个新解$x_{t+1}$，并计算$E(x_{t+1})$&lt;/li&gt;
+&lt;li&gt;计算$\Delta E=E(x_{t+1})-E(x_t)$&lt;/li&gt;
+&lt;li&gt;$\Delta E&amp;lt;0$ 接受$x_{t+1}$为新解
+else 按照P的概率接受&lt;/li&gt;
+&lt;li&gt;在温度T下，重复L次扰动和接受过程，即执行步骤3-5&lt;/li&gt;
+&lt;li&gt;判断温度是否达到终止温度水平，若是则终止算法，否则返回步骤2.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;改进&#34;&gt;改进&lt;/h1&gt;
+&lt;h1 id=&#34;应用&#34;&gt;应用&lt;/h1&gt;
+&lt;p&gt;模拟退火算法作为一种通用的随机搜索算法，现已广泛用于VLSI设计、图像识别和神经网计算机的研究。模拟退火算法的应用如下：&lt;/p&gt;
+&lt;h1 id=&#34;作业&#34;&gt;作业&lt;/h1&gt;
+&lt;h2 id=&#34;旅行商问题&#34;&gt;旅行商问题&lt;/h2&gt;
+&lt;h3 id=&#34;描述&#34;&gt;描述&lt;/h3&gt;
+&lt;p&gt;Develop a generic simulated annealing algorithm to solve the traveling salesman problem with 20 cities that are uniformly distributed within a unit square in a 2-dimensional plane.
+The coordinates of 20 cities are given below in a 2x20 matrix.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PPO优化方法</title>
+      <link>https://milong26.github.io/post/ppo%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/</link>
+      <pubDate>Tue, 19 Sep 2023 20:21:17 +0000</pubDate>
+      <guid>https://milong26.github.io/post/ppo%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/</guid>
+      <description>&lt;p&gt;准备拿来当素材
+我炼我炼&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

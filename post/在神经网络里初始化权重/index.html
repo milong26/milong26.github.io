@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>在神经网络里初始化权重 | 我的博客</title>
+<meta name="keywords" content="ai, weight initialize">
+<meta name="description" content="其实我还没明白怎么就到这里了
+参考
+为什么要初始化权重
+权重初始化的目的是防止层激活输出在深度神经网络前向传播过程中爆炸或消失。如果发生任何一种情况，损失梯度要么太大要么太小而无法有益地向后流动，并且网络将需要更长的时间才能收敛（即使它能够收敛）。
+一句话概括：权重太大导致梯度爆炸（torch.isnan()可判断是否是空值），权重太小导致输出不明显
+如何找到最佳权重
+从权重定义开始
+输出与权重、输入
+输出y是输入向量x和权重矩阵a之间的矩阵乘积，即
+$Y_{i}=\sum_{k=0}^{n-1}a_{i,k}*x_{k}$
+其中i是权重矩阵a的给定行索引，k是权重矩阵a中的给定列索引和输入向量x中的元素索引，n是x中元素的范围或总数。这也可以在 Python 中定义为：
+y[i] = sum([c*d for c,d in zip(a[i], x)])
+标准差相近
+在给定的层，我们从标准正态分布初始化的输入x和权重矩阵a的矩阵乘积，平均而言，标准偏差非常接近输入通道的平方根
+代码证明
+import math
+import torch
+mean = 0.
+var = 0.
+for i in range(10000):
+    x = torch.randn(512)
+    a = torch.randn(512, 512)
+    y = a @ x
+    mean &#43;= y.mean().item()
+    var &#43;= y.pow(2).mean().item()
+print(mean/10000, math.sqrt(var/10000))
+数学方法
+为了计算y，我们将输入x的一列元素与权重a的一行的元素相乘的512个乘积累加。其中，x服从标准正态分布，a服从标准正态分布，且互相独立。
+对于a中的点与x中点相乘，可以粗略看完两个正态分布相乘。
+对于两个独立的正态分布相乘。
+令$X ∼ N ( μ_1 , σ_1^2 ) ,Y ∼ N ( μ_2 , σ_2^2 ) $，XY独立
+$\operatorname{var}(X Y)=E\left[(X Y)^{2}\right]-(E[X Y])^{2}=E\left[X^{2} Y^{2}\right]-(E[X Y])^{2}$">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/%E5%9C%A8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E9%87%8C%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9D%83%E9%87%8D/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/%E5%9C%A8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E9%87%8C%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9D%83%E9%87%8D/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/%E5%9C%A8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E9%87%8C%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9D%83%E9%87%8D/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="在神经网络里初始化权重">
+  <meta property="og:description" content="其实我还没明白怎么就到这里了 参考
+为什么要初始化权重 权重初始化的目的是防止层激活输出在深度神经网络前向传播过程中爆炸或消失。如果发生任何一种情况，损失梯度要么太大要么太小而无法有益地向后流动，并且网络将需要更长的时间才能收敛（即使它能够收敛）。 一句话概括：权重太大导致梯度爆炸（torch.isnan()可判断是否是空值），权重太小导致输出不明显
+如何找到最佳权重 从权重定义开始 输出与权重、输入 输出y是输入向量x和权重矩阵a之间的矩阵乘积，即 $Y_{i}=\sum_{k=0}^{n-1}a_{i,k}*x_{k}$ 其中i是权重矩阵a的给定行索引，k是权重矩阵a中的给定列索引和输入向量x中的元素索引，n是x中元素的范围或总数。这也可以在 Python 中定义为：
+y[i] = sum([c*d for c,d in zip(a[i], x)]) 标准差相近 在给定的层，我们从标准正态分布初始化的输入x和权重矩阵a的矩阵乘积，平均而言，标准偏差非常接近输入通道的平方根
+代码证明 import math import torch mean = 0. var = 0. for i in range(10000): x = torch.randn(512) a = torch.randn(512, 512) y = a @ x mean &#43;= y.mean().item() var &#43;= y.pow(2).mean().item() print(mean/10000, math.sqrt(var/10000)) 数学方法 为了计算y，我们将输入x的一列元素与权重a的一行的元素相乘的512个乘积累加。其中，x服从标准正态分布，a服从标准正态分布，且互相独立。 对于a中的点与x中点相乘，可以粗略看完两个正态分布相乘。 对于两个独立的正态分布相乘。 令$X ∼ N ( μ_1 , σ_1^2 ) ,Y ∼ N ( μ_2 , σ_2^2 ) $，XY独立 $\operatorname{var}(X Y)=E\left[(X Y)^{2}\right]-(E[X Y])^{2}=E\left[X^{2} Y^{2}\right]-(E[X Y])^{2}$">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-06-25T17:03:24+00:00">
+    <meta property="article:modified_time" content="2023-06-25T17:03:24+00:00">
+    <meta property="article:tag" content="Ai">
+    <meta property="article:tag" content="Weight Initialize">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="在神经网络里初始化权重">
+  <meta name="twitter:description" content="其实我还没明白怎么就到这里了 参考
+为什么要初始化权重 权重初始化的目的是防止层激活输出在深度神经网络前向传播过程中爆炸或消失。如果发生任何一种情况，损失梯度要么太大要么太小而无法有益地向后流动，并且网络将需要更长的时间才能收敛（即使它能够收敛）。 一句话概括：权重太大导致梯度爆炸（torch.isnan()可判断是否是空值），权重太小导致输出不明显
+如何找到最佳权重 从权重定义开始 输出与权重、输入 输出y是输入向量x和权重矩阵a之间的矩阵乘积，即 $Y_{i}=\sum_{k=0}^{n-1}a_{i,k}*x_{k}$ 其中i是权重矩阵a的给定行索引，k是权重矩阵a中的给定列索引和输入向量x中的元素索引，n是x中元素的范围或总数。这也可以在 Python 中定义为：
+y[i] = sum([c*d for c,d in zip(a[i], x)]) 标准差相近 在给定的层，我们从标准正态分布初始化的输入x和权重矩阵a的矩阵乘积，平均而言，标准偏差非常接近输入通道的平方根
+代码证明 import math import torch mean = 0. var = 0. for i in range(10000): x = torch.randn(512) a = torch.randn(512, 512) y = a @ x mean &#43;= y.mean().item() var &#43;= y.pow(2).mean().item() print(mean/10000, math.sqrt(var/10000)) 数学方法 为了计算y，我们将输入x的一列元素与权重a的一行的元素相乘的512个乘积累加。其中，x服从标准正态分布，a服从标准正态分布，且互相独立。 对于a中的点与x中点相乘，可以粗略看完两个正态分布相乘。 对于两个独立的正态分布相乘。 令$X ∼ N ( μ_1 , σ_1^2 ) ,Y ∼ N ( μ_2 , σ_2^2 ) $，XY独立 $\operatorname{var}(X Y)=E\left[(X Y)^{2}\right]-(E[X Y])^{2}=E\left[X^{2} Y^{2}\right]-(E[X Y])^{2}$">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "在神经网络里初始化权重",
+      "item": "https://milong26.github.io/post/%E5%9C%A8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E9%87%8C%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9D%83%E9%87%8D/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "在神经网络里初始化权重",
+  "name": "在神经网络里初始化权重",
+  "description": "其实我还没明白怎么就到这里了 参考\n为什么要初始化权重 权重初始化的目的是防止层激活输出在深度神经网络前向传播过程中爆炸或消失。如果发生任何一种情况，损失梯度要么太大要么太小而无法有益地向后流动，并且网络将需要更长的时间才能收敛（即使它能够收敛）。 一句话概括：权重太大导致梯度爆炸（torch.isnan()可判断是否是空值），权重太小导致输出不明显\n如何找到最佳权重 从权重定义开始 输出与权重、输入 输出y是输入向量x和权重矩阵a之间的矩阵乘积，即 $Y_{i}=\\sum_{k=0}^{n-1}a_{i,k}*x_{k}$ 其中i是权重矩阵a的给定行索引，k是权重矩阵a中的给定列索引和输入向量x中的元素索引，n是x中元素的范围或总数。这也可以在 Python 中定义为：\ny[i] = sum([c*d for c,d in zip(a[i], x)]) 标准差相近 在给定的层，我们从标准正态分布初始化的输入x和权重矩阵a的矩阵乘积，平均而言，标准偏差非常接近输入通道的平方根\n代码证明 import math import torch mean = 0. var = 0. for i in range(10000): x = torch.randn(512) a = torch.randn(512, 512) y = a @ x mean += y.mean().item() var += y.pow(2).mean().item() print(mean/10000, math.sqrt(var/10000)) 数学方法 为了计算y，我们将输入x的一列元素与权重a的一行的元素相乘的512个乘积累加。其中，x服从标准正态分布，a服从标准正态分布，且互相独立。 对于a中的点与x中点相乘，可以粗略看完两个正态分布相乘。 对于两个独立的正态分布相乘。 令$X ∼ N ( μ_1 , σ_1^2 ) ,Y ∼ N ( μ_2 , σ_2^2 ) $，XY独立 $\\operatorname{var}(X Y)=E\\left[(X Y)^{2}\\right]-(E[X Y])^{2}=E\\left[X^{2} Y^{2}\\right]-(E[X Y])^{2}$\n",
+  "keywords": [
+    "ai", "weight initialize"
+  ],
+  "articleBody": "其实我还没明白怎么就到这里了 参考\n为什么要初始化权重 权重初始化的目的是防止层激活输出在深度神经网络前向传播过程中爆炸或消失。如果发生任何一种情况，损失梯度要么太大要么太小而无法有益地向后流动，并且网络将需要更长的时间才能收敛（即使它能够收敛）。 一句话概括：权重太大导致梯度爆炸（torch.isnan()可判断是否是空值），权重太小导致输出不明显\n如何找到最佳权重 从权重定义开始 输出与权重、输入 输出y是输入向量x和权重矩阵a之间的矩阵乘积，即 $Y_{i}=\\sum_{k=0}^{n-1}a_{i,k}*x_{k}$ 其中i是权重矩阵a的给定行索引，k是权重矩阵a中的给定列索引和输入向量x中的元素索引，n是x中元素的范围或总数。这也可以在 Python 中定义为：\ny[i] = sum([c*d for c,d in zip(a[i], x)]) 标准差相近 在给定的层，我们从标准正态分布初始化的输入x和权重矩阵a的矩阵乘积，平均而言，标准偏差非常接近输入通道的平方根\n代码证明 import math import torch mean = 0. var = 0. for i in range(10000): x = torch.randn(512) a = torch.randn(512, 512) y = a @ x mean += y.mean().item() var += y.pow(2).mean().item() print(mean/10000, math.sqrt(var/10000)) 数学方法 为了计算y，我们将输入x的一列元素与权重a的一行的元素相乘的512个乘积累加。其中，x服从标准正态分布，a服从标准正态分布，且互相独立。 对于a中的点与x中点相乘，可以粗略看完两个正态分布相乘。 对于两个独立的正态分布相乘。 令$X ∼ N ( μ_1 , σ_1^2 ) ,Y ∼ N ( μ_2 , σ_2^2 ) $，XY独立 $\\operatorname{var}(X Y)=E\\left[(X Y)^{2}\\right]-(E[X Y])^{2}=E\\left[X^{2} Y^{2}\\right]-(E[X Y])^{2}$\n$E\\left[X^{2}\\right]=\\mu_{1}^{2}+\\sigma_{1}^{2}, E\\left[Y^{2}\\right]=\\mu_{2}^{2}+\\sigma_{2}^{2}$\n代进去, $\\operatorname{var}(X Y)=\\left(\\mu_{1}^{2}+\\sigma_{1}^{2}\\right)\\left(\\mu_{2}^{2}+\\sigma_{2}^{2}\\right)-\\left(\\mu_{1} \\mu_{2}\\right)^{2}$\n相乘这部分不重要，其实也就是公式里面的a*x，但是相乘之后的累加比较麻烦： 本文全部是标准正态分布，$\\mu=0，\\sigma=1$所以每个点还是服从标准正态分布，但是我们最终要求这512个点的和，512个点都服从标准正态分布，按照上述公式，同样的推，可得 $ E(X+Y)=\\mu_1+\\mu_2$ $\\operatorname{var}(X +Y)=\\sigma_{1}+\\sigma_{2}$\n则512个标准正态分布相加，点集就服从$(0,\\sqrt{512}^2)$。 也就是说，当我们进行了一次矩阵运算之后，输出就已经很大了。当这样的矩阵运算多来几次，输出的分布就已经开始变得巨大。同理，当输出的分布小于(0,1)分布，经过多层矩阵运算之后，梯度会消失。\n总结 我们希望网咯的输出分布还是能够保持在正态分布中，那么，在这100层矩阵乘法中，我们怎么保证我们的输出最终还是符合标准正态分布？很显然，我们只需要将我们的权重按$1/\\sqrt{512}$缩放就好。\n缩放的权重 上例中，代码修改为\nimport math import torch x = torch.randn(512) for i in range(10000): a = torch.randn(512, 512) / math.sqrt(512) x = a @ x print(x.mean(), x.std()) 输出服从的分布还是接近标准正态分布，因此消灭了梯度爆炸和梯度消失。 实际上真正的神经网络里面需要用激活函数来缩放\nXavier 初始化 神经网络初期阶段，最常用的激活函数都是关于给定值对称的，并且具有渐进接近于该点中点正负一定距离的值的范围。tanh（）和softsign（）就是这样的函数。\n",
+  "wordCount" : "132",
+  "inLanguage": "en",
+  "datePublished": "2023-06-25T17:03:24Z",
+  "dateModified": "2023-06-25T17:03:24Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/%E5%9C%A8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E9%87%8C%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9D%83%E9%87%8D/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      在神经网络里初始化权重
+    </h1>
+    <div class="post-meta">
+
+<span title='2023-06-25 17:03:24 +0000 UTC'>June 25, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>其实我还没明白怎么就到这里了
+<a href="https://towardsdatascience.com/weight-initialization-in-neural-networks-a-journey-from-the-basics-to-kaiming-954fb9b47c79">参考</a></p>
+<h1 id="为什么要初始化权重">为什么要初始化权重<a hidden class="anchor" aria-hidden="true" href="#为什么要初始化权重">#</a></h1>
+<p>权重初始化的目的是防止层激活输出在深度神经网络前向传播过程中爆炸或消失。如果发生任何一种情况，损失梯度要么太大要么太小而无法有益地向后流动，并且网络将需要更长的时间才能收敛（即使它能够收敛）。
+一句话概括：权重太大导致梯度爆炸（<code>torch.isnan()</code>可判断是否是空值），权重太小导致输出不明显</p>
+<h1 id="如何找到最佳权重">如何找到最佳权重<a hidden class="anchor" aria-hidden="true" href="#如何找到最佳权重">#</a></h1>
+<h2 id="从权重定义开始">从权重定义开始<a hidden class="anchor" aria-hidden="true" href="#从权重定义开始">#</a></h2>
+<h3 id="输出与权重输入">输出与权重、输入<a hidden class="anchor" aria-hidden="true" href="#输出与权重输入">#</a></h3>
+<p>输出y是输入向量x和权重矩阵a之间的矩阵乘积，即
+$Y_{i}=\sum_{k=0}^{n-1}a_{i,k}*x_{k}$
+其中i是权重矩阵a的给定行索引，k是权重矩阵a中的给定列索引和输入向量x中的元素索引，n是x中元素的范围或总数。这也可以在 Python 中定义为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>y[i] <span style="color:#f92672">=</span> sum([c<span style="color:#f92672">*</span>d <span style="color:#66d9ef">for</span> c,d <span style="color:#f92672">in</span> zip(a[i], x)])
+</span></span></code></pre></div><h3 id="标准差相近">标准差相近<a hidden class="anchor" aria-hidden="true" href="#标准差相近">#</a></h3>
+<p>在给定的层，我们从标准正态分布初始化的输入x和权重矩阵a的矩阵乘积，平均而言，标准偏差非常接近输入通道的平方根</p>
+<h4 id="代码证明">代码证明<a hidden class="anchor" aria-hidden="true" href="#代码证明">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> math
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> torch
+</span></span><span style="display:flex;"><span>mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.</span>
+</span></span><span style="display:flex;"><span>var <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10000</span>):
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>randn(<span style="color:#ae81ff">512</span>)
+</span></span><span style="display:flex;"><span>    a <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>randn(<span style="color:#ae81ff">512</span>, <span style="color:#ae81ff">512</span>)
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> a <span style="color:#f92672">@</span> x
+</span></span><span style="display:flex;"><span>    mean <span style="color:#f92672">+=</span> y<span style="color:#f92672">.</span>mean()<span style="color:#f92672">.</span>item()
+</span></span><span style="display:flex;"><span>    var <span style="color:#f92672">+=</span> y<span style="color:#f92672">.</span>pow(<span style="color:#ae81ff">2</span>)<span style="color:#f92672">.</span>mean()<span style="color:#f92672">.</span>item()
+</span></span><span style="display:flex;"><span>print(mean<span style="color:#f92672">/</span><span style="color:#ae81ff">10000</span>, math<span style="color:#f92672">.</span>sqrt(var<span style="color:#f92672">/</span><span style="color:#ae81ff">10000</span>))
+</span></span></code></pre></div><h4 id="数学方法">数学方法<a hidden class="anchor" aria-hidden="true" href="#数学方法">#</a></h4>
+<p>为了计算y，我们将输入x的一列元素与权重a的一行的元素相乘的512个乘积累加。其中，x服从标准正态分布，a服从标准正态分布，且互相独立。
+对于a中的点与x中点相乘，可以粗略看完两个正态分布相乘。
+对于两个独立的正态分布相乘。
+令$X ∼ N ( μ_1 , σ_1^2 ) ,Y ∼ N ( μ_2 , σ_2^2 ) $，XY独立
+$\operatorname{var}(X Y)=E\left[(X Y)^{2}\right]-(E[X Y])^{2}=E\left[X^{2} Y^{2}\right]-(E[X Y])^{2}$</p>
+<p>$E\left[X^{2}\right]=\mu_{1}^{2}+\sigma_{1}^{2}, E\left[Y^{2}\right]=\mu_{2}^{2}+\sigma_{2}^{2}$</p>
+<p>代进去,
+$\operatorname{var}(X Y)=\left(\mu_{1}^{2}+\sigma_{1}^{2}\right)\left(\mu_{2}^{2}+\sigma_{2}^{2}\right)-\left(\mu_{1} \mu_{2}\right)^{2}$</p>
+<p>相乘这部分不重要，其实也就是公式里面的a*x，但是相乘之后的累加比较麻烦：
+本文全部是标准正态分布，$\mu=0，\sigma=1$所以每个点还是服从标准正态分布，但是我们最终要求这512个点的和，512个点都服从标准正态分布，按照上述公式，同样的推，可得
+$ E(X+Y)=\mu_1+\mu_2$
+$\operatorname{var}(X +Y)=\sigma_{1}+\sigma_{2}$</p>
+<p>则512个标准正态分布相加，点集就服从$(0,\sqrt{512}^2)$。
+也就是说，当我们进行了一次矩阵运算之后，输出就已经很大了。当这样的矩阵运算多来几次，输出的分布就已经开始变得巨大。同理，当输出的分布小于(0,1)分布，经过多层矩阵运算之后，梯度会消失。</p>
+<h4 id="总结">总结<a hidden class="anchor" aria-hidden="true" href="#总结">#</a></h4>
+<p>我们希望网咯的输出分布还是能够保持在正态分布中，那么，在这100层矩阵乘法中，我们怎么保证我们的输出最终还是符合标准正态分布？很显然，我们只需要将我们的权重按$1/\sqrt{512}$缩放就好。</p>
+<h3 id="缩放的权重">缩放的权重<a hidden class="anchor" aria-hidden="true" href="#缩放的权重">#</a></h3>
+<p>上例中，代码修改为</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> math
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> torch
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>randn(<span style="color:#ae81ff">512</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10000</span>):
+</span></span><span style="display:flex;"><span>    a <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>randn(<span style="color:#ae81ff">512</span>, <span style="color:#ae81ff">512</span>) <span style="color:#f92672">/</span> math<span style="color:#f92672">.</span>sqrt(<span style="color:#ae81ff">512</span>)
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span>  a <span style="color:#f92672">@</span> x
+</span></span><span style="display:flex;"><span>print(x<span style="color:#f92672">.</span>mean(), x<span style="color:#f92672">.</span>std())
+</span></span></code></pre></div><p>输出服从的分布还是接近标准正态分布，因此消灭了梯度爆炸和梯度消失。
+实际上真正的神经网络里面需要用激活函数来缩放</p>
+<h2 id="xavier-初始化">Xavier 初始化<a hidden class="anchor" aria-hidden="true" href="#xavier-初始化">#</a></h2>
+<p>神经网络初期阶段，最常用的激活函数都是关于给定值对称的，并且具有渐进接近于该点中点正负一定距离的值的范围。tanh（）和softsign（）就是这样的函数。</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/ai/">Ai</a></li>
+      <li><a href="https://milong26.github.io/tags/weight-initialize/">Weight Initialize</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

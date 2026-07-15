@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Peft on 我的博客</title>
+    <link>https://milong26.github.io/tags/peft/</link>
+    <description>Recent content in Peft on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 18 Mar 2024 16:16:31 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/peft/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Towards A Unified View Of Parameter-Efficient Transfer Learning</title>
+      <link>https://milong26.github.io/post/towards-a-unified-view-of-parameter-efficient-transfer-learning/</link>
+      <pubDate>Mon, 18 Mar 2024 16:16:31 +0000</pubDate>
+      <guid>https://milong26.github.io/post/towards-a-unified-view-of-parameter-efficient-transfer-learning/</guid>
+      <description>&lt;p&gt;高效参数微调的综述类论文阅读&lt;/p&gt;
+&lt;p&gt;百篇paper计划(2/100)，对【高效参数】迁移学习的总结。&lt;/p&gt;
+&lt;p&gt;由于我也不怎么会选论文，就按照会议选了这篇比较近的(ps现在是2024年初)。光从标题看，这一篇应该是综述，正好我补一下几个经典的高效参数方法。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;论文标题：Towards a Unified View of Parameter-Efficient Transfer Learning&lt;/li&gt;
+&lt;li&gt;arxiv地址：&lt;a href=&#34;https://arxiv.org/abs/2110.04366&#34;&gt;链接&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;code：&lt;a href=&#34;https://github.com/jxhe/unify-parameter-efficient-tuning&#34;&gt;github&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;rank: ICLR 2022 (spotlight presentation)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;abstract&#34;&gt;abstract&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;大背景：
+在&lt;strong&gt;下游任务&lt;/strong&gt;上&lt;strong&gt;微调&lt;/strong&gt;大规模的、预训练的模型 在&lt;strong&gt;NLP&lt;/strong&gt;领域里面用得很多。但是传统方法&lt;strong&gt;全参数微调&lt;/strong&gt;，当模型参数和任务个数增加时变得很难搞。&lt;/li&gt;
+&lt;li&gt;小背景（现在工作）：
+高效参数迁移学习(parameter-efficient transfer learning)方法只微调小规模参数，但是几种方法之间缺少系统的联系&lt;/li&gt;
+&lt;li&gt;贡献
+分析了几种最先进的高效参数迁移学习方案，给出一个统一的框架。&lt;/li&gt;
+&lt;li&gt;具体：
+将这几种方法概括为修改预训练模型中特定的&lt;strong&gt;隐藏状态&lt;/strong&gt;，并定义一组设计维度来总括性地设计方法。
+通过跨机器翻译、文本摘要、语言理解和文本分类基准的综合实证研究，我们利用统一的观点来识别以前方法中的重要设计选择。&lt;/li&gt;
+&lt;li&gt;实验：
+统一框架实现了设计元素在不同方法之间的迁移，因此我们能够实例化新的参数高效的微调方法，这些方法比以前的方法调整更少的参数，同时更有效，在所有四个任务上都能获得与所有参数微调相当的结果。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;introduction&#34;&gt;introduction&lt;/h1&gt;
+&lt;h2 id=&#34;大背景&#34;&gt;大背景&lt;/h2&gt;
+&lt;p&gt;在预训练的语言模型PLMs基础上进行迁移学习在NLP领域比较流行。
+为什么不要全参数微调：模型越来越大+需要对每个任务都微调。&lt;/p&gt;
+&lt;h2 id=&#34;小背景&#34;&gt;小背景&lt;/h2&gt;
+&lt;p&gt;一些方法更新小部分参数，让大部分参数不变。&lt;/p&gt;
+&lt;h3 id=&#34;adapter-tuning&#34;&gt;adapter tuning&lt;/h3&gt;
+&lt;p&gt;在预训练网络每层中插入一些小的神经模块&lt;strong&gt;adapters&lt;/strong&gt;
+微调时只训练adapters&lt;/p&gt;
+&lt;h3 id=&#34;prefix-tuning-和-prompt-tuning&#34;&gt;prefix tuning 和 prompt tuning&lt;/h3&gt;
+&lt;p&gt;从 通过文本提示控制PLM的提示方法(prompting methods that control PLMs through textual prompts) 出发，给输入或者隐含层预置了一个额外的可调前缀标记l，并且在下游任务中预训练时，只训练这些soft prompt
+(这个soft prompt应该是刚刚预置的可调标记)&lt;/p&gt;
+&lt;h3 id=&#34;loralow-rank-matrices-to-approximate-parameter-updates&#34;&gt;LoRA（low-rank matrices to approximate parameter updates）&lt;/h3&gt;
+&lt;p&gt;学习&lt;strong&gt;低秩矩阵&lt;/strong&gt;来近似参数更新。&lt;/p&gt;
+&lt;h3 id=&#34;总结&#34;&gt;总结&lt;/h3&gt;
+&lt;p&gt;这些方法在不同的任务集上表现出与全微调相当的性能，通常通过更新不到1%的原始模型参数来实现。
+除了节省参数外，高效参数的调整使其能够快速适应新任务而不会遗忘。并且在分布外评估(out-of-distribution evaluation)中表现出优异的健壮性。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

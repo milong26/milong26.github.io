@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>配置python | 我的博客</title>
+<meta name="keywords" content="python, configure">
+<meta name="description" content="重装系统之后很多配置也没了，python反正也要用，安装过程也记录一下
+环境配置
+下载
+官网
+找windows的就行
+速度比较快可以不用镜像
+安装
+点costume的，然后改地址
+点配置环境变量可以免得自己再搞
+执行
+cmd可以直接跑
+import sys
+print(sys.version)
+可以查看版本
+项目
+现在不着急，ide以后再装
+问题
+在配置好了python环境变量之后在cmd命令行下输入python但是打开的是windows 10的应用商店，但是我们希望显示的是python的安装版本，可以使用以下的方法解决：首先打开计算机的环境变量，找到path，将python的环境变量移动到WindowsApps环境变量前面
+
+Fatal error in launcher: Unable to create process using &lsquo;&ldquo;D:\conf\python\python.exe&rdquo;  &ldquo;D:\conf\python\Scripts\pip.exe&rdquo; install -i https://pypi.tuna.tsinghua.edu.cn/simple/ jupyter&rsquo;: ???????????
+步骤1：到python\scripts\目录，将原来的pip.exe文件删掉
+步骤2：cmd窗口执行：python -m pip install -U pip
+步骤3：验证
+
+
+Traceback (most recent call last):
+File &ldquo;D:\conf\python\lib\runpy.py&rdquo;, line 196, in _run_module_as_main
+return run_code(code, main_globals, None,
+File &ldquo;D:\conf\python\lib\runpy.py&rdquo;, line 86, in run_code
+exec(code, run_globals)
+File &ldquo;D:\conf\python\scripts\pip.exe_main.py&rdquo;, line 2, in 
+File &ldquo;D:\conf\python\lib\re_init.py&rdquo;, line 125, in 
+from . import _compiler, _parser
+File &ldquo;D:\conf\python\lib\re_compiler.py&rdquo;, line 18, in 
+assert _sre.MAGIC == MAGIC, &ldquo;SRE module mismatch&rdquo;
+AssertionError: SRE module mismatch
+说是版本不一致，我的话就是之前的没删干净，删了重装就行">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/%E9%85%8D%E7%BD%AEpython/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/%E9%85%8D%E7%BD%AEpython/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/%E9%85%8D%E7%BD%AEpython/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="配置python">
+  <meta property="og:description" content="重装系统之后很多配置也没了，python反正也要用，安装过程也记录一下
+环境配置 下载 官网 找windows的就行 速度比较快可以不用镜像
+安装 点costume的，然后改地址 点配置环境变量可以免得自己再搞
+执行 cmd可以直接跑
+import sys print(sys.version) 可以查看版本
+项目 现在不着急，ide以后再装
+问题 在配置好了python环境变量之后在cmd命令行下输入python但是打开的是windows 10的应用商店，但是我们希望显示的是python的安装版本，可以使用以下的方法解决：首先打开计算机的环境变量，找到path，将python的环境变量移动到WindowsApps环境变量前面
+Fatal error in launcher: Unable to create process using ‘“D:\conf\python\python.exe” “D:\conf\python\Scripts\pip.exe” install -i https://pypi.tuna.tsinghua.edu.cn/simple/ jupyter’: ??????????? 步骤1：到python\scripts\目录，将原来的pip.exe文件删掉 步骤2：cmd窗口执行：python -m pip install -U pip 步骤3：验证
+Traceback (most recent call last): File “D:\conf\python\lib\runpy.py”, line 196, in _run_module_as_main return run_code(code, main_globals, None, File “D:\conf\python\lib\runpy.py”, line 86, in run_code exec(code, run_globals) File “D:\conf\python\scripts\pip.exe_main.py”, line 2, in File “D:\conf\python\lib\re_init.py”, line 125, in from . import _compiler, _parser File “D:\conf\python\lib\re_compiler.py”, line 18, in assert _sre.MAGIC == MAGIC, “SRE module mismatch” AssertionError: SRE module mismatch 说是版本不一致，我的话就是之前的没删干净，删了重装就行">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-05-20T14:15:39+00:00">
+    <meta property="article:modified_time" content="2023-05-20T14:15:39+00:00">
+    <meta property="article:tag" content="Python">
+    <meta property="article:tag" content="Configure">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="配置python">
+  <meta name="twitter:description" content="重装系统之后很多配置也没了，python反正也要用，安装过程也记录一下
+环境配置 下载 官网 找windows的就行 速度比较快可以不用镜像
+安装 点costume的，然后改地址 点配置环境变量可以免得自己再搞
+执行 cmd可以直接跑
+import sys print(sys.version) 可以查看版本
+项目 现在不着急，ide以后再装
+问题 在配置好了python环境变量之后在cmd命令行下输入python但是打开的是windows 10的应用商店，但是我们希望显示的是python的安装版本，可以使用以下的方法解决：首先打开计算机的环境变量，找到path，将python的环境变量移动到WindowsApps环境变量前面
+Fatal error in launcher: Unable to create process using ‘“D:\conf\python\python.exe” “D:\conf\python\Scripts\pip.exe” install -i https://pypi.tuna.tsinghua.edu.cn/simple/ jupyter’: ??????????? 步骤1：到python\scripts\目录，将原来的pip.exe文件删掉 步骤2：cmd窗口执行：python -m pip install -U pip 步骤3：验证
+Traceback (most recent call last): File “D:\conf\python\lib\runpy.py”, line 196, in _run_module_as_main return run_code(code, main_globals, None, File “D:\conf\python\lib\runpy.py”, line 86, in run_code exec(code, run_globals) File “D:\conf\python\scripts\pip.exe_main.py”, line 2, in File “D:\conf\python\lib\re_init.py”, line 125, in from . import _compiler, _parser File “D:\conf\python\lib\re_compiler.py”, line 18, in assert _sre.MAGIC == MAGIC, “SRE module mismatch” AssertionError: SRE module mismatch 说是版本不一致，我的话就是之前的没删干净，删了重装就行">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "配置python",
+      "item": "https://milong26.github.io/post/%E9%85%8D%E7%BD%AEpython/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "配置python",
+  "name": "配置python",
+  "description": "重装系统之后很多配置也没了，python反正也要用，安装过程也记录一下\n环境配置 下载 官网 找windows的就行 速度比较快可以不用镜像\n安装 点costume的，然后改地址 点配置环境变量可以免得自己再搞\n执行 cmd可以直接跑\nimport sys print(sys.version) 可以查看版本\n项目 现在不着急，ide以后再装\n问题 在配置好了python环境变量之后在cmd命令行下输入python但是打开的是windows 10的应用商店，但是我们希望显示的是python的安装版本，可以使用以下的方法解决：首先打开计算机的环境变量，找到path，将python的环境变量移动到WindowsApps环境变量前面\nFatal error in launcher: Unable to create process using \u0026lsquo;\u0026ldquo;D:\\conf\\python\\python.exe\u0026rdquo; \u0026ldquo;D:\\conf\\python\\Scripts\\pip.exe\u0026rdquo; install -i https://pypi.tuna.tsinghua.edu.cn/simple/ jupyter\u0026rsquo;: ??????????? 步骤1：到python\\scripts\\目录，将原来的pip.exe文件删掉 步骤2：cmd窗口执行：python -m pip install -U pip 步骤3：验证\nTraceback (most recent call last): File \u0026ldquo;D:\\conf\\python\\lib\\runpy.py\u0026rdquo;, line 196, in _run_module_as_main return run_code(code, main_globals, None, File \u0026ldquo;D:\\conf\\python\\lib\\runpy.py\u0026rdquo;, line 86, in run_code exec(code, run_globals) File \u0026ldquo;D:\\conf\\python\\scripts\\pip.exe_main.py\u0026rdquo;, line 2, in File \u0026ldquo;D:\\conf\\python\\lib\\re_init.py\u0026rdquo;, line 125, in from . import _compiler, _parser File \u0026ldquo;D:\\conf\\python\\lib\\re_compiler.py\u0026rdquo;, line 18, in assert _sre.MAGIC == MAGIC, \u0026ldquo;SRE module mismatch\u0026rdquo; AssertionError: SRE module mismatch 说是版本不一致，我的话就是之前的没删干净，删了重装就行\n",
+  "keywords": [
+    "python", "configure"
+  ],
+  "articleBody": "重装系统之后很多配置也没了，python反正也要用，安装过程也记录一下\n环境配置 下载 官网 找windows的就行 速度比较快可以不用镜像\n安装 点costume的，然后改地址 点配置环境变量可以免得自己再搞\n执行 cmd可以直接跑\nimport sys print(sys.version) 可以查看版本\n项目 现在不着急，ide以后再装\n问题 在配置好了python环境变量之后在cmd命令行下输入python但是打开的是windows 10的应用商店，但是我们希望显示的是python的安装版本，可以使用以下的方法解决：首先打开计算机的环境变量，找到path，将python的环境变量移动到WindowsApps环境变量前面\nFatal error in launcher: Unable to create process using ‘“D:\\conf\\python\\python.exe” “D:\\conf\\python\\Scripts\\pip.exe” install -i https://pypi.tuna.tsinghua.edu.cn/simple/ jupyter’: ??????????? 步骤1：到python\\scripts\\目录，将原来的pip.exe文件删掉 步骤2：cmd窗口执行：python -m pip install -U pip 步骤3：验证\nTraceback (most recent call last): File “D:\\conf\\python\\lib\\runpy.py”, line 196, in _run_module_as_main return run_code(code, main_globals, None, File “D:\\conf\\python\\lib\\runpy.py”, line 86, in run_code exec(code, run_globals) File “D:\\conf\\python\\scripts\\pip.exe_main.py”, line 2, in File “D:\\conf\\python\\lib\\re_init.py”, line 125, in from . import _compiler, _parser File “D:\\conf\\python\\lib\\re_compiler.py”, line 18, in assert _sre.MAGIC == MAGIC, “SRE module mismatch” AssertionError: SRE module mismatch 说是版本不一致，我的话就是之前的没删干净，删了重装就行\n‘pip’ 不是内部或外部命令，也不是可运行的程序 或批处理文件。 重新安装 python -m ensurepip python -m pip install --upgrade pip\npip pip换源 首先在 C:\\Users\\×××目录中创建名为pip的文件夹（×××为用户名），然后在里面创建名为 pip.ini 的文件，最后在该文件中添加以下内容，保存即可。\n[global] index-url=https://pypi.tuna.tsinghua.edu.cn/simple timeout = 6000 [install] trusted-host=pypi.tuna.tsinghua.edu.cn disable-pip-version-check = true 说明：请注意，该方式不适合于linux系统和MacOS。\n版本匹配 ERROR: Could not find a version that satisfies the requirement nunmpy (from versions: none) ERROR: No matching distribution found for nunmpy 换源\npip install numpy -i https://pypi.tuna.tsinghua.edu.cn/simple/ pip相关 upgrade 下载速度太慢 python -m pip install --upgrade pip -i http://pypi.douban.com/simple --trusted-host pypi.douban.com ",
+  "wordCount" : "170",
+  "inLanguage": "en",
+  "datePublished": "2023-05-20T14:15:39Z",
+  "dateModified": "2023-05-20T14:15:39Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/%E9%85%8D%E7%BD%AEpython/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      配置python
+    </h1>
+    <div class="post-meta">
+
+<span title='2023-05-20 14:15:39 +0000 UTC'>May 20, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>重装系统之后很多配置也没了，python反正也要用，安装过程也记录一下</p>
+<h1 id="环境配置">环境配置<a hidden class="anchor" aria-hidden="true" href="#环境配置">#</a></h1>
+<h2 id="下载">下载<a hidden class="anchor" aria-hidden="true" href="#下载">#</a></h2>
+<p><a href="https://www.python.org/">官网</a>
+找windows的就行
+速度比较快可以不用镜像</p>
+<h2 id="安装">安装<a hidden class="anchor" aria-hidden="true" href="#安装">#</a></h2>
+<p>点costume的，然后改地址
+点配置环境变量可以免得自己再搞</p>
+<h2 id="执行">执行<a hidden class="anchor" aria-hidden="true" href="#执行">#</a></h2>
+<p>cmd可以直接跑</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
+</span></span><span style="display:flex;"><span>print(sys<span style="color:#f92672">.</span>version)
+</span></span></code></pre></div><p>可以查看版本</p>
+<h2 id="项目">项目<a hidden class="anchor" aria-hidden="true" href="#项目">#</a></h2>
+<p>现在不着急，ide以后再装</p>
+<h1 id="问题">问题<a hidden class="anchor" aria-hidden="true" href="#问题">#</a></h1>
+<p>在配置好了python环境变量之后在cmd命令行下输入python但是打开的是windows 10的应用商店，但是我们希望显示的是python的安装版本，可以使用以下的方法解决：首先打开计算机的环境变量，找到path，将python的环境变量移动到WindowsApps环境变量前面</p>
+<blockquote>
+<p>Fatal error in launcher: Unable to create process using &lsquo;&ldquo;D:\conf\python\python.exe&rdquo;  &ldquo;D:\conf\python\Scripts\pip.exe&rdquo; install -i <a href="https://pypi.tuna.tsinghua.edu.cn/simple/">https://pypi.tuna.tsinghua.edu.cn/simple/</a> jupyter&rsquo;: ???????????
+步骤1：到python\scripts\目录，将原来的pip.exe文件删掉
+步骤2：cmd窗口执行：python -m pip install -U pip
+步骤3：验证</p>
+</blockquote>
+<blockquote>
+<p>Traceback (most recent call last):
+File &ldquo;D:\conf\python\lib\runpy.py&rdquo;, line 196, in _run_module_as_main
+return <em>run_code(code, main_globals, None,
+File &ldquo;D:\conf\python\lib\runpy.py&rdquo;, line 86, in <em>run_code
+exec(code, run_globals)
+File &ldquo;D:\conf\python\scripts\pip.exe_<em>main</em></em>.py&rdquo;, line 2, in <!-- raw HTML omitted -->
+File &ldquo;D:\conf\python\lib\re_<em>init</em></em>.py&rdquo;, line 125, in <!-- raw HTML omitted -->
+from . import _compiler, _parser
+File &ldquo;D:\conf\python\lib\re_compiler.py&rdquo;, line 18, in <!-- raw HTML omitted -->
+assert _sre.MAGIC == MAGIC, &ldquo;SRE module mismatch&rdquo;
+AssertionError: SRE module mismatch
+说是版本不一致，我的话就是之前的没删干净，删了重装就行</p>
+</blockquote>
+<blockquote>
+<p>&lsquo;pip&rsquo; 不是内部或外部命令，也不是可运行的程序
+或批处理文件。
+重新安装
+<code>python -m ensurepip</code>
+<code>python -m pip install --upgrade pip</code></p>
+</blockquote>
+<h1 id="pip">pip<a hidden class="anchor" aria-hidden="true" href="#pip">#</a></h1>
+<h2 id="pip换源">pip换源<a hidden class="anchor" aria-hidden="true" href="#pip换源">#</a></h2>
+<p>首先在 C:\Users\×××目录中创建名为pip的文件夹（×××为用户名），然后在里面创建名为 pip.ini 的文件，最后在该文件中添加以下内容，保存即可。</p>
+<pre tabindex="0"><code>[global]
+index-url=https://pypi.tuna.tsinghua.edu.cn/simple
+timeout = 6000
+[install]
+trusted-host=pypi.tuna.tsinghua.edu.cn
+disable-pip-version-check = true
+</code></pre><p>说明：请注意，该方式不适合于linux系统和MacOS。</p>
+<h2 id="版本匹配">版本匹配<a hidden class="anchor" aria-hidden="true" href="#版本匹配">#</a></h2>
+<p>ERROR: Could not find a version that satisfies the requirement nunmpy (from versions: none)
+ERROR: No matching distribution found for nunmpy
+换源</p>
+<pre tabindex="0"><code>pip install numpy -i https://pypi.tuna.tsinghua.edu.cn/simple/
+</code></pre><h1 id="pip相关">pip相关<a hidden class="anchor" aria-hidden="true" href="#pip相关">#</a></h1>
+<h2 id="upgrade">upgrade<a hidden class="anchor" aria-hidden="true" href="#upgrade">#</a></h2>
+<ul>
+<li>下载速度太慢
+<pre tabindex="0"><code>python -m pip install --upgrade pip  -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+</code></pre></li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/python/">Python</a></li>
+      <li><a href="https://milong26.github.io/tags/configure/">Configure</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

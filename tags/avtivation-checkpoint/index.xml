@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Avtivation Checkpoint on 我的博客</title>
+    <link>https://milong26.github.io/tags/avtivation-checkpoint/</link>
+    <description>Recent content in Avtivation Checkpoint on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 26 Dec 2023 20:11:12 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/avtivation-checkpoint/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>训练具有次线性记忆代价的深度网络</title>
+      <link>https://milong26.github.io/post/%E8%AE%AD%E7%BB%83%E5%85%B7%E6%9C%89%E6%AC%A1%E7%BA%BF%E6%80%A7%E8%AE%B0%E5%BF%86%E4%BB%A3%E4%BB%B7%E7%9A%84%E6%B7%B1%E5%BA%A6%E7%BD%91%E7%BB%9C/</link>
+      <pubDate>Tue, 26 Dec 2023 20:11:12 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E8%AE%AD%E7%BB%83%E5%85%B7%E6%9C%89%E6%AC%A1%E7%BA%BF%E6%80%A7%E8%AE%B0%E5%BF%86%E4%BB%A3%E4%BB%B7%E7%9A%84%E6%B7%B1%E5%BA%A6%E7%BD%91%E7%BB%9C/</guid>
+      <description>&lt;p&gt;主要是激活检查点的技术，不精读了，论文比较古早&lt;/p&gt;
+&lt;h1 id=&#34;paper&#34;&gt;paper&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;标题：Training Deep Nets with Sublinear Memory Cost&lt;/li&gt;
+&lt;li&gt;地址：&lt;a href=&#34;https://arxiv.org/abs/1604.06174&#34;&gt;arxiv&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;摘要&#34;&gt;摘要&lt;/h1&gt;
+&lt;h2 id=&#34;文章结构&#34;&gt;文章结构&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;感觉这篇都是干货，都没提背景&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;贡献：设计了一个系统上的方法
+减少深度神经网络训练时的内存消耗。&lt;/li&gt;
+&lt;li&gt;具体：设计了一种算法
+训练n层网络时消耗$O(\sqrt{n})$的内存，只需要每一个mini-batch额外的foward计算成本。&lt;/li&gt;
+&lt;li&gt;大背景：
+模型达到GPU内存上限&lt;/li&gt;
+&lt;li&gt;目标：
+减少内存消耗
+什么样的：训练过程存储中间特征图和梯度的&lt;/li&gt;
+&lt;li&gt;小背景
+计算图分析Computation graph analysis
+用来：自动现场操作+内存共享优化
+我们证明了有可能以牺牲内存计算为代价，以较小的额外计算成本给出一个更高效的内存训练算法。&lt;/li&gt;
+&lt;li&gt;结果
+在极端情况下，我们的分析还表明，内存消耗可以降低到O ( log n )，而forward的额外开销只有O( nlogn)。
+我们的实验表明，在ImageNet问题上，我们可以将1，000层深度残差网络的内存开销从48G降低到7G。类似地，在非常长的序列上训练复杂的递归神经网络时，观察到显著的记忆成本降低。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;个人总结&#34;&gt;个人总结&lt;/h2&gt;
+&lt;p&gt;大背景是模型超过GPU上限，因为研究的时候大模型还不热（或者说还没出来）；
+采取了&lt;strong&gt;计算图分析&lt;/strong&gt;这个技术，利用其在自动现场操作+内存共享优化这两个方面的作用，以减少训练过程中存储中间特征图（中间结果？）和梯度的内存消耗；
+方法是用额外的forward计算赚回内存消耗，使得训练n层网络只要消耗$O(\sqrt{n})$的内存
+最后还有实际实验数据。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;结构比较另类，可能因为比较早。
+大概需要了解一下计算图分析是什么
+因为不是精读，了解一下后面论文干了什么&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;介绍&#34;&gt;介绍&lt;/h1&gt;
+&lt;p&gt;扩充了摘要部分，有几个问题&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;为什么要搞中间结果
+由于在许多常见的深度架构中，与中间特征图的大小相比，参数的大小相对较小。
+&lt;blockquote&gt;
+&lt;p&gt;中间特征图是什么？看起来像是训练过程中特征的可视化。。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;计算图分析技术
+来进行自动就地(in-place，现场？就地？)操作和内存共享优化。&lt;/li&gt;
+&lt;li&gt;结果写得更清楚
+提出了一种新的方法来用计算换换内存
+我们给出了一个用O (√n )的内存来训练一个n层网络的实用算法，只要两倍的forward计算。
+验证了：在极端情况下，对特征图使用尽可能少的O (log n)内存来训练一个n层网络是可能的。&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>排序 | 我的博客</title>
+<meta name="keywords" content="数据结构">
+<meta name="description" content="排序分类
+按照排序时排序对象存放的设备
+
+内部排序:排序过程中数据对象全部在内存中的排序。
+外部排序:排序过程数据对象并非完全在内存中的排序
+
+按照排序是的基本操作是否基于关键字的比较
+
+基于比较：基本操作——关键字的比较和记录的移动，其最差时间下限已经被证明为Ω（nlogn）。
+
+交换排序（气泡、快速排序）；选择排序（直接选择排序、堆排序）；插入排序（直接插入、折半插入、希尔排序）、归并排序（二路归并排序）。
+
+不基于比较：根据根据组成关键字的的分量及其分布特征，如基数排序(箱子排序)。
+
+
+后将元素调整至相应位置
+若出现重复数据：当前&#43;1
+排序的稳定性：相同元素的相对位置不发生变化
+template&lt;class T&gt;
+void Rank(T a[], int n,int r[]){
+   for(int i=1; i&lt;n; i&#43;&#43;)
+      r[i]=0;
+   for (int i = 1; i &lt; n; i&#43;&#43;)
+      for(int j=0; j&lt;i; j&#43;&#43;)
+         if (a[j] &lt;= a[i])
+            r[i]&#43;&#43;;
+         else r[j]&#43;&#43;;
+}//循环n(n-1)/2
+void Rearrange(T a[], int n, int r[]){
+   T *u=new T[n&#43;1];//保存原有数据的副本，即根据名次将元素放至对应位置
+   for(int i=0; i&lt;n; i&#43;&#43;)
+      u[r[i]]=a[i];
+   for(int i=0; i&lt;n; i&#43;&#43;)
+      a[i]=u[i];
+   delete []u;
+}//移动2n次
+//辅助存储空间：2n
+
+最多n-1次交换、n次比较">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/%E6%8E%92%E5%BA%8F/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/%E6%8E%92%E5%BA%8F/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/%E6%8E%92%E5%BA%8F/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="排序">
+  <meta property="og:description" content="排序分类 按照排序时排序对象存放的设备
+内部排序:排序过程中数据对象全部在内存中的排序。 外部排序:排序过程数据对象并非完全在内存中的排序 按照排序是的基本操作是否基于关键字的比较
+基于比较：基本操作——关键字的比较和记录的移动，其最差时间下限已经被证明为Ω（nlogn）。 交换排序（气泡、快速排序）；选择排序（直接选择排序、堆排序）；插入排序（直接插入、折半插入、希尔排序）、归并排序（二路归并排序）。
+不基于比较：根据根据组成关键字的的分量及其分布特征，如基数排序(箱子排序)。 后将元素调整至相应位置
+若出现重复数据：当前&#43;1
+排序的稳定性：相同元素的相对位置不发生变化
+template&lt;class T&gt; void Rank(T a[], int n,int r[]){ for(int i=1; i&lt;n; i&#43;&#43;) r[i]=0; for (int i = 1; i &lt; n; i&#43;&#43;) for(int j=0; j&lt;i; j&#43;&#43;) if (a[j] &lt;= a[i]) r[i]&#43;&#43;; else r[j]&#43;&#43;; }//循环n(n-1)/2 void Rearrange(T a[], int n, int r[]){ T *u=new T[n&#43;1];//保存原有数据的副本，即根据名次将元素放至对应位置 for(int i=0; i&lt;n; i&#43;&#43;) u[r[i]]=a[i]; for(int i=0; i&lt;n; i&#43;&#43;) a[i]=u[i]; delete []u; }//移动2n次 //辅助存储空间：2n 最多n-1次交换、n次比较">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2019-12-04T09:00:36+00:00">
+    <meta property="article:modified_time" content="2019-12-04T09:00:36+00:00">
+    <meta property="article:tag" content="数据结构">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="排序">
+  <meta name="twitter:description" content="排序分类 按照排序时排序对象存放的设备
+内部排序:排序过程中数据对象全部在内存中的排序。 外部排序:排序过程数据对象并非完全在内存中的排序 按照排序是的基本操作是否基于关键字的比较
+基于比较：基本操作——关键字的比较和记录的移动，其最差时间下限已经被证明为Ω（nlogn）。 交换排序（气泡、快速排序）；选择排序（直接选择排序、堆排序）；插入排序（直接插入、折半插入、希尔排序）、归并排序（二路归并排序）。
+不基于比较：根据根据组成关键字的的分量及其分布特征，如基数排序(箱子排序)。 后将元素调整至相应位置
+若出现重复数据：当前&#43;1
+排序的稳定性：相同元素的相对位置不发生变化
+template&lt;class T&gt; void Rank(T a[], int n,int r[]){ for(int i=1; i&lt;n; i&#43;&#43;) r[i]=0; for (int i = 1; i &lt; n; i&#43;&#43;) for(int j=0; j&lt;i; j&#43;&#43;) if (a[j] &lt;= a[i]) r[i]&#43;&#43;; else r[j]&#43;&#43;; }//循环n(n-1)/2 void Rearrange(T a[], int n, int r[]){ T *u=new T[n&#43;1];//保存原有数据的副本，即根据名次将元素放至对应位置 for(int i=0; i&lt;n; i&#43;&#43;) u[r[i]]=a[i]; for(int i=0; i&lt;n; i&#43;&#43;) a[i]=u[i]; delete []u; }//移动2n次 //辅助存储空间：2n 最多n-1次交换、n次比较">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "排序",
+      "item": "https://milong26.github.io/post/%E6%8E%92%E5%BA%8F/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "排序",
+  "name": "排序",
+  "description": "排序分类 按照排序时排序对象存放的设备\n内部排序:排序过程中数据对象全部在内存中的排序。 外部排序:排序过程数据对象并非完全在内存中的排序 按照排序是的基本操作是否基于关键字的比较\n基于比较：基本操作——关键字的比较和记录的移动，其最差时间下限已经被证明为Ω（nlogn）。 交换排序（气泡、快速排序）；选择排序（直接选择排序、堆排序）；插入排序（直接插入、折半插入、希尔排序）、归并排序（二路归并排序）。\n不基于比较：根据根据组成关键字的的分量及其分布特征，如基数排序(箱子排序)。 后将元素调整至相应位置\n若出现重复数据：当前+1\n排序的稳定性：相同元素的相对位置不发生变化\ntemplate\u0026lt;class T\u0026gt; void Rank(T a[], int n,int r[]){ for(int i=1; i\u0026lt;n; i++) r[i]=0; for (int i = 1; i \u0026lt; n; i++) for(int j=0; j\u0026lt;i; j++) if (a[j] \u0026lt;= a[i]) r[i]++; else r[j]++; }//循环n(n-1)/2 void Rearrange(T a[], int n, int r[]){ T *u=new T[n+1];//保存原有数据的副本，即根据名次将元素放至对应位置 for(int i=0; i\u0026lt;n; i++) u[r[i]]=a[i]; for(int i=0; i\u0026lt;n; i++) a[i]=u[i]; delete []u; }//移动2n次 //辅助存储空间：2n 最多n-1次交换、n次比较\n",
+  "keywords": [
+    "数据结构"
+  ],
+  "articleBody": "排序分类 按照排序时排序对象存放的设备\n内部排序:排序过程中数据对象全部在内存中的排序。 外部排序:排序过程数据对象并非完全在内存中的排序 按照排序是的基本操作是否基于关键字的比较\n基于比较：基本操作——关键字的比较和记录的移动，其最差时间下限已经被证明为Ω（nlogn）。 交换排序（气泡、快速排序）；选择排序（直接选择排序、堆排序）；插入排序（直接插入、折半插入、希尔排序）、归并排序（二路归并排序）。\n不基于比较：根据根据组成关键字的的分量及其分布特征，如基数排序(箱子排序)。 后将元素调整至相应位置\n若出现重复数据：当前+1\n排序的稳定性：相同元素的相对位置不发生变化\ntemplate\u003cclass T\u003e void Rank(T a[], int n,int r[]){ for(int i=1; i\u003cn; i++) r[i]=0; for (int i = 1; i \u003c n; i++) for(int j=0; j\u003ci; j++) if (a[j] \u003c= a[i]) r[i]++; else r[j]++; }//循环n(n-1)/2 void Rearrange(T a[], int n, int r[]){ T *u=new T[n+1];//保存原有数据的副本，即根据名次将元素放至对应位置 for(int i=0; i\u003cn; i++) u[r[i]]=a[i]; for(int i=0; i\u003cn; i++) a[i]=u[i]; delete []u; }//移动2n次 //辅助存储空间：2n 最多n-1次交换、n次比较\ntemplate\u003cclass T\u003e void Rearrange(T a[], int n, int r[]){ T *u=new T[n+1]; for(int i=0; i\u003cn; i++) u[r[i]]=a[i]; for(int i=0; i\u003cn; i++) a[i]=u[i]; delete []u; } void Rearrange(T a[], int n, int r[]){ for(int i=0; i\u003cn; i++) while(r[i]!=i){ int t=r[i]; Swap(a[i],a[t]); Swap(r[i],r[t]); }//移动次数可能增加，占用空间减少！ 有重复的话需要后移\n最坏情况：全都一样\nvoid CountSort(int data[],int n) { int i,j,count,*data_p; data_p=(int*)malloc(sizeof(int)*n); for(i=0;i\u003cn;i++)//初始化data_p data_p[i]=0; for(i=0;i\u003cn;i++) { count=0; for(j=0;j\u003cn;j++)//扫描待排序数组 if(data[j]\u003cdata[i])//统计比data[i]值小的值的个数 count++; while(data_p[count]!=0) //对于相等非0的数据， count++; data_p[count]=data[i];//存放到data_p中的对应位置 } } 比较上3种：\n2、3的交换次数与初始顺序有关\n2整理过程性能与初始顺序有关，3比较（重复）有关，移动无关\n} void quick_sort(int arr[], int left, int right) { if (left \u003e right) return; int j = partition(arr, left, right); cout « endl; quick_sort(arr, left, j - 1); quick_sort(arr, j + 1, right); } int main() { int num; cin » num; int *a = new int[num]; for (int i = 0; i \u003c num; i++) cin » a[i]; quick_sort(a, 0, num - 1); for (int i = 0; i \u003c num; i++) cout« a[i]«\" “; }\n冒泡排序 比较次数：1+2+...+n-1=n(n-1)/2 交换次数：最好：0；最坏：逆序，n(n-1)/2 时间复杂度O(n^2^) 空间复杂度S(1) ```c++ void BubbleSort ( int n , LIST\t\u0026A ) { for ( int i =1; i \u003c= n-1; i++ ) for ( int j =n; j \u003e= i+1; j-- ) if ( A[j].key \u003c A[j-1].key ) swap (A[j], A[j-1])//每次将小的数据向前移动 } ``` 快速排序 减少总的比较次数和移动次数 -\u003e增大记录的比较和移动距离 -\u003e较大记录从前面直接移动到后面 较小记录从后面直接移动到前面 分治：(从小到大顺序时)比当前元素大，放右边，小的放左边 A 交替 不稳定：重复元素的相对位置会改变 线性时间复杂度 n=2^k^≤2^k^T(1)+kO(n)=2^k^+kn=n+logn 最优情况：n+logn 平均性能： A1 C 所有游标都从左侧开始 大于pivot：k++；小于：交换，所有游标后移 希尔排序 ```c++ #include using namespace std; int ininum; void shell(int *ini) { int num = ininum / 2; while (num \u003e= 1) { for (int i = num; i \u003c ininum; i++) { int j = 0; int trem = ini[i]; for (j = i - num; j \u003e= 0 \u0026\u0026 trem \u003c ini[j]; j -= num) { ini[j + num] = ini[j]; } ini[j + num] = trem; } for (int i = 0; i \u003c ininum; i++) { cout \u003c\u003c ini[i]; if (i != ininum - 1) cout \u003c\u003c \" \"; } cout \u003c\u003c endl; num /= 2; } } int main() { cin \u003e\u003e ininum; int *ini = new int[ininum]; for (int i = 0; i \u003c ininum; i++) cin \u003e\u003e ini[i]; shell(ini); } ``` 插入排序 归并排序 实现代码 ```c++ #include #include using namespace std; void merge(vector \u0026arr,int L,int mid,int R) {\tint *help = new int[R-L+1];//辅助空间 int p1=L,p2=mid+1,i=0; while(p1\u003c=mid \u0026\u0026 p2\u003c=R)\t{\thelp[i++] = arr[p1]\u003earr[p2] ? arr[p2++] : arr[p1++]; }\twhile(p1\u003c=mid)\thelp[i++] = arr[p1++]; while(p2\u003c=R)\thelp[i++] = arr[p2++]; for (int i=0;i",
+  "wordCount" : "697",
+  "inLanguage": "en",
+  "datePublished": "2019-12-04T09:00:36Z",
+  "dateModified": "2019-12-04T09:00:36Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/%E6%8E%92%E5%BA%8F/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      排序
+    </h1>
+    <div class="post-meta">
+
+<span title='2019-12-04 09:00:36 +0000 UTC'>December 4, 2019</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><h3 id="排序分类">排序分类<a hidden class="anchor" aria-hidden="true" href="#排序分类">#</a></h3>
+<p>按照排序时排序对象存放的设备</p>
+<ul>
+<li>内部排序:排序过程中数据对象全部在内存中的排序。</li>
+<li>外部排序:排序过程数据对象并非完全在内存中的排序</li>
+</ul>
+<p>按照排序是的基本操作是否基于关键字的比较</p>
+<ul>
+<li>基于比较：基本操作——关键字的比较和记录的移动，其最差时间下限已经被证明为Ω（nlogn）。</li>
+</ul>
+<p>交换排序（气泡、快速排序）；选择排序（直接选择排序、堆排序）；插入排序（直接插入、折半插入、希尔排序）、归并排序（二路归并排序）。</p>
+<ul>
+<li>不基于比较：根据根据组成关键字的的分量及其分布特征，如基数排序(箱子排序)。</li>
+</ul>
+<!-- raw HTML omitted -->
+<p>后将元素调整至相应位置</p>
+<p>若出现重复数据：当前+1</p>
+<p>排序的稳定性：相同元素的相对位置不发生变化</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> Rank(T a[], <span style="color:#66d9ef">int</span> n,<span style="color:#66d9ef">int</span> r[]){
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>; i<span style="color:#f92672">&lt;</span>n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>      r[i]<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; j<span style="color:#f92672">&lt;</span>i; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">if</span> (a[j] <span style="color:#f92672">&lt;=</span> a[i])
+</span></span><span style="display:flex;"><span>            r[i]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">else</span> r[j]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}<span style="color:#75715e">//循环n(n-1)/2
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Rearrange</span>(T a[], <span style="color:#66d9ef">int</span> n, <span style="color:#66d9ef">int</span> r[]){
+</span></span><span style="display:flex;"><span>   T <span style="color:#f92672">*</span>u<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> T[n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>];<span style="color:#75715e">//保存原有数据的副本，即根据名次将元素放至对应位置
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>      u[r[i]]<span style="color:#f92672">=</span>a[i];
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>      a[i]<span style="color:#f92672">=</span>u[i];
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">delete</span> []u;
+</span></span><span style="display:flex;"><span>}<span style="color:#75715e">//移动2n次
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//辅助存储空间：2n
+</span></span></span></code></pre></div><!-- raw HTML omitted -->
+<p>最多n-1次交换、n次比较</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> Rearrange(T a[], <span style="color:#66d9ef">int</span> n, <span style="color:#66d9ef">int</span> r[]){
+</span></span><span style="display:flex;"><span>   T <span style="color:#f92672">*</span>u<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> T[n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>      u[r[i]]<span style="color:#f92672">=</span>a[i];
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>      a[i]<span style="color:#f92672">=</span>u[i];
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">delete</span> []u;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Rearrange</span>(T a[], <span style="color:#66d9ef">int</span> n, <span style="color:#66d9ef">int</span> r[]){
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">while</span>(r[i]<span style="color:#f92672">!=</span>i){
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">int</span> t<span style="color:#f92672">=</span>r[i];
+</span></span><span style="display:flex;"><span>          Swap(a[i],a[t]);
+</span></span><span style="display:flex;"><span>          Swap(r[i],r[t]);
+</span></span><span style="display:flex;"><span>}<span style="color:#75715e">//移动次数可能增加，占用空间减少！
+</span></span></span></code></pre></div><!-- raw HTML omitted -->
+<p>有重复的话需要后移</p>
+<p>最坏情况：全都一样</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">CountSort</span>(<span style="color:#66d9ef">int</span> data[],<span style="color:#66d9ef">int</span> n)
+</span></span><span style="display:flex;"><span>{    <span style="color:#66d9ef">int</span> i,j,count,<span style="color:#f92672">*</span>data_p;
+</span></span><span style="display:flex;"><span>    data_p<span style="color:#f92672">=</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">*</span>)<span style="color:#a6e22e">malloc</span>(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>)<span style="color:#f92672">*</span>n);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span>n;i<span style="color:#f92672">++</span>)<span style="color:#75715e">//初始化data_p
+</span></span></span><span style="display:flex;"><span>        data_p[i]<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span>n;i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {   count<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(j<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;j<span style="color:#f92672">&lt;</span>n;j<span style="color:#f92672">++</span>)<span style="color:#75715e">//扫描待排序数组
+</span></span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(data[j]<span style="color:#f92672">&lt;</span>data[i])<span style="color:#75715e">//统计比data[i]值小的值的个数
+</span></span></span><span style="display:flex;"><span>                count<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(data_p[count]<span style="color:#f92672">!=</span><span style="color:#ae81ff">0</span>)      <span style="color:#75715e">//对于相等非0的数据，
+</span></span></span><span style="display:flex;"><span>            count<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        data_p[count]<span style="color:#f92672">=</span>data[i];<span style="color:#75715e">//存放到data_p中的对应位置
+</span></span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>比较上3种：</p>
+<p>2、3的交换次数与初始顺序有关</p>
+<p>2整理过程性能与初始顺序有关，3比较（重复）有关，移动无关</p>
+<hr>
+<!-- raw HTML omitted -->
+<p>}
+void quick_sort(int arr[], int left, int right)
+{
+if (left &gt; right)
+return;
+int j = partition(arr, left, right);
+cout &laquo; endl;
+quick_sort(arr, left, j - 1);
+quick_sort(arr, j + 1, right);
+}
+int main()
+{
+int num;
+cin &raquo; num;
+int *a = new int[num];
+for (int i = 0; i &lt; num; i++)
+cin &raquo; a[i];
+quick_sort(a, 0, num - 1);
+for (int i = 0; i &lt; num; i++)
+cout&laquo; a[i]&laquo;&quot; &ldquo;;
+}</p>
+<pre tabindex="0"><code>
+
+
+&lt;h4&gt;冒泡排序&lt;/h4&gt;
+比较次数：1+2+...+n-1=n(n-1)/2
+
+交换次数：最好：0；最坏：逆序，n(n-1)/2
+
+时间复杂度O(n^2^)
+
+空间复杂度S(1)
+
+```c++
+void BubbleSort ( int n , LIST	&amp;A )
+{
+    for ( int i =1; i &lt;= n-1; i++ ) 
+        for ( int j =n; j &gt;= i+1; j-- )
+            if ( A[j].key &lt; A[j-1].key )
+                swap (A[j], A[j-1])//每次将小的数据向前移动
+}
+```
+
+&lt;h4&gt;快速排序&lt;/h4&gt;
+减少总的比较次数和移动次数
+
+-&gt;增大记录的比较和移动距离
+
+-&gt;较大记录从前面直接移动到后面 较小记录从后面直接移动到前面
+
+分治：(从小到大顺序时)比当前元素大，放右边，小的放左边
+
+&lt;h5&gt;A&lt;/h5&gt;
+交替
+
+不稳定：重复元素的相对位置会改变
+
+线性时间复杂度
+
+n=2^k^≤2^k^T(1)+kO(n)=2^k^+kn=n+logn
+
+最优情况：n+logn
+
+平均性能：
+
+&lt;h5&gt;A1&lt;/h5&gt;
+&lt;h5&gt;C&lt;/h5&gt;
+所有游标都从左侧开始
+
+大于pivot：k++；小于：交换，所有游标后移
+
+&lt;h3&gt;希尔排序&lt;/h3&gt;
+```c++
+#include&lt;iostream&gt;
+using namespace std;
+int ininum;
+void shell(int *ini)
+{
+	int num = ininum / 2;
+	while (num &gt;= 1)
+	{
+		for (int i = num; i &lt; ininum; i++)
+		{
+			int j = 0;
+			int trem = ini[i];
+			for (j = i - num; j &gt;= 0 &amp;&amp; trem &lt; ini[j]; j -= num)
+			{
+				ini[j + num] = ini[j];
+			}
+			ini[j + num] = trem;
+		}
+		for (int i = 0; i &lt; ininum; i++)
+		{
+			cout &lt;&lt; ini[i];
+			if (i != ininum - 1) cout &lt;&lt; &#34; &#34;;
+		}
+		cout &lt;&lt; endl;
+		num /= 2;
+	}
+}
+int main()
+{
+	cin &gt;&gt; ininum;
+	int *ini = new int[ininum];
+	for (int i = 0; i &lt; ininum; i++)
+		cin &gt;&gt; ini[i];
+	shell(ini);
+}
+```
+
+
+
+
+
+&lt;h4&gt;插入排序&lt;/h4&gt;
+&lt;h3&gt;归并排序&lt;/h3&gt;
+实现代码
+
+```c++
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std; 
+void merge(vector&lt;int&gt; &amp;arr,int L,int mid,int R)
+{	
+	int *help = new int[R-L+1];//辅助空间
+	int p1=L,p2=mid+1,i=0;
+	while(p1&lt;=mid &amp;&amp; p2&lt;=R)	
+	{		
+		help[i++] = arr[p1]&gt;arr[p2] ? arr[p2++] : arr[p1++];
+	}	
+	while(p1&lt;=mid)	
+		help[i++] = arr[p1++];
+	while(p2&lt;=R)	
+		help[i++] = arr[p2++];
+	for (int i=0;i&lt;R-L+1;i++)	
+	{	
+		arr[L+i] = help[i];
+	}
+}
+void sortprocess(vector&lt;int&gt; &amp;arr,int L,int R)
+{	
+	if (L &lt; R)
+	{	
+		
+		int mid = L + (R-L)/2;  
+		sortprocess(arr,L,mid);//左边的
+		sortprocess(arr,mid+1,R);//右边的
+		merge(arr,L,mid,R);	
+	}
+}
+void MergeSort(vector&lt;int&gt; &amp;arr,int L,int R)//一定要有&amp;
+{
+	if (arr.size()&lt;2)	
+		return;
+	sortprocess(arr,L,R);
+}  
+int main()
+{
+	vector&lt;int&gt; arr;
+	int n,temp;	cin&gt;&gt;n;  //输入n个数	
+	for (int i=0;i&lt;n;i++)	
+	{		
+		cin&gt;&gt;temp;  //输入数据
+		arr.push_back(temp);
+	} //arr.size=n
+	MergeSort(arr,0,arr.size()-1); 
+	for(int i=0;i&lt;arr.size();i++)
+		cout&lt;&lt;arr[i]&lt;&lt;&#34; &#34;; 
+	return 0;
+}
+```
+
+| 排序法 | 平均时间 | 最差情形    | 稳定度 | 额外空间 | 备注                                       |
+| ------ | -------- | ----------- | ------ | -------- | ------------------------------------------ |
+| 冒泡   | O(n^2^)  | O(n^2^)     | 稳定   | O(1)     | n小时较好                                  |
+| 选择   | O(n^2^)  | O(n^2^)     | 不稳定 | O(1)     | n小时较好                                  |
+| 插入   | O(n^2^)  | O(n^2^)     | 稳定   | O(1)     | 大部分已排序时较好                         |
+| 基数   | O(logRB) | O(logRB)    | 稳定   | O(n)     | B是真数(0-9)， 			R是基数(个十百) |
+| Shell  | O(nlogn) | O(ns) 1&lt;s&lt;2 | 不稳定 | O(1)     | s是所选分组                                |
+| 快速   | O(nlogn) | O(n2)       | 不稳定 | O(nlogn) | n大时较好                                  |
+| 归并   | O(nlogn) | O(nlogn)    | 稳定   | O(1)     | n大时较好                                  |
+| 堆     | O(nlogn) | O(nlogn)    | 不稳定 | O(1)     | n大时较好                                  |
+
+稳定性 
+
+归并排序、冒泡排序、插入排序。基数排序是稳定的 
+
+选择排序、快速排序、希尔排序、堆排序是不稳定的
+
+(1)冒泡排序：
+
+是相邻元素之间的比较和交换，两重循环O(n2)；所以，如果两个相邻元素相等，是不会交换的。所以它是一种稳定的排序方法
+
+ 
+
+(2)选择排序：
+
+每个元素都与第一个元素相比，产生交换，两重循环O(n2)；举个栗子，5 8 5 2 9，第一遍之后，2会与5交换，那么原序列中两个5的顺序就被破坏了。所以不是稳定的排序算法
+
+ 
+
+(3)插入排序：
+
+插入排序是在一个已经有序的小序列的基础上，一次插入一个元素。刚开始这个小序列只包含第一个元素，事件复杂度O(n2)。比较是从这个小序列的末尾开始的。想要插入的元素和小序列的最大者开始比起，如果比它大则直接插在其后面，否则一直往前找它该插入的位置。如果遇见了一个和插入元素相等的，则把插入元素放在这个相等元素的后面。所以相等元素间的顺序没有改变，是稳定的。
+
+ 
+
+(4)快速排序
+
+快速排序有两个方向，左边的i下标一直往右走，当a[i] &lt;= a[center_index]，其中center_index是中枢元素的数组下标，一般取为数组第0个元素。而右边的j下标一直往左走，当a[j] &gt; a[center_index]。如果i和j都走不动了，i &lt;= j, 交换a[i]和a[j],重复上面的过程，直到i&gt;j。 交换a[j]和a[center_index]，完成一趟快速排序。在中枢元素和a[j]交换的时候，很有可能把前面的元素的稳定性打乱，比如序列为 5 3 3 4 3 8 9 10 11， 现在中枢元素5和3(第5个元素，下标从1开始计)交换就会把元素3的稳定性打乱，所以快速排序是一个不稳定的排序算法，不稳定发生在中枢元素和a[j]交换的时刻。
+
+ 
+
+(5)归并排序
+   归并排序是把序列递归地分成短序列，递归出口是短序列只有1个元素(认为直接有序)或者2个序列(1次比较和交换),然后把各个有序的段序列合并成一个有序的长序列，不断合并直到原序列全部排好序。可以发现，在1个或2个元素时，1个元素不会交换，2个元素如果大小相等也没有人故意交换，这不会破坏稳定性。那么，在短的有序序列合并的过程中，稳定是是否受到破坏？没有，合并过程中我们可以保证如果两个当前元素相等时，我们把处在前面的序列的元素保存在结果序列的前面，这样就保证了稳定性。所以，归并排序也是稳定的排序算法。
+
+ 
+
+(6)基数排序
+  基数排序是按照低位先排序，然后收集；再按照高位排序，然后再收集；依次类推，直到最高位。有时候有些属性是有优先级顺序的，先按低优先级排序，再按高优先级排序，最后的次序就是高优先级高的在前，高优先级相同的低优先级高的在前。基数排序基于分别排序，分别收集，所以其是稳定的排序算法。
+
+
+
+(7)希尔排序(shell)
+   希尔排序是按照不同步长对元素进行插入排序，当刚开始元素很无序的时候，步长最大，所以插入排序的元素个数很少，速度很快；当元素基本有序了，步长很小，插入排序对于有序的序列效率很高。所以，希尔排序的时间复杂度会比o(n^2)好一些。由于多次插入排序，我们知道一次插入排序是稳定的，不会改变相同元素的相对顺序，但在不同的插入排序过程中，相同的元素可能在各自的插入排序中移动，最后其稳定性就会被打乱，所以shell排序是不稳定的。
+
+ 
+
+(8)堆排序
+  我们知道堆的结构是节点i的孩子为2*i和2*i+1节点，大顶堆要求父节点大于等于其2个子节点，小顶堆要求父节点小于等于其2个子节点。在一个长为n的序列，堆排序的过程是从第n/2开始和其子节点共3个值选择最大(大顶堆)或者最小(小顶堆),这3个元素之间的选择当然不会破坏稳定性。但当为n/2-1, n/2-2, ...1这些个父节点选择元素时，就会破坏稳定性。有可能第n/2个父节点交换把后面一个元素交换过去了，而第n/2-1个父节点把后面一个相同的元素没有交换，那么这2个相同的元素之间的稳定性就被破坏了。所以，堆排序不是稳定的排序算法
+</code></pre>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Optimizer on 我的博客</title>
+    <link>https://milong26.github.io/tags/optimizer/</link>
+    <description>Recent content in Optimizer on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 21 Dec 2023 16:09:48 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/optimizer/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SGD vs Adam</title>
+      <link>https://milong26.github.io/post/sgd-vs-adam/</link>
+      <pubDate>Thu, 21 Dec 2023 16:09:48 +0000</pubDate>
+      <guid>https://milong26.github.io/post/sgd-vs-adam/</guid>
+      <description>&lt;p&gt;比较一下SGD和Adam这两个优化器，时间顺序上Adam是对SGD的改进，但是在一些层面SGD还是很好用的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 只写了一点点，没空了，以后再搞
+参考：https://blog.csdn.net/S20144144/article/details/103417502
+参考：https://www.zhihu.com/question/422203931/answers/updated#:~:text=Adam%20%E7%AE%97%E6%B3%95%E5%8F%AF%E4%BB%A5%E7%9C%8B%E4%BD%9C%E6%98%AF%E5%9C%A8,SGD%20%E7%9A%84%E5%9F%BA%E7%A1%80%E4%B8%8A%E8%BF%9B%E8%A1%8C%E4%BA%86%E4%BC%98%E5%8C%96%EF%BC%8C%E5%AE%83%E7%BB%93%E5%90%88%E4%BA%86%E6%A2%AF%E5%BA%A6%E7%9A%84%E4%B8%80%E9%98%B6%E7%9F%A9%E4%BC%B0%E8%AE%A1%E5%92%8C%E4%BA%8C%E9%98%B6%E7%9F%A9%E4%BC%B0%E8%AE%A1%E6%9D%A5%E5%8A%A8%E6%80%81%E8%B0%83%E6%95%B4%E5%AD%A6%E4%B9%A0%E7%8E%87%EF%BC%8C%E4%BD%BF%E5%BE%97%E5%B0%8F%E7%90%83%E8%83%BD%E5%A4%9F%E6%9B%B4%E5%8A%A0%E6%99%BA%E8%83%BD%E5%9C%B0%E6%BB%9A%E5%8A%A8%E5%88%B0%E5%B1%B1%E8%B0%B7%E7%9A%84%E6%9C%80%E4%BD%8E%E7%82%B9%E3%80%82&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;优化算法总览&#34;&gt;优化算法总览&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;SGD.md&#34;&gt;SGD&lt;/a&gt;和&lt;a href=&#34;adam%E4%BC%98%E5%8C%96%E5%99%A8.md&#34;&gt;Adam&lt;/a&gt;的设定部分直接看原文，这里只做总结。&lt;/p&gt;
+&lt;p&gt;深度学习优化算法经历了 SGD -&amp;gt; SGDM -&amp;gt; NAG -&amp;gt;AdaGrad -&amp;gt; AdaDelta -&amp;gt; Adam -&amp;gt; Nadam 这样的发展历程。&lt;/p&gt;
+&lt;p&gt;优化问题：待优化参数w，目标函数f(w)，初始学习率$\alpha$，对该优化问题迭代优化。在每个epoch t：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;计算梯度$g_t=\nabla f(w_t)$&lt;/li&gt;
+&lt;li&gt;根据历史梯度计算一阶动$m_t$量和二阶动量$v_t$（一阶动量和二阶动量分别是历史梯度的一阶函数和二阶函数。）&lt;/li&gt;
+&lt;li&gt;计算当前时刻的下降梯度
+$$
+\Delta\theta_t=-\alpha\cdot \frac{m_t}{\sqrt{v_t}}
+$$&lt;/li&gt;
+&lt;li&gt;根据下降梯度更新
+$$
+w_{t+1}=w_t-\Delta\theta_t
+$$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;步骤3、4对于各个算法都是一致的，主要的差别就体现在1和2上。&lt;/p&gt;
+&lt;h1 id=&#34;sgd&#34;&gt;SGD&lt;/h1&gt;
+&lt;p&gt;SGD没有动量（vanilla SGD），即上面公式里面
+$m_t=g_t,v_t=I^2$&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>adam优化器</title>
+      <link>https://milong26.github.io/post/adam%E4%BC%98%E5%8C%96%E5%99%A8/</link>
+      <pubDate>Thu, 21 Dec 2023 11:02:12 +0000</pubDate>
+      <guid>https://milong26.github.io/post/adam%E4%BC%98%E5%8C%96%E5%99%A8/</guid>
+      <description>&lt;p&gt;Adam 优化算法，Adaptive。
+可以将其理解成Adam = Momentum + Adaptive Learning Rate&lt;/p&gt;
+&lt;h1 id=&#34;梯度下降不够&#34;&gt;梯度下降不够&lt;/h1&gt;
+&lt;p&gt;基本的mini-batch SGD优化算法在深度学习取得很多不错的成绩。然而也存在一些问题需解决：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;选择恰当的初始学习率很困难。&lt;/li&gt;
+&lt;li&gt;学习率调整策略受限于预先指定的调整规则。&lt;/li&gt;
+&lt;li&gt;相同的学习率被应用于各个参数。&lt;/li&gt;
+&lt;li&gt;高度非凸的误差函数的优化过程，如何避免陷入大量的局部次优解或鞍点。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;自适应优化&#34;&gt;自适应优化&lt;/h1&gt;
+&lt;h2 id=&#34;adagrad&#34;&gt;AdaGrad&lt;/h2&gt;
+&lt;p&gt;针对简单的SGD及Momentum存在的问题，AdaGrad优化算法(Adaptive Gradient，自适应梯度)出现
+它能够对每个不同的参数调整不同的学习率，对频繁变化的参数以更小的步长进行更新，而稀疏的参数以更大的步长进行更新。
+$$
+g_i=\nabla_\theta J(\theta_{t-1})\
+\theta_{t+1}=\theta_t-\alpha \cdot\frac{g_t}{\sqrt{\sum_{i=1}^t}g_i^2}
+$$
+$g_t$表示第t时间步的梯度（向量，包含各个参数对应的偏导数， 表示第i个参数t时刻偏导数）&lt;/p&gt;
+&lt;p&gt;$g_t^2$表示第t时间步的梯度平方（向量，由 各元素自己进行平方运算所得，即Element-wise）&lt;/p&gt;
+&lt;p&gt;AdaGrad与SGD的核心区别在于:计算更新步长时，增加了分母：梯度平方累积和的平方根。
+此项能够累积各个参数的&lt;strong&gt;历史&lt;/strong&gt;梯度平方，频繁更新的梯度，则累积的分母项逐渐偏大，那么更新的步长(stepsize)相对就会变小，而稀疏的梯度，则导致累积的分母项中对应值比较小，那么更新的步长则相对比较大。&lt;/p&gt;
+&lt;p&gt;AdaGrad能够自动为不同参数适应不同的学习率（平方根的分母项相当于对学习率α进进行了自动调整，然后再乘以本次梯度），大多数的框架实现采用默认学习率α=0.01即可完成比较好的收敛。&lt;/p&gt;
+&lt;p&gt;优势：在数据&lt;strong&gt;分布稀疏&lt;/strong&gt;的场景，能更好利用稀疏梯度的信息，比标准的SGD算法更有效地收敛。&lt;/p&gt;
+&lt;p&gt;缺点：主要缺陷来自分母项的对梯度平方不断累积，随之时间步地增加，分母项越来越大，最终导致学习率收缩到太小无法进行有效更新。&lt;/p&gt;
+&lt;p&gt;数据分布稀疏是什么情况？&lt;a href=&#34;%E6%95%B0%E6%8D%AE%E7%9A%84%E7%A8%80%E7%96%8F%E6%80%A7.md&#34;&gt;数据的稀疏性&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;rmsprop&#34;&gt;RMSProp&lt;/h2&gt;
+&lt;p&gt;RMSProp结合梯度平方的指数移动平均数来调节学习率的变化,能够在不稳定（Non-Stationary）的目标函数情况下进行很好地收敛。
+$$
+g_t=\nabla &lt;em&gt;\theta J(\theta&lt;/em&gt;{t-1})\
+v_t=\gamma(v_{t-1})+(1-\gamma)g_t^2
+$$
+计算梯度平方的指数移动平均数vt（Exponential Moving Average），γ是遗忘因子（或称为指数衰减率），依据经验，默认设置为0.9。&lt;/p&gt;
+&lt;p&gt;梯度更新时候，与AdaGrad类似，只是更新的梯度平方的期望（指数移动均值），其中ε=10^-8，避免除数为0。默认学习率α=0.001。
+$$
+\theta_t=\theta_{t-1}-\alpha\cdot\frac{g_t}{\sqrt{v_t}+\varepsilon}
+$$&lt;/p&gt;
+&lt;p&gt;优势：能够克服AdaGrad梯度急剧减小的问题，在很多应用中都展示出优秀的学习率自适应能力。尤其在不稳定(Non-Stationary)的目标函数下，比基本的SGD、Momentum、AdaGrad表现更良好。&lt;/p&gt;
+&lt;h1 id=&#34;adam优化器&#34;&gt;Adam优化器&lt;/h1&gt;
+&lt;p&gt;Adam优化器结合AdaGrad和RMSProp两种优化算法的优点。对梯度的一阶矩估计（First Moment Estimation，即梯度的均值）和二阶矩估计（Second Moment Estimation，即梯度的未中心化的方差）进行综合考虑，计算出更新步长。&lt;/p&gt;
+&lt;h2 id=&#34;优点&#34;&gt;优点&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;实现简单，计算高效，对内存需求少&lt;/li&gt;
+&lt;li&gt;参数的更新不受梯度的伸缩变换影响&lt;/li&gt;
+&lt;li&gt;超参数具有很好的解释性，且通常无需调整或仅需很少的微调&lt;/li&gt;
+&lt;li&gt;更新的步长能够被限制在大致的范围内（初始学习率）&lt;/li&gt;
+&lt;li&gt;能自然地实现步长退火过程（自动调整学习率）&lt;/li&gt;
+&lt;li&gt;很适合应用于大规模的数据及参数的场景&lt;/li&gt;
+&lt;li&gt;适用于不稳定目标函数&lt;/li&gt;
+&lt;li&gt;适用于梯度稀疏或梯度存在很大噪声的问题&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;综合Adam在很多情况下算作默认工作性能比较优秀的优化器&lt;/p&gt;
+&lt;h2 id=&#34;伪代码&#34;&gt;伪代码&lt;/h2&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://pic4.zhimg.com/80/v2-aff80e27c453720c335dbb7aaba1a7c3_1440w.webp&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>SGD</title>
+      <link>https://milong26.github.io/post/sgd/</link>
+      <pubDate>Wed, 06 Dec 2023 20:40:39 +0000</pubDate>
+      <guid>https://milong26.github.io/post/sgd/</guid>
+      <description>&lt;p&gt;Stochastic Gradient Descent，随机梯度下降，一种优化方法。&lt;/p&gt;
+&lt;p&gt;学习SGD需要先从梯度下降开始，再到批量梯度下降，最后理解随机梯度下降。&lt;/p&gt;
+&lt;h1 id=&#34;梯度下降&#34;&gt;梯度下降&lt;/h1&gt;
+&lt;p&gt;曲面上方向导数的最大值的方向就代表了梯度的方向，因此我们在做梯度下降的时候，应该是沿着梯度的反方向进行权重的更新，可以有效的找到全局的最优解。&lt;/p&gt;
+&lt;p&gt;对单优化问题，参数的更新方式为：
+$$
+\theta _j:=\theta _j-\alpha \frac{\partial}{\partial \theta _j} J(\theta)
+$$
+其中$\alpha$表示的是步长或者说是学习率（learning rate）&lt;/p&gt;
+&lt;p&gt;直观的理解就是在崎岖的地方爬坡，为了最快下山会找最陡峭的地方。&lt;/p&gt;
+&lt;h1 id=&#34;批量梯度下降&#34;&gt;批量梯度下降&lt;/h1&gt;
+&lt;p&gt;$$
+对每个j\
+\theta &lt;em&gt;j:=\theta &lt;em&gt;j +\alpha \sum&lt;/em&gt;{i=1}^m(y^{(i)}-h&lt;/em&gt;\theta (x^{(i)}))x_j^{(i)}
+$$&lt;/p&gt;
+&lt;h1 id=&#34;随机梯度下降&#34;&gt;随机梯度下降&lt;/h1&gt;
+&lt;p&gt;在每次更新时用1个样本，随机也就是说用样本中的一个例子来近似所有的样本，来调整θ，因而随机梯度下降是会带来一定的问题，因为计算得到的并不是准确的一个梯度，对于最优化问题，凸问题，虽然不是每次迭代得到的损失函数都向着全局最优方向， 但是大的整体的方向是向全局最优解的，最终的结果往往是在全局最优解附近。但是相比于批量梯度，这样的方法更快，更快收敛，虽然不是全局最优，但很多时候是我们可以接受的，所以这个方法用的也比上面的多。
+$$
+loop:i=1 \space to \space m\
+\theta _j :=\theta &lt;em&gt;j+\alpha (y^{(i)}-h&lt;/em&gt;\theta (x^{(i)}))x_j^{(i)} \
+$$&lt;/p&gt;
+&lt;h1 id=&#34;代码&#34;&gt;代码&lt;/h1&gt;
+&lt;p&gt;SGD&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; np
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; plt
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 随机X纬度x1，rand是随机均匀分布&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rand(&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 人为设置真实的Y一列 np.random.randn(100,1) 设置误差遵循标准正态分布&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;y &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randn(&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 整合 x0 和 x1 成矩阵&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x_b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;c_[np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ones((&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)),x]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;learning_rate &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.01&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 学习率一般默认设置为0.01&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;n_iterations &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10000&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 迭代次数够多即可(不一定需要全局最优解)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 100 行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# #1 初始化theta，w0...wn&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;theta &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randn(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# x_b 中只有x0,x1,只需要两个theta&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# #4 不设置阀值，直接设置超参数，迭代次数，迭代次数到了就认为收敛了&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; iteration &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(n_iterations):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# #2 求梯度gradient&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    index &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randint(m) &lt;span style=&#34;color:#75715e&#34;&gt;# 随机索引，抽取出来，进行训练&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    xi &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x_b[index:index&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#75715e&#34;&gt;# 抽取随机x&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    yi &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; y[index:index&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#75715e&#34;&gt;# 抽取随机x对应的y&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    gradients &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x_b&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;T&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;dot(x_b&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;dot(theta)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;y)&lt;span style=&#34;color:#75715e&#34;&gt;# 不需要1/m平权&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# #3 调整theta值&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    theta &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; theta &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; learning_rate &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; gradients
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(theta)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x_new &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;array([[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]])
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x_new_b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;c_[(np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ones((&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;))),x_new]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;y_predict &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x_new_b&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;dot(theta)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 绘制图形&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(x_new,y_predict,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;r-&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(x,y,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;b.&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;axis([&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;])
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+  </channel>
+</rss>

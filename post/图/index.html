@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>图 | 我的博客</title>
+<meta name="keywords" content="数据结构">
+<meta name="description" content="
+关联于/至：&lt;2,3&gt;&lt;4,3&gt;关联至3，&lt;3,5&gt;&lt;3,4&gt;关联于3
+邻接于/至:   &lt;1,2&gt;&lt;2,3&gt; 顶点2邻接于1，邻接至3
+无/有向图；完全图：全连上；稀疏/稠密图；加权有/无向图&ndash;网络
+顶点v的度：与v关联的边的数目
+有向图中顶点v的入度：关联至v的边的数目
+有向图中顶点v的出度：关联于v的边的数目
+路径：当且仅当对于每一个j（1≤j≤k）边(ij, ij&#43;1)都在E中时，
+顶点序列P=i1, i2, &hellip;, ik是图或有向图G=(V, E)中一条从i1到ik的路径
+路径长度：路径上所有边的长度之和
+简单路径：序列中顶点不重复出现的路径
+回路：第一个顶点和最后一个顶点相同的路径
+无环图 ：不存在回路的图。
+有向无环图：不存在回路的有向图
+连通图：如果图中任意两个顶点vi和vj都是连通的，则图G是连通图
+连通分量：无向图中的极大连通子图
+强连通图：对于有向图中任意两个顶点vi和vj，如果从vi到vj和从vj到vi都有路径，则图G是强连通图
+强连通分量 ：有向图中的极大连通子图称为强连通分量
+生成树：一个连通图的生成树含有图中全部顶点，但只有足以构成一棵树的n-1条边（包含G中所有顶点且是G的子图的树），树：无环的无向连通图
+
+对有向图：入度和=出度和=边数
+
+DiGraph{有向图
+Create(n)：创建一个具有n个顶点、没有边的有向图
+Exist(i,j)：如果存在边（i,j）则返回true，否则返回false
+Edges()：返回图中边的数目
+Vertices()：返回图中顶点的数目
+Add(i,j)：向图中添加边（i,j）
+Delete(i,j)：删除边（i,j）
+InDegree(i)：返回顶点i的入度
+OutDegree(i)：返回顶点i的出度
+}
+
+对非强连通的有向图和非连通的无向图遍历将得到生成森林
+
+----
+
+&lt;h3&gt;图的存储&lt;/h3&gt;
+&lt;h4&gt;邻接矩阵&lt;/h4&gt;(顺序存储)
+二维数组A
+
+i-&gt;j有边，A~i~ ~j~ =1
+
+A行、列的和=顶点的度
+
+有向图：行和=出度，列和=出度
+
+优化：位操作（取值只有0/1）
+
+时间复杂度：
+
+- 给定节点的邻接节点集合，Θ(n)
+- 求图中总的边数，Θ(n^2^) 遍历整个矩阵
+
+&lt;h4&gt;邻接压缩表&lt;/h4&gt;
+(顺序存储)
+
+一维数组h，l[0~x] 有向图x=e-1.无向图x=2e-1
+
+h[i]：顶点i邻接顶点集合再l中的起始位置
+
+l：保存邻接顶点集合
+
+例：A=[0 1 1 1;1 0 1 0;1 1 0 1;1 0 1 0]
+
+l=[ ^h1^ 4 2 3  ^h2^1 3  ^h3^ 2 1 4 ^h4^ 1 3  ^h5^]
+
+h=[0,3,5,8,10]
+
+优化：h取值范围0~2e，⌈log ~2~ (2e&#43;1)⌉
+
+​            l取值范围1~n，⌈log ~2~ n⌉
+
+​            总空间：O((n&#43;e)logn)？为啥啊
+
+时间复杂度：增、删边：O(n&#43;e)
+
+&lt;h4&gt;邻接链表&lt;/h4&gt;
+(链表存储)
+
+邻接表用链表保存 chain&lt;int&gt; h  h[i]:顶点i的邻接表
+
+例：A=[0 1 1 1;1 0 1 0;1 1 0 1;1 0 1 0]
+
+​       h    data                link
+
+[1]      -&gt;4 #-&gt;  2 #-&gt; 3 0
+
+[2]      -&gt;3 #-&gt;  1 0
+
+[3]      -&gt;2 #-&gt;  4 #-&gt;  1 0
+
+[4]      -&gt;1 #-&gt;  3 0
+
+空间复杂度：2(n&#43;m&#43;1),有向图m=e，无向图m=2e
+
+时间复杂度：
+
+- 增、删边块
+- 求邻接顶点集合：Q(n)
+- 求边的总数：Q(e)
+
+&lt;h4&gt;十字链表&lt;/h4&gt;
+(链表存储)
+
+![](C:\Users\zhon\Desktop\myBlog\picture\图片2.png)
+
+邻接矩阵适用于稠密图、邻接表适用于稀疏图
+
+&lt;h4&gt;网络&lt;/h4&gt;
+邻接矩阵：不存在边：∞
+
+------
+
+
+
+&lt;h3&gt;图的遍历&lt;/h3&gt;
+从一个给定节点开始，访问所有可达节点，且每个顶点仅访问一次
+
+&lt;h4&gt;宽度优先&lt;/h4&gt;
+1开始，1能到{2,3,4}，{2,3,4}能到{5,6,7}...
+从顶点v 开始的宽度优先搜索
+把顶点v标记为已到达顶点；
+初始化队列Q，其中仅包含一个元素v;
+while (Q不空) {
+从队列中删除顶点w;
+令u 为邻接于w 的顶点;
+while (u) {
+if (u 尚未被标记)
+{
+把u 加入队列；
+把u 标记为已到达顶点；
+}
+u = 邻接于w 的下一个顶点；
+}
+}">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/%E5%9B%BE/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/%E5%9B%BE/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/%E5%9B%BE/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="图">
+  <meta property="og:description" content="关联于/至：&lt;2,3&gt;&lt;4,3&gt;关联至3，&lt;3,5&gt;&lt;3,4&gt;关联于3
+邻接于/至: &lt;1,2&gt;&lt;2,3&gt; 顶点2邻接于1，邻接至3
+无/有向图；完全图：全连上；稀疏/稠密图；加权有/无向图–网络
+顶点v的度：与v关联的边的数目
+有向图中顶点v的入度：关联至v的边的数目
+有向图中顶点v的出度：关联于v的边的数目
+路径：当且仅当对于每一个j（1≤j≤k）边(ij, ij&#43;1)都在E中时， 顶点序列P=i1, i2, …, ik是图或有向图G=(V, E)中一条从i1到ik的路径
+路径长度：路径上所有边的长度之和
+简单路径：序列中顶点不重复出现的路径
+回路：第一个顶点和最后一个顶点相同的路径
+无环图 ：不存在回路的图。
+有向无环图：不存在回路的有向图
+连通图：如果图中任意两个顶点vi和vj都是连通的，则图G是连通图
+连通分量：无向图中的极大连通子图
+强连通图：对于有向图中任意两个顶点vi和vj，如果从vi到vj和从vj到vi都有路径，则图G是强连通图
+强连通分量 ：有向图中的极大连通子图称为强连通分量
+生成树：一个连通图的生成树含有图中全部顶点，但只有足以构成一棵树的n-1条边（包含G中所有顶点且是G的子图的树），树：无环的无向连通图
+对有向图：入度和=出度和=边数
+DiGraph{有向图 Create(n)：创建一个具有n个顶点、没有边的有向图 Exist(i,j)：如果存在边（i,j）则返回true，否则返回false Edges()：返回图中边的数目 Vertices()：返回图中顶点的数目 Add(i,j)：向图中添加边（i,j） Delete(i,j)：删除边（i,j） InDegree(i)：返回顶点i的入度 OutDegree(i)：返回顶点i的出度 }
+对非强连通的有向图和非连通的无向图遍历将得到生成森林 ---- &lt;h3&gt;图的存储&lt;/h3&gt; &lt;h4&gt;邻接矩阵&lt;/h4&gt;(顺序存储) 二维数组A i-&gt;j有边，A~i~ ~j~ =1 A行、列的和=顶点的度 有向图：行和=出度，列和=出度 优化：位操作（取值只有0/1） 时间复杂度： - 给定节点的邻接节点集合，Θ(n) - 求图中总的边数，Θ(n^2^) 遍历整个矩阵 &lt;h4&gt;邻接压缩表&lt;/h4&gt; (顺序存储) 一维数组h，l[0~x] 有向图x=e-1.无向图x=2e-1 h[i]：顶点i邻接顶点集合再l中的起始位置 l：保存邻接顶点集合 例：A=[0 1 1 1;1 0 1 0;1 1 0 1;1 0 1 0] l=[ ^h1^ 4 2 3 ^h2^1 3 ^h3^ 2 1 4 ^h4^ 1 3 ^h5^] h=[0,3,5,8,10] 优化：h取值范围0~2e，⌈log ~2~ (2e&#43;1)⌉ ​ l取值范围1~n，⌈log ~2~ n⌉ ​ 总空间：O((n&#43;e)logn)？为啥啊 时间复杂度：增、删边：O(n&#43;e) &lt;h4&gt;邻接链表&lt;/h4&gt; (链表存储) 邻接表用链表保存 chain&lt;int&gt; h h[i]:顶点i的邻接表 例：A=[0 1 1 1;1 0 1 0;1 1 0 1;1 0 1 0] ​ h data link [1] -&gt;4 #-&gt; 2 #-&gt; 3 0 [2] -&gt;3 #-&gt; 1 0 [3] -&gt;2 #-&gt; 4 #-&gt; 1 0 [4] -&gt;1 #-&gt; 3 0 空间复杂度：2(n&#43;m&#43;1),有向图m=e，无向图m=2e 时间复杂度： - 增、删边块 - 求邻接顶点集合：Q(n) - 求边的总数：Q(e) &lt;h4&gt;十字链表&lt;/h4&gt; (链表存储) ![](C:\Users\zhon\Desktop\myBlog\picture\图片2.png) 邻接矩阵适用于稠密图、邻接表适用于稀疏图 &lt;h4&gt;网络&lt;/h4&gt; 邻接矩阵：不存在边：∞ ------ &lt;h3&gt;图的遍历&lt;/h3&gt; 从一个给定节点开始，访问所有可达节点，且每个顶点仅访问一次 &lt;h4&gt;宽度优先&lt;/h4&gt; 1开始，1能到{2,3,4}，{2,3,4}能到{5,6,7}... 从顶点v 开始的宽度优先搜索 把顶点v标记为已到达顶点； 初始化队列Q，其中仅包含一个元素v; while (Q不空) { 从队列中删除顶点w; 令u 为邻接于w 的顶点; while (u) { if (u 尚未被标记) { 把u 加入队列； 把u 标记为已到达顶点； } u = 邻接于w 的下一个顶点； } }">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2019-11-20T09:29:57+00:00">
+    <meta property="article:modified_time" content="2019-11-20T09:29:57+00:00">
+    <meta property="article:tag" content="数据结构">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="图">
+  <meta name="twitter:description" content="关联于/至：&lt;2,3&gt;&lt;4,3&gt;关联至3，&lt;3,5&gt;&lt;3,4&gt;关联于3
+邻接于/至: &lt;1,2&gt;&lt;2,3&gt; 顶点2邻接于1，邻接至3
+无/有向图；完全图：全连上；稀疏/稠密图；加权有/无向图–网络
+顶点v的度：与v关联的边的数目
+有向图中顶点v的入度：关联至v的边的数目
+有向图中顶点v的出度：关联于v的边的数目
+路径：当且仅当对于每一个j（1≤j≤k）边(ij, ij&#43;1)都在E中时， 顶点序列P=i1, i2, …, ik是图或有向图G=(V, E)中一条从i1到ik的路径
+路径长度：路径上所有边的长度之和
+简单路径：序列中顶点不重复出现的路径
+回路：第一个顶点和最后一个顶点相同的路径
+无环图 ：不存在回路的图。
+有向无环图：不存在回路的有向图
+连通图：如果图中任意两个顶点vi和vj都是连通的，则图G是连通图
+连通分量：无向图中的极大连通子图
+强连通图：对于有向图中任意两个顶点vi和vj，如果从vi到vj和从vj到vi都有路径，则图G是强连通图
+强连通分量 ：有向图中的极大连通子图称为强连通分量
+生成树：一个连通图的生成树含有图中全部顶点，但只有足以构成一棵树的n-1条边（包含G中所有顶点且是G的子图的树），树：无环的无向连通图
+对有向图：入度和=出度和=边数
+DiGraph{有向图 Create(n)：创建一个具有n个顶点、没有边的有向图 Exist(i,j)：如果存在边（i,j）则返回true，否则返回false Edges()：返回图中边的数目 Vertices()：返回图中顶点的数目 Add(i,j)：向图中添加边（i,j） Delete(i,j)：删除边（i,j） InDegree(i)：返回顶点i的入度 OutDegree(i)：返回顶点i的出度 }
+对非强连通的有向图和非连通的无向图遍历将得到生成森林 ---- &lt;h3&gt;图的存储&lt;/h3&gt; &lt;h4&gt;邻接矩阵&lt;/h4&gt;(顺序存储) 二维数组A i-&gt;j有边，A~i~ ~j~ =1 A行、列的和=顶点的度 有向图：行和=出度，列和=出度 优化：位操作（取值只有0/1） 时间复杂度： - 给定节点的邻接节点集合，Θ(n) - 求图中总的边数，Θ(n^2^) 遍历整个矩阵 &lt;h4&gt;邻接压缩表&lt;/h4&gt; (顺序存储) 一维数组h，l[0~x] 有向图x=e-1.无向图x=2e-1 h[i]：顶点i邻接顶点集合再l中的起始位置 l：保存邻接顶点集合 例：A=[0 1 1 1;1 0 1 0;1 1 0 1;1 0 1 0] l=[ ^h1^ 4 2 3 ^h2^1 3 ^h3^ 2 1 4 ^h4^ 1 3 ^h5^] h=[0,3,5,8,10] 优化：h取值范围0~2e，⌈log ~2~ (2e&#43;1)⌉ ​ l取值范围1~n，⌈log ~2~ n⌉ ​ 总空间：O((n&#43;e)logn)？为啥啊 时间复杂度：增、删边：O(n&#43;e) &lt;h4&gt;邻接链表&lt;/h4&gt; (链表存储) 邻接表用链表保存 chain&lt;int&gt; h h[i]:顶点i的邻接表 例：A=[0 1 1 1;1 0 1 0;1 1 0 1;1 0 1 0] ​ h data link [1] -&gt;4 #-&gt; 2 #-&gt; 3 0 [2] -&gt;3 #-&gt; 1 0 [3] -&gt;2 #-&gt; 4 #-&gt; 1 0 [4] -&gt;1 #-&gt; 3 0 空间复杂度：2(n&#43;m&#43;1),有向图m=e，无向图m=2e 时间复杂度： - 增、删边块 - 求邻接顶点集合：Q(n) - 求边的总数：Q(e) &lt;h4&gt;十字链表&lt;/h4&gt; (链表存储) ![](C:\Users\zhon\Desktop\myBlog\picture\图片2.png) 邻接矩阵适用于稠密图、邻接表适用于稀疏图 &lt;h4&gt;网络&lt;/h4&gt; 邻接矩阵：不存在边：∞ ------ &lt;h3&gt;图的遍历&lt;/h3&gt; 从一个给定节点开始，访问所有可达节点，且每个顶点仅访问一次 &lt;h4&gt;宽度优先&lt;/h4&gt; 1开始，1能到{2,3,4}，{2,3,4}能到{5,6,7}... 从顶点v 开始的宽度优先搜索 把顶点v标记为已到达顶点； 初始化队列Q，其中仅包含一个元素v; while (Q不空) { 从队列中删除顶点w; 令u 为邻接于w 的顶点; while (u) { if (u 尚未被标记) { 把u 加入队列； 把u 标记为已到达顶点； } u = 邻接于w 的下一个顶点； } }">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "图",
+      "item": "https://milong26.github.io/post/%E5%9B%BE/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "图",
+  "name": "图",
+  "description": " 关联于/至：\u0026lt;2,3\u0026gt;\u0026lt;4,3\u0026gt;关联至3，\u0026lt;3,5\u0026gt;\u0026lt;3,4\u0026gt;关联于3\n邻接于/至: \u0026lt;1,2\u0026gt;\u0026lt;2,3\u0026gt; 顶点2邻接于1，邻接至3\n无/有向图；完全图：全连上；稀疏/稠密图；加权有/无向图\u0026ndash;网络\n顶点v的度：与v关联的边的数目\n有向图中顶点v的入度：关联至v的边的数目\n有向图中顶点v的出度：关联于v的边的数目\n路径：当且仅当对于每一个j（1≤j≤k）边(ij, ij+1)都在E中时， 顶点序列P=i1, i2, \u0026hellip;, ik是图或有向图G=(V, E)中一条从i1到ik的路径\n路径长度：路径上所有边的长度之和\n简单路径：序列中顶点不重复出现的路径\n回路：第一个顶点和最后一个顶点相同的路径\n无环图 ：不存在回路的图。\n有向无环图：不存在回路的有向图\n连通图：如果图中任意两个顶点vi和vj都是连通的，则图G是连通图\n连通分量：无向图中的极大连通子图\n强连通图：对于有向图中任意两个顶点vi和vj，如果从vi到vj和从vj到vi都有路径，则图G是强连通图\n强连通分量 ：有向图中的极大连通子图称为强连通分量\n生成树：一个连通图的生成树含有图中全部顶点，但只有足以构成一棵树的n-1条边（包含G中所有顶点且是G的子图的树），树：无环的无向连通图\n对有向图：入度和=出度和=边数\nDiGraph{有向图 Create(n)：创建一个具有n个顶点、没有边的有向图 Exist(i,j)：如果存在边（i,j）则返回true，否则返回false Edges()：返回图中边的数目 Vertices()：返回图中顶点的数目 Add(i,j)：向图中添加边（i,j） Delete(i,j)：删除边（i,j） InDegree(i)：返回顶点i的入度 OutDegree(i)：返回顶点i的出度 }\n对非强连通的有向图和非连通的无向图遍历将得到生成森林 ---- \u0026lt;h3\u0026gt;图的存储\u0026lt;/h3\u0026gt; \u0026lt;h4\u0026gt;邻接矩阵\u0026lt;/h4\u0026gt;(顺序存储) 二维数组A i-\u0026gt;j有边，A~i~ ~j~ =1 A行、列的和=顶点的度 有向图：行和=出度，列和=出度 优化：位操作（取值只有0/1） 时间复杂度： - 给定节点的邻接节点集合，Θ(n) - 求图中总的边数，Θ(n^2^) 遍历整个矩阵 \u0026lt;h4\u0026gt;邻接压缩表\u0026lt;/h4\u0026gt; (顺序存储) 一维数组h，l[0~x] 有向图x=e-1.无向图x=2e-1 h[i]：顶点i邻接顶点集合再l中的起始位置 l：保存邻接顶点集合 例：A=[0 1 1 1;1 0 1 0;1 1 0 1;1 0 1 0] l=[ ^h1^ 4 2 3 ^h2^1 3 ^h3^ 2 1 4 ^h4^ 1 3 ^h5^] h=[0,3,5,8,10] 优化：h取值范围0~2e，⌈log ~2~ (2e+1)⌉ ​ l取值范围1~n，⌈log ~2~ n⌉ ​ 总空间：O((n+e)logn)？为啥啊 时间复杂度：增、删边：O(n+e) \u0026lt;h4\u0026gt;邻接链表\u0026lt;/h4\u0026gt; (链表存储) 邻接表用链表保存 chain\u0026lt;int\u0026gt; h h[i]:顶点i的邻接表 例：A=[0 1 1 1;1 0 1 0;1 1 0 1;1 0 1 0] ​ h data link [1] -\u0026gt;4 #-\u0026gt; 2 #-\u0026gt; 3 0 [2] -\u0026gt;3 #-\u0026gt; 1 0 [3] -\u0026gt;2 #-\u0026gt; 4 #-\u0026gt; 1 0 [4] -\u0026gt;1 #-\u0026gt; 3 0 空间复杂度：2(n+m+1),有向图m=e，无向图m=2e 时间复杂度： - 增、删边块 - 求邻接顶点集合：Q(n) - 求边的总数：Q(e) \u0026lt;h4\u0026gt;十字链表\u0026lt;/h4\u0026gt; (链表存储) ![](C:\\Users\\zhon\\Desktop\\myBlog\\picture\\图片2.png) 邻接矩阵适用于稠密图、邻接表适用于稀疏图 \u0026lt;h4\u0026gt;网络\u0026lt;/h4\u0026gt; 邻接矩阵：不存在边：∞ ------ \u0026lt;h3\u0026gt;图的遍历\u0026lt;/h3\u0026gt; 从一个给定节点开始，访问所有可达节点，且每个顶点仅访问一次 \u0026lt;h4\u0026gt;宽度优先\u0026lt;/h4\u0026gt; 1开始，1能到{2,3,4}，{2,3,4}能到{5,6,7}... 从顶点v 开始的宽度优先搜索 把顶点v标记为已到达顶点； 初始化队列Q，其中仅包含一个元素v; while (Q不空) { 从队列中删除顶点w; 令u 为邻接于w 的顶点; while (u) { if (u 尚未被标记) { 把u 加入队列； 把u 标记为已到达顶点； } u = 邻接于w 的下一个顶点； } }\n",
+  "keywords": [
+    "数据结构"
+  ],
+  "articleBody": " 关联于/至：\u003c2,3\u003e\u003c4,3\u003e关联至3，\u003c3,5\u003e\u003c3,4\u003e关联于3\n邻接于/至: \u003c1,2\u003e\u003c2,3\u003e 顶点2邻接于1，邻接至3\n无/有向图；完全图：全连上；稀疏/稠密图；加权有/无向图–网络\n顶点v的度：与v关联的边的数目\n有向图中顶点v的入度：关联至v的边的数目\n有向图中顶点v的出度：关联于v的边的数目\n路径：当且仅当对于每一个j（1≤j≤k）边(ij, ij+1)都在E中时， 顶点序列P=i1, i2, …, ik是图或有向图G=(V, E)中一条从i1到ik的路径\n路径长度：路径上所有边的长度之和\n简单路径：序列中顶点不重复出现的路径\n回路：第一个顶点和最后一个顶点相同的路径\n无环图 ：不存在回路的图。\n有向无环图：不存在回路的有向图\n连通图：如果图中任意两个顶点vi和vj都是连通的，则图G是连通图\n连通分量：无向图中的极大连通子图\n强连通图：对于有向图中任意两个顶点vi和vj，如果从vi到vj和从vj到vi都有路径，则图G是强连通图\n强连通分量 ：有向图中的极大连通子图称为强连通分量\n生成树：一个连通图的生成树含有图中全部顶点，但只有足以构成一棵树的n-1条边（包含G中所有顶点且是G的子图的树），树：无环的无向连通图\n对有向图：入度和=出度和=边数\nDiGraph{有向图 Create(n)：创建一个具有n个顶点、没有边的有向图 Exist(i,j)：如果存在边（i,j）则返回true，否则返回false Edges()：返回图中边的数目 Vertices()：返回图中顶点的数目 Add(i,j)：向图中添加边（i,j） Delete(i,j)：删除边（i,j） InDegree(i)：返回顶点i的入度 OutDegree(i)：返回顶点i的出度 }\n对非强连通的有向图和非连通的无向图遍历将得到生成森林 ---- 图的存储 邻接矩阵(顺序存储) 二维数组A i-\u003ej有边，A~i~ ~j~ =1 A行、列的和=顶点的度 有向图：行和=出度，列和=出度 优化：位操作（取值只有0/1） 时间复杂度： - 给定节点的邻接节点集合，Θ(n) - 求图中总的边数，Θ(n^2^) 遍历整个矩阵 邻接压缩表 (顺序存储) 一维数组h，l[0~x] 有向图x=e-1.无向图x=2e-1 h[i]：顶点i邻接顶点集合再l中的起始位置 l：保存邻接顶点集合 例：A=[0 1 1 1;1 0 1 0;1 1 0 1;1 0 1 0] l=[ ^h1^ 4 2 3 ^h2^1 3 ^h3^ 2 1 4 ^h4^ 1 3 ^h5^] h=[0,3,5,8,10] 优化：h取值范围0~2e，⌈log ~2~ (2e+1)⌉ ​ l取值范围1~n，⌈log ~2~ n⌉ ​ 总空间：O((n+e)logn)？为啥啊 时间复杂度：增、删边：O(n+e) 邻接链表 (链表存储) 邻接表用链表保存 chain h h[i]:顶点i的邻接表 例：A=[0 1 1 1;1 0 1 0;1 1 0 1;1 0 1 0] ​ h data link [1] -\u003e4 #-\u003e 2 #-\u003e 3 0 [2] -\u003e3 #-\u003e 1 0 [3] -\u003e2 #-\u003e 4 #-\u003e 1 0 [4] -\u003e1 #-\u003e 3 0 空间复杂度：2(n+m+1),有向图m=e，无向图m=2e 时间复杂度： - 增、删边块 - 求邻接顶点集合：Q(n) - 求边的总数：Q(e) 十字链表 (链表存储) ![](C:\\Users\\zhon\\Desktop\\myBlog\\picture\\图片2.png) 邻接矩阵适用于稠密图、邻接表适用于稀疏图 网络 邻接矩阵：不存在边：∞ ------ 图的遍历 从一个给定节点开始，访问所有可达节点，且每个顶点仅访问一次 宽度优先 1开始，1能到{2,3,4}，{2,3,4}能到{5,6,7}... 从顶点v 开始的宽度优先搜索 把顶点v标记为已到达顶点； 初始化队列Q，其中仅包含一个元素v; while (Q不空) { 从队列中删除顶点w; 令u 为邻接于w 的顶点; while (u) { if (u 尚未被标记) { 把u 加入队列； 把u 标记为已到达顶点； } u = 邻接于w 的下一个顶点； } }\n复杂性分析： 邻接矩阵 O(n^2^) 邻接链表 Θ(Σd^out^) 深度优先 v为顶点，选择与v邻接、未标记u，递归调用，对u处理好后，选择另一个与v相邻、未标记的顶点，继续搜索。若不存在，搜索中止 （意思就是一条路到底，再返回之前有分叉的地方） 生成树 对连通图进行BFS(宽度优先)（深度优先也可以），所有顶点都被标记 到达一个新的顶点，要通过相应的边 恰好n-1条边——连通子图——生成树 ----- 最小生成树 割、极短跨边 (不知道干啥用的) 设(U; V\\U)是N的割（cut） 【Cut Property-A】 若：(u, v)是该割的极短跨边（shortest crossing edge） 则：必存在一棵包含(u, v)的MST 反证：假设(u, v)未被任何MST采用... 任取一棵MST，将(u, v)加入其中，于是 将出现唯一的回路，且该回路必经过 (u, v)以及至少另一跨边(s, t) 现在，将原MST中的(s, t)替换为(u, v)... 【Cut Property-B】 反之，N的任一MST也必通过极短跨边联接每一割 Kruskal 对边从小到大排序、挨个加入，`成环`就跳过，直到边数有n-1 //在一个具有n 个顶点的网络中找到一棵最小生成树 令T为所选边的集合，初始化T=Φ 令E为网络中边的集合 while (E≠Φ) \u0026\u0026 (|T|≠n-1) { 令(u,v)为E中代价最小的边 E=E-{ (u,v) } / /从E中删除边 if ((u,v)加入T中不会产生环路) 将(u,v)加入T } if (|T| == n-1) T是最小耗费生成树 else 网络不是连通的，不能找到生成树\nPrim 找到最小的边，对它的两端点连的边里头找最小 //假设网络中至少具有一个顶点 设T为所选择的边的集合，初始化T=Φ 设TV为已在树中的顶点的集合，置TV={1} 令E为网络中边的集合 while (E\u003c\u003eΦ) \u0026\u0026 (|T|\u003c\u003en-1) { 令(u,v)为最小代价边，其中u∈TV,v∈TV if (没有这种边) break E=E-{(u,v)}//从E中删除此边 在T中加入边(u,v) } if (|T|==n-1) T是一棵最小生成树 else 网络是不连通的，没有最小生成树\n------------------ 最短路径 单源最短路径 给定源顶点s，求它到其他任意顶点（目的顶点）的最短路径 1)连通图中，s到每个顶点都有（至少）一条最短路径 2)就同一起点s而言，任何最短路径的前缀，也是一条最短路径 3)就同一起点s而言，所有最短路径的并，不含回路 Dijkstra算法 ###### 说明 边的权值都\u003e0 时间复杂度O(n^2^)，求每一个O(n^3^) S：“已求出最短路径顶点集合”，初始为{s} L=V - S 每个步骤从L选取一个顶点v加入S 贪心准则：v是L中距s距离最短者 新最短路径=已有最短路径+一条边 每个顶点无需保存其完整路径，保存路径中它的前一顶点即可\n###### 实现： 数组p：保存路径 •p[i]：最短路径中顶点i的前驱顶点 •从终点开始，逆向即可获取路径 数组d：当前最短路径长度 •i在S中，d[i]：sài的真正最短路径长度（最终结果） •i在L中，d[i]：当前最短路径长度 sàj(∈S)ài的路径长度（最短者）：d[j]+a[j][i] •从L中选择v加入S后，S发生变化，L中的d[i]可能变得更小，应进行更新 ###### 示例： （就是铁杠的做法） ![](C:\\Users\\zhon\\Desktop\\myBlog\\picture\\2.png) ###### 算法伪代码 ``` 初始化d[i]=a[s][i]（1≤i≤n） 对于邻接于s的所有顶点i，置p[i]=s，对于其余的顶点置p[i]=0 对于p[i]≠0的所有顶点建立L表 若L为空，终止，否则转至3) 从L中删除d值最小的顶点 对于与i邻接的所有还未到达的顶点j，更新d[j]值为min{d[j], d[i]+a[i][j]} 若d[j]发生了变化且j还未在L中，则置p[j]=i，并将j加入L，转至2 ``` ###### 无序链表实现 ```c++ struct chain{ int a; int b; } template void AdjacencyWDigraph::ShortestPaths(int s,T d[], int p[]) {// Shortest paths from vertex s, return shortest distances in d and predecessor info in p. if (s \u003c 1 || s \u003e n) throw OutOfBounds(); Chain L; // list of reachable vertices for which paths have yet to be found ChainIterator I; // initialize d, p, and L for (int i = 1; i \u003c= n; i++) { d[i] = a[s][i]; if (d[i] == NoEdge) p[i] = 0; else { p[i] = s; L.Insert(0, i); } } // update d and p while (!L.IsEmpty()) {// more paths exist // find vertex *v in L with least d int *v = I.Initialize(L); int *w = I.Next(); while (w) { if (d[*w] \u003c d[*v]) v = w; w = I.Next(); } int i = *v; L.Delete(*v); for (int j = 1; j \u003c= n; j++) { if (a[i][j] != NoEdge \u0026\u0026 (!p[j] || d[j] \u003e d[i] + a[i][j])) { d[j] = d[i] + a[i][j]; if (!p[j]) L.Insert(0, j); p[j] = i; } } } } ``` ### 每一对点的最短路径 Floyd算法 点到点的距离-\u003e二维矩阵 动态规划 支持负权值的计算，不支持负权回路 递归：O(n2^n^) 迭代O(n^3^) 伪代码 ``` (i,j,k)：i-\u003ej的“最短路径”长度——加了限制条件，路径中顶点的最大编号为k //寻找最短路径的长度 //初始化c（i，j，1） for (int i=1； i \u003c = n ; i ++) for (int j=1; j\u003c=n; j++) c( i ,j, 0) = a (i ,j); // a 是长度邻接矩阵 //计算c ( i ,j, k ) ( 0 \u003c k \u003c = n ) for(int k=1;k\u003c=n;k++) for (int i=1;i\u003c=n;i++) for (int j= 1 ;j\u003c = n ;j+ + ) if (c(i,k,k-1)+c(k, j, k - 1) \u003c c (i, j, k - 1)) c(i, j, k) = c(i, k, k - 1) + c(k, j, k - 1) ; else c(i, j, k) = c (i, j, k - 1); ``` c(i,j,1)=min(c(i,j,0), c(i,1,0)+c(1,j,0)) c(i,j,2)=min(c(i,j,1), c(i,2,1)+c(2,j,1)) c(i,j,3)=min(c(i,j,2), c(i,3,2)+c(3,j,2)) c(i,j,4)=min(c(i,j,3), c(i,4,3)+c(4,j,3)) ... 示例（前驱节点可以同步更新 ![](C:\\Users\\zhon\\Desktop\\myBlog\\picture\\3.png) ![4](C:\\Users\\zhon\\Desktop\\myBlog\\picture\\4.png) ![5](C:\\Users\\zhon\\Desktop\\myBlog\\picture\\5.png) ![6](C:\\Users\\zhon\\Desktop\\myBlog\\picture\\6.png) ![7](C:\\Users\\zhon\\Desktop\\myBlog\\picture\\7.png) 代码： ```c++ template void AdjacencyWDigraph::AllPairs(T **c, int **kay) {// All pairs shortest paths. // Compute c[i][j] and kay[i][j] for all i and j. for (int i = 1; i \u003c= n; i++) for (int j = 1; j \u003c= n; j++) { c[i][j] = a[i][j]; kay[i][j] = 0; }//就初始化 for (i = 1; i \u003c= n; i++) c[i][i] = 0; // compute c[i][j] = c(i,j,k) for (int k = 1; k \u003c= n; k++) for (int i = 1; i \u003c= n; i++) for (int j = 1; j \u003c= n; j++) { T t1 = c[i][k]; T t2 = c[k][j]; T t3 = c[i][j]; if (t1 != NoEdge \u0026\u0026 t2 != NoEdge \u0026\u0026 (t3 == NoEdge || t1 + t2 \u003c t3)) { c[i][j] = t1 + t2; kay[i][j] = k;} } } void outputPath(int **kay, int i, int j) {// Actual code to output i to j path. if (i == j) return; if (kay[i][j] == 0) cout \u003c\u003c j \u003c\u003c ' '; else {outputPath(kay, i, kay[i][j]); outputPath(kay, kay[i][j], j);} } template void OutputPath(T **c, int **kay, T NoEdge, int i, int j) {// Output shortest path from i to j. if (c[i][j] == NoEdge) { cout \u003c\u003c \"There is no path from \" \u003c\u003c i \u003c\u003c \" to \" \u003c\u003c j \u003c\u003c endl; return;} cout \u003c\u003c \"The path is\" \u003c\u003c endl; cout \u003c\u003c i \u003c\u003c ' '; outputPath(kay,i,j); cout \u003c\u003c endl; } ``` 单源最短路径Bellman-Ford算法 可检验负权回路 思路： •对每个S-V尝试加入全部边。如果可以缩短距离，则认为该边为最短路径候选。 每个最短路径最多有n-1条边。所以最多尝试n-1次即可以。 如果第n次仍然会减少权值，则说明存在负权回路。 优化：Shortest Path Faster Algorithm-SPFA •使用队列，快速检测是否已经得到最短路径，及时跳出循环 O(ne) e为边的个数 不再改变当前值时跳出循环 对边遍历 ```c++ bool Bellman_Ford() { for(int i = 1; i \u003c= nodenum; ++i) //初始化 dis[i] = (i == original ? 0 : MAX); for(int i = 1; i \u003c= nodenum - 1; ++i) for(int j = 1; j \u003c= edgenum; ++j) if(dis[edge[j].v] \u003e dis[edge[j].u] + edge[j].cost) //尝试加入边 { dis[edge[j].v] = dis[edge[j].u] + edge[j].cost; pre[edge[j].v] = edge[j].u; } bool flag = 1; //判断是否含有负权回路 ，再次加入一次边 for(int i = 1; i \u003c= edgenum; ++i) if(dis[edge[i].v] \u003e dis[edge[i].u] + edge[i].cost) { flag = 0; break; } return flag; } ``` ----- 拓扑排序 描述复杂工程：有向无环图 活动之间具有前后约束关系 拓扑排序 偏序：集合中仅有部分成员之间可比较 全序：集合中全体成员之间均可比较 拓扑排序（Topological Sort）：由某个集合上的一个偏序得到该集合上的一个全序 AOV图 用顶点表示活动，用箭头表示活动间优先关系的有向图称为顶点活动网络 顶点i在顶点j之前，意味着活动i是活动j的先决条件 显然不会出现有向图 利用贪心算法进行拓扑排序 在有向图中选一个没有前驱的顶点且输出 从图中删除该顶点和所有从其发出的箭头 重复上述两步，直至所有顶点均已输出，或者当前图中不存在无前驱的顶点为止 算法描述： ``` 设n是有向图中的顶点数 设V是一个空序列 while (true){ 设w不存在入边（v,w），其中顶点v不在V中 如果没有这样的w，break 把w添加到V的尾部 } if(V中的顶点数少于n)算法失败 elseV是一个拓扑序列 ``` 算法实现 初始：V为空；InDegree保存图中顶点入度；将入度为0的顶点压栈 步骤： 弹出栈顶顶点p，加入V； 并将p的每个邻接顶点的InDegree值减1； 若某个顶点的InDegree值变为0，将其压栈 ```c++ bool Network::Topological(int v[]) { int n = Vertices(); // Compute in-degrees int *InDegree = new int [n+1]; InitializePos(); // graph iterator array for (int i = 1; i \u003c= n; i++) // initialize InDegree[i] = 0; for (i = 1; i \u003c= n; i++) {// 遍历所有顶点的出边，计算入度 int u = Begin(i); while (u) { InDegree[u]++; u = NextVertex(i); } } // Stack vertices with zero in-degree LinkedStack S; for (i = 1; i \u003c= n; i++) if (!InDegree[i]) S.Add(i); // Generate topological order i = 0; // cursor for array v while (!S.IsEmpty()) {// select from stack int w; // next vertex S.Delete(w); v[i++] = w; int u = Begin(w); while (u) {// update in-degrees InDegree[u]--; if (!InDegree[u]) S.Add(u); u = NextVertex(w);} } DeactivatePos(); delete [] InDegree; return (i == n); } //时间复杂度是O(n+e) ``` •入度为0的顶点即没有前驱活动的，或前驱活动都已经完成的顶点，工程可以从这个顶点所代表的活动开始或继续 •算法每输出一个顶点之后，要删去从这个顶点发出的边，这意味着这个顶点所代表的活动已经完成，对于后续顶点所代表的活动来说，该前驱活动已经完成 •如果一个节点有多个直接后继，则拓扑排序的结果通常不唯一 •由于AOV网络中各顶点的地位是平等的，每个顶点的编号是人为的，因此可以按照拓扑排序的结果重新安排顶点的序号，生成AOV网络的新的邻接矩阵存储表示。其中，对角线以下可以全为零。 ----- 关键路径 AOE网 一个带权的有向无环图，其中顶点表示事件，边表示活动(必须完成的工作)，权表示活动持续的时间。 #### 关键路径 •从源点到汇点长度（时间和）最长的路径 （就是在一堆有继承关系的任务中完成任务的最短时间 #### 关键活动 •源点v1àvi的最长路径长度： 事件vi的最早发生时间， vi发出的所有边（活动）的最早开始时间 •e(i)：活动ai的最早开始时间 •最迟开始时间：l(i)，前提：不影响工程进度 •l(i)=e(i)：关键活动 •关键路径上的活动都是关键活动 •通过计算l(i)、e(i)寻找关键活动 #### 计算 事件的最早发生时间ve(j) 最迟发生时间vl(j) 活动ai由边表示dut()表示其持续时间，则有 •e(i)=ve(j) •含义是：活动i要想开始至少需要等待的时间 •l(i)=vl(k)-dut() •含义是：活动i开始之前最多空闲的时间 •由ve(0)=0向前递推 ve(j)=max{ve(i)+dut()}，∈E •由vl(n-1)=ve(n-1)向后递推 vl(i)=min{vl(j)-dut()}，∈E #### 计算中用到的变量 从前往后推： 最早发生时间 ve(j) 从后往前推： 最迟发生时间vl(j) 活动最早开始时间和活动最迟发生时间 #### 算法 ``` 算法 Step1：从源点开始计算ve(i)，考察指向顶点i的所有边，寻找最大值ve(j)=max{ve(i)+dut()}，∈E Step2：从汇点开始计算vl(i)，考察顶点i发出的所有边，寻找最小值vl(i)=min{vl(j)-dut()}，∈E Step3：求每个活动的e(i)，等于活动发出顶点的ve值 Step4：求每个活动的l(i)，等于活动指向顶点的vl值减去活动本身的持续时间 Step5：找到那些l(i)=e(i)的活动，即为关键活动；构成的路径即为关键路径。关键路径可能不止一条。 ``` [参考]: https://www.cnblogs.com/Braveliu/p/3461649.html\t\"关键路径\" ---- ### 关节点 \u0026 双连通分量 无向图的关节点其删除之后，原图的连通分量增多 无关节点的图，称作双（重）连通图 极大的双连通子图，称作双连通分量 ",
+  "wordCount" : "1229",
+  "inLanguage": "en",
+  "datePublished": "2019-11-20T09:29:57Z",
+  "dateModified": "2019-11-20T09:29:57Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/%E5%9B%BE/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      图
+    </h1>
+    <div class="post-meta">
+
+<span title='2019-11-20 09:29:57 +0000 UTC'>November 20, 2019</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><!-- raw HTML omitted -->
+<p>关联于/至：&lt;2,3&gt;&lt;4,3&gt;关联至3，&lt;3,5&gt;&lt;3,4&gt;关联于3</p>
+<p>邻接于/至:   &lt;1,2&gt;&lt;2,3&gt; 顶点2邻接于1，邻接至3</p>
+<p>无/有向图；完全图：全连上；稀疏/稠密图；加权有/无向图&ndash;网络</p>
+<p>顶点v的度：与v关联的边的数目</p>
+<p>有向图中顶点v的入度：关联至v的边的数目</p>
+<p>有向图中顶点v的出度：关联于v的边的数目</p>
+<p>路径：当且仅当对于每一个<em>j</em>（1≤<em>j</em>≤<em>k</em>）边(<em>i</em><del>j</del>, <em>i</em><del>j+1</del>)都在<em>E</em>中时，
+顶点序列<em>P</em>=<em>i</em><del>1</del>, <em>i</em><del>2</del>, &hellip;, <em>i</em><del>k</del>是图或有向图<em>G</em>=(<em>V</em>, <em>E</em>)中一条从<em>i</em><del>1</del>到<em>i</em><del>k</del>的路径</p>
+<p>路径长度：路径上所有边的长度之和</p>
+<p><strong>简单路径：序列中顶点不重复出现的路径</strong></p>
+<p>回路：第一个顶点和最后一个顶点相同的路径</p>
+<p>无环图 ：不存在回路的图。</p>
+<p>有向无环图：不存在回路的有向图</p>
+<p>连通图：如果图中任意两个顶点v<del>i</del>和v<del>j</del>都是连通的，则图G是连通图</p>
+<p>连通分量：无向图中的极大连通子图</p>
+<p>强连通图：对于有向图中任意两个顶点v<del>i</del>和v<del>j</del>，如果从v<del>i</del>到v<del>j</del>和从v<del>j</del>到v<del>i</del>都有路径，则图G是强连通图</p>
+<p>强连通分量 ：有向图中的极大连通子图称为强连通分量</p>
+<p>生成树：一个连通图的生成树含有图中全部顶点，但只有足以构成一棵树的n-1条边（包含G中所有顶点且是G的子图的树），树：无环的无向连通图</p>
+<!-- raw HTML omitted -->
+<p>对有向图：入度和=出度和=边数</p>
+<!-- raw HTML omitted -->
+<p>DiGraph{有向图
+Create(n)：创建一个具有n个顶点、没有边的有向图
+Exist(i,j)：如果存在边（i,j）则返回true，否则返回false
+Edges()：返回图中边的数目
+Vertices()：返回图中顶点的数目
+Add(i,j)：向图中添加边（i,j）
+Delete(i,j)：删除边（i,j）
+InDegree(i)：返回顶点i的入度
+OutDegree(i)：返回顶点i的出度
+}</p>
+<pre tabindex="0"><code>
+对非强连通的有向图和非连通的无向图遍历将得到生成森林
+
+----
+
+&lt;h3&gt;图的存储&lt;/h3&gt;
+&lt;h4&gt;邻接矩阵&lt;/h4&gt;(顺序存储)
+二维数组A
+
+i-&gt;j有边，A~i~ ~j~ =1
+
+A行、列的和=顶点的度
+
+有向图：行和=出度，列和=出度
+
+优化：位操作（取值只有0/1）
+
+时间复杂度：
+
+- 给定节点的邻接节点集合，Θ(n)
+- 求图中总的边数，Θ(n^2^) 遍历整个矩阵
+
+&lt;h4&gt;邻接压缩表&lt;/h4&gt;
+(顺序存储)
+
+一维数组h，l[0~x] 有向图x=e-1.无向图x=2e-1
+
+h[i]：顶点i邻接顶点集合再l中的起始位置
+
+l：保存邻接顶点集合
+
+例：A=[0 1 1 1;1 0 1 0;1 1 0 1;1 0 1 0]
+
+l=[ ^h1^ 4 2 3  ^h2^1 3  ^h3^ 2 1 4 ^h4^ 1 3  ^h5^]
+
+h=[0,3,5,8,10]
+
+优化：h取值范围0~2e，⌈log ~2~ (2e+1)⌉
+
+​            l取值范围1~n，⌈log ~2~ n⌉
+
+​            总空间：O((n+e)logn)？为啥啊
+
+时间复杂度：增、删边：O(n+e)
+
+&lt;h4&gt;邻接链表&lt;/h4&gt;
+(链表存储)
+
+邻接表用链表保存 chain&lt;int&gt; h  h[i]:顶点i的邻接表
+
+例：A=[0 1 1 1;1 0 1 0;1 1 0 1;1 0 1 0]
+
+​       h    data                link
+
+[1]      -&gt;4 #-&gt;  2 #-&gt; 3 0
+
+[2]      -&gt;3 #-&gt;  1 0
+
+[3]      -&gt;2 #-&gt;  4 #-&gt;  1 0
+
+[4]      -&gt;1 #-&gt;  3 0
+
+空间复杂度：2(n+m+1),有向图m=e，无向图m=2e
+
+时间复杂度：
+
+- 增、删边块
+- 求邻接顶点集合：Q(n)
+- 求边的总数：Q(e)
+
+&lt;h4&gt;十字链表&lt;/h4&gt;
+(链表存储)
+
+![](C:\Users\zhon\Desktop\myBlog\picture\图片2.png)
+
+邻接矩阵适用于稠密图、邻接表适用于稀疏图
+
+&lt;h4&gt;网络&lt;/h4&gt;
+邻接矩阵：不存在边：∞
+
+------
+
+
+
+&lt;h3&gt;图的遍历&lt;/h3&gt;
+从一个给定节点开始，访问所有可达节点，且每个顶点仅访问一次
+
+&lt;h4&gt;宽度优先&lt;/h4&gt;
+1开始，1能到{2,3,4}，{2,3,4}能到{5,6,7}...
+</code></pre><p>从顶点v 开始的宽度优先搜索
+把顶点v标记为已到达顶点；
+初始化队列Q，其中仅包含一个元素v;
+while (Q不空) {
+从队列中删除顶点w;
+令u 为邻接于w 的顶点;
+while (u) {
+if (u 尚未被标记)
+{
+把u 加入队列；
+把u 标记为已到达顶点；
+}
+u = 邻接于w 的下一个顶点；
+}
+}</p>
+<pre tabindex="0"><code>
+ 复杂性分析：
+
+邻接矩阵 O(n^2^)
+
+邻接链表 Θ(Σd^out^)
+
+&lt;h4&gt;深度优先&lt;/h4&gt;
+v为顶点，选择与v邻接、未标记u，递归调用，对u处理好后，选择另一个与v相邻、未标记的顶点，继续搜索。若不存在，搜索中止
+
+（意思就是一条路到底，再返回之前有分叉的地方）
+
+&lt;h4&gt;生成树&lt;/h4&gt;
+对连通图进行BFS(宽度优先)（深度优先也可以），所有顶点都被标记
+
+到达一个新的顶点，要通过相应的边
+
+恰好n-1条边——连通子图——生成树
+
+-----
+
+&lt;h3&gt;最小生成树&lt;/h3&gt;
+&lt;h4&gt;割、极短跨边&lt;/h4&gt;
+(不知道干啥用的)
+
+设(U; V\U)是N的割（cut）
+
+【Cut Property-A】
+ 若：(u, v)是该割的极短跨边（shortest crossing edge）
+ 则：必存在一棵包含(u, v)的MST
+
+反证：假设(u, v)未被任何MST采用...
+
+任取一棵MST，将(u, v)加入其中，于是
+ 将出现唯一的回路，且该回路必经过
+  (u, v)以及至少另一跨边(s, t)
+
+现在，将原MST中的(s, t)替换为(u, v)...
+
+【Cut Property-B】
+ 反之，N的任一MST也必通过极短跨边联接每一割
+
+&lt;h4&gt;Kruskal&lt;/h4&gt;
+对边从小到大排序、挨个加入，`成环`就跳过，直到边数有n-1
+</code></pre><p>//在一个具有n 个顶点的网络中找到一棵最小生成树
+令T为所选边的集合，初始化T=Φ
+令E为网络中边的集合
+while (E≠Φ) &amp;&amp; (|T|≠n-1) {
+令(u,v)为E中代价最小的边
+E=E-{ (u,v) } / /从E中删除边
+if ((u,v)加入T中不会产生环路) 将(u,v)加入T
+}
+if (|T| == n-1) T是最小耗费生成树
+else 网络不是连通的，不能找到生成树</p>
+<pre tabindex="0"><code>
+&lt;h4&gt;Prim&lt;/h4&gt;
+找到最小的边，对它的两端点连的边里头找最小
+</code></pre><p>//假设网络中至少具有一个顶点
+设T为所选择的边的集合，初始化T=Φ
+设TV为已在树中的顶点的集合，置TV={1}
+令E为网络中边的集合
+while (E&lt;&gt;Φ) &amp;&amp; (|T|&lt;&gt;n-1) {
+令(u,v)为最小代价边，其中u∈TV,v∈TV
+if (没有这种边) break
+E=E-{(u,v)}//从E中删除此边
+在T中加入边(u,v)
+}
+if (|T|==n-1) T是一棵最小生成树
+else 网络是不连通的，没有最小生成树</p>
+<pre tabindex="0"><code>
+------------------
+
+&lt;h3&gt;最短路径&lt;/h3&gt;
+&lt;h4&gt;单源最短路径&lt;/h4&gt;
+给定源顶点s，求它到其他任意顶点（目的顶点）的最短路径
+
+1)连通图中，s到每个顶点都有（至少）一条最短路径
+
+2)就同一起点s而言，任何最短路径的前缀，也是一条最短路径
+
+3)就同一起点s而言，所有最短路径的并，不含回路
+
+&lt;h5&gt; Dijkstra算法 &lt;/h5&gt;
+###### 说明
+
+边的权值都&gt;0
+
+时间复杂度O(n^2^)，求每一个O(n^3^)
+</code></pre><p>S：“已求出最短路径顶点集合”，初始为{s}
+L=V - S
+每个步骤从L选取一个顶点v加入S
+贪心准则：v是L中距s距离最短者
+新最短路径=已有最短路径+一条边
+每个顶点无需保存其完整路径，保存路径中它的前一顶点即可</p>
+<pre tabindex="0"><code>
+###### 实现：
+
+数组p：保存路径
+
+•p[i]：最短路径中顶点i的前驱顶点
+
+•从终点开始，逆向即可获取路径
+
+数组d：当前最短路径长度
+
+•i在S中，d[i]：sài的真正最短路径长度（最终结果）
+
+•i在L中，d[i]：当前最短路径长度
+ sàj(∈S)ài的路径长度（最短者）：d[j]+a[j][i] 
+
+•从L中选择v加入S后，S发生变化，L中的d[i]可能变得更小，应进行更新
+
+###### 示例：
+
+（就是铁杠的做法）
+
+![](C:\Users\zhon\Desktop\myBlog\picture\2.png)
+
+###### 算法伪代码
+
+```
+初始化d[i]=a[s][i]（1≤i≤n）
+对于邻接于s的所有顶点i，置p[i]=s，对于其余的顶点置p[i]=0
+对于p[i]≠0的所有顶点建立L表
+若L为空，终止，否则转至3)
+从L中删除d值最小的顶点
+对于与i邻接的所有还未到达的顶点j，更新d[j]值为min{d[j], d[i]+a[i][j]}
+若d[j]发生了变化且j还未在L中，则置p[j]=i，并将j加入L，转至2
+```
+
+###### 无序链表实现
+
+```c++
+struct chain{
+int a;
+int b;
+}
+template&lt;class T&gt;
+void AdjacencyWDigraph&lt;T&gt;::ShortestPaths(int s,T d[], int p[])
+{// Shortest paths from vertex s, return shortest distances in d and predecessor info in p.
+	if (s &lt; 1 || s &gt; n) throw OutOfBounds();
+	Chain&lt;int&gt; L; // list of reachable vertices for which paths have yet to be found
+	ChainIterator&lt;int&gt; I;
+	// initialize d, p, and L
+	for (int i = 1; i &lt;= n; i++) {
+		d[i] = a[s][i];
+		if (d[i] == NoEdge) p[i] = 0;
+		else {
+			p[i] = s;
+			L.Insert(0, i);
+		}
+	}
+	// update d and p
+	while (!L.IsEmpty()) {// more paths exist
+						  // find vertex *v in L with least d
+		int *v = I.Initialize(L);
+		int *w = I.Next();
+		while (w) {
+			if (d[*w] &lt; d[*v]) v = w;
+			w = I.Next();
+		}
+		int i = *v;
+		L.Delete(*v);
+		for (int j = 1; j &lt;= n; j++) {
+			if (a[i][j] != NoEdge &amp;&amp; (!p[j] ||
+				d[j] &gt; d[i] + a[i][j])) {
+				d[j] = d[i] + a[i][j];
+				if (!p[j]) L.Insert(0, j);
+				p[j] = i;
+			}
+		}
+	}
+}
+```
+
+###  每一对点的最短路径  
+
+&lt;h5&gt; Floyd算法 &lt;/h5&gt;
+点到点的距离-&gt;二维矩阵  动态规划
+
+支持负权值的计算，不支持负权回路
+
+递归：O(n2^n^) 迭代O(n^3^)
+
+伪代码
+
+```
+(i,j,k)：i-&gt;j的“最短路径”长度——加了限制条件，路径中顶点的最大编号为k
+//寻找最短路径的长度
+//初始化c（i，j，1）
+for  (int i=1； i &lt; = n ; i ++)
+	for (int j=1; j&lt;=n; j++)
+	   c( i ,j, 0) = a (i ,j); // a 是长度邻接矩阵
+//计算c ( i ,j, k ) ( 0 &lt; k &lt; = n )
+for(int k=1;k&lt;=n;k++)
+	for (int i=1;i&lt;=n;i++)
+	   for (int j= 1 ;j&lt; = n ;j+ + )
+		if (c(i,k,k-1)+c(k, j, k - 1) &lt; c (i, j, k - 1))
+		   c(i, j, k) = c(i, k, k - 1) + c(k, j, k - 1) ;
+		else c(i, j, k) = c (i, j, k - 1);
+```
+
+c(i,j,1)=min(c(i,j,0), c(i,1,0)+c(1,j,0))
+
+c(i,j,2)=min(c(i,j,1), c(i,2,1)+c(2,j,1))
+
+c(i,j,3)=min(c(i,j,2), c(i,3,2)+c(3,j,2))
+
+c(i,j,4)=min(c(i,j,3), c(i,4,3)+c(4,j,3))
+
+...
+
+示例（前驱节点可以同步更新
+
+![](C:\Users\zhon\Desktop\myBlog\picture\3.png)
+
+![4](C:\Users\zhon\Desktop\myBlog\picture\4.png)
+
+![5](C:\Users\zhon\Desktop\myBlog\picture\5.png)
+
+![6](C:\Users\zhon\Desktop\myBlog\picture\6.png)
+
+![7](C:\Users\zhon\Desktop\myBlog\picture\7.png)
+
+
+
+代码：
+
+```c++
+template&lt;class T&gt;
+void AdjacencyWDigraph&lt;T&gt;::AllPairs(T **c, int **kay)
+{// All pairs shortest paths.
+ // Compute c[i][j] and kay[i][j] for all i and j.
+   for (int i = 1; i &lt;= n; i++)
+      for (int j = 1; j &lt;= n; j++) {
+         c[i][j] = a[i][j];
+         kay[i][j] = 0;
+         }//就初始化
+   for (i = 1; i &lt;= n; i++)
+      c[i][i] = 0;
+    // compute c[i][j] = c(i,j,k)
+   for (int k = 1; k &lt;= n; k++)
+      for (int i = 1; i &lt;= n; i++)
+         for (int j = 1; j &lt;= n; j++) {
+            T t1 = c[i][k];
+            T t2 = c[k][j];
+            T t3 = c[i][j];
+            if (t1 != NoEdge &amp;&amp; t2 != NoEdge &amp;&amp;
+               (t3 == NoEdge || t1 + t2 &lt; t3)) {
+                 c[i][j] = t1 + t2;
+                 kay[i][j] = k;}
+            }
+}
+void outputPath(int **kay, int i, int j)
+{// Actual code to output i to j path.
+   if (i == j) return;
+   if (kay[i][j] == 0) cout &lt;&lt; j &lt;&lt; &#39; &#39;;
+   else {outputPath(kay, i, kay[i][j]);
+         outputPath(kay, kay[i][j], j);}
+}
+template&lt;class T&gt;
+void OutputPath(T **c, int **kay, T NoEdge,
+                         int i, int j)
+{// Output shortest path from i to j.
+   if (c[i][j] == NoEdge) {
+      cout &lt;&lt; &#34;There is no path from &#34; &lt;&lt; i &lt;&lt; &#34; to &#34;
+           &lt;&lt; j &lt;&lt; endl;
+      return;}
+   cout &lt;&lt; &#34;The path is&#34; &lt;&lt; endl;
+   cout &lt;&lt; i &lt;&lt; &#39; &#39;;
+   outputPath(kay,i,j);
+   cout &lt;&lt; endl;
+}
+```
+
+&lt;h5&gt; 单源最短路径Bellman-Ford算法 &lt;/h5&gt;
+可检验负权回路
+
+思路：
+
+•对每个S-V尝试加入全部边。如果可以缩短距离，则认为该边为最短路径候选。
+ 每个最短路径最多有n-1条边。所以最多尝试n-1次即可以。
+ 如果第n次仍然会减少权值，则说明存在负权回路。
+
+优化：Shortest Path Faster Algorithm-SPFA
+
+•使用队列，快速检测是否已经得到最短路径，及时跳出循环
+
+O(ne)  e为边的个数
+
+不再改变当前值时跳出循环
+
+对边遍历
+
+```c++
+bool Bellman_Ford()  
+{  
+    for(int i = 1; i &lt;= nodenum; ++i) //初始化  
+        dis[i] = (i == original ? 0 : MAX);  
+    for(int i = 1; i &lt;= nodenum - 1; ++i)  
+        for(int j = 1; j &lt;= edgenum; ++j)  
+            if(dis[edge[j].v] &gt; dis[edge[j].u] + edge[j].cost) //尝试加入边 
+            {  
+                dis[edge[j].v] = dis[edge[j].u] + edge[j].cost;  
+                pre[edge[j].v] = edge[j].u;  
+            }  
+    bool flag = 1; //判断是否含有负权回路  ，再次加入一次边
+    for(int i = 1; i &lt;= edgenum; ++i)  
+        if(dis[edge[i].v] &gt; dis[edge[i].u] + edge[i].cost)  
+        {  
+            flag = 0;  
+            break;  
+        }  
+        return flag;  
+}
+```
+
+-----
+&lt;h3&gt;拓扑排序&lt;/h3&gt;
+描述复杂工程：有向无环图
+
+活动之间具有前后约束关系
+
+&lt;h4&gt;拓扑排序&lt;/h4&gt;
+偏序：集合中仅有部分成员之间可比较
+
+全序：集合中全体成员之间均可比较
+
+拓扑排序（Topological Sort）：由某个集合上的一个偏序得到该集合上的一个全序
+
+&lt;h4&gt;AOV图&lt;/h4&gt;
+用顶点表示活动，用箭头表示活动间优先关系的有向图称为顶点活动网络 
+
+顶点i在顶点j之前，意味着活动i是活动j的先决条件
+
+显然不会出现有向图
+
+&lt;h4&gt;  利用贪心算法进行拓扑排序&lt;/h4&gt;
+在有向图中选一个没有前驱的顶点且输出
+
+从图中删除该顶点和所有从其发出的箭头
+
+重复上述两步，直至所有顶点均已输出，或者当前图中不存在无前驱的顶点为止
+
+算法描述：
+
+```
+设n是有向图中的顶点数
+设V是一个空序列
+while (true){
+	设w不存在入边（v,w），其中顶点v不在V中
+	如果没有这样的w，break
+	把w添加到V的尾部
+}
+if(V中的顶点数少于n)算法失败
+elseV是一个拓扑序列
+```
+
+&lt;h4&gt;算法实现&lt;/h4&gt;
+初始：V为空；InDegree保存图中顶点入度；将入度为0的顶点压栈
+
+步骤：
+
+弹出栈顶顶点p，加入V；
+
+并将p的每个邻接顶点的InDegree值减1；
+
+若某个顶点的InDegree值变为0，将其压栈
+
+```c++
+bool Network::Topological(int v[])
+{
+   int n = Vertices();
+   // Compute in-degrees
+   int *InDegree = new int [n+1];
+   InitializePos(); // graph iterator array
+   for (int i = 1; i &lt;= n; i++) // initialize
+      InDegree[i] = 0;
+    for (i = 1; i &lt;= n; i++)
+    {// 遍历所有顶点的出边，计算入度
+      int u = Begin(i);
+      while (u)
+      {
+         InDegree[u]++;
+         u = NextVertex(i);
+      }
+    }
+   
+   // Stack vertices with zero in-degree
+   LinkedStack&lt;int&gt; S;
+   for (i = 1; i &lt;= n; i++)
+      if (!InDegree[i]) S.Add(i);
+       // Generate topological order
+   i = 0;  // cursor for array v
+   while (!S.IsEmpty()) {// select from stack
+      int w;             // next vertex
+      S.Delete(w);
+      v[i++] = w;
+      int u = Begin(w);
+      while (u) {// update in-degrees
+         InDegree[u]--;
+         if (!InDegree[u]) S.Add(u);
+         u = NextVertex(w);}
+      }
+   DeactivatePos();
+   delete [] InDegree;
+   return (i == n);
+}
+//时间复杂度是O(n+e)
+```
+
+•入度为0的顶点即没有前驱活动的，或前驱活动都已经完成的顶点，工程可以从这个顶点所代表的活动开始或继续
+
+•算法每输出一个顶点之后，要删去从这个顶点发出的边，这意味着这个顶点所代表的活动已经完成，对于后续顶点所代表的活动来说，该前驱活动已经完成
+
+•如果一个节点有多个直接后继，则拓扑排序的结果通常不唯一
+
+•由于AOV网络中各顶点的地位是平等的，每个顶点的编号是人为的，因此可以按照拓扑排序的结果重新安排顶点的序号，生成AOV网络的新的邻接矩阵存储表示。其中，对角线以下可以全为零。
+
+-----
+
+&lt;h3&gt;关键路径&lt;/h3&gt;
+&lt;h4&gt;AOE网&lt;/h4&gt;
+一个带权的有向无环图，其中顶点表示事件，边表示活动(必须完成的工作)，权表示活动持续的时间。
+
+#### 关键路径
+
+•从源点到汇点长度（时间和）最长的路径
+
+（就是在一堆有继承关系的任务中完成任务的最短时间
+
+#### 关键活动
+
+•源点v1àvi的最长路径长度：
+ 事件vi的最早发生时间，
+ vi发出的所有边（活动）的最早开始时间
+
+•e(i)：活动ai的最早开始时间
+
+•最迟开始时间：l(i)，前提：不影响工程进度
+
+•l(i)=e(i)：关键活动
+
+•关键路径上的活动都是关键活动
+
+•通过计算l(i)、e(i)寻找关键活动
+
+#### 计算
+
+事件的最早发生时间ve(j) 最迟发生时间vl(j)
+
+活动ai由边&lt;j, k&gt;表示dut(&lt;j, k&gt;)表示其持续时间，则有
+
+•e(i)=ve(j)  
+
+•含义是：活动i要想开始至少需要等待的时间
+
+•l(i)=vl(k)-dut(&lt;j, k&gt;)
+
+•含义是：活动i开始之前最多空闲的时间
+
+•由ve(0)=0向前递推 ve(j)=max{ve(i)+dut(&lt;i, j&gt;)}，&lt;i, j&gt;∈E
+
+•由vl(n-1)=ve(n-1)向后递推 vl(i)=min{vl(j)-dut(&lt;i, j&gt;)}，&lt;i, j&gt;∈E
+
+ #### 计算中用到的变量
+
+从前往后推：
+
+最早发生时间 ve(j)
+
+从后往前推：
+
+最迟发生时间vl(j)
+
+活动最早开始时间和活动最迟发生时间
+
+
+
+#### 算法
+
+```
+算法
+Step1：从源点开始计算ve(i)，考察指向顶点i的所有边，寻找最大值ve(j)=max{ve(i)+dut(&lt;i, j&gt;)}，&lt;i, j&gt;∈E
+Step2：从汇点开始计算vl(i)，考察顶点i发出的所有边，寻找最小值vl(i)=min{vl(j)-dut(&lt;i, j&gt;)}，&lt;i, j&gt;∈E
+Step3：求每个活动的e(i)，等于活动发出顶点的ve值
+Step4：求每个活动的l(i)，等于活动指向顶点的vl值减去活动本身的持续时间
+Step5：找到那些l(i)=e(i)的活动，即为关键活动；构成的路径即为关键路径。关键路径可能不止一条。
+```
+
+[参考]: https://www.cnblogs.com/Braveliu/p/3461649.html	&#34;关键路径&#34;
+
+----
+
+###  关节点 &amp; 双连通分量  
+
+无向图的关节点其删除之后，原图的连通分量增多
+
+无关节点的图，称作双（重）连通图
+
+极大的双连通子图，称作双连通分量
+</code></pre>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

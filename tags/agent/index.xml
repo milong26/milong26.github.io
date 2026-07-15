@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Agent on 我的博客</title>
+    <link>https://milong26.github.io/tags/agent/</link>
+    <description>Recent content in Agent on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 24 Nov 2024 20:39:30 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/agent/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GR-2: A Generative Video-Language-Action Model with Web-Scale Knowledge for Robot Manipulation</title>
+      <link>https://milong26.github.io/post/gr-2-a-generative-video-language-action-model-with-web-scale-knowledge-for-robot-manipulation/</link>
+      <pubDate>Sun, 24 Nov 2024 20:39:30 +0000</pubDate>
+      <guid>https://milong26.github.io/post/gr-2-a-generative-video-language-action-model-with-web-scale-knowledge-for-robot-manipulation/</guid>
+      <description>&lt;p&gt;这是啥时候看的论文，我怎么毫无印象(11/100)&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

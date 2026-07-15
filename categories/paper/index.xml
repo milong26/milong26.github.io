@@ -1,0 +1,876 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Paper on 我的博客</title>
+    <link>https://milong26.github.io/categories/paper/</link>
+    <description>Recent content in Paper on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 28 Jun 2026 17:34:03 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/categories/paper/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TinyVLA-Toward-Fast-Data-Efficient-Vision-Language-Action-Models-for-Robotic-Manipulation</title>
+      <link>https://milong26.github.io/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</link>
+      <pubDate>Sun, 28 Jun 2026 17:34:03 +0000</pubDate>
+      <guid>https://milong26.github.io/post/tinyvla-toward-fast-data-efficient-vision-language-action-models-for-robotic-manipulation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Towards Generalizable Robotic Data Flywheel High-Dimensional Factorization and Composition</title>
+      <link>https://milong26.github.io/post/towards-generalizable-robotic-data-flywheel-high-dimensional-factorization-and-composition/</link>
+      <pubDate>Wed, 24 Jun 2026 16:57:24 +0000</pubDate>
+      <guid>https://milong26.github.io/post/towards-generalizable-robotic-data-flywheel-high-dimensional-factorization-and-composition/</guid>
+      <description>&lt;p&gt;讲得很有意思而且很贴切的一个论文，就是很多词我看不懂。这一篇要是ai直接看会很浪费
+24号开始，然后迅速提出了40多个雷霆问题。25号偷懒，26号终于都回答了。
+它帮我更加确立我的方向，
+大方向确实还是 efficient data collection
+但是iterative learning不行
+而且factor不需要分这么多，因为我是给定环境的
+那我就相当于要在object和action这两个区域里面做更细致的generalization
+可以通过什么方法 Implicit，但我不知道能不能做&lt;/p&gt;
+&lt;p&gt;总结这篇论文，让我以后写相关工作的时候可以直接看：
+to 目的 &amp;ndash; efficient data collection to generalize
+this work 怎么做&amp;ndash; design factor composition and use iteractive learning
+get 结果 nearly 5-10/1 data requirement reduction
+but 局限性 need to design factor humanly and iterative need much work&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Data Quality in Imitation Learning</title>
+      <link>https://milong26.github.io/post/data-quality-in-imitation-learning/</link>
+      <pubDate>Wed, 25 Feb 2026 17:52:40 +0000</pubDate>
+      <guid>https://milong26.github.io/post/data-quality-in-imitation-learning/</guid>
+      <description>&lt;p&gt;开年第一篇论文，讲模仿学习中的数据质量
+我想从这篇论文中得到的信息：
+数据质量怎么评估，只能训练吗？
+有什么办法可以增加数据质量，采集和算法层面？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Grounding Actions in Camera Space: Observation-Centric  Vision-Language-Action Policy</title>
+      <link>https://milong26.github.io/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/</link>
+      <pubDate>Tue, 09 Dec 2025 22:03:50 +0000</pubDate>
+      <guid>https://milong26.github.io/post/grounding-actions-in-camera-space-observation-centric-vision-language-action-policy/</guid>
+      <description>&lt;p&gt;ee形式的action从机器人坐标系转移到相机坐标系可以提到对相机的泛化性。&lt;/p&gt;
+&lt;p&gt;也就是利用“空间对齐”带来泛化提升&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>RoboKeyGen: Robot Pose and Joint Angles Estimation via  Diffusion-based 3D Keypoint Generation</title>
+      <link>https://milong26.github.io/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/</link>
+      <pubDate>Mon, 08 Dec 2025 16:09:53 +0000</pubDate>
+      <guid>https://milong26.github.io/post/robokeygen-robot-pose-and-joint-angles-estimation-via-diffusion-based-3d-keypoint-generation/</guid>
+      <description>&lt;p&gt;这篇文章用的英文单词好拗口，但是写得挺清晰的，还挺喜欢&lt;/p&gt;
+&lt;p&gt;解决什么问题？pose estimation，以前的要么慢，要么不够精确。这篇文章首先检测2d关键点，然后cross-camera（用内参计算）规范化，然后扩散模型生成3d（相机坐标），然后MLP推理出joint angle，用fk算出eepose等。
+对我有什么启发？相机的归一化能不能拓展到外参？Intrinsic-&amp;gt;Extrinsic&lt;/p&gt;
+&lt;p&gt;并不是VLA！只是传统的视觉&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Foundation Feature-Driven Online End-Effector Pose Estimation: A Marker-Free and Learning-Free Approach</title>
+      <link>https://milong26.github.io/post/foundation-feature-driven-online-end-effector-pose-estimation-a-marker-free-and-learning-free-approach/</link>
+      <pubDate>Mon, 24 Nov 2025 22:03:50 +0000</pubDate>
+      <guid>https://milong26.github.io/post/foundation-feature-driven-online-end-effector-pose-estimation-a-marker-free-and-learning-free-approach/</guid>
+      <description>&lt;p&gt;看标题后产生的疑问：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;为什么需要估计ee姿态？&lt;/li&gt;
+&lt;li&gt;估计完的姿态是以什么形式，相对？&lt;/li&gt;
+&lt;li&gt;相机位置改变了吗？&lt;/li&gt;
+&lt;li&gt;对vla有没有好处？&lt;/li&gt;
+&lt;li&gt;对我想实现的目标：真正机械臂泛化有没有用？&lt;/li&gt;
+&lt;li&gt;能做到什么程度？在线机器人自标定&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    <item>
+      <title>Pure Vision Language Action (VLA) Models:  A Comprehensive Survey</title>
+      <link>https://milong26.github.io/post/pure-vision-language-action-vla-models-a-comprehensive-surve/</link>
+      <pubDate>Tue, 28 Oct 2025 15:52:55 +0000</pubDate>
+      <guid>https://milong26.github.io/post/pure-vision-language-action-vla-models-a-comprehensive-surve/</guid>
+      <description>&lt;p&gt;比较新的综述，2025年9月25日发的&lt;/p&gt;
+&lt;p&gt;写了不整理相当于没写。&lt;/p&gt;
+&lt;p&gt;这篇文章里面好多分类错误的东西:P，别全信，可以提供思路&lt;/p&gt;
+&lt;p&gt;ok没读完也不许再看了，现在没空&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>pi0</title>
+      <link>https://milong26.github.io/post/pi0/</link>
+      <pubDate>Mon, 20 Oct 2025 16:08:55 +0000</pubDate>
+      <guid>https://milong26.github.io/post/pi0/</guid>
+      <description>&lt;p&gt;好方法，一直没看，2025/10/20上午2小时，下午1小时看完论文主要结构，测试没仔细看，代码也没看，主要是我想先比较一下pi0和pi0.5。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>pi0.5</title>
+      <link>https://milong26.github.io/post/pi0.5/</link>
+      <pubDate>Mon, 20 Oct 2025 15:05:54 +0000</pubDate>
+      <guid>https://milong26.github.io/post/pi0.5/</guid>
+      <description>&lt;p&gt;pi0.5也开源了，看一下原文&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>smolvla</title>
+      <link>https://milong26.github.io/post/smolvla/</link>
+      <pubDate>Sun, 17 Aug 2025 22:39:53 +0000</pubDate>
+      <guid>https://milong26.github.io/post/smolvla/</guid>
+      <description>&lt;p&gt;主要是代码理解和修改&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>RoboGen: Towards Unleashing Infinite Data for  Automated Robot Learning via Generative Simulation</title>
+      <link>https://milong26.github.io/post/robogen-towards-unleashing-infinite-data-for-automated-robot-learning-via-generative-simulation/</link>
+      <pubDate>Tue, 01 Apr 2025 15:56:36 +0000</pubDate>
+      <guid>https://milong26.github.io/post/robogen-towards-unleashing-infinite-data-for-automated-robot-learning-via-generative-simulation/</guid>
+      <description>&lt;p&gt;看上去是那种一句话生成仿真环境的。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;一句话-&amp;gt;llm生成代码？assets还是得自己搞吧-&amp;gt;传到环境里面这个流程？
+&lt;ol&gt;
+&lt;li&gt;基本流程是propose-generate-learn&lt;/li&gt;
+&lt;li&gt;不是直接生成代码，与最近采用大型语言模型等基础模型直接产生策略或低级行动的努力相比，robogen只提取完全属于这些模型的能力和模式的信息——对象语义、对象可供性、关于哪些任务值得学习的常识性知识等。不过我也不知道这个指什么&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;用的什么环境，issac gym吗，居然是genesis&lt;/li&gt;
+&lt;li&gt;asset有没有好用的数据库 里面提到几个，还有图片生成mesh的，没有考虑collision吗
+&lt;ol&gt;
+&lt;li&gt;放置asset的时候，RoboGen 指示 GPT-4 以无碰撞的方式放置对象：当 LLM 生成对象的初始姿势时，我们会提示它利用其基本的空间理解，并尝试将对象放置在不同的位置。我们将其用作初始化，并检查初始场景配置中的潜在冲突。对于两个对象之间检测到的任何碰撞，我们识别接触对象的碰撞节点，并沿碰撞法线的相反方向推开它们的质心以解决碰撞。&lt;/li&gt;
+&lt;li&gt;collision-free 动作基元与运动规划相结合，在解决任务时更可靠，例如通过无碰撞路径接近目标对象&lt;/li&gt;
+&lt;li&gt;看起来论文里面涉及到collision的就这些了，那collision属性不考虑了？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;看样子是2finger机器人，什么模型抓取的，视觉？ 居然是吸盘式的&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    <item>
+      <title>DIFFTACTILE: A PHYSICS-BASED DIFFERENTIABLE  TACTILE SIMULATOR FOR CONTACT-RICH ROBOTIC  MANIPULATION</title>
+      <link>https://milong26.github.io/post/difftactile-a-physics-based-differentiable-tactile-simulator-for-contact-rich-robotic-manipulation/</link>
+      <pubDate>Tue, 25 Mar 2025 15:08:42 +0000</pubDate>
+      <guid>https://milong26.github.io/post/difftactile-a-physics-based-differentiable-tactile-simulator-for-contact-rich-robotic-manipulation/</guid>
+      <description>&lt;p&gt;2夹，tactile，精细操作(其实也就4种)。(19/100)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CALVIN: A Benchmark for Language-Conditioned  Policy Learning for Long-Horizon Robot  Manipulation Tasks</title>
+      <link>https://milong26.github.io/post/calvin-a-benchmark-for-language-conditioned-policy-learning-for-long-horizon-robot-manipulation-tasks/</link>
+      <pubDate>Sun, 23 Mar 2025 17:22:30 +0000</pubDate>
+      <guid>https://milong26.github.io/post/calvin-a-benchmark-for-language-conditioned-policy-learning-for-long-horizon-robot-manipulation-tasks/</guid>
+      <description>&lt;p&gt;来不及自己看了，量子速读，发动！&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>VideoWorld: Exploring Knowledge Learning from Unlabeled Videos</title>
+      <link>https://milong26.github.io/post/videoworld-exploring-knowledge-learning-from-unlabeled-videos/</link>
+      <pubDate>Sun, 23 Mar 2025 16:23:09 +0000</pubDate>
+      <guid>https://milong26.github.io/post/videoworld-exploring-knowledge-learning-from-unlabeled-videos/</guid>
+      <description>&lt;p&gt;做的是从视频数据中获得action的工作。(17/100)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Generative Artificial Intelligence in Robotic Manipulation: A Survey</title>
+      <link>https://milong26.github.io/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</link>
+      <pubDate>Thu, 13 Mar 2025 15:59:45 +0000</pubDate>
+      <guid>https://milong26.github.io/post/generative-artificial-intelligence-in-robotic-manipulation-a-survey/</guid>
+      <description>&lt;p&gt;(16/100)&lt;/p&gt;
+&lt;p&gt;what i want to get&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;了解其所描述的通用机器人操作是否和我想的一样：qpos of robot&lt;/li&gt;
+&lt;li&gt;找里面有没有我想要的数据集：text-guided robotic video task&lt;/li&gt;
+&lt;li&gt;只要看dexterous部分&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    <item>
+      <title>Multi-Goal Reinforcement Learning: Challenging Robotics Environments and Request for Research</title>
+      <link>https://milong26.github.io/post/multi-goal-reinforcement-learning-challenging-robotics-environments-and-request-for-research/</link>
+      <pubDate>Fri, 07 Mar 2025 20:57:09 +0000</pubDate>
+      <guid>https://milong26.github.io/post/multi-goal-reinforcement-learning-challenging-robotics-environments-and-request-for-research/</guid>
+      <description>&lt;p&gt;好久没看论文了orz，这篇是从 &lt;a href=&#34;https://robotics.farama.org/envs/shadow_dexterous_hand/reach/&#34;&gt;gymnasium-robotics关于shadow hand的操作&lt;/a&gt;里翻出来的。借助gymm这个平台给单个灵巧手做强化学习。&lt;/p&gt;
+&lt;p&gt;(15/100)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>A Comprehensive Survey of LLM Alignment Techniques: RLHF, RLAIF, PPO, DPO and More</title>
+      <link>https://milong26.github.io/post/a-comprehensive-survey-of-llm-alignment-techniques-rlhf-rlaif-ppo-dpo-and-more/</link>
+      <pubDate>Mon, 03 Mar 2025 10:20:54 +0000</pubDate>
+      <guid>https://milong26.github.io/post/a-comprehensive-survey-of-llm-alignment-techniques-rlhf-rlaif-ppo-dpo-and-more/</guid>
+      <description>&lt;p&gt;时过境迁，当时怎么看的已经忘记了。现在我的问题变成了：什么是llm的对齐？vlm也有对齐吗？怎样实现对齐的？从这篇文章出发的话，我应该怎么做
+重看论文(1)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Aligner: Efficient Alignment by Learning to Correct</title>
+      <link>https://milong26.github.io/post/aligner-efficient-alignment-by-learning-to-correct/</link>
+      <pubDate>Mon, 03 Mar 2025 10:18:23 +0000</pubDate>
+      <guid>https://milong26.github.io/post/aligner-efficient-alignment-by-learning-to-correct/</guid>
+      <description>&lt;p&gt;以前看论文的方式好糟糕，看完以后完全没印象，一句话形容：对预训练的llm微调对齐，利用通过小模型学习偏好与不偏好答案之间的纠正残差&lt;/p&gt;
+&lt;p&gt;所以LLM的方向实际上就两种：微调和压缩？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>robotic grasp相关文献整理</title>
+      <link>https://milong26.github.io/post/robotic-grasp%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86/</link>
+      <pubDate>Mon, 03 Mar 2025 10:17:03 +0000</pubDate>
+      <guid>https://milong26.github.io/post/robotic-grasp%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86/</guid>
+      <description>&lt;p&gt;开始看文献了，2025/2/24-2025/3/2。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>MANISKILL3: GPU PARALLELIZED ROBOTICS  SIMULATION AND RENDERING FOR  GENERALIZABLE EMBODIED AI</title>
+      <link>https://milong26.github.io/post/maniskill3-gpu-parallelized-robotics-simulation-and-rendering-for-generalizable-embodied-ai/</link>
+      <pubDate>Mon, 25 Nov 2024 20:55:43 +0000</pubDate>
+      <guid>https://milong26.github.io/post/maniskill3-gpu-parallelized-robotics-simulation-and-rendering-for-generalizable-embodied-ai/</guid>
+      <description>&lt;p&gt;一个机器人模拟平台的论文&lt;/p&gt;
+&lt;p&gt;paper(12/100)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>GR-2: A Generative Video-Language-Action Model with Web-Scale Knowledge for Robot Manipulation</title>
+      <link>https://milong26.github.io/post/gr-2-a-generative-video-language-action-model-with-web-scale-knowledge-for-robot-manipulation/</link>
+      <pubDate>Sun, 24 Nov 2024 20:39:30 +0000</pubDate>
+      <guid>https://milong26.github.io/post/gr-2-a-generative-video-language-action-model-with-web-scale-knowledge-for-robot-manipulation/</guid>
+      <description>&lt;p&gt;这是啥时候看的论文，我怎么毫无印象(11/100)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Kubric: A scalable dataset generator</title>
+      <link>https://milong26.github.io/post/kubric-a-scalable-dataset-generator/</link>
+      <pubDate>Fri, 22 Nov 2024 19:48:12 +0000</pubDate>
+      <guid>https://milong26.github.io/post/kubric-a-scalable-dataset-generator/</guid>
+      <description>&lt;p&gt;到了新环境，安排我看的论文，说是了解一下就行。&lt;/p&gt;
+&lt;p&gt;这个是百篇计划(10/100)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AN EMULATOR FOR FINE-TUNING LARGE LANGUAGE  MODELS USING SMALL LANGUAGE MODELS</title>
+      <link>https://milong26.github.io/post/an-emulator-for-fine-tuning-large-language-models-using-small-language-models/</link>
+      <pubDate>Mon, 04 Nov 2024 16:20:53 +0000</pubDate>
+      <guid>https://milong26.github.io/post/an-emulator-for-fine-tuning-large-language-models-using-small-language-models/</guid>
+      <description>&lt;p&gt;百篇paper计划(9/100)，用小模型微调大模型。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CLLMs: Consistency Large Language Models</title>
+      <link>https://milong26.github.io/post/cllms-consistency-large-language-models/</link>
+      <pubDate>Tue, 22 Oct 2024 15:59:04 +0000</pubDate>
+      <guid>https://milong26.github.io/post/cllms-consistency-large-language-models/</guid>
+      <description>&lt;p&gt;百篇paper计划(8/100)，关于持续性，不知道对我有没有启发，先看看吧。&lt;/p&gt;
+&lt;p&gt;这一篇的实验要求比较高，不精读了，看思想。它有个前提是jacobi方法，没这个基础的话看不太懂。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>TRANSFORMER EXPLAINER: Interactive Learning of Text-Generative Models</title>
+      <link>https://milong26.github.io/post/transformer-explainer-interactive-learning-of-text-generative-models/</link>
+      <pubDate>Fri, 13 Sep 2024 10:12:29 +0000</pubDate>
+      <guid>https://milong26.github.io/post/transformer-explainer-interactive-learning-of-text-generative-models/</guid>
+      <description>&lt;p&gt;百篇paper计划(7/100)，很短，才2页，重点在code和其project，理解transformer。论文是没啥创新点了，写得也比较拉，看看项目吧。&lt;/p&gt;
+&lt;p&gt;这一篇写完啦！^^&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>LISA: Layerwise Importance Sampling for Memory-Efficient Large Language Model Fine-Tuning</title>
+      <link>https://milong26.github.io/post/lisa-layerwise-importance-sampling-for-memory-efficient-large-language-model-fine-tuning/</link>
+      <pubDate>Mon, 01 Jul 2024 11:45:24 +0000</pubDate>
+      <guid>https://milong26.github.io/post/lisa-layerwise-importance-sampling-for-memory-efficient-large-language-model-fine-tuning/</guid>
+      <description>&lt;p&gt;百篇paper计划(6/100)，好像是LoRA的改进，随便找的，而且这篇还没投会议呢。&lt;/p&gt;
+&lt;p&gt;这一篇也是微调，改lora&lt;/p&gt;
+&lt;p&gt;我以前看论文居然这么龟毛orz我的百篇paper计划创业未半而中道崩殂啊&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>paper reading</title>
+      <link>https://milong26.github.io/post/paper-reading/</link>
+      <pubDate>Tue, 21 May 2024 11:22:52 +0000</pubDate>
+      <guid>https://milong26.github.io/post/paper-reading/</guid>
+      <description>&lt;p&gt;把看过的论文做一个总结，防止我忘掉&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>FlexGen: high-throughput generative inference of large language models with a single GPU</title>
+      <link>https://milong26.github.io/post/flexgen-high-throughput-generative-inference-of-large-language-models-with-a-single-gpu/</link>
+      <pubDate>Tue, 21 May 2024 10:37:15 +0000</pubDate>
+      <guid>https://milong26.github.io/post/flexgen-high-throughput-generative-inference-of-large-language-models-with-a-single-gpu/</guid>
+      <description>&lt;p&gt;推理llm里面搞卸载的。百篇阅读计划(5/100)。看到和以前有点相关联的地方了，卸载和内存优化都是偏系统的。&lt;/p&gt;
+&lt;p&gt;因为大的背景过于重复了，以后论文注解只记录小的背景了。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</title>
+      <link>https://milong26.github.io/post/chain-of-thought-prompting-elicits-reasoning-in-large-language-models/</link>
+      <pubDate>Tue, 16 Apr 2024 21:39:51 +0000</pubDate>
+      <guid>https://milong26.github.io/post/chain-of-thought-prompting-elicits-reasoning-in-large-language-models/</guid>
+      <description>&lt;p&gt;思维链论文阅读，百篇paper计划(4/100)，思维链这个技术还是prompt这个部分里面的，所以这篇论文还是算prompt&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>TinyLLM: Learning a Small Student from Multiple Large Language Models</title>
+      <link>https://milong26.github.io/post/tinyllm-learning-a-small-student-from-multiple-large-language-models/</link>
+      <pubDate>Sun, 24 Mar 2024 20:41:50 +0000</pubDate>
+      <guid>https://milong26.github.io/post/tinyllm-learning-a-small-student-from-multiple-large-language-models/</guid>
+      <description>&lt;p&gt;小样本llm论文阅读，百篇paper计划(3/100)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Towards A Unified View Of Parameter-Efficient Transfer Learning</title>
+      <link>https://milong26.github.io/post/towards-a-unified-view-of-parameter-efficient-transfer-learning/</link>
+      <pubDate>Mon, 18 Mar 2024 16:16:31 +0000</pubDate>
+      <guid>https://milong26.github.io/post/towards-a-unified-view-of-parameter-efficient-transfer-learning/</guid>
+      <description>&lt;p&gt;高效参数微调的综述类论文阅读&lt;/p&gt;
+&lt;p&gt;百篇paper计划(2/100)，对【高效参数】迁移学习的总结。&lt;/p&gt;
+&lt;p&gt;由于我也不怎么会选论文，就按照会议选了这篇比较近的(ps现在是2024年初)。光从标题看，这一篇应该是综述，正好我补一下几个经典的高效参数方法。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;论文标题：Towards a Unified View of Parameter-Efficient Transfer Learning&lt;/li&gt;
+&lt;li&gt;arxiv地址：&lt;a href=&#34;https://arxiv.org/abs/2110.04366&#34;&gt;链接&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;code：&lt;a href=&#34;https://github.com/jxhe/unify-parameter-efficient-tuning&#34;&gt;github&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;rank: ICLR 2022 (spotlight presentation)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;abstract&#34;&gt;abstract&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;大背景：
+在&lt;strong&gt;下游任务&lt;/strong&gt;上&lt;strong&gt;微调&lt;/strong&gt;大规模的、预训练的模型 在&lt;strong&gt;NLP&lt;/strong&gt;领域里面用得很多。但是传统方法&lt;strong&gt;全参数微调&lt;/strong&gt;，当模型参数和任务个数增加时变得很难搞。&lt;/li&gt;
+&lt;li&gt;小背景（现在工作）：
+高效参数迁移学习(parameter-efficient transfer learning)方法只微调小规模参数，但是几种方法之间缺少系统的联系&lt;/li&gt;
+&lt;li&gt;贡献
+分析了几种最先进的高效参数迁移学习方案，给出一个统一的框架。&lt;/li&gt;
+&lt;li&gt;具体：
+将这几种方法概括为修改预训练模型中特定的&lt;strong&gt;隐藏状态&lt;/strong&gt;，并定义一组设计维度来总括性地设计方法。
+通过跨机器翻译、文本摘要、语言理解和文本分类基准的综合实证研究，我们利用统一的观点来识别以前方法中的重要设计选择。&lt;/li&gt;
+&lt;li&gt;实验：
+统一框架实现了设计元素在不同方法之间的迁移，因此我们能够实例化新的参数高效的微调方法，这些方法比以前的方法调整更少的参数，同时更有效，在所有四个任务上都能获得与所有参数微调相当的结果。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;introduction&#34;&gt;introduction&lt;/h1&gt;
+&lt;h2 id=&#34;大背景&#34;&gt;大背景&lt;/h2&gt;
+&lt;p&gt;在预训练的语言模型PLMs基础上进行迁移学习在NLP领域比较流行。
+为什么不要全参数微调：模型越来越大+需要对每个任务都微调。&lt;/p&gt;
+&lt;h2 id=&#34;小背景&#34;&gt;小背景&lt;/h2&gt;
+&lt;p&gt;一些方法更新小部分参数，让大部分参数不变。&lt;/p&gt;
+&lt;h3 id=&#34;adapter-tuning&#34;&gt;adapter tuning&lt;/h3&gt;
+&lt;p&gt;在预训练网络每层中插入一些小的神经模块&lt;strong&gt;adapters&lt;/strong&gt;
+微调时只训练adapters&lt;/p&gt;
+&lt;h3 id=&#34;prefix-tuning-和-prompt-tuning&#34;&gt;prefix tuning 和 prompt tuning&lt;/h3&gt;
+&lt;p&gt;从 通过文本提示控制PLM的提示方法(prompting methods that control PLMs through textual prompts) 出发，给输入或者隐含层预置了一个额外的可调前缀标记l，并且在下游任务中预训练时，只训练这些soft prompt
+(这个soft prompt应该是刚刚预置的可调标记)&lt;/p&gt;
+&lt;h3 id=&#34;loralow-rank-matrices-to-approximate-parameter-updates&#34;&gt;LoRA（low-rank matrices to approximate parameter updates）&lt;/h3&gt;
+&lt;p&gt;学习&lt;strong&gt;低秩矩阵&lt;/strong&gt;来近似参数更新。&lt;/p&gt;
+&lt;h3 id=&#34;总结&#34;&gt;总结&lt;/h3&gt;
+&lt;p&gt;这些方法在不同的任务集上表现出与全微调相当的性能，通常通过更新不到1%的原始模型参数来实现。
+除了节省参数外，高效参数的调整使其能够快速适应新任务而不会遗忘。并且在分布外评估(out-of-distribution evaluation)中表现出优异的健壮性。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>训练具有次线性记忆代价的深度网络</title>
+      <link>https://milong26.github.io/post/%E8%AE%AD%E7%BB%83%E5%85%B7%E6%9C%89%E6%AC%A1%E7%BA%BF%E6%80%A7%E8%AE%B0%E5%BF%86%E4%BB%A3%E4%BB%B7%E7%9A%84%E6%B7%B1%E5%BA%A6%E7%BD%91%E7%BB%9C/</link>
+      <pubDate>Tue, 26 Dec 2023 20:11:12 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E8%AE%AD%E7%BB%83%E5%85%B7%E6%9C%89%E6%AC%A1%E7%BA%BF%E6%80%A7%E8%AE%B0%E5%BF%86%E4%BB%A3%E4%BB%B7%E7%9A%84%E6%B7%B1%E5%BA%A6%E7%BD%91%E7%BB%9C/</guid>
+      <description>&lt;p&gt;主要是激活检查点的技术，不精读了，论文比较古早&lt;/p&gt;
+&lt;h1 id=&#34;paper&#34;&gt;paper&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;标题：Training Deep Nets with Sublinear Memory Cost&lt;/li&gt;
+&lt;li&gt;地址：&lt;a href=&#34;https://arxiv.org/abs/1604.06174&#34;&gt;arxiv&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;摘要&#34;&gt;摘要&lt;/h1&gt;
+&lt;h2 id=&#34;文章结构&#34;&gt;文章结构&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;感觉这篇都是干货，都没提背景&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;贡献：设计了一个系统上的方法
+减少深度神经网络训练时的内存消耗。&lt;/li&gt;
+&lt;li&gt;具体：设计了一种算法
+训练n层网络时消耗$O(\sqrt{n})$的内存，只需要每一个mini-batch额外的foward计算成本。&lt;/li&gt;
+&lt;li&gt;大背景：
+模型达到GPU内存上限&lt;/li&gt;
+&lt;li&gt;目标：
+减少内存消耗
+什么样的：训练过程存储中间特征图和梯度的&lt;/li&gt;
+&lt;li&gt;小背景
+计算图分析Computation graph analysis
+用来：自动现场操作+内存共享优化
+我们证明了有可能以牺牲内存计算为代价，以较小的额外计算成本给出一个更高效的内存训练算法。&lt;/li&gt;
+&lt;li&gt;结果
+在极端情况下，我们的分析还表明，内存消耗可以降低到O ( log n )，而forward的额外开销只有O( nlogn)。
+我们的实验表明，在ImageNet问题上，我们可以将1，000层深度残差网络的内存开销从48G降低到7G。类似地，在非常长的序列上训练复杂的递归神经网络时，观察到显著的记忆成本降低。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;个人总结&#34;&gt;个人总结&lt;/h2&gt;
+&lt;p&gt;大背景是模型超过GPU上限，因为研究的时候大模型还不热（或者说还没出来）；
+采取了&lt;strong&gt;计算图分析&lt;/strong&gt;这个技术，利用其在自动现场操作+内存共享优化这两个方面的作用，以减少训练过程中存储中间特征图（中间结果？）和梯度的内存消耗；
+方法是用额外的forward计算赚回内存消耗，使得训练n层网络只要消耗$O(\sqrt{n})$的内存
+最后还有实际实验数据。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;结构比较另类，可能因为比较早。
+大概需要了解一下计算图分析是什么
+因为不是精读，了解一下后面论文干了什么&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;介绍&#34;&gt;介绍&lt;/h1&gt;
+&lt;p&gt;扩充了摘要部分，有几个问题&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;为什么要搞中间结果
+由于在许多常见的深度架构中，与中间特征图的大小相比，参数的大小相对较小。
+&lt;blockquote&gt;
+&lt;p&gt;中间特征图是什么？看起来像是训练过程中特征的可视化。。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;计算图分析技术
+来进行自动就地(in-place，现场？就地？)操作和内存共享优化。&lt;/li&gt;
+&lt;li&gt;结果写得更清楚
+提出了一种新的方法来用计算换换内存
+我们给出了一个用O (√n )的内存来训练一个n层网络的实用算法，只要两倍的forward计算。
+验证了：在极端情况下，对特征图使用尽可能少的O (log n)内存来训练一个n层网络是可能的。&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    <item>
+      <title>FlexMoE：基于动态设备放置的大规模稀疏预训练模型训练</title>
+      <link>https://milong26.github.io/post/flexmoe%E5%9F%BA%E4%BA%8E%E5%8A%A8%E6%80%81%E8%AE%BE%E5%A4%87%E6%94%BE%E7%BD%AE%E7%9A%84%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%A8%80%E7%96%8F%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/</link>
+      <pubDate>Mon, 18 Dec 2023 10:44:54 +0000</pubDate>
+      <guid>https://milong26.github.io/post/flexmoe%E5%9F%BA%E4%BA%8E%E5%8A%A8%E6%80%81%E8%AE%BE%E5%A4%87%E6%94%BE%E7%BD%AE%E7%9A%84%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%A8%80%E7%96%8F%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/</guid>
+      <description>&lt;p&gt;动态设备放置是其方法，内容是对大规模稀疏预训练模型的训练。其中预训练模型是在GPT体系里的，现在是预训练-提示语句-微调的结构。
+一句话：改进moe&lt;/p&gt;
+&lt;p&gt;论文地址：&lt;a href=&#34;https://arxiv.org/abs/2304.03946&#34;&gt;arxiv&lt;/a&gt;
+Comments:	Accepted by SIGMOD 2023
+Subjects:	Distributed, Parallel, and Cluster Computing (cs.DC); Machine Learning (cs.LG)
+Cite as:	arXiv:2304.03946 [cs.DC]
+(or arXiv:2304.03946v1 [cs.DC] for this version)&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://doi.org/10.48550/arXiv.2304.03946&#34;&gt;https://doi.org/10.48550/arXiv.2304.03946&lt;/a&gt;
+Focus to learn more
+Journal reference:	Proc. ACM Manag. Data, Vol. 1, No. 1, Article 110. Publication date: May 2023&lt;/p&gt;
+&lt;h1 id=&#34;摘要&#34;&gt;摘要&lt;/h1&gt;
+&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
+&lt;p&gt;使用大规模预训练模型，在训练中需要用很多参数，包含许多稀疏代数，很占硬件资源。
+稀疏门专家混合sparsely-gated Mixture-of-Experts (MoEs)在很多下游任务里展示了令人印象深刻的预训练可扩展性。
+但是，由于路由不平衡和波动问题，这种稀疏的条件计算在实际系统中可能并不像预期的那样有效。
+总结一下：问题大背景是大规模预训练模型，主要方向是使用MoEs，但是它有两个问题：路由不平衡和波动。那这篇文章主要就是解决这两个问题的。&lt;/p&gt;
+&lt;h2 id=&#34;工作&#34;&gt;工作&lt;/h2&gt;
+&lt;p&gt;提出了一种新的DNN训练框架，FlexMoE，它系统地、透明地解决了动态数据流引起的效率低下问题。
+步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;对训练MoE模型进行分析
+通过动态的专家管理和设备放置机制来克服路由不平衡和波动问题&lt;/li&gt;
+&lt;li&gt;改进DNN
+引入了一个新的调度模块来监视数据流、制定调度计划，并根据实时数据流量动态调整模型到硬件的映射。&lt;/li&gt;
+&lt;li&gt;启发式算法
+为了在训练时动态地最优化设备放置&lt;/li&gt;
+&lt;li&gt;实验
+在NLP和图像模型上都训练了&lt;/li&gt;
+&lt;li&gt;结果
+FlexMoE比DeepSpeed平均提升1.70 ×，最高提升2.10 ×，比FasterMoE平均提升1.30 ×，最高提升1.45 ×。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;介绍&#34;&gt;介绍&lt;/h1&gt;
+&lt;h2 id=&#34;前提&#34;&gt;前提&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;大背景：大规模预训练模型Large-scale pre-trained models (PTMs)
+1是应用广泛
+2是可以微调（基准模型）
+3问题：模型质量与数据规模呈指数关系，要得到好的模型需要相当多的参数，因此也消耗大量训练时间。&lt;/li&gt;
+&lt;li&gt;小方向：稀疏门混合专家sparsely-gated Mixture-of-Experts (MoE)
+目的当然是减少消耗哈，怎么实现的：
+保持计算预算稳定的情况下，通过扩展专家网络来扩大模型参数规模。
+具体来说，每个MoE层由一个门网络+一堆专家构成。门网络仅将输入令牌发送给少数专家，而不是所有，以提高计算效率。&lt;/li&gt;
+&lt;li&gt;MoE应用广泛，但有问题
+大的MoE模型不仅需要很多数据，还要很多计算资源
+有必要解决现有系统中隐藏的数据管理问题&lt;/li&gt;
+&lt;li&gt;怎么解决
+因为i一个单独的MoE层就能轻易超过GPU内存限制，之前的分布式训练技术已经不够用了。
+专家分布技术：
+将专家分布到多个GPU中，以适应有限的GPU内存
+对于每个训练令牌，在门网络确定路由后，将其发送给其目标专家所在的GPU。
+由于它适应了MoE结构的特点，专家并行已经成为在几个著名的框架中训练基于MoE的模型的最广泛使用的技术之一。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;工作量不平衡的挑战&#34;&gt;工作量不平衡的挑战&lt;/h2&gt;
+&lt;p&gt;问题：由MoE层的稀疏性和条件性计算性质带来的负载不均衡
+来源：MoE层稀疏、且有条件的计算性质带来的
+具体：输入的token被组织在一个细粒度的水平，并通过门控网络路由到个人的专家。
+表现：输入token显示出对专家的高度不均匀偏好，并且路由结果在训练过程中不断变化。
+结果：这种工作量不平衡可能导致效率显著下降和严重的资源利用不足。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>FULL PARAMETER FINE-TUNING FOR LARGE LANGUAGE MODELS WITH LIMITED RESOURCES</title>
+      <link>https://milong26.github.io/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/</link>
+      <pubDate>Fri, 24 Nov 2023 17:10:38 +0000</pubDate>
+      <guid>https://milong26.github.io/post/full-parameter-fine-tuning-for-large-language-models-with-limited-resources/</guid>
+      <description>&lt;p&gt;百篇paper计划(1/100)，推荐阅读的，没有选择趋向。内容是：用有限的资源（主要是内存）进行全参数大模型微调，研究重点集中在微调部分，做的是内存优化的工作。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;论文标题：Full Parameter Fine-tuning for Large Language Models with Limited Resources&lt;/li&gt;
+&lt;li&gt;arxiv地址：&lt;a href=&#34;https://arxiv.org/abs/2306.09782&#34;&gt;链接&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;code：&lt;a href=&#34;https://github.com/OpenLMLab/LOMO&#34;&gt;github&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;abstract&#34;&gt;abstract&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;背景：LLMs给NLP问题带来了革命性变化，but需要大量GPU资源&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;已有：高效参数微调（PEFT），没有彻底解决
+&lt;a href=&#34;%E9%AB%98%E6%95%88%E5%8F%82%E6%95%B0%E5%BE%AE%E8%B0%83.md&#34;&gt;PEFT参考文档&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;parameter-efficient fine-tuning vs full-parameter fine-tune&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创新：提出了新的优化器 LOw-Memory-Optimization
+内容：在一个步骤融合了梯度计算和参数更新&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;怎么融合(fuse)？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;效果：和标准方法（DeepSpeed解决方案）相比，我们将内存使用量减少到10.8%。
+因此，我们的方法可以在一台拥有8×RTX 3090的机器上对65B模型进行全参数微调，每台机器都有24GB内存&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;introduction&#34;&gt;introduction&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;感觉就是把摘要扩写了一遍&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;背景：LLMs 厉害，但是要钱。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;目前：有效参数微调方法
+比如：LoRA,Prefix-tuning
+但是：没有全参数的&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;解决问题：我们要找个办法实现全参数微调&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;干了啥&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;分析LLMs里面内存使用的四个主要方面：
+激活，优化器状态，梯度张量和参数&lt;/li&gt;
+&lt;li&gt;从三个方面优化了训练过程：
+&lt;ul&gt;
+&lt;li&gt;SGD-优化器：由于SGD不存储任何中间状态，可以删除整个优化器状态部分&lt;a href=&#34;SGD.md&#34;&gt;SGD是什么&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;LOMO把梯度tensor的内存使用降到了O(1)&lt;/li&gt;
+&lt;li&gt;为了稳定使用混合精度训练：集成梯度归一化和损失缩放，并将某些计算过渡到全精度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;结果
+内存使用量等于参数使用量加上激活量和最大梯度张量。&lt;/p&gt;
+&lt;p&gt;分析了：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;内存和吞吐量&lt;/li&gt;
+&lt;li&gt;下游表现&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;贡献&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;SGD&lt;/li&gt;
+&lt;li&gt;LOMO&lt;/li&gt;
+&lt;li&gt;验证&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;related-work&#34;&gt;related work&lt;/h1&gt;
+&lt;p&gt;都是节省内存的技术&lt;/p&gt;
+&lt;h2 id=&#34;activation-checkpointing&#34;&gt;Activation Checkpointing&lt;/h2&gt;
+&lt;p&gt;计算图中策略性地选择的检查点节点的激活变量在正向阶段后保留在内存中，而其余节点的激活变量在梯度计算时最多重新计算一次。激活内存可以降低原始内存使用量的平方根，代价是需要多一次正向传递。
+在前向传播过程中，有选择性的丢弃一些产生的中间激活值，当反向传播需要使用这些激活值时，再依据上一个保存的激活值来计算出这些需要的激活值来帮助完成反向传播。这样一来，便可以大大减少训练过程中所需要的存储空间。&lt;/p&gt;
+&lt;h2 id=&#34;mixed-precision-training&#34;&gt;Mixed-Precision Training&lt;/h2&gt;
+&lt;p&gt;混合精度，32位浮点数和16位浮点数混合使用&lt;/p&gt;
+&lt;h2 id=&#34;heterogeneous-training-system&#34;&gt;Heterogeneous Training System&lt;/h2&gt;
+&lt;p&gt;通过利用异构内存（如CPU和NVMe内存）来减少GPU内存消耗&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;但是怎么做？？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;method&#34;&gt;method&lt;/h1&gt;
+&lt;h2 id=&#34;优化器&#34;&gt;优化器&lt;/h2&gt;
+&lt;p&gt;adam和SGD比起来哪里不好了！
+参考https://blog.csdn.net/S20144144/article/details/103417502&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>有限资源大模型全参数微调</title>
+      <link>https://milong26.github.io/post/%E6%9C%89%E9%99%90%E8%B5%84%E6%BA%90%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%85%A8%E5%8F%82%E6%95%B0%E5%BE%AE%E8%B0%83/</link>
+      <pubDate>Fri, 24 Nov 2023 17:10:38 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E6%9C%89%E9%99%90%E8%B5%84%E6%BA%90%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%85%A8%E5%8F%82%E6%95%B0%E5%BE%AE%E8%B0%83/</guid>
+      <description>&lt;p&gt;论文标题：Full Parameter Fine-tuning for Large Language Models with Limited Resources
+arxiv地址：&lt;a href=&#34;https://arxiv.org/abs/2306.09782&#34;&gt;链接&lt;/a&gt;
+用有限的资源（主要是内存）进行全参数大模型微调
+code：&lt;a href=&#34;https://github.com/OpenLMLab/LOMO&#34;&gt;github&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;abstract&#34;&gt;abstract&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;背景：LLMs给NLP问题带来了革命性变化，but需要大量GPU资源&lt;/li&gt;
+&lt;li&gt;已有：高效参数微调（PEFT），没有彻底解决
+&lt;a href=&#34;%E9%AB%98%E6%95%88%E5%8F%82%E6%95%B0%E5%BE%AE%E8%B0%83.md&#34;&gt;PEFT参考文档&lt;/a&gt;
+&lt;blockquote&gt;
+&lt;p&gt;parameter-efficient fine-tuning vs full-parameter fine-tune&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;创新：提出了新的优化器 LOw-Memory-Optimization
+内容：在一个步骤融合了梯度计算和参数更新
+&lt;blockquote&gt;
+&lt;p&gt;怎么融合(fuse)？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;效果：和标准方法（DeepSpeed解决方案）相比，我们将内存使用量减少到10.8%。
+因此，我们的方法可以在一台拥有8×RTX 3090的机器上对65B模型进行全参数微调，每台机器都有24GB内存&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;introduction&#34;&gt;introduction&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;感觉就是把摘要扩写了一遍&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;背景：LLMs 厉害，但是要钱。&lt;/li&gt;
+&lt;li&gt;目前：有效参数微调方法
+比如：LoRA,Prefix-tuning
+但是：没有全参数的&lt;/li&gt;
+&lt;li&gt;解决问题：我们要找个办法实现全参数微调&lt;/li&gt;
+&lt;li&gt;干了啥
+&lt;ul&gt;
+&lt;li&gt;分析LLMs里面内存使用的四个主要方面：
+激活，优化器状态，梯度张量和参数&lt;/li&gt;
+&lt;li&gt;从三个方面优化了训练过程：
+&lt;ul&gt;
+&lt;li&gt;SGD-优化器：由于SGD不存储任何中间状态，可以删除整个优化器状态部分&lt;a href=&#34;SGD.md&#34;&gt;SGD是什么&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;LOMO把梯度tensor的内存使用降到了O(1)&lt;/li&gt;
+&lt;li&gt;为了稳定使用混合精度训练：集成梯度归一化和损失缩放，并将某些计算过渡到全精度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;结果
+内存使用量等于参数使用量加上激活量和最大梯度张量。
+分析了：
+&lt;ol&gt;
+&lt;li&gt;内存和吞吐量&lt;/li&gt;
+&lt;li&gt;下游表现&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;贡献
+&lt;ol&gt;
+&lt;li&gt;SGD&lt;/li&gt;
+&lt;li&gt;LOMO&lt;/li&gt;
+&lt;li&gt;验证&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;related-work&#34;&gt;related work&lt;/h1&gt;
+&lt;p&gt;都是节省内存的技术&lt;/p&gt;
+&lt;h2 id=&#34;activation-checkpointing&#34;&gt;Activation Checkpointing&lt;/h2&gt;
+&lt;p&gt;计算图中策略性地选择的检查点节点的激活变量在正向阶段后保留在内存中，而其余节点的激活变量在梯度计算时最多重新计算一次。激活内存可以降低原始内存使用量的平方根，代价是需要多一次正向传递。
+在前向传播过程中，有选择性的丢弃一些产生的中间激活值，当反向传播需要使用这些激活值时，再依据上一个保存的激活值来计算出这些需要的激活值来帮助完成反向传播。这样一来，便可以大大减少训练过程中所需要的存储空间。&lt;/p&gt;
+&lt;h2 id=&#34;mixed-precision-training&#34;&gt;Mixed-Precision Training&lt;/h2&gt;
+&lt;p&gt;混合精度，32位浮点数和16位浮点数混合使用&lt;/p&gt;
+&lt;h2 id=&#34;heterogeneous-training-system&#34;&gt;Heterogeneous Training System&lt;/h2&gt;
+&lt;p&gt;通过利用异构内存（如CPU和NVMe内存）来减少GPU内存消耗&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;但是怎么做？？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;method&#34;&gt;method&lt;/h1&gt;
+&lt;h2 id=&#34;优化器&#34;&gt;优化器&lt;/h2&gt;
+&lt;p&gt;adam和SGD比起来哪里不好了！
+参考https://blog.csdn.net/S20144144/article/details/103417502&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>paperen_FlexMoE:Scaling Large=scale Sparese Pre-trained Model Training via Dynamic Device Placement</title>
+      <link>https://milong26.github.io/post/paperen-flexmoe-scaling-large-scale-sparese-pre-trained-model-training-via-dynamic-device-placement/</link>
+      <pubDate>Tue, 21 Nov 2023 10:47:40 +0000</pubDate>
+      <guid>https://milong26.github.io/post/paperen-flexmoe-scaling-large-scale-sparese-pre-trained-model-training-via-dynamic-device-placement/</guid>
+      <description>&lt;h1 id=&#34;论文简介&#34;&gt;论文简介&lt;/h1&gt;
+&lt;p&gt;论文地址&lt;a href=&#34;https://arxiv.org/abs/2304.03946&#34;&gt;arxiv&lt;/a&gt;
+&lt;a href=&#34;https://ar5iv.labs.arxiv.org/html/2304.03946&#34;&gt;html版&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Comments:	Accepted by SIGMOD 2023
+Subjects:	Distributed, Parallel, and Cluster Computing (cs.DC); Machine Learning (cs.LG)
+Cite as:	arXiv:2304.03946 [cs.DC]
+(or arXiv:2304.03946v1 [cs.DC] for this version)&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://doi.org/10.48550/arXiv.2304.03946&#34;&gt;https://doi.org/10.48550/arXiv.2304.03946&lt;/a&gt;
+Focus to learn more
+Journal reference:	Proc. ACM Manag. Data, Vol. 1, No. 1, Article 110. Publication date: May 2023&lt;/p&gt;
+&lt;p&gt;标题：FlexMoE:度量 大规模 稀疏 预训练模型训练 通过 动态设备放置
+一句话：改进moe&lt;/p&gt;
+&lt;h1 id=&#34;abstract&#34;&gt;abstract&lt;/h1&gt;
+&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
+&lt;p&gt;趋势：用大规模的(large-scale)预训练模型
+but：它用了很多密集的代数，需要硬件资源&lt;/p&gt;
+&lt;p&gt;目前：稀疏门控专家混合(sparsely-gated Mixture-of-Experts,MoEs)&lt;a href=&#34;MoE-%E7%A8%80%E7%96%8F%E9%97%A8%E6%8E%A7%E5%88%B6%E7%9A%84%E4%B8%93%E5%AE%B6%E6%B7%B7%E5%90%88%E5%B1%82.md&#34;&gt;参考&lt;/a&gt;
+but：因为路由不平衡(route imbalance)和波动(fluctuation)问题，这种稀疏条件计算在实际系统中可能不如预期的有效。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 这两种都是MoEs通讯上的问题吗？&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 专家到底是什么&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;这篇&#34;&gt;这篇&lt;/h2&gt;
+&lt;h3 id=&#34;提出的算法&#34;&gt;提出的算法&lt;/h3&gt;
+&lt;p&gt;提出：FLEXMOE
+分类：DNN训练框架
+优点：系统地、透明地解决了动态递归造成的效率低下问题&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>paperen_Aspect Detection using Word and Char Embeddings with (Bi)LSTM and CRF</title>
+      <link>https://milong26.github.io/post/paperen-aspect-detection-using-word-and-char-embeddings-with-bi-lstm-and-crf-2/</link>
+      <pubDate>Thu, 26 Oct 2023 18:36:13 +0000</pubDate>
+      <guid>https://milong26.github.io/post/paperen-aspect-detection-using-word-and-char-embeddings-with-bi-lstm-and-crf-2/</guid>
+      <description>&lt;p&gt;搞不懂这个embedding怎么运作的&lt;/p&gt;
+&lt;h1 id=&#34;paper&#34;&gt;paper&lt;/h1&gt;
+&lt;p&gt;论文&lt;a href=&#34;https://ieeexplore.ieee.org/document/8791735&#34;&gt;地址&lt;/a&gt;
+目前只要搞懂input的句子怎么通过embedding层的就可以了&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>paperen_Aspect Detection using Word and Char Embeddings with (Bi)LSTM and CRF</title>
+      <link>https://milong26.github.io/post/paperen-aspect-detection-using-word-and-char-embeddings-with-bi-lstm-and-crf/</link>
+      <pubDate>Thu, 26 Oct 2023 18:36:13 +0000</pubDate>
+      <guid>https://milong26.github.io/post/paperen-aspect-detection-using-word-and-char-embeddings-with-bi-lstm-and-crf/</guid>
+      <description>&lt;p&gt;搞不懂这个embedding怎么运作的&lt;/p&gt;
+&lt;h1 id=&#34;paper&#34;&gt;paper&lt;/h1&gt;
+&lt;p&gt;论文&lt;a href=&#34;https://ieeexplore.ieee.org/document/8791735&#34;&gt;地址&lt;/a&gt;
+目前只要搞懂input的句子怎么通过embedding层的就可以了&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>基于对比学习的大型语言模型反向词典任务提示生成方法</title>
+      <link>https://milong26.github.io/post/%E5%9F%BA%E4%BA%8E%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8F%8D%E5%90%91%E8%AF%8D%E5%85%B8%E4%BB%BB%E5%8A%A1%E6%8F%90%E7%A4%BA%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95/</link>
+      <pubDate>Tue, 24 Oct 2023 16:21:15 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E5%9F%BA%E4%BA%8E%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8F%8D%E5%90%91%E8%AF%8D%E5%85%B8%E4%BB%BB%E5%8A%A1%E6%8F%90%E7%A4%BA%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95/</guid>
+      <description>&lt;p&gt;2023年10月才发的中文paper，看了之后感觉是大杂烩，学一下它的结构吧
+感觉没什么特别厉害的创意&lt;/p&gt;
+&lt;h1 id=&#34;paper&#34;&gt;paper&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://kns.cnki.net/kcms2/article/abstract?v=A67obWUfw0klPsaU27SILDfmAhRFDx8g4znhsvTW3NjQ-mAG-l_nQ8aGUnlqhHNgUl_yk7IM3pyGYjo8V--zYEQqzrRcylTYciSHkMJEfTW1k29gH5HwKy7NFD_AtZQbBR7LLD0u1HU=&amp;amp;uniplatform=NZKPT&amp;amp;language=CHS&#34;&gt;论文地址&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;introduction&#34;&gt;introduction&lt;/h2&gt;
+&lt;p&gt;introduction里面怎么没有介绍反向词典？&lt;/p&gt;
+&lt;h3 id=&#34;反向词典&#34;&gt;反向词典&lt;/h3&gt;
+&lt;p&gt;输入释义，输出表示这个意思的词汇列表&lt;/p&gt;
+&lt;h3 id=&#34;大规模语言模型&#34;&gt;大规模语言模型&lt;/h3&gt;
+&lt;p&gt;对GPT-3测试之后，发现prompt中含有期望词汇时输出正确率会大大提高&lt;/p&gt;
+&lt;h3 id=&#34;这篇文章&#34;&gt;这篇文章&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;目的：自动生成prompt&lt;/li&gt;
+&lt;li&gt;模型：基于对比学习的反向词典模型RDMCL&lt;/li&gt;
+&lt;li&gt;数据集 Oxford&lt;/li&gt;
+&lt;li&gt;方法
+&lt;ul&gt;
+&lt;li&gt;用RDMCL生成单词&lt;/li&gt;
+&lt;li&gt;用生成的单词创建prompt&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;创新点
+&lt;ul&gt;
+&lt;li&gt;RDMCL比较高级
+&lt;ul&gt;
+&lt;li&gt;语义信息捕捉
+&lt;ul&gt;
+&lt;li&gt;Bi-LSTM&lt;/li&gt;
+&lt;li&gt;cnn(卷积神经网络)&lt;/li&gt;
+&lt;li&gt;自注意力机制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;融合语义信息，并映射到目标单词的语义空间&lt;/li&gt;
+&lt;li&gt;(新)提出有监督对比损失函数
+&lt;ul&gt;
+&lt;li&gt;引入负例，提高泛化性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;相关工作&#34;&gt;相关工作&lt;/h2&gt;
+&lt;h3 id=&#34;反向词典-1&#34;&gt;反向词典&lt;/h3&gt;
+&lt;p&gt;从多尺度上考虑了定义的不同于一层次的信息（在说什么鬼话）&lt;/p&gt;
+&lt;h3 id=&#34;对比学习&#34;&gt;对比学习&lt;/h3&gt;
+&lt;p&gt;为了提高反向词典的准确性，就是个辅助
+关于如何构建负例样本&lt;/p&gt;
+&lt;h2 id=&#34;研究方法&#34;&gt;研究方法&lt;/h2&gt;
+&lt;p&gt;目的：自动生成高质量的prompt
+方法：基于对比学习的promp生成方法
+步骤：1. RDMCL生成候选词汇；2. 根据词汇生成prompt&lt;/p&gt;
+&lt;h3 id=&#34;语义信息&#34;&gt;语义信息&lt;/h3&gt;
+&lt;p&gt;该文章把一段话分成三个语义层次，但我不知道为什么&lt;/p&gt;
+&lt;h4 id=&#34;句子&#34;&gt;句子&lt;/h4&gt;
+&lt;p&gt;输入的就是普通句子
+先经过embedding层（嵌入层）&lt;a href=&#34;https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;amp;arnumber=8791735&#34;&gt;我没看懂这篇paper里怎么得到embs的&lt;/a&gt;得到$emb_s$&lt;/p&gt;
+&lt;p&gt;然后经过&lt;a href=&#34;Bi-LSTM.md&#34;&gt;Bi-LSTM&lt;/a&gt;
+得到两个输出
+$$
+v_{sen}=\mathop{h}\limits^\rightarrow+\mathop{h}\limits^\leftarrow \
+E_{emb_s}=\mathop{E}\limits^\rightarrow+\mathop{E}\limits^\leftarrow
+$$&lt;/p&gt;
+&lt;h4 id=&#34;短语&#34;&gt;短语&lt;/h4&gt;
+&lt;p&gt;主要是cnn（卷积神经网络）+self-attention
+卷积神经网络比较熟就不重复了
+&lt;a href=&#34;%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6.md&#34;&gt;自注意力&lt;/a&gt; 也写了
+先卷积
+$$
+c_{r,k}=tanh(\sum_{i,j}(F_r&lt;em&gt;E_{emb_s}^{k:k+l-1})&lt;em&gt;{i,j})\
+c_r=(c&lt;/em&gt;{r,1},c_{r,2},&amp;hellip;c_{t,n-l+1})\
+C=(c_1,c_2,&amp;hellip;c_t)
+$$
+再用自注意力
+$$
+i=softmax(tanh(W_1E_{emb_s}^T+b_1))
+$$
+i广播操作(torch、numpy里面都有，其实就是合并到同一个维度)得到I
+最后得到
+$$
+V_{phrase}=(I&lt;/em&gt;E_{emb_s}^T)
+$$&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CoT-VLA: Visual Chain-of-Thought Reasoning for  Vision-Language-Action Models</title>
+      <link>https://milong26.github.io/post/cot-vla-visual-chain-of-thought-reasoning-for-vision-language-action-models/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/cot-vla-visual-chain-of-thought-reasoning-for-vision-language-action-models/</guid>
+      <description>&lt;p&gt;怎么感觉这又是个插值？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Data Scaling Laws for Imitation Learning-Based End-to-End Autonomous Driving</title>
+      <link>https://milong26.github.io/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/</guid>
+      <description>&lt;p&gt;14:21:30开始，这篇论文只能看20分钟
+快速了解：
+这篇论文是否可以扩展到vla方面？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Efficient Data Collection for Robotic Manipulation  via Compositional Generalization</title>
+      <link>https://milong26.github.io/post/efficient-data-collection-for-robotic-manipulation--via-compositional-generalization/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/efficient-data-collection-for-robotic-manipulation--via-compositional-generalization/</guid>
+      <description>&lt;p&gt;为什么要看这篇：感觉跟我想做的有一点像。所以看完这一篇以后我要得到的是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;这篇能否作为横向对比？&lt;/li&gt;
+&lt;li&gt;要对比的话，哪些是有用的？&lt;/li&gt;
+&lt;li&gt;这篇论文的结构有没有可参考之处&lt;/li&gt;
+&lt;li&gt;rank：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;@INPROCEEDINGS{Gao-RSS-24, 
+    AUTHOR    = {Jensen Gao AND Annie Xie AND Ted Xiao AND Chelsea Finn AND Dorsa Sadigh}, 
+    TITLE     = {{Efficient Data Collection for Robotic Manipulation via Compositional Generalization}}, 
+    BOOKTITLE = {Proceedings of Robotics: Science and Systems}, 
+    YEAR      = {2024}, 
+    ADDRESS   = {Delft, Netherlands}, 
+    MONTH     = {July}, 
+    DOI       = {10.15607/RSS.2024.XX.013} 
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;原来只要实验也行啊，早知道我就只写实验结果了orz&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>FAST:Efficient Action Tokenization for  Vision-Language-Action Models</title>
+      <link>https://milong26.github.io/post/fast-efficient-action-tokenization-for-vision-language-action-models/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/fast-efficient-action-tokenization-for-vision-language-action-models/</guid>
+      <description>&lt;p&gt;pi0.5的时候用到这个方法：post-train里面用这个方法，说是因为这个论文发现了用离散的token训练更快。有点好奇是怎么把动作给离散化的，又不能分词，既然它能离散化的话，那图像也能离散化吗？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>simPLE: a visuotactile method learned in simulation  to precisely pick, localize, regrasp, and place objects</title>
+      <link>https://milong26.github.io/post/simple-a-visuotactile-method-learned-in-simulation-to-precisely-pick-localize-regrasp-and-place-objects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/simple-a-visuotactile-method-learned-in-simulation-to-precisely-pick-localize-regrasp-and-place-objects/</guid>
+      <description>&lt;p&gt;在仿真中学到的视觉触觉方法&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vision-Language-Action Models for Robotics: A Review Towards Real-World Applications</title>
+      <link>https://milong26.github.io/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/vision-language-action-models-for-robotics-a-review-towards-real-world-applications/</guid>
+      <description>&lt;p&gt;一篇综述
+2025-11-06 16:15:25 开始看&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 看完 (@2026-04-06 02:33)
+希望从这篇综述中得到：一个综述应该从什么视角看vla，以及重点关注vla的泛化性和精确性的trade-off。vla的目标是什么？轻量？泛化？精确？还是什么？
+Q:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;一个综述应该从怎样的视角？&lt;/li&gt;
+&lt;li&gt;vla的目标、定义、来源、和别的模型的区分&lt;/li&gt;
+&lt;li&gt;技术层面的问题：核心架构、挑战、风险、目前的算法怎样应对&lt;/li&gt;
+&lt;li&gt;实际应用与如何评估&lt;/li&gt;
+&lt;li&gt;如果我自己来，能搞出什么东西？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;2025-11-06 17:16:47 确定好问题，可以开始看了&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>VLA-OS: Structuring and Dissecting Planning Representations and Paradigms in Vision-Language-Action Models</title>
+      <link>https://milong26.github.io/post/vla-os-structuring-and-dissecting-planning-representations-and-paradigms-in-vision-language-action-models/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/vla-os-structuring-and-dissecting-planning-representations-and-paradigms-in-vision-language-action-models/</guid>
+      <description>&lt;p&gt;看起来还不错，没有正式发表&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>vla综述们</title>
+      <link>https://milong26.github.io/post/vla%E7%BB%BC%E8%BF%B0%E4%BB%AC/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/vla%E7%BB%BC%E8%BF%B0%E4%BB%AC/</guid>
+      <description>&lt;p&gt;若干综述的集合，看就完事&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>安全抓取思路</title>
+      <link>https://milong26.github.io/post/%E5%AE%89%E5%85%A8%E6%8A%93%E5%8F%96%E6%80%9D%E8%B7%AF/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E5%AE%89%E5%85%A8%E6%8A%93%E5%8F%96%E6%80%9D%E8%B7%AF/</guid>
+      <description>&lt;p&gt;要求：对不同材料的柔体（比如布料）或者比较脆弱的刚体（鸡蛋）操作，保证抓取的安全，稳定，考虑力 force。VLA+物体摩擦系数提示&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

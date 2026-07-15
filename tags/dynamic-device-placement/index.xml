@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Dynamic Device Placement on 我的博客</title>
+    <link>https://milong26.github.io/tags/dynamic-device-placement/</link>
+    <description>Recent content in Dynamic Device Placement on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 21 Nov 2023 10:47:40 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/dynamic-device-placement/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>paperen_FlexMoE:Scaling Large=scale Sparese Pre-trained Model Training via Dynamic Device Placement</title>
+      <link>https://milong26.github.io/post/paperen-flexmoe-scaling-large-scale-sparese-pre-trained-model-training-via-dynamic-device-placement/</link>
+      <pubDate>Tue, 21 Nov 2023 10:47:40 +0000</pubDate>
+      <guid>https://milong26.github.io/post/paperen-flexmoe-scaling-large-scale-sparese-pre-trained-model-training-via-dynamic-device-placement/</guid>
+      <description>&lt;h1 id=&#34;论文简介&#34;&gt;论文简介&lt;/h1&gt;
+&lt;p&gt;论文地址&lt;a href=&#34;https://arxiv.org/abs/2304.03946&#34;&gt;arxiv&lt;/a&gt;
+&lt;a href=&#34;https://ar5iv.labs.arxiv.org/html/2304.03946&#34;&gt;html版&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Comments:	Accepted by SIGMOD 2023
+Subjects:	Distributed, Parallel, and Cluster Computing (cs.DC); Machine Learning (cs.LG)
+Cite as:	arXiv:2304.03946 [cs.DC]
+(or arXiv:2304.03946v1 [cs.DC] for this version)&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://doi.org/10.48550/arXiv.2304.03946&#34;&gt;https://doi.org/10.48550/arXiv.2304.03946&lt;/a&gt;
+Focus to learn more
+Journal reference:	Proc. ACM Manag. Data, Vol. 1, No. 1, Article 110. Publication date: May 2023&lt;/p&gt;
+&lt;p&gt;标题：FlexMoE:度量 大规模 稀疏 预训练模型训练 通过 动态设备放置
+一句话：改进moe&lt;/p&gt;
+&lt;h1 id=&#34;abstract&#34;&gt;abstract&lt;/h1&gt;
+&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
+&lt;p&gt;趋势：用大规模的(large-scale)预训练模型
+but：它用了很多密集的代数，需要硬件资源&lt;/p&gt;
+&lt;p&gt;目前：稀疏门控专家混合(sparsely-gated Mixture-of-Experts,MoEs)&lt;a href=&#34;MoE-%E7%A8%80%E7%96%8F%E9%97%A8%E6%8E%A7%E5%88%B6%E7%9A%84%E4%B8%93%E5%AE%B6%E6%B7%B7%E5%90%88%E5%B1%82.md&#34;&gt;参考&lt;/a&gt;
+but：因为路由不平衡(route imbalance)和波动(fluctuation)问题，这种稀疏条件计算在实际系统中可能不如预期的有效。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 这两种都是MoEs通讯上的问题吗？&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 专家到底是什么&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;这篇&#34;&gt;这篇&lt;/h2&gt;
+&lt;h3 id=&#34;提出的算法&#34;&gt;提出的算法&lt;/h3&gt;
+&lt;p&gt;提出：FLEXMOE
+分类：DNN训练框架
+优点：系统地、透明地解决了动态递归造成的效率低下问题&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

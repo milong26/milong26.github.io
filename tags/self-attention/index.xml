@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Self Attention on 我的博客</title>
+    <link>https://milong26.github.io/tags/self-attention/</link>
+    <description>Recent content in Self Attention on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 25 Oct 2023 21:36:31 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/self-attention/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>自注意力机制</title>
+      <link>https://milong26.github.io/post/%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</link>
+      <pubDate>Wed, 25 Oct 2023 21:36:31 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</guid>
+      <description>&lt;p&gt;Self-Attention 是 Transformer最核心的思想&lt;/p&gt;
+&lt;h1 id=&#34;基础&#34;&gt;基础&lt;/h1&gt;
+&lt;h2 id=&#34;公式&#34;&gt;公式&lt;/h2&gt;
+&lt;p&gt;$$
+Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})V
+$$
+其本质是$softmax(XX^T)X$&lt;/p&gt;
+&lt;h3 id=&#34;xxt&#34;&gt;XX^T&lt;/h3&gt;
+&lt;p&gt;一个矩阵乘以它自己的转置，会得到什么结果，有什么意义？&lt;/p&gt;
+&lt;p&gt;我们知道，矩阵可以看作由一些向量组成，一个矩阵乘以它自己转置的运算，其实可以看成这些向量分别与其他向量计算内积。向量的内积，其几何意义是什么？&lt;/p&gt;
+&lt;p&gt;答：表征两个向量的夹角，表征一个向量在另一个向量上的投影&lt;/p&gt;
+&lt;p&gt;举例说明：$X = [x_1^T;x_2^T;x_3^T]$，模拟字向量的计算过程
+&lt;img loading=&#34;lazy&#34; src=&#34;https://pic2.zhimg.com/80/v2-f6973006b0ca2b67f452439698e6aacd_1440w.webp&#34;&gt;&lt;/p&gt;
+&lt;p&gt;行向量$x_i$分别与自己和其他两个行向量做内积（&amp;ldquo;早&amp;quot;分别与&amp;quot;上&amp;quot;&amp;ldquo;好&amp;quot;计算内积），得到了一个新的向量。&lt;/p&gt;
+&lt;p&gt;投影的值大，说明两个向量相关度高。&lt;/p&gt;
+&lt;p&gt;更进一步，这个向量是词向量，是词在高维空间的数值映射。词向量之间相关度高表示什么？是不是在一定程度上（不是完全）表示，在关注词A的时候，应当给予词B更多的关注？&lt;/p&gt;
+&lt;p&gt;矩阵 $XX^T$是一个方阵，我们以行向量的角度理解，里面保存了每个向量与自己和其他向量进行内积运算的结果。
+每一行可以看作是每个向量与所有向量的相关度&lt;/p&gt;
+&lt;h3 id=&#34;softmax&#34;&gt;softmax&lt;/h3&gt;
+&lt;p&gt;$$
+softmax(z_i)=\frac{e^{z_i}}{\sum_{c=1}^Ce^{z_c}}
+$$
+主要干的是归一化的工作，Softmax之后，这些数字的和为1了
+为什么要softmax?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;反方观点：
+&lt;a href=&#34;https://zhuanlan.zhihu.com/p/157490738#&#34;&gt;这篇&lt;/a&gt;用了线性attention，也就是去掉softmax，文章结论认为去掉softmax是可行的
+&lt;a href=&#34;https://arxiv.org/abs/2006.16236&#34;&gt;这一篇也是线性attention&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;正方观点：
+attention的本质就是加权求和
+softmax之后的数值就是权重&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;softmaxxxtx&#34;&gt;softmax(XX^T)X&lt;/h3&gt;
+&lt;p&gt;从上文的$XX^T$继续看
+&lt;img loading=&#34;lazy&#34; src=&#34;https://pic2.zhimg.com/80/v2-71069dfdaf4758a037bdddc56d2a5fc5_1440w.webp&#34;&gt;
+一个行向量*X的一个列向量，得到：
+在新的向量中，每一个维度的数值都是由三个词向量在这一维度的数值加权求和得来的，这个新的行向量就是&amp;quot;早&amp;quot;字词向量经过注意力机制加权求和之后的表示。&lt;/p&gt;
+&lt;h3 id=&#34;qkt&#34;&gt;Q,K,T&lt;/h3&gt;
+&lt;p&gt;Q K V矩阵都是从X线性变化来的，为了提升模型的拟合能力
+&lt;img loading=&#34;lazy&#34; src=&#34;https://pic3.zhimg.com/80/v2-55d08f662a489739c3220486de095e12_1440w.webp&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;sqrtd_k&#34;&gt;sqrt(d_k)&lt;/h3&gt;
+&lt;p&gt;假设Q,K里的元素的均值为0，方差为1，那么$A^T=Q^TK$中元素的均值为0，方差为d. 当d变得很大时，A中的元素的方差也会变得很大，如果
+A中的元素方差很大，那么softmax(A)的分布会趋于陡峭(分布的方差大，分布集中在绝对值大的区域)。&lt;/p&gt;
+&lt;p&gt;总结一下就是softmax(A)的分布会和d有关。因此A中每一个元素除以
+$\sqrt{d_k}$后，方差又变为1。这使得softmax(A)的分布“陡峭”程度与d解耦，从而使得训练过程中梯度值保持稳定。&lt;/p&gt;
+&lt;p&gt;最后再补充一点，对self-attention来说，它跟每一个input vector都做attention，所以没有考虑到input sequence的顺序。更通俗来讲，大家可以发现我们前文的计算每一个词向量都与其他词向量计算内积，得到的结果丢失了我们原来文本的顺序信息。对比来说，LSTM是对于文本顺序信息的解释是输出词向量的先后顺序，而我们上文的计算对sequence的顺序这一部分则完全没有提及，你打乱词向量的顺序，得到的结果仍然是相同的。&lt;/p&gt;
+&lt;p&gt;这就牵扯到Transformer的位置编码了，具体在transformer里面看。&lt;/p&gt;
+&lt;h1 id=&#34;代码&#34;&gt;代码&lt;/h1&gt;
+&lt;p&gt;不着急写，&lt;a href=&#34;https://zhuanlan.zhihu.com/p/410776234&#34;&gt;以后看&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

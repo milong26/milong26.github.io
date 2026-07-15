@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>VLA们 | 我的博客</title>
+<meta name="keywords" content="vla, survey">
+<meta name="description" content="还是很混沌，多看论文吧">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/vla%E4%BB%AC/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/vla%E4%BB%AC/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/vla%E4%BB%AC/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="VLA们">
+  <meta property="og:description" content="还是很混沌，多看论文吧">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:tag" content="Vla">
+    <meta property="article:tag" content="Survey">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="VLA们">
+  <meta name="twitter:description" content="还是很混沌，多看论文吧">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "VLA们",
+      "item": "https://milong26.github.io/post/vla%E4%BB%AC/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "VLA们",
+  "name": "VLA们",
+  "description": "还是很混沌，多看论文吧\n",
+  "keywords": [
+    "vla", "survey"
+  ],
+  "articleBody": "还是很混沌，多看论文吧\n结构 当我想设计一个VLA的时候：\nVLA 要解决什么问题？ 我希望机器人能做什么？（任务目标） 当前系统为什么做不到？（痛点） 我的VLA系统能在哪些方面改进现有方案？（贡献点） 怎么设计思路去解决，也就是一个总体策略 模块化设计还是端到端设计？ 强调大规模预训练还是数据高效学习？ 用哪种范式（transformer-based? diffusion-based? RL-based?） 系统内部怎么实现这种思路，用什么模块 视觉编码器（Vision Encoder）：提取环境视觉特征。 语言编码器（Language Encoder）：解析任务命令。 多模态融合模块（Fusion Module）：让视觉、语言信息对齐。 动作生成模块（Action Decoder / Policy Head）：输出动作指令或控制信号。 记忆与状态模块（Memory / Context）：处理时序与上下文信息。 模型具体怎么训练和运行：我打算用什么学习机制，让模型学会执行任务？ 监督学习（supervised learning）：从配对数据中学习。 模仿学习（imitation learning）：学习人类演示的动作。 强化学习（reinforcement learning）：在交互中学习策略。 自监督预训练（self-supervised pretraining）：用未标注数据学习模态间对齐。 多阶段训练：预训练 + 微调（pretrain + fine-tune）。 评估：“我的系统在真实世界中表现如何？” 定义指标 选择平台 survey Vision-Language-Action Models for Robotics: A Review Towards Real-World Applications,2025.9:本文提供了一个系统的审查的VLA，包括他们的战略和架构过渡，架构和积木，特定于模态的处理技术，学习范式，常用的机器人平台，数据收集策略，公开可用的数据集，数据增强方法和评估基准。 架构 基础模型 仿真平台 一篇coppeliasim-vs-gazebo-vs-nvidia-isaac-sim\ncoppliasim 有edu版本，windows和linux都可以 不知道为什么windows的只能安装在c盘 尝试用了一下确实还可以，但是精度不太够 数据集 benchmark rlbench CALVIN ",
+  "wordCount" : "68",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/vla%E4%BB%AC/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      VLA们
+    </h1>
+    <div class="post-meta">
+
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>还是很混沌，多看论文吧</p>
+<h1 id="结构">结构<a hidden class="anchor" aria-hidden="true" href="#结构">#</a></h1>
+<p>当我想设计一个VLA的时候：</p>
+<ol>
+<li>VLA 要解决什么问题？
+<ol>
+<li>我希望机器人能做什么？（任务目标）</li>
+<li>当前系统为什么做不到？（痛点）</li>
+<li>我的VLA系统能在哪些方面改进现有方案？（贡献点）</li>
+</ol>
+</li>
+<li>怎么设计思路去解决，也就是一个总体策略
+<ol>
+<li>模块化设计还是端到端设计？</li>
+<li>强调大规模预训练还是数据高效学习？</li>
+<li>用哪种范式（transformer-based? diffusion-based? RL-based?）</li>
+</ol>
+</li>
+<li>系统内部怎么实现这种思路，用什么模块
+<ol>
+<li>视觉编码器（Vision Encoder）：提取环境视觉特征。</li>
+<li>语言编码器（Language Encoder）：解析任务命令。</li>
+<li>多模态融合模块（Fusion Module）：让视觉、语言信息对齐。</li>
+<li>动作生成模块（Action Decoder / Policy Head）：输出动作指令或控制信号。</li>
+<li>记忆与状态模块（Memory / Context）：处理时序与上下文信息。</li>
+</ol>
+</li>
+<li>模型具体怎么训练和运行：我打算用什么学习机制，让模型学会执行任务？
+<ol>
+<li>监督学习（supervised learning）：从配对数据中学习。</li>
+<li>模仿学习（imitation learning）：学习人类演示的动作。</li>
+<li>强化学习（reinforcement learning）：在交互中学习策略。</li>
+<li>自监督预训练（self-supervised pretraining）：用未标注数据学习模态间对齐。</li>
+<li>多阶段训练：预训练 + 微调（pretrain + fine-tune）。</li>
+</ol>
+</li>
+<li>评估：“我的系统在真实世界中表现如何？”
+<ol>
+<li>定义指标</li>
+<li>选择平台</li>
+</ol>
+</li>
+</ol>
+<h1 id="survey">survey<a hidden class="anchor" aria-hidden="true" href="#survey">#</a></h1>
+<ul>
+<li>Vision-Language-Action Models for Robotics: A Review Towards Real-World Applications,2025.9:本文提供了一个系统的审查的VLA，包括他们的战略和架构过渡，架构和积木，特定于模态的处理技术，学习范式，常用的机器人平台，数据收集策略，公开可用的数据集，数据增强方法和评估基准。</li>
+</ul>
+<h1 id="架构">架构<a hidden class="anchor" aria-hidden="true" href="#架构">#</a></h1>
+<h1 id="基础模型">基础模型<a hidden class="anchor" aria-hidden="true" href="#基础模型">#</a></h1>
+<h1 id="仿真平台">仿真平台<a hidden class="anchor" aria-hidden="true" href="#仿真平台">#</a></h1>
+<p>一篇<a href="https://onebrowsing.com/compare/coppeliasim-vs-gazebo-vs-nvidia-isaac-sim/">coppeliasim-vs-gazebo-vs-nvidia-isaac-sim</a></p>
+<ul>
+<li>coppliasim
+<ul>
+<li>有edu版本，windows和linux都可以</li>
+<li>不知道为什么windows的只能安装在c盘</li>
+<li>尝试用了一下确实还可以，但是精度不太够</li>
+</ul>
+</li>
+</ul>
+<h1 id="数据集">数据集<a hidden class="anchor" aria-hidden="true" href="#数据集">#</a></h1>
+<h1 id="benchmark">benchmark<a hidden class="anchor" aria-hidden="true" href="#benchmark">#</a></h1>
+<ul>
+<li>rlbench</li>
+<li>CALVIN</li>
+</ul>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/vla/">Vla</a></li>
+      <li><a href="https://milong26.github.io/tags/survey/">Survey</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

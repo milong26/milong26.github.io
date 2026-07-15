@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Task Reconstruction and Extrapolation for π0 using Text Latent | 我的博客</title>
+<meta name="keywords" content="">
+<meta name="description" content="好久没看论文了，复建复建
+在看这篇论文之前，第一想法
+extrapolation，相比interpolation
+文本处理
+做泛化性的
+模型是pi0">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/task-reconstruction-and-extrapolation-for-%CF%800-using-text-latent/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/task-reconstruction-and-extrapolation-for-%CF%800-using-text-latent/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/task-reconstruction-and-extrapolation-for-%CF%800-using-text-latent/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="Task Reconstruction and Extrapolation for π0 using Text Latent">
+  <meta property="og:description" content="好久没看论文了，复建复建
+在看这篇论文之前，第一想法 extrapolation，相比interpolation 文本处理 做泛化性的 模型是pi0">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-09-29T15:17:42+00:00">
+    <meta property="article:modified_time" content="2025-09-29T15:17:42+00:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Task Reconstruction and Extrapolation for π0 using Text Latent">
+  <meta name="twitter:description" content="好久没看论文了，复建复建
+在看这篇论文之前，第一想法 extrapolation，相比interpolation 文本处理 做泛化性的 模型是pi0">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Task Reconstruction and Extrapolation for π0 using Text Latent",
+      "item": "https://milong26.github.io/post/task-reconstruction-and-extrapolation-for-%CF%800-using-text-latent/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Task Reconstruction and Extrapolation for π0 using Text Latent",
+  "name": "Task Reconstruction and Extrapolation for π0 using Text Latent",
+  "description": "好久没看论文了，复建复建\n在看这篇论文之前，第一想法 extrapolation，相比interpolation 文本处理 做泛化性的 模型是pi0\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "好久没看论文了，复建复建\n在看这篇论文之前，第一想法 extrapolation，相比interpolation 文本处理 做泛化性的 模型是pi0\nintroduction extrapolate:to guess or think about what might happen using information that is already known interpolate:to add something in the middle of a text, piece of music\n为什么这里用extrapolation而不是直接用inference\n验证vla是不是真的能推断，还是只是会重复，我感觉模仿学习的就是单纯的重复？\ntext latent：“it is a task-specific vector derived from the models’ hidden states” (Li, 2025, p. 1) 也就是说，text latent是对任务编码，可以用在模型里面重建任务行为。说白了就是这个玩意指导模型的action，应该是比所有observation更加顶层的东西。Quest is leader（毕竟是vla，l好像没啥存在感）\n此外，我们发现在不同任务中使用的技能可以通过混合各自的潜在文本来组合以产生新颖的行为。\n为什么只有推理的时候？？只在推理做就能验证模型已经学到了\n残差 stream 后面接的是什么？\n在 Transformer 中，每一层的 residual stream（通常就是 token 的 hidden states）是这样的：\n进入某个子层（比如 Multi-Head Attention 或 MLP）。\n子层输出 + 输入（残差连接） → 得到新的 residual stream。\n这个 residual stream 会：\n作为下一层 Transformer block 的输入；\n最后在最后一层时，经过 LayerNorm → 输出 → 送到 LM head（softmax over vocab）或者其他任务 head（比如 action predictor）。\n所以回答你的问题：\n中间层的 residual stream：会传给下一层 Transformer。\n最后一层的 residual stream：会经过投影矩阵/LM head，产生输出概率分布。\n🔤VLA 具有表现出空间过度拟合的共同模式，将对象名称与对象在演示场景中的空间位置相关联，而不是实现真正的对象和目标理解🔤 vla在ood的任务表现怎么样？那我的论文里面那些抓取任务就是ood任务了，任务内容不变，对象形状改变了就识别不出来。\ntext latent: “is a task-specific vector and collected from the model’s internal states. By injecting a text latent back into the model, the associated task behavior can be activated” (Li, 2025, p. 2)\ntext latent这个概念好抽象，本来就是隐式的了\ntext latent是什么，怎么量化它？ 为了识别给定任务的潜在文本，我们在相应的任务演示上运行π0，并记录每个Transformer层的文本标记的隐藏状态。在此之后，我们对所有收集的层特征进行平均并获得文本潜在。\n这个是能记录的吗？记下来也没用啊\n对于文本来说，模型读到 prompt 或指令后，会把它编码成一系列 token hidden states，这些就是“text latent”的来源。\n此外，我们发现，通过使用文本潜在插值（TLI）来混合两个文本潜在，我们可以将两个任务中使用的子行为或技能结合起来。TLI 将两个各自文本潜在物的时间插值注入残差流，混合比在每个时间步长线性调整。\n这个操作的目的是为了让模型能通过插值组合以前的task，不需要另外训练就能做出以前没做过的动作轨迹。\n看完上面的introduction部分，现在的理解是\n文章解决的问题是：如何让VLAs能够完成需要重组已学子技能的新任务，而无需额外的训练数据。 text latent感觉怪怪的，看一下代码是不是我理解的：smolvla里面就是text-\u003elm-\u003e的那一部分token（之前有过数量不一致的） text latent直接加入推理里面难道不会让模型原来能做到的都做不到吗？ 所以它不是做没见过的物体，而是把任务A和任务B组合起来，类似做轨迹融合？主要前提是机器人在这之前做不到这一点 不过感觉跟我想要的还是有点差距的，我想做的是尽可能多地融合一些信息到文本里面（？）\nintroduction看完了，现在大概能确定：\n解决的问题是：如何让VLAs能够完成需要重组已学子技能的新任务，而无需额外的训练数据。那相关工作里面应该是vla和下面的可解释性？ 为什么有可解释性？- 不训练新模型，而是挖掘现有模型内部已经学到的表示要做到这一点，必须先理解模型内部的工作机制 related works里面说明了这篇文章做的是vla+可解释性。\n看到这里更清晰一点了：做的就是想办法组合任务技能。但是只做了pick-and-place\n继续看后面的内容，看之前的疑问\ntext latent是什么，怎么量化任务指令的表示？模型一开始会做抓取物体a放到b，抓取物体b放到c。想让它直接做：抓取物体a放到c。text latent怎么组合？ 把任务线性插值能插到什么程度 这个也没有真正解决泛化性的问题，但毕竟改了一点。我能从中得到什么启发吗？ 能不能做动态物体的pick-and-place？ method 基于transformer的vla的原理，text latennt是什么，以及怎样用它们来改变模型的内部表示。 现在的vla咋整的：先用vlm编码器处理多模态，融合，\n本体感知一般都是连续的，和离散的任务不一样，所以一般不用先分词\n",
+  "wordCount" : "190",
+  "inLanguage": "en",
+  "datePublished": "2025-09-29T15:17:42Z",
+  "dateModified": "2025-09-29T15:17:42Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/task-reconstruction-and-extrapolation-for-%CF%800-using-text-latent/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Task Reconstruction and Extrapolation for π0 using Text Latent
+    </h1>
+    <div class="post-meta">
+
+<span title='2025-09-29 15:17:42 +0000 UTC'>September 29, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>好久没看论文了，复建复建</p>
+<p>在看这篇论文之前，第一想法
+extrapolation，相比interpolation
+文本处理
+做泛化性的
+模型是pi0</p>
+<h1 id="introduction">introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h1>
+<p>extrapolate:to guess or think about what might happen using information that is already known
+interpolate:to add something in the middle of a text, piece of music</p>
+<p>为什么这里用extrapolation而不是直接用inference</p>
+<p>验证vla是不是真的能推断，还是只是会重复，我感觉模仿学习的就是单纯的重复？</p>
+<p>text latent：“it is a task-specific vector derived from the models’ hidden states” (Li, 2025, p. 1)
+也就是说，text latent是对任务编码，可以用在模型里面重建任务行为。说白了就是这个玩意指导模型的action，应该是比所有observation更加顶层的东西。Quest is leader（毕竟是vla，l好像没啥存在感）</p>
+<p>此外，我们发现在不同任务中使用的技能可以通过混合各自的潜在文本来组合以产生新颖的行为。</p>
+<p>为什么只有推理的时候？？只在推理做就能验证模型已经学到了</p>
+<p>残差 stream 后面接的是什么？</p>
+<p>在 Transformer 中，每一层的 residual stream（通常就是 token 的 hidden states）是这样的：</p>
+<ol>
+<li>
+<p>进入某个子层（比如 Multi-Head Attention 或 MLP）。</p>
+</li>
+<li>
+<p>子层输出 + 输入（残差连接） → 得到新的 residual stream。</p>
+</li>
+<li>
+<p>这个 residual stream 会：</p>
+<ul>
+<li>
+<p>作为下一层 Transformer block 的输入；</p>
+</li>
+<li>
+<p>最后在最后一层时，经过 LayerNorm → 输出 → 送到 LM head（softmax over vocab）或者其他任务 head（比如 action predictor）。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>所以回答你的问题：</p>
+<ul>
+<li>
+<p><strong>中间层的 residual stream</strong>：会传给下一层 Transformer。</p>
+</li>
+<li>
+<p><strong>最后一层的 residual stream</strong>：会经过投影矩阵/LM head，产生输出概率分布。</p>
+</li>
+</ul>
+<p>🔤VLA 具有表现出空间过度拟合的共同模式，将对象名称与对象在演示场景中的空间位置相关联，而不是实现真正的对象和目标理解🔤
+vla在ood的任务表现怎么样？那我的论文里面那些抓取任务就是ood任务了，任务内容不变，对象形状改变了就识别不出来。</p>
+<p>text latent: “is a task-specific vector and collected from the model’s internal states. By injecting a text latent back into the model, the associated task behavior can be activated” (Li, 2025, p. 2)</p>
+<p>text latent这个概念好抽象，本来就是隐式的了</p>
+<ul>
+<li><input disabled="" type="checkbox"> text latent是什么，怎么量化它？</li>
+</ul>
+<p>为了识别给定任务的潜在文本，我们在相应的任务演示上运行π0，并记录每个Transformer层的文本标记的隐藏状态。在此之后，我们对所有收集的层特征进行平均并获得文本潜在。</p>
+<blockquote>
+<p>这个是能记录的吗？记下来也没用啊</p>
+</blockquote>
+<p>对于文本来说，模型读到 prompt 或指令后，会把它编码成一系列 <strong>token hidden states</strong>，这些就是“text latent”的来源。</p>
+<p>此外，我们发现，通过使用文本潜在插值（TLI）来混合两个文本潜在，我们可以将两个任务中使用的子行为或技能结合起来。TLI 将两个各自文本潜在物的时间插值注入残差流，混合比在每个时间步长线性调整。</p>
+<p>这个操作的目的是为了让模型能通过插值组合以前的task，不需要另外训练就能做出以前没做过的动作轨迹。</p>
+<p>看完上面的introduction部分，现在的理解是</p>
+<ol>
+<li>文章解决的问题是：如何让VLAs能够完成需要重组已学子技能的新任务，而无需额外的训练数据。</li>
+<li>text latent感觉怪怪的，看一下代码是不是我理解的：smolvla里面就是text-&gt;lm-&gt;的那一部分token（之前有过数量不一致的）</li>
+<li>text latent直接加入推理里面难道不会让模型原来能做到的都做不到吗？</li>
+</ol>
+<p>所以它不是做没见过的物体，而是把任务A和任务B组合起来，类似做轨迹融合？主要前提是机器人在这之前做不到这一点
+不过感觉跟我想要的还是有点差距的，我想做的是尽可能多地融合一些信息到文本里面（？）</p>
+<p>introduction看完了，现在大概能确定：</p>
+<ul>
+<li><input disabled="" type="checkbox"> 解决的问题是：如何让VLAs能够完成需要重组已学子技能的新任务，而无需额外的训练数据。那相关工作里面应该是vla和下面的可解释性？</li>
+<li><input disabled="" type="checkbox"> 为什么有可解释性？- <strong>不训练新模型</strong>，而是挖掘现有模型内部已经学到的表示要做到这一点，必须先<strong>理解模型内部的工作机制</strong></li>
+</ul>
+<p>related works里面说明了这篇文章做的是vla+可解释性。</p>
+<p>看到这里更清晰一点了：做的就是想办法组合任务技能。但是只做了pick-and-place</p>
+<p>继续看后面的内容，看之前的疑问</p>
+<ul>
+<li><input disabled="" type="checkbox"> text latent是什么，怎么量化任务指令的表示？模型一开始会做抓取物体a放到b，抓取物体b放到c。想让它直接做：抓取物体a放到c。text latent怎么组合？</li>
+<li><input disabled="" type="checkbox"> 把任务线性插值能插到什么程度</li>
+<li><input disabled="" type="checkbox"> 这个也没有真正解决泛化性的问题，但毕竟改了一点。我能从中得到什么启发吗？</li>
+<li><input disabled="" type="checkbox"> 能不能做动态物体的pick-and-place？</li>
+</ul>
+<h1 id="method">method<a hidden class="anchor" aria-hidden="true" href="#method">#</a></h1>
+<p>基于transformer的vla的原理，text latennt是什么，以及怎样用它们来改变模型的内部表示。
+现在的vla咋整的：先用vlm编码器处理多模态，融合，</p>
+<p>本体感知一般都是连续的，和离散的任务不一样，所以一般不用先分词</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

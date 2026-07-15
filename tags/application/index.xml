@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Application on 我的博客</title>
+    <link>https://milong26.github.io/tags/application/</link>
+    <description>Recent content in Application on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 19 Dec 2024 18:42:06 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/application/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VS code</title>
+      <link>https://milong26.github.io/post/vs-code/</link>
+      <pubDate>Thu, 19 Dec 2024 18:42:06 +0000</pubDate>
+      <guid>https://milong26.github.io/post/vs-code/</guid>
+      <description>&lt;p&gt;Visual studio Code&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>xshell和xftp指北</title>
+      <link>https://milong26.github.io/post/xshell%E6%8C%87%E5%8C%97/</link>
+      <pubDate>Sat, 06 Jan 2024 16:24:20 +0000</pubDate>
+      <guid>https://milong26.github.io/post/xshell%E6%8C%87%E5%8C%97/</guid>
+      <description>&lt;p&gt;XShell 是一种流行且简单的网络程序，旨在模拟虚拟终端。XShell可以在Windows界面下来访问远端不同系统下的服务器，从而比较好的达到远程控制终端的目的。它支持 RLOGIN、SFTP、SERIAL、TELNET、SSH2 和 SSH1，可以非常方便的对Linux主机进行远程管理。除此之外，其还有丰富的外观配色方案以及样式选择。
+xftp是用来上传和下载文件的&lt;/p&gt;
+&lt;h1 id=&#34;下载与安装&#34;&gt;下载与安装&lt;/h1&gt;
+&lt;p&gt;下载地址：https://www.xshell.com/zh/free-for-home-school/
+xshell和xftp都可以下载
+安装：直接无脑安装，但是不知道为啥它还要自己新建文件夹，不能自动创建吗
+注册：随便用个邮箱注册，它不是商用的&lt;/p&gt;
+&lt;h1 id=&#34;使用&#34;&gt;使用&lt;/h1&gt;
+&lt;h2 id=&#34;连接&#34;&gt;连接&lt;/h2&gt;</description>
+    </item>
+    <item>
+      <title>tim</title>
+      <link>https://milong26.github.io/post/tim/</link>
+      <pubDate>Mon, 18 Dec 2023 16:19:09 +0000</pubDate>
+      <guid>https://milong26.github.io/post/tim/</guid>
+      <description>&lt;p&gt;qq办公版，比qq轻量而且功能简单。但是也有问题，等到哪天我实在忍不了的时候再放弃吧==&lt;/p&gt;
+&lt;h1 id=&#34;下载&#34;&gt;下载&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://office.qq.com/&#34;&gt;官网&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;安装&#34;&gt;安装&lt;/h1&gt;
+&lt;p&gt;无脑操作就行
+按照个人习惯把应用全塞到D:/application文件&lt;/p&gt;
+&lt;h1 id=&#34;配置&#34;&gt;配置&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;关闭TIM&lt;/li&gt;
+&lt;li&gt;打开&lt;code&gt;C:\Users\Public\Documents&lt;/code&gt;文件夹（可直接复制路径到资源管理器中打开），在此路径下新建名为&lt;code&gt;Tencent&lt;/code&gt;的文件夹，在Tencent文件夹中新建名为&lt;code&gt;QQ&lt;/code&gt;的文件夹，&lt;/li&gt;
+&lt;li&gt;在新建的QQ文件夹中，新建文本文件，输入以下内容&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[UserDataImportSet]
+NeedImport=0
+OldVersion=
+OldVerDataPathType=
+OldVerDataPath=
+OldQQInstallPath=C:\Program\Tencent\TIM
+[UserDataSet]
+UserDataSavePathType=2
+UserDataSavePath=D:\TimFiles
+NewVersion=
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注意：第6行OldQQInstallPath等号后面的路径应改为自己电脑上TIM的安装路径，第9行等号后面UserDataSavePath的路径改为自己想放的位置。&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;将新建的文本文件另存为“UserDataInfo.ini”，放在第3步新建这个QQ文件夹中&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;关闭文件，打开TIM，可以在设置中看到个人文件夹目录已经设置成功。如下图&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;文件夹位置不用改，会自己调整（但是也没法单独分离出来）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    <item>
+      <title>visualstudio</title>
+      <link>https://milong26.github.io/post/visualstudio/</link>
+      <pubDate>Sun, 24 Sep 2023 19:19:24 +0000</pubDate>
+      <guid>https://milong26.github.io/post/visualstudio/</guid>
+      <description>&lt;p&gt;c++还是vs好用，vscode配置太麻烦了
+注：这个是专门写c++等的vs，和vscode不一样&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://visualstudio.microsoft.com/zh-hans/thank-you-downloading-visual-studio/?sku=Community&amp;amp;channel=Release&amp;amp;version=VS2022&amp;amp;source=VSLandingPage&amp;amp;cid=2030&amp;amp;workload=dotnet-dotnetwebcloud&amp;amp;passive=false#dotnet&#34;&gt;下载&lt;/a&gt;
+在vs文件夹下创建3个子文件夹：ide、下载缓存、共享组件工具和SDK
+其它默认安装就行
+空间要足够用
+下载时间比较长&lt;/p&gt;
+&lt;p&gt;报错：&lt;br&gt;
+很抱歉出现问题，无法安装Win10SDK_10.0.19041
+看了一下日志，嗯，它要在我D盘里找windows kits&lt;/p&gt;
+&lt;p&gt;咱直接下载 &lt;a href=&#34;https://developer.microsoft.com/zh-cn/windows/downloads/windows-10-sdk/&#34;&gt;看这里&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;安装的时候发现报错 Invalid Drive: E:\，看来主要还是以前的残留。&lt;/p&gt;
+&lt;p&gt;去注册表里边搜E:\，搜到一个，把它的值改到C盘去（我windows kits装c盘了）&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://support.microsoft.com/zh-cn/windows/%E4%BF%AE%E5%A4%8D%E9%98%BB%E6%AD%A2%E7%A8%8B%E5%BA%8F%E5%AE%89%E8%A3%85%E6%88%96%E5%88%A0%E9%99%A4%E7%9A%84%E9%97%AE%E9%A2%98-cca7d1b6-65a9-3d98-426b-e9f927e1eb4d&#34;&gt;vs修复工具&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>vscode</title>
+      <link>https://milong26.github.io/post/vscode/</link>
+      <pubDate>Thu, 21 Sep 2023 20:10:15 +0000</pubDate>
+      <guid>https://milong26.github.io/post/vscode/</guid>
+      <description>&lt;p&gt;Visual Studio Code永远的神！&lt;/p&gt;
+&lt;h1 id=&#34;安装&#34;&gt;安装&lt;/h1&gt;
+&lt;h1 id=&#34;售后问题&#34;&gt;售后问题&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Error loading webview: Error: Could not register service worker: InvalidStateError: Failed to register a ServiceWorker: The document is in an invalid state..
+1、关闭vscode
+2、按WIN + R，输入cmd，打开终端，然后输入命令
+&lt;code&gt;code --no-sandbox&lt;/code&gt;
+3、重启vscode，就可以正常使用了。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;修改文件显示顺序
+在setting里面搜索sort order,explore对应的就是vs工作区的文件显示，写blog最好还是把文件按修改时间排序比较好。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

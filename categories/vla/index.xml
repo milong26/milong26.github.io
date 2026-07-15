@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Vla on 我的博客</title>
+    <link>https://milong26.github.io/categories/vla/</link>
+    <description>Recent content in Vla on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 27 Jan 2026 14:38:07 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/categories/vla/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VLA需要验证吗</title>
+      <link>https://milong26.github.io/post/vla%E9%9C%80%E8%A6%81%E9%AA%8C%E8%AF%81%E5%90%97/</link>
+      <pubDate>Tue, 27 Jan 2026 14:38:07 +0000</pubDate>
+      <guid>https://milong26.github.io/post/vla%E9%9C%80%E8%A6%81%E9%AA%8C%E8%AF%81%E5%90%97/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://hf-mirror.com/blog/m1b/validation-loss-robotics&#34;&gt;Is using a validation set useful for end-to-end learning in robotics?&lt;/a&gt; huggingface上的一篇文章解释了，回答了我长久以来的一个问题&lt;/p&gt;
+&lt;p&gt;并且Lerobot之前有人实现过验证但是最终没有合并 &lt;a href=&#34;https://github.com/huggingface/lerobot/issues/250&#34;&gt;#250&lt;/a&gt;  &lt;a href=&#34;https://github.com/huggingface/lerobot/pull/283&#34;&gt;#283&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 多任务，验证有用吗？&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>action space</title>
+      <link>https://milong26.github.io/post/action-space/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/action-space/</guid>
+      <description>&lt;p&gt;joint-level与end-effector-Cartesian-level&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

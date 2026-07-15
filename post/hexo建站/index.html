@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>hexo建站 | 我的博客</title>
+<meta name="keywords" content="hexo, blog">
+<meta name="description" content="个人blog生成日志，防备以后需要">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/hexo%E5%BB%BA%E7%AB%99/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/hexo%E5%BB%BA%E7%AB%99/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/hexo%E5%BB%BA%E7%AB%99/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="hexo建站">
+  <meta property="og:description" content="个人blog生成日志，防备以后需要">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-03-04T15:26:28+00:00">
+    <meta property="article:modified_time" content="2024-03-04T15:26:28+00:00">
+    <meta property="article:tag" content="Hexo">
+    <meta property="article:tag" content="Blog">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="hexo建站">
+  <meta name="twitter:description" content="个人blog生成日志，防备以后需要">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "hexo建站",
+      "item": "https://milong26.github.io/post/hexo%E5%BB%BA%E7%AB%99/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "hexo建站",
+  "name": "hexo建站",
+  "description": "个人blog生成日志，防备以后需要\n",
+  "keywords": [
+    "hexo", "blog"
+  ],
+  "articleBody": "个人blog生成日志，防备以后需要\nprework nodejs安装以及相关安装配置 git本地登录 安装hexo npm i hexo-cli -g\n将D:\\conf\\nodejs\\node-v20.17.0-win-x64\\node-global加入环境变量Path\nhexo -v验证\n初始化 新建文件夹，在这里hexo init，会生成若干文件夹。 hexo g+hexo s 可以预览网页\n托管到github 新建一个名为git用户名.github.io的仓库\n修改_config.yml最后的deploy\ndeploy: type: git repository: git@github.com:用户名/用户名.github.io branch: main 安装git插件 npm install hexo-deployer-git --save\n确认git账号登陆了，执行hexo d\n正常的话就能搞上去\n域名配置（可选） 不设置的话可以在https://用户名.github.io/看到整个网站\n仓库-settings-pages，Custom domain填入自己的域名\n域名另外设置一下\n/source文件夹里要新建一个CNAME的文件，填上域名\n文稿 新建 hexo new draft xxx 生成草稿\n修改后再hexo p xxx转换成post可见\n也可以直接hexo n xxx\n模板 对/scaffolds中的md文件修改\n主题 默认的landscape\n使用next 主题仓库\n主题配置文件\n安装 git clone https://github.com/next-theme/hexo-theme-next themes/next\n_config.yml文件中更改theme: theme: next\n主题修改 配置 显示 首页里面放的正文太多了：使用，可以直接放在模板里面。 修改_config.yml：修改author、语言、标题等 按更新顺序排：修改源目录下，\\node_modules\\hexo-generator-index\\lib\\generator.js，改成 'use strict'; var pagination = require('hexo-pagination'); module.exports = function(locals){ var config = this.config; var posts = locals.posts.sort('-updated'); //修改这里！ 原代码为var posts = locals.posts.sort('-date'); var paginationDir = config.pagination_dir || 'page'; return pagination('', posts, { perPage: config.index_generator.per_page, layout: ['index', 'archive'], format: paginationDir + '/%d/', data: { __index: true } }); }; 其它功能 数学公式 测试 $$ e=mc^2 $$ 你好$\\frac{a}{b}$\nbug及解决方案 连接github问题 fatal: Could not read from remote repository. 挂了梯子 git账号没有配置好 执行ssh-keygen –t rsa –C “git仓库邮箱”，重新生成密钥； 执行git config –global user.name “git用户名”，重新配置本地用户名； 执行git config –global user.email “git登录邮箱”，重新配置本地邮箱； 之后将生成在C:\\Users\\用户名.ssh文件夹下的id_rsa.pub文件打开后复制到Git仓库设置—SSH配置—Key配置的地方粘贴即可 我在linux上重新配置了一下，直接把以前的拿过来了，现在问题是hexo clean后再hexo g，s会出现cannot get\n",
+  "wordCount" : "163",
+  "inLanguage": "en",
+  "datePublished": "2024-03-04T15:26:28Z",
+  "dateModified": "2024-03-04T15:26:28Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/hexo%E5%BB%BA%E7%AB%99/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      hexo建站
+    </h1>
+    <div class="post-meta">
+
+<span title='2024-03-04 15:26:28 +0000 UTC'>March 4, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>个人blog生成日志，防备以后需要</p>
+<h1 id="prework">prework<a hidden class="anchor" aria-hidden="true" href="#prework">#</a></h1>
+<ol>
+<li>nodejs安装以及相关安装配置</li>
+<li>git本地登录</li>
+</ol>
+<h1 id="安装hexo">安装hexo<a hidden class="anchor" aria-hidden="true" href="#安装hexo">#</a></h1>
+<p><code>npm i hexo-cli -g</code></p>
+<p>将<code>D:\conf\nodejs\node-v20.17.0-win-x64\node-global</code>加入环境变量Path</p>
+<p><code>hexo -v</code>验证</p>
+<h1 id="初始化">初始化<a hidden class="anchor" aria-hidden="true" href="#初始化">#</a></h1>
+<p>新建文件夹，在这里<code>hexo init</code>，会生成若干文件夹。
+<code>hexo g</code>+<code>hexo s</code> 可以预览网页</p>
+<h1 id="托管到github">托管到github<a hidden class="anchor" aria-hidden="true" href="#托管到github">#</a></h1>
+<p>新建一个名为<code>git用户名.github.io</code>的仓库</p>
+<p>修改<code>_config.yml</code>最后的deploy</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">deploy</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">git</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">repository</span>: <span style="color:#ae81ff">git@github.com:用户名/用户名.github.io</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">branch</span>: <span style="color:#ae81ff">main</span>
+</span></span></code></pre></div><p>安装git插件
+<code>npm install hexo-deployer-git --save</code></p>
+<p>确认git账号登陆了，执行<code>hexo d</code></p>
+<p>正常的话就能搞上去</p>
+<h1 id="域名配置可选">域名配置（可选）<a hidden class="anchor" aria-hidden="true" href="#域名配置可选">#</a></h1>
+<p>不设置的话可以在<code>https://用户名.github.io/</code>看到整个网站</p>
+<p>仓库-settings-pages，Custom domain填入自己的域名</p>
+<p>域名另外设置一下</p>
+<p>/source文件夹里要新建一个CNAME的文件，填上域名</p>
+<h1 id="文稿">文稿<a hidden class="anchor" aria-hidden="true" href="#文稿">#</a></h1>
+<h2 id="新建">新建<a hidden class="anchor" aria-hidden="true" href="#新建">#</a></h2>
+<p><code>hexo new draft xxx</code> 生成草稿</p>
+<p>修改后再<code>hexo p xxx</code>转换成post可见</p>
+<p>也可以直接<code>hexo n xxx</code></p>
+<h2 id="模板">模板<a hidden class="anchor" aria-hidden="true" href="#模板">#</a></h2>
+<p>对/scaffolds中的md文件修改</p>
+<h1 id="主题">主题<a hidden class="anchor" aria-hidden="true" href="#主题">#</a></h1>
+<p>默认的landscape</p>
+<h2 id="使用next">使用next<a hidden class="anchor" aria-hidden="true" href="#使用next">#</a></h2>
+<p><a href="https://github.com/next-theme/hexo-theme-next">主题仓库</a></p>
+<p><a href="https://theme-next.js.org/docs/getting-started/">主题配置文件</a></p>
+<h3 id="安装">安装<a hidden class="anchor" aria-hidden="true" href="#安装">#</a></h3>
+<p><code>git clone https://github.com/next-theme/hexo-theme-next themes/next</code></p>
+<p>_config.yml文件中更改theme:
+<code>theme: next</code></p>
+<h3 id="主题修改">主题修改<a hidden class="anchor" aria-hidden="true" href="#主题修改">#</a></h3>
+<h1 id="配置">配置<a hidden class="anchor" aria-hidden="true" href="#配置">#</a></h1>
+<h2 id="显示">显示<a hidden class="anchor" aria-hidden="true" href="#显示">#</a></h2>
+<ol>
+<li>首页里面放的正文太多了：使用<code>&lt;!--more--&gt;</code>，可以直接放在模板里面。</li>
+<li>修改_config.yml：修改author、语言、标题等</li>
+<li>按更新顺序排：修改源目录下，\node_modules\hexo-generator-index\lib\generator.js，改成
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#e6db74">&#39;use strict&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">pagination</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;hexo-pagination&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">locals</span>){
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">config</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">config</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">posts</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">locals</span>.<span style="color:#a6e22e">posts</span>.<span style="color:#a6e22e">sort</span>(<span style="color:#e6db74">&#39;-updated&#39;</span>); <span style="color:#75715e">//修改这里！ 原代码为var posts = locals.posts.sort(&#39;-date&#39;);
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">paginationDir</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">pagination_dir</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;page&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">pagination</span>(<span style="color:#e6db74">&#39;&#39;</span>, <span style="color:#a6e22e">posts</span>, {
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">perPage</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">index_generator</span>.<span style="color:#a6e22e">per_page</span>,
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">layout</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;index&#39;</span>, <span style="color:#e6db74">&#39;archive&#39;</span>],
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">format</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">paginationDir</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/%d/&#39;</span>,
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">__index</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div></li>
+</ol>
+<h1 id="其它功能">其它功能<a hidden class="anchor" aria-hidden="true" href="#其它功能">#</a></h1>
+<h2 id="数学公式">数学公式<a hidden class="anchor" aria-hidden="true" href="#数学公式">#</a></h2>
+<p>测试
+$$
+e=mc^2
+$$
+你好$\frac{a}{b}$</p>
+<h1 id="bug及解决方案">bug及解决方案<a hidden class="anchor" aria-hidden="true" href="#bug及解决方案">#</a></h1>
+<h2 id="连接github问题">连接github问题<a hidden class="anchor" aria-hidden="true" href="#连接github问题">#</a></h2>
+<ol>
+<li>fatal: Could not read from remote repository.
+<ol>
+<li>挂了梯子</li>
+<li>git账号没有配置好
+<ol>
+<li>执行ssh-keygen –t rsa –C &ldquo;git仓库邮箱&rdquo;，重新生成密钥；</li>
+<li>执行git config &ndash;global user.name &ldquo;git用户名&rdquo;，重新配置本地用户名；</li>
+<li>执行git config &ndash;global user.email &ldquo;git登录邮箱&rdquo;，重新配置本地邮箱；</li>
+<li>之后将生成在C:\Users\用户名.ssh文件夹下的id_rsa.pub文件打开后复制到Git仓库设置—SSH配置—Key配置的地方粘贴即可</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>我在linux上重新配置了一下，直接把以前的拿过来了，现在问题是hexo clean后再hexo g，s会出现cannot get</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/hexo/">Hexo</a></li>
+      <li><a href="https://milong26.github.io/tags/blog/">Blog</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

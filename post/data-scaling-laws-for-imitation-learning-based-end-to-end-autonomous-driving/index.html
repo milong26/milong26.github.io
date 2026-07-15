@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Data Scaling Laws for Imitation Learning-Based End-to-End Autonomous Driving | 我的博客</title>
+<meta name="keywords" content="">
+<meta name="description" content="14:21:30开始，这篇论文只能看20分钟
+快速了解：
+这篇论文是否可以扩展到vla方面？">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="Data Scaling Laws for Imitation Learning-Based End-to-End Autonomous Driving">
+  <meta property="og:description" content="14:21:30开始，这篇论文只能看20分钟 快速了解： 这篇论文是否可以扩展到vla方面？">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Data Scaling Laws for Imitation Learning-Based End-to-End Autonomous Driving">
+  <meta name="twitter:description" content="14:21:30开始，这篇论文只能看20分钟 快速了解： 这篇论文是否可以扩展到vla方面？">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Data Scaling Laws for Imitation Learning-Based End-to-End Autonomous Driving",
+      "item": "https://milong26.github.io/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Data Scaling Laws for Imitation Learning-Based End-to-End Autonomous Driving",
+  "name": "Data Scaling Laws for Imitation Learning-Based End-to-End Autonomous Driving",
+  "description": "14:21:30开始，这篇论文只能看20分钟 快速了解： 这篇论文是否可以扩展到vla方面？\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "14:21:30开始，这篇论文只能看20分钟 快速了解： 这篇论文是否可以扩展到vla方面？\nhttps://zhuanlan.zhihu.com/p/15333349697 在imitation learning中是否存在scaling law\n通过实验证明，本文证明了log-log scaling law存在，数据分布对模型训练结果有影响。scaling law能够提升模型的泛化能力。\n看这篇文章最终的目标是：这篇文章能否扩展到vision language action 领域，做机械臂针对小样本抓取的fine-tune，想要研究尽可能少的示范数据实现模型成功率饱和\n一、这篇论文在干什么？ 1️⃣ 核心问题是什么？ 这篇论文关心的不是“模型结构还能不能再 fancy 一点”，而是一个非常基础但之前没人系统回答的问题：\n模仿学习（IL）驱动的端到端自动驾驶，是否存在“数据 scaling law”？\n数据到底该“越多越好”，还是“分布更重要”？\n大数据是否真的带来泛化？\n更具体拆成三个问题\n是否存在数据量 vs 性能的 scaling law？\n为什么 open-loop 和 closed-loop 的结论不一致？\n大规模数据是否让模型学到“组合泛化（combinatorial generalization）”？\n2️⃣ 方法是怎么做的？ (1) 数据层面：第一次真的“够大” 他们搞了一个工业级数据集 ONE-Drive：\n4M demonstrations\n30,000+ 小时\n覆盖 23 种驾驶场景类型\n真·真实世界（不是 CARLA）\n👉 这是这篇 paper 能谈 scaling law 的前提条件。\n(2) 模型层面：不是重点，但要“稳定可扩展” 基于 PARA-Drive 的 并行端到端架构\n多模态输入（多相机 + LiDAR）\nBEV 表示\n多任务并行 decoder（地图 / occupancy / detection / prediction / planning）\n⚠️ 关键点：\n模型结构保持不变，只 scale 数据量\n否则 scaling law 会被 confound。\n(3) 实验设计：非常“干净” 他们做了三组关键实验：\nA. Open-loop scaling 指标：ADE（预测轨迹 vs GT）\n数据量：10k → 4M\n结果：幂律关系（power law）\nB. Closed-loop scaling 用 3D-GS 重建环境\n指标：安全 / 舒适 / 规则 / 效率 / 导航\n结果：不是幂律，且早早饱和\nC. 数据分布 \u0026 长尾 固定总数据量\n只增加某个长尾场景的数据\n性能提升巨大（9%～30%）\n3️⃣ 最终结论是什么？ 我用一句话版本 + 拆解版。\n一句话版本 端到端模仿学习确实 obey scaling law，但“数据分布”比“数据总量”重要得多；\n真正的泛化来自对“可组合技能”的覆盖，而不是暴力堆样本。\n拆解结论（非常关键） ✅ 结论 1：Open-loop 有 power law，closed-loop 没有 Open-loop ≈ 函数拟合 → 数据越多越好\nClosed-loop ≈ 因果+分布偏移 → 很快进入收益递减\n👉 真实部署不该只看 open-loop\n✅ 结论 2：长尾数据的“边际价值”极高 给 rare scenario 多几百 / 几千条\n效果 \u003e 随机加几十万条常见数据\n👉 targeted data beats brute-force scaling\n✅ 结论 3：大数据带来“组合泛化” 模型并不是记住新场景，而是学会：\n把“已见过的子技能”组合成“未见过的整体行为”\n比如：\n学过「高速行驶」\n学过「低速避障」\n→ 泛化到「高速避障（没见过）」\n这点对你后面的问题 极其重要。\n二、扩展到 Vision-Language-Action + 机械臂小样本抓取：怎么做？ 你问的是一个非常对口、而且很前沿的问题：\n如何在 VLA 机械臂抓取中，用尽量少的示范数据，让 fine-tune 成功率尽快饱和？\n我直接给你一个研究级别的思路框架，不是“工程 tricks”。\n三、把这篇 paper 的 insight 映射到 VLA 抓取 🔁 对应关系先对齐 自动驾驶论文 机械臂 VLA 抓取 demonstration 抓取 episode scenario type 抓取子技能 / 条件 open-loop ADE 离线 action loss / imitation loss closed-loop score 实际抓取成功率 combinatorial generalization 新物体 / 新摆放 / 新语言组合 四、核心结论先给你 **小样本下成功率想“快饱和”，关键不是多收 demo，而是：\n让每条 demo 覆盖“最大可组合子技能空间”\n下面是可直接写 proposal / paper 的 5 条路线。\n五、具体研究思路（强烈推荐 ①②③） ⭐ 思路 ①：抓取任务的「子技能分解 + 覆盖最小基」 核心想法（来自 combinatorial generalization）：\n不要按“物体种类”或“任务名”收数据，\n而是按 可组合子技能（skill basis） 收。\n抓取可拆成哪些原子维度？ 举例（不是唯一）：\n视觉：\n对称 vs 非对称\n凸 vs 凹\n遮挡 vs 清晰\n几何：\n顶抓 / 侧抓\n单接触 / 多接触\n交互：\n刚体 / 可形变\n稳定 / 滚动\n语言：\n“抓红色的”\n“把最左边那个拿起来”\n👉 目标：\n用最少 demo 覆盖 每个维度的极端点\n📌 这本质上是在构造一个 抓取的“basis set”\n⭐ 思路 ②：像论文一样，刻意放大“抓取长尾” 和 ONE-Drive 一模一样的逻辑：\n统计当前模型失败最多的 5% 情况\n只补这些 failure mode\n固定总 demo 数，比较：\nrandom sampling vs targeted long-tail sampling\n你甚至可以直接复现他们的 Table III 风格实验。\n⭐ 思路 ③：先 VLA 预训练，再「极低步数对齐」 论文 future work 提到：\nself-supervised / foundation model 会改变 scaling law\n在抓取里更明显：\n推荐 pipeline 冻结视觉-语言 backbone\nCLIP / SigLIP / VLM 只 fine-tune action head 或 low-rank adapter\n每条 demo 的作用从：\n“教你怎么看世界”\n变成：\n“教你怎么把 perception → action”\n👉 这样一来，demo 的信息密度暴增\n⭐ 思路 ④：用语言做“分布控制器” 这是 VLA 独有优势，自动驾驶做不到。\n你可以：\n同一个 demo\n用多种 language prompt 重放\n“pick the red block”\n“grasp the object on the left”\n“grab the cube carefully”\n➡️ 等价于数据分布扩展，而非动作扩展\n这在小样本下非常值钱。\n⭐ 思路 ⑤：成功率饱和 ≠ imitation loss 饱和 和论文 open-loop vs closed-loop 一样：\n不要用 offline loss 作为 stopping criterion\n用：\n成功率-vs-demo 数曲线\nfailure 类型熵\n新组合条件下的 zero-shot success\n否则你会被假饱和骗了。\nok来看vla的问题\n数据分布缺失 这篇论文做的研究就是 他们其实做了三件事：\n固定模型 控制数据量 操纵数据分布 → 看性能变化 ",
+  "wordCount" : "445",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/data-scaling-laws-for-imitation-learning-based-end-to-end-autonomous-driving/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Data Scaling Laws for Imitation Learning-Based End-to-End Autonomous Driving
+    </h1>
+    <div class="post-meta">
+
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>14:21:30开始，这篇论文只能看20分钟
+快速了解：
+这篇论文是否可以扩展到vla方面？</p>
+<p><a href="https://zhuanlan.zhihu.com/p/15333349697">https://zhuanlan.zhihu.com/p/15333349697</a>
+在imitation learning中是否存在scaling law</p>
+<p>通过实验证明，本文证明了log-log scaling law存在，数据分布对模型训练结果有影响。scaling law能够提升模型的泛化能力。</p>
+<p>看这篇文章最终的目标是：这篇文章能否扩展到vision language action 领域，做机械臂针对小样本抓取的fine-tune，想要研究尽可能少的示范数据实现模型成功率饱和</p>
+<h2 id="一这篇论文在干什么">一、这篇论文在干什么？<a hidden class="anchor" aria-hidden="true" href="#一这篇论文在干什么">#</a></h2>
+<h3 id="1-核心问题是什么">1️⃣ 核心问题是什么？<a hidden class="anchor" aria-hidden="true" href="#1-核心问题是什么">#</a></h3>
+<p>这篇论文关心的不是“模型结构还能不能再 fancy 一点”，而是一个<strong>非常基础但之前没人系统回答的问题</strong>：</p>
+<blockquote>
+<p><strong>模仿学习（IL）驱动的端到端自动驾驶，是否存在“数据 scaling law”？<br>
+数据到底该“越多越好”，还是“分布更重要”？<br>
+大数据是否真的带来泛化？</strong></p>
+</blockquote>
+<p>更具体拆成三个问题</p>
+<ol>
+<li>
+<p><strong>是否存在数据量 vs 性能的 scaling law？</strong></p>
+</li>
+<li>
+<p><strong>为什么 open-loop 和 closed-loop 的结论不一致？</strong></p>
+</li>
+<li>
+<p><strong>大规模数据是否让模型学到“组合泛化（combinatorial generalization）”？</strong></p>
+</li>
+</ol>
+<hr>
+<h3 id="2-方法是怎么做的">2️⃣ 方法是怎么做的？<a hidden class="anchor" aria-hidden="true" href="#2-方法是怎么做的">#</a></h3>
+<h4 id="1-数据层面第一次真的够大">(1) 数据层面：第一次真的“够大”<a hidden class="anchor" aria-hidden="true" href="#1-数据层面第一次真的够大">#</a></h4>
+<p>他们搞了一个工业级数据集 <strong>ONE-Drive</strong>：</p>
+<ul>
+<li>
+<p><strong>4M demonstrations</strong></p>
+</li>
+<li>
+<p><strong>30,000+ 小时</strong></p>
+</li>
+<li>
+<p>覆盖 <strong>23 种驾驶场景类型</strong></p>
+</li>
+<li>
+<p>真·真实世界（不是 CARLA）</p>
+</li>
+</ul>
+<p>👉 这是这篇 paper 能谈 scaling law 的前提条件。</p>
+<hr>
+<h4 id="2-模型层面不是重点但要稳定可扩展">(2) 模型层面：不是重点，但要“稳定可扩展”<a hidden class="anchor" aria-hidden="true" href="#2-模型层面不是重点但要稳定可扩展">#</a></h4>
+<ul>
+<li>
+<p>基于 <strong>PARA-Drive</strong> 的 <strong>并行端到端架构</strong></p>
+</li>
+<li>
+<p>多模态输入（多相机 + LiDAR）</p>
+</li>
+<li>
+<p>BEV 表示</p>
+</li>
+<li>
+<p>多任务并行 decoder（地图 / occupancy / detection / prediction / planning）</p>
+</li>
+</ul>
+<p>⚠️ 关键点：</p>
+<blockquote>
+<p><strong>模型结构保持不变，只 scale 数据量</strong><br>
+否则 scaling law 会被 confound。</p>
+</blockquote>
+<hr>
+<h4 id="3-实验设计非常干净">(3) 实验设计：非常“干净”<a hidden class="anchor" aria-hidden="true" href="#3-实验设计非常干净">#</a></h4>
+<p>他们做了三组关键实验：</p>
+<h5 id="a-open-loop-scaling">A. Open-loop scaling<a hidden class="anchor" aria-hidden="true" href="#a-open-loop-scaling">#</a></h5>
+<ul>
+<li>
+<p>指标：ADE（预测轨迹 vs GT）</p>
+</li>
+<li>
+<p>数据量：10k → 4M</p>
+</li>
+<li>
+<p>结果：<strong>幂律关系（power law）</strong></p>
+</li>
+</ul>
+<h5 id="b-closed-loop-scaling">B. Closed-loop scaling<a hidden class="anchor" aria-hidden="true" href="#b-closed-loop-scaling">#</a></h5>
+<ul>
+<li>
+<p>用 3D-GS 重建环境</p>
+</li>
+<li>
+<p>指标：安全 / 舒适 / 规则 / 效率 / 导航</p>
+</li>
+<li>
+<p>结果：<strong>不是幂律，且早早饱和</strong></p>
+</li>
+</ul>
+<h5 id="c-数据分布--长尾">C. 数据分布 &amp; 长尾<a hidden class="anchor" aria-hidden="true" href="#c-数据分布--长尾">#</a></h5>
+<ul>
+<li>
+<p>固定总数据量</p>
+</li>
+<li>
+<p><strong>只增加某个长尾场景的数据</strong></p>
+</li>
+<li>
+<p>性能提升巨大（9%～30%）</p>
+</li>
+</ul>
+<hr>
+<h3 id="3-最终结论是什么">3️⃣ 最终结论是什么？<a hidden class="anchor" aria-hidden="true" href="#3-最终结论是什么">#</a></h3>
+<p>我用一句话版本 + 拆解版。</p>
+<h4 id="一句话版本">一句话版本<a hidden class="anchor" aria-hidden="true" href="#一句话版本">#</a></h4>
+<blockquote>
+<p><strong>端到端模仿学习确实 obey scaling law，但“数据分布”比“数据总量”重要得多；<br>
+真正的泛化来自对“可组合技能”的覆盖，而不是暴力堆样本。</strong></p>
+</blockquote>
+<hr>
+<h4 id="拆解结论非常关键">拆解结论（非常关键）<a hidden class="anchor" aria-hidden="true" href="#拆解结论非常关键">#</a></h4>
+<h5 id="-结论-1open-loop-有-power-lawclosed-loop-没有">✅ 结论 1：Open-loop 有 power law，closed-loop 没有<a hidden class="anchor" aria-hidden="true" href="#-结论-1open-loop-有-power-lawclosed-loop-没有">#</a></h5>
+<ul>
+<li>
+<p>Open-loop ≈ 函数拟合 → 数据越多越好</p>
+</li>
+<li>
+<p>Closed-loop ≈ 因果+分布偏移 → 很快进入收益递减</p>
+</li>
+</ul>
+<p>👉 <strong>真实部署不该只看 open-loop</strong></p>
+<hr>
+<h5 id="-结论-2长尾数据的边际价值极高">✅ 结论 2：长尾数据的“边际价值”极高<a hidden class="anchor" aria-hidden="true" href="#-结论-2长尾数据的边际价值极高">#</a></h5>
+<ul>
+<li>
+<p>给 rare scenario 多几百 / 几千条</p>
+</li>
+<li>
+<p>效果 &gt; 随机加几十万条常见数据</p>
+</li>
+</ul>
+<p>👉 <strong>targeted data beats brute-force scaling</strong></p>
+<hr>
+<h5 id="-结论-3大数据带来组合泛化">✅ 结论 3：大数据带来“组合泛化”<a hidden class="anchor" aria-hidden="true" href="#-结论-3大数据带来组合泛化">#</a></h5>
+<p>模型并不是记住新场景，而是学会：</p>
+<blockquote>
+<p><strong>把“已见过的子技能”组合成“未见过的整体行为”</strong></p>
+</blockquote>
+<p>比如：</p>
+<ul>
+<li>
+<p>学过「高速行驶」</p>
+</li>
+<li>
+<p>学过「低速避障」<br>
+→ 泛化到「高速避障（没见过）」</p>
+</li>
+</ul>
+<p>这点对你后面的问题 <strong>极其重要</strong>。</p>
+<h2 id="二扩展到-vision-language-action--机械臂小样本抓取怎么做">二、扩展到 Vision-Language-Action + 机械臂小样本抓取：怎么做？<a hidden class="anchor" aria-hidden="true" href="#二扩展到-vision-language-action--机械臂小样本抓取怎么做">#</a></h2>
+<p>你问的是一个<strong>非常对口、而且很前沿</strong>的问题：</p>
+<blockquote>
+<p><strong>如何在 VLA 机械臂抓取中，用尽量少的示范数据，让 fine-tune 成功率尽快饱和？</strong></p>
+</blockquote>
+<p>我直接给你一个<strong>研究级别的思路框架</strong>，不是“工程 tricks”。</p>
+<hr>
+<h2 id="三把这篇-paper-的-insight-映射到-vla-抓取">三、把这篇 paper 的 insight 映射到 VLA 抓取<a hidden class="anchor" aria-hidden="true" href="#三把这篇-paper-的-insight-映射到-vla-抓取">#</a></h2>
+<h3 id="-对应关系先对齐">🔁 对应关系先对齐<a hidden class="anchor" aria-hidden="true" href="#-对应关系先对齐">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th>自动驾驶论文</th>
+          <th>机械臂 VLA 抓取</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>demonstration</td>
+          <td>抓取 episode</td>
+      </tr>
+      <tr>
+          <td>scenario type</td>
+          <td>抓取子技能 / 条件</td>
+      </tr>
+      <tr>
+          <td>open-loop ADE</td>
+          <td>离线 action loss / imitation loss</td>
+      </tr>
+      <tr>
+          <td>closed-loop score</td>
+          <td>实际抓取成功率</td>
+      </tr>
+      <tr>
+          <td>combinatorial generalization</td>
+          <td>新物体 / 新摆放 / 新语言组合</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="四核心结论先给你">四、核心结论先给你<a hidden class="anchor" aria-hidden="true" href="#四核心结论先给你">#</a></h2>
+<blockquote>
+<p>**小样本下成功率想“快饱和”，关键不是多收 demo，而是：<br>
+让每条 demo 覆盖“最大可组合子技能空间”</p>
+</blockquote>
+<p>下面是<strong>可直接写 proposal / paper 的 5 条路线</strong>。</p>
+<hr>
+<h2 id="五具体研究思路强烈推荐-">五、具体研究思路（强烈推荐 ①②③）<a hidden class="anchor" aria-hidden="true" href="#五具体研究思路强烈推荐-">#</a></h2>
+<hr>
+<h3 id="-思路-抓取任务的子技能分解--覆盖最小基">⭐ 思路 ①：抓取任务的「子技能分解 + 覆盖最小基」<a hidden class="anchor" aria-hidden="true" href="#-思路-抓取任务的子技能分解--覆盖最小基">#</a></h3>
+<p><strong>核心想法（来自 combinatorial generalization）：</strong></p>
+<p>不要按“物体种类”或“任务名”收数据，<br>
+而是按 <strong>可组合子技能（skill basis）</strong> 收。</p>
+<h4 id="抓取可拆成哪些原子维度">抓取可拆成哪些原子维度？<a hidden class="anchor" aria-hidden="true" href="#抓取可拆成哪些原子维度">#</a></h4>
+<p>举例（不是唯一）：</p>
+<ul>
+<li>
+<p>视觉：</p>
+<ul>
+<li>
+<p>对称 vs 非对称</p>
+</li>
+<li>
+<p>凸 vs 凹</p>
+</li>
+<li>
+<p>遮挡 vs 清晰</p>
+</li>
+</ul>
+</li>
+<li>
+<p>几何：</p>
+<ul>
+<li>
+<p>顶抓 / 侧抓</p>
+</li>
+<li>
+<p>单接触 / 多接触</p>
+</li>
+</ul>
+</li>
+<li>
+<p>交互：</p>
+<ul>
+<li>
+<p>刚体 / 可形变</p>
+</li>
+<li>
+<p>稳定 / 滚动</p>
+</li>
+</ul>
+</li>
+<li>
+<p>语言：</p>
+<ul>
+<li>
+<p>“抓红色的”</p>
+</li>
+<li>
+<p>“把最左边那个拿起来”</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>👉 <strong>目标</strong>：<br>
+用最少 demo 覆盖 <strong>每个维度的极端点</strong></p>
+<p>📌 这本质上是在构造一个 <strong>抓取的“basis set”</strong></p>
+<hr>
+<h3 id="-思路-像论文一样刻意放大抓取长尾">⭐ 思路 ②：像论文一样，刻意放大“抓取长尾”<a hidden class="anchor" aria-hidden="true" href="#-思路-像论文一样刻意放大抓取长尾">#</a></h3>
+<p>和 ONE-Drive 一模一样的逻辑：</p>
+<ul>
+<li>
+<p>统计当前模型失败最多的 5% 情况</p>
+</li>
+<li>
+<p><strong>只补这些 failure mode</strong></p>
+</li>
+<li>
+<p>固定总 demo 数，比较：</p>
+</li>
+</ul>
+<blockquote>
+<p>random sampling vs targeted long-tail sampling</p>
+</blockquote>
+<p>你甚至可以直接复现他们的 Table III 风格实验。</p>
+<hr>
+<h3 id="-思路-先-vla-预训练再极低步数对齐">⭐ 思路 ③：先 VLA 预训练，再「极低步数对齐」<a hidden class="anchor" aria-hidden="true" href="#-思路-先-vla-预训练再极低步数对齐">#</a></h3>
+<p>论文 future work 提到：</p>
+<blockquote>
+<p>self-supervised / foundation model 会改变 scaling law</p>
+</blockquote>
+<p>在抓取里更明显：</p>
+<h4 id="推荐-pipeline">推荐 pipeline<a hidden class="anchor" aria-hidden="true" href="#推荐-pipeline">#</a></h4>
+<ol>
+<li>
+<p><strong>冻结视觉-语言 backbone</strong></p>
+<ul>
+<li>CLIP / SigLIP / VLM</li>
+</ul>
+</li>
+<li>
+<p><strong>只 fine-tune action head 或 low-rank adapter</strong></p>
+</li>
+<li>
+<p>每条 demo 的作用从：</p>
+<ul>
+<li>
+<p>“教你怎么看世界”</p>
+</li>
+<li>
+<p>变成：</p>
+</li>
+<li>
+<p>“教你怎么把 perception → action”</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>👉 这样一来，<strong>demo 的信息密度暴增</strong></p>
+<hr>
+<h3 id="-思路-用语言做分布控制器">⭐ 思路 ④：用语言做“分布控制器”<a hidden class="anchor" aria-hidden="true" href="#-思路-用语言做分布控制器">#</a></h3>
+<p>这是 VLA 独有优势，自动驾驶做不到。</p>
+<p>你可以：</p>
+<ul>
+<li>
+<p>同一个 demo</p>
+</li>
+<li>
+<p>用多种 language prompt 重放</p>
+<ul>
+<li>
+<p>“pick the red block”</p>
+</li>
+<li>
+<p>“grasp the object on the left”</p>
+</li>
+<li>
+<p>“grab the cube carefully”</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>➡️ <strong>等价于数据分布扩展，而非动作扩展</strong></p>
+<p>这在小样本下非常值钱。</p>
+<hr>
+<h3 id="-思路-成功率饱和--imitation-loss-饱和">⭐ 思路 ⑤：成功率饱和 ≠ imitation loss 饱和<a hidden class="anchor" aria-hidden="true" href="#-思路-成功率饱和--imitation-loss-饱和">#</a></h3>
+<p>和论文 open-loop vs closed-loop 一样：</p>
+<ul>
+<li>
+<p>不要用 offline loss 作为 stopping criterion</p>
+</li>
+<li>
+<p>用：</p>
+<ul>
+<li>
+<p>成功率-vs-demo 数曲线</p>
+</li>
+<li>
+<p>failure 类型熵</p>
+</li>
+<li>
+<p>新组合条件下的 zero-shot success</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>否则你会<strong>被假饱和骗了</strong>。</p>
+<p>ok来看vla的问题</p>
+<ol>
+<li>数据分布缺失</li>
+</ol>
+<p>这篇论文做的研究就是
+他们其实做了三件事：</p>
+<ol>
+<li><strong>固定模型</strong></li>
+<li><strong>控制数据量</strong></li>
+<li><strong>操纵数据分布</strong>  → 看性能变化</li>
+</ol>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>UML类图 | 我的博客</title>
+<meta name="keywords" content="面向对象">
+<meta name="description" content="UML类图">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/uml%E7%B1%BB%E5%9B%BE/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/uml%E7%B1%BB%E5%9B%BE/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/uml%E7%B1%BB%E5%9B%BE/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="UML类图">
+  <meta property="og:description" content="UML类图">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2021-04-21T12:55:08+00:00">
+    <meta property="article:modified_time" content="2021-04-21T12:55:08+00:00">
+    <meta property="article:tag" content="面向对象">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="UML类图">
+  <meta name="twitter:description" content="UML类图">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "UML类图",
+      "item": "https://milong26.github.io/post/uml%E7%B1%BB%E5%9B%BE/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "UML类图",
+  "name": "UML类图",
+  "description": "UML类图\n",
+  "keywords": [
+    "面向对象"
+  ],
+  "articleBody": "UML类图\n关系 在UML类图中，常见的有以下几种关系:泛化（Generalization）, 实现（Realization）,关联（Association）,聚合（Aggregation）,组合(Composition)，依赖(Dependency)\n泛化(Generalization) 【泛化关系】：是一种继承关系,它指定了子类如何特化父类的所有特征和行为例如：老虎是动物的一种.\n【箭头指向】：带三角箭头的实线，箭头指向parent\n实现（Realization) 【实现关系】：是一种类与接口的关系，表示类是接口所有特征和行为的实现\n【箭头指向】：带三角箭头的虚线，箭头指向接口\n关联（Association） 【关联关系】：是一种拥有的关系,它使一个类知道另一个类的属性和方法；如：老师与学生，丈夫与妻子\n关联可以是双向的，也可以是单向的。双向的关联可以有两个箭头或者没有箭头，单向的关联有一个箭头。\n【代码体现】：成员变量\n【箭头及指向】：带普通箭头的实心线，指向被拥有者\n上图中，老师与学生是双向关联，老师有多名学生，学生也可能有多名老师。但学生与某课程间的关系为单向关联，一名学生可能要上多门课程，课程是个抽象的东西他不拥有学生。\n上图为自身关联：\n聚合（Aggregation） 【聚合关系】：是整体与部分的关系.如车和轮胎是整体和部分的关系.\n聚合关系是关联关系的一种，是强的关联关系；关联和聚合在语法上无法区分，必须考察具体的逻辑关系。\n【代码体现】：成员变量\n【箭头及指向】：带空心菱形的实心线，菱形指向整体\n组合(Composition) 【组合关系】：是整体与部分的关系.,没有公司就不存在部门 组合关系是关联关系的一种，是比聚合关系还要强的关系，它要求普通的聚合关系中代表整体的对象负责代表部分的对象的生命周期\n【代码体现】：成员变量\n【箭头及指向】：带实心菱形的实线，菱形指向整体\n依赖(Dependency) 【依赖关系】：是一种使用的关系,所以要尽量不使用双向的互相依赖。\n【代码表现】：局部变量、方法的参数或者对静态方法的调用\n【箭头及指向】：带箭头的虚线，指向被使用者\n总结 各种关系的强弱顺序：\n泛化= 实现\u003e 组合\u003e 聚合\u003e 关联\u003e 依赖\n下面这张UML图，比较形象地展示了各种类图关系：\n",
+  "wordCount" : "40",
+  "inLanguage": "en",
+  "datePublished": "2021-04-21T12:55:08Z",
+  "dateModified": "2021-04-21T12:55:08Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/uml%E7%B1%BB%E5%9B%BE/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      UML类图
+    </h1>
+    <div class="post-meta">
+
+<span title='2021-04-21 12:55:08 +0000 UTC'>April 21, 2021</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>UML类图</p>
+<h1 id="关系">关系<a hidden class="anchor" aria-hidden="true" href="#关系">#</a></h1>
+<p>在UML类图中，常见的有以下几种关系:泛化（Generalization）,  实现（Realization）,关联（Association）,聚合（Aggregation）,组合(Composition)，依赖(Dependency)</p>
+<h2 id="泛化generalization">泛化(Generalization)<a hidden class="anchor" aria-hidden="true" href="#泛化generalization">#</a></h2>
+<p>【泛化关系】：是一种继承关系,它指定了子类如何特化父类的所有特征和行为例如：老虎是动物的一种.</p>
+<p>【箭头指向】：带三角箭头的实线，箭头指向parent</p>
+<p><img loading="lazy" src="https://www.hualigs.cn/image/607fb12691c2a.jpg"></p>
+<h2 id="实现realization">实现（Realization)<a hidden class="anchor" aria-hidden="true" href="#实现realization">#</a></h2>
+<p>【实现关系】：是一种类与接口的关系，表示类是接口所有特征和行为的实现</p>
+<p>【箭头指向】：带三角箭头的虚线，箭头指向接口</p>
+<p><img loading="lazy" src="http://hi.csdn.net/attachment/201104/22/0_13034367939K49.gif"></p>
+<h2 id="关联association">关联（Association）<a hidden class="anchor" aria-hidden="true" href="#关联association">#</a></h2>
+<p>【关联关系】：是一种拥有的关系,它使一个类知道另一个类的属性和方法；如：老师与学生，丈夫与妻子</p>
+<p>关联可以是双向的，也可以是单向的。双向的关联可以有两个箭头或者没有箭头，单向的关联有一个箭头。</p>
+<p>【代码体现】：成员变量</p>
+<p>【箭头及指向】：带普通箭头的实心线，指向被拥有者</p>
+<p><img loading="lazy" src="http://hi.csdn.net/attachment/201104/22/0_1303436801W1kf.gif"></p>
+<p>上图中，老师与学生是双向关联，老师有多名学生，学生也可能有多名老师。但学生与某课程间的关系为单向关联，一名学生可能要上多门课程，课程是个抽象的东西他不拥有学生。</p>
+<!-- raw HTML omitted -->
+<p>上图为自身关联：</p>
+<h2 id="聚合aggregation">聚合（Aggregation）<a hidden class="anchor" aria-hidden="true" href="#聚合aggregation">#</a></h2>
+<p>【聚合关系】：是整体与部分的关系.如车和轮胎是整体和部分的关系.</p>
+<p>聚合关系是关联关系的一种，是强的关联关系；关联和聚合在语法上无法区分，必须考察具体的逻辑关系。</p>
+<p>【代码体现】：成员变量</p>
+<p>【箭头及指向】：带空心菱形的实心线，菱形指向整体</p>
+<p><img loading="lazy" src="http://hi.csdn.net/attachment/201104/22/0_1303436811y36B.gif"></p>
+<h2 id="组合composition">组合(Composition)<a hidden class="anchor" aria-hidden="true" href="#组合composition">#</a></h2>
+<p>【组合关系】：是整体与部分的关系.,没有公司就不存在部门      组合关系是关联关系的一种，是比聚合关系还要强的关系，它要求普通的聚合关系中代表整体的对象负责代表部分的对象的生命周期</p>
+<p>【代码体现】：成员变量</p>
+<p>【箭头及指向】：带实心菱形的实线，菱形指向整体</p>
+<p><img loading="lazy" src="http://hi.csdn.net/attachment/201104/22/0_1303436817mqXK.gif"></p>
+<h2 id="依赖dependency">依赖(Dependency)<a hidden class="anchor" aria-hidden="true" href="#依赖dependency">#</a></h2>
+<p>【依赖关系】：是一种使用的关系,所以要尽量不使用双向的互相依赖。</p>
+<p>【代码表现】：局部变量、方法的参数或者对静态方法的调用</p>
+<p>【箭头及指向】：带箭头的虚线，指向被使用者</p>
+<p><img loading="lazy" src="http://hi.csdn.net/attachment/201104/22/0_130343682580L6.gif"></p>
+<h2 id="总结">总结<a hidden class="anchor" aria-hidden="true" href="#总结">#</a></h2>
+<p>各种关系的强弱顺序：</p>
+<p>泛化= 实现&gt; 组合&gt; 聚合&gt; 关联&gt; 依赖</p>
+<p>下面这张UML图，比较形象地展示了各种类图关系：</p>
+<p><img loading="lazy" src="http://hi.csdn.net/attachment/201202/29/0_1330497855hqk2.gif"></p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">面向对象</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

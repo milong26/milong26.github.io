@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>散列 | 我的博客</title>
+<meta name="keywords" content="数据结构">
+<meta name="description" content="
+抽象数据类型Dictionary{
+实例
+	具有不同关键字的元素集合
+操作
+	Create()：创建一个空字典
+	Search(k, x)：搜索关键字为k的元素，结果放入x；
+			如果没找到，则返回false，否则返回true
+	Insert(x)：向字典中插入元素x
+	Delete(k, x)：删除关键字为k的元素，并将其放入x
+}
+操作
+随机访问：
+在编译器中定义用户标识符的符号表（symbol table）——重复元素字典
+
+定义标识符-&gt;建立一个记录并插入到符号表中
+同样的标识符名可以定义多次(在不同的程序块中)-&gt;相同关键字的记录
+搜索结果——最新插入的元素
+删除——程序块的结尾（标识符作用域结束）
+
+SortedChain类
+template&lt;class E, class K&gt;
+class SortedChain {
+   public:
+      SortedChain() {first = 0;}
+      ~SortedChain();
+      bool IsEmpty() const {return first == 0;}
+      int Length() const;
+      bool Search(const K&amp; k, E&amp; e) const;
+      SortedChain&lt;E,K&gt;&amp; Delete(const K&amp; k, E&amp; e);
+      SortedChain&lt;E,K&gt;&amp; Insert(const E&amp; e);
+      SortedChain&lt;E,K&gt;&amp; DistinctInsert(const E&amp; e);
+      void Output(ostream&amp; out) const;
+   private:
+      SortedChainNode&lt;E,K&gt; *first;  
+};
+
+//搜索
+template&lt;class E, class K&gt;
+bool SortedChain&lt;E,K&gt;::Search(const K&amp; k, E&amp; e) const
+{
+    SortedChainNode&lt;E,K&gt; *p = first;
+    while (p &amp;&amp; p-&gt;data &lt; k)
+        p = p-&gt;link;
+
+   // 判断是否匹配
+   if (p &amp;&amp; p-&gt;data == k) // 如果链表尚不为空且数据匹配
+      {e = p-&gt;data; return true;}
+   return false; // 链表已经为空，或当前数据大于k
+}
+
+//删除
+template&lt;class E, class K&gt;
+SortedChain&lt;E,K&gt;&amp; SortedChain&lt;E,K&gt;::Delete(const K&amp; k, E&amp; e)
+{
+    SortedChainNode&lt;E,K&gt; *p = first, *tp = 0; 
+   // search for match with k
+   while (p &amp;&amp; p-&gt;data &lt; k)
+   {
+        tp = p;
+        p = p-&gt;link;
+   }
+    if (p &amp;&amp; p-&gt;data == k) //找到了要删的节点
+    {
+        e = p-&gt;data; 
+        if (tp)  tp-&gt;link = p-&gt;link; //p是普通节点
+        else first = p-&gt;link;  //p是首节点
+        delete p;
+        return *this;
+    }
+     throw BadInput();  //没有可删的节点
+     return *this;    
+}
+
+//插入（允许重复）
+template&lt;class E, class K&gt;
+SortedChain&lt;E,K&gt;&amp; SortedChain&lt;E,K&gt;::Insert(const E&amp; e)
+{
+   SortedChainNode&lt;E,K&gt; *p = first,  *tp = 0;
+   while (p &amp;&amp; p-&gt;data &lt; e) {
+      tp = p;
+      p = p-&gt;link;
+   }
+   SortedChainNode&lt;E,K&gt; *q = new SortedChainNode&lt;E,K&gt;;
+   q-&gt;data = e;
+   q-&gt;link = p;
+   if (tp) tp-&gt;link = q;
+   else first = q;
+   return *this;
+}
+
+//插入（不允许重复）
+template&lt;class E, class K&gt;
+SortedChain&lt;E,K&gt;&amp; SortedChain&lt;E,K&gt;
+                 ::DistinctInsert(const E&amp; e)
+{// Insert e only if no element with same key
+ 
+   SortedChainNode&lt;E,K&gt; *p = first, *tp = 0; 
+
+   while (p &amp;&amp; p-&gt;data &lt; e)
+   {
+      tp = p;
+      p = p-&gt;link;
+   }
+   // check if duplicate
+   if (p &amp;&amp; p-&gt;data == e) throw BadInput();
+   // not duplicate, set up node for e
+   SortedChainNode&lt;E,K&gt; *q = new SortedChainNode&lt;E,K&gt;;
+   q-&gt;data = e;
+
+   // insert node just after tp
+   q-&gt;link = p;
+   if (tp) tp-&gt;link = q;
+   else first = q;
+
+   return *this;
+}
+
+散列表的适用范围">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/%E6%95%A3%E5%88%97/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/%E6%95%A3%E5%88%97/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/%E6%95%A3%E5%88%97/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="散列">
+  <meta property="og:description" content="抽象数据类型Dictionary{ 实例 具有不同关键字的元素集合 操作 Create()：创建一个空字典 Search(k, x)：搜索关键字为k的元素，结果放入x； 如果没找到，则返回false，否则返回true Insert(x)：向字典中插入元素x Delete(k, x)：删除关键字为k的元素，并将其放入x } 操作 随机访问：
+在编译器中定义用户标识符的符号表（symbol table）——重复元素字典
+定义标识符-&gt;建立一个记录并插入到符号表中 同样的标识符名可以定义多次(在不同的程序块中)-&gt;相同关键字的记录 搜索结果——最新插入的元素 删除——程序块的结尾（标识符作用域结束） SortedChain类 template&lt;class E, class K&gt; class SortedChain { public: SortedChain() {first = 0;} ~SortedChain(); bool IsEmpty() const {return first == 0;} int Length() const; bool Search(const K&amp; k, E&amp; e) const; SortedChain&lt;E,K&gt;&amp; Delete(const K&amp; k, E&amp; e); SortedChain&lt;E,K&gt;&amp; Insert(const E&amp; e); SortedChain&lt;E,K&gt;&amp; DistinctInsert(const E&amp; e); void Output(ostream&amp; out) const; private: SortedChainNode&lt;E,K&gt; *first; }; //搜索 template&lt;class E, class K&gt; bool SortedChain&lt;E,K&gt;::Search(const K&amp; k, E&amp; e) const { SortedChainNode&lt;E,K&gt; *p = first; while (p &amp;&amp; p-&gt;data &lt; k) p = p-&gt;link; // 判断是否匹配 if (p &amp;&amp; p-&gt;data == k) // 如果链表尚不为空且数据匹配 {e = p-&gt;data; return true;} return false; // 链表已经为空，或当前数据大于k } //删除 template&lt;class E, class K&gt; SortedChain&lt;E,K&gt;&amp; SortedChain&lt;E,K&gt;::Delete(const K&amp; k, E&amp; e) { SortedChainNode&lt;E,K&gt; *p = first, *tp = 0; // search for match with k while (p &amp;&amp; p-&gt;data &lt; k) { tp = p; p = p-&gt;link; } if (p &amp;&amp; p-&gt;data == k) //找到了要删的节点 { e = p-&gt;data; if (tp) tp-&gt;link = p-&gt;link; //p是普通节点 else first = p-&gt;link; //p是首节点 delete p; return *this; } throw BadInput(); //没有可删的节点 return *this; } //插入（允许重复） template&lt;class E, class K&gt; SortedChain&lt;E,K&gt;&amp; SortedChain&lt;E,K&gt;::Insert(const E&amp; e) { SortedChainNode&lt;E,K&gt; *p = first, *tp = 0; while (p &amp;&amp; p-&gt;data &lt; e) { tp = p; p = p-&gt;link; } SortedChainNode&lt;E,K&gt; *q = new SortedChainNode&lt;E,K&gt;; q-&gt;data = e; q-&gt;link = p; if (tp) tp-&gt;link = q; else first = q; return *this; } //插入（不允许重复） template&lt;class E, class K&gt; SortedChain&lt;E,K&gt;&amp; SortedChain&lt;E,K&gt; ::DistinctInsert(const E&amp; e) {// Insert e only if no element with same key SortedChainNode&lt;E,K&gt; *p = first, *tp = 0; while (p &amp;&amp; p-&gt;data &lt; e) { tp = p; p = p-&gt;link; } // check if duplicate if (p &amp;&amp; p-&gt;data == e) throw BadInput(); // not duplicate, set up node for e SortedChainNode&lt;E,K&gt; *q = new SortedChainNode&lt;E,K&gt;; q-&gt;data = e; // insert node just after tp q-&gt;link = p; if (tp) tp-&gt;link = q; else first = q; return *this; } 散列表的适用范围">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2019-12-19T18:21:27+00:00">
+    <meta property="article:modified_time" content="2019-12-19T18:21:27+00:00">
+    <meta property="article:tag" content="数据结构">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="散列">
+  <meta name="twitter:description" content="抽象数据类型Dictionary{ 实例 具有不同关键字的元素集合 操作 Create()：创建一个空字典 Search(k, x)：搜索关键字为k的元素，结果放入x； 如果没找到，则返回false，否则返回true Insert(x)：向字典中插入元素x Delete(k, x)：删除关键字为k的元素，并将其放入x } 操作 随机访问：
+在编译器中定义用户标识符的符号表（symbol table）——重复元素字典
+定义标识符-&gt;建立一个记录并插入到符号表中 同样的标识符名可以定义多次(在不同的程序块中)-&gt;相同关键字的记录 搜索结果——最新插入的元素 删除——程序块的结尾（标识符作用域结束） SortedChain类 template&lt;class E, class K&gt; class SortedChain { public: SortedChain() {first = 0;} ~SortedChain(); bool IsEmpty() const {return first == 0;} int Length() const; bool Search(const K&amp; k, E&amp; e) const; SortedChain&lt;E,K&gt;&amp; Delete(const K&amp; k, E&amp; e); SortedChain&lt;E,K&gt;&amp; Insert(const E&amp; e); SortedChain&lt;E,K&gt;&amp; DistinctInsert(const E&amp; e); void Output(ostream&amp; out) const; private: SortedChainNode&lt;E,K&gt; *first; }; //搜索 template&lt;class E, class K&gt; bool SortedChain&lt;E,K&gt;::Search(const K&amp; k, E&amp; e) const { SortedChainNode&lt;E,K&gt; *p = first; while (p &amp;&amp; p-&gt;data &lt; k) p = p-&gt;link; // 判断是否匹配 if (p &amp;&amp; p-&gt;data == k) // 如果链表尚不为空且数据匹配 {e = p-&gt;data; return true;} return false; // 链表已经为空，或当前数据大于k } //删除 template&lt;class E, class K&gt; SortedChain&lt;E,K&gt;&amp; SortedChain&lt;E,K&gt;::Delete(const K&amp; k, E&amp; e) { SortedChainNode&lt;E,K&gt; *p = first, *tp = 0; // search for match with k while (p &amp;&amp; p-&gt;data &lt; k) { tp = p; p = p-&gt;link; } if (p &amp;&amp; p-&gt;data == k) //找到了要删的节点 { e = p-&gt;data; if (tp) tp-&gt;link = p-&gt;link; //p是普通节点 else first = p-&gt;link; //p是首节点 delete p; return *this; } throw BadInput(); //没有可删的节点 return *this; } //插入（允许重复） template&lt;class E, class K&gt; SortedChain&lt;E,K&gt;&amp; SortedChain&lt;E,K&gt;::Insert(const E&amp; e) { SortedChainNode&lt;E,K&gt; *p = first, *tp = 0; while (p &amp;&amp; p-&gt;data &lt; e) { tp = p; p = p-&gt;link; } SortedChainNode&lt;E,K&gt; *q = new SortedChainNode&lt;E,K&gt;; q-&gt;data = e; q-&gt;link = p; if (tp) tp-&gt;link = q; else first = q; return *this; } //插入（不允许重复） template&lt;class E, class K&gt; SortedChain&lt;E,K&gt;&amp; SortedChain&lt;E,K&gt; ::DistinctInsert(const E&amp; e) {// Insert e only if no element with same key SortedChainNode&lt;E,K&gt; *p = first, *tp = 0; while (p &amp;&amp; p-&gt;data &lt; e) { tp = p; p = p-&gt;link; } // check if duplicate if (p &amp;&amp; p-&gt;data == e) throw BadInput(); // not duplicate, set up node for e SortedChainNode&lt;E,K&gt; *q = new SortedChainNode&lt;E,K&gt;; q-&gt;data = e; // insert node just after tp q-&gt;link = p; if (tp) tp-&gt;link = q; else first = q; return *this; } 散列表的适用范围">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "散列",
+      "item": "https://milong26.github.io/post/%E6%95%A3%E5%88%97/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "散列",
+  "name": "散列",
+  "description": " 抽象数据类型Dictionary{ 实例 具有不同关键字的元素集合 操作 Create()：创建一个空字典 Search(k, x)：搜索关键字为k的元素，结果放入x； 如果没找到，则返回false，否则返回true Insert(x)：向字典中插入元素x Delete(k, x)：删除关键字为k的元素，并将其放入x } 操作 随机访问：\n在编译器中定义用户标识符的符号表（symbol table）——重复元素字典\n定义标识符-\u0026gt;建立一个记录并插入到符号表中 同样的标识符名可以定义多次(在不同的程序块中)-\u0026gt;相同关键字的记录 搜索结果——最新插入的元素 删除——程序块的结尾（标识符作用域结束） SortedChain类 template\u0026lt;class E, class K\u0026gt; class SortedChain { public: SortedChain() {first = 0;} ~SortedChain(); bool IsEmpty() const {return first == 0;} int Length() const; bool Search(const K\u0026amp; k, E\u0026amp; e) const; SortedChain\u0026lt;E,K\u0026gt;\u0026amp; Delete(const K\u0026amp; k, E\u0026amp; e); SortedChain\u0026lt;E,K\u0026gt;\u0026amp; Insert(const E\u0026amp; e); SortedChain\u0026lt;E,K\u0026gt;\u0026amp; DistinctInsert(const E\u0026amp; e); void Output(ostream\u0026amp; out) const; private: SortedChainNode\u0026lt;E,K\u0026gt; *first; }; //搜索 template\u0026lt;class E, class K\u0026gt; bool SortedChain\u0026lt;E,K\u0026gt;::Search(const K\u0026amp; k, E\u0026amp; e) const { SortedChainNode\u0026lt;E,K\u0026gt; *p = first; while (p \u0026amp;\u0026amp; p-\u0026gt;data \u0026lt; k) p = p-\u0026gt;link; // 判断是否匹配 if (p \u0026amp;\u0026amp; p-\u0026gt;data == k) // 如果链表尚不为空且数据匹配 {e = p-\u0026gt;data; return true;} return false; // 链表已经为空，或当前数据大于k } //删除 template\u0026lt;class E, class K\u0026gt; SortedChain\u0026lt;E,K\u0026gt;\u0026amp; SortedChain\u0026lt;E,K\u0026gt;::Delete(const K\u0026amp; k, E\u0026amp; e) { SortedChainNode\u0026lt;E,K\u0026gt; *p = first, *tp = 0; // search for match with k while (p \u0026amp;\u0026amp; p-\u0026gt;data \u0026lt; k) { tp = p; p = p-\u0026gt;link; } if (p \u0026amp;\u0026amp; p-\u0026gt;data == k) //找到了要删的节点 { e = p-\u0026gt;data; if (tp) tp-\u0026gt;link = p-\u0026gt;link; //p是普通节点 else first = p-\u0026gt;link; //p是首节点 delete p; return *this; } throw BadInput(); //没有可删的节点 return *this; } //插入（允许重复） template\u0026lt;class E, class K\u0026gt; SortedChain\u0026lt;E,K\u0026gt;\u0026amp; SortedChain\u0026lt;E,K\u0026gt;::Insert(const E\u0026amp; e) { SortedChainNode\u0026lt;E,K\u0026gt; *p = first, *tp = 0; while (p \u0026amp;\u0026amp; p-\u0026gt;data \u0026lt; e) { tp = p; p = p-\u0026gt;link; } SortedChainNode\u0026lt;E,K\u0026gt; *q = new SortedChainNode\u0026lt;E,K\u0026gt;; q-\u0026gt;data = e; q-\u0026gt;link = p; if (tp) tp-\u0026gt;link = q; else first = q; return *this; } //插入（不允许重复） template\u0026lt;class E, class K\u0026gt; SortedChain\u0026lt;E,K\u0026gt;\u0026amp; SortedChain\u0026lt;E,K\u0026gt; ::DistinctInsert(const E\u0026amp; e) {// Insert e only if no element with same key SortedChainNode\u0026lt;E,K\u0026gt; *p = first, *tp = 0; while (p \u0026amp;\u0026amp; p-\u0026gt;data \u0026lt; e) { tp = p; p = p-\u0026gt;link; } // check if duplicate if (p \u0026amp;\u0026amp; p-\u0026gt;data == e) throw BadInput(); // not duplicate, set up node for e SortedChainNode\u0026lt;E,K\u0026gt; *q = new SortedChainNode\u0026lt;E,K\u0026gt;; q-\u0026gt;data = e; // insert node just after tp q-\u0026gt;link = p; if (tp) tp-\u0026gt;link = q; else first = q; return *this; } 散列表的适用范围\n",
+  "keywords": [
+    "数据结构"
+  ],
+  "articleBody": " 抽象数据类型Dictionary{ 实例 具有不同关键字的元素集合 操作 Create()：创建一个空字典 Search(k, x)：搜索关键字为k的元素，结果放入x； 如果没找到，则返回false，否则返回true Insert(x)：向字典中插入元素x Delete(k, x)：删除关键字为k的元素，并将其放入x } 操作 随机访问：\n在编译器中定义用户标识符的符号表（symbol table）——重复元素字典\n定义标识符-\u003e建立一个记录并插入到符号表中 同样的标识符名可以定义多次(在不同的程序块中)-\u003e相同关键字的记录 搜索结果——最新插入的元素 删除——程序块的结尾（标识符作用域结束） SortedChain类 template\u003cclass E, class K\u003e class SortedChain { public: SortedChain() {first = 0;} ~SortedChain(); bool IsEmpty() const {return first == 0;} int Length() const; bool Search(const K\u0026 k, E\u0026 e) const; SortedChain\u003cE,K\u003e\u0026 Delete(const K\u0026 k, E\u0026 e); SortedChain\u003cE,K\u003e\u0026 Insert(const E\u0026 e); SortedChain\u003cE,K\u003e\u0026 DistinctInsert(const E\u0026 e); void Output(ostream\u0026 out) const; private: SortedChainNode\u003cE,K\u003e *first; }; //搜索 template\u003cclass E, class K\u003e bool SortedChain\u003cE,K\u003e::Search(const K\u0026 k, E\u0026 e) const { SortedChainNode\u003cE,K\u003e *p = first; while (p \u0026\u0026 p-\u003edata \u003c k) p = p-\u003elink; // 判断是否匹配 if (p \u0026\u0026 p-\u003edata == k) // 如果链表尚不为空且数据匹配 {e = p-\u003edata; return true;} return false; // 链表已经为空，或当前数据大于k } //删除 template\u003cclass E, class K\u003e SortedChain\u003cE,K\u003e\u0026 SortedChain\u003cE,K\u003e::Delete(const K\u0026 k, E\u0026 e) { SortedChainNode\u003cE,K\u003e *p = first, *tp = 0; // search for match with k while (p \u0026\u0026 p-\u003edata \u003c k) { tp = p; p = p-\u003elink; } if (p \u0026\u0026 p-\u003edata == k) //找到了要删的节点 { e = p-\u003edata; if (tp) tp-\u003elink = p-\u003elink; //p是普通节点 else first = p-\u003elink; //p是首节点 delete p; return *this; } throw BadInput(); //没有可删的节点 return *this; } //插入（允许重复） template\u003cclass E, class K\u003e SortedChain\u003cE,K\u003e\u0026 SortedChain\u003cE,K\u003e::Insert(const E\u0026 e) { SortedChainNode\u003cE,K\u003e *p = first, *tp = 0; while (p \u0026\u0026 p-\u003edata \u003c e) { tp = p; p = p-\u003elink; } SortedChainNode\u003cE,K\u003e *q = new SortedChainNode\u003cE,K\u003e; q-\u003edata = e; q-\u003elink = p; if (tp) tp-\u003elink = q; else first = q; return *this; } //插入（不允许重复） template\u003cclass E, class K\u003e SortedChain\u003cE,K\u003e\u0026 SortedChain\u003cE,K\u003e ::DistinctInsert(const E\u0026 e) {// Insert e only if no element with same key SortedChainNode\u003cE,K\u003e *p = first, *tp = 0; while (p \u0026\u0026 p-\u003edata \u003c e) { tp = p; p = p-\u003elink; } // check if duplicate if (p \u0026\u0026 p-\u003edata == e) throw BadInput(); // not duplicate, set up node for e SortedChainNode\u003cE,K\u003e *q = new SortedChainNode\u003cE,K\u003e; q-\u003edata = e; // insert node just after tp q-\u003elink = p; if (tp) tp-\u003elink = q; else first = q; return *this; } 散列表的适用范围\nkey的取值范围比较宽泛 待处理的key值不多 存储空间有限 特别适用于需要快速查找的问题 构造哈希函数 好的哈希函数：确定（统一值对应到同一位置）、快速计算、尽可能满射、均匀（有效避免聚焦，概率尽可能接近）\n直接定址法 线性计算\n数字分析法 根据频率选取冲突较少的位进行映射\n平方取中法 取关键字平方后的中间几位\n折叠法 将关键字分割成位数相同的几部分（最后一部分的位数可以不同），然后取这几部分的叠加和（舍去进位）作为哈希地址\n可以从左向右分割，也可以从右向左分割\n一般分割出的位数将与散列表地址位数相同\n适用于关键字位数很多的情况（显然此时数字分析和平方取中均不合适）\n移位折叠法 把各部分的最后一位对齐相加\n间界叠加法（分界叠加法） 各部分不折断，沿各部分的分界来回折叠，然后对齐相加\n除留余数法 取关键字被某个不大于哈希表表长m的数p除后所得余数为哈希地址【最常用的方法】\nH(key)=key % p, p\u003c=m\n伪随机数法 循环： rand(x+1) = [a x rand(x)] % M\n径取：hash(key) = rand(key) = [rand(0) xakey] % M\n多项式法 针对字符串的哈希值\nhash(s = “x0x1…xn-1”) = x0a^n-1^ + x1a^n-2^ + … + xn-2a^1^ + xn-1 = (…((x0a + x1)a + x2)a + … xn-2)a + xn-1\nstatic size_t hashCode(char s[]) { int h = 0; for ( n = (s), = 0; \u003c n; ++) { h = () | (); h += (int) s[]; } return () h; } 处理冲突 开放寻址法 可存放新表项的空闲位置既向它的同义词表项开放，又向它的非同义词表项开放同义词是指那些散列地址相同的不同关键字 Open addressing + closed hashing 为每个桶都事先约定若干备用桶 //具体如何约定？ 它们构成一个查找链（probing sequence/chain） 查找： 一旦发生冲突，则沿查找链转向下一桶单元，直到 命中（成功），或者 抵达一个空桶（已遍历所有冲突的词条，失败） 插入： 新词条若尚不存在，则存入查找终止处的空桶 删除： 简单地清除命中的桶？（多条）查找链可能因此被切断… 优点： 结构本身保持简单；在散列表内部解决冲突，无需附加空间 缺点： 冲突之后，可能引发本可避免的新冲突 线性开放寻址法（线性试探法 Linear probing） 使用某一种散列函数计算出初始散列地址H0，一旦发生冲突，在表中顺次向后寻找“下一个”空闲位置Hi的公式为：\nHi=(Hi-1+d) % m。其中，d=1\n懒惰删除：\n按照开放定址策略 先后插入、相互冲突的一组词条，将存放于同一查找链中 若需删除其中某一词条，应如何实现？ 直接删除：清除词条，回收空桶 问题：查找链被切断，后续词条将丢失——明明存在，却访问不到 Lazy deletion：仅做删除标记 此后，带有删除标记的桶所扮演的“角色”，因具体的操作类型而异 1）查找词条时，被视作“必不匹配的非空桶”，查找链在此得以延续 2）插入词条时，被视作“必然匹配的空闲桶”，可以用来存放新词条 具体过程的实现 hashtable类 template\u003cclass E, class K\u003e class HashTable { public: HashTable(int divisor = 11); ~HashTable() {delete [] ht; delete [] empty;} bool Search(const K\u0026 k, E\u0026 e) const; HashTable\u003cE,K\u003e\u0026 Insert(const E\u0026 e); void Output();// output the hash table private: int hSearch(const K\u0026 k) const; int m; // hash function divisor E *ht; // hash table array bool *empty; // 1D array }; //构造函数 template\u003cclass E, class K\u003e HashTable\u003cE,K\u003e::HashTable(int divisor) {// Constructor. m = divisor; // allocate hash table arrays ht = new E [m]; empty = new bool [m]; // set all buckets to empty for (int i = 0; i \u003c m; i++) empty[i] = true; } //辅助函数 template\u003cclass E, class K\u003e int HashTable\u003cE,K\u003e::hSearch(const K\u0026 k) const {// Search an open addressed table. // Return location of k if present. // Otherwise return insert point if there is space. int i = k % m; // home bucket int j = i; // start at home bucket do { if (empty[j] || ht[j] == k) return j; j = (j + 1) % m; // next bucket } while (j != i); // returned to home? return j; // table full } //三种返回情况：1、empty[b]=true，可插入该位置2、ht[j]=k，重复3、ht[b]\u003c\u003ek，且empty[b]=false，表满 //搜索 template\u003cclass E, class K\u003e bool HashTable\u003cE,K\u003e::Search(const K\u0026 k, E\u0026 e) const {// Put element that matches k in e. // Return false if no match. int b = hSearch(k); if (empty[b] || ht[b] != k) return false; e = ht[b]; return true; } //插入 template\u003cclass E, class K\u003e HashTable\u003cE,K\u003e\u0026 HashTable\u003cE,K\u003e::Insert(const E\u0026 e) {// Hash table insert. K k = e; // extract key int b = hSearch(k); // check if insert is to be done if (empty[b]) {empty[b] = false; ht[b] = e; return *this;} // no insert, check if duplicate or full if (ht[b] == k) throw BadInput(); // duplicate throw NoMem(); // table full return *this; // Visual C++ needs this line } 复杂性分析 初始化： Θ(m)\n搜索、插入最坏情况： Θ(n)\n平均情况：\nUn：一次不成功搜索平均检查的桶的数目\nSn：一次成功搜索平均检查的桶的数目\nun≈1/2[1+1/(1-a)^2^] sn≈1/2[1+1/(1-a)]\na=n/m：负载因子——hash表满的程度\n平方探测法 d=i^2^——探测h(k)、h(k)+1、h(k)+4、…\n优点：沿着查找链，各桶之间的距离线性递增–数据聚集现象有所缓解\n缺点：在需要缓存的场合，I/O操作将激增；速度上可能得不偿失 在表不满的情况下，也不能保证插入肯定成功 若M是素数，且λ ≤ 0.5，就一定能够找出；否则，可能失败\n双散列表法 需要两个散列函数\n第一个散列函数计算关键字的首选地址\n一旦发生冲突，用第二个散列函数计算到下一地址的增量；或者直接计算下一个地址\n双散列法将冲突处理也“随机化”，避免了“聚集”\n链表法 冲突：额外空间保存——链表\n相同hash函数值元素-\u003e一个链表\n冲突情况下的插入、删除、搜索à链表的插入、删除、搜索\n思想：\n通过哈希函数计算具有相同哈希地址的元素串在一个链表当中（归于一个子集合） 正常情况下，每个同义词链表长度都比较短，设有n个关键字存放到长度为m的散列表中，则每一个同义词链平均长度是n/m，效率可以接受 另一个优点是：除了解决冲突外，还可以解决溢出问题 chainhashtable类 template\u003cclass E, class K\u003e class ChainHashTable { public: ChainHashTable(int divisor = 11) {m = divisor; ht = new SortedChain\u003cE,K\u003e [m];} ~ChainHashTable() {delete [] ht;} bool Search(const K\u0026 k, E\u0026 e) const {return ht[k % m].Search(k, e);} ChainHashTable\u003cE,K\u003e\u0026 Insert(const E\u0026 e) {ht[e % m].DistinctInsert(e); return *this;} ChainHashTable\u003cE,K\u003e\u0026 Delete(const K\u0026 k, E\u0026 e) {ht[k % m].Delete(k, e); return *this;} void Output() const; // output the table private: int m; // divisor SortedChain\u003cE,K\u003e *ht; // array of chains }; 时间复杂度 链表长度i，不成功搜索：平均操作次数=1+i/2，平均链表长度n/m=a，则un=1+a/2\n成功搜索：插入第i个关键字时，链表平均长度(i-1)/m，sn=1+(n-1)/2m≈1+a/2\n公共溢出法 Overflow area 单独开辟一块连续空间 发生冲突的词条，顺序存入此区域 结构简单 算法易于实现 但是，不冲突则已，一旦发生冲突 最坏情况下，处理冲突词条所需的时间正比于溢出区的规模 ",
+  "wordCount" : "913",
+  "inLanguage": "en",
+  "datePublished": "2019-12-19T18:21:27Z",
+  "dateModified": "2019-12-19T18:21:27Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/%E6%95%A3%E5%88%97/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      散列
+    </h1>
+    <div class="post-meta">
+
+<span title='2019-12-19 18:21:27 +0000 UTC'>December 19, 2019</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><!-- raw HTML omitted -->
+<pre tabindex="0"><code>抽象数据类型Dictionary{
+实例
+	具有不同关键字的元素集合
+操作
+	Create()：创建一个空字典
+	Search(k, x)：搜索关键字为k的元素，结果放入x；
+			如果没找到，则返回false，否则返回true
+	Insert(x)：向字典中插入元素x
+	Delete(k, x)：删除关键字为k的元素，并将其放入x
+}
+</code></pre><h4 id="操作">操作<a hidden class="anchor" aria-hidden="true" href="#操作">#</a></h4>
+<p>随机访问：</p>
+<p>在编译器中定义用户标识符的符号表（symbol table）——重复元素字典</p>
+<ul>
+<li>定义标识符-&gt;建立一个记录并插入到符号表中</li>
+<li>同样的标识符名可以定义多次(在不同的程序块中)-&gt;相同关键字的记录</li>
+<li>搜索结果——最新插入的元素</li>
+<li>删除——程序块的结尾（标识符作用域结束）</li>
+</ul>
+<h4 id="sortedchain类">SortedChain类<a hidden class="anchor" aria-hidden="true" href="#sortedchain类">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">E</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">K</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SortedChain</span> {
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      SortedChain() {first <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;}
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">~</span>SortedChain();
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">IsEmpty</span>() <span style="color:#66d9ef">const</span> {<span style="color:#66d9ef">return</span> first <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>;}
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">Length</span>() <span style="color:#66d9ef">const</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">Search</span>(<span style="color:#66d9ef">const</span> K<span style="color:#f92672">&amp;</span> k, E<span style="color:#f92672">&amp;</span> e) <span style="color:#66d9ef">const</span>;
+</span></span><span style="display:flex;"><span>      SortedChain<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;&amp;</span> Delete(<span style="color:#66d9ef">const</span> K<span style="color:#f92672">&amp;</span> k, E<span style="color:#f92672">&amp;</span> e);
+</span></span><span style="display:flex;"><span>      SortedChain<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;&amp;</span> Insert(<span style="color:#66d9ef">const</span> E<span style="color:#f92672">&amp;</span> e);
+</span></span><span style="display:flex;"><span>      SortedChain<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;&amp;</span> DistinctInsert(<span style="color:#66d9ef">const</span> E<span style="color:#f92672">&amp;</span> e);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Output</span>(ostream<span style="color:#f92672">&amp;</span> out) <span style="color:#66d9ef">const</span>;
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      SortedChainNode<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>first;  
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//搜索
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">E</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">K</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> SortedChain<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;::</span>Search(<span style="color:#66d9ef">const</span> K<span style="color:#f92672">&amp;</span> k, E<span style="color:#f92672">&amp;</span> e) <span style="color:#66d9ef">const</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    SortedChainNode<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> first;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (p <span style="color:#f92672">&amp;&amp;</span> p<span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">&lt;</span> k)
+</span></span><span style="display:flex;"><span>        p <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>link;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">// 判断是否匹配
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (p <span style="color:#f92672">&amp;&amp;</span> p<span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">==</span> k) <span style="color:#75715e">// 如果链表尚不为空且数据匹配
+</span></span></span><span style="display:flex;"><span>      {e <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>data; <span style="color:#66d9ef">return</span> true;}
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> false; <span style="color:#75715e">// 链表已经为空，或当前数据大于k
+</span></span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//删除
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">E</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">K</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>SortedChain<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;&amp;</span> SortedChain<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;::</span>Delete(<span style="color:#66d9ef">const</span> K<span style="color:#f92672">&amp;</span> k, E<span style="color:#f92672">&amp;</span> e)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    SortedChainNode<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> first, <span style="color:#f92672">*</span>tp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; 
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">// search for match with k
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">while</span> (p <span style="color:#f92672">&amp;&amp;</span> p<span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">&lt;</span> k)
+</span></span><span style="display:flex;"><span>   {
+</span></span><span style="display:flex;"><span>        tp <span style="color:#f92672">=</span> p;
+</span></span><span style="display:flex;"><span>        p <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>link;
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (p <span style="color:#f92672">&amp;&amp;</span> p<span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">==</span> k) <span style="color:#75715e">//找到了要删的节点
+</span></span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        e <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>data; 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (tp)  tp<span style="color:#f92672">-&gt;</span>link <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>link; <span style="color:#75715e">//p是普通节点
+</span></span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> first <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>link;  <span style="color:#75715e">//p是首节点
+</span></span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">delete</span> p;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">BadInput</span>();  <span style="color:#75715e">//没有可删的节点
+</span></span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;    
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//插入（允许重复）
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">E</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">K</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>SortedChain<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;&amp;</span> SortedChain<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;::</span>Insert(<span style="color:#66d9ef">const</span> E<span style="color:#f92672">&amp;</span> e)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>   SortedChainNode<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> first,  <span style="color:#f92672">*</span>tp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">while</span> (p <span style="color:#f92672">&amp;&amp;</span> p<span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">&lt;</span> e) {
+</span></span><span style="display:flex;"><span>      tp <span style="color:#f92672">=</span> p;
+</span></span><span style="display:flex;"><span>      p <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>link;
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>   SortedChainNode<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>q <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SortedChainNode<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;</span>;
+</span></span><span style="display:flex;"><span>   q<span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">=</span> e;
+</span></span><span style="display:flex;"><span>   q<span style="color:#f92672">-&gt;</span>link <span style="color:#f92672">=</span> p;
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (tp) tp<span style="color:#f92672">-&gt;</span>link <span style="color:#f92672">=</span> q;
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">else</span> first <span style="color:#f92672">=</span> q;
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//插入（不允许重复）
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">E</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">K</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>SortedChain<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;&amp;</span> SortedChain<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                 <span style="color:#f92672">::</span>DistinctInsert(<span style="color:#66d9ef">const</span> E<span style="color:#f92672">&amp;</span> e)
+</span></span><span style="display:flex;"><span>{<span style="color:#75715e">// Insert e only if no element with same key
+</span></span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>   SortedChainNode<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> first, <span style="color:#f92672">*</span>tp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">while</span> (p <span style="color:#f92672">&amp;&amp;</span> p<span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">&lt;</span> e)
+</span></span><span style="display:flex;"><span>   {
+</span></span><span style="display:flex;"><span>      tp <span style="color:#f92672">=</span> p;
+</span></span><span style="display:flex;"><span>      p <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>link;
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">// check if duplicate
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (p <span style="color:#f92672">&amp;&amp;</span> p<span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">==</span> e) <span style="color:#66d9ef">throw</span> BadInput();
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">// not duplicate, set up node for e
+</span></span></span><span style="display:flex;"><span>   SortedChainNode<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>q <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SortedChainNode<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;</span>;
+</span></span><span style="display:flex;"><span>   q<span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">=</span> e;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">// insert node just after tp
+</span></span></span><span style="display:flex;"><span>   q<span style="color:#f92672">-&gt;</span>link <span style="color:#f92672">=</span> p;
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (tp) tp<span style="color:#f92672">-&gt;</span>link <span style="color:#f92672">=</span> q;
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">else</span> first <span style="color:#f92672">=</span> q;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><!-- raw HTML omitted -->
+<p>散列表的适用范围</p>
+<ul>
+<li>key的取值范围比较宽泛</li>
+<li>待处理的key值不多</li>
+<li>存储空间有限</li>
+<li>特别适用于需要快速查找的问题</li>
+</ul>
+<h4 id="构造哈希函数">构造哈希函数<a hidden class="anchor" aria-hidden="true" href="#构造哈希函数">#</a></h4>
+<p>好的哈希函数：确定（统一值对应到同一位置）、快速计算、尽可能满射、均匀（有效避免聚焦，概率尽可能接近）</p>
+<h5 id="直接定址法">直接定址法<a hidden class="anchor" aria-hidden="true" href="#直接定址法">#</a></h5>
+<p>线性计算</p>
+<h5 id="数字分析法">数字分析法<a hidden class="anchor" aria-hidden="true" href="#数字分析法">#</a></h5>
+<p>根据频率选取冲突较少的位进行映射</p>
+<h5 id="平方取中法">平方取中法<a hidden class="anchor" aria-hidden="true" href="#平方取中法">#</a></h5>
+<p>取关键字平方后的中间几位</p>
+<h5 id="折叠法">折叠法<a hidden class="anchor" aria-hidden="true" href="#折叠法">#</a></h5>
+<p>将关键字分割成位数相同的几部分（最后一部分的位数可以不同），然后取这几部分的叠加和（舍去进位）作为哈希地址</p>
+<p>可以从左向右分割，也可以从右向左分割</p>
+<p>一般分割出的位数将与散列表地址位数相同</p>
+<p>适用于关键字位数很多的情况（显然此时数字分析和平方取中均不合适）</p>
+<h6 id="移位折叠法">移位折叠法<a hidden class="anchor" aria-hidden="true" href="#移位折叠法">#</a></h6>
+<p>把各部分的最后一位对齐相加</p>
+<h6 id="间界叠加法分界叠加法">间界叠加法（分界叠加法）<a hidden class="anchor" aria-hidden="true" href="#间界叠加法分界叠加法">#</a></h6>
+<p>各部分不折断，沿各部分的分界来回折叠，然后对齐相加</p>
+<h5 id="除留余数法">除留余数法<a hidden class="anchor" aria-hidden="true" href="#除留余数法">#</a></h5>
+<p>取关键字被某个不大于哈希表表长m的数p除后所得余数为哈希地址【最常用的方法】</p>
+<p>H(key)=key % p, p&lt;=m</p>
+<h5 id="伪随机数法">伪随机数法<a hidden class="anchor" aria-hidden="true" href="#伪随机数法">#</a></h5>
+<p>循环： rand(x+1) = [a x rand(x)] % M</p>
+<p>径取：hash(key) = rand(key) = [rand(0) xakey] % M</p>
+<h5 id="多项式法">多项式法<a hidden class="anchor" aria-hidden="true" href="#多项式法">#</a></h5>
+<p>针对字符串的哈希值</p>
+<p>hash(s = &ldquo;x<del>0</del>x<del>1</del>&hellip;x<del>n-1</del>&rdquo;)
+= x<del>0</del>a^n-1^ + x<del>1</del>a^n-2^ + &hellip; + x<del>n-2</del>a^1^ + x<del>n-1</del>
+= (&hellip;((x<del>0</del>a + x<del>1</del>)a + x<del>2</del>)a + &hellip; x<del>n-2</del>)a + x<del>n-1</del></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> size_t <span style="color:#a6e22e">hashCode</span>(<span style="color:#66d9ef">char</span> s[]) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> h <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> ( n <span style="color:#f92672">=</span> (s),  <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    { h <span style="color:#f92672">=</span> () <span style="color:#f92672">|</span> (); h <span style="color:#f92672">+=</span> (<span style="color:#66d9ef">int</span>) s[]; }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> () h;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="处理冲突">处理冲突<a hidden class="anchor" aria-hidden="true" href="#处理冲突">#</a></h4>
+<h5 id="开放寻址法">开放寻址法<a hidden class="anchor" aria-hidden="true" href="#开放寻址法">#</a></h5>
+<ul>
+<li>可存放新表项的空闲位置既向它的同义词表项开放，又向它的非同义词表项开放同义词是指那些散列地址相同的不同关键字</li>
+<li>Open addressing + closed hashing
+为每个桶都事先约定若干备用桶 //具体如何约定？
+它们构成一个查找链（probing sequence/chain）</li>
+<li>查找： 一旦发生冲突，则沿查找链转向下一桶单元，直到
+命中（成功），或者
+抵达一个空桶（已遍历所有冲突的词条，失败）</li>
+<li>插入： 新词条若尚不存在，则存入查找终止处的空桶</li>
+<li>删除： 简单地清除命中的桶？（多条）查找链可能因此被切断&hellip;</li>
+<li>优点： 结构本身保持简单；在散列表内部解决冲突，无需附加空间</li>
+<li>缺点： 冲突之后，可能引发本可避免的新冲突</li>
+</ul>
+<h5 id="线性开放寻址法线性试探法-linear-probing">线性开放寻址法（线性试探法 Linear probing）<a hidden class="anchor" aria-hidden="true" href="#线性开放寻址法线性试探法-linear-probing">#</a></h5>
+<p>使用某一种散列函数计算出初始散列地址H0，一旦发生冲突，在表中顺次向后寻找“下一个”空闲位置Hi的公式为：</p>
+<p>H<del>i</del>=(H<del>i-1</del>+d) % m。其中，d=1</p>
+<p>懒惰删除：</p>
+<ul>
+<li>按照开放定址策略
+先后插入、相互冲突的一组词条，将存放于同一查找链中</li>
+<li>若需删除其中某一词条，应如何实现？</li>
+<li>直接删除：清除词条，回收空桶
+问题：查找链被切断，后续词条将丢失——明明存在，却访问不到</li>
+<li>Lazy deletion：仅做删除标记</li>
+<li>此后，带有删除标记的桶所扮演的“角色”，因具体的操作类型而异
+1）查找词条时，被视作“必不匹配的非空桶”，查找链在此得以延续
+2）插入词条时，被视作“必然匹配的空闲桶”，可以用来存放新词条
+具体过程的实现</li>
+</ul>
+<h5 id="hashtable类">hashtable类<a hidden class="anchor" aria-hidden="true" href="#hashtable类">#</a></h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">E</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">K</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HashTable</span> {
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      HashTable(<span style="color:#66d9ef">int</span> divisor <span style="color:#f92672">=</span> <span style="color:#ae81ff">11</span>); 
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">~</span>HashTable() {<span style="color:#66d9ef">delete</span> [] ht;  <span style="color:#66d9ef">delete</span> [] empty;}
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">Search</span>(<span style="color:#66d9ef">const</span> K<span style="color:#f92672">&amp;</span> k, E<span style="color:#f92672">&amp;</span> e) <span style="color:#66d9ef">const</span>;
+</span></span><span style="display:flex;"><span>      HashTable<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;&amp;</span> Insert(<span style="color:#66d9ef">const</span> E<span style="color:#f92672">&amp;</span> e);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Output</span>();<span style="color:#75715e">// output the hash table
+</span></span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> hSearch(<span style="color:#66d9ef">const</span> K<span style="color:#f92672">&amp;</span> k) <span style="color:#66d9ef">const</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> m; <span style="color:#75715e">// hash function divisor
+</span></span></span><span style="display:flex;"><span>      E <span style="color:#f92672">*</span>ht; <span style="color:#75715e">// hash table array
+</span></span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">bool</span> <span style="color:#f92672">*</span>empty; <span style="color:#75715e">// 1D array
+</span></span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//构造函数
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">E</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">K</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>HashTable<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;::</span>HashTable(<span style="color:#66d9ef">int</span> divisor)
+</span></span><span style="display:flex;"><span>{<span style="color:#75715e">// Constructor.
+</span></span></span><span style="display:flex;"><span>   m <span style="color:#f92672">=</span> divisor;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">// allocate hash table arrays
+</span></span></span><span style="display:flex;"><span>   ht <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> E [m];
+</span></span><span style="display:flex;"><span>   empty <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">bool</span> [m];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">// set all buckets to empty
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>      empty[i] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//辅助函数
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">E</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">K</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> HashTable<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;::</span>hSearch(<span style="color:#66d9ef">const</span> K<span style="color:#f92672">&amp;</span> k) <span style="color:#66d9ef">const</span>
+</span></span><span style="display:flex;"><span>{<span style="color:#75715e">// Search an open addressed table.
+</span></span></span><span style="display:flex;"><span> <span style="color:#75715e">// Return location of k if present.
+</span></span></span><span style="display:flex;"><span> <span style="color:#75715e">// Otherwise return insert point if there is space.
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> k <span style="color:#f92672">%</span> m; <span style="color:#75715e">// home bucket
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i;     <span style="color:#75715e">// start at home bucket
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">do</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (empty[j] <span style="color:#f92672">||</span> ht[j] <span style="color:#f92672">==</span> k) <span style="color:#66d9ef">return</span> j;
+</span></span><span style="display:flex;"><span>      j <span style="color:#f92672">=</span> (j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">%</span> m;  <span style="color:#75715e">// next bucket
+</span></span></span><span style="display:flex;"><span>      } <span style="color:#66d9ef">while</span> (j <span style="color:#f92672">!=</span> i); <span style="color:#75715e">// returned to home?
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> j;  <span style="color:#75715e">// table full
+</span></span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//三种返回情况：1、empty[b]=true，可插入该位置2、ht[j]=k，重复3、ht[b]&lt;&gt;k，且empty[b]=false，表满
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//搜索
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">E</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">K</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> HashTable<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;::</span>Search(<span style="color:#66d9ef">const</span> K<span style="color:#f92672">&amp;</span> k, E<span style="color:#f92672">&amp;</span> e) <span style="color:#66d9ef">const</span>
+</span></span><span style="display:flex;"><span>{<span style="color:#75715e">// Put element that matches k in e.
+</span></span></span><span style="display:flex;"><span> <span style="color:#75715e">// Return false if no match.
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">int</span> b <span style="color:#f92672">=</span> hSearch(k);
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (empty[b] <span style="color:#f92672">||</span> ht[b] <span style="color:#f92672">!=</span> k) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>   e <span style="color:#f92672">=</span> ht[b];
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//插入
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">E</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">K</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>HashTable<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;&amp;</span> HashTable<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;::</span>Insert(<span style="color:#66d9ef">const</span> E<span style="color:#f92672">&amp;</span> e)
+</span></span><span style="display:flex;"><span>{<span style="color:#75715e">// Hash table insert.
+</span></span></span><span style="display:flex;"><span>   K k <span style="color:#f92672">=</span> e; <span style="color:#75715e">// extract key
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">int</span> b <span style="color:#f92672">=</span> hSearch(k);
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">// check if insert is to be done
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (empty[b]) {empty[b] <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>                  ht[b] <span style="color:#f92672">=</span> e;
+</span></span><span style="display:flex;"><span>                  <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;}
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">// no insert, check if duplicate or full
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (ht[b] <span style="color:#f92672">==</span> k) <span style="color:#66d9ef">throw</span> BadInput(); <span style="color:#75715e">// duplicate
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">NoMem</span>(); <span style="color:#75715e">// table full
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;  <span style="color:#75715e">// Visual C++ needs this line
+</span></span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h5 id="复杂性分析">复杂性分析<a hidden class="anchor" aria-hidden="true" href="#复杂性分析">#</a></h5>
+<p>初始化： Θ(m)</p>
+<p>搜索、插入最坏情况： Θ(n)</p>
+<p>平均情况：</p>
+<p>Un：一次不成功搜索平均检查的桶的数目</p>
+<p>Sn：一次成功搜索平均检查的桶的数目</p>
+<p>u<del>n</del>≈1/2[1+1/(1-a)^2^]  s<del>n</del>≈1/2[1+1/(1-a)]</p>
+<p>a=n/m：负载因子——hash表满的程度</p>
+<h5 id="平方探测法">平方探测法<a hidden class="anchor" aria-hidden="true" href="#平方探测法">#</a></h5>
+<p>d=i^2^——探测h(k)、h(k)+1、h(k)+4、…</p>
+<p>优点：沿着查找链，各桶之间的距离线性递增&ndash;数据聚集现象有所缓解</p>
+<p>缺点：在需要缓存的场合，I/O操作将激增；速度上可能得不偿失
+在表不满的情况下，也不能保证插入肯定成功
+若M是素数，且λ ≤ 0.5，就一定能够找出；否则，可能失败</p>
+<h5 id="双散列表法">双散列表法<a hidden class="anchor" aria-hidden="true" href="#双散列表法">#</a></h5>
+<p>需要两个散列函数</p>
+<p>第一个散列函数计算关键字的首选地址</p>
+<p>一旦发生冲突，用第二个散列函数计算到下一地址的增量；或者直接计算下一个地址</p>
+<p>双散列法将冲突处理也“随机化”，避免了“聚集”</p>
+<h5 id="链表法">链表法<a hidden class="anchor" aria-hidden="true" href="#链表法">#</a></h5>
+<p>冲突：额外空间保存——链表</p>
+<p>相同hash函数值元素-&gt;一个链表</p>
+<p>冲突情况下的插入、删除、搜索à链表的插入、删除、搜索</p>
+<p>思想：</p>
+<ul>
+<li>通过哈希函数计算具有相同哈希地址的元素串在一个链表当中（归于一个子集合）</li>
+<li>正常情况下，每个同义词链表长度都比较短，设有n个关键字存放到长度为m的散列表中，则每一个同义词链平均长度是n/m，效率可以接受</li>
+<li>另一个优点是：除了解决冲突外，还可以解决溢出问题</li>
+</ul>
+<h6 id="chainhashtable类">chainhashtable类<a hidden class="anchor" aria-hidden="true" href="#chainhashtable类">#</a></h6>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">E</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">K</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ChainHashTable</span> {
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      ChainHashTable(<span style="color:#66d9ef">int</span> divisor <span style="color:#f92672">=</span> <span style="color:#ae81ff">11</span>)
+</span></span><span style="display:flex;"><span>         {m <span style="color:#f92672">=</span> divisor; ht <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SortedChain<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;</span> [m];}
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">~</span>ChainHashTable() {<span style="color:#66d9ef">delete</span> [] ht;}
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">Search</span>(<span style="color:#66d9ef">const</span> K<span style="color:#f92672">&amp;</span> k, E<span style="color:#f92672">&amp;</span> e) <span style="color:#66d9ef">const</span>
+</span></span><span style="display:flex;"><span>           {<span style="color:#66d9ef">return</span> ht[k <span style="color:#f92672">%</span> m].Search(k, e);}
+</span></span><span style="display:flex;"><span>            ChainHashTable<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;&amp;</span> Insert(<span style="color:#66d9ef">const</span> E<span style="color:#f92672">&amp;</span> e)
+</span></span><span style="display:flex;"><span>           {ht[e <span style="color:#f92672">%</span> m].DistinctInsert(e); <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;}
+</span></span><span style="display:flex;"><span>      ChainHashTable<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;&amp;</span> Delete(<span style="color:#66d9ef">const</span> K<span style="color:#f92672">&amp;</span> k, E<span style="color:#f92672">&amp;</span> e)
+</span></span><span style="display:flex;"><span>           {ht[k <span style="color:#f92672">%</span> m].Delete(k, e); <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;}
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Output</span>() <span style="color:#66d9ef">const</span>;   <span style="color:#75715e">// output the table
+</span></span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> m;                 <span style="color:#75715e">// divisor
+</span></span></span><span style="display:flex;"><span>      SortedChain<span style="color:#f92672">&lt;</span>E,K<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>ht;  <span style="color:#75715e">// array of chains
+</span></span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h6 id="时间复杂度">时间复杂度<a hidden class="anchor" aria-hidden="true" href="#时间复杂度">#</a></h6>
+<p>链表长度i，不成功搜索：平均操作次数=1+i/2，平均链表长度n/m=a，则u<del>n</del>=1+a/2</p>
+<p>成功搜索：插入第i个关键字时，链表平均长度(i-1)/m，s<del>n</del>=1+(n-1)/2m≈1+a/2</p>
+<h5 id="公共溢出法">公共溢出法<a hidden class="anchor" aria-hidden="true" href="#公共溢出法">#</a></h5>
+<ul>
+<li>Overflow area
+单独开辟一块连续空间
+发生冲突的词条，顺序存入此区域</li>
+<li>结构简单
+算法易于实现</li>
+<li>但是，不冲突则已，一旦发生冲突
+最坏情况下，处理冲突词条所需的时间正比于溢出区的规模</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Towards Generalizable Robotic Data Flywheel High-Dimensional Factorization and Composition | 我的博客</title>
+<meta name="keywords" content="">
+<meta name="description" content="讲得很有意思而且很贴切的一个论文，就是很多词我看不懂。这一篇要是ai直接看会很浪费
+24号开始，然后迅速提出了40多个雷霆问题。25号偷懒，26号终于都回答了。
+它帮我更加确立我的方向，
+大方向确实还是 efficient data collection
+但是iterative learning不行
+而且factor不需要分这么多，因为我是给定环境的
+那我就相当于要在object和action这两个区域里面做更细致的generalization
+可以通过什么方法 Implicit，但我不知道能不能做
+总结这篇论文，让我以后写相关工作的时候可以直接看：
+to 目的 &ndash; efficient data collection to generalize
+this work 怎么做&ndash; design factor composition and use iteractive learning
+get 结果 nearly 5-10/1 data requirement reduction
+but 局限性 need to design factor humanly and iterative need much work">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/towards-generalizable-robotic-data-flywheel-high-dimensional-factorization-and-composition/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/towards-generalizable-robotic-data-flywheel-high-dimensional-factorization-and-composition/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/towards-generalizable-robotic-data-flywheel-high-dimensional-factorization-and-composition/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="Towards Generalizable Robotic Data Flywheel High-Dimensional Factorization and Composition">
+  <meta property="og:description" content="讲得很有意思而且很贴切的一个论文，就是很多词我看不懂。这一篇要是ai直接看会很浪费 24号开始，然后迅速提出了40多个雷霆问题。25号偷懒，26号终于都回答了。 它帮我更加确立我的方向， 大方向确实还是 efficient data collection 但是iterative learning不行 而且factor不需要分这么多，因为我是给定环境的 那我就相当于要在object和action这两个区域里面做更细致的generalization 可以通过什么方法 Implicit，但我不知道能不能做
+总结这篇论文，让我以后写相关工作的时候可以直接看： to 目的 – efficient data collection to generalize this work 怎么做– design factor composition and use iteractive learning get 结果 nearly 5-10/1 data requirement reduction but 局限性 need to design factor humanly and iterative need much work">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2026-06-24T16:57:24+00:00">
+    <meta property="article:modified_time" content="2026-06-24T16:57:24+00:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Towards Generalizable Robotic Data Flywheel High-Dimensional Factorization and Composition">
+  <meta name="twitter:description" content="讲得很有意思而且很贴切的一个论文，就是很多词我看不懂。这一篇要是ai直接看会很浪费 24号开始，然后迅速提出了40多个雷霆问题。25号偷懒，26号终于都回答了。 它帮我更加确立我的方向， 大方向确实还是 efficient data collection 但是iterative learning不行 而且factor不需要分这么多，因为我是给定环境的 那我就相当于要在object和action这两个区域里面做更细致的generalization 可以通过什么方法 Implicit，但我不知道能不能做
+总结这篇论文，让我以后写相关工作的时候可以直接看： to 目的 – efficient data collection to generalize this work 怎么做– design factor composition and use iteractive learning get 结果 nearly 5-10/1 data requirement reduction but 局限性 need to design factor humanly and iterative need much work">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Towards Generalizable Robotic Data Flywheel High-Dimensional Factorization and Composition",
+      "item": "https://milong26.github.io/post/towards-generalizable-robotic-data-flywheel-high-dimensional-factorization-and-composition/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Towards Generalizable Robotic Data Flywheel High-Dimensional Factorization and Composition",
+  "name": "Towards Generalizable Robotic Data Flywheel High-Dimensional Factorization and Composition",
+  "description": "讲得很有意思而且很贴切的一个论文，就是很多词我看不懂。这一篇要是ai直接看会很浪费 24号开始，然后迅速提出了40多个雷霆问题。25号偷懒，26号终于都回答了。 它帮我更加确立我的方向， 大方向确实还是 efficient data collection 但是iterative learning不行 而且factor不需要分这么多，因为我是给定环境的 那我就相当于要在object和action这两个区域里面做更细致的generalization 可以通过什么方法 Implicit，但我不知道能不能做\n总结这篇论文，让我以后写相关工作的时候可以直接看： to 目的 \u0026ndash; efficient data collection to generalize this work 怎么做\u0026ndash; design factor composition and use iteractive learning get 结果 nearly 5-10/1 data requirement reduction but 局限性 need to design factor humanly and iterative need much work\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "讲得很有意思而且很贴切的一个论文，就是很多词我看不懂。这一篇要是ai直接看会很浪费 24号开始，然后迅速提出了40多个雷霆问题。25号偷懒，26号终于都回答了。 它帮我更加确立我的方向， 大方向确实还是 efficient data collection 但是iterative learning不行 而且factor不需要分这么多，因为我是给定环境的 那我就相当于要在object和action这两个区域里面做更细致的generalization 可以通过什么方法 Implicit，但我不知道能不能做\n总结这篇论文，让我以后写相关工作的时候可以直接看： to 目的 – efficient data collection to generalize this work 怎么做– design factor composition and use iteractive learning get 结果 nearly 5-10/1 data requirement reduction but 局限性 need to design factor humanly and iterative need much work\n边看边提问，提问了一堆\na heuristic Factor-Aware Compositional Iterative Learning framework for data factorization and compositional generalization.这里面每个词和词组我都没看懂。是专业名词的话解释一下 heuristic指一种基于经验、直觉或“准则”来寻找答案的方法，而不是通过严密的数学证明去寻找全局最优解。它通常用于解决极其复杂（如 NP-hard）的问题，追求的是“足够好”且“速度快”。 论文中要寻找“最精简的数据集子集 D′D′”在数学上是极难的（因为 VLA 模型是黑盒）。因此，作者设计了一个启发式准则——即计算成功率张量 RR 和缺口张量 SS。通过寻找 SS 中的最小值来决定采集什么数据，这就是一种“启发式搜索”。 Factor-Aware 指系统“知道”数据是由哪些不同的维度（因子）组成的。传统的学习框架把数据看作一整块（一堆录像），而 F-ACIL 感知到了数据背后的 Object（物体）、Action（动作）、Environment（环境） 这三大因子轴。它在采样和评估时，每一条数据都被打上了这些因子的标签。 Iterative Learning (迭代学习)：体现为论文提到的 Data Flywheel（数据飞轮）。系统不是一次性学完，而是：第一轮学 O（物体），评估后发现不行，第二轮再针对性学，第三轮学 A（动作） Data Factorization (数据因子化)：Factorization 原意是数学里的“因式分解”。在这里指把复杂的原始数据分解为独立的因子轴。 figure1里面，数据分布的图是怎么画出来的？As a result, the overall data coverage typically forms a Gaussian-like distribution, as illustrated in Fig. 1(a). 这个结论怎么得到的？ 这种分布源于对真实世界机器人数据收集的观察。在实际操作中，由于收集者的习惯模式或固定场景布局，演示数据往往集中在少数几种变体上，导致覆盖范围窄且方差低。例如，物体通常摆放在固定的几个位置，动作轨迹也具有高度的一致性。这种受限的采集方式使得数据呈现出一种长尾的、类高斯的分布（Gaussian-like distribution） 现实世界的数据，因为人工数据采集有固定的习惯，通常用固定的环境布局，所以数据呈现 gaussian-like distribution。 “For instance, not only objects are typically arranged within a small set of fixed layouts, the action sequences in long-horizon tasks are also constrained by the collectors’ habitual patterns formed through repeated daily work, and so forth. Furthermore, real-world demonstrations are frequently gathered under convenient settings, ultimately causing distribution shift from training to real-world distribution. As a result, the overall data coverage typically forms a Gaussian-like distribution” 前面的经验观察我知道，后面的类高斯这个推论正确吗？数据会围绕\"最常见\"的情况大量集中，而离这个常见情况越远的数据越少。也就是中心密集，外围稀疏，这个形状看起来像二维高斯，所以是gaussian-like。推论也不是很严谨，看投稿以后会不会改。 高斯为什么不好，难道不是采集越多就表示这个越重要吗？学习到类高斯的数据会导致容易dominant过拟合，sampling bias导致generalization差。 However, naive expansion toward a quasi-uniform distribution across multiple axes in high-dimensional factor spaces often leads to the curse of dimensionality这个结论又怎么得到的？ 什么是 curse of dimensionality？是因为维度太多了吗？ 均匀就是组合起来，所以维度爆炸 类似面多了加水水多加面 实现有效泛化所需的数据分布既不是高斯分布，也不是准均匀分布。好像也没有解释过。也就是多个簇的形式，mixture of gaussian mode 什么是迭代学习：指数据收集与模型训练交替进行的循环过程。评估模型在因子化基准上的表现 -\u003e 识别表现不佳的因子组合（Factor Compositions） -\u003e 针对性地补充这些区域的演示数据 -\u003e 重新训练模型。这个过程循环往复（Data Flywheel） VLA evaluations often largely focus on aggregate task success or semantic intent, without systematically disentangling how individual factor(e.g., object properties, action element, and environmental conditions) affects generalization performance. In contrast, F-ACIL directly evaluates how VLAs adapt to compositional variations, enabling a more precise understanding of how policies manipulate objects across diverse environments and various poses.VLA 的评估通常主要关注整体任务成功率或语义意图，而没有系统地分析各个因素（例如物体属性、动作元素和环境条件）如何影响泛化表现。相比之下，F-ACIL 直接评估 VLA 如何适应组合变化，从而更准确地理解策略在不同环境和各种姿态下操作物体的方式。怎么做到的？显式地在各个解耦的因子轴上进行评估，能够精确量化单个因子（如物体尺寸或环境光照）对性能的影响。所以还是实验 introduction给我说心动了，这个东西到底可以实现哪些功能，为什么设计出来的F-ACIL可以做到？核心功能是：因子化设计、组合泛化、以及迭代训练。为什么有效：原本难以处理的高维状态空间转化为可解释、可操作的因子空间，所以是物理意义上的转化，但还是有改进空间的 那我的改进切入点的办法是不是就只有把成功率提升到99%？虽然 Scaling Laws 表明增加数据量能提升性能，但单纯追求数据量而不考虑维度设计会导致效率低下。F-ACIL 证明，通过结构化因子化和组合泛化，即使演示数据量减少 5-10 倍，也能获得显著的性能提升（超过 45%）。因此，维度感知的设计（Dimension-aware design）比单纯追求成功率数据更重要。那我怎么改？ Instead of exhaustive enumeration over all possible factors, F-ACIL iteratively expands along selected dimensions, leveraging relationships among different spaces to extrapolate to unseen compositions with fewer demonstrations, shifting generalization from passive coverage-based scaling to active dimension-aware expansion.迭代扩展是什么？这么强 terative Expansion：模型沿选定的维度逐步扩展其泛化能力，利用不同空间间的关系推断未见组合。 Dimension-aware Expansion：这是一种主动的策略，根据因子对泛化的相对影响（如先 Object，再 Action，后 Environment）按优先级进行顺序探索，从而缓解组合爆炸问题。 Data-efficient Robotic Learning.这一节列举的相关工作都值得看看 还没做，我觉得方向可以敲定就是这个了，或者说问题 we adopt a factorized perspective based on the physical structure of the real world. 那我现在真的好奇：基于embedding的思路有没有搞头？ 物体相关的分解成 纹理、几何形状和尺寸。但是直接分类？这个分类有什么作用吗？选取这三个最显著的视觉变化轴，可以在保持表示简洁的同时，系统地分析模型在大型 VLA 训练中的覆盖率和泛化能力。 通过初始场景配置的不同来体现动作的多样性：是个好想法，但是这个操作跟模仿学习很接近……也就是和模仿学习强绑定的，它意味着在测试的时候，一个初始状态需要完整的轨迹示范？我的想法有点混乱，i mean，初始配置是否已经决定好了整个轨迹的方向，而不是：agent在运行过程中实时调整？在许多任务（如“把 X 放入 Y”）中，只要任务完成，具体的轨迹并不唯一。因此，F-ACIL 通过改变初始场景配置（Initial scene configuration）来表征动作的多样性，而不是强制要求实时的确定轨迹。这有助于模型学习在不同初始条件下如何完成动作，增强了模仿学习的鲁棒性。多动作的建模依赖初始场景不太妙吧 环境主要是视觉观测，目前这个我没有太涉及，就先跳过 在单因素的情况下构建推广模型？ formulating generalization in the single-factor case什么意思？指在只考虑一个因子维度（如 Object）时，如何定义和衡量模型的泛化能力。论文通过定义一个将数据集映射到因子空间的函数，并利用轨道闭包（Orbit closure）的概念，描述模型在单维度上能覆盖的泛化范围，作为多因子复杂场景的基础。这个定义怎么来的，有没有理论基础？ 我看懂了这个相当于比我的多了绕xy轴旋转的和环境，我之前没有做环境，分解之后怎么做的？ group action是什么意思？借用数学中的群作用概念来形式化因子维度上的泛化。它定义了模型如何基于已观察到的演示数据（通过经验变换集 HO​），将其泛化能力扩展到因子空间的特定范围（即其“轨道”）。 定义一个函数，map a dataset to the object factor space，就是将一个数据集按照object之前的定义，比，也就是table1:object factors的texture geometry 和size进行分组 figure4的实验是直接做出来的？放在method部分不会显得method和experiment混乱吗？还是说只要这个图没有写具体的数据就没事？但是也说了 Demonstrations collected for iteration 1 under 𝒪 space，所以还是先采集了一组数据然后测试，给出了一个没有具体数据但是可以图表示的实验结果？ 所以这个图的意思是，采集了16个数据集，分别测试，测试出来每个组合，比如cylind和trans的组合，记录成功率，画图的时候只画和tau的对比关系。然后选择D1只有4个，也就是f (D1) ={ (Transparent, Cylindrical), (Diffuse, Dish-like), (Specular, Rod-like), (Absorptive, Irregular)}. a model can generalize to via an orbit closure induced by an empirical transformed set怎么做到的？给定数据集 DD 及其因子 f(D)f(D)，模型能泛化的范围定义为轨道 OrbHO(D):={g⋅s∣g∈HO,s∈f(D)}OrbHO​​(D):={g⋅s∣g∈HO​,s∈f(D)}。这反映了模型通过已有的经验变换 HOHO​ 能从已知数据点推导出的所有可能情况。 orb的部分概括起来就是：定义数据集D1，包含于数据集D。f函数是因子表示。HO denotes the set of empirical transformations obtained from evaluation along O这个HO直观来说是什么？orb ho D直观上，OrbHO （D） 表示模型在数据集 D 上训练后可以泛化的对象因素集合。HO 表示沿 O 的求值所得的经验变换集合，我从它的定义公式中看不出来，解释这个定义公式 D: 训练数据集。 f(D): 数据集对应的因子组合集合。 HO: 在因子空间 O 上评估得到的经验变换集。 OrbHO(D) 模型训练后能泛化到的因子空间范围。 As illustrated in Fig. 4, the OrbHO (D1) is the region where the success rate over τ什么意思，图上没有标注Orb的结果，我只知道D1是4个，所以这里OrbHO (D1)指的是结果论（成功率高）而不是定义？Notably, the composition (Absorptive, Irregular) belongs to f (D1) but lies outside OrbHO (D1). This discrepancy reveals that certain factor compositions are inherently more difficult to learn than others.这个差异我没看懂，怎么突然来了差异 差异是：(Absorptive, Irregular) 在 f(D1) 中但在 Orb_HO(D1) 之外 这个(A,I)是黑色点，黑色点表示包含在D1数据集中 但是成功率还是比较低，表明虽然该组合存在于训练集中，但由于其本身难以学习或泛化，模型仍无法在该点实现可靠泛化。这说明某些因子组合需要更多的样本才能达到泛化阈值。 前面说了一堆，Our goal is therefore to identify a training dataset D′ so that才切入正题。minimize the cardinality就是找满足什么条件，但是数目最小的集合吧。目标是找到一个最小的因子组合子集 D′D′，使得模型能够泛化到整个因子空间（即 OrbHO(D′)=OOrbHO​​(D′)=O），但数据集的规模远小于全空间（∣f(D′)∣\u003c∣O∣），从而实现最高的训练效率。 我知道为什么要这么定义了，就是想找到数目最少，但同时模型能从少量数据集学习泛化到整个环境的子集，但是我看到这个定义也不知道怎么找到，模型不都是黑盒吗？ 先写好全部的配置，然后从对角线配置开始训练。 先在基准上评估获得成功率R 用R计算识别表现最差的因子 然后针对性地补充一点数据 直到整体的成功率达标 我感觉怪怪的，vlm特别是vla还是有一定的泛化能力的吧，那ood做的是什么？不在训练集中的物体，但还是符合这个配置的？ 数据收集策略 a hierarchical data collection strategy哪里体现出分层，噢原来是先O，再拓展到A，再拓展到environment。那iterative subset search怎么做的？用object的因子分解解释一下。在每个空间内进行迭代子集搜索，找到能诱导全覆盖的最小数据集，从而避免在全空间中直接搜索导致的组合爆炸。 prioritize the factor spaces according to their relative impact on generalization, following the order怎么知道是Object，action，environment的顺序的？？这是基于各因子对泛化影响的相对重要性进行的经验排序。物体因子通常最基础，其次是动作的空间变体，最后是环境的细节变化。这种分层探索能更高效地构建泛化能力。好吧还是经验 还是orb的定义问题，怎么知道orbHo(Do)=那么大的集合o，就是做实验，具体可以看算法2 Although this condition does not guarantee the generalization to the full product OA, we further show (in Sec. 4.2) that 所以这个完全是实验证明的………… 所以sequential factor exploration讲的是宏观上怎样A-\u003eO-\u003eenvironment的，iterative subset search within each factor space讲的就是怎么找到orb=o的？ 顺序因子探索：宏观策略，决定先扩充哪个维度（O -\u003e A -\u003e E）。 迭代子集搜索：微观过程，在特定维度内寻找最有效的最小训练样本集。 Then, the model is evaluated on a factor-based benchmark specifically designed to measure performance across different object factors. From the evaluation, we obtain the individual success rate for each object factor and the overall success rate aggregated across all factors, resulting in an success rate tensor R.什么benchmark这么高级，真的是实验出来的？？？在每一轮迭代后，通过在专门设计的因子化基准（Factor-based benchmark）上评估模型，收集每个因子组合的独立成功率和聚合成功率，形成张量 R。具体怎么评估的？流程是：先设计object表，比如object有(t,g,s)三种类别，那就来一个三维的表格，t有trans，diffuse，specular，absorp四种。g有cylind，dish，rod，irregular四种。s有small，middle，big三种。那一开始的对角线就是先采集4个小的集合，分别是t=trans,g=cylind,s=small；t=diffuse, g=dish,s=middle这样的一共4个。然后用D1=这四个数据训练，并分别在4x4x3=64个环境里面测试（object），得到成功率矩阵R，然后计算S，找到效果最差的因子，然后补充采集数据？再进行下一次？ 为什么突然开始定义tensor S，是要处理成功率矩阵。S后面有用到吗。张量 SS 用于量化各因子的“贡献度”或“缺失度”，通过公式 Si=∑∑Rj−(n−1)RiSi​=∑∑Rj​−(n−1)Ri​ 识别出哪些因子是性能瓶颈，从而决定下一步数据采集的方向。为什么不能直接通过成功率计算，还要通过S？S的这个设计有什么物理含义吗？ 所以这个迭代策略就是先分组实验，测出结果以后得到成功率矩阵？然后再算S？系统根据 RR 计算 SS，然后通过 argmin(S)argmin(S) 找到表现最差的因子点。针对该点补充数据后，模型性能会得到最有效的提升。 尝试algorithm1，就是我看不懂的迭代计算，先构建对焦点，怎么感觉就是看成功率和success threshold的比较。update dataset是通过factorization and composition实现 重点：通过迭代扩展实现全空间泛化。 阈值：预设的成功率阈值 τ。 更新：若当前成功率低于 τ，调用算法 2 寻找最差因子点并更新数据集 D。 3.2.3节这个标题怎么感觉跟algorthm2的Collecting Data based on Factorization and Composition中后面三个单词差不多？没怎么看懂， 感觉这一节没什么干货？这一节阐述了 F-ACIL 的核心原则是组合泛化。它指出因子设计至关重要：因子必须能覆盖目标空间，且应通过实验驱动（根据对性能的影响）进行选择。 实验部分，naive full-space iteration是什么，就是所有数据都采集一遍吗？这是一种低效的策略，试图通过穷举评估全乘积空间（如 OA）中所有可能的组合来收集数据。由于维度诅咒，这种方法耗时极长且不可持续。 选择GR-3作为基准，模型的原始架构不变，主干的参数不变，只训练策略，那不就是只用自己采集的数据微调已经有的VLA模型，而且只微调动作生成部分？ 实验使用 GR-3 作为主干网络（Backbone）。在迭代过程中，Backbone 参数被冻结，只训练 VLA 策略层，以确保性能提升完全归功于 F-ACIL 的结构化采样策略。 动作空间的维度划分跟我之前想的好像不一样 Pick-and-Place：保留 6 自由度（x, y, z 位置和 roll, pitch, yaw 姿态），形成 4x2x3 的张量。 Open-and-Close：简化为 4x2 空间，只改变 yaw 轴。 During the real-world iterative process, we perform five tests for each subset in the evaluation set when assessing different skills.什么叫5次测试，就每个任务只检测5次，相当于计算成功率的时候成功次数/总次数这个公式，总次数=5？还是说5次是不同的随机种子之类的？每个因子组合进行 5 次独立运行。 figure7的right图是采集数据消耗的时间吗，呃看起来是，也可能是直接估算的，这也能画图啊 看得有点晕，f(Do)A采集过程中不是还需要尝试其他类型的吗，得到那个成功率表格？通过先确定物体空间的精简集 f(D0)f(D0​)，然后只在 f(D0)f(D0​) 与动作空间 AA 的乘积空间内搜索，从而加速了向全 OA 空间的扩展过程 figure8 是什么，怎么还有个gaussian，描述是As illustrated in Fig. 8, there is a consistent trend that the proposed F-ACIL-Factors-Ratio strategy achieves comparable performance with substantially fewer demonstrations across both skill groups (Pick-and-Place and Open-and-Close). gaussian是什么，怎么突然出现。F-ACIL-后面ratio，mixture，这些方法之前没说过啊，分别是什么定义？ Gaussian：纯随机高斯分布采样（基线）。这个怎么做的？ F-ACIL-Factors-Ratio (Ratio)：F-ACIL 提出的策略，控制不同因子空间的比例进行扩张。 F-ACIL-Factors-Mixture (Mixture)：增加准均匀分布的演示量，但不显式考虑因子结构。 table4只考虑数据规模没有做数据质量的区分吗？因为前文不是已经发现会有orbhO=O因为模型泛化，所以肯定有数据是多余的，那table4的数据规模没有对数据做区分，岂不是会出现：100个满足orb的数据，然后100个多余的数据，这样成功率应该没有提高太多？结果显示，性能随数据量增加而提升，但提升斜率受数据维度影响。盲目增加数据量（Scaling up）会遭遇收益递减，证明了结构化因子化带来的数据质量比单纯的数量更关键。 总结所有的实验，按照实验目的进行划分，说清楚实验目的、实验内容以及预期结果 实验目标 实验设置与方法 预期结果 / 核心发现 Q1：完整空间泛化能力 比较模型在约简空间 $$f(D_\\mathcal{O})\\mathcal{A}$$ 与完整 $$\\mathcal{OA}$$ 空间上的成功率。 在紧凑子空间上获得的泛化能力能够成功迁移到整个乘积空间[^12]。 Q2：Flywheel 加速效果 比较子集搜索与朴素全空间迭代在墙钟时间（wall-clock time）和评估 rollout 数量上的差异。 定向采样将评估次数降低至 $$120$$ 次，使迭代 Flywheel 加速 16 倍[^16]。 Q3：数据效率 在严格的数据预算下，对比 F-ACIL（Ratio / Mixture）与 Gaussian 采样基线。 F-ACIL-Ratio 仅需 2k–4k 个样本即可获得较高成功率，而 Gaussian 方法需要超过 32k 个样本[^17]。 Q4：维度增长分析 分析随着因素空间复杂度增加时的幂律（power-law）缩放指数。 更高维度需要指数级更多的数据才能获得性能提升，进一步揭示了维度灾难问题[^20]。 F-ACIL：通过将数据建模为稀疏的类高斯模式混合（sparse mixture of Gaussian-like modes） 可以利用利用少量数据即可外推到未见过的因素组合\n迭代子集搜索采用数学上的成功张量（success tensor），用于精确定位哪些因素组合表现较差，从而使算法仅在真正需要的位置补充训练数据。在对比实验中，F-ACIL 的 Ratio 策略（用于控制因素之间的关系）明显优于 Mixture（准均匀采样）和 Gaussian（随机高斯采样）两种基线方法\n问题1-4以及前面的引言可以做一个总结 现实观察：因为采集习惯和场景固定，采集到的数据呈现类高斯分布，也就是数据会围绕\"最常见\"的情况大量集中，而离这个常见情况越远的数据越少。中心密集，外围稀疏。导致在OOD的时候泛化性差。 为了对抗，均匀分布看起来不错，但是为了均匀采集全数据会导致维度爆炸。 因此中和思想后，得到F-ACIL，思想是让采集到的数据呈现多中心的类高斯分布。\n但是，前面的呈现类高斯分布只是现实观察得到的推论，也没有证明，而且“数据会围绕\"最常见\"的情况大量集中”是一件坏事吗？ 集中本身不是错，错在它浪费了有限的采集资源，却没能换来对空间的整体理解，也就是过于集中导致信息增量太低了\n多中心的类高斯分布一定好吗？论文最后也没有从理论上证明，而是实验证明吧，最后也没有做实验画F-ACIL的数据集呈现理想的分布 一种Sparse Proxy 思想，就看VLA的插值能力Interpolation如何了\n我之前看过讨论VLA的interpolatyion和extrapolation的，有什么区别吗？从这个论文的实验举例来说？是不是out比较困难。 写在这里不够，所以新建一个[[内插和外推]] 所以这个论文主要做的是想办法插值？\n跟我的目标还是有一点差距的： 它做的是泛化比较大的泛化，而且多次迭代，觉得不好再加数据，然后成功率也是有一个标准，没有饱和的程度。 基于 Embedding（嵌入） 的思路属于Implicit Factorization（隐式因子化）。虽然现在主流 VLA 是隐式的，但论文作者认为隐式方法不可控、难解释。如果你能把显式的物理因子与隐式的 Embedding 表示结合（例如：受控的隐空间），那绝对是一个非常有力的改进点。\n根据第一遍提问后补充的问题（加粗的）再来新问题。部分是发散部分是深入\n我可以的改进切入点：除了提升成功率，改进的方向主要在于“如何定义和利用维度”，但这个切入点还是比较太基于它的思路 自动化发现因子：目前是人工定义的，有没有办法自动从海量无标签数据中发现对泛化影响最大的latent factor？ 自适应评估权重（Adaptive Weighting）：目前的 SS 张量是对所有因子同等对待。如果你能证明某些因子（如物体的材质）在某些任务中比（尺寸）更难泛化，并据此动态调整迭代权重，这就是一个很好的改进。 跨任务组合（Cross-task Composition）：F-ACIL 还在单任务内讨论组合，如果你能实现跨任务（如“从抓取学到的形状感知”直接迁移到“开门”任务），那泛化层级就更高了。 基于embedding的思路： Implicit vs. Explicit Factorization 的博弈 F-ACIL 采用的是显式（Explicit）分类，虽然简单直接，但不够 Scalable（你没法为世界上所有东西分类）。 Embedding 思路：如果你能将场景映射到一个隐空间，在这个空间里，不同的轴对应不同的物理属性（类似 Disentangled Representation Learning）。 改进切入点：用 Embedding 代替人工分类标签。通过在隐空间进行“插值（Interpolation）”来寻找模型表现差的区域。这种**“隐空间驱动的因子采样” 设计action依赖初始场景好吗？VLA 是闭环的：虽然初始配置决定了动作的“大方向”，但 VLA 在运行中是每秒多次实时调整的。初始场景的作用：它不是为了锁定轨迹，而是为了定义 “交互流形（Interaction Manifold）”。在模仿学习中，如果模型只见过物体在左边的演示，它可能学不会抓右边的。改变初始配置是为了强迫模型学习不同相对坐标下的策略，从而增强鲁棒性。 orb那个函数的定义，group action有什么理论？ 这里的理论基础来自于对称性（Symmetry）和等变性（Equivariance）： Group Theory（群论）：在数学中，如果一个模型对某种变换（如旋转）是“免疫”的，我们说它在这个群作用下是等变的。 直观理解：如果模型学会了抓“直立的圆柱体”，而它本身具备旋转等变性，那么“倾斜的圆柱体”就在它的“轨道（Orbit）”上。 定义来源：作者借用这个符号是为了说明：泛化不是随机的，而是沿着特定的物理轴（如几何变换）发生的。这套定义是为了让“模型能举一反三”这件事在数学上可描述。 部分实验放在method里面，叫 Pilot Study（初步研究）。 目的：它不是为了展示最终实验结果，而是为了支撑方法论的可行性。 逻辑：作者必须先证明“模型确实存在轨道闭包现象”（即：练 4 个点能带出周边 12 个点），后续提出的“子集搜索算法”才有存在的意义。如果没有 Fig 4 证明这种泛化的存在，读者会怀疑你的迭代搜索是在做无用功。 VLA 也有泛化能力，那 OOD 到底做的是什么？作者发现，VLA 的泛化是有“死角”的。F-ACIL 做的不是寻找完全未知的世界，而是通过因子化，精准地找出 VLA 泛化能力的“边界悬崖”在哪里，然后在那儿补数据。 评估逻辑和我的思路是一样的，把原本模糊的“模型不行”量化为了一个具体的坐标。比如发现 t=speculart=specular（镜面物体）这一层的平均分最低，下一次迭代就专门去采镜面物体的演示。 为什不直接用R还要算S：R 的局限：RR 只能告诉你当前这个点好不好。- S 的含义（Marginal Contribution / Gap）：SS 衡量的是“如果我补了这个因子，它能对整体泛化带来多大的提升”。物理含义：SS 其实是在寻找因子空间里的“瓶颈轴”。它考虑了该因子与其他因子组合时的平均表现。如果一个因子在所有组合中都拖后腿，那么它的 SS 值就会引导算法优先处理它。这比只看单个点（Point-wise）要更具全局视野。 高斯采样：真不知道，代码里面会写吗 ",
+  "wordCount" : "946",
+  "inLanguage": "en",
+  "datePublished": "2026-06-24T16:57:24Z",
+  "dateModified": "2026-06-24T16:57:24Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/towards-generalizable-robotic-data-flywheel-high-dimensional-factorization-and-composition/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Towards Generalizable Robotic Data Flywheel High-Dimensional Factorization and Composition
+    </h1>
+    <div class="post-meta">
+
+<span title='2026-06-24 16:57:24 +0000 UTC'>June 24, 2026</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>讲得很有意思而且很贴切的一个论文，就是很多词我看不懂。这一篇要是ai直接看会很浪费
+24号开始，然后迅速提出了40多个雷霆问题。25号偷懒，26号终于都回答了。
+它帮我更加确立我的方向，
+大方向确实还是 efficient data collection
+但是iterative learning不行
+而且factor不需要分这么多，因为我是给定环境的
+那我就相当于要在object和action这两个区域里面做更细致的generalization
+可以通过什么方法 Implicit，但我不知道能不能做</p>
+<p>总结这篇论文，让我以后写相关工作的时候可以直接看：
+to 目的 &ndash; efficient data collection to generalize
+this work 怎么做&ndash; design factor composition and use iteractive learning
+get 结果 nearly 5-10/1 data requirement reduction
+but 局限性 need to design factor humanly and iterative need much work</p>
+<p>边看边提问，提问了一堆</p>
+<ol>
+<li>a heuristic Factor-Aware Compositional Iterative Learning framework for data factorization and compositional generalization.这里面每个词和词组我都没看懂。是专业名词的话解释一下
+<ol>
+<li>heuristic指一种基于经验、直觉或“准则”来寻找答案的方法，而不是通过严密的数学证明去寻找全局最优解。它通常用于解决极其复杂（如 NP-hard）的问题，追求的是“足够好”且“速度快”。</li>
+<li>论文中要寻找“最精简的数据集子集 D′D′”在数学上是极难的（因为 VLA 模型是黑盒）。因此，作者设计了一个启发式准则——即计算成功率张量 RR 和缺口张量 SS。通过寻找 SS 中的最小值来决定采集什么数据，这就是一种“启发式搜索”。</li>
+<li>Factor-Aware 指系统“知道”数据是由哪些不同的维度（因子）组成的。传统的学习框架把数据看作一整块（一堆录像），而 F-ACIL 感知到了数据背后的 Object（物体）、Action（动作）、Environment（环境） 这三大因子轴。它在采样和评估时，每一条数据都被打上了这些因子的标签。</li>
+<li>Iterative Learning (迭代学习)：体现为论文提到的 Data Flywheel（数据飞轮）。系统不是一次性学完，而是：第一轮学 O（物体），评估后发现不行，第二轮再针对性学，第三轮学 A（动作）</li>
+<li>Data Factorization (数据因子化)：Factorization 原意是数学里的“因式分解”。在这里指把复杂的原始数据分解为独立的因子轴。</li>
+</ol>
+</li>
+<li>figure1里面，数据分布的图是怎么画出来的？As a result, the overall data coverage typically forms a Gaussian-like distribution, as illustrated in Fig. <a href="https://arxiv.org/html/2603.25583v1#S1.F1.sf1" title="Figure 1(a) ‣ Figure 1 ‣ 1 Introduction ‣ Towards Generalizable Robotic Data Flywheel: High-Dimensional Factorization and Composition">1(a)</a>. 这个结论怎么得到的？
+<ol>
+<li>这种分布源于对真实世界机器人数据收集的观察。在实际操作中，由于收集者的习惯模式或固定场景布局，演示数据往往集中在少数几种变体上，导致覆盖范围窄且方差低。例如，物体通常摆放在固定的几个位置，动作轨迹也具有高度的一致性。这种受限的采集方式使得数据呈现出一种长尾的、类高斯的分布（Gaussian-like distribution）</li>
+<li>现实世界的数据，因为人工数据采集有固定的习惯，通常用固定的环境布局，所以数据呈现 gaussian-like distribution。</li>
+<li>&ldquo;For instance, not only objects are typically arranged within a small set of fixed layouts, the action sequences in long-horizon tasks are also constrained by the collectors’ habitual patterns formed through repeated daily work, and so forth. Furthermore, real-world demonstrations are frequently gathered under convenient settings, ultimately causing distribution shift from training to real-world distribution. As a result, the overall data coverage typically forms a Gaussian-like distribution&rdquo;</li>
+<li>前面的经验观察我知道，后面的类高斯这个推论正确吗？数据会围绕&quot;最常见&quot;的情况大量集中，而离这个常见情况越远的数据越少。也就是中心密集，外围稀疏，这个形状看起来像二维高斯，所以是gaussian-like。推论也不是很严谨，看投稿以后会不会改。</li>
+<li>高斯为什么不好，难道不是采集越多就表示这个越重要吗？学习到类高斯的数据会导致容易dominant过拟合，sampling bias导致generalization差。</li>
+</ol>
+</li>
+<li> However, naive expansion toward a quasi-uniform distribution across multiple axes in high-dimensional factor spaces often leads to the curse of dimensionality这个结论又怎么得到的？ 什么是 curse of dimensionality？是因为维度太多了吗？
+<ol>
+<li>均匀就是组合起来，所以维度爆炸</li>
+<li>类似面多了加水水多加面</li>
+</ol>
+</li>
+<li>实现有效泛化所需的数据分布既不是高斯分布，也不是准均匀分布。好像也没有解释过。也就是多个簇的形式，mixture of gaussian mode</li>
+<li>什么是迭代学习：指数据收集与模型训练交替进行的循环过程。评估模型在因子化基准上的表现 -&gt; 识别表现不佳的因子组合（Factor Compositions） -&gt; 针对性地补充这些区域的演示数据 -&gt; 重新训练模型。这个过程循环往复（Data Flywheel）</li>
+<li>VLA evaluations often largely focus on aggregate task success or semantic intent, without systematically disentangling how individual factor(e.g., object properties, action element, and environmental conditions) affects generalization performance. In contrast, F-ACIL directly evaluates how VLAs adapt to compositional variations, enabling a more precise understanding of how policies manipulate objects across diverse environments and various poses.VLA 的评估通常主要关注整体任务成功率或语义意图，而没有系统地分析各个因素（例如物体属性、动作元素和环境条件）如何影响泛化表现。相比之下，F-ACIL 直接评估 VLA 如何适应组合变化，从而更准确地理解策略在不同环境和各种姿态下操作物体的方式。怎么做到的？显式地在各个解耦的因子轴上进行评估，能够精确量化单个因子（如物体尺寸或环境光照）对性能的影响。所以还是实验</li>
+<li>introduction给我说心动了，这个东西到底可以实现哪些功能，为什么设计出来的F-ACIL可以做到？核心功能是：因子化设计、组合泛化、以及迭代训练。为什么有效：原本难以处理的高维状态空间转化为可解释、可操作的因子空间，所以是物理意义上的转化，但还是有改进空间的</li>
+<li>那我的改进切入点的办法是不是就只有把成功率提升到99%？虽然 Scaling Laws 表明增加数据量能提升性能，但单纯追求数据量而不考虑维度设计会导致效率低下。F-ACIL 证明，通过结构化因子化和组合泛化，即使演示数据量减少 5-10 倍，也能获得显著的性能提升（超过 45%）。因此，维度感知的设计（Dimension-aware design）比单纯追求成功率数据更重要。那我怎么改？</li>
+<li> Instead of exhaustive enumeration over all possible factors, F-ACIL iteratively expands along selected dimensions, leveraging relationships among different spaces to extrapolate to unseen compositions with fewer demonstrations, shifting generalization from passive coverage-based scaling to active dimension-aware expansion.迭代扩展是什么？这么强
+<ol>
+<li>terative Expansion：模型沿选定的维度逐步扩展其泛化能力，利用不同空间间的关系推断未见组合。</li>
+<li>Dimension-aware Expansion：这是一种主动的策略，根据因子对泛化的相对影响（如先 Object，再 Action，后 Environment）按优先级进行顺序探索，从而缓解组合爆炸问题。</li>
+</ol>
+</li>
+<li><strong>Data-efficient Robotic Learning.这一节列举的相关工作都值得看看</strong> 还没做，我觉得方向可以敲定就是这个了，或者说问题</li>
+<li>we adopt a factorized perspective based on the physical structure of the real world. <strong>那我现在真的好奇：基于embedding的思路有没有搞头？</strong></li>
+<li>物体相关的分解成 纹理、几何形状和尺寸。但是直接分类？这个分类有什么作用吗？选取这三个最显著的视觉变化轴，可以在保持表示简洁的同时，系统地分析模型在大型 VLA 训练中的覆盖率和泛化能力。</li>
+<li>通过初始场景配置的不同来体现动作的多样性：是个好想法，但是这个操作跟模仿学习很接近……也就是和模仿学习强绑定的，它意味着在测试的时候，一个初始状态需要完整的轨迹示范？我的想法有点混乱，i mean，初始配置是否已经决定好了整个轨迹的方向，而不是：agent在运行过程中实时调整？在许多任务（如“把 X 放入 Y”）中，只要任务完成，具体的轨迹并不唯一。因此，F-ACIL 通过改变初始场景配置（Initial scene configuration）来表征动作的多样性，而不是强制要求实时的确定轨迹。这有助于模型学习在不同初始条件下如何完成动作，增强了模仿学习的鲁棒性。<strong>多动作的建模依赖初始场景不太妙吧</strong></li>
+<li>环境主要是视觉观测，目前这个我没有太涉及，就先跳过</li>
+<li>在单因素的情况下构建推广模型？ formulating generalization in the single-factor case什么意思？指在只考虑一个因子维度（如 Object）时，如何定义和衡量模型的泛化能力。论文通过定义一个将数据集映射到因子空间的函数，并利用轨道闭包（Orbit closure）的概念，描述模型在单维度上能覆盖的泛化范围，作为多因子复杂场景的基础。<strong>这个定义怎么来的，有没有理论基础？</strong></li>
+<li>我看懂了这个相当于比我的多了绕xy轴旋转的和环境，我之前没有做环境，分解之后怎么做的？</li>
+<li>group action是什么意思？<strong>借用数学中的群作用概念来形式化因子维度上的泛化。它定义了模型如何基于已观察到的演示数据（通过经验变换集 HO​），将其泛化能力扩展到因子空间的特定范围（即其“轨道”）。</strong></li>
+<li>定义一个函数，map a dataset to the object factor space，就是将一个数据集按照object之前的定义，比，也就是table1:object factors的texture geometry 和size进行分组</li>
+<li>figure4的实验是直接做出来的？<strong>放在method部分不会显得method和experiment混乱吗？还是说只要这个图没有写具体的数据就没事？但是也说了 Demonstrations collected for iteration 1 under 𝒪 space，所以还是先采集了一组数据然后测试，给出了一个没有具体数据但是可以图表示的实验结果？</strong> 所以这个图的意思是，采集了16个数据集，分别测试，测试出来每个组合，比如cylind和trans的组合，记录成功率，画图的时候只画和tau的对比关系。然后选择D1只有4个，也就是f (D1) ={ (Transparent, Cylindrical), (Diffuse, Dish-like), (Specular, Rod-like), (Absorptive, Irregular)}.</li>
+<li>a model can generalize to via an orbit closure induced by an empirical transformed set怎么做到的？给定数据集 DD 及其因子 f(D)f(D)，模型能泛化的范围定义为轨道 OrbHO(D):={g⋅s∣g∈HO,s∈f(D)}OrbHO​​(D):={g⋅s∣g∈HO​,s∈f(D)}。这反映了模型通过已有的经验变换 HOHO​ 能从已知数据点推导出的所有可能情况。</li>
+<li>orb的部分概括起来就是：定义数据集D1，包含于数据集D。f函数是因子表示。HO denotes the set of empirical transformations obtained from evaluation along O这个HO直观来说是什么？orb ho D直观上，OrbHO （D） 表示模型在数据集 D 上训练后可以泛化的对象因素集合。HO 表示沿 O 的求值所得的经验变换集合，我从它的定义公式中看不出来，解释这个定义公式
+<ul>
+<li>D: 训练数据集。</li>
+<li>f(D): 数据集对应的因子组合集合。</li>
+<li>HO: 在因子空间 O 上评估得到的经验变换集。</li>
+<li>OrbHO(D) 模型训练后能泛化到的因子空间范围。</li>
+</ul>
+</li>
+<li>As illustrated in Fig. 4, the OrbHO (D1) is the region where the success rate over τ什么意思，图上没有标注Orb的结果，我只知道D1是4个，所以这里OrbHO (D1)指的是结果论（成功率高）而不是定义？Notably, the composition (Absorptive, Irregular) belongs to f (D1) but lies outside OrbHO (D1). This discrepancy reveals that certain factor compositions are inherently more difficult to learn than others.这个差异我没看懂，怎么突然来了差异
+<ol>
+<li>差异是：(Absorptive, Irregular) 在 f(D1) 中但在 Orb_HO(D1) 之外</li>
+<li>这个(A,I)是黑色点，黑色点表示包含在D1数据集中</li>
+<li>但是成功率还是比较低，表明虽然该组合存在于训练集中，但由于其本身难以学习或泛化，模型仍无法在该点实现可靠泛化。这说明某些因子组合需要更多的样本才能达到泛化阈值。</li>
+</ol>
+</li>
+<li>前面说了一堆，Our goal is therefore to identify a training dataset D′ so that才切入正题。minimize the cardinality就是找满足什么条件，但是数目最小的集合吧。目标是找到一个最小的因子组合子集 D′D′，使得模型能够泛化到整个因子空间（即 OrbHO(D′)=OOrbHO​​(D′)=O），但数据集的规模远小于全空间（∣f(D′)∣&lt;∣O∣），从而实现最高的训练效率。</li>
+<li>我知道为什么要这么定义了，就是想找到数目最少，但同时模型能从少量数据集学习泛化到整个环境的子集，但是我看到这个定义也不知道怎么找到，模型不都是黑盒吗？
+<ol>
+<li>先写好全部的配置，然后从对角线配置开始训练。</li>
+<li>先在基准上评估获得成功率R</li>
+<li>用R计算识别表现最差的因子</li>
+<li>然后针对性地补充一点数据</li>
+<li>直到整体的成功率达标</li>
+<li><strong>我感觉怪怪的，vlm特别是vla还是有一定的泛化能力的吧，那ood做的是什么？不在训练集中的物体，但还是符合这个配置的？</strong></li>
+</ol>
+</li>
+<li>数据收集策略 a hierarchical data collection strategy哪里体现出分层，噢原来是先O，再拓展到A，再拓展到environment。那iterative subset search怎么做的？用object的因子分解解释一下。在每个空间内进行迭代子集搜索，找到能诱导全覆盖的最小数据集，从而避免在全空间中直接搜索导致的组合爆炸。</li>
+<li>prioritize the factor spaces according to their relative impact on generalization, following the order怎么知道是Object，action，environment的顺序的？？这是基于各因子对泛化影响的相对重要性进行的经验排序。物体因子通常最基础，其次是动作的空间变体，最后是环境的细节变化。这种分层探索能更高效地构建泛化能力。好吧还是经验</li>
+<li>还是orb的定义问题，怎么知道orbHo(Do)=那么大的集合o，就是做实验，具体可以看<strong>算法2</strong></li>
+<li>Although this condition does not guarantee the generalization to the full product OA, we further show (in Sec. 4.2) that  所以这个完全是实验证明的…………</li>
+<li>所以sequential factor exploration讲的是宏观上怎样A-&gt;O-&gt;environment的，iterative subset search within each factor space讲的就是怎么找到orb=o的？
+<ol>
+<li>顺序因子探索：宏观策略，决定先扩充哪个维度（O -&gt; A -&gt; E）。</li>
+<li>迭代子集搜索：微观过程，在特定维度内寻找最有效的最小训练样本集。</li>
+</ol>
+</li>
+<li>Then, the model is evaluated on a factor-based benchmark specifically designed to measure performance across different object factors. From the evaluation, we obtain the individual success rate for each object factor and the overall success rate aggregated across all factors, resulting in an success rate tensor R.什么benchmark这么高级，真的是实验出来的？？？在每一轮迭代后，通过在专门设计的因子化基准（Factor-based benchmark）上评估模型，收集每个因子组合的独立成功率和聚合成功率，形成张量 R。<strong>具体怎么评估的？流程是：先设计object表，比如object有(t,g,s)三种类别，那就来一个三维的表格，t有trans，diffuse，specular，absorp四种。g有cylind，dish，rod，irregular四种。s有small，middle，big三种。那一开始的对角线就是先采集4个小的集合，分别是t=trans,g=cylind,s=small；t=diffuse, g=dish,s=middle这样的一共4个。然后用D1=这四个数据训练，并分别在4x4x3=64个环境里面测试（object），得到成功率矩阵R，然后计算S，找到效果最差的因子，然后补充采集数据？再进行下一次？</strong></li>
+<li>为什么突然开始定义tensor S，是要处理成功率矩阵。S后面有用到吗。张量 SS 用于量化各因子的“贡献度”或“缺失度”，通过公式 Si=∑∑Rj−(n−1)RiSi​=∑∑Rj​−(n−1)Ri​ 识别出哪些因子是性能瓶颈，从而决定下一步数据采集的方向。<strong>为什么不能直接通过成功率计算，还要通过S？S的这个设计有什么物理含义吗？</strong></li>
+<li>所以这个迭代策略就是先分组实验，测出结果以后得到成功率矩阵？然后再算S？系统根据 RR 计算 SS，然后通过 argmin(S)argmin(S) 找到表现最差的因子点。针对该点补充数据后，模型性能会得到最有效的提升。</li>
+<li>尝试algorithm1，就是我看不懂的迭代计算，先构建对焦点，怎么感觉就是看成功率和success threshold的比较。update dataset是通过factorization and composition实现
+<ol>
+<li>重点：通过迭代扩展实现全空间泛化。</li>
+<li>阈值：预设的成功率阈值 τ。</li>
+<li>更新：若当前成功率低于 τ，调用算法 2 寻找最差因子点并更新数据集 D。</li>
+</ol>
+</li>
+<li>3.2.3节这个标题怎么感觉跟algorthm2的Collecting Data based on Factorization and Composition中后面三个单词差不多？没怎么看懂， 感觉这一节没什么干货？这一节阐述了 F-ACIL 的核心原则是组合泛化。它指出因子设计至关重要：因子必须能覆盖目标空间，且应通过实验驱动（根据对性能的影响）进行选择。</li>
+<li>实验部分，naive full-space iteration是什么，就是所有数据都采集一遍吗？这是一种低效的策略，试图通过穷举评估全乘积空间（如 OA）中所有可能的组合来收集数据。由于维度诅咒，这种方法耗时极长且不可持续。</li>
+<li>选择GR-3作为基准，模型的原始架构不变，主干的参数不变，只训练策略，那不就是只用自己采集的数据微调已经有的VLA模型，而且只微调动作生成部分？ 实验使用 GR-3 作为主干网络（Backbone）。在迭代过程中，Backbone 参数被冻结，只训练 VLA 策略层，以确保性能提升完全归功于 F-ACIL 的结构化采样策略。</li>
+<li>动作空间的维度划分跟我之前想的好像不一样
+<ul>
+<li>Pick-and-Place：保留 6 自由度（x, y, z 位置和 roll, pitch, yaw 姿态），形成 4x2x3 的张量。</li>
+<li>Open-and-Close：简化为 4x2 空间，只改变 yaw 轴。</li>
+</ul>
+</li>
+<li>During the real-world iterative process, we perform five tests for each subset in the evaluation set when assessing different skills.什么叫5次测试，就每个任务只检测5次，相当于计算成功率的时候成功次数/总次数这个公式，总次数=5？还是说5次是不同的随机种子之类的？每个因子组合进行 5 次独立运行。</li>
+<li>figure7的right图是采集数据消耗的时间吗，呃看起来是，也可能是直接估算的，这也能画图啊</li>
+<li>看得有点晕，f(Do)A采集过程中不是还需要尝试其他类型的吗，得到那个成功率表格？通过先确定物体空间的精简集 f(D0)f(D0​)，然后只在 f(D0)f(D0​) 与动作空间 AA 的乘积空间内搜索，从而加速了向全 OA 空间的扩展过程</li>
+<li>figure8 是什么，怎么还有个gaussian，描述是As illustrated in Fig. 8, there is a consistent trend that the proposed F-ACIL-Factors-Ratio strategy achieves comparable performance with substantially fewer demonstrations across both skill groups (Pick-and-Place and Open-and-Close). gaussian是什么，怎么突然出现。F-ACIL-后面ratio，mixture，这些方法之前没说过啊，分别是什么定义？
+<ul>
+<li><strong>Gaussian：纯随机高斯分布采样（基线）。这个怎么做的？</strong></li>
+<li>F-ACIL-Factors-Ratio (Ratio)：F-ACIL 提出的策略，控制不同因子空间的比例进行扩张。</li>
+<li>F-ACIL-Factors-Mixture (Mixture)：增加准均匀分布的演示量，但不显式考虑因子结构。</li>
+</ul>
+</li>
+<li>table4只考虑数据规模没有做数据质量的区分吗？因为前文不是已经发现会有orbhO=O因为模型泛化，所以肯定有数据是多余的，那table4的数据规模没有对数据做区分，岂不是会出现：100个满足orb的数据，然后100个多余的数据，这样成功率应该没有提高太多？结果显示，性能随数据量增加而提升，但提升斜率受数据维度影响。盲目增加数据量（Scaling up）会遭遇收益递减，证明了结构化因子化带来的数据质量比单纯的数量更关键。</li>
+<li>总结所有的实验，按照实验目的进行划分，说清楚实验目的、实验内容以及预期结果</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">实验目标</th>
+          <th style="text-align: left">实验设置与方法</th>
+          <th style="text-align: left">预期结果 / 核心发现</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>Q1：完整空间泛化能力</strong></td>
+          <td style="text-align: left">比较模型在约简空间 $$f(D_\mathcal{O})\mathcal{A}$$ 与完整 $$\mathcal{OA}$$ 空间上的成功率。</td>
+          <td style="text-align: left">在紧凑子空间上获得的泛化能力能够成功迁移到整个乘积空间[^12]。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>Q2：Flywheel 加速效果</strong></td>
+          <td style="text-align: left">比较子集搜索与朴素全空间迭代在墙钟时间（wall-clock time）和评估 rollout 数量上的差异。</td>
+          <td style="text-align: left">定向采样将评估次数降低至 $$120$$ 次，使迭代 Flywheel 加速 <strong>16 倍</strong>[^16]。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>Q3：数据效率</strong></td>
+          <td style="text-align: left">在严格的数据预算下，对比 F-ACIL（Ratio / Mixture）与 Gaussian 采样基线。</td>
+          <td style="text-align: left">F-ACIL-Ratio 仅需 2k–4k 个样本即可获得较高成功率，而 Gaussian 方法需要超过 32k 个样本[^17]。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>Q4：维度增长分析</strong></td>
+          <td style="text-align: left">分析随着因素空间复杂度增加时的幂律（power-law）缩放指数。</td>
+          <td style="text-align: left">更高维度需要指数级更多的数据才能获得性能提升，进一步揭示了维度灾难问题[^20]。</td>
+      </tr>
+  </tbody>
+</table>
+<p>F-ACIL：通过将数据建模为稀疏的类高斯模式混合（sparse mixture of Gaussian-like modes）
+可以利用利用少量数据即可外推到未见过的因素组合</p>
+<p>迭代子集搜索采用数学上的成功张量（success tensor），用于精确定位哪些因素组合表现较差，从而使算法仅在真正需要的位置补充训练数据。在对比实验中，F-ACIL 的 <strong>Ratio</strong> 策略（用于控制因素之间的关系）明显优于 <strong>Mixture</strong>（准均匀采样）和 <strong>Gaussian</strong>（随机高斯采样）两种基线方法</p>
+<p>问题1-4以及前面的引言可以做一个总结
+现实观察：因为采集习惯和场景固定，采集到的数据呈现类高斯分布，也就是数据会围绕&quot;最常见&quot;的情况大量集中，而离这个常见情况越远的数据越少。中心密集，外围稀疏。导致在OOD的时候泛化性差。
+为了对抗，均匀分布看起来不错，但是为了均匀采集全数据会导致维度爆炸。
+因此中和思想后，得到F-ACIL，思想是让采集到的数据呈现多中心的类高斯分布。</p>
+<p>但是，前面的呈现类高斯分布只是现实观察得到的推论，也没有证明，而且“数据会围绕&quot;最常见&quot;的情况大量集中”是一件坏事吗？
+集中本身不是错，错在它浪费了有限的采集资源，却没能换来对空间的整体理解，也就是过于集中导致信息增量太低了</p>
+<p>多中心的类高斯分布一定好吗？论文最后也没有从理论上证明，而是实验证明吧，最后也没有做实验画F-ACIL的数据集呈现理想的分布
+一种Sparse Proxy 思想，就看VLA的插值能力Interpolation如何了</p>
+<p>我之前看过讨论VLA的interpolatyion和extrapolation的，有什么区别吗？从这个论文的实验举例来说？是不是out比较困难。
+写在这里不够，所以新建一个[[内插和外推]]
+所以这个论文主要做的是想办法插值？</p>
+<p>跟我的目标还是有一点差距的：
+它做的是泛化比较大的泛化，而且多次迭代，觉得不好再加数据，然后成功率也是有一个标准，没有饱和的程度。
+基于 Embedding（嵌入） 的思路属于<strong>Implicit Factorization（隐式因子化）</strong>。虽然现在主流 VLA 是隐式的，但论文作者认为隐式方法不可控、难解释。如果你能把显式的物理因子与隐式的 Embedding 表示结合（例如：受控的隐空间），那绝对是一个非常有力的改进点。</p>
+<p>根据第一遍提问后补充的问题（加粗的）再来新问题。部分是发散部分是深入</p>
+<ol>
+<li>我可以的改进切入点：除了提升成功率，改进的方向主要在于“如何定义和利用维度”，但这个切入点还是比较太基于它的思路
+<ol>
+<li>自动化发现因子：目前是人工定义的，有没有办法自动从海量无标签数据中发现对泛化影响最大的latent factor？</li>
+<li>自适应评估权重（Adaptive Weighting）：目前的 SS 张量是对所有因子同等对待。如果你能证明某些因子（如物体的材质）在某些任务中比（尺寸）更难泛化，并据此动态调整迭代权重，这就是一个很好的改进。</li>
+<li>跨任务组合（Cross-task Composition）：F-ACIL 还在单任务内讨论组合，如果你能实现跨任务（如“从抓取学到的形状感知”直接迁移到“开门”任务），那泛化层级就更高了。</li>
+</ol>
+</li>
+<li>基于embedding的思路： Implicit vs. Explicit Factorization 的博弈
+<ol>
+<li>F-ACIL 采用的是显式（Explicit）分类，虽然简单直接，但不够 Scalable（你没法为世界上所有东西分类）。</li>
+<li>Embedding 思路：如果你能将场景映射到一个隐空间，在这个空间里，不同的轴对应不同的物理属性（类似 Disentangled Representation Learning）。</li>
+<li>改进切入点：用 Embedding 代替人工分类标签。通过在隐空间进行“插值（Interpolation）”来寻找模型表现差的区域。这种**“隐空间驱动的因子采样”</li>
+</ol>
+</li>
+<li>设计action依赖初始场景好吗？VLA 是闭环的：虽然初始配置决定了动作的“大方向”，但 VLA 在运行中是每秒多次实时调整的。初始场景的作用：它不是为了锁定轨迹，而是为了定义 “交互流形（Interaction Manifold）”。在模仿学习中，如果模型只见过物体在左边的演示，它可能学不会抓右边的。改变初始配置是为了强迫模型学习不同相对坐标下的策略，从而增强鲁棒性。</li>
+<li>orb那个函数的定义，group action有什么理论？
+<ol>
+<li>这里的理论基础来自于对称性（Symmetry）和等变性（Equivariance）：</li>
+</ol>
+<ul>
+<li>Group Theory（群论）：在数学中，如果一个模型对某种变换（如旋转）是“免疫”的，我们说它在这个群作用下是等变的。</li>
+<li>直观理解：如果模型学会了抓“直立的圆柱体”，而它本身具备旋转等变性，那么“倾斜的圆柱体”就在它的“轨道（Orbit）”上。</li>
+<li>定义来源：作者借用这个符号是为了说明：泛化不是随机的，而是沿着特定的物理轴（如几何变换）发生的。这套定义是为了让“模型能举一反三”这件事在数学上可描述。</li>
+</ul>
+</li>
+<li>部分实验放在method里面，叫 Pilot Study（初步研究）。
+<ul>
+<li>目的：它不是为了展示最终实验结果，而是为了支撑方法论的可行性。</li>
+<li>逻辑：作者必须先证明“模型确实存在轨道闭包现象”（即：练 4 个点能带出周边 12 个点），后续提出的“子集搜索算法”才有存在的意义。如果没有 Fig 4 证明这种泛化的存在，读者会怀疑你的迭代搜索是在做无用功。</li>
+</ul>
+</li>
+<li>VLA 也有泛化能力，那 OOD 到底做的是什么？作者发现，VLA 的泛化是有“死角”的。F-ACIL 做的不是寻找完全未知的世界，而是通过因子化，精准地找出 VLA 泛化能力的“边界悬崖”在哪里，然后在那儿补数据。</li>
+<li>评估逻辑和我的思路是一样的，把原本模糊的“模型不行”量化为了一个具体的坐标。比如发现 t=speculart=specular（镜面物体）这一层的平均分最低，下一次迭代就专门去采镜面物体的演示。</li>
+<li>为什不直接用R还要算S：R 的局限：RR 只能告诉你当前这个点好不好。- S 的含义（Marginal Contribution / Gap）：SS 衡量的是“如果我补了这个因子，它能对整体泛化带来多大的提升”。物理含义：SS 其实是在寻找因子空间里的“瓶颈轴”。它考虑了该因子与其他因子组合时的平均表现。如果一个因子在所有组合中都拖后腿，那么它的 SS 值就会引导算法优先处理它。这比只看单个点（Point-wise）要更具全局视野。</li>
+<li>高斯采样：真不知道，代码里面会写吗</li>
+</ol>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

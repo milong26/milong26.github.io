@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>pose estimation | 我的博客</title>
+<meta name="keywords" content="">
+<meta name="description" content="感觉对VLA挺重要，尤其是camera pose estimation">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/pose-estimation/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/pose-estimation/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/pose-estimation/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="pose estimation">
+  <meta property="og:description" content="感觉对VLA挺重要，尤其是camera pose estimation">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="pose estimation">
+  <meta name="twitter:description" content="感觉对VLA挺重要，尤其是camera pose estimation">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "pose estimation",
+      "item": "https://milong26.github.io/post/pose-estimation/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "pose estimation",
+  "name": "pose estimation",
+  "description": "感觉对VLA挺重要，尤其是camera pose estimation\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "感觉对VLA挺重要，尤其是camera pose estimation\n会用到什么技术？ 在 pose estimation 里，尤其是 keypoint detection 阶段，确实会用到一些不同的技术，但要区分哪些是“必需的核心技术”，哪些是“可选的辅助技术”。我给你梳理一下：\n1️⃣ 核心技术（必用/主流） 卷积神经网络（CNN）\nHeatmap-based 方法几乎都是基于 CNN。\n常见网络：ResNet、HRNet、Hourglass Network。\n作用：从图像中提取特征并生成关键点热力图。\nHeatmap 回归\n核心思想：为每个关键点生成二维概率分布图（heatmap），峰值位置就是关键点。\n优点：比直接回归坐标更稳定、精度高。\nLoss：MSE（mean squared error）或者 focal loss。\nTop-down / Bottom-up 策略\nTop-down：先检测人体框，再做 keypoint detection。\nBottom-up：先检测所有关键点，再组装成人体实例。\n决定了网络输入/输出结构和后处理方法。\nPost-processing\nNMS（非极大值抑制）去掉重复预测。\nPAF（Part Affinity Fields，OpenPose）用于 bottom-up 方法将关键点连接成骨架。\n2️⃣ 可选/增强技术（提高精度或多样性） Segmentation（语义分割/实例分割）\n不是必须，但可以辅助：\nMask R-CNN 等方法中，用人体 mask 辅助 keypoint 定位。\n可以减少背景干扰，提高关键点检测精度。\n用途：\n人体实例分割 → 提供更精确的人体区域。\n特别在多人场景中有用。\nPositional Embedding（位置编码）\n主要出现在 Transformer-based pose estimation 中，如 TokenPose、HRFormer。\n作用：\n告诉网络每个特征的空间位置。\n弥补纯 self-attention 缺少位置信息的缺点。\nCNN-based 传统方法一般不需要。\nAttention / Transformer\n对复杂姿态、多人体交互场景有用。\n结合 positional embedding，可以更好地捕捉全局结构。\n数据增强和正则化\n随机旋转、缩放、水平翻转。\nheatmap 高斯模糊增强稳定性。\n",
+  "wordCount" : "88",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/pose-estimation/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      pose estimation
+    </h1>
+    <div class="post-meta">
+
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>感觉对VLA挺重要，尤其是camera pose estimation</p>
+<p>会用到什么技术？
+在 <strong>pose estimation</strong> 里，尤其是 <strong>keypoint detection</strong> 阶段，确实会用到一些不同的技术，但要区分哪些是“必需的核心技术”，哪些是“可选的辅助技术”。我给你梳理一下：</p>
+<hr>
+<h3 id="1-核心技术必用主流">1️⃣ 核心技术（必用/主流）<a hidden class="anchor" aria-hidden="true" href="#1-核心技术必用主流">#</a></h3>
+<ol>
+<li>
+<p><strong>卷积神经网络（CNN）</strong></p>
+<ul>
+<li>
+<p>Heatmap-based 方法几乎都是基于 CNN。</p>
+</li>
+<li>
+<p>常见网络：ResNet、HRNet、Hourglass Network。</p>
+</li>
+<li>
+<p>作用：从图像中提取特征并生成关键点热力图。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Heatmap 回归</strong></p>
+<ul>
+<li>
+<p>核心思想：为每个关键点生成二维概率分布图（heatmap），峰值位置就是关键点。</p>
+</li>
+<li>
+<p>优点：比直接回归坐标更稳定、精度高。</p>
+</li>
+<li>
+<p>Loss：MSE（mean squared error）或者 focal loss。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Top-down / Bottom-up 策略</strong></p>
+<ul>
+<li>
+<p><strong>Top-down</strong>：先检测人体框，再做 keypoint detection。</p>
+</li>
+<li>
+<p><strong>Bottom-up</strong>：先检测所有关键点，再组装成人体实例。</p>
+</li>
+<li>
+<p>决定了网络输入/输出结构和后处理方法。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Post-processing</strong></p>
+<ul>
+<li>
+<p>NMS（非极大值抑制）去掉重复预测。</p>
+</li>
+<li>
+<p>PAF（Part Affinity Fields，OpenPose）用于 bottom-up 方法将关键点连接成骨架。</p>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="2-可选增强技术提高精度或多样性">2️⃣ 可选/增强技术（提高精度或多样性）<a hidden class="anchor" aria-hidden="true" href="#2-可选增强技术提高精度或多样性">#</a></h3>
+<ol>
+<li>
+<p><strong>Segmentation（语义分割/实例分割）</strong></p>
+<ul>
+<li>
+<p><strong>不是必须</strong>，但可以辅助：</p>
+<ul>
+<li>
+<p>Mask R-CNN 等方法中，用人体 mask 辅助 keypoint 定位。</p>
+</li>
+<li>
+<p>可以减少背景干扰，提高关键点检测精度。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>用途：</p>
+<ul>
+<li>
+<p>人体实例分割 → 提供更精确的人体区域。</p>
+</li>
+<li>
+<p>特别在多人场景中有用。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Positional Embedding（位置编码）</strong></p>
+<ul>
+<li>
+<p>主要出现在 <strong>Transformer-based pose estimation</strong> 中，如 TokenPose、HRFormer。</p>
+</li>
+<li>
+<p>作用：</p>
+<ul>
+<li>
+<p>告诉网络每个特征的空间位置。</p>
+</li>
+<li>
+<p>弥补纯 self-attention 缺少位置信息的缺点。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>CNN-based 传统方法一般不需要。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Attention / Transformer</strong></p>
+<ul>
+<li>
+<p>对复杂姿态、多人体交互场景有用。</p>
+</li>
+<li>
+<p>结合 positional embedding，可以更好地捕捉全局结构。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>数据增强和正则化</strong></p>
+<ul>
+<li>
+<p>随机旋转、缩放、水平翻转。</p>
+</li>
+<li>
+<p>heatmap 高斯模糊增强稳定性。</p>
+</li>
+</ul>
+</li>
+</ol>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

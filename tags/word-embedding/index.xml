@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Word Embedding on 我的博客</title>
+    <link>https://milong26.github.io/tags/word-embedding/</link>
+    <description>Recent content in Word Embedding on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 26 Oct 2023 18:36:13 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/word-embedding/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>paperen_Aspect Detection using Word and Char Embeddings with (Bi)LSTM and CRF</title>
+      <link>https://milong26.github.io/post/paperen-aspect-detection-using-word-and-char-embeddings-with-bi-lstm-and-crf-2/</link>
+      <pubDate>Thu, 26 Oct 2023 18:36:13 +0000</pubDate>
+      <guid>https://milong26.github.io/post/paperen-aspect-detection-using-word-and-char-embeddings-with-bi-lstm-and-crf-2/</guid>
+      <description>&lt;p&gt;搞不懂这个embedding怎么运作的&lt;/p&gt;
+&lt;h1 id=&#34;paper&#34;&gt;paper&lt;/h1&gt;
+&lt;p&gt;论文&lt;a href=&#34;https://ieeexplore.ieee.org/document/8791735&#34;&gt;地址&lt;/a&gt;
+目前只要搞懂input的句子怎么通过embedding层的就可以了&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>paperen_Aspect Detection using Word and Char Embeddings with (Bi)LSTM and CRF</title>
+      <link>https://milong26.github.io/post/paperen-aspect-detection-using-word-and-char-embeddings-with-bi-lstm-and-crf/</link>
+      <pubDate>Thu, 26 Oct 2023 18:36:13 +0000</pubDate>
+      <guid>https://milong26.github.io/post/paperen-aspect-detection-using-word-and-char-embeddings-with-bi-lstm-and-crf/</guid>
+      <description>&lt;p&gt;搞不懂这个embedding怎么运作的&lt;/p&gt;
+&lt;h1 id=&#34;paper&#34;&gt;paper&lt;/h1&gt;
+&lt;p&gt;论文&lt;a href=&#34;https://ieeexplore.ieee.org/document/8791735&#34;&gt;地址&lt;/a&gt;
+目前只要搞懂input的句子怎么通过embedding层的就可以了&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

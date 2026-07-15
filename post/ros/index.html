@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>ros | 我的博客</title>
+<meta name="keywords" content="ros, robot">
+<meta name="description" content="原来是一个系统集成的框架，和Lerobot相比它侧重于真实场景的“系统”。">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/ros/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/ros/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/ros/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="ros">
+  <meta property="og:description" content="原来是一个系统集成的框架，和Lerobot相比它侧重于真实场景的“系统”。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-11-13T10:04:05+00:00">
+    <meta property="article:modified_time" content="2025-11-13T10:04:05+00:00">
+    <meta property="article:tag" content="Ros">
+    <meta property="article:tag" content="Robot">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="ros">
+  <meta name="twitter:description" content="原来是一个系统集成的框架，和Lerobot相比它侧重于真实场景的“系统”。">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "ros",
+      "item": "https://milong26.github.io/post/ros/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "ros",
+  "name": "ros",
+  "description": "原来是一个系统集成的框架，和Lerobot相比它侧重于真实场景的“系统”。\n",
+  "keywords": [
+    "ros", "robot"
+  ],
+  "articleBody": "原来是一个系统集成的框架，和Lerobot相比它侧重于真实场景的“系统”。\nROS定义 ROS（Robot Operating System）本质上并不是一个“操作系统”，\n而是一套 让机器人各部分（传感器、控制器、算法）协同工作 的 通信框架。\n从数据采集和训练角度看，ROS 主要负责：\n传感器采集（相机、IMU、力传感器） → 发布数据 控制器接收指令（电机、机械臂控制） → 执行动作 这些功能运行在不同的 节点（Node） 中，由 ROS 统一管理通信。 ROS 解决的问题 ROS 解决的是“系统连接问题”。\n当一个机器人系统由多个 不同的硬件、传感器和控制器 组成时，\nROS 提供一种统一的通信机制，让这些异构模块能够协同工作。\nROS 核心概念 概念 对应你熟悉的东西 你需要知道的用途 Node（节点） 一个独立运行的模块，例如“相机采集节点” 类似你的一段数据采集脚本 Topic（话题） 数据传输管道，例如 “camera/image_raw” 类似一个实时数据流或队列 Message（消息） 传输的数据格式 类似 Python 的 dict 或 Numpy 数组 简而言之：节点通过话题发送消息 = “模块间通过数据流通信”。 Lerobot 与 ROS 的关系 Lerobot 主要专注于 数据采集、模型训练和策略学习，\n并没有直接使用 ROS。\n两者的区别可以概括为：\n类别 ROS Lerobot 定位 让机器人系统运作 让机器人变得聪明 核心功能 通信、模块协调、控制接口 数据采集、模型训练、策略学习 典型用户 系统集成工程师 / 机器人研发 机器学习研究者 / 算法开发者 关键产出 可运行的机器人系统 可泛化的智能策略（模型） 五、总结 ROS 侧重于真实场景的“系统集成”，是机器人运行的“基础设施”。 Lerobot 更关注模型层面的“智能学习”，是机器人“变聪明”的核心。 可以理解为：ROS 负责让身体各部分能沟通协作，Lerobot 负责让大脑学会思考与行动。\nlerobot是不是代替了ros的主要功能？那为什么还有同时用ros和lerobot的？ 原来基本机器人都有ros接口，但是python就不一定，所以需要ros，有python那肯定很方便搞软件的，但是也有不提供python的\n",
+  "wordCount" : "94",
+  "inLanguage": "en",
+  "datePublished": "2025-11-13T10:04:05Z",
+  "dateModified": "2025-11-13T10:04:05Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/ros/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      ros
+    </h1>
+    <div class="post-meta">
+
+<span title='2025-11-13 10:04:05 +0000 UTC'>November 13, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>原来是一个系统集成的框架，和Lerobot相比它侧重于真实场景的“系统”。</p>
+<h1 id="ros定义">ROS定义<a hidden class="anchor" aria-hidden="true" href="#ros定义">#</a></h1>
+<p>ROS（Robot Operating System）本质上并不是一个“操作系统”，<br>
+而是一套 <strong>让机器人各部分（传感器、控制器、算法）协同工作</strong> 的 <strong>通信框架</strong>。</p>
+<p>从数据采集和训练角度看，ROS 主要负责：</p>
+<ul>
+<li><strong>传感器采集</strong>（相机、IMU、力传感器） → 发布数据</li>
+<li><strong>控制器接收指令</strong>（电机、机械臂控制） → 执行动作</li>
+<li>这些功能运行在不同的 <strong>节点（Node）</strong> 中，由 ROS 统一管理通信。</li>
+</ul>
+<h1 id="ros-解决的问题">ROS 解决的问题<a hidden class="anchor" aria-hidden="true" href="#ros-解决的问题">#</a></h1>
+<blockquote>
+<p>ROS 解决的是“系统连接问题”。</p>
+</blockquote>
+<p>当一个机器人系统由多个 <strong>不同的硬件、传感器和控制器</strong> 组成时，<br>
+ROS 提供一种统一的通信机制，让这些异构模块能够协同工作。</p>
+<h1 id="ros-核心概念">ROS 核心概念<a hidden class="anchor" aria-hidden="true" href="#ros-核心概念">#</a></h1>
+<table>
+  <thead>
+      <tr>
+          <th>概念</th>
+          <th>对应你熟悉的东西</th>
+          <th>你需要知道的用途</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Node（节点）</strong></td>
+          <td>一个独立运行的模块，例如“相机采集节点”</td>
+          <td>类似你的一段数据采集脚本</td>
+      </tr>
+      <tr>
+          <td><strong>Topic（话题）</strong></td>
+          <td>数据传输管道，例如 “camera/image_raw”</td>
+          <td>类似一个实时数据流或队列</td>
+      </tr>
+      <tr>
+          <td><strong>Message（消息）</strong></td>
+          <td>传输的数据格式</td>
+          <td>类似 Python 的 <code>dict</code> 或 Numpy 数组</td>
+      </tr>
+      <tr>
+          <td>简而言之：<strong>节点通过话题发送消息</strong> = “模块间通过数据流通信”。</td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<h1 id="lerobot-与-ros-的关系">Lerobot 与 ROS 的关系<a hidden class="anchor" aria-hidden="true" href="#lerobot-与-ros-的关系">#</a></h1>
+<p>Lerobot 主要专注于 <strong>数据采集、模型训练和策略学习</strong>，<br>
+并没有直接使用 ROS。<br>
+两者的区别可以概括为：</p>
+<table>
+  <thead>
+      <tr>
+          <th>类别</th>
+          <th>ROS</th>
+          <th>Lerobot</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>定位</strong></td>
+          <td>让机器人系统运作</td>
+          <td>让机器人变得聪明</td>
+      </tr>
+      <tr>
+          <td><strong>核心功能</strong></td>
+          <td>通信、模块协调、控制接口</td>
+          <td>数据采集、模型训练、策略学习</td>
+      </tr>
+      <tr>
+          <td><strong>典型用户</strong></td>
+          <td>系统集成工程师 / 机器人研发</td>
+          <td>机器学习研究者 / 算法开发者</td>
+      </tr>
+      <tr>
+          <td><strong>关键产出</strong></td>
+          <td>可运行的机器人系统</td>
+          <td>可泛化的智能策略（模型）</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="五总结">五、总结<a hidden class="anchor" aria-hidden="true" href="#五总结">#</a></h2>
+<ul>
+<li><strong>ROS</strong> 侧重于真实场景的“系统集成”，是机器人运行的“基础设施”。</li>
+<li><strong>Lerobot</strong> 更关注模型层面的“智能学习”，是机器人“变聪明”的核心。</li>
+</ul>
+<p>可以理解为：ROS 负责让身体各部分能沟通协作，Lerobot 负责让大脑学会思考与行动。</p>
+<p>lerobot是不是代替了ros的主要功能？那为什么还有同时用ros和lerobot的？
+原来基本机器人都有ros接口，但是python就不一定，所以需要ros，有python那肯定很方便搞软件的，但是也有不提供python的</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/ros/">Ros</a></li>
+      <li><a href="https://milong26.github.io/tags/robot/">Robot</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

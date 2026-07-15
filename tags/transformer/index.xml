@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Transformer on 我的博客</title>
+    <link>https://milong26.github.io/tags/transformer/</link>
+    <description>Recent content in Transformer on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 13 Sep 2024 10:12:29 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/transformer/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TRANSFORMER EXPLAINER: Interactive Learning of Text-Generative Models</title>
+      <link>https://milong26.github.io/post/transformer-explainer-interactive-learning-of-text-generative-models/</link>
+      <pubDate>Fri, 13 Sep 2024 10:12:29 +0000</pubDate>
+      <guid>https://milong26.github.io/post/transformer-explainer-interactive-learning-of-text-generative-models/</guid>
+      <description>&lt;p&gt;百篇paper计划(7/100)，很短，才2页，重点在code和其project，理解transformer。论文是没啥创新点了，写得也比较拉，看看项目吧。&lt;/p&gt;
+&lt;p&gt;这一篇写完啦！^^&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>transformer</title>
+      <link>https://milong26.github.io/post/transformer/</link>
+      <pubDate>Tue, 05 Mar 2024 21:17:53 +0000</pubDate>
+      <guid>https://milong26.github.io/post/transformer/</guid>
+      <description>&lt;p&gt;Transformer是一个利用注意力机制来提高模型训练速度的神经网络架构。&lt;/p&gt;
+&lt;p&gt;#文本生成的架构 这一部分确定完成了，其它部分未完全完成，以后有空再补&lt;/p&gt;
+&lt;p&gt;唯一的问题：那个贼大的框架图每一步怎么走的？&lt;/p&gt;
+&lt;h1 id=&#34;前提&#34;&gt;前提&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;&#34;&gt;编码器+解码器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;&#34;&gt;自注意力&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;解析&#34;&gt;解析&lt;/h1&gt;
+&lt;p&gt;image 一个盒子，以文本翻译为例，输入中文句子，输出英文句子。&lt;/p&gt;
+&lt;h2 id=&#34;解码器和编码器&#34;&gt;解码器和编码器&lt;/h2&gt;
+&lt;p&gt;这个盒子有两部分：解码器和编码器。
+编码器之间：每一个的小编码器的输入是前一个小编码器的输出，而每一个小解码器的输入不光是它的前一个解码器的输出，还包括了整个编码部分的输出。
+解析编码器：自注意力+前馈神经网络
+解析解码器：同样的，在decoder中使用的也是同样的结构。也是首先对输出（machine learning）计算自注意力得分，不同的地方在于，进行过自注意力机制后，将self-attention的输出再与Decoders模块的输出计算一遍注意力机制得分&lt;/p&gt;
+&lt;h2 id=&#34;残差神经网络&#34;&gt;残差神经网络&lt;/h2&gt;
+&lt;p&gt;为了解决梯度消失的问题，在Encoders和Decoder中都是用了残差神经网络的结构&lt;/p&gt;
+&lt;h2 id=&#34;softmax&#34;&gt;softmax&lt;/h2&gt;
+&lt;p&gt;回归最初的问题，将“机器学习”翻译成“machine learing”，解码器输出本来是一个浮点型的向量，怎么转化成“machine learing”这两个词呢？&lt;/p&gt;
+&lt;p&gt;最后的线性层接上一个softmax，其中线性层是一个简单的全连接神经网络，它将解码器产生的向量投影到一个更高维度的向量（logits）上，假设我们模型的词汇表是10000个词，那么logits就有10000个维度，每个维度对应一个惟一的词的得分。之后的softmax层将这些分数转换为概率。选择概率最大的维度，并对应地生成与之关联的单词作为此时间步的输出就是最终的输出&lt;/p&gt;
+&lt;h2 id=&#34;位置编码&#34;&gt;位置编码&lt;/h2&gt;
+&lt;p&gt;把词向量输入变成携带位置信息的输入：&lt;/p&gt;
+&lt;p&gt;我们可以给每个词向量加上一个有顺序特征的向量，发现sin和cos函数能够很好的表达这种特征，所以通常位置向量用以下公式来表示：
+$$
+PE (pos,2i)= sin(\frac{pos}{10000^{2i/d_{model}}}) \
+PE (pos,2i+ 1)= cos(\frac{pos}{10000^{2i/d_{model}}})
+$$&lt;/p&gt;
+&lt;h1 id=&#34;结构&#34;&gt;结构&lt;/h1&gt;
+&lt;p&gt;&lt;img alt=&#34;transformer结构图&#34; loading=&#34;lazy&#34; src=&#34;https://ooo.0x0.ooo/2024/03/05/Oy0VHp.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Transformer 的内部结构图，左侧为 Encoder block，右侧为 Decoder block。
+红色圈中的部分为 Multi-Head Attention，可以看到 Encoder block 包含一个 Multi-Head Attention，而 Decoder block 包含两个 Multi-Head Attention (其中有一个用到 Masked)。&lt;/p&gt;
+&lt;p&gt;Multi-Head Attention 上方还包括一个 Add &amp;amp; Norm 层，Add 表示残差连接 (Residual Connection) 用于防止网络退化，Norm 表示 Layer Normalization，用于对每一层的激活值进行归一化。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>diffusion transformer</title>
+      <link>https://milong26.github.io/post/diffusion-transformer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/diffusion-transformer/</guid>
+      <description>&lt;p&gt;想学习，但没找到好的教程，学的时候复盘一下diffusion,transformer和DiT是用来干啥的吧。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>条件transformer</title>
+      <link>https://milong26.github.io/post/%E6%9D%A1%E4%BB%B6transformer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E6%9D%A1%E4%BB%B6transformer/</guid>
+      <description>&lt;p&gt;什么是条件transformer？它能做到什么？什么情况下使用它？怎么样能看出来这是一个条件transformer？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 整理文本&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 有哪些经典的实际上就是条件transformer&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 和最基本的transformer对比&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+  </channel>
+</rss>

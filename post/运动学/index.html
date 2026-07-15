@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>运动学 | 我的博客</title>
+<meta name="keywords" content="3d">
+<meta name="description" content="kinematics，包括正向与逆向。用于joint-space和end-effector Cartesian-space的转换">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/%E8%BF%90%E5%8A%A8%E5%AD%A6/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/%E8%BF%90%E5%8A%A8%E5%AD%A6/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/%E8%BF%90%E5%8A%A8%E5%AD%A6/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="运动学">
+  <meta property="og:description" content="kinematics，包括正向与逆向。用于joint-space和end-effector Cartesian-space的转换">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-01-08T10:05:53+00:00">
+    <meta property="article:modified_time" content="2025-01-08T10:05:53+00:00">
+    <meta property="article:tag" content="3d">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="运动学">
+  <meta name="twitter:description" content="kinematics，包括正向与逆向。用于joint-space和end-effector Cartesian-space的转换">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "运动学",
+      "item": "https://milong26.github.io/post/%E8%BF%90%E5%8A%A8%E5%AD%A6/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "运动学",
+  "name": "运动学",
+  "description": "kinematics，包括正向与逆向。用于joint-space和end-effector Cartesian-space的转换\n",
+  "keywords": [
+    "3d"
+  ],
+  "articleBody": "kinematics，包括正向与逆向。用于joint-space和end-effector Cartesian-space的转换\n正向运动学 逆向运动学 在机器人的逆运动学的数值解法中，有两种常用的方法：\ndifferential inverse kinematics (微分逆运动学，differential ik) inverse kinematics (为了与微分逆运动学区分开来，我们叫direct inverse kinematics，direct ik) 为了比较二者差别，用末端位姿ik问题举例 direct ik就是直接求出一组关节角度，使得末端位姿精确达到目标。先算好终点，然后慢慢插值“搬过去”。如果目标和当前姿态差距大，中间轨迹可能不平滑甚至奇怪。 differential ik：求每时刻的关节速度​，让末端位姿残差指数衰减，边执行边优化 Differential IK 可以看作 用 Gauss-Newton 方法迭代求解 Direct IK 的一种在线实现。 用differential ik的时候，必须要必须以执行动作后的当前 joint 状态作为参考或初始条件。\nquaternion四元数 四元数定义：q=w+xi+yj+zk\nw,x,y,z是实数，ijk是虚数\n当用一个四元数乘以一个向量时，实际上就是让该向量围绕着这个四元数所描述的旋转轴，转动这个四元数所描述的角度而得到的向量。\nw表示旋转角度 w=cos(theta/2)，其中theta是旋转角，(xyz)是旋转轴：(x,y,z)=sin(theta/2)*(x,y,z)旋转轴\n比如绕y轴逆时针旋转90度，quat=(0.7,0,0.7,0)，绕x轴旋转90度，quat=(0.7,0.7,0,0)，复合起来的结果可以看错是(w+xi+yj+zk)的矢量计算\n算法 lerobot用的是placo issac用的是Differential inverse kinematics (lk) controller，算是一个比较通用的吧？ mplib是什么？\n",
+  "wordCount" : "49",
+  "inLanguage": "en",
+  "datePublished": "2025-01-08T10:05:53Z",
+  "dateModified": "2025-01-08T10:05:53Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/%E8%BF%90%E5%8A%A8%E5%AD%A6/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      运动学
+    </h1>
+    <div class="post-meta">
+
+<span title='2025-01-08 10:05:53 +0000 UTC'>January 8, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>kinematics，包括正向与逆向。用于joint-space和end-effector Cartesian-space的转换</p>
+<h1 id="正向运动学">正向运动学<a hidden class="anchor" aria-hidden="true" href="#正向运动学">#</a></h1>
+<h1 id="逆向运动学">逆向运动学<a hidden class="anchor" aria-hidden="true" href="#逆向运动学">#</a></h1>
+<p>在机器人的逆运动学的数值解法中，有两种常用的方法：</p>
+<ul>
+<li>differential inverse kinematics (微分逆运动学，differential ik)</li>
+<li>inverse kinematics (为了与微分逆运动学区分开来，我们叫direct inverse kinematics，direct ik)
+为了比较二者差别，用末端位姿ik问题举例</li>
+</ul>
+<ol>
+<li>direct ik就是直接求出一组关节角度，使得末端位姿精确达到目标。先算好终点，然后慢慢插值“搬过去”。如果目标和当前姿态差距大，中间轨迹可能不平滑甚至奇怪。</li>
+<li>differential ik：求每时刻的关节速度​，让末端位姿残差指数衰减，边执行边优化
+Differential IK 可以看作 <strong>用 Gauss-Newton 方法迭代求解 Direct IK 的一种在线实现</strong>。</li>
+</ol>
+<p>用differential ik的时候，必须要必须以执行动作后的当前 joint 状态作为参考或初始条件。</p>
+<h2 id="quaternion四元数">quaternion四元数<a hidden class="anchor" aria-hidden="true" href="#quaternion四元数">#</a></h2>
+<p>四元数定义：q=w+xi+yj+zk</p>
+<p>w,x,y,z是实数，ijk是虚数</p>
+<p>当用一个四元数乘以一个向量时，实际上就是让该向量围绕着这个四元数所描述的旋转轴，转动这个四元数所描述的角度而得到的向量。</p>
+<p>w表示旋转角度 w=cos(theta/2)，其中theta是旋转角，(xyz)是旋转轴：(x,y,z)=sin(theta/2)*(x,y,z)旋转轴</p>
+<p>比如绕y轴逆时针旋转90度，quat=(0.7,0,0.7,0)，绕x轴旋转90度，quat=(0.7,0.7,0,0)，复合起来的结果可以看错是(w+xi+yj+zk)的矢量计算</p>
+<h2 id="算法">算法<a hidden class="anchor" aria-hidden="true" href="#算法">#</a></h2>
+<ol>
+<li>lerobot用的是placo</li>
+<li>issac用的是Differential inverse kinematics (lk) controller，算是一个比较通用的吧？</li>
+</ol>
+<p>mplib是什么？</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/3d/">3d</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

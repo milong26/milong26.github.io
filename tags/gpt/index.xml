@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Gpt on 我的博客</title>
+    <link>https://milong26.github.io/tags/gpt/</link>
+    <description>Recent content in Gpt on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 19 Sep 2023 17:08:20 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/gpt/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LFQA的问题</title>
+      <link>https://milong26.github.io/post/%E9%98%85%E8%AF%BB-lfqa%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Tue, 19 Sep 2023 17:08:20 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E9%98%85%E8%AF%BB-lfqa%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+      <description>&lt;p&gt;论文标题：Hurdles to Progress in Long-form Question Answering
+地址：
+阅读参考：https://blog.csdn.net/c9Yv2cf9I06K2A9E/article/details/115387895&lt;/p&gt;
+&lt;p&gt;显而易见这篇还没来得及写&lt;/p&gt;
+&lt;p&gt;LFQA现有的工作倾向于集中在任务的两个核心部分，信息检索和综合合成information retrieval and synthesis。（from WebGPT: Browser-assisted question-answering with human feedback）&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>阅读-webgpt:借助浏览器和人工反馈实现的问答</title>
+      <link>https://milong26.github.io/post/%E9%98%85%E8%AF%BB-webgpt-%E5%80%9F%E5%8A%A9%E6%B5%8F%E8%A7%88%E5%99%A8%E5%92%8C%E4%BA%BA%E5%B7%A5%E5%8F%8D%E9%A6%88%E5%AE%9E%E7%8E%B0%E7%9A%84%E9%97%AE%E7%AD%94/</link>
+      <pubDate>Tue, 19 Sep 2023 16:53:26 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E9%98%85%E8%AF%BB-webgpt-%E5%80%9F%E5%8A%A9%E6%B5%8F%E8%A7%88%E5%99%A8%E5%92%8C%E4%BA%BA%E5%B7%A5%E5%8F%8D%E9%A6%88%E5%AE%9E%E7%8E%B0%E7%9A%84%E9%97%AE%E7%AD%94/</guid>
+      <description>&lt;p&gt;论文标题：WebGPT: Browser-assisted question-answering with human feedback
+&lt;a href=&#34;https://arxiv.org/abs/2112.09332&#34;&gt;地址&lt;/a&gt;
+一言以蔽之：让模型能上网找答案&lt;/p&gt;
+&lt;h1 id=&#34;介绍&#34;&gt;介绍&lt;/h1&gt;
+&lt;h2 id=&#34;为什么&#34;&gt;为什么&lt;/h2&gt;
+&lt;p&gt;写在introduction这一节的有的没的，help me部分理解为什么要这么干吧
+首先，该文章基于NLP的。
+NLP的一个问题：长形式的问答(LFQA)，即生成一个段落长度的答案来回答一个开放式的问题长形式的问答(LFQA)，即生成一个段落长度的答案来回答一个开放式的问题，拓展可以看这篇&lt;a href=&#34;LFQA%E7%9A%84%E9%97%AE%E9%A2%98.md&#34;&gt;LFQA的问题&lt;/a&gt;，总结下就是在信息检索和综合合成这俩方面有点瘸
+&lt;strong&gt;就是NLP在LFQA上不太好&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;怎么做&#34;&gt;怎么做&lt;/h2&gt;
+&lt;p&gt;作者做了大杂烩把这三个合起来：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将文档检索外包给微软必应网络搜索API&lt;/li&gt;
+&lt;li&gt;利用无监督的预训练，通过微调GPT-3实现高质量的合成&lt;/li&gt;
+&lt;li&gt;利用人类反馈直接优化答案质量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;贡献&#34;&gt;贡献&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;创建了一个基于文本的网页浏览器环境，一个经过微调的语言模型可以与这个环境交互。这使我们能够使用模仿学习和强化学习等通用方法，以端到端方式改进检索和合成。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这里端到端是什么意思？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;通过相关的参考（文章段落）来生成答案: 模型在浏览网页时从网页中提取段落。允许标注者判断答案的事实准确性，而无需进行困难的、主观的独立研究， 这是非常重要的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;标注者labeler是谁，人工还是机器？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;数据集&#34;&gt;数据集&lt;/h2&gt;
+&lt;p&gt;主要来自ELI5，额外有两种数据&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;demonstrations 人工示范的解答&lt;/li&gt;
+&lt;li&gt;comparisons 2种有不同参考的模型回答问题，人类反馈他们更喜欢哪个&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;数据集的使用方法&#34;&gt;数据集的使用方法&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;使用示范（上面的demonstration）行为克隆(即监督微调)，&lt;/li&gt;
+&lt;li&gt;使用比较（comparison）的奖励模型，&lt;/li&gt;
+&lt;li&gt;针对奖励模型用强化学习
+&lt;blockquote&gt;
+&lt;p&gt;这里用的against没懂
+reward model哪来的&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;针对奖励模型用拒绝抽样&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;评估模型&#34;&gt;评估模型&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;模型回答与人工示范比较，用留出法（测试集和训练集分开）hold-out&lt;/li&gt;
+&lt;li&gt;模型的答案与ELI5数据集提供的票数最高的答案进行比较&lt;/li&gt;
+&lt;li&gt;在TruthfulQA上评估我们的模型[Lin et al.， 2021]，这是一个简短问题的对抗式数据集。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;环境&#34;&gt;环境&lt;/h1&gt;
+&lt;p&gt;为了更好理解这篇文章我先按照它的行文顺序写，环境就是在&lt;a href=&#34;#%E8%B4%A1%E7%8C%AE&#34;&gt;贡献&lt;/a&gt;里提到的浏览器环境，这个我觉得更多的是工程设计方面的问题，没有细看（作者也没讲太多）
+基于bing搜索引擎+基于文本的网页浏览器环境，知道这个就行&lt;/p&gt;
+&lt;h1 id=&#34;方法&#34;&gt;方法&lt;/h1&gt;
+&lt;h2 id=&#34;数据收集&#34;&gt;数据收集&lt;/h2&gt;
+&lt;p&gt;还记得有什么数据吗，基础的数据集+demonstration+comparison，其中comparison必须要有模型才能收集到
+我咋感觉数据收集就是氪金呢。。&lt;/p&gt;
+&lt;h2 id=&#34;训练&#34;&gt;训练&lt;/h2&gt;
+&lt;h3 id=&#34;基础模型&#34;&gt;基础模型&lt;/h3&gt;
+&lt;p&gt;终于到重头戏了XD
+选择的模型：GPT-3
+模型大小：760M,13B,175B&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;看来还要写一个GPT-3相关的，我对这些参数没概念&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;训练方法&#34;&gt;训练方法&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Behavior Cloning
+使用监督学习对示范数据集进行微调，将人类演示者发出的命令作为标签。
+&lt;blockquote&gt;
+&lt;p&gt;什么东西？怎么做标签？？？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;Reward Modeling
+从BC模型开始，去掉最后的非嵌入层，我们训练模型接受一个问题和一个带有参考信息的答案，并输出一个标量奖励。奖励代表了Elo分数，缩放后，两个分数之间的差异代表了人类标记者更喜欢其中一个的概率的对数。奖励模型使用交叉熵损失进行训练，将比较作为标签。领带被视为50%的软标签。
+&lt;blockquote&gt;
+&lt;p&gt;什么叫with the final unembedding layer removed？？需要知道bc模型长什么样=gpt-3长什么样
+elo分数看&lt;a href=&#34;%E5%AD%A6%E4%BC%9A%E6%80%BB%E7%BB%93%E4%BA%BA%E7%B1%BB%E5%8F%8D%E9%A6%88.md&#34;&gt;学会总结人类反馈&lt;/a&gt;这一篇，但我没找到，可能是这个作者自己创的词汇吧
+原文说的是Ties are treated as soft 50% labels. ties这里是连接的意思？
+这一段我基本没看懂，reward应该是侧重在这个elo score上面&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

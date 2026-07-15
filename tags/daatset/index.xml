@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Daatset on 我的博客</title>
+    <link>https://milong26.github.io/tags/daatset/</link>
+    <description>Recent content in Daatset on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <atom:link href="https://milong26.github.io/tags/daatset/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>vla数据集</title>
+      <link>https://milong26.github.io/post/vla%E6%95%B0%E6%8D%AE%E9%9B%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/vla%E6%95%B0%E6%8D%AE%E9%9B%86/</guid>
+      <description>&lt;p&gt;看论文的时候一些数据集记录下来&lt;/p&gt;
+&lt;p&gt;有个问题：vla为啥还能有benchmark，不都是本地部署吗？&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

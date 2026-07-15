@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>hugo使用指南 | 我的博客</title>
+<meta name="keywords" content="website">
+<meta name="description" content="hugo配置日志">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/hugo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/hugo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/hugo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="hugo使用指南">
+  <meta property="og:description" content="hugo配置日志">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:tag" content="Website">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="hugo使用指南">
+  <meta name="twitter:description" content="hugo配置日志">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "hugo使用指南",
+      "item": "https://milong26.github.io/post/hugo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "hugo使用指南",
+  "name": "hugo使用指南",
+  "description": "hugo配置日志\n",
+  "keywords": [
+    "website"
+  ],
+  "articleBody": "hugo配置日志\n需求清单\n能联动pages（pages只支持静态吧） 可以有热力图 可以显示公式 有标签和分类 可以obsidian 开搞 参考别人的博客 都是windows环境\n环境配置 hugo 安装 下载v0.156.0release搜索到有windows版本的，最好直接安装extended版本：hugo_extended_withdeploy_windows命名的文件下载 设置环境变量，Path中添加hugo解压后的文件夹（可以访问到hugo.exe的那个路径） hugo version检查有结果了就行\n教程\n使用前的配置 在期望存放的位置\nhugo new site guance 出现Congratulations! Your new Hugo project was created in表示成功 进入文件夹，必须先找到一个主题，用PaperMod吧\ngit init git submodule add https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod 然后修改 hugo.toml：\nbaseURL = \"https://example.com/\" languageCode = \"en-us\" title = \"My Notes\" theme = \"PaperMod\" 重点是改theme\n然后执行hugo就能转到public\nhugo server -D 可以预览\nhugo 可以生成\n将网站文件夹转换为 Git ，要去public文件夹然后git init\n将 Git 本地库关联至远程库。\n已有的md文件复制粘贴到blog/content/posts/ 创建模板（借助obsidian）\n--- title: \"{{title}}\" date: \"{{date}}\" tags: categories: description: summary: cover.image: draft: true --- github 相关 源代码（markdown文件）更新\ngit add . git submodule add https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod pages展览\n创建username.github.io的仓库 源代码上传还比较简单\n但是hugo上传还是麻烦了一点\n还差什么功能\n基本配置：改hugo.toml，参考https://hugo.opendocs.io/getting-started/configuration/，抄了一个https://blog.rzlnb.top/posts/blog/hugo-blog-setup/。必要的时候文件名也可以修改。 页面增加ategory 上ai，爽歪歪 然后调整文章页面的\nobsidian模板 最好还是要有草稿箱的功能 obsidian一键怎么搞 域名配置好 然后把这一篇完善好 然后想要增加功能\nobsidian里面自动上传文档（非必须） obsidian上传public的功能（必须） 遇到报错\nrender: [en v1.0.0 guest] failed to render pages: render of \"D:/guance/content/post/GR-2-A-Generative-Video-Language-Action-Model-with-Web-Scale-Knowledge-for-Robot-Manipulation.md\" failed: \"D:\\guance\\themes\\PaperMod\\layouts\\baseof.html:16:8\": execute of template failed at ",
+  "wordCount" : "409",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/hugo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      hugo使用指南
+    </h1>
+    <div class="post-meta">
+
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>hugo配置日志</p>
+<p>需求清单</p>
+<ul>
+<li><input disabled="" type="checkbox"> 能联动pages（pages只支持静态吧）</li>
+<li><input disabled="" type="checkbox"> 可以有热力图</li>
+<li><input disabled="" type="checkbox"> 可以显示公式</li>
+<li><input disabled="" type="checkbox"> 有标签和分类</li>
+<li><input disabled="" type="checkbox"> 可以obsidian</li>
+</ul>
+<p>开搞
+参考<a href="https://blog.rouper.site/posts/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA-hugo--obsidian--github/">别人的博客</a>
+都是windows环境</p>
+<h1 id="环境配置">环境配置<a hidden class="anchor" aria-hidden="true" href="#环境配置">#</a></h1>
+<h2 id="hugo">hugo<a hidden class="anchor" aria-hidden="true" href="#hugo">#</a></h2>
+<h3 id="安装">安装<a hidden class="anchor" aria-hidden="true" href="#安装">#</a></h3>
+<p>下载<a href="https://github.com/gohugoio/hugo/releases/tag/v0.156.0">v0.156.0</a>release搜索到有windows版本的，最好直接安装extended版本：hugo_extended_withdeploy_windows命名的文件下载
+设置环境变量，Path中添加hugo解压后的文件夹（可以访问到hugo.exe的那个路径）
+hugo version检查有结果了就行</p>
+<p><a href="https://hugo.opendocs.io/getting-started/">教程</a></p>
+<h3 id="使用前的配置">使用前的配置<a hidden class="anchor" aria-hidden="true" href="#使用前的配置">#</a></h3>
+<p>在期望存放的位置</p>
+<pre tabindex="0"><code>hugo new site guance
+</code></pre><p>出现<code>Congratulations! Your new Hugo project was created in</code>表示成功
+进入文件夹，必须先找到一个主题，用PaperMod吧</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git init  
+</span></span><span style="display:flex;"><span>git submodule add https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
+</span></span></code></pre></div><p>然后修改 <code>hugo.toml</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#a6e22e">baseURL</span> = <span style="color:#e6db74">&#34;https://example.com/&#34;</span>  
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">languageCode</span> = <span style="color:#e6db74">&#34;en-us&#34;</span>  
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">title</span> = <span style="color:#e6db74">&#34;My Notes&#34;</span>  
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">theme</span> = <span style="color:#e6db74">&#34;PaperMod&#34;</span>
+</span></span></code></pre></div><p>重点是改theme</p>
+<p>然后执行hugo就能转到public</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hugo server -D
+</span></span></code></pre></div><p>可以预览</p>
+<pre tabindex="0"><code>hugo
+</code></pre><p>可以生成</p>
+<p>将网站文件夹转换为 Git ，要去public文件夹然后git init</p>
+<p>将 Git 本地库关联至远程库。</p>
+<p>已有的md文件复制粘贴到blog/content/posts/
+创建模板（借助obsidian）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>title: &#34;{{title}}&#34;
+</span></span><span style="display:flex;"><span>date: &#34;{{date}}&#34;
+</span></span><span style="display:flex;"><span>tags:
+</span></span><span style="display:flex;"><span>categories:
+</span></span><span style="display:flex;"><span>description:
+</span></span><span style="display:flex;"><span>summary:
+</span></span><span style="display:flex;"><span>cover.image:
+</span></span><span style="display:flex;"><span>draft: true
+</span></span><span style="display:flex;"><span>---
+</span></span></code></pre></div><h3 id="github-相关">github 相关<a hidden class="anchor" aria-hidden="true" href="#github-相关">#</a></h3>
+<p>源代码（markdown文件）更新</p>
+<pre tabindex="0"><code>git add .
+git submodule add https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
+</code></pre><p>pages展览</p>
+<ol>
+<li>创建username.github.io的仓库</li>
+</ol>
+<p>源代码上传还比较简单</p>
+<p>但是hugo上传还是麻烦了一点</p>
+<p>还差什么功能</p>
+<ol>
+<li>基本配置：改<code>hugo.toml</code>，参考https://hugo.opendocs.io/getting-started/configuration/，抄了一个https://blog.rzlnb.top/posts/blog/hugo-blog-setup/。必要的时候文件名也可以修改。</li>
+<li>页面增加ategory
+上ai，爽歪歪</li>
+</ol>
+<p>然后调整文章页面的</p>
+<ul>
+<li><input disabled="" type="checkbox"> obsidian模板</li>
+<li><input disabled="" type="checkbox"> 最好还是要有草稿箱的功能</li>
+<li><input disabled="" type="checkbox"> obsidian一键怎么搞</li>
+<li><input disabled="" type="checkbox"> 域名配置好</li>
+<li><input disabled="" type="checkbox"> 然后把这一篇完善好</li>
+</ul>
+<p>然后想要增加功能</p>
+<ol>
+<li>obsidian里面自动上传文档（非必须）</li>
+<li>obsidian上传public的功能（必须）</li>
+</ol>
+<p>遇到报错</p>
+<pre tabindex="0"><code> render: [en v1.0.0 guest] failed to render pages: render of &#34;D:/guance/content/post/GR-2-A-Generative-Video-Language-Action-Model-with-Web-Scale-Knowledge-for-Robot-Manipulation.md&#34; failed: &#34;D:\guance\themes\PaperMod\layouts\baseof.html:16:8&#34;: execute of template failed at &lt;partial &#34;head.html&#34; .&gt;: error calling partial: &#34;D:\guance\themes\PaperMod\layouts\_partials\head.html:19:31&#34;: execute of template failed at &lt;.Params.tags&gt;: range can’t iterate over agent
+D:\guance\themes\PaperMod\layouts\baseof.html:16:8:
+
+&lt;head&gt;
+    {{- partial &#34;head.html&#34; . }}
+&lt;/head&gt;
+
+D:\guance\themes\PaperMod\layouts\_partials\head.html:19:31:
+&lt;meta name=&#34;keywords&#34; content=&#34;{{ if .Params.keywords -}}
+    {{- range $i, $e := .Params.keywords }}{{ if $i }}, {{ end }}{{ $e }}{{ end }} {{- else }}
+    {{- range $i, $e := .Params.tags }}{{ if $i }}, {{ end }}{{ $e }}{{ end }} {{- end -}}&#34;&gt;
+{{- end }}
+&lt;meta name=&#34;description&#34; content=&#34;{{- with .Description }}{{ . }}{{- else }}{{- if or .IsPage .IsSection}}
+hugo v0.157.0-7747abbb316b03c8f353fd3be62d5011fa883ee6+extended+withdeploy windows/amd64 BuildDate=2026-02-25T16:38:33Z VendorInfo=gohugoio
+
+Reload Page
+</code></pre><p>是tags的问题</p>
+<p>我用obsidian，所以直接打开了content/post文件夹，但是里面还有一些我不想生成网页的文件，所以hugo生成网页的时候，对post内部的内容能否增加对文件夹的跳过？
+参考[<a href="https://manski.net/articles/hugo/ignore-files">https://discourse.gohugo.io/t/ignore-certain-files-and-directory-in-hugo/41960</a>](<a href="https://blog.sangeeth.dev/notes/excluding-directories-from-build-in-hugo/">https://blog.sangeeth.dev/notes/excluding-directories-from-build-in-hugo/</a>)</p>
+<p>在 hugo.toml / config.yaml 里加：
+Hugo config：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">ignoreFiles</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#34;/content/post/private/.*&#34;</span>
+</span></span></code></pre></div><p>整个文件夹完全不会参与构建</p>
+<p>主题是否支持draft，支持的，但是我需要用吗？用吧，虽然刚开始可能不习惯</p>
+<p>模板设定：在哪里，内容是什么</p>
+<p>自动插入模板
+创建文件的时候自动使用模板
+不支持自动，必须用插件Templater
+Templater → Trigger Templater on new file creation（新文件创建时触发）</p>
+<p>private文件夹迁移</p>
+<p>obsidian的vault配置完成了，然后搞一下</p>
+<ul>
+<li>github上传代码的时候不要把private、daily这些也上传：.gitignore</li>
+<li>上传一下最近的代码，别是网络问题</li>
+<li>hugo生成网页的时候不要把这两个里面的也生成</li>
+</ul>
+<p>为什么会有specialpage：
+hugo.yaml里面加上</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">params</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">disableSpecial1stPost</span>: <span style="color:#66d9ef">true</span>
+</span></span></code></pre></div><p>不要左右键，加上页码，而且一页显示的文章篇幅多一点
+参考https://blog.csdn.net/gitblog_00200/article/details/151458895
+打开分页模板文件layouts/_default/list.html，找到第102-104行和111-112行代码，确保ShowPageNums参数已启用。该参数控制是否在分页按钮中显示页码信息：</p>
+<p>papermod的配置可以参考
+<a href="https://github.com/wangyunzi/papermod/blob/master/config.yml">https://github.com/wangyunzi/papermod/blob/master/config.yml</a></p>
+<p>上传public文件夹以后报错
+<a href="https://github.com/milong26/milong26.github.io/actions/runs/28797666507/job/85392325237#step:11:2"><strong>build</strong></a>
+Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/upload-artifact@v4. For more information see: <a href="https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/">https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/</a></p>
+<h1 id="清除缓存">清除缓存<a hidden class="anchor" aria-hidden="true" href="#清除缓存">#</a></h1>
+<p>Hugo &ndash;gc</p>
+<h1 id="为什么publicindexhtml文件排版乱的好像没有用上css和js">为什么public/index.html文件排版乱的（好像没有用上css和js）<a hidden class="anchor" aria-hidden="true" href="#为什么publicindexhtml文件排版乱的好像没有用上css和js">#</a></h1>
+<!-- raw HTML omitted -->
+<p>content.js:40 Executing inline script violates the following Content Security Policy directive &lsquo;script-src &lsquo;self&rsquo; &lsquo;wasm-unsafe-eval&rsquo; &lsquo;inline-speculation-rules&rsquo; chrome-extension://cf78f897-7451-4d1f-a080-aecc336d5e3d/&rsquo;. Either the &lsquo;unsafe-inline&rsquo; keyword, a hash (&lsquo;sha256-RlhVC6WGhVrcsY0hAmbU/YhaSUz2iA2q1f16/7A6jLU=&rsquo;), or a nonce (&rsquo;nonce-&hellip;&rsquo;) is required to enable inline execution. The action has been blocked.
+insertScript @ content.js:40
+(index):1 Failed to find a valid digest in the &lsquo;integrity&rsquo; attribute for resource &lsquo;<a href="https://milong26.github.io/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css'">https://milong26.github.io/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css'</a> with computed SHA-256 integrity &lsquo;b/RkR7H6P4pcwLyuSAiN7MOuN/X7yZQGo678O/DmBEo=&rsquo;. The resource has been blocked.
+livereload.js:1  Failed to load resource: the server responded with a status of 404 ()
+userscript.html?name=%25E9%2598%2585%25E8%25AF%25BB%25E5%2585%25A8%25E6%2596%2587%25E3%2580%2581%25E8%2587%25AA%25E5%258A%25A8%25E5%25B1%2595%25E5%25BC%2580%25E5%2585%25A8%25E6%2596%2587%25E3%2580%2581%25E8%2587%25AA%25E5%258A%25A8%25E7%25A7%25BB%25E9%2599%25A4%25E4%25B8%2587%25E6%2581%25B6%25E5%25BC%25B9%25E6%25A1%2586.user.js&amp;id=d8ce1a36-aea2-4217-ad71-1b5ed76d8a78:11318 检测到github.io。。。。
+content_main.js:4760 This page uses Chrome&rsquo;s Built-In AI features (LanguageDetector)! We&rsquo;re always improving our models; please submit your feedback here: <a href="https://issues.chromium.org/issues/new?component=1583316">https://issues.chromium.org/issues/new?component=1583316</a></p>
+<p>有这个报错表示css被拦截了 说是css的hash不一样，所以浏览器拒绝</p>
+<p>我真服气了，是这个问题
+<a href="https://qing.shuncs.com/post/tech/hugo/">https://qing.shuncs.com/post/tech/hugo/</a>
+因为我忽视了warning。。。</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/website/">Website</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

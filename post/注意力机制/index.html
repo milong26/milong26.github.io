@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>注意力机制 | 我的博客</title>
+<meta name="keywords" content="attention">
+<meta name="description" content="注意力机制是transformer的核心，有三个关键的计算QKV">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="注意力机制">
+  <meta property="og:description" content="注意力机制是transformer的核心，有三个关键的计算QKV">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-03-05T16:49:09+00:00">
+    <meta property="article:modified_time" content="2024-03-05T16:49:09+00:00">
+    <meta property="article:tag" content="Attention">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="注意力机制">
+  <meta name="twitter:description" content="注意力机制是transformer的核心，有三个关键的计算QKV">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "注意力机制",
+      "item": "https://milong26.github.io/post/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "注意力机制",
+  "name": "注意力机制",
+  "description": "注意力机制是transformer的核心，有三个关键的计算QKV\n",
+  "keywords": [
+    "attention"
+  ],
+  "articleBody": "注意力机制是transformer的核心，有三个关键的计算QKV\n有几个问题：\n自注意力(self attention)和注意力(attention)是不是一个？ QKV的计算过程 attention的输入输出和完整流程 多头注意力里的“多头”是什么概念 引入 attention提出之前有CNN和RNN，还需要attention的原因： （1）计算能力的限制：当要记住很多“信息“，模型就要变得更复杂，然而目前计算能力依然是限制神经网络发展的瓶颈。\n（2）优化算法的限制：LSTM只能在一定程度上缓解RNN中的长距离依赖问题，且信息“记忆”能力并不高。\n基础 attention过程计算的三个阶段：\n根据Query和Key计算权重系数 根据Query和Key计算两者的相似性或者相关性； 对上一步的原始分值进行归一化处理 根据权重系数对Value进行加权求和 本来以为attention很麻烦的，结果看下来它的框架还是很简单的。\n自注意力 Q1解决了，自注意力和注意力不一样。之前一直分不清楚这俩\n自注意力(self-attention)是transformer里面的，它减少了对外部信息的依赖，更擅长捕捉数据或特征的内部相关性。\n计算过程 将输入单词转化成嵌入向量； 根据嵌入向量得到q，k，v三个向量； 为每个向量计算一个score：score =q . k ； 为了梯度的稳定，Transformer使用了score归一化，即除以$\\sqrt{d_k}$； 对score施以softmax激活函数； softmax点乘Value值v，得到加权的每个输入向量的评分v； 相加之后得到最终的输出结果z ：z=$\\sum v$ Q2和Q3来了\nembedding转换 嵌入只发生在最底层的编码器中\nqkv计算 随机初始化3个矩阵： $$ W^Q\\in R^{d\\times d_q}\\ W^K\\in R^{d\\times d_k}\\ W^V\\in R^{d\\times d_v} $$ d是embedding时候一个行向量的维度。 W和它上标在一起是一个整体，命名成w1，w2，w3也行 $$ Q=X\\cdot W^Q\\ K=X\\cdot W^K\\ V=X\\cdot W^V $$ X是经过embedding的，n行（单词个数）d列（维度）\nscore 用的是“点注意力”。另外还有很多算法，transformer用的也是点 从推荐系统开始： 基本原理是：给定一个 query，计算query 与 key 的相关性，然后根据query 与 key 的相关性去找到最合适的 value。 球的score其实就是相关性\n归一化 为什么要归一化？ 随着$d_k$变大，$q\\cdot k$的结果也变大。这样会将softmax函数推入梯度非常小的区域，使得收敛困难(可能出现梯度消失的情况)\n假设q和k是均值0，方差1的独立随机变量，$q\\cdot k=\\sum_{i=1}^{d_k}q_ik_i$均值为0，方差$d_k$，为了抵消这种影响，需要缩放\n怎么抵消的看一看这篇包含概率期望方差计算的推导\n变体 多头注意力 $$ Attention(Q,K,V)=softmax(\\frac{QK^T}{\\sqrt{d_k}})\\ MultiHead(Q,K,V)=concat(head_1…head_h)W^O\\ where \\space head_i=Attention(QW^Q_i,KW_i^K,VW_i^v) $$\n一下子看不懂，以后看transformer的时候再琢磨吧\n",
+  "wordCount" : "92",
+  "inLanguage": "en",
+  "datePublished": "2024-03-05T16:49:09Z",
+  "dateModified": "2024-03-05T16:49:09Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      注意力机制
+    </h1>
+    <div class="post-meta">
+
+<span title='2024-03-05 16:49:09 +0000 UTC'>March 5, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>注意力机制是transformer的核心，有三个关键的计算QKV</p>
+<p>有几个问题：</p>
+<ol>
+<li>自注意力(self attention)和注意力(attention)是不是一个？</li>
+<li>QKV的计算过程</li>
+<li>attention的输入输出和完整流程</li>
+<li>多头注意力里的“多头”是什么概念</li>
+</ol>
+<h1 id="引入">引入<a hidden class="anchor" aria-hidden="true" href="#引入">#</a></h1>
+<p>attention提出之前有CNN和RNN，还需要attention的原因：
+（1）计算能力的限制：当要记住很多“信息“，模型就要变得更复杂，然而目前计算能力依然是限制神经网络发展的瓶颈。</p>
+<p>（2）优化算法的限制：LSTM只能在一定程度上缓解RNN中的长距离依赖问题，且信息“记忆”能力并不高。</p>
+<h1 id="基础">基础<a hidden class="anchor" aria-hidden="true" href="#基础">#</a></h1>
+<p>attention过程计算的三个阶段：</p>
+<ol>
+<li>根据Query和Key计算权重系数
+<ol>
+<li>根据Query和Key计算两者的相似性或者相关性；</li>
+<li>对上一步的原始分值进行归一化处理</li>
+</ol>
+</li>
+<li>根据权重系数对Value进行加权求和</li>
+</ol>
+<blockquote>
+<p>本来以为attention很麻烦的，结果看下来它的框架还是很简单的。</p>
+</blockquote>
+<h1 id="自注意力">自注意力<a hidden class="anchor" aria-hidden="true" href="#自注意力">#</a></h1>
+<blockquote>
+<p>Q1解决了，自注意力和注意力不一样。之前一直分不清楚这俩</p>
+</blockquote>
+<p>自注意力(self-attention)是transformer里面的，它减少了对外部信息的依赖，更擅长捕捉数据或特征的内部相关性。</p>
+<h2 id="计算过程">计算过程<a hidden class="anchor" aria-hidden="true" href="#计算过程">#</a></h2>
+<ol>
+<li>将输入单词转化成嵌入向量；</li>
+<li>根据嵌入向量得到q，k，v三个向量；</li>
+<li>为每个向量计算一个score：score =q . k ；</li>
+<li>为了梯度的稳定，Transformer使用了score归一化，即除以$\sqrt{d_k}$；</li>
+<li>对score施以softmax激活函数；</li>
+<li>softmax点乘Value值v，得到加权的每个输入向量的评分v；</li>
+<li>相加之后得到最终的输出结果z ：z=$\sum v$</li>
+</ol>
+<blockquote>
+<p>Q2和Q3来了</p>
+</blockquote>
+<h3 id="embedding转换">embedding转换<a hidden class="anchor" aria-hidden="true" href="#embedding转换">#</a></h3>
+<p>嵌入只发生在最底层的编码器中</p>
+<h3 id="qkv计算">qkv计算<a hidden class="anchor" aria-hidden="true" href="#qkv计算">#</a></h3>
+<p>随机初始化3个矩阵：
+$$
+W^Q\in R^{d\times d_q}\
+W^K\in R^{d\times d_k}\
+W^V\in R^{d\times d_v}
+$$
+d是embedding时候一个行向量的维度。
+W和它上标在一起是一个整体，命名成w1，w2，w3也行
+$$
+Q=X\cdot W^Q\
+K=X\cdot W^K\
+V=X\cdot W^V
+$$
+X是经过embedding的，n行（单词个数）d列（维度）</p>
+<h3 id="score">score<a hidden class="anchor" aria-hidden="true" href="#score">#</a></h3>
+<p>用的是“点注意力”。另外还有很多算法，transformer用的也是点
+从推荐系统开始：
+基本原理是：给定一个 query，计算query 与 key 的相关性，然后根据query 与 key 的相关性去找到最合适的 value。
+球的score其实就是相关性</p>
+<h3 id="归一化">归一化<a hidden class="anchor" aria-hidden="true" href="#归一化">#</a></h3>
+<p>为什么要归一化？
+随着$d_k$变大，$q\cdot k$的结果也变大。这样会将softmax函数推入梯度非常小的区域，使得收敛困难(可能出现梯度消失的情况)</p>
+<p>假设q和k是均值0，方差1的独立随机变量，$q\cdot k=\sum_{i=1}^{d_k}q_ik_i$均值为0，方差$d_k$，为了抵消这种影响，需要缩放</p>
+<p>怎么抵消的看一看<a href="http://t.csdnimg.cn/WqKbt">这篇包含概率期望方差计算的推导</a></p>
+<h1 id="变体">变体<a hidden class="anchor" aria-hidden="true" href="#变体">#</a></h1>
+<h2 id="多头注意力">多头注意力<a hidden class="anchor" aria-hidden="true" href="#多头注意力">#</a></h2>
+<p>$$
+Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})\
+MultiHead(Q,K,V)=concat(head_1&hellip;head_h)W^O\
+where \space head_i=Attention(QW^Q_i,KW_i^K,VW_i^v)
+$$</p>
+<blockquote>
+<p>一下子看不懂，以后看transformer的时候再琢磨吧</p>
+</blockquote>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/attention/">Attention</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

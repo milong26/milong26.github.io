@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Ai on 我的博客</title>
+    <link>https://milong26.github.io/categories/ai/</link>
+    <description>Recent content in Ai on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 19 Sep 2025 16:40:21 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/categories/ai/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>embed</title>
+      <link>https://milong26.github.io/post/embed/</link>
+      <pubDate>Fri, 19 Sep 2025 16:40:21 +0000</pubDate>
+      <guid>https://milong26.github.io/post/embed/</guid>
+      <description>&lt;p&gt;这个词语太抽象了，学习一下&lt;/p&gt;
+&lt;p&gt;原来说白了就是投影……&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>思维链</title>
+      <link>https://milong26.github.io/post/%E6%80%9D%E7%BB%B4%E9%93%BE/</link>
+      <pubDate>Wed, 17 Apr 2024 11:30:14 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E6%80%9D%E7%BB%B4%E9%93%BE/</guid>
+      <description>&lt;p&gt;思维链针对的是大模型搞推理问题，让它直接从直接输出一个结果变成写推理过程+结果的形式。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>transformer</title>
+      <link>https://milong26.github.io/post/transformer/</link>
+      <pubDate>Tue, 05 Mar 2024 21:17:53 +0000</pubDate>
+      <guid>https://milong26.github.io/post/transformer/</guid>
+      <description>&lt;p&gt;Transformer是一个利用注意力机制来提高模型训练速度的神经网络架构。&lt;/p&gt;
+&lt;p&gt;#文本生成的架构 这一部分确定完成了，其它部分未完全完成，以后有空再补&lt;/p&gt;
+&lt;p&gt;唯一的问题：那个贼大的框架图每一步怎么走的？&lt;/p&gt;
+&lt;h1 id=&#34;前提&#34;&gt;前提&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;&#34;&gt;编码器+解码器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;&#34;&gt;自注意力&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;解析&#34;&gt;解析&lt;/h1&gt;
+&lt;p&gt;image 一个盒子，以文本翻译为例，输入中文句子，输出英文句子。&lt;/p&gt;
+&lt;h2 id=&#34;解码器和编码器&#34;&gt;解码器和编码器&lt;/h2&gt;
+&lt;p&gt;这个盒子有两部分：解码器和编码器。
+编码器之间：每一个的小编码器的输入是前一个小编码器的输出，而每一个小解码器的输入不光是它的前一个解码器的输出，还包括了整个编码部分的输出。
+解析编码器：自注意力+前馈神经网络
+解析解码器：同样的，在decoder中使用的也是同样的结构。也是首先对输出（machine learning）计算自注意力得分，不同的地方在于，进行过自注意力机制后，将self-attention的输出再与Decoders模块的输出计算一遍注意力机制得分&lt;/p&gt;
+&lt;h2 id=&#34;残差神经网络&#34;&gt;残差神经网络&lt;/h2&gt;
+&lt;p&gt;为了解决梯度消失的问题，在Encoders和Decoder中都是用了残差神经网络的结构&lt;/p&gt;
+&lt;h2 id=&#34;softmax&#34;&gt;softmax&lt;/h2&gt;
+&lt;p&gt;回归最初的问题，将“机器学习”翻译成“machine learing”，解码器输出本来是一个浮点型的向量，怎么转化成“machine learing”这两个词呢？&lt;/p&gt;
+&lt;p&gt;最后的线性层接上一个softmax，其中线性层是一个简单的全连接神经网络，它将解码器产生的向量投影到一个更高维度的向量（logits）上，假设我们模型的词汇表是10000个词，那么logits就有10000个维度，每个维度对应一个惟一的词的得分。之后的softmax层将这些分数转换为概率。选择概率最大的维度，并对应地生成与之关联的单词作为此时间步的输出就是最终的输出&lt;/p&gt;
+&lt;h2 id=&#34;位置编码&#34;&gt;位置编码&lt;/h2&gt;
+&lt;p&gt;把词向量输入变成携带位置信息的输入：&lt;/p&gt;
+&lt;p&gt;我们可以给每个词向量加上一个有顺序特征的向量，发现sin和cos函数能够很好的表达这种特征，所以通常位置向量用以下公式来表示：
+$$
+PE (pos,2i)= sin(\frac{pos}{10000^{2i/d_{model}}}) \
+PE (pos,2i+ 1)= cos(\frac{pos}{10000^{2i/d_{model}}})
+$$&lt;/p&gt;
+&lt;h1 id=&#34;结构&#34;&gt;结构&lt;/h1&gt;
+&lt;p&gt;&lt;img alt=&#34;transformer结构图&#34; loading=&#34;lazy&#34; src=&#34;https://ooo.0x0.ooo/2024/03/05/Oy0VHp.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Transformer 的内部结构图，左侧为 Encoder block，右侧为 Decoder block。
+红色圈中的部分为 Multi-Head Attention，可以看到 Encoder block 包含一个 Multi-Head Attention，而 Decoder block 包含两个 Multi-Head Attention (其中有一个用到 Masked)。&lt;/p&gt;
+&lt;p&gt;Multi-Head Attention 上方还包括一个 Add &amp;amp; Norm 层，Add 表示残差连接 (Residual Connection) 用于防止网络退化，Norm 表示 Layer Normalization，用于对每一层的激活值进行归一化。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>注意力机制</title>
+      <link>https://milong26.github.io/post/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</link>
+      <pubDate>Tue, 05 Mar 2024 16:49:09 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</guid>
+      <description>&lt;p&gt;注意力机制是transformer的核心，有三个关键的计算QKV&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>编码器和解码器</title>
+      <link>https://milong26.github.io/post/%E7%BC%96%E7%A0%81%E5%99%A8%E5%92%8C%E8%A7%A3%E7%A0%81%E5%99%A8/</link>
+      <pubDate>Mon, 04 Mar 2024 16:36:10 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E7%BC%96%E7%A0%81%E5%99%A8%E5%92%8C%E8%A7%A3%E7%A0%81%E5%99%A8/</guid>
+      <description>&lt;p&gt;写完之后发现编码器和解码器这个框架不是很麻烦，就是一种思想，但是要扯上transformer就很麻烦orz。&lt;/p&gt;
+&lt;p&gt;一句话总结一下：编码器是可变-&amp;gt;固定，解码器是固定-&amp;gt;可变&lt;/p&gt;
+&lt;p&gt;encoder-decoder是seq2seq的一种实现，是深度学习中常见的模型框架。&lt;/p&gt;
+&lt;h1 id=&#34;定义&#34;&gt;定义&lt;/h1&gt;
+&lt;p&gt;Encoder将&lt;strong&gt;可变长度&lt;/strong&gt;的输入序列编码成一个&lt;strong&gt;固定长度&lt;/strong&gt;的向量；
+Decoder将&lt;strong&gt;固定长度&lt;/strong&gt;的向量解码成一个&lt;strong&gt;可变长度&lt;/strong&gt;的输出序列；
+Encoder-Decoder阶段的编码与解码的方式可以是CNN、RNN、LSTM、GRU等
+（所以encoder和decoder中间的向量长度是固定的，这也是它的一个缺陷）&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;为什么是缺陷，长度固定的+缺点体现在哪里&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;rnn的编码器解码器&#34;&gt;RNN的编码器解码器&lt;/h1&gt;
+&lt;p&gt;&lt;img alt=&#34;编码器和解码器&#34; loading=&#34;lazy&#34; src=&#34;https://ooo.0x0.ooo/2024/03/04/OytU4r.png&#34;&gt;
+该结构来自论文Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation
+RNN编码-解码器 ，该模型包含两个RNN，分别位于编码器和解码器中。
+编码器中的RNN负责将变长的输入序列映射到一个固定长度的向量中，解码器中的RNN则负责将向量映射到一个变长的输出序列中。
+定性的来讲，这个模型可以学习语言短语的有意义的的语义和句法表示。&lt;/p&gt;
+&lt;h3 id=&#34;编码器&#34;&gt;编码器&lt;/h3&gt;
+&lt;p&gt;编码器部分的隐藏层状态用 $h_t$表示，隐含层更新公式为
+$$
+h_t=f(h_{t-1},x_t)
+$$
+f是一个函数，可以是简单的sigmoid，也可以是复杂的LSTM，上文提到的论文里面用的是GRU
+C 是中间语义表示，可以是h总和也可以是最后一个h，看用的什么方法。这里描述的是用RNN，RNN的信息会流到最后，所以这篇paper里用的是最后一个h&lt;/p&gt;
+&lt;h3 id=&#34;解码器&#34;&gt;解码器&lt;/h3&gt;
+&lt;p&gt;解码器的隐含层更新为
+$$
+s_t=g(s_{t-1},y_{t-1},c)
+$$
+最后模型的输出预测为
+$$
+P(y_t|y_{t-1},y_{t-2},&amp;hellip;y_1,c)=g(s_t,y_{t-1},c)
+$$&lt;/p&gt;
+&lt;h3 id=&#34;训练&#34;&gt;训练&lt;/h3&gt;
+&lt;p&gt;对解码阶段每个时间步骤i，解码器输出$y_i$的条件概率为$P(y_i|y_1&amp;hellip;y_{i-1},c)$，输出序列的联合概率函数为
+$$
+P(y_1,&amp;hellip;y_{T&amp;rsquo;}|x_1,&amp;hellip;x_T)=\prod_{i=1}^{T&amp;rsquo;}P(y_i|y_1&amp;hellip;y_{i-1},c)
+$$&lt;/p&gt;
+&lt;p&gt;想要最大化输出序列的联合概率，根据最大似然估计&lt;/p&gt;
+&lt;p&gt;$$
+max_\theta \frac{1}{N} \sum_{n=1}^N logp_\theta(y_n|x_n)
+$$&lt;/p&gt;
+&lt;h1 id=&#34;引入注意力&#34;&gt;引入注意力&lt;/h1&gt;
+&lt;p&gt;在普通的编码器-解码器模型中，有一个很大的局限性。那就是上下文变量对于 Decoding 阶段每个时间步都是一样的，这可能是模型性能的一个瓶颈。&lt;/p&gt;
+&lt;p&gt;我们希望不同时间步的解码能够依赖于与之更相关的上下文信息，换句话说，Decoding 往往并不需要整个输入序列的信息，而是要有所侧重。于是，Bengio 团队的 Bahdanau 在 2014年首次在编码器-解码器模型中引入了注意力机制 (Attention Mechanism)&lt;/p&gt;
+&lt;p&gt;具体做法：
+在解码器过程中，在时间步i，将c泛化为$c_i$
+注意力机制的目标是让解码器在每一时间步对输入序列中不同时间步编码的信息分配不同的注意力。那么体现在上下文变量中， $c_i$就是 Encoder 中不同时间步的隐藏状态的加权平均。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Bi-LSTM</title>
+      <link>https://milong26.github.io/post/bi-lstm/</link>
+      <pubDate>Tue, 24 Oct 2023 19:34:14 +0000</pubDate>
+      <guid>https://milong26.github.io/post/bi-lstm/</guid>
+      <description>&lt;p&gt;LSTM的全称是Long Short-Term Memory，它是递归神经网络RNN（Recurrent Neural Network）的一种。
+LSTM由于其设计的特点，非常适合用于对时序数据的建模，如文本数据。
+BiLSTM是Bi-directional Long Short-Term Memory的缩写，是由前向LSTM与后向LSTM组合而成。两者在自然语言处理任务中都常被用来建模上下文信息。&lt;/p&gt;
+&lt;h1 id=&#34;rnn&#34;&gt;RNN&lt;/h1&gt;
+&lt;p&gt;RNN可以这么表示
+&lt;img alt=&#34;rnn的流程&#34; loading=&#34;lazy&#34; src=&#34;https://pic4.zhimg.com/80/v2-3f49463a7388c2b43c75db279b69ad23_1440w.webp&#34;&gt;
+递归神经网络在许多情况下运行良好，特别是在对&lt;strong&gt;短&lt;/strong&gt;时间序列数据的分析时十分方便。&lt;/p&gt;
+&lt;p&gt;上图所示的简单递归神经网络存在一个“硬伤“，长期依赖问题：递归神经网络只能处理我们需要较接近的上下文的情况。
+不但如此，相比于一般的神经网络，这种简单的RNN还很容易出现两种在神经网络中臭名昭著的问题：梯度消失问题（神经网络的权重/偏置梯度极小，导致神经网络参数调整速率急剧下降）和梯度爆炸问题（神经网络的权重/偏置梯度极大，导致神经网络参数调整幅度过大，矫枉过正）。&lt;/p&gt;
+&lt;p&gt;根据微分链式法则，在RNN中，神经元的权重的梯度可以被表示为一系列函数的微分的连乘。因为神经元的参数（权重与偏置）都是基于学习速率（一般为常数）和参数梯度相反数（使得神经网络输出最快逼近目标输出）得到的，一个过小或过大的梯度会导致我们要么需要极长的训练时间&lt;/p&gt;
+&lt;h1 id=&#34;lstm&#34;&gt;LSTM&lt;/h1&gt;
+&lt;p&gt;LSTM从被设计之初就被用于解决一般递归神经网络中普遍存在的长期依赖问题，使用LSTM可以有效的传递和表达长时间序列中的信息并且不会导致长时间前的有用信息被忽略（遗忘）。与此同时，LSTM还可以解决RNN中的梯度消失/爆炸问题。&lt;/p&gt;
+&lt;p&gt;“长短期记忆”的概念——只有一部分的信息需要长期的记忆，而有的信息可以不记下来。同时，我们还需要一套机制可以动态的处理神经网络的“记忆”，因为有的信息可能一开始价值很高，后面价值逐渐衰减，这时候我们也需要让神经网络学会“遗忘”特定的信息。&lt;/p&gt;
+&lt;h2 id=&#34;流程图&#34;&gt;流程图&lt;/h2&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://pic4.zhimg.com/80/v2-35ad506e9db04ca903d41997dcb677df_1440w.webp&#34;&gt;
+上图中，每一个红色圆形代表对向量做出的操作（pointwise operation， 对位操作），而黄色的矩形代表一个神经网络层，上面的字符代表神经网络所使用的激活函数。&lt;/p&gt;
+&lt;h3 id=&#34;遗忘&#34;&gt;遗忘&lt;/h3&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://pic2.zhimg.com/80/v2-badaabdf1504958d424eb74296f0b219_1440w.webp&#34;&gt;
+用来扔掉一些没用的
+每一次输入一个新的输入，LSTM会先根据新的输入和上一时刻的输出决定遗忘掉之前的哪些记忆——输入和上一步的输出会整合为一个单独的向量，然后通过sigmoid神经层，最后点对点的乘在单元状态上。
+因为sigmoid会将任意输入压缩到(0,1)上， 如果整合后的向量某个分量在通过sigmoid层后变为0，那么显然单元状态在对位相乘后对应的分量也会变成0，换句话说，“遗忘”了这个分量上的信息；如果某个分量通过sigmoid层后为1，单元状态会“保持完整记忆”。不同的sigmoid输出会带来不同信息的记忆与遗忘。通过这种方式，LSTM可以长期记忆重要信息，并且记忆可以随着输入进行动态调整。&lt;/p&gt;
+&lt;p&gt;公式：
+$$
+f_t=sigmoid(W_f·[h_{t-1},x_t]+b_f)
+$$&lt;/p&gt;
+&lt;p&gt;最基础的就是y=wx+b&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如何判断这个分量上的信息需要被遗忘/记住&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;记忆&#34;&gt;记忆&lt;/h3&gt;
+&lt;p&gt;用来控制是否将在t时刻（现在）的数据并入单元状态中的控制单位。首先，用tanh函数层将现在的向量中的有效信息提取出来，然后使用（图上tanh函数层左侧）的sigmoid函数来控制这些记忆要放“多少”进入单元状态。这两者结合起来就可以做到：
+&lt;img loading=&#34;lazy&#34; src=&#34;https://pic2.zhimg.com/80/v2-ada5e6a675e84806be530bfc0627c369_1440w.webp&#34;&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;从当前输入中提取有效信息
+$$
+\tilde{C}&lt;em&gt;t=tanh(W_c·[h&lt;/em&gt;{t-1},x_t]+b_c)
+$$&lt;/li&gt;
+&lt;li&gt;对提取的有效信息做出筛选，为每个分量做出评级(0 ~ 1)，评级越高的最后会有越多的记忆进入单元状态
+$$
+i_t=sigmoid(W_t · [h_{t-1,x_t}]+b_i)
+$$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;lstm的关键单元状态&#34;&gt;LSTM的关键：单元状态&lt;/h3&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://pic2.zhimg.com/80/v2-7d88049a24256fecb5b61801072c6629_1440w.webp&#34;&gt;
+用$C_t$表示神经元在t时刻过后的“记忆”，这个向量涵盖了在t+1时刻前神经网络对于所有输入信息的“概括总结”
+$$
+C_t=f_t&lt;em&gt;C_{t-1}+i_t&lt;/em&gt;\tilde{C}_t
+$$&lt;/p&gt;
+&lt;h3 id=&#34;输出&#34;&gt;输出&lt;/h3&gt;
+&lt;p&gt;输出层会先将当前输入值与上一时刻输出值整合后的向量（即$[h_{t-1},x_t]$）用sigmoid函数提取其中的信息，接着，会将当前的单元状态通过tanh函数压缩映射到区间(-1, 1)中&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;为什么我们要在LSTM的输出门上使用tanh函数？
+以下引用自Stack Overflow上问题 What is the intuition of using tanh in LSTM 中的最佳答案：
+&lt;a href=&#34;https://stackoverflow.com/questions/40761185/what-is-the-intuition-of-using-tanh-in-lstm&#34;&gt;https://stackoverflow.com/questions/40761185/what-is-the-intuition-of-using-tanh-in-lstm&lt;/a&gt;
+在LSTM的输入和输出门中使用tanh函数有以下几个原因：&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

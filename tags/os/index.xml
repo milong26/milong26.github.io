@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Os on 我的博客</title>
+    <link>https://milong26.github.io/tags/os/</link>
+    <description>Recent content in Os on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 02 Apr 2025 15:14:40 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/os/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>windows</title>
+      <link>https://milong26.github.io/post/windows/</link>
+      <pubDate>Wed, 02 Apr 2025 15:14:40 +0000</pubDate>
+      <guid>https://milong26.github.io/post/windows/</guid>
+      <description>&lt;p&gt;windows，系统和使用。有linux了怎么能没有windows&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>linux</title>
+      <link>https://milong26.github.io/post/linux/</link>
+      <pubDate>Fri, 21 Feb 2025 11:10:22 +0000</pubDate>
+      <guid>https://milong26.github.io/post/linux/</guid>
+      <description>&lt;p&gt;linux一些常用指令&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>重装系统之前和之后我要干什么</title>
+      <link>https://milong26.github.io/post/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B9%8B%E5%89%8D%E5%92%8C%E4%B9%8B%E5%90%8E%E6%88%91%E8%A6%81%E5%B9%B2%E4%BB%80%E4%B9%88/</link>
+      <pubDate>Wed, 17 May 2023 16:49:37 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B9%8B%E5%89%8D%E5%92%8C%E4%B9%8B%E5%90%8E%E6%88%91%E8%A6%81%E5%B9%B2%E4%BB%80%E4%B9%88/</guid>
+      <description>&lt;p&gt;遇到问题睡大觉×
+遇到问题重装√&lt;/p&gt;
+&lt;p&gt;之前：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 导出chrome的用户名和密码&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 导出收藏夹&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; qq文件&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; d盘中的文件相关&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 桌面上可能有的文件残留&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 单机游戏的存档&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;重装系统ing&lt;/p&gt;
+&lt;p&gt;之后：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 设置一下配色，防止闪瞎&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 修改桌面布局、卸载掉不用的软件&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; chrome下载回来&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; darkreader拓展&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 佛跳墙&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 屏蔽广告的拓展和tampermonkey&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 导入密码和收藏夹&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 7z、vscode、tim等软件安装和配置&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 显示器的驱动找intel assiat它会补全&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 指纹的驱动在&lt;a href=&#34;https://www.dell.com/support/home/zh-cn/product-support/product/vostro-13-5370-laptop/drivers&#34;&gt;这&lt;/a&gt;，指纹是这个Goodix GF3208 指纹传感器驱动程序&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 腾讯的翻译拓展挺好用的，不需要登录，比谷歌快&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>阻塞系统调用</title>
+      <link>https://milong26.github.io/post/%E9%98%BB%E5%A1%9E%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/</link>
+      <pubDate>Tue, 04 May 2021 08:08:14 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E9%98%BB%E5%A1%9E%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>进程和线程</title>
+      <link>https://milong26.github.io/post/%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Sun, 18 Apr 2021 17:43:32 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/</guid>
+      <description>&lt;p&gt;进程和线程&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>操作系统环境与运行机制</title>
+      <link>https://milong26.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E4%B8%8E%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/</link>
+      <pubDate>Fri, 16 Apr 2021 16:52:07 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E4%B8%8E%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/</guid>
+      <description>&lt;p&gt;中断|异常&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>操作系统概述</title>
+      <link>https://milong26.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/</link>
+      <pubDate>Fri, 16 Apr 2021 15:42:58 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/</guid>
+      <description>&lt;p&gt;操作系统-概述&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>安卓</title>
+      <link>https://milong26.github.io/post/%E5%AE%89%E5%8D%93/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E5%AE%89%E5%8D%93/</guid>
+      <description>&lt;p&gt;纠结了一下还是分类到it了，但可能以后还是放到life里面？&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

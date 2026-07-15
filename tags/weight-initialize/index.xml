@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Weight Initialize on 我的博客</title>
+    <link>https://milong26.github.io/tags/weight-initialize/</link>
+    <description>Recent content in Weight Initialize on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 25 Jun 2023 17:03:24 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/weight-initialize/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在神经网络里初始化权重</title>
+      <link>https://milong26.github.io/post/%E5%9C%A8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E9%87%8C%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9D%83%E9%87%8D/</link>
+      <pubDate>Sun, 25 Jun 2023 17:03:24 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E5%9C%A8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E9%87%8C%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9D%83%E9%87%8D/</guid>
+      <description>&lt;p&gt;其实我还没明白怎么就到这里了
+&lt;a href=&#34;https://towardsdatascience.com/weight-initialization-in-neural-networks-a-journey-from-the-basics-to-kaiming-954fb9b47c79&#34;&gt;参考&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;为什么要初始化权重&#34;&gt;为什么要初始化权重&lt;/h1&gt;
+&lt;p&gt;权重初始化的目的是防止层激活输出在深度神经网络前向传播过程中爆炸或消失。如果发生任何一种情况，损失梯度要么太大要么太小而无法有益地向后流动，并且网络将需要更长的时间才能收敛（即使它能够收敛）。
+一句话概括：权重太大导致梯度爆炸（&lt;code&gt;torch.isnan()&lt;/code&gt;可判断是否是空值），权重太小导致输出不明显&lt;/p&gt;
+&lt;h1 id=&#34;如何找到最佳权重&#34;&gt;如何找到最佳权重&lt;/h1&gt;
+&lt;h2 id=&#34;从权重定义开始&#34;&gt;从权重定义开始&lt;/h2&gt;
+&lt;h3 id=&#34;输出与权重输入&#34;&gt;输出与权重、输入&lt;/h3&gt;
+&lt;p&gt;输出y是输入向量x和权重矩阵a之间的矩阵乘积，即
+$Y_{i}=\sum_{k=0}^{n-1}a_{i,k}*x_{k}$
+其中i是权重矩阵a的给定行索引，k是权重矩阵a中的给定列索引和输入向量x中的元素索引，n是x中元素的范围或总数。这也可以在 Python 中定义为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;y[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sum([c&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;d &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; c,d &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; zip(a[i], x)])
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;标准差相近&#34;&gt;标准差相近&lt;/h3&gt;
+&lt;p&gt;在给定的层，我们从标准正态分布初始化的输入x和权重矩阵a的矩阵乘积，平均而言，标准偏差非常接近输入通道的平方根&lt;/p&gt;
+&lt;h4 id=&#34;代码证明&#34;&gt;代码证明&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; math
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; torch
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mean &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;var &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;10000&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; torch&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randn(&lt;span style=&#34;color:#ae81ff&#34;&gt;512&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; torch&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randn(&lt;span style=&#34;color:#ae81ff&#34;&gt;512&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;512&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    y &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt; x
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    mean &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; y&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;mean()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;item()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    var &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; y&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pow(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;mean()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;item()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(mean&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10000&lt;/span&gt;, math&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sqrt(var&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10000&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;数学方法&#34;&gt;数学方法&lt;/h4&gt;
+&lt;p&gt;为了计算y，我们将输入x的一列元素与权重a的一行的元素相乘的512个乘积累加。其中，x服从标准正态分布，a服从标准正态分布，且互相独立。
+对于a中的点与x中点相乘，可以粗略看完两个正态分布相乘。
+对于两个独立的正态分布相乘。
+令$X ∼ N ( μ_1 , σ_1^2 ) ,Y ∼ N ( μ_2 , σ_2^2 ) $，XY独立
+$\operatorname{var}(X Y)=E\left[(X Y)^{2}\right]-(E[X Y])^{2}=E\left[X^{2} Y^{2}\right]-(E[X Y])^{2}$&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

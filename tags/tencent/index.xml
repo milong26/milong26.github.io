@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Tencent on 我的博客</title>
+    <link>https://milong26.github.io/tags/tencent/</link>
+    <description>Recent content in Tencent on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 18 Dec 2023 16:19:09 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/tencent/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>tim</title>
+      <link>https://milong26.github.io/post/tim/</link>
+      <pubDate>Mon, 18 Dec 2023 16:19:09 +0000</pubDate>
+      <guid>https://milong26.github.io/post/tim/</guid>
+      <description>&lt;p&gt;qq办公版，比qq轻量而且功能简单。但是也有问题，等到哪天我实在忍不了的时候再放弃吧==&lt;/p&gt;
+&lt;h1 id=&#34;下载&#34;&gt;下载&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://office.qq.com/&#34;&gt;官网&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;安装&#34;&gt;安装&lt;/h1&gt;
+&lt;p&gt;无脑操作就行
+按照个人习惯把应用全塞到D:/application文件&lt;/p&gt;
+&lt;h1 id=&#34;配置&#34;&gt;配置&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;关闭TIM&lt;/li&gt;
+&lt;li&gt;打开&lt;code&gt;C:\Users\Public\Documents&lt;/code&gt;文件夹（可直接复制路径到资源管理器中打开），在此路径下新建名为&lt;code&gt;Tencent&lt;/code&gt;的文件夹，在Tencent文件夹中新建名为&lt;code&gt;QQ&lt;/code&gt;的文件夹，&lt;/li&gt;
+&lt;li&gt;在新建的QQ文件夹中，新建文本文件，输入以下内容&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[UserDataImportSet]
+NeedImport=0
+OldVersion=
+OldVerDataPathType=
+OldVerDataPath=
+OldQQInstallPath=C:\Program\Tencent\TIM
+[UserDataSet]
+UserDataSavePathType=2
+UserDataSavePath=D:\TimFiles
+NewVersion=
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注意：第6行OldQQInstallPath等号后面的路径应改为自己电脑上TIM的安装路径，第9行等号后面UserDataSavePath的路径改为自己想放的位置。&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;将新建的文本文件另存为“UserDataInfo.ini”，放在第3步新建这个QQ文件夹中&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;关闭文件，打开TIM，可以在设置中看到个人文件夹目录已经设置成功。如下图&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;文件夹位置不用改，会自己调整（但是也没法单独分离出来）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+  </channel>
+</rss>

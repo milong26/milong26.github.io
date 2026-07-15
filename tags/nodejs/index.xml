@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Nodejs on 我的博客</title>
+    <link>https://milong26.github.io/tags/nodejs/</link>
+    <description>Recent content in Nodejs on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 12 Sep 2024 11:34:24 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/nodejs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>nodejs</title>
+      <link>https://milong26.github.io/post/nodejs/</link>
+      <pubDate>Thu, 12 Sep 2024 11:34:24 +0000</pubDate>
+      <guid>https://milong26.github.io/post/nodejs/</guid>
+      <description>&lt;p&gt;安装、配置、更新nodejs的流程&lt;/p&gt;
+&lt;p&gt;但是我现在更新不了……重新配置一遍算了&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>nodejs配置</title>
+      <link>https://milong26.github.io/post/nodejs%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Sun, 18 Jul 2021 19:13:39 +0000</pubDate>
+      <guid>https://milong26.github.io/post/nodejs%E9%85%8D%E7%BD%AE/</guid>
+      <description>&lt;p&gt;安装nodejs&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;走非侵入式安装，下载压缩包http://nodejs.cn/download/&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在解压出的node-vxxx文件夹下面再新建两个目录：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;node-global :npm全局安装位置&lt;/li&gt;
+&lt;li&gt;node-cache：npm 缓存路径&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;配置环境变量Path
+D:\conf\node\node-v14.16.0-win-x64&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;cmd 中node -v有输出，🆗&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;cmd进入node-v14.16.0-win-x64文件夹&lt;/p&gt;
+&lt;p&gt;npm下载慢：更换源&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;npm config set prefix &amp;#34;D:\conf\node\node-v14.16.0-win-x64\node-global&amp;#34;
+npm config set cache &amp;#34;D:\conf\node\node-v14.16.0-win-x64\node-cache&amp;#34;
+npm config set registry https://registry.npm.taobao.org
+npm install webpack -g 
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;再根据提示做更新之类的。&lt;/p&gt;
+&lt;p&gt;这样nodejs配置🆗&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>矩阵 | 我的博客</title>
+<meta name="keywords" content="数据结构">
+<meta name="description" content="
+抽象数据类型Array{
+实例
+	形如(index,value)的数据对集合，其中任意两对数据的index值都各不相同
+操作
+	Create()：创建一个空的数组
+	Store(index,value)：添加数据(index,value)，并删除具有相同index值的数据对（若存在）
+	Retrieve(index)：返回索引值为index的数据对
+}
+多维数组的保存方式：
+计算机内存是一维连续存储
+会有行主映射和列主映射，默认是行
+#include&lt;iostream&gt;
+using namespace std;
+class matrix {
+public:
+	matrix(int a, int b);//构造 看一下二维数组
+	~matrix();//析构 
+	matrix operator&#43;(matrix &amp;mat);//加法
+	matrix operator=(matrix &amp;mat);//等于,没写拷贝构造函数还没法用
+	matrix(const matrix &amp;mat);//拷贝构造函数
+	friend ostream&amp; operator&lt;&lt;(ostream&amp;out, matrix &amp;mat);//输出
+	friend istream&amp; operator&gt;&gt;(istream&amp;in, matrix &amp;mat);//输入
+private:
+	int rows;
+	int cols;
+	int** p;
+};
+matrix::matrix(int n, int m)//初始化
+{
+	rows = n;
+	cols = m;
+	p = new int*[rows];
+	for (int i = 0; i &lt; rows; i&#43;&#43;)
+		p[i] = new int[cols];
+}
+matrix::~matrix()//析构函数，主要是看删除二维数组
+{
+	for (int i = 0; i &lt; rows; i&#43;&#43;)
+		delete p[i];
+	delete p;
+}
+matrix::matrix(const matrix &amp;mat)
+{
+	rows = mat.rows;
+	cols = mat.cols;
+	p = new int*[rows];
+	for (int i = 0; i &lt; rows; i&#43;&#43;)
+	{
+		p[i] = new int[cols];
+		for (int j = 0; j &lt; cols; j&#43;&#43;)
+			p[i][j] = mat.p[i][j];
+	}
+}
+matrix matrix::operator&#43;(matrix &amp;mat)
+{
+	matrix matsum(rows, cols);//定义一个新的
+	for (int i = 0; i &lt; rows; i&#43;&#43;)
+		for (int j = 0; j &lt; cols; j&#43;&#43;)
+			matsum.p[i][j] = p[i][j] &#43; mat.p[i][j];
+	return matsum;
+}
+matrix matrix::operator=( matrix &amp;mat)
+{
+	for (int i = 0; i &lt; mat.rows; i&#43;&#43;)
+		for (int j = 0; j &lt; mat.cols; j&#43;&#43;)
+			p[i][j] = mat.p[i][j];
+	//cout &lt;&lt; &#34;ok&#34; &lt;&lt; endl;
+	return (*this);
+}
+ostream&amp; operator&lt;&lt;(ostream &amp;out, matrix &amp;mat)
+{
+	for (int i = 0; i &lt; mat.rows; i&#43;&#43;)
+	{
+		for (int j = 0; j &lt; mat.cols; j&#43;&#43;)
+			out &lt;&lt; mat.p[i][j]&lt;&lt;&#34; &#34;;
+		out &lt;&lt; endl;
+	}
+	return out;
+}
+istream&amp; operator&gt;&gt;(istream&amp;in, matrix &amp;mat)
+{
+	for (int i = 0; i &lt; mat.rows; i&#43;&#43;)
+		for (int j = 0; j &lt; mat.cols; j&#43;&#43;)
+			in &gt;&gt; mat.p[i][j];
+	return in;
+}
+int main()
+{
+	int n, m;
+	cin &gt;&gt; n &gt;&gt; m;
+	matrix mat1(n, m),mat2(n,m),mat3(n,m);
+	cin &gt;&gt; mat1;
+	cout &lt;&lt;&#34;mat1:&#34;&lt;&lt;endl&lt;&lt;mat1&lt;&lt;endl;
+	cin &gt;&gt; mat2;
+	cout &lt;&lt;&#34;mat2:&#34;&lt;&lt;endl&lt;&lt;mat2 &lt;&lt; endl;
+	mat3=mat1;
+	cout &lt;&lt;&#34;mat3:&#34;&lt;&lt;endl&lt;&lt;mat3 &lt;&lt; endl;
+}
+
+
+
+
+下对角线：i-j=1 ；元素数n-1；M(i, j)－a[i-2]">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/%E7%9F%A9%E9%98%B5/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/%E7%9F%A9%E9%98%B5/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/%E7%9F%A9%E9%98%B5/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="矩阵">
+  <meta property="og:description" content="抽象数据类型Array{ 实例 形如(index,value)的数据对集合，其中任意两对数据的index值都各不相同 操作 Create()：创建一个空的数组 Store(index,value)：添加数据(index,value)，并删除具有相同index值的数据对（若存在） Retrieve(index)：返回索引值为index的数据对 } 多维数组的保存方式：
+计算机内存是一维连续存储
+会有行主映射和列主映射，默认是行
+#include&lt;iostream&gt; using namespace std; class matrix { public: matrix(int a, int b);//构造 看一下二维数组 ~matrix();//析构 matrix operator&#43;(matrix &amp;mat);//加法 matrix operator=(matrix &amp;mat);//等于,没写拷贝构造函数还没法用 matrix(const matrix &amp;mat);//拷贝构造函数 friend ostream&amp; operator&lt;&lt;(ostream&amp;out, matrix &amp;mat);//输出 friend istream&amp; operator&gt;&gt;(istream&amp;in, matrix &amp;mat);//输入 private: int rows; int cols; int** p; }; matrix::matrix(int n, int m)//初始化 { rows = n; cols = m; p = new int*[rows]; for (int i = 0; i &lt; rows; i&#43;&#43;) p[i] = new int[cols]; } matrix::~matrix()//析构函数，主要是看删除二维数组 { for (int i = 0; i &lt; rows; i&#43;&#43;) delete p[i]; delete p; } matrix::matrix(const matrix &amp;mat) { rows = mat.rows; cols = mat.cols; p = new int*[rows]; for (int i = 0; i &lt; rows; i&#43;&#43;) { p[i] = new int[cols]; for (int j = 0; j &lt; cols; j&#43;&#43;) p[i][j] = mat.p[i][j]; } } matrix matrix::operator&#43;(matrix &amp;mat) { matrix matsum(rows, cols);//定义一个新的 for (int i = 0; i &lt; rows; i&#43;&#43;) for (int j = 0; j &lt; cols; j&#43;&#43;) matsum.p[i][j] = p[i][j] &#43; mat.p[i][j]; return matsum; } matrix matrix::operator=( matrix &amp;mat) { for (int i = 0; i &lt; mat.rows; i&#43;&#43;) for (int j = 0; j &lt; mat.cols; j&#43;&#43;) p[i][j] = mat.p[i][j]; //cout &lt;&lt; &#34;ok&#34; &lt;&lt; endl; return (*this); } ostream&amp; operator&lt;&lt;(ostream &amp;out, matrix &amp;mat) { for (int i = 0; i &lt; mat.rows; i&#43;&#43;) { for (int j = 0; j &lt; mat.cols; j&#43;&#43;) out &lt;&lt; mat.p[i][j]&lt;&lt;&#34; &#34;; out &lt;&lt; endl; } return out; } istream&amp; operator&gt;&gt;(istream&amp;in, matrix &amp;mat) { for (int i = 0; i &lt; mat.rows; i&#43;&#43;) for (int j = 0; j &lt; mat.cols; j&#43;&#43;) in &gt;&gt; mat.p[i][j]; return in; } int main() { int n, m; cin &gt;&gt; n &gt;&gt; m; matrix mat1(n, m),mat2(n,m),mat3(n,m); cin &gt;&gt; mat1; cout &lt;&lt;&#34;mat1:&#34;&lt;&lt;endl&lt;&lt;mat1&lt;&lt;endl; cin &gt;&gt; mat2; cout &lt;&lt;&#34;mat2:&#34;&lt;&lt;endl&lt;&lt;mat2 &lt;&lt; endl; mat3=mat1; cout &lt;&lt;&#34;mat3:&#34;&lt;&lt;endl&lt;&lt;mat3 &lt;&lt; endl; } 下对角线：i-j=1 ；元素数n-1；M(i, j)－a[i-2]">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2019-12-18T22:45:30+00:00">
+    <meta property="article:modified_time" content="2019-12-18T22:45:30+00:00">
+    <meta property="article:tag" content="数据结构">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="矩阵">
+  <meta name="twitter:description" content="抽象数据类型Array{ 实例 形如(index,value)的数据对集合，其中任意两对数据的index值都各不相同 操作 Create()：创建一个空的数组 Store(index,value)：添加数据(index,value)，并删除具有相同index值的数据对（若存在） Retrieve(index)：返回索引值为index的数据对 } 多维数组的保存方式：
+计算机内存是一维连续存储
+会有行主映射和列主映射，默认是行
+#include&lt;iostream&gt; using namespace std; class matrix { public: matrix(int a, int b);//构造 看一下二维数组 ~matrix();//析构 matrix operator&#43;(matrix &amp;mat);//加法 matrix operator=(matrix &amp;mat);//等于,没写拷贝构造函数还没法用 matrix(const matrix &amp;mat);//拷贝构造函数 friend ostream&amp; operator&lt;&lt;(ostream&amp;out, matrix &amp;mat);//输出 friend istream&amp; operator&gt;&gt;(istream&amp;in, matrix &amp;mat);//输入 private: int rows; int cols; int** p; }; matrix::matrix(int n, int m)//初始化 { rows = n; cols = m; p = new int*[rows]; for (int i = 0; i &lt; rows; i&#43;&#43;) p[i] = new int[cols]; } matrix::~matrix()//析构函数，主要是看删除二维数组 { for (int i = 0; i &lt; rows; i&#43;&#43;) delete p[i]; delete p; } matrix::matrix(const matrix &amp;mat) { rows = mat.rows; cols = mat.cols; p = new int*[rows]; for (int i = 0; i &lt; rows; i&#43;&#43;) { p[i] = new int[cols]; for (int j = 0; j &lt; cols; j&#43;&#43;) p[i][j] = mat.p[i][j]; } } matrix matrix::operator&#43;(matrix &amp;mat) { matrix matsum(rows, cols);//定义一个新的 for (int i = 0; i &lt; rows; i&#43;&#43;) for (int j = 0; j &lt; cols; j&#43;&#43;) matsum.p[i][j] = p[i][j] &#43; mat.p[i][j]; return matsum; } matrix matrix::operator=( matrix &amp;mat) { for (int i = 0; i &lt; mat.rows; i&#43;&#43;) for (int j = 0; j &lt; mat.cols; j&#43;&#43;) p[i][j] = mat.p[i][j]; //cout &lt;&lt; &#34;ok&#34; &lt;&lt; endl; return (*this); } ostream&amp; operator&lt;&lt;(ostream &amp;out, matrix &amp;mat) { for (int i = 0; i &lt; mat.rows; i&#43;&#43;) { for (int j = 0; j &lt; mat.cols; j&#43;&#43;) out &lt;&lt; mat.p[i][j]&lt;&lt;&#34; &#34;; out &lt;&lt; endl; } return out; } istream&amp; operator&gt;&gt;(istream&amp;in, matrix &amp;mat) { for (int i = 0; i &lt; mat.rows; i&#43;&#43;) for (int j = 0; j &lt; mat.cols; j&#43;&#43;) in &gt;&gt; mat.p[i][j]; return in; } int main() { int n, m; cin &gt;&gt; n &gt;&gt; m; matrix mat1(n, m),mat2(n,m),mat3(n,m); cin &gt;&gt; mat1; cout &lt;&lt;&#34;mat1:&#34;&lt;&lt;endl&lt;&lt;mat1&lt;&lt;endl; cin &gt;&gt; mat2; cout &lt;&lt;&#34;mat2:&#34;&lt;&lt;endl&lt;&lt;mat2 &lt;&lt; endl; mat3=mat1; cout &lt;&lt;&#34;mat3:&#34;&lt;&lt;endl&lt;&lt;mat3 &lt;&lt; endl; } 下对角线：i-j=1 ；元素数n-1；M(i, j)－a[i-2]">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "矩阵",
+      "item": "https://milong26.github.io/post/%E7%9F%A9%E9%98%B5/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "矩阵",
+  "name": "矩阵",
+  "description": " 抽象数据类型Array{ 实例 形如(index,value)的数据对集合，其中任意两对数据的index值都各不相同 操作 Create()：创建一个空的数组 Store(index,value)：添加数据(index,value)，并删除具有相同index值的数据对（若存在） Retrieve(index)：返回索引值为index的数据对 } 多维数组的保存方式：\n计算机内存是一维连续存储\n会有行主映射和列主映射，默认是行\n#include\u0026lt;iostream\u0026gt; using namespace std; class matrix { public: matrix(int a, int b);//构造 看一下二维数组 ~matrix();//析构 matrix operator+(matrix \u0026amp;mat);//加法 matrix operator=(matrix \u0026amp;mat);//等于,没写拷贝构造函数还没法用 matrix(const matrix \u0026amp;mat);//拷贝构造函数 friend ostream\u0026amp; operator\u0026lt;\u0026lt;(ostream\u0026amp;out, matrix \u0026amp;mat);//输出 friend istream\u0026amp; operator\u0026gt;\u0026gt;(istream\u0026amp;in, matrix \u0026amp;mat);//输入 private: int rows; int cols; int** p; }; matrix::matrix(int n, int m)//初始化 { rows = n; cols = m; p = new int*[rows]; for (int i = 0; i \u0026lt; rows; i++) p[i] = new int[cols]; } matrix::~matrix()//析构函数，主要是看删除二维数组 { for (int i = 0; i \u0026lt; rows; i++) delete p[i]; delete p; } matrix::matrix(const matrix \u0026amp;mat) { rows = mat.rows; cols = mat.cols; p = new int*[rows]; for (int i = 0; i \u0026lt; rows; i++) { p[i] = new int[cols]; for (int j = 0; j \u0026lt; cols; j++) p[i][j] = mat.p[i][j]; } } matrix matrix::operator+(matrix \u0026amp;mat) { matrix matsum(rows, cols);//定义一个新的 for (int i = 0; i \u0026lt; rows; i++) for (int j = 0; j \u0026lt; cols; j++) matsum.p[i][j] = p[i][j] + mat.p[i][j]; return matsum; } matrix matrix::operator=( matrix \u0026amp;mat) { for (int i = 0; i \u0026lt; mat.rows; i++) for (int j = 0; j \u0026lt; mat.cols; j++) p[i][j] = mat.p[i][j]; //cout \u0026lt;\u0026lt; \u0026#34;ok\u0026#34; \u0026lt;\u0026lt; endl; return (*this); } ostream\u0026amp; operator\u0026lt;\u0026lt;(ostream \u0026amp;out, matrix \u0026amp;mat) { for (int i = 0; i \u0026lt; mat.rows; i++) { for (int j = 0; j \u0026lt; mat.cols; j++) out \u0026lt;\u0026lt; mat.p[i][j]\u0026lt;\u0026lt;\u0026#34; \u0026#34;; out \u0026lt;\u0026lt; endl; } return out; } istream\u0026amp; operator\u0026gt;\u0026gt;(istream\u0026amp;in, matrix \u0026amp;mat) { for (int i = 0; i \u0026lt; mat.rows; i++) for (int j = 0; j \u0026lt; mat.cols; j++) in \u0026gt;\u0026gt; mat.p[i][j]; return in; } int main() { int n, m; cin \u0026gt;\u0026gt; n \u0026gt;\u0026gt; m; matrix mat1(n, m),mat2(n,m),mat3(n,m); cin \u0026gt;\u0026gt; mat1; cout \u0026lt;\u0026lt;\u0026#34;mat1:\u0026#34;\u0026lt;\u0026lt;endl\u0026lt;\u0026lt;mat1\u0026lt;\u0026lt;endl; cin \u0026gt;\u0026gt; mat2; cout \u0026lt;\u0026lt;\u0026#34;mat2:\u0026#34;\u0026lt;\u0026lt;endl\u0026lt;\u0026lt;mat2 \u0026lt;\u0026lt; endl; mat3=mat1; cout \u0026lt;\u0026lt;\u0026#34;mat3:\u0026#34;\u0026lt;\u0026lt;endl\u0026lt;\u0026lt;mat3 \u0026lt;\u0026lt; endl; } 下对角线：i-j=1 ；元素数n-1；M(i, j)－a[i-2]\n",
+  "keywords": [
+    "数据结构"
+  ],
+  "articleBody": " 抽象数据类型Array{ 实例 形如(index,value)的数据对集合，其中任意两对数据的index值都各不相同 操作 Create()：创建一个空的数组 Store(index,value)：添加数据(index,value)，并删除具有相同index值的数据对（若存在） Retrieve(index)：返回索引值为index的数据对 } 多维数组的保存方式：\n计算机内存是一维连续存储\n会有行主映射和列主映射，默认是行\n#include using namespace std; class matrix { public: matrix(int a, int b);//构造 看一下二维数组 ~matrix();//析构 matrix operator+(matrix \u0026mat);//加法 matrix operator=(matrix \u0026mat);//等于,没写拷贝构造函数还没法用 matrix(const matrix \u0026mat);//拷贝构造函数 friend ostream\u0026 operator\u003c\u003c(ostream\u0026out, matrix \u0026mat);//输出 friend istream\u0026 operator\u003e\u003e(istream\u0026in, matrix \u0026mat);//输入 private: int rows; int cols; int** p; }; matrix::matrix(int n, int m)//初始化 { rows = n; cols = m; p = new int*[rows]; for (int i = 0; i \u003c rows; i++) p[i] = new int[cols]; } matrix::~matrix()//析构函数，主要是看删除二维数组 { for (int i = 0; i \u003c rows; i++) delete p[i]; delete p; } matrix::matrix(const matrix \u0026mat) { rows = mat.rows; cols = mat.cols; p = new int*[rows]; for (int i = 0; i \u003c rows; i++) { p[i] = new int[cols]; for (int j = 0; j \u003c cols; j++) p[i][j] = mat.p[i][j]; } } matrix matrix::operator+(matrix \u0026mat) { matrix matsum(rows, cols);//定义一个新的 for (int i = 0; i \u003c rows; i++) for (int j = 0; j \u003c cols; j++) matsum.p[i][j] = p[i][j] + mat.p[i][j]; return matsum; } matrix matrix::operator=( matrix \u0026mat) { for (int i = 0; i \u003c mat.rows; i++) for (int j = 0; j \u003c mat.cols; j++) p[i][j] = mat.p[i][j]; //cout \u003c\u003c \"ok\" \u003c\u003c endl; return (*this); } ostream\u0026 operator\u003c\u003c(ostream \u0026out, matrix \u0026mat) { for (int i = 0; i \u003c mat.rows; i++) { for (int j = 0; j \u003c mat.cols; j++) out \u003c\u003c mat.p[i][j]\u003c\u003c\" \"; out \u003c\u003c endl; } return out; } istream\u0026 operator\u003e\u003e(istream\u0026in, matrix \u0026mat) { for (int i = 0; i \u003c mat.rows; i++) for (int j = 0; j \u003c mat.cols; j++) in \u003e\u003e mat.p[i][j]; return in; } int main() { int n, m; cin \u003e\u003e n \u003e\u003e m; matrix mat1(n, m),mat2(n,m),mat3(n,m); cin \u003e\u003e mat1; cout \u003c\u003c\"mat1:\"\u003c\u003cendl\u003c\u003cmat1\u003c\u003cendl; cin \u003e\u003e mat2; cout \u003c\u003c\"mat2:\"\u003c\u003cendl\u003c\u003cmat2 \u003c\u003c endl; mat3=mat1; cout \u003c\u003c\"mat3:\"\u003c\u003cendl\u003c\u003cmat3 \u003c\u003c endl; } 下对角线：i-j=1 ；元素数n-1；M(i, j)－a[i-2]\n主对角线：i=j ；元素数n；M(i, j)－a[n-1+i-1]\n上对角线i-j=-1；元素数n-1；M(i, j)－a[2n-1+i-1]\n逐列映射\n对角线映射\n空间复杂性\n每个元素：2*sizeof(int)+sizeof(T)\n240000：40000000，节省99.4%！\n时间复杂性\nStore：O(非0元素数目)\nRetrieve：O(log(非0元素数目))\n",
+  "wordCount" : "319",
+  "inLanguage": "en",
+  "datePublished": "2019-12-18T22:45:30Z",
+  "dateModified": "2019-12-18T22:45:30Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/%E7%9F%A9%E9%98%B5/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      矩阵
+    </h1>
+    <div class="post-meta">
+
+<span title='2019-12-18 22:45:30 +0000 UTC'>December 18, 2019</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><!-- raw HTML omitted -->
+<pre tabindex="0"><code>抽象数据类型Array{
+实例
+	形如(index,value)的数据对集合，其中任意两对数据的index值都各不相同
+操作
+	Create()：创建一个空的数组
+	Store(index,value)：添加数据(index,value)，并删除具有相同index值的数据对（若存在）
+	Retrieve(index)：返回索引值为index的数据对
+}
+</code></pre><p>多维数组的保存方式：</p>
+<p>计算机内存是一维连续存储</p>
+<p>会有行主映射和列主映射，默认是行</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">#include&lt;iostream&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">matrix</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	matrix(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b);<span style="color:#75715e">//构造 看一下二维数组
+</span></span></span><span style="display:flex;"><span>	<span style="color:#f92672">~</span>matrix();<span style="color:#75715e">//析构 
+</span></span></span><span style="display:flex;"><span>	matrix <span style="color:#66d9ef">operator</span><span style="color:#f92672">+</span>(matrix <span style="color:#f92672">&amp;</span>mat);<span style="color:#75715e">//加法
+</span></span></span><span style="display:flex;"><span>	matrix <span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(matrix <span style="color:#f92672">&amp;</span>mat);<span style="color:#75715e">//等于,没写拷贝构造函数还没法用
+</span></span></span><span style="display:flex;"><span>	matrix(<span style="color:#66d9ef">const</span> matrix <span style="color:#f92672">&amp;</span>mat);<span style="color:#75715e">//拷贝构造函数
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">friend</span> ostream<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&lt;&lt;</span>(ostream<span style="color:#f92672">&amp;</span>out, matrix <span style="color:#f92672">&amp;</span>mat);<span style="color:#75715e">//输出
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">friend</span> istream<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&gt;&gt;</span>(istream<span style="color:#f92672">&amp;</span>in, matrix <span style="color:#f92672">&amp;</span>mat);<span style="color:#75715e">//输入
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> rows;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> cols;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span><span style="color:#f92672">**</span> p;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>matrix<span style="color:#f92672">::</span>matrix(<span style="color:#66d9ef">int</span> n, <span style="color:#66d9ef">int</span> m)<span style="color:#75715e">//初始化
+</span></span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	rows <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>	cols <span style="color:#f92672">=</span> m;
+</span></span><span style="display:flex;"><span>	p <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">*</span>[rows];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> rows; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		p[i] <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[cols];
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>matrix<span style="color:#f92672">::~</span>matrix()<span style="color:#75715e">//析构函数，主要是看删除二维数组
+</span></span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> rows; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">delete</span> p[i];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">delete</span> p;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>matrix<span style="color:#f92672">::</span>matrix(<span style="color:#66d9ef">const</span> matrix <span style="color:#f92672">&amp;</span>mat)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	rows <span style="color:#f92672">=</span> mat.rows;
+</span></span><span style="display:flex;"><span>	cols <span style="color:#f92672">=</span> mat.cols;
+</span></span><span style="display:flex;"><span>	p <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">*</span>[rows];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> rows; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		p[i] <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[cols];
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> cols; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>			p[i][j] <span style="color:#f92672">=</span> mat.p[i][j];
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>matrix matrix<span style="color:#f92672">::</span><span style="color:#66d9ef">operator</span><span style="color:#f92672">+</span>(matrix <span style="color:#f92672">&amp;</span>mat)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	matrix <span style="color:#a6e22e">matsum</span>(rows, cols);<span style="color:#75715e">//定义一个新的
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> rows; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> cols; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>			matsum.p[i][j] <span style="color:#f92672">=</span> p[i][j] <span style="color:#f92672">+</span> mat.p[i][j];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> matsum;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>matrix matrix<span style="color:#f92672">::</span><span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>( matrix <span style="color:#f92672">&amp;</span>mat)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> mat.rows; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> mat.cols; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>			p[i][j] <span style="color:#f92672">=</span> mat.p[i][j];
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//cout &lt;&lt; &#34;ok&#34; &lt;&lt; endl;
+</span></span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> (<span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>ostream<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&lt;&lt;</span>(ostream <span style="color:#f92672">&amp;</span>out, matrix <span style="color:#f92672">&amp;</span>mat)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> mat.rows; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> mat.cols; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>			out <span style="color:#f92672">&lt;&lt;</span> mat.p[i][j]<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34; &#34;</span>;
+</span></span><span style="display:flex;"><span>		out <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> out;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>istream<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&gt;&gt;</span>(istream<span style="color:#f92672">&amp;</span>in, matrix <span style="color:#f92672">&amp;</span>mat)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> mat.rows; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> mat.cols; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>			in <span style="color:#f92672">&gt;&gt;</span> mat.p[i][j];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> in;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> n, m;
+</span></span><span style="display:flex;"><span>	cin <span style="color:#f92672">&gt;&gt;</span> n <span style="color:#f92672">&gt;&gt;</span> m;
+</span></span><span style="display:flex;"><span>	matrix mat1(n, m),mat2(n,m),mat3(n,m);
+</span></span><span style="display:flex;"><span>	cin <span style="color:#f92672">&gt;&gt;</span> mat1;
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;mat1:&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl<span style="color:#f92672">&lt;&lt;</span>mat1<span style="color:#f92672">&lt;&lt;</span>endl;
+</span></span><span style="display:flex;"><span>	cin <span style="color:#f92672">&gt;&gt;</span> mat2;
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;mat2:&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl<span style="color:#f92672">&lt;&lt;</span>mat2 <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>	mat3<span style="color:#f92672">=</span>mat1;
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;mat3:&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl<span style="color:#f92672">&lt;&lt;</span>mat3 <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<p>下对角线：i-j=1 ；元素数n-1；M(i, j)－a[i-2]</p>
+</li>
+<li>
+<p>主对角线：i=j ；元素数n；M(i, j)－a[n-1+i-1]</p>
+</li>
+<li>
+<p>上对角线i-j=-1；元素数n-1；M(i, j)－a[2n-1+i-1]</p>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<p>逐列映射</p>
+<p>对角线映射</p>
+<!-- raw HTML omitted -->
+<p>空间复杂性</p>
+<p>每个元素：2*sizeof(int)+sizeof(T)</p>
+<p>240000：40000000，节省99.4%！</p>
+<p>时间复杂性</p>
+<p>Store：O(非0元素数目)</p>
+<p>Retrieve：O(log(非0元素数目))</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

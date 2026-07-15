@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Code on 我的博客</title>
+    <link>https://milong26.github.io/tags/code/</link>
+    <description>Recent content in Code on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 09 Apr 2024 16:37:52 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/code/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>leetcode肝活</title>
+      <link>https://milong26.github.io/post/leetcode%E8%82%9D%E6%B4%BB/</link>
+      <pubDate>Tue, 09 Apr 2024 16:37:52 +0000</pubDate>
+      <guid>https://milong26.github.io/post/leetcode%E8%82%9D%E6%B4%BB/</guid>
+      <description>&lt;p&gt;leetcode刷题日志，哪天有空哪天刷&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>二项式公式</title>
+      <link>https://milong26.github.io/post/%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%85%AC%E5%BC%8F/</link>
+      <pubDate>Sun, 17 Sep 2023 20:46:39 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%85%AC%E5%BC%8F/</guid>
+      <description>&lt;p&gt;针对二项式格式的说明，方便看论文&lt;/p&gt;
+&lt;p&gt;$一般格式C_{n}^{p}=\binom{n}{p}$
+论文里用&lt;code&gt;\binom&lt;/code&gt;也就是圆括号比较多
+$$
+\binom{n}{p}=\frac{n!}{(n-p)!p!}
+$$
+特殊形式形如
+$$
+\binom{n}{p_{1},p_{2},&amp;hellip;p_{k}}
+$$&lt;/p&gt;
+&lt;p&gt;属于Multinomial Coefficients（多项式？）
+定义：
+p1,p2..都是非负整数，令n=p1+p2+&amp;hellip;+pk
+,有
+$$
+\binom{n}{p_{1},p_{2},&amp;hellip;p_{k}}=\binom{n}{p_{1}}\binom{n-p_{1}}{p_{2}}&amp;hellip;\binom{p_{k}}{p_{k}}=\frac{n!}{p_{1}!p_{2}!&amp;hellip;p_{k}!}
+$$
+表示将n个物品放入k个容器里，所以第i个容器里有pi个物品，这种放法一共多少种方案。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>最小生成树</title>
+      <link>https://milong26.github.io/post/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/</link>
+      <pubDate>Fri, 15 Sep 2023 15:40:34 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/</guid>
+      <description>&lt;p&gt;满足两点之间有且仅有一条简单路径的结构只有&lt;strong&gt;树&lt;/strong&gt;
+且这棵树包含 n 个节点。我们称这棵树为给定的图的生成树，其中总权值最小的生成树，我们称其为最小生成树。
+最小生成树关键在避免环&lt;/p&gt;
+&lt;h1 id=&#34;生成树&#34;&gt;生成树&lt;/h1&gt;
+&lt;h2 id=&#34;定义&#34;&gt;定义&lt;/h2&gt;
+&lt;p&gt;一个连通图的生成树是一个极小的连通子图，它包含图中全部的n个顶点，但只有构成一棵树的n-1条边。&lt;/p&gt;
+&lt;h2 id=&#34;性质&#34;&gt;性质&lt;/h2&gt;
+&lt;p&gt;生成树的属性
+一个连通图可以有多个生成树；
+一个连通图的所有生成树都包含相同的顶点个数和边数；
+生成树当中不存在环；
+移除生成树中的任意一条边都会导致图的不连通， 生成树的边最少特性；
+在生成树中添加一条边会构成环。
+对于包含n个顶点的连通图，生成树包含n个顶点和n-1条边；
+对于包含n个顶点的无向完全图最多包含$n^{n-2}$颗生成树。
+证明$n^{n-2}$：
+为什么是n^n-2），一篇里面塞不下:D&lt;/p&gt;
+&lt;h1 id=&#34;最小生成树&#34;&gt;最小生成树&lt;/h1&gt;
+&lt;h2 id=&#34;定义-1&#34;&gt;定义&lt;/h2&gt;
+&lt;p&gt;所谓一个带权图的最小生成树，就是原图中边的权值最小的生成树 ，所谓最小是指边的权值之和小于或者等于其它生成树的边的权值之和。&lt;/p&gt;
+&lt;h2 id=&#34;求解&#34;&gt;求解&lt;/h2&gt;
+&lt;h3 id=&#34;kruskal&#34;&gt;Kruskal&lt;/h3&gt;
+&lt;p&gt;贪心找边，从小到大加入边&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;按边长度排序&lt;/li&gt;
+&lt;li&gt;从小到大，if加入e之后没有形成环，e加入G&#39;&lt;/li&gt;
+&lt;li&gt;最后得到G‘
+问题是判断成环，见其它post&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;prim&#34;&gt;Prim&lt;/h3&gt;
+&lt;p&gt;加点，把点分成两坨A,B集合，A表示已经成了，B是待选的，要做的事从B里面挑一个点，满足它到A的点里面，有个边距离是最短的
+（理解成长三角经济圈画好了，接下来先从周边里挑一个离长三角圈里面的城市最近的，这么想有点奇怪）
+关键在怎么从待选里找距离最短的点
+思路是用一个点个数大小的数组，没有直接连用∞，否则记录最小值
+注意区分已访问过的点
+这个为什么不会成环？把点分成两坨了，找的都是新点&lt;/p&gt;
+&lt;h2 id=&#34;示例与代码&#34;&gt;示例与代码&lt;/h2&gt;
+&lt;p&gt;测试数据&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-7&#34; data-lang=&#34;7&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1 6 10
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1 2 28
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;6 5 25
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;5 7 24
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2 7 14
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2 3 16
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;3 4 12
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;4 7 18
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;4 5 22
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;代码&lt;/p&gt;
+&lt;p&gt;使用Kruskal算法&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&amp;lt;iostream&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&amp;lt;algorithm&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;namespace&lt;/span&gt; std;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; maxe &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; fa[maxe], n, m, ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;edge&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; u, v, w;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}e[maxe];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;bool&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;cmp&lt;/span&gt;(edge a, edge b)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; a.w&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;b.w;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; x)&lt;span style=&#34;color:#75715e&#34;&gt;//用处是看它是否成环的，nb
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (fa[x] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; x) &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; x;&lt;span style=&#34;color:#75715e&#34;&gt;//x的根为它本身，x就是该集的根
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; fa[x] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get(fa[x]);&lt;span style=&#34;color:#75715e&#34;&gt;//路径压缩
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	cin &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; n &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; m;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; n; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		fa[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; i;&lt;span style=&#34;color:#75715e&#34;&gt;//初始化
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; m; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		cin &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; e[i].u &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; e[i].v &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; e[i].w;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	sort(e &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, e &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; m, cmp);&lt;span style=&#34;color:#75715e&#34;&gt;//升序排序
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; m; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; u &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get(e[i].u);&lt;span style=&#34;color:#75715e&#34;&gt;//找根
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; v &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get(e[i].v);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (u &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; v) &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;;&lt;span style=&#34;color:#75715e&#34;&gt;//continue 表示终止本次（本轮）循环，进入下一轮循环。判断它是否成环
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		fa[u] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; v;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; e[i].u &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; e[i].v &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; endl;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		ans &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; e[i].w;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; ans &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; endl;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>欧拉图</title>
+      <link>https://milong26.github.io/post/%E6%AC%A7%E6%8B%89%E5%9B%BE/</link>
+      <pubDate>Thu, 14 Sep 2023 21:11:37 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E6%AC%A7%E6%8B%89%E5%9B%BE/</guid>
+      <description>&lt;p&gt;几百年不学离散数学了我都，这次遇到代码题正好复习一遍。&lt;/p&gt;
+&lt;h1 id=&#34;理论&#34;&gt;理论&lt;/h1&gt;
+&lt;h2 id=&#34;起源&#34;&gt;起源&lt;/h2&gt;
+&lt;p&gt;哥尼斯堡七桥问题：遍历七桥一次如何返回起点。这个是遍历所有&lt;strong&gt;点&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;定义&#34;&gt;定义&lt;/h2&gt;
+&lt;p&gt;图、路径和回路这些定义就不再重复了
+欧拉路径：图G上有一条经过所有顶点、所有边的简单路径（边不重复，&lt;em&gt;点可以重复&lt;/em&gt;）&lt;/p&gt;
+&lt;p&gt;欧拉回路：图G上有一条经过所有顶点、所有边的简单回路（边不重复，&lt;em&gt;点可以重复&lt;/em&gt;）&lt;/p&gt;
+&lt;p&gt;欧拉回路比欧拉路就是多了个回的区别，回路vs路径也就是回路的起点和终点是相同的点&lt;/p&gt;
+&lt;p&gt;欧拉图：有欧拉回路的连通无向图&lt;/p&gt;
+&lt;p&gt;欧拉有向图：有欧拉回路的连通有向图&lt;/p&gt;
+&lt;h2 id=&#34;定理&#34;&gt;定理&lt;/h2&gt;
+&lt;p&gt;复习一下&lt;strong&gt;欧拉图：有回路经过所有边一次，所有点至少一次的连通无向图&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;判断欧拉图&#34;&gt;判断欧拉图&lt;/h3&gt;
+&lt;p&gt;一个连通无向图G是欧拉图？=经过所有边一次，点至少一次
+当且仅当
+所有节点为偶节点&lt;/p&gt;
+&lt;h3 id=&#34;判断欧拉路径&#34;&gt;判断欧拉路径&lt;/h3&gt;
+&lt;p&gt;设G=&amp;lt;V，E&amp;gt;为连通无向图，且v1,v2∈V，则有一条从v1至v2的欧拉路径
+当且仅当
+恰有两个奇结点v1和v2。&lt;/p&gt;
+&lt;h3 id=&#34;判断欧拉有向图&#34;&gt;判断欧拉有向图&lt;/h3&gt;
+&lt;p&gt;设G为弱连通有向图。G是欧拉有向图，
+当且仅当
+所有结点的出度等于入度。&lt;/p&gt;
+&lt;h1 id=&#34;实践&#34;&gt;实践&lt;/h1&gt;</description>
+    </item>
+    <item>
+      <title>leetcode刷题崩溃全过程</title>
+      <link>https://milong26.github.io/post/leetcode%E5%88%B7%E9%A2%98%E5%B4%A9%E6%BA%83%E5%85%A8%E8%BF%87%E7%A8%8B/</link>
+      <pubDate>Fri, 08 Sep 2023 16:02:59 +0000</pubDate>
+      <guid>https://milong26.github.io/post/leetcode%E5%88%B7%E9%A2%98%E5%B4%A9%E6%BA%83%E5%85%A8%E8%BF%87%E7%A8%8B/</guid>
+      <description>&lt;p&gt;尝试过多次之后，于2023年9月8日重新开始刷leetcode，名字是小鱼就把它刷成大佬号:D&lt;/p&gt;
+&lt;p&gt;总结一下写代码的时候遇到的问题（说真的，碰到哪个哪个不会）&lt;/p&gt;
+&lt;h1 id=&#34;语法&#34;&gt;语法&lt;/h1&gt;
+&lt;p&gt;几种常见语法&lt;/p&gt;
+&lt;h2 id=&#34;c&#34;&gt;c++&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/pascals-triangle/&#34;&gt;118&lt;/a&gt;Pascal&amp;rsquo;s Triangle
+vector&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/group-the-people-given-the-group-size-they-belong-to/&#34;&gt;1282&lt;/a&gt;. Group the People Given the Group Size They Belong To
+unordered_map
+可以学一下容器的emplace方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;java&#34;&gt;java&lt;/h2&gt;
+&lt;h2 id=&#34;python&#34;&gt;python&lt;/h2&gt;
+&lt;h1 id=&#34;算法&#34;&gt;算法&lt;/h1&gt;
+&lt;h2 id=&#34;动态规划&#34;&gt;动态规划&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/combination-sum-iv/&#34;&gt;377&lt;/a&gt; Combination Sum IV
+方程：
+$$f[n]=\sum_{target\ge number[i] }f[target-number[i]]$$&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/count-all-valid-pickup-and-delivery-options/&#34;&gt;1359&lt;/a&gt; Count All Valid Pickup and Delivery Options&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/build-array-where-you-can-find-the-maximum-exactly-k-comparisons/&#34;&gt;1420. Build Array Where You Can Find The Maximum Exactly K Comparisons&lt;/a&gt;
+三维的动态规划你见过吗？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;递归&#34;&gt;递归&lt;/h2&gt;
+&lt;h2 id=&#34;滑动窗口&#34;&gt;滑动窗口&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero/&#34;&gt;1658. Minimum Operations to Reduce X to Zero&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;前缀和&#34;&gt;前缀和&lt;/h2&gt;
+&lt;h1 id=&#34;数据结构&#34;&gt;数据结构&lt;/h1&gt;
+&lt;h2 id=&#34;图&#34;&gt;图&lt;/h2&gt;
+&lt;h3 id=&#34;欧拉图&#34;&gt;欧拉图&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/reconstruct-itinerary/&#34;&gt;332&lt;/a&gt;Reconstruct Itinerary
+求解欧拉回路+贪心&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;树&#34;&gt;树&lt;/h2&gt;
+&lt;h3 id=&#34;最小生成树&#34;&gt;最小生成树&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/min-cost-to-connect-all-points/&#34;&gt;1584&lt;/a&gt;Min Cost to Connect All Points
+居然是最小生成树，以前怎么没想到呢&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;问题&#34;&gt;问题&lt;/h1&gt;
+&lt;h2 id=&#34;排序&#34;&gt;排序&lt;/h2&gt;
+&lt;h2 id=&#34;查找&#34;&gt;查找&lt;/h2&gt;
+&lt;h3 id=&#34;二分查找&#34;&gt;二分查找&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/find-the-duplicate-number/&#34;&gt;287&lt;/a&gt;. Find the Duplicate Number
+有很多限制的题目
+&lt;blockquote&gt;
+&lt;p&gt;我觉得可以有很多想法的题目&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>python里@的作用</title>
+      <link>https://milong26.github.io/post/python%E9%87%8C@%E7%9A%84%E4%BD%9C%E7%94%A8/</link>
+      <pubDate>Sun, 25 Jun 2023 17:14:52 +0000</pubDate>
+      <guid>https://milong26.github.io/post/python%E9%87%8C@%E7%9A%84%E4%BD%9C%E7%94%A8/</guid>
+      <description>&lt;p&gt;看文献的时候看到里面有一句&lt;code&gt;x=a@x&lt;/code&gt;，遂搜索&lt;/p&gt;
+&lt;h2 id=&#34;修饰符&#34;&gt;修饰符&lt;/h2&gt;
+&lt;p&gt;用做函数的修饰符，可以在模块或者类的定义层内对函数进行修饰
+函数前面有两个及以上装饰器时倒着来&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#Example 2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;FA&lt;/span&gt;(fn):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;warp&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;a&amp;gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;fn()&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;a&amp;gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; warp
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;FB&lt;/span&gt;(fn):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;warp&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;b&amp;gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;fn()&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;b&amp;gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; warp
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@FA&lt;/span&gt;         &lt;span style=&#34;color:#75715e&#34;&gt;#相当于makebold(test1),也就是把当前函数作为入参传过去&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;test1&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;test1&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@FB&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;test2&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;test2&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@FA&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@FB&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;test3&lt;/span&gt;():     &lt;span style=&#34;color:#75715e&#34;&gt;#函数和装饰器是倒着执行的，从下往上，从内而外，一层层执行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;test3&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(test1())
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(test2())
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(test3())
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;结果：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;a&amp;gt;test1&amp;lt;a&amp;gt;
+&amp;lt;b&amp;gt;test2&amp;lt;b&amp;gt;
+&amp;lt;a&amp;gt;&amp;lt;b&amp;gt;test3&amp;lt;b&amp;gt;&amp;lt;a&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;矩阵乘法&#34;&gt;矩阵乘法&lt;/h2&gt;
+&lt;p&gt;运算符*在矩阵运算中的功能是逐元素的乘法（称为Hadamard积（Hadamard product，数学符号⊙）
+@在矩阵运算中的功能是矩阵乘法。也即，在矩阵乘法中，b矩阵右乘的作用是交换被乘矩阵的1、2两列，结果即是。其实@运算符和numpy的matmul是一样的&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>自定义组件事件传递</title>
+      <link>https://milong26.github.io/post/%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92/</link>
+      <pubDate>Wed, 14 Apr 2021 23:00:15 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92/</guid>
+      <description>&lt;p&gt;微信小程序一个自定义组件Component，调用它的事件传递过程&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>微信小程序本地存储数据</title>
+      <link>https://milong26.github.io/post/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE/</link>
+      <pubDate>Mon, 12 Apr 2021 23:51:21 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE/</guid>
+      <description>&lt;p&gt;编写微信小程序应用，本地存储数据避免重复加载&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>为什么我会写出屎山代码</title>
+      <link>https://milong26.github.io/post/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BC%9A%E5%86%99%E5%87%BA%E5%B1%8E%E5%B1%B1%E4%BB%A3%E7%A0%81/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BC%9A%E5%86%99%E5%87%BA%E5%B1%8E%E5%B1%B1%E4%BB%A3%E7%A0%81/</guid>
+      <description>&lt;p&gt;导模块导得头疼，连续必可导，可导不一定连续&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>解读smolvla代码</title>
+      <link>https://milong26.github.io/post/%E8%A7%A3%E8%AF%BBsmolvla%E4%BB%A3%E7%A0%81/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E8%A7%A3%E8%AF%BBsmolvla%E4%BB%A3%E7%A0%81/</guid>
+      <description>&lt;p&gt;一个比较小的模型smovla，但里面涉及的还挺多，当扫盲&lt;/p&gt;
+&lt;p&gt;看代码不能看单词的含义而是看整体结构orz&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

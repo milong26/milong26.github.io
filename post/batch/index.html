@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>batch | 我的博客</title>
+<meta name="keywords" content="batch, undone">
+<meta name="description" content="包含：mini-batch
+batch
+mini-batch
+在梯度下降中需要对所有样本进行处理过后然后走一步，那么如果我们的样本规模的特别大的话效率就会比较低。
+假如有500万，甚至5000万个样本的话走一轮迭代就会非常的耗时。这个时候的梯度下降叫做full batch。
+所以为了提高效率，我们可以把样本分成等量的子集。
+例如我们把100万样本分成1000份， 每份1000个样本， 这些子集就称为mini batch。
+然后我们分别用一个for循环遍历这1000个子集。 针对每一个子集做一次梯度下降。 然后更新参数w和b的值。接着到下一个子集中继续进行梯度下降。
+这样在遍历完所有的mini batch之后我们相当于在梯度下降中做了1000次迭代。
+我们将遍历一次所有样本的行为叫做一个 epoch，也就是一个世代。 在mini batch下的梯度下降中做的事情其实跟full batch一样，只不过我们训练的数据不再是所有的样本，而是一个个的子集。
+这样在mini batch我们在一个epoch中就能进行1000次的梯度下降，而在full batch中只有一次。 这样就大大的提高了我们算法的运行速度。
+既然有了mini batch那就会有一个batch size的超参数，也就是块大小。代表着每一个mini batch中有多少个样本。 我们一般设置为2的n次方。 例如64,128,512,1024. 一般不会超过这个范围。不能太大，因为太大了会无限接近full batch的行为，速度会慢。 也不能太小，太小了以后可能算法永远不会收敛。 当然如果我们的数据比较小， 但也用不着mini batch了。 full batch的效果是最好的。">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/batch/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/batch/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/batch/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="batch">
+  <meta property="og:description" content="包含：mini-batch
+batch mini-batch 在梯度下降中需要对所有样本进行处理过后然后走一步，那么如果我们的样本规模的特别大的话效率就会比较低。 假如有500万，甚至5000万个样本的话走一轮迭代就会非常的耗时。这个时候的梯度下降叫做full batch。 所以为了提高效率，我们可以把样本分成等量的子集。 例如我们把100万样本分成1000份， 每份1000个样本， 这些子集就称为mini batch。 然后我们分别用一个for循环遍历这1000个子集。 针对每一个子集做一次梯度下降。 然后更新参数w和b的值。接着到下一个子集中继续进行梯度下降。 这样在遍历完所有的mini batch之后我们相当于在梯度下降中做了1000次迭代。 我们将遍历一次所有样本的行为叫做一个 epoch，也就是一个世代。 在mini batch下的梯度下降中做的事情其实跟full batch一样，只不过我们训练的数据不再是所有的样本，而是一个个的子集。 这样在mini batch我们在一个epoch中就能进行1000次的梯度下降，而在full batch中只有一次。 这样就大大的提高了我们算法的运行速度。 既然有了mini batch那就会有一个batch size的超参数，也就是块大小。代表着每一个mini batch中有多少个样本。 我们一般设置为2的n次方。 例如64,128,512,1024. 一般不会超过这个范围。不能太大，因为太大了会无限接近full batch的行为，速度会慢。 也不能太小，太小了以后可能算法永远不会收敛。 当然如果我们的数据比较小， 但也用不着mini batch了。 full batch的效果是最好的。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-12-26T20:23:43+00:00">
+    <meta property="article:modified_time" content="2023-12-26T20:23:43+00:00">
+    <meta property="article:tag" content="Batch">
+    <meta property="article:tag" content="Undone">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="batch">
+  <meta name="twitter:description" content="包含：mini-batch
+batch mini-batch 在梯度下降中需要对所有样本进行处理过后然后走一步，那么如果我们的样本规模的特别大的话效率就会比较低。 假如有500万，甚至5000万个样本的话走一轮迭代就会非常的耗时。这个时候的梯度下降叫做full batch。 所以为了提高效率，我们可以把样本分成等量的子集。 例如我们把100万样本分成1000份， 每份1000个样本， 这些子集就称为mini batch。 然后我们分别用一个for循环遍历这1000个子集。 针对每一个子集做一次梯度下降。 然后更新参数w和b的值。接着到下一个子集中继续进行梯度下降。 这样在遍历完所有的mini batch之后我们相当于在梯度下降中做了1000次迭代。 我们将遍历一次所有样本的行为叫做一个 epoch，也就是一个世代。 在mini batch下的梯度下降中做的事情其实跟full batch一样，只不过我们训练的数据不再是所有的样本，而是一个个的子集。 这样在mini batch我们在一个epoch中就能进行1000次的梯度下降，而在full batch中只有一次。 这样就大大的提高了我们算法的运行速度。 既然有了mini batch那就会有一个batch size的超参数，也就是块大小。代表着每一个mini batch中有多少个样本。 我们一般设置为2的n次方。 例如64,128,512,1024. 一般不会超过这个范围。不能太大，因为太大了会无限接近full batch的行为，速度会慢。 也不能太小，太小了以后可能算法永远不会收敛。 当然如果我们的数据比较小， 但也用不着mini batch了。 full batch的效果是最好的。">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "batch",
+      "item": "https://milong26.github.io/post/batch/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "batch",
+  "name": "batch",
+  "description": "包含：mini-batch\nbatch mini-batch 在梯度下降中需要对所有样本进行处理过后然后走一步，那么如果我们的样本规模的特别大的话效率就会比较低。 假如有500万，甚至5000万个样本的话走一轮迭代就会非常的耗时。这个时候的梯度下降叫做full batch。 所以为了提高效率，我们可以把样本分成等量的子集。 例如我们把100万样本分成1000份， 每份1000个样本， 这些子集就称为mini batch。 然后我们分别用一个for循环遍历这1000个子集。 针对每一个子集做一次梯度下降。 然后更新参数w和b的值。接着到下一个子集中继续进行梯度下降。 这样在遍历完所有的mini batch之后我们相当于在梯度下降中做了1000次迭代。 我们将遍历一次所有样本的行为叫做一个 epoch，也就是一个世代。 在mini batch下的梯度下降中做的事情其实跟full batch一样，只不过我们训练的数据不再是所有的样本，而是一个个的子集。 这样在mini batch我们在一个epoch中就能进行1000次的梯度下降，而在full batch中只有一次。 这样就大大的提高了我们算法的运行速度。 既然有了mini batch那就会有一个batch size的超参数，也就是块大小。代表着每一个mini batch中有多少个样本。 我们一般设置为2的n次方。 例如64,128,512,1024. 一般不会超过这个范围。不能太大，因为太大了会无限接近full batch的行为，速度会慢。 也不能太小，太小了以后可能算法永远不会收敛。 当然如果我们的数据比较小， 但也用不着mini batch了。 full batch的效果是最好的。\n",
+  "keywords": [
+    "batch", "undone"
+  ],
+  "articleBody": "包含：mini-batch\nbatch mini-batch 在梯度下降中需要对所有样本进行处理过后然后走一步，那么如果我们的样本规模的特别大的话效率就会比较低。 假如有500万，甚至5000万个样本的话走一轮迭代就会非常的耗时。这个时候的梯度下降叫做full batch。 所以为了提高效率，我们可以把样本分成等量的子集。 例如我们把100万样本分成1000份， 每份1000个样本， 这些子集就称为mini batch。 然后我们分别用一个for循环遍历这1000个子集。 针对每一个子集做一次梯度下降。 然后更新参数w和b的值。接着到下一个子集中继续进行梯度下降。 这样在遍历完所有的mini batch之后我们相当于在梯度下降中做了1000次迭代。 我们将遍历一次所有样本的行为叫做一个 epoch，也就是一个世代。 在mini batch下的梯度下降中做的事情其实跟full batch一样，只不过我们训练的数据不再是所有的样本，而是一个个的子集。 这样在mini batch我们在一个epoch中就能进行1000次的梯度下降，而在full batch中只有一次。 这样就大大的提高了我们算法的运行速度。 既然有了mini batch那就会有一个batch size的超参数，也就是块大小。代表着每一个mini batch中有多少个样本。 我们一般设置为2的n次方。 例如64,128,512,1024. 一般不会超过这个范围。不能太大，因为太大了会无限接近full batch的行为，速度会慢。 也不能太小，太小了以后可能算法永远不会收敛。 当然如果我们的数据比较小， 但也用不着mini batch了。 full batch的效果是最好的。\n",
+  "wordCount" : "39",
+  "inLanguage": "en",
+  "datePublished": "2023-12-26T20:23:43Z",
+  "dateModified": "2023-12-26T20:23:43Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/batch/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      batch
+    </h1>
+    <div class="post-meta">
+
+<span title='2023-12-26 20:23:43 +0000 UTC'>December 26, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>包含：mini-batch</p>
+<h1 id="batch">batch<a hidden class="anchor" aria-hidden="true" href="#batch">#</a></h1>
+<h1 id="mini-batch">mini-batch<a hidden class="anchor" aria-hidden="true" href="#mini-batch">#</a></h1>
+<p>在梯度下降中需要对所有样本进行处理过后然后走一步，那么如果我们的样本规模的特别大的话效率就会比较低。
+假如有500万，甚至5000万个样本的话走一轮迭代就会非常的耗时。这个时候的梯度下降叫做full batch。
+所以为了提高效率，我们可以把样本分成<strong>等量的子集</strong>。
+例如我们把100万样本分成1000份， 每份1000个样本， 这些子集就称为mini batch。
+然后我们分别用一个for循环遍历这1000个子集。 针对每一个子集做一次梯度下降。 然后更新参数w和b的值。接着到下一个子集中继续进行梯度下降。
+这样在遍历完所有的mini batch之后我们相当于在梯度下降中做了1000次迭代。
+我们将遍历一次所有样本的行为叫做一个 epoch，也就是一个世代。 在mini batch下的梯度下降中做的事情其实跟full batch一样，只不过我们训练的数据不再是所有的样本，而是一个个的子集。
+这样在mini batch我们在一个epoch中就能进行1000次的梯度下降，而在full batch中只有一次。 这样就大大的提高了我们算法的运行速度。
+既然有了mini batch那就会有一个batch size的超参数，也就是块大小。代表着每一个mini batch中有多少个样本。 我们一般设置为2的n次方。 例如64,128,512,1024. 一般不会超过这个范围。不能太大，因为太大了会无限接近full batch的行为，速度会慢。 也不能太小，太小了以后可能算法永远不会收敛。 当然如果我们的数据比较小， 但也用不着mini batch了。 full batch的效果是最好的。</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/batch/">Batch</a></li>
+      <li><a href="https://milong26.github.io/tags/undone/">Undone</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>操作系统概述 | 我的博客</title>
+<meta name="keywords" content="OS, undone">
+<meta name="description" content="操作系统-概述">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="操作系统概述">
+  <meta property="og:description" content="操作系统-概述">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2021-04-16T15:42:58+00:00">
+    <meta property="article:modified_time" content="2021-04-16T15:42:58+00:00">
+    <meta property="article:tag" content="Os">
+    <meta property="article:tag" content="Undone">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="操作系统概述">
+  <meta name="twitter:description" content="操作系统-概述">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "操作系统概述",
+      "item": "https://milong26.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "操作系统概述",
+  "name": "操作系统概述",
+  "description": "操作系统-概述\n",
+  "keywords": [
+    "OS", "undone"
+  ],
+  "articleBody": "操作系统-概述\n可执行文件的文件格式常见有：\nexe 和 dll（Windows 系列）、elf（Linux 系列）和 Mach-O（Mac系列）；\n操作系统定义\n计算机系统中的一个系统软件\nCPU利用率 资源管理 用户界面和编程接口 操作系统功能\n自底向上：资源管理 记录哪些空闲 资源分配策略（算法） 静态分配（执行前要多少给多少）-浪费 动态分配（执行时要才给） 资源分配和回收 协调冲突、保护资源、提高利用率 5个基本功能 进程/线程管理 存储管理 文件管理 设备管理 用户接口 给用户提供服务 扩展硬件机器 操作系统特征\n并发concurrency\n处理多个同时性活动\n程序在CPU上轮流执行，宏观表现为同时执行\n并行parallel：不同程序同时在多个硬件上执行\n共享sharing\nOS与多个用户的程序共同使用系统资源\n互斥共享（打印机） 同时共享（文件读写） 虚拟virtual\n物理实体映射为若干个对应的逻辑实体\n分时 分空间 随机\n对不可预测的次序发生的事件响应\n典型操作系统架构\nwindows\n用户态、内核态\nunix\n最里面是Unix内核，在它之上是Unix的系统调用，各种库文件是建立再系统调用之上的，可以由用户程序（application）调用，Shell是一个比较特殊的应用程序（application），它提供了运行其他用户程序的接口。用户程序（application）可以在Shell上运行，可以调用Library运行，也可以直接调用system calls 运行。\nlinux\n内核、shell、文件系统和应用程序\nandroid\nOS分类\n批处理 分时 实时（硬实时、软实时） 个人计算机操作系统 网络操作系统 分布式操作系统 嵌入式操作系统 TANENBAUM分类\nSpooling技术（假脱机技术）\n将一台独享打印机改造为可供多个用户共享的打印机，是应用 SPOOLing技术的典型实例。\n具体做法是：系统对于用户的打印输出，并不真正把打印机分配给该用户进程，而是先在输出井中申请一个空闲盘块区，并将要打印的数据送入其中；然后为用户申请并填写请求打印表，将该表挂到请求打印队列上。若打印机空闲，输出程序从请求打印队首取表，将要打印的数据从输出井传送到内存缓冲区，再进行打印，直到打印队列为空。\n",
+  "wordCount" : "67",
+  "inLanguage": "en",
+  "datePublished": "2021-04-16T15:42:58Z",
+  "dateModified": "2021-04-16T15:42:58Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      操作系统概述
+    </h1>
+    <div class="post-meta">
+
+<span title='2021-04-16 15:42:58 +0000 UTC'>April 16, 2021</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>操作系统-概述</p>
+<ol>
+<li>
+<p>可执行文件的文件格式常见有：</p>
+<p>exe 和 dll（Windows 系列）、elf（Linux 系列）和 Mach-O（Mac系列）；</p>
+</li>
+<li>
+<p>操作系统定义</p>
+<p>计算机系统中的一个系统软件</p>
+<ul>
+<li>CPU利用率</li>
+<li>资源管理</li>
+<li>用户界面和编程接口</li>
+</ul>
+</li>
+<li>
+<p>操作系统功能</p>
+<ul>
+<li>自底向上：资源管理
+<ul>
+<li>记录哪些空闲</li>
+<li>资源分配策略（算法）
+<ul>
+<li>静态分配（执行前要多少给多少）-浪费</li>
+<li><strong>动态分配</strong>（执行时要才给）</li>
+</ul>
+</li>
+<li>资源分配和回收</li>
+<li>协调冲突、保护资源、提高利用率</li>
+<li>5个基本功能
+<ol>
+<li>进程/线程管理</li>
+<li>存储管理</li>
+<li>文件管理</li>
+<li>设备管理</li>
+<li>用户接口</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>给用户提供服务</li>
+<li>扩展硬件机器</li>
+</ul>
+</li>
+<li>
+<p>操作系统特征</p>
+<ul>
+<li>
+<p>并发concurrency</p>
+<p>处理多个同时性活动</p>
+<p>程序在CPU上轮流执行，宏观表现为同时执行</p>
+<p><strong>并行parallel</strong>：不同程序同时在多个硬件上执行</p>
+</li>
+<li>
+<p>共享sharing</p>
+<p>OS与多个用户的程序共同使用系统资源</p>
+<ul>
+<li>互斥共享（打印机）</li>
+<li>同时共享（文件读写）</li>
+</ul>
+</li>
+<li>
+<p>虚拟virtual</p>
+<p>物理实体映射为若干个对应的逻辑实体</p>
+<ul>
+<li>分时</li>
+<li>分空间</li>
+</ul>
+</li>
+<li>
+<p>随机</p>
+<p>对不可预测的次序发生的事件响应</p>
+</li>
+</ul>
+</li>
+<li>
+<p>典型操作系统架构</p>
+<ul>
+<li>
+<p>windows</p>
+<p>用户态、内核态</p>
+<p><img loading="lazy" src="https://p-blog.csdn.net/images/p_blog_csdn_net/mickey139/windows%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.gif"></p>
+<p><img loading="lazy" src="https://graph.baidu.com/thumb/v4/1355064464,1862591986.jpg"></p>
+</li>
+<li>
+<p>unix</p>
+<p><img loading="lazy" src="http://images.cnblogs.com/cnblogs_com/wangshuo/201104/201104091442008204.png"></p>
+<p>最里面是Unix<strong>内核</strong>，在它之上是Unix的<strong>系统调用</strong>，各种<strong>库文件</strong>是建立再系统调用之上的，可以由<strong>用户程序</strong>（application）调用，Shell是一个比较特殊的应用程序（application），它提供了运行其他用户程序的接口。用户程序（application）可以在Shell上运行，可以调用Library运行，也可以直接调用system calls 运行。</p>
+</li>
+<li>
+<p>linux</p>
+<p><img loading="lazy" src="https://www.linuxprobe.com/wp-content/uploads/2017/08/linux-system-1-300x298.png"></p>
+<p>内核、shell、文件系统和应用程序</p>
+</li>
+<li>
+<p>android</p>
+<p><img loading="lazy" src="https://www.hualigs.cn/image/60794f7de7cdf.jpg"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>OS分类</p>
+<ul>
+<li>批处理</li>
+<li>分时</li>
+<li>实时（硬实时、软实时）</li>
+<li>个人计算机操作系统</li>
+<li>网络操作系统</li>
+<li>分布式操作系统</li>
+<li>嵌入式操作系统</li>
+</ul>
+<p>TANENBAUM分类</p>
+</li>
+<li>
+<p>Spooling技术（假脱机技术）</p>
+<p>将一台独享打印机改造为可供多个用户共享的打印机，是应用 SPOOLing技术的典型实例。</p>
+<p>具体做法是：系统对于用户的打印输出，并不真正把打印机分配给该用户进程，而是先在输出井中申请一个空闲盘块区，并将要打印的数据送入其中；然后为用户申请并填写请求打印表，将该表挂到请求打印队列上。若打印机空闲，输出程序从请求打印队首取表，将要打印的数据从输出井传送到内存缓冲区，再进行打印，直到打印队列为空。</p>
+</li>
+</ol>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/os/">Os</a></li>
+      <li><a href="https://milong26.github.io/tags/undone/">Undone</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

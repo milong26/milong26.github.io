@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>LoRA on 我的博客</title>
+    <link>https://milong26.github.io/tags/lora/</link>
+    <description>Recent content in LoRA on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 01 Jul 2024 11:45:24 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/lora/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LISA: Layerwise Importance Sampling for Memory-Efficient Large Language Model Fine-Tuning</title>
+      <link>https://milong26.github.io/post/lisa-layerwise-importance-sampling-for-memory-efficient-large-language-model-fine-tuning/</link>
+      <pubDate>Mon, 01 Jul 2024 11:45:24 +0000</pubDate>
+      <guid>https://milong26.github.io/post/lisa-layerwise-importance-sampling-for-memory-efficient-large-language-model-fine-tuning/</guid>
+      <description>&lt;p&gt;百篇paper计划(6/100)，好像是LoRA的改进，随便找的，而且这篇还没投会议呢。&lt;/p&gt;
+&lt;p&gt;这一篇也是微调，改lora&lt;/p&gt;
+&lt;p&gt;我以前看论文居然这么龟毛orz我的百篇paper计划创业未半而中道崩殂啊&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

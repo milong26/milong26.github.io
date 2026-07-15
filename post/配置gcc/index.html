@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>配置gcc | 我的博客</title>
+<meta name="keywords" content="gcc, configure">
+<meta name="description" content="c/c&#43;&#43;环境没自己配置过，试试
+windows配置
+下载并解压
+离线下载地址
+修改环境变量
+修改系统变量的Path，新增(也就是gcc解压后的bin路径)
+D:\conf\gcc\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin
+验证
+按win&#43;r运行cmd或者powershell输入gcc -v
+出现一大坨就证明ok
+vscode使用
+安装插件
+在vscode中安装以下插件
+C/C&#43;&#43;
+Code Runner
+之前写的blog，不知道可不可行
+
+
+MinGW
+链接
+往下滑，找到最新版的 &ldquo;x86_64-posix-seh&rdquo;。
+下载后得到一个7z压缩包，解压到指定conf位置D:\conf\MinGW
+编辑用户变量Path，加入刚才的D:\conf\MinGW\mingw64\bin
+验证：g&#43;&#43;，提示：g&#43;&#43;: fatal error: no input files，证明🆗
+
+
+配置vs的c&#43;&#43;环境（和以前在ubuntu上面有点像，所以很痛苦的，是一个文件夹里配置）
+打开一个文件夹，新建一个cpp文件，写点代码上去。
+侧边工作栏的bug按钮，（以下最好连续）**选中Run and Debug，选C&#43;&#43;(GDB/LLDB)，g&#43;&#43;.exe，**会自动生成一个launch.json.
+然后咱们来看看launch.json啊
+{
+    &#34;version&#34;: &#34;0.2.0&#34;,
+    &#34;configurations&#34;: [
+        {
+            &#34;name&#34;: &#34;g&#43;&#43;.exe build and debug active file&#34;,
+            &#34;type&#34;: &#34;cppdbg&#34;,
+            &#34;request&#34;: &#34;launch&#34;,
+            &#34;program&#34;: &#34;${fileDirname}\\${fileBasenameNoExtension}.exe&#34;,
+            &#34;args&#34;: [],
+            &#34;stopAtEntry&#34;: false,
+            &#34;cwd&#34;: &#34;${workspaceFolder}&#34;,
+            &#34;environment&#34;: [],
+            &#34;externalConsole&#34;: true,      //修改此项，让其弹出终端
+            &#34;MIMode&#34;: &#34;gdb&#34;,
+            &#34;miDebuggerPath&#34;: &#34;D:\\conf\\MinGW\\mingw64\\bin\\gdb.exe&#34;,
+            &#34;setupCommands&#34;: [
+                {
+                    &#34;description&#34;: &#34;Enable pretty-printing for gdb&#34;,
+                    &#34;text&#34;: &#34;-enable-pretty-printing&#34;,
+                    &#34;ignoreFailures&#34;: true
+                }
+            ],
+            &#34;preLaunchTask&#34;: &#34;task g&#43;&#43;&#34; //修改此项
+        }
+    ]
+}
+保存，返回c&#43;&#43;，停止运行，按F5调试，提示找不到文件。选择Configure Task，编辑tasks.json，把其中label行修改成       &quot;label&quot;: &quot;task g&#43;&#43;&quot;, ">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/%E9%85%8D%E7%BD%AEgcc/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/%E9%85%8D%E7%BD%AEgcc/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/%E9%85%8D%E7%BD%AEgcc/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="配置gcc">
+  <meta property="og:description" content="c/c&#43;&#43;环境没自己配置过，试试
+windows配置 下载并解压 离线下载地址
+修改环境变量 修改系统变量的Path，新增(也就是gcc解压后的bin路径) D:\conf\gcc\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin
+验证 按win&#43;r运行cmd或者powershell输入gcc -v 出现一大坨就证明ok
+vscode使用 安装插件 在vscode中安装以下插件 C/C&#43;&#43; Code Runner
+之前写的blog，不知道可不可行 MinGW
+链接
+往下滑，找到最新版的 “x86_64-posix-seh”。
+下载后得到一个7z压缩包，解压到指定conf位置D:\conf\MinGW
+编辑用户变量Path，加入刚才的D:\conf\MinGW\mingw64\bin
+验证：g&#43;&#43;，提示：g&#43;&#43;: fatal error: no input files，证明🆗
+配置vs的c&#43;&#43;环境（和以前在ubuntu上面有点像，所以很痛苦的，是一个文件夹里配置）
+打开一个文件夹，新建一个cpp文件，写点代码上去。
+侧边工作栏的bug按钮，（以下最好连续）**选中Run and Debug，选C&#43;&#43;(GDB/LLDB)，g&#43;&#43;.exe，**会自动生成一个launch.json.
+然后咱们来看看launch.json啊
+{ &#34;version&#34;: &#34;0.2.0&#34;, &#34;configurations&#34;: [ { &#34;name&#34;: &#34;g&#43;&#43;.exe build and debug active file&#34;, &#34;type&#34;: &#34;cppdbg&#34;, &#34;request&#34;: &#34;launch&#34;, &#34;program&#34;: &#34;${fileDirname}\\${fileBasenameNoExtension}.exe&#34;, &#34;args&#34;: [], &#34;stopAtEntry&#34;: false, &#34;cwd&#34;: &#34;${workspaceFolder}&#34;, &#34;environment&#34;: [], &#34;externalConsole&#34;: true, //修改此项，让其弹出终端 &#34;MIMode&#34;: &#34;gdb&#34;, &#34;miDebuggerPath&#34;: &#34;D:\\conf\\MinGW\\mingw64\\bin\\gdb.exe&#34;, &#34;setupCommands&#34;: [ { &#34;description&#34;: &#34;Enable pretty-printing for gdb&#34;, &#34;text&#34;: &#34;-enable-pretty-printing&#34;, &#34;ignoreFailures&#34;: true } ], &#34;preLaunchTask&#34;: &#34;task g&#43;&#43;&#34; //修改此项 } ] } 保存，返回c&#43;&#43;，停止运行，按F5调试，提示找不到文件。选择Configure Task，编辑tasks.json，把其中label行修改成 &#34;label&#34;: &#34;task g&#43;&#43;&#34;,">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-09-16T17:15:33+00:00">
+    <meta property="article:modified_time" content="2023-09-16T17:15:33+00:00">
+    <meta property="article:tag" content="Gcc">
+    <meta property="article:tag" content="Configure">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="配置gcc">
+  <meta name="twitter:description" content="c/c&#43;&#43;环境没自己配置过，试试
+windows配置 下载并解压 离线下载地址
+修改环境变量 修改系统变量的Path，新增(也就是gcc解压后的bin路径) D:\conf\gcc\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin
+验证 按win&#43;r运行cmd或者powershell输入gcc -v 出现一大坨就证明ok
+vscode使用 安装插件 在vscode中安装以下插件 C/C&#43;&#43; Code Runner
+之前写的blog，不知道可不可行 MinGW
+链接
+往下滑，找到最新版的 “x86_64-posix-seh”。
+下载后得到一个7z压缩包，解压到指定conf位置D:\conf\MinGW
+编辑用户变量Path，加入刚才的D:\conf\MinGW\mingw64\bin
+验证：g&#43;&#43;，提示：g&#43;&#43;: fatal error: no input files，证明🆗
+配置vs的c&#43;&#43;环境（和以前在ubuntu上面有点像，所以很痛苦的，是一个文件夹里配置）
+打开一个文件夹，新建一个cpp文件，写点代码上去。
+侧边工作栏的bug按钮，（以下最好连续）**选中Run and Debug，选C&#43;&#43;(GDB/LLDB)，g&#43;&#43;.exe，**会自动生成一个launch.json.
+然后咱们来看看launch.json啊
+{ &#34;version&#34;: &#34;0.2.0&#34;, &#34;configurations&#34;: [ { &#34;name&#34;: &#34;g&#43;&#43;.exe build and debug active file&#34;, &#34;type&#34;: &#34;cppdbg&#34;, &#34;request&#34;: &#34;launch&#34;, &#34;program&#34;: &#34;${fileDirname}\\${fileBasenameNoExtension}.exe&#34;, &#34;args&#34;: [], &#34;stopAtEntry&#34;: false, &#34;cwd&#34;: &#34;${workspaceFolder}&#34;, &#34;environment&#34;: [], &#34;externalConsole&#34;: true, //修改此项，让其弹出终端 &#34;MIMode&#34;: &#34;gdb&#34;, &#34;miDebuggerPath&#34;: &#34;D:\\conf\\MinGW\\mingw64\\bin\\gdb.exe&#34;, &#34;setupCommands&#34;: [ { &#34;description&#34;: &#34;Enable pretty-printing for gdb&#34;, &#34;text&#34;: &#34;-enable-pretty-printing&#34;, &#34;ignoreFailures&#34;: true } ], &#34;preLaunchTask&#34;: &#34;task g&#43;&#43;&#34; //修改此项 } ] } 保存，返回c&#43;&#43;，停止运行，按F5调试，提示找不到文件。选择Configure Task，编辑tasks.json，把其中label行修改成 &#34;label&#34;: &#34;task g&#43;&#43;&#34;,">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "配置gcc",
+      "item": "https://milong26.github.io/post/%E9%85%8D%E7%BD%AEgcc/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "配置gcc",
+  "name": "配置gcc",
+  "description": "c/c++环境没自己配置过，试试\nwindows配置 下载并解压 离线下载地址\n修改环境变量 修改系统变量的Path，新增(也就是gcc解压后的bin路径) D:\\conf\\gcc\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\n验证 按win+r运行cmd或者powershell输入gcc -v 出现一大坨就证明ok\nvscode使用 安装插件 在vscode中安装以下插件 C/C++ Code Runner\n之前写的blog，不知道可不可行 MinGW\n链接\n往下滑，找到最新版的 \u0026ldquo;x86_64-posix-seh\u0026rdquo;。\n下载后得到一个7z压缩包，解压到指定conf位置D:\\conf\\MinGW\n编辑用户变量Path，加入刚才的D:\\conf\\MinGW\\mingw64\\bin\n验证：g++，提示：g++: fatal error: no input files，证明🆗\n配置vs的c++环境（和以前在ubuntu上面有点像，所以很痛苦的，是一个文件夹里配置）\n打开一个文件夹，新建一个cpp文件，写点代码上去。\n侧边工作栏的bug按钮，（以下最好连续）**选中Run and Debug，选C++(GDB/LLDB)，g++.exe，**会自动生成一个launch.json.\n然后咱们来看看launch.json啊\n{ \u0026#34;version\u0026#34;: \u0026#34;0.2.0\u0026#34;, \u0026#34;configurations\u0026#34;: [ { \u0026#34;name\u0026#34;: \u0026#34;g++.exe build and debug active file\u0026#34;, \u0026#34;type\u0026#34;: \u0026#34;cppdbg\u0026#34;, \u0026#34;request\u0026#34;: \u0026#34;launch\u0026#34;, \u0026#34;program\u0026#34;: \u0026#34;${fileDirname}\\\\${fileBasenameNoExtension}.exe\u0026#34;, \u0026#34;args\u0026#34;: [], \u0026#34;stopAtEntry\u0026#34;: false, \u0026#34;cwd\u0026#34;: \u0026#34;${workspaceFolder}\u0026#34;, \u0026#34;environment\u0026#34;: [], \u0026#34;externalConsole\u0026#34;: true, //修改此项，让其弹出终端 \u0026#34;MIMode\u0026#34;: \u0026#34;gdb\u0026#34;, \u0026#34;miDebuggerPath\u0026#34;: \u0026#34;D:\\\\conf\\\\MinGW\\\\mingw64\\\\bin\\\\gdb.exe\u0026#34;, \u0026#34;setupCommands\u0026#34;: [ { \u0026#34;description\u0026#34;: \u0026#34;Enable pretty-printing for gdb\u0026#34;, \u0026#34;text\u0026#34;: \u0026#34;-enable-pretty-printing\u0026#34;, \u0026#34;ignoreFailures\u0026#34;: true } ], \u0026#34;preLaunchTask\u0026#34;: \u0026#34;task g++\u0026#34; //修改此项 } ] } 保存，返回c++，停止运行，按F5调试，提示找不到文件。选择Configure Task，编辑tasks.json，把其中label行修改成 \u0026quot;label\u0026quot;: \u0026quot;task g++\u0026quot;, ",
+  "keywords": [
+    "gcc", "configure"
+  ],
+  "articleBody": "c/c++环境没自己配置过，试试\nwindows配置 下载并解压 离线下载地址\n修改环境变量 修改系统变量的Path，新增(也就是gcc解压后的bin路径) D:\\conf\\gcc\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\n验证 按win+r运行cmd或者powershell输入gcc -v 出现一大坨就证明ok\nvscode使用 安装插件 在vscode中安装以下插件 C/C++ Code Runner\n之前写的blog，不知道可不可行 MinGW\n链接\n往下滑，找到最新版的 “x86_64-posix-seh”。\n下载后得到一个7z压缩包，解压到指定conf位置D:\\conf\\MinGW\n编辑用户变量Path，加入刚才的D:\\conf\\MinGW\\mingw64\\bin\n验证：g++，提示：g++: fatal error: no input files，证明🆗\n配置vs的c++环境（和以前在ubuntu上面有点像，所以很痛苦的，是一个文件夹里配置）\n打开一个文件夹，新建一个cpp文件，写点代码上去。\n侧边工作栏的bug按钮，（以下最好连续）**选中Run and Debug，选C++(GDB/LLDB)，g++.exe，**会自动生成一个launch.json.\n然后咱们来看看launch.json啊\n{ \"version\": \"0.2.0\", \"configurations\": [ { \"name\": \"g++.exe build and debug active file\", \"type\": \"cppdbg\", \"request\": \"launch\", \"program\": \"${fileDirname}\\\\${fileBasenameNoExtension}.exe\", \"args\": [], \"stopAtEntry\": false, \"cwd\": \"${workspaceFolder}\", \"environment\": [], \"externalConsole\": true, //修改此项，让其弹出终端 \"MIMode\": \"gdb\", \"miDebuggerPath\": \"D:\\\\conf\\\\MinGW\\\\mingw64\\\\bin\\\\gdb.exe\", \"setupCommands\": [ { \"description\": \"Enable pretty-printing for gdb\", \"text\": \"-enable-pretty-printing\", \"ignoreFailures\": true } ], \"preLaunchTask\": \"task g++\" //修改此项 } ] } 保存，返回c++，停止运行，按F5调试，提示找不到文件。选择Configure Task，编辑tasks.json，把其中label行修改成 \"label\": \"task g++\", （ps它有好几个选项，不知道选哪个，姑且改了第一个，有问题以后再改。）\n再F5调试，ok\n尝试run 解决报错：\ng++ : 无法将“g++”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。请检查名称的拼写，如果包括路径，请确保路径正确，然后再试一次。所在位置 行:1 字符: 42 cd “d:\\file\\codefile\\cpp\\1\" ; if ($?) { g++ Untitled-1.cpp -o Untitl … ~~~ CategoryInfo : ObjectNotFound: (g++:String) [], CommandNotFoundException FullyQualifiedErrorId : CommandNotFoundException 解决：配置环境变量之后没重启，识别不到头文件。重启下就行 我想要外部终端 插件C/C++ Compile Run 没成功，还是在底下的，不知道为啥 ",
+  "wordCount" : "134",
+  "inLanguage": "en",
+  "datePublished": "2023-09-16T17:15:33Z",
+  "dateModified": "2023-09-16T17:15:33Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/%E9%85%8D%E7%BD%AEgcc/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      配置gcc
+    </h1>
+    <div class="post-meta">
+
+<span title='2023-09-16 17:15:33 +0000 UTC'>September 16, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>c/c++环境没自己配置过，试试</p>
+<h1 id="windows配置">windows配置<a hidden class="anchor" aria-hidden="true" href="#windows配置">#</a></h1>
+<h2 id="下载并解压">下载并解压<a hidden class="anchor" aria-hidden="true" href="#下载并解压">#</a></h2>
+<p>离线下载<a href="https://link.zhihu.com/?target=https%3A//sourceforge.net/projects/mingw-w64/files/Toolchains%2520targetting%2520Win64/Personal%2520Builds/mingw-builds/8.1.0/threads-posix/seh/x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z/download">地址</a></p>
+<h2 id="修改环境变量">修改环境变量<a hidden class="anchor" aria-hidden="true" href="#修改环境变量">#</a></h2>
+<p>修改系统变量的Path，新增(也就是gcc解压后的bin路径)
+<code>D:\conf\gcc\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin</code></p>
+<h2 id="验证">验证<a hidden class="anchor" aria-hidden="true" href="#验证">#</a></h2>
+<p>按win+r运行cmd或者powershell输入gcc -v
+出现一大坨就证明ok</p>
+<h2 id="vscode使用">vscode使用<a hidden class="anchor" aria-hidden="true" href="#vscode使用">#</a></h2>
+<h3 id="安装插件">安装插件<a hidden class="anchor" aria-hidden="true" href="#安装插件">#</a></h3>
+<p>在vscode中安装以下插件
+C/C++
+Code Runner</p>
+<h3 id="之前写的blog不知道可不可行">之前写的blog，不知道可不可行<a hidden class="anchor" aria-hidden="true" href="#之前写的blog不知道可不可行">#</a></h3>
+<ol start="3">
+<li>
+<p>MinGW</p>
+<p><a href="https://sourceforge.net/projects/mingw-w64/files/">链接</a></p>
+<p>往下滑，找到最新版的 &ldquo;x86_64-posix-seh&rdquo;。</p>
+<p>下载后得到一个7z压缩包，解压到指定conf位置D:\conf\MinGW</p>
+<p>编辑用户变量Path，加入刚才的D:\conf\MinGW\mingw64\bin</p>
+<p>验证：g++，提示：g++: fatal error: no input files，证明🆗</p>
+</li>
+<li>
+<p>配置vs的c++环境（和以前在ubuntu上面有点像，所以很痛苦的，是一个文件夹里配置）</p>
+<p>打开一个文件夹，新建一个cpp文件，写点代码上去。</p>
+<p>侧边工作栏的bug按钮，（以下最好连续）**选中Run and Debug，选C++(GDB/LLDB)，g++.exe，**会自动生成一个launch.json.</p>
+<p>然后咱们来看看launch.json啊</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;0.2.0&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;configurations&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;g++.exe build and debug active file&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;cppdbg&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;request&#34;</span>: <span style="color:#e6db74">&#34;launch&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;program&#34;</span>: <span style="color:#e6db74">&#34;${fileDirname}\\${fileBasenameNoExtension}.exe&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;args&#34;</span>: [],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;stopAtEntry&#34;</span>: <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;cwd&#34;</span>: <span style="color:#e6db74">&#34;${workspaceFolder}&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;environment&#34;</span>: [],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;externalConsole&#34;</span>: <span style="color:#66d9ef">true</span>,      <span style="color:#75715e">//修改此项，让其弹出终端
+</span></span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;MIMode&#34;</span>: <span style="color:#e6db74">&#34;gdb&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;miDebuggerPath&#34;</span>: <span style="color:#e6db74">&#34;D:\\conf\\MinGW\\mingw64\\bin\\gdb.exe&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;setupCommands&#34;</span>: [
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Enable pretty-printing for gdb&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;text&#34;</span>: <span style="color:#e6db74">&#34;-enable-pretty-printing&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;ignoreFailures&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;preLaunchTask&#34;</span>: <span style="color:#e6db74">&#34;task g++&#34;</span> <span style="color:#75715e">//修改此项
+</span></span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>保存，返回c++，停止运行，按F5调试，提示找不到文件。选择Configure Task，编辑tasks.json，把其中label行修改成<code>       &quot;label&quot;: &quot;task g++&quot;, </code></p>
+<p>（ps它有好几个选项，不知道选哪个，姑且改了第一个，有问题以后再改。）</p>
+<p>再F5调试，ok</p>
+</li>
+</ol>
+<h3 id="尝试run">尝试run<a hidden class="anchor" aria-hidden="true" href="#尝试run">#</a></h3>
+<p>解决报错：</p>
+<ol>
+<li>g++ : 无法将“g++”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。请检查名称的拼写，如果包括路径，请确保路径正确，然后再试一次。所在位置 行:1 字符: 42
+<ul>
+<li>cd &ldquo;d:\file\codefile\cpp\1&quot; ; if ($?) { g++ Untitled-1.cpp -o Untitl &hellip;</li>
+<li>
+<pre><code>                                     ~~~
+</code></pre>
+<ul>
+<li>CategoryInfo          : ObjectNotFound: (g++:String) [], CommandNotFoundException</li>
+<li>FullyQualifiedErrorId : CommandNotFoundException
+解决：配置环境变量之后没重启，识别不到头文件。重启下就行</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>我想要外部终端
+插件C/C++ Compile Run
+没成功，还是在底下的，不知道为啥</li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/gcc/">Gcc</a></li>
+      <li><a href="https://milong26.github.io/tags/configure/">Configure</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

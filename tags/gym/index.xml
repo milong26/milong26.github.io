@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Gym on 我的博客</title>
+    <link>https://milong26.github.io/tags/gym/</link>
+    <description>Recent content in Gym on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 10 Mar 2025 15:44:23 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/gym/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gymnasium-Robotics</title>
+      <link>https://milong26.github.io/post/gymnasium-robotics/</link>
+      <pubDate>Mon, 10 Mar 2025 15:44:23 +0000</pubDate>
+      <guid>https://milong26.github.io/post/gymnasium-robotics/</guid>
+      <description>&lt;p&gt;又来看新环境 Gymnasium-Robotics，看上了它提供的shadown hand&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

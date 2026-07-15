@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Java on 我的博客</title>
+    <link>https://milong26.github.io/tags/java/</link>
+    <description>Recent content in Java on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 26 May 2023 15:07:22 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>springboot从头开始</title>
+      <link>https://milong26.github.io/post/springboot%E4%BB%8E%E5%A4%B4%E5%BC%80%E5%A7%8B/</link>
+      <pubDate>Fri, 26 May 2023 15:07:22 +0000</pubDate>
+      <guid>https://milong26.github.io/post/springboot%E4%BB%8E%E5%A4%B4%E5%BC%80%E5%A7%8B/</guid>
+      <description>&lt;p&gt;以前学过的springboot全忘光了。。
+从头学起来，就当是复习java了&lt;/p&gt;
+&lt;h1 id=&#34;新建项目&#34;&gt;新建项目&lt;/h1&gt;
+&lt;h2 id=&#34;本地创建&#34;&gt;本地创建&lt;/h2&gt;
+&lt;p&gt;我用的intellij idea community没有这个功能，跳过&lt;/p&gt;
+&lt;h2 id=&#34;外部导入&#34;&gt;外部导入&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://start.spring.io/&#34;&gt;spring initializer&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;几个选项&#34;&gt;几个选项&lt;/h3&gt;
+&lt;h4 id=&#34;project&#34;&gt;project&lt;/h4&gt;
+&lt;p&gt;Gradle&lt;/p&gt;
+&lt;p&gt;Maven&lt;/p&gt;
+&lt;h3 id=&#34;project-metadata&#34;&gt;Project Metadata&lt;/h3&gt;</description>
+    </item>
+    <item>
+      <title>配置java</title>
+      <link>https://milong26.github.io/post/%E9%85%8D%E7%BD%AEjava/</link>
+      <pubDate>Tue, 23 May 2023 16:45:04 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E9%85%8D%E7%BD%AEjava/</guid>
+      <description>&lt;p&gt;搞开发（特别是软件比较多的）还得是看java啊&lt;/p&gt;
+&lt;h1 id=&#34;下载&#34;&gt;下载&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.oracle.com/java/technologies/downloads&#34;&gt;官网&lt;/a&gt;
+jdk和jre都是啥&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;JRE是java运行时环境而JDK是java开发工具包，JDK包含JRE，但是JRE可以独立安装。JDK 是用于开发 Java 程序的最小环境，JRE是提供给 Java 程序运行的最小环境。运行java程序只需安装JRE。如果需要编写java程序，需要安装JDK。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;配置&#34;&gt;配置&lt;/h1&gt;
+&lt;p&gt;cmd -&amp;gt; &lt;code&gt;java -verbose&lt;/code&gt; 查看安装目录
+这个就没有python智能了需要手动配置环境
+在系统变量里面点新建&lt;/p&gt;
+&lt;h1 id=&#34;其他问题&#34;&gt;其他问题&lt;/h1&gt;
+&lt;p&gt;带有相对地址的不要放在环境变量最开始，要不然环境变量就只显示一条横的很难改&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>java使用map</title>
+      <link>https://milong26.github.io/post/java%E4%BD%BF%E7%94%A8map/</link>
+      <pubDate>Thu, 20 May 2021 20:07:28 +0000</pubDate>
+      <guid>https://milong26.github.io/post/java%E4%BD%BF%E7%94%A8map/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

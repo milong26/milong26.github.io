@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Conda on 我的博客</title>
+    <link>https://milong26.github.io/tags/conda/</link>
+    <description>Recent content in Conda on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 19 Dec 2024 18:40:56 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/conda/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>conda</title>
+      <link>https://milong26.github.io/post/conda/</link>
+      <pubDate>Thu, 19 Dec 2024 18:40:56 +0000</pubDate>
+      <guid>https://milong26.github.io/post/conda/</guid>
+      <description>&lt;p&gt;conda。管理python环境的，很好用&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

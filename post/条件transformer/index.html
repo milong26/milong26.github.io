@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>条件transformer | 我的博客</title>
+<meta name="keywords" content="transformer">
+<meta name="description" content="什么是条件transformer？它能做到什么？什么情况下使用它？怎么样能看出来这是一个条件transformer？
+
+ 整理文本
+ 有哪些经典的实际上就是条件transformer
+ 和最基本的transformer对比
+">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/%E6%9D%A1%E4%BB%B6transformer/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/%E6%9D%A1%E4%BB%B6transformer/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/%E6%9D%A1%E4%BB%B6transformer/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="条件transformer">
+  <meta property="og:description" content="什么是条件transformer？它能做到什么？什么情况下使用它？怎么样能看出来这是一个条件transformer？
+整理文本 有哪些经典的实际上就是条件transformer 和最基本的transformer对比">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:tag" content="Transformer">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="条件transformer">
+  <meta name="twitter:description" content="什么是条件transformer？它能做到什么？什么情况下使用它？怎么样能看出来这是一个条件transformer？
+整理文本 有哪些经典的实际上就是条件transformer 和最基本的transformer对比">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "条件transformer",
+      "item": "https://milong26.github.io/post/%E6%9D%A1%E4%BB%B6transformer/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "条件transformer",
+  "name": "条件transformer",
+  "description": "什么是条件transformer？它能做到什么？什么情况下使用它？怎么样能看出来这是一个条件transformer？\n整理文本 有哪些经典的实际上就是条件transformer 和最基本的transformer对比 ",
+  "keywords": [
+    "transformer"
+  ],
+  "articleBody": "什么是条件transformer？它能做到什么？什么情况下使用它？怎么样能看出来这是一个条件transformer？\n整理文本 有哪些经典的实际上就是条件transformer 和最基本的transformer对比 条件 Transformer就是：\n在 Transformer 工作时，额外给它一个“条件/背景/要求”，让它“按这个条件来想和生成”。\n这个“额外加的要求”，就是 condition（条件）。\n回忆：transformer在做什么\nattention的本质，“我这个词（Q），应该重点看哪些别的词（K），然后把它们的信息（V）拿过来用”\n普通 Transformer 只在“同一段输入”里互相参考\n条件 = 额外的信息来源，指导模型怎么理解 / 怎么生成，条件不是模型要预测的对象，而是“背景设定”\n怎么加条件的？把条件当成“额外的 token”，一起喂进去。Transformer 并不知道哪是条件、哪是正文\n但 attention 会自动学会：\n“生成正文时，要多关注这些‘条件 token’”\n更高级的方式，让正文的 Q，去看“条件的 K / V”\n也就是：\n正文：负责提问（Q）\n条件：提供参考信息（K / V） 这叫 Cross-Attention（交叉注意力）\n让同一个模型，在不同“要求/背景”下，做不同的事\n什么时候用条件transformer\n用一句判断标准： 当“输出”不只依赖于自身历史，而是依赖于“额外信息”时\n判断是不是transformer： 输入是不是两部分条件 + 要生成的内容 或者看到\n也就是说，corss-attention就是条件transformer\n说白了就是有外部输入的就是条件transformer，普通transformer是只有self-attention，并且注意力只看自己的历史token输出\n如果是有encoder和decoder就差不多是条件transformer了\n",
+  "wordCount" : "53",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/%E6%9D%A1%E4%BB%B6transformer/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      条件transformer
+    </h1>
+    <div class="post-meta">
+
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>什么是条件transformer？它能做到什么？什么情况下使用它？怎么样能看出来这是一个条件transformer？</p>
+<ul>
+<li><input disabled="" type="checkbox"> 整理文本</li>
+<li><input disabled="" type="checkbox"> 有哪些经典的实际上就是条件transformer</li>
+<li><input disabled="" type="checkbox"> 和最基本的transformer对比</li>
+</ul>
+<p><strong>条件 Transformer</strong>就是：</p>
+<blockquote>
+<p><strong>在 Transformer 工作时，额外给它一个“条件/背景/要求”，让它“按这个条件来想和生成”。</strong></p>
+</blockquote>
+<p>这个“额外加的要求”，就是 <strong>condition（条件）</strong>。</p>
+<p>回忆：transformer在做什么</p>
+<p>attention的本质，“我这个词（Q），应该重点看哪些别的词（K），然后把它们的信息（V）拿过来用”</p>
+<p>普通 Transformer 只在“同一段输入”里互相参考</p>
+<p>条件 = 额外的信息来源，指导模型怎么理解 / 怎么生成，条件不是模型要预测的对象，而是“背景设定”</p>
+<p>怎么加条件的？把条件当成“额外的 token”，一起喂进去。Transformer 并不知道哪是条件、哪是正文<br>
+<strong>但 attention 会自动学会：</strong></p>
+<blockquote>
+<p>“生成正文时，要多关注这些‘条件 token’”</p>
+</blockquote>
+<p>更高级的方式，<strong>让正文的 Q，去看“条件的 K / V”</strong></p>
+<p>也就是：</p>
+<ul>
+<li>
+<p>正文：负责提问（Q）</p>
+</li>
+<li>
+<p>条件：提供参考信息（K / V）
+这叫 <strong>Cross-Attention（交叉注意力）</strong></p>
+</li>
+</ul>
+<p>让同一个模型，在不同“要求/背景”下，做不同的事</p>
+<p>什么时候用条件transformer</p>
+<h3 id="用一句判断标准">用一句判断标准：<a hidden class="anchor" aria-hidden="true" href="#用一句判断标准">#</a></h3>
+<blockquote>
+<p><strong>当“输出”不只依赖于自身历史，而是依赖于“额外信息”时</strong></p>
+</blockquote>
+<p>判断是不是transformer：
+输入是不是两部分条件 + 要生成的内容
+或者看到</p>
+<p>也就是说，corss-attention就是条件transformer</p>
+<p>说白了就是有外部输入的就是条件transformer，普通transformer是只有self-attention，并且注意力只看自己的历史token输出</p>
+<p>如果是有encoder和decoder就差不多是条件transformer了</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/transformer/">Transformer</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

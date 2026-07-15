@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Dropout on 我的博客</title>
+    <link>https://milong26.github.io/tags/dropout/</link>
+    <description>Recent content in Dropout on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 28 Sep 2025 16:05:41 +0000</lastBuildDate>
+    <atom:link href="https://milong26.github.io/tags/dropout/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>dropout</title>
+      <link>https://milong26.github.io/post/dropout/</link>
+      <pubDate>Sun, 28 Sep 2025 16:05:41 +0000</pubDate>
+      <guid>https://milong26.github.io/post/dropout/</guid>
+      <description>&lt;p&gt;以前没好好学的现在孽力回馈了。&lt;/p&gt;
+&lt;p&gt;搜了一下dropout居然算深度学习，深度学习是神经网络里面的？&lt;/p&gt;
+&lt;p&gt;嗯原来是一种skill :D&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
