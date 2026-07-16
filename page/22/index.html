@@ -145,21 +145,6 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">微信小程序本地存储数据
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>编写微信小程序应用，本地存储数据避免重复加载
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2021-04-12 23:51:21 +0000 UTC'>April 12, 2021</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 微信小程序本地存储数据" href="https://milong26.github.io/post/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
     <h2 class="entry-hint-parent">hexo搭建
     </h2>
   </header>
@@ -388,6 +373,24 @@ T1
 
 <span title='2019-12-19 18:21:27 +0000 UTC'>December 19, 2019</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
   <a class="entry-link" aria-label="post link to 散列" href="https://milong26.github.io/post/%E6%95%A3%E5%88%97/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">矩阵
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 抽象数据类型Array{ 实例 形如(index,value)的数据对集合，其中任意两对数据的index值都各不相同 操作 Create()：创建一个空的数组 Store(index,value)：添加数据(index,value)，并删除具有相同index值的数据对（若存在） Retrieve(index)：返回索引值为index的数据对 } 多维数组的保存方式：
+计算机内存是一维连续存储
+会有行主映射和列主映射，默认是行
+#include&lt;iostream&gt; using namespace std; class matrix { public: matrix(int a, int b);//构造 看一下二维数组 ~matrix();//析构 matrix operator&#43;(matrix &amp;mat);//加法 matrix operator=(matrix &amp;mat);//等于,没写拷贝构造函数还没法用 matrix(const matrix &amp;mat);//拷贝构造函数 friend ostream&amp; operator&lt;&lt;(ostream&amp;out, matrix &amp;mat);//输出 friend istream&amp; operator&gt;&gt;(istream&amp;in, matrix &amp;mat);//输入 private: int rows; int cols; int** p; }; matrix::matrix(int n, int m)//初始化 { rows = n; cols = m; p = new int*[rows]; for (int i = 0; i &lt; rows; i&#43;&#43;) p[i] = new int[cols]; } matrix::~matrix()//析构函数，主要是看删除二维数组 { for (int i = 0; i &lt; rows; i&#43;&#43;) delete p[i]; delete p; } matrix::matrix(const matrix &amp;mat) { rows = mat.rows; cols = mat.cols; p = new int*[rows]; for (int i = 0; i &lt; rows; i&#43;&#43;) { p[i] = new int[cols]; for (int j = 0; j &lt; cols; j&#43;&#43;) p[i][j] = mat.p[i][j]; } } matrix matrix::operator&#43;(matrix &amp;mat) { matrix matsum(rows, cols);//定义一个新的 for (int i = 0; i &lt; rows; i&#43;&#43;) for (int j = 0; j &lt; cols; j&#43;&#43;) matsum.p[i][j] = p[i][j] &#43; mat.p[i][j]; return matsum; } matrix matrix::operator=( matrix &amp;mat) { for (int i = 0; i &lt; mat.rows; i&#43;&#43;) for (int j = 0; j &lt; mat.cols; j&#43;&#43;) p[i][j] = mat.p[i][j]; //cout &lt;&lt; &#34;ok&#34; &lt;&lt; endl; return (*this); } ostream&amp; operator&lt;&lt;(ostream &amp;out, matrix &amp;mat) { for (int i = 0; i &lt; mat.rows; i&#43;&#43;) { for (int j = 0; j &lt; mat.cols; j&#43;&#43;) out &lt;&lt; mat.p[i][j]&lt;&lt;&#34; &#34;; out &lt;&lt; endl; } return out; } istream&amp; operator&gt;&gt;(istream&amp;in, matrix &amp;mat) { for (int i = 0; i &lt; mat.rows; i&#43;&#43;) for (int j = 0; j &lt; mat.cols; j&#43;&#43;) in &gt;&gt; mat.p[i][j]; return in; } int main() { int n, m; cin &gt;&gt; n &gt;&gt; m; matrix mat1(n, m),mat2(n,m),mat3(n,m); cin &gt;&gt; mat1; cout &lt;&lt;&#34;mat1:&#34;&lt;&lt;endl&lt;&lt;mat1&lt;&lt;endl; cin &gt;&gt; mat2; cout &lt;&lt;&#34;mat2:&#34;&lt;&lt;endl&lt;&lt;mat2 &lt;&lt; endl; mat3=mat1; cout &lt;&lt;&#34;mat3:&#34;&lt;&lt;endl&lt;&lt;mat3 &lt;&lt; endl; } 下对角线：i-j=1 ；元素数n-1；M(i, j)－a[i-2]
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2019-12-18 22:45:30 +0000 UTC'>December 18, 2019</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 矩阵" href="https://milong26.github.io/post/%E7%9F%A9%E9%98%B5/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

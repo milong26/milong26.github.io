@@ -145,29 +145,6 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">prompt
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>prompt，翻译为提示，多用在NLP上 详细可以参考这篇论文
-定义 预训练模型(Pretrained Language Model)传统是预训练&#43;微调，引入prompt后变成了 预训练&#43;prompt&#43;微调，算是一个承前启后的作用 句中的是cloze prompt 句末的是prefix prompt
-设计 形状 cloze cloze prompt和masked language model很像，对MLM来说用cloze比较合适
-prefix 对于生成任务来说，或者使用自回归LM解决的任务，prefix prompts就会更加合适；
-else Full text reconstruction models较为通用，因此两种prompt均适用。另外，对于文本对的分类，prompt模板通常要给输入预留两个空，[x1]和[x2]。
-人工 这个没啥好说的
-自动学习 离散的主要包括 Prompt Mining, Prompt Paraphrasing, Gradient-based Search, Prompt Generation 和 Prompt Scoring；连续的则主要包括Prefix Tuning, Tuning Initialized with Discrete Prompts 和 Hard-Soft Prompt Hybrid Tuning。
-离散 自动生成离散Prompts指的是自动生成由自然语言的词组成的Prompt，因此其搜索空间是离散的。目前大致可以分成下面几个方法：
-Prompt Mining. 该方法需要一个大的文本库支持，例如Wikipedia。给定输入 和输出 ，要找到 和 之间的中间词或者依赖路径，然后选取出现频繁的中间词或依赖路径作为模板，即“[X] middle words [Z]”。 Prompt Paraphrasing. Paraphrasing-based方法是基于释义的，主要采用现有的种子prompts(例如手动构造)，并将其转述成一组其他候选prompts，然后选择一个在目标任务上达到最好效果的。一般的做法有：将提示符翻译成另一种语言，然后再翻译回来；使用同义或近义短语来替换等。 Gradient-based Search. 梯度下降搜索的方法是在单词候选集里选择词并组合成prompt，利用梯度下降的方式不断尝试组合，从而达到让PLM生成需要的词的目的。 Prompt Generation. 既然Prompt也是一段文本，那是否可以用文本生成的方式来生成Prompt呢？该类方法就是将标准的自然语言生成的模型用于生成prompts了。例如，Gao等人将T5引入了模板搜索的过程，让T5生成模板词；Ben-David 等人提出了一种域自适应算法，训练T5为每个输入生成一种唯一的域相关特征，然后把输入和特征连接起来组成模板再用到下游任务中。 Prompt Scoring. Davison等人在研究知识图谱补全任务的时候为三元组输入（头实体，关系，尾实体）设计了一种模板。首先人工制造一组模板候选，然后把相应的[X]和[Z]都填上成为prompts，并使用一个双向LM给这些prompts打分，最后选取其中的高分prompt。
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2023-09-19 10:49:28 +0000 UTC'>September 19, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to prompt" href="https://milong26.github.io/post/prompt/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
     <h2 class="entry-hint-parent">配置git
     </h2>
   </header>
@@ -353,6 +330,37 @@ int findSet(int x){ if(Parent[x] == -1){ return x; // x is root } return findSet
 
 <span title='2023-09-14 21:11:37 +0000 UTC'>September 14, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
   <a class="entry-link" aria-label="post link to 欧拉图" href="https://milong26.github.io/post/%E6%AC%A7%E6%8B%89%E5%9B%BE/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">强化学习
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>先根据课程梳理一条线，后面会把其它我觉得有类似的补充过来
+Course by David Silver 本章内容出自UCL Course on RL by David Silver
+introduction of RL 一句话：RL=非监督&#43;有奖励 需要考虑如何设计奖励。 这一章好多概念性的东西，so我进行了精简，看不懂可以参考 学完可能会会过头来看看
+原理 强化学习是一个序列决策（Sequential Decision Making）问题：连续选择一些行为，从这些行为完成后得到最大的收益作为最好的结果。 先尝试实践，得到反馈之后调整。
+区别 vs监督学习 监督学习有标签；立刻反馈；输入时独立分布的 RL没有标签；反馈有延时；输入变化 强化学习具有时间相关性（作为序列决策问题，属于非独立同分布数据）。
+vs其它非监督学习 非监督学习主要是为了挖掘无标签数据之间的内部关联（譬如聚类问题） RL是为了最大化reward。
+总结 RL并不需要出现正确的输入/输出对，也不需要精确校正次优化的行为。RL更加专注于在线规划，需要在exploration和exploitation之间找到平衡。
+概念解释 奖励rewards 很重要，独家的 $R_{t}$是一个标量反馈信号反映了智能体在时刻$t$行为的好坏 Agent的目的即最大化累积回报 RL奖励假设：所有目标都可以表示为最大化期望累计回报
+马尔可夫性 Markov Property 随机过程的某事件只取决于它的上一事件，与初始状态无关。（以前写过，不赘述）
+这是强化学习的主要研究问题——马尔可夫决策过程 （Markov Decision Process，MDP）
+MDP问题组成 策略（Policy）、值函数（value function）、模型（model）
+policy 最终的目的就是找到一个策略，通过策略可以描述智能体的行为。
+由当前看到的observation来决定action，是从state到action的映射，直观上描述就是：当智能体在什么状态时应该做什么事。 有两种表达形式： 一种是Deterministic policy（确定策略）在某种状态下，一定会执行某个动作$a=\pi(s)$，a时action，s是状态 一种是Stochastic policy（随机策略）它是在某种状态下执行某个动作的概率。$\pi(a|s)=P[A_t=a|S_t=s]$
+回报 它预测了当前状态下未来可能获得的reward的期望，用来评价当前状态的好坏程度 Return(回报):$G_t/U_t$为在一个马尔科夫奖励链上从t时刻开始往后所有的奖励的有衰减的收益总和。
+$$ G(s_0,s_1,s_2…=)=\sum_{t=0}^\infty\gamma^tR(s_t)\ \leq\sum_{t=0}^\infty\gamma^tR_{max}=\frac{R_{max}}{1-\gamma} $$
+这里s是状态，R是reward=奖励； 第二个等式用的高数里面的幂级数展开 强化学习的目的是最大化长期未来奖励，即寻找最大的 U
+其中的$\gamma\in[0,1]$ 指的是衰减因子，体现了未来的奖励在当前时刻的价值比例， 接近0，则表明趋向于“近视”性评估；接近1则表明偏重考虑远期的利益。
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-11 19:56:04 +0000 UTC'>September 11, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 强化学习" href="https://milong26.github.io/post/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -151,22 +151,6 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">xshell和xftp指北
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>XShell 是一种流行且简单的网络程序，旨在模拟虚拟终端。XShell可以在Windows界面下来访问远端不同系统下的服务器，从而比较好的达到远程控制终端的目的。它支持 RLOGIN、SFTP、SERIAL、TELNET、SSH2 和 SSH1，可以非常方便的对Linux主机进行远程管理。除此之外，其还有丰富的外观配色方案以及样式选择。 xftp是用来上传和下载文件的
-下载与安装 下载地址：https://www.xshell.com/zh/free-for-home-school/ xshell和xftp都可以下载 安装：直接无脑安装，但是不知道为啥它还要自己新建文件夹，不能自动创建吗 注册：随便用个邮箱注册，它不是商用的
-使用 连接</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2024-01-06 16:24:20 +0000 UTC'>January 6, 2024</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to xshell和xftp指北" href="https://milong26.github.io/post/xshell%E6%8C%87%E5%8C%97/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
     <h2 class="entry-hint-parent">batch
     </h2>
   </header>
@@ -342,6 +326,22 @@ https://doi.org/10.48550/arXiv.2304.03946 Focus to learn more Journal reference:
 
 <span title='2023-12-16 11:06:58 +0000 UTC'>December 16, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
   <a class="entry-link" aria-label="post link to ZeRO：为训练万亿参数模型而进行的内存优化" href="https://milong26.github.io/post/zero%E4%B8%BA%E8%AE%AD%E7%BB%83%E4%B8%87%E4%BA%BF%E5%8F%82%E6%95%B0%E6%A8%A1%E5%9E%8B%E8%80%8C%E8%BF%9B%E8%A1%8C%E7%9A%84%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">白嫖阿里云部署ChatGLM踩坑指南
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>自己电脑跑不动，白嫖阿里云一个服务器试试
+服务器 领取阿里云资源 地址 只要没有申请过PAI-DSW资源的新老用户皆可申请5000CU的免费额度，3个月内使用。 找“交互式建模 PAI-DSW 5000CU”的那个点试用 如果想玩Stable Diffusion来做AI画图可以试试官方教程 开通控制台 在阿里云页面内搜索PAI平台，点击立即开通，开通PAI控制台 我选了默认的设置项，这个拿来玩玩 创建实例 进入控制台，交互式建模（DSW）页面，创建实例 资源配额如果没有显示的话要先进行授权 选取资源，注意选择GPU资源，并选择支持资源包抵扣的资源。比如下图的ecs.gn6v-c8g1.2xlarg。可以看到他们的价格里，写明了每小时消耗的CU，你可以大致计算一下，5000CU可以用多久，ecs.gn6v-c8g1.2xlarg这个型号可以跑333小时，大概连续13天。 创建实例 等待加载一段时间 打开 进入操作页面 模型准备 下载 模型较大（13G左右）小文件下载不麻烦，主要是几个大文件LFS很麻烦 官方仓库 可以去镜像站[https://hf-mirror.com/]找 （不过我没有下载成功，最后还是用u盘蹭别人的） 为什么要下载到本地：因为 创建OSS 先开通oss 进入控制台 创建OSS bucket 名字自己记得就行 地域要选和PAI一致的，我当时是“华东2-上海” 反正是拿来练手的，随便创…… 上传文件 扫描很快，上传需要花点时间 中间断了的可以重新传，还挺方便的，大概50分钟能全部上传完成 部署模型 回到DSW控制台，闲置关机的话启动需要花点时间 在notebook页面直接读取oss文件 import oss2 auth = oss2.Auth(&#39;&lt;your_AccessKey_ID&gt;&#39;, &#39;&lt;your_AccessKey_Secret&gt;&#39;) bucket = oss2.Bucket(auth, &#39;http://oss-cn-beijing-internal.aliyuncs.com&#39;, &#39;&lt;your_bucket_name&gt;&#39;) 阿里云物联网accessKeyID 和 accessSecret 获取 方法 首先登录阿里云网站www.aliyun.com 然后网页右侧点击控制台 进入控制台后，右侧的头像，鼠标移动上去，就会有下拉菜单。点击 AccessKey 管理 在这里就能复制获取accessKeyID 和 accessSecret 在服务器上安装ossutil 教程 config时： accesskeyIS和secret是必须的 endpoint就是oss域名，参考 OSS域名。需要根据实例的地域选择对应的OSS域名： 华北2（北京）后付费实例：oss-cn-beijing.aliyuncs.com 华北2（北京）预付费实例：oss-cn-beijing-internal.aliyuncs.com 华东2（上海）GPU P100实例或CPU实例：oss-cn-shanghai.aliyuncs.com 华东2（上海）GPU M40实例：oss-cn-shanghai-internal.aliyuncs.com 下载整个文件 教程 省流版： 下载文件夹（包含子目录） 下载某一个文件夹（包含子目录）下所有文件的示例如下： ossutil64 cp -r oss://examplebucket/destfolder/ localfolder/ 文件夹名字自己写 懒得搞了，一堆bug…..
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-12-14 10:44:05 +0000 UTC'>December 14, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 白嫖阿里云部署ChatGLM踩坑指南" href="https://milong26.github.io/post/%E7%99%BD%E5%AB%96%E9%98%BF%E9%87%8C%E4%BA%91%E9%83%A8%E7%BD%B2chatglm%E8%B8%A9%E5%9D%91%E6%8C%87%E5%8D%97/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
