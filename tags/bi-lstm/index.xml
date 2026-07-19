@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Bi-LSTM on 我的博客</title>
+    <title>Bi-Lstm on 我的博客</title>
     <link>https://milong26.github.io/tags/bi-lstm/</link>
-    <description>Recent content in Bi-LSTM on 我的博客</description>
+    <description>Recent content in Bi-Lstm on 我的博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 26 Oct 2023 18:36:13 +0000</lastBuildDate>
