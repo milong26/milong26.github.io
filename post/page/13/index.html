@@ -151,32 +151,6 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">基于对比学习的大型语言模型反向词典任务提示生成方法
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>2023年10月才发的中文paper，看了之后感觉是大杂烩，学一下它的结构吧 感觉没什么特别厉害的创意
-paper 论文地址
-introduction introduction里面怎么没有介绍反向词典？
-反向词典 输入释义，输出表示这个意思的词汇列表
-大规模语言模型 对GPT-3测试之后，发现prompt中含有期望词汇时输出正确率会大大提高
-这篇文章 目的：自动生成prompt 模型：基于对比学习的反向词典模型RDMCL 数据集 Oxford 方法 用RDMCL生成单词 用生成的单词创建prompt 创新点 RDMCL比较高级 语义信息捕捉 Bi-LSTM cnn(卷积神经网络) 自注意力机制 融合语义信息，并映射到目标单词的语义空间 (新)提出有监督对比损失函数 引入负例，提高泛化性 相关工作 反向词典 从多尺度上考虑了定义的不同于一层次的信息（在说什么鬼话）
-对比学习 为了提高反向词典的准确性，就是个辅助 关于如何构建负例样本
-研究方法 目的：自动生成高质量的prompt 方法：基于对比学习的promp生成方法 步骤：1. RDMCL生成候选词汇；2. 根据词汇生成prompt
-语义信息 该文章把一段话分成三个语义层次，但我不知道为什么
-句子 输入的就是普通句子 先经过embedding层（嵌入层）我没看懂这篇paper里怎么得到embs的得到$emb_s$
-然后经过Bi-LSTM 得到两个输出 $$ v_{sen}=\mathop{h}\limits^\rightarrow&#43;\mathop{h}\limits^\leftarrow \ E_{emb_s}=\mathop{E}\limits^\rightarrow&#43;\mathop{E}\limits^\leftarrow $$
-短语 主要是cnn（卷积神经网络）&#43;self-attention 卷积神经网络比较熟就不重复了 自注意力 也写了 先卷积 $$ c_{r,k}=tanh(\sum_{i,j}(F_rE_{emb_s}^{k:k&#43;l-1}){i,j})\ c_r=(c{r,1},c_{r,2},…c_{t,n-l&#43;1})\ C=(c_1,c_2,…c_t) $$ 再用自注意力 $$ i=softmax(tanh(W_1E_{emb_s}^T&#43;b_1)) $$ i广播操作(torch、numpy里面都有，其实就是合并到同一个维度)得到I 最后得到 $$ V_{phrase}=(IE_{emb_s}^T) $$
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2023-10-24 16:21:15 +0000 UTC'>October 24, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 基于对比学习的大型语言模型反向词典任务提示生成方法" href="https://milong26.github.io/post/%E5%9F%BA%E4%BA%8E%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8F%8D%E5%90%91%E8%AF%8D%E5%85%B8%E4%BB%BB%E5%8A%A1%E6%8F%90%E7%A4%BA%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
     <h2 class="entry-hint-parent">好用的浏览器拓展
     </h2>
   </header>
@@ -325,6 +299,22 @@ vs修复工具
 
 <span title='2023-09-22 13:25:51 +0000 UTC'>September 22, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
   <a class="entry-link" aria-label="post link to 字符串匹配" href="https://milong26.github.io/post/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">vscode
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Visual Studio Code永远的神！
+安装 售后问题 Error loading webview: Error: Could not register service worker: InvalidStateError: Failed to register a ServiceWorker: The document is in an invalid state.. 1、关闭vscode 2、按WIN &#43; R，输入cmd，打开终端，然后输入命令 code --no-sandbox 3、重启vscode，就可以正常使用了。 修改文件显示顺序 在setting里面搜索sort order,explore对应的就是vs工作区的文件显示，写blog最好还是把文件按修改时间排序比较好。
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-21 20:10:15 +0000 UTC'>September 21, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to vscode" href="https://milong26.github.io/post/vscode/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -151,39 +151,6 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">队列
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 先入先出
-front恒等于0，队列长度rear&#43;1；队列空：rear=-1
-静态，删除需要Θ(n)
-删除：front&#43;&#43;， Θ(1)
-队列逐渐向数组尾部“移动”
-队列空——front &gt; rear
-队尾到达数组尾时，即rear==MaxSize – 1时进行Add操作
-front &gt; 0：队列移动到数组头部（front&lt;-0），再Add，Θ(n)
-front==0，失败
-最坏情况下仍为Θ(n)
-最后一个元素之后是第一个元素
-location(i)=(location(1)&#43;i–1) % MaxSize
-front——location(1) – 1
-rear——最后一个元素在数组中的位置
-插入、删除均为Θ(1)
-缺陷：数组长度固定，但是也有其应用，例如固定最大值的线程池的描述等
-队列空和队列满的区分：只允许最多MaxSize-1个元素
-队列空：front == rear 队列满：front == (rear &#43; 1) % MaxSize 代码
-template&lt;class T&gt; class Queue {// FIFO objects public: Queue(int MaxQueueSize = 10); ~Queue() {delete [] queue;} bool IsEmpty() const {return front == rear;} bool IsFull() const { return (((rear &#43; 1) % MaxSize == front) ? 1 : 0);} T First() const; // return front element T Last() const; // return last element Queue&lt;T&gt;&amp; Add(const T&amp; x); Queue&lt;T&gt;&amp; Delete(T&amp; x); private: int front; //队首 int rear; // 队尾 int MaxSize; // 队列容量 T *queue; // element array }; //构造函数 template&lt;class T&gt; Queue&lt;T&gt;::Queue(int MaxQueueSize) {// Create an empty queue whose capacity MaxSize = MaxQueueSize &#43; 1;//留出1个额外空间 queue = new T[MaxSize]; front = rear = 0; } //队首元素 template&lt;class T&gt; T Queue&lt;T&gt;::First() const {// Return first element of queue. Throw // OutOfBounds exception if the queue is empty. if (IsEmpty()) throw OutOfBounds(); return queue[(front &#43; 1) % MaxSize]; } //队尾元素 template&lt;class T&gt; T Queue&lt;T&gt;::Last() const {// Return last element of queue. Throw // OutOfBounds exception if the queue is empty. if (IsEmpty()) throw OutOfBounds(); return queue[rear]; } //插入 template&lt;class T&gt; Queue&lt;T&gt;&amp; Queue&lt;T&gt;::Add(const T&amp; x) {// Add x to the rear of the queue. Throw // NoMem exception if the queue is full. if (IsFull()) throw NoMem(); rear = (rear &#43; 1) % MaxSize; queue[rear] = x; return *this; } //删除 template&lt;class T&gt; Queue&lt;T&gt;&amp; Queue&lt;T&gt;::Delete(T&amp; x) {// Delete first element and put in x. Throw // OutOfBounds exception if the queue is empty. if (IsEmpty()) throw OutOfBounds(); front = (front &#43; 1) % MaxSize; x = queue[front];//？ return *this; } 两种指针方向：
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2019-12-07 10:38:34 +0000 UTC'>December 7, 2019</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 队列" href="https://milong26.github.io/post/%E9%98%9F%E5%88%97/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
     <h2 class="entry-hint-parent">栈
     </h2>
   </header>
@@ -367,6 +334,21 @@ vibe coding是什么？
 
 <span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
   <a class="entry-link" aria-label="post link to " href="https://milong26.github.io/post/untitled/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>做一件事时要完全专注于当下，不同时想着其他任务，切换到下一件事时也尽量让情绪和思维归零，不带着上一件事的干扰。为了帮助实现这种切换，可以利用物理环境或工具的变化，比如换地点、换设备、换软件，甚至用不同空间来区分不同任务，从而给大脑明确的“结束与开始”的信号。同时，建议将脑力和体力任务交替安排，避免连续高消耗，从而减少疲劳感。整体想表达的是，通过人为设计“切换机制”，让注意力更集中、内耗更少，使多任务生活变得更可持续，而不是同时分心处理多件事。
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to " href="https://milong26.github.io/post/%E5%BF%83%E7%90%86/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
