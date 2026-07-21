@@ -74,7 +74,7 @@
     <meta property="article:published_time" content="2025-02-21T11:10:22+00:00">
     <meta property="article:modified_time" content="2025-02-21T11:10:22+00:00">
     <meta property="article:tag" content="Linux">
-    <meta property="article:tag" content="OS">
+    <meta property="article:tag" content="Os">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="linux">
@@ -111,8 +111,8 @@
   "keywords": [
     "linux", "os"
   ],
-  "articleBody": "linux一些常用指令\n安装 常用指令 查看内存 free 查看版本 uname -a cat /proc/version lsb_release -a 检查cuda nvcc -v 个人用户在服务器上安装cuda nvidia-smi检查能用的cuda版本 文件位置 有两种，和/，一般指的是/home/user/ 安装软件 deb 下载 直接执行sudo dpkg -i xxx.deb，会安装到applications里面 kill kill -9 为什么用9 https://blog.csdn.net/guo_guo_cai/article/details/78499477\nkill kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec … or kill -l [sigspec] 不知道放在哪儿\nepoch和step什么关系？ 一个epoch的step就相当于data数量 除以 batch_size 大小\nepoch：表示整个训练数据集被「完整地」训练了一遍。\nstep：指每次模型更新参数的一次操作，通常对应一次 forward + backward + optimizer.step()。\nbatch_size：每个 step 中喂给模型的样本数量。\n怎么从一个链接下载内容 wget -P(一定要大写) 可以指定下载到本地的目录\nubuntu卸载一些软件，比如tencent meeting:sudo dpkg -P wemeet 卸载intellij idea：忘记当时怎么安装的了\nsnap list | grep idea 如果是snap安装，会看到 sudo snap remove intellij-idea-community 就能卸载掉了 卸载默认的扫雷游戏 sudo apt remove gnome-mines sudo apt autoremove 其它的基本都这样 重启键盘，启动 IBus 输入法框架守护进程，-r 的意思是 restart，即“重启”。-d 的意思是 daemonize，即“以守护进程方式运行”。守护进程意味着这个程序会在后台运行，不会占用当前终端。如果不加 -d，它会在前台运行，并把日志输出到当前终端。-x 的意思是 enable XIM support。\nibus-daemon -r -d -x 给文件夹重命名（命令行） mv 旧文件夹名 新文件夹名\n复制并重命名 cp -r 源文件 目标路径/新文件名。 -r 是为了复制目录及其内容，必须加上 -r（递归）选项。\n检查空间使用情况 du -sh ~ 会显示总共的\ndu -sh ~/* 显示所有文件夹的（一层）\ndu -sh ~/* ~/.* 显示包含隐藏文件的\n检查文件已经粘贴结束 sync 没有输出了 lsof +D /media/qwe/xiake/collect_data | grep -v “bash|lsof” 检查这个文件夹有没有新增\n所以复制粘贴文件特别是大文件，想显式知道什么时候结束的话尽量用指令比如 Rsync –progress 这种\n",
-  "wordCount" : "154",
+  "articleBody": "linux一些常用指令\n安装 常用指令 查看内存 free 查看版本 uname -a cat /proc/version lsb_release -a 检查cuda nvcc -v 个人用户在服务器上安装cuda nvidia-smi检查能用的cuda版本 文件位置 有两种，和/，一般指的是/home/user/ 安装软件 deb 下载 直接执行sudo dpkg -i xxx.deb，会安装到applications里面 kill kill -9 为什么用9 https://blog.csdn.net/guo_guo_cai/article/details/78499477\nkill kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec … or kill -l [sigspec] 不知道放在哪儿\nepoch和step什么关系？ 一个epoch的step就相当于data数量 除以 batch_size 大小\nepoch：表示整个训练数据集被「完整地」训练了一遍。\nstep：指每次模型更新参数的一次操作，通常对应一次 forward + backward + optimizer.step()。\nbatch_size：每个 step 中喂给模型的样本数量。\n怎么从一个链接下载内容 wget -P(一定要大写) 可以指定下载到本地的目录\nubuntu卸载一些软件，比如tencent meeting:sudo dpkg -P wemeet 卸载intellij idea：忘记当时怎么安装的了\nsnap list | grep idea 如果是snap安装，会看到 sudo snap remove intellij-idea-community 就能卸载掉了 卸载默认的扫雷游戏 sudo apt remove gnome-mines sudo apt autoremove 其它的基本都这样 重启键盘，启动 IBus 输入法框架守护进程，-r 的意思是 restart，即“重启”。-d 的意思是 daemonize，即“以守护进程方式运行”。守护进程意味着这个程序会在后台运行，不会占用当前终端。如果不加 -d，它会在前台运行，并把日志输出到当前终端。-x 的意思是 enable XIM support。\nibus-daemon -r -d -x 给文件夹重命名（命令行） mv 旧文件夹名 新文件夹名\n复制并重命名 cp -r 源文件 目标路径/新文件名。 -r 是为了复制目录及其内容，必须加上 -r（递归）选项。\n检查空间使用情况 du -sh ~ 会显示总共的\ndu -sh ~/* 显示所有文件夹的（一层）\ndu -sh ~/* ~/.* 显示包含隐藏文件的\n检查文件已经粘贴结束 sync 没有输出了 lsof +D /media/qwe/xiake/collect_data | grep -v “bash|lsof” 检查这个文件夹有没有新增\n所以复制粘贴文件特别是大文件，想显式知道什么时候结束的话尽量用指令比如 Rsync –progress 这种\n检查文件夹大小\ndu -sh /path/to/folder 共享文件夹 文件夹右键有个，直接点击显示service not installed，点击install会安装Samba 不要允许访客访问\n从 Ubuntu/Linux 系统中访问共享文件夹，你需要系统的 IP 地址或主机名。为此，打开系统设置(System Settings)_ -\u003e Wi-Fi -\u003e 获取 IP 地址(Get the IP address)”。\n然后创建密码\nsudo smbpasswd -a 指定的用户名 然后启用 sudo smbpasswd -e 指定的用户名\nlinux就搞定了 hostname -I 得到ip 去windows，资源管理栏//ip 就能打开，然后输入用户名和密码就ok\n",
+  "wordCount" : "194",
   "inLanguage": "en",
   "datePublished": "2025-02-21T11:10:22Z",
   "dateModified": "2025-02-21T11:10:22Z",
@@ -280,13 +280,28 @@ du -sh ~
 lsof +D /media/qwe/xiake/collect_data | grep -v &ldquo;bash|lsof&rdquo;
 检查这个文件夹有没有新增</p>
 <p>所以复制粘贴文件特别是大文件，想显式知道什么时候结束的话尽量用指令比如 Rsync &ndash;progress 这种</p>
+<p>检查文件夹大小</p>
+<pre tabindex="0"><code>du -sh /path/to/folder
+</code></pre><h1 id="共享文件夹">共享文件夹<a hidden class="anchor" aria-hidden="true" href="#共享文件夹">#</a></h1>
+<p>文件夹右键有个，直接点击显示service not installed，点击install会安装Samba
+不要允许访客访问</p>
+<p>从 Ubuntu/Linux 系统中访问共享文件夹，你需要系统的 IP 地址或主机名。为此，打开系统设置(System Settings)_ -&gt; Wi-Fi -&gt; <em>获取 IP 地址(Get the IP address)</em>”。</p>
+<p>然后创建密码</p>
+<p>sudo smbpasswd -a 指定的用户名
+然后启用
+sudo smbpasswd -e 指定的用户名</p>
+<p>linux就搞定了
+hostname -I
+得到ip
+去windows，资源管理栏//ip
+就能打开，然后输入用户名和密码就ok</p>
 
   </div>
 
   <footer class="post-footer">
     <ul class="post-tags">
       <li><a href="https://milong26.github.io/tags/linux/">Linux</a></li>
-      <li><a href="https://milong26.github.io/tags/os/">OS</a></li>
+      <li><a href="https://milong26.github.io/tags/os/">Os</a></li>
     </ul>
   </footer>
 </article>

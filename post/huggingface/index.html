@@ -105,8 +105,8 @@
   "keywords": [
     
   ],
-  "articleBody": "hf download haosulab/ManiSkill2 –repo-type=dataset Traceback (most recent call last): File “/home/zhonglinyue/.local/bin/hf”, line 3, in from huggingface_hub.cli.hf import main ModuleNotFoundError: No module named ‘huggingface_hub’\n遇到这个怎么解决？ 在一个conda环境里面install\nexport HF_ENDPOINT=https://hf-mirror.com\nhf download 下载的模型权重在哪里？ 当我不使用hf的读取方式，\n转移了huggingface得默认路径怎么改\n想用hf download下载，一定要安装最新的版本 pip install -U –force-reinstall huggingface-hub 老版本命令不一样\n用 hf –version检查\n",
-  "wordCount" : "43",
+  "articleBody": "hf download haosulab/ManiSkill2 –repo-type=dataset Traceback (most recent call last): File “/home/zhonglinyue/.local/bin/hf”, line 3, in from huggingface_hub.cli.hf import main ModuleNotFoundError: No module named ‘huggingface_hub’\n遇到这个怎么解决？ 在一个conda环境里面install\nexport HF_ENDPOINT=https://hf-mirror.com\nhf download 下载的模型权重在哪里？ 当我不使用hf的读取方式，\n转移了huggingface得默认路径怎么改\n想用hf download下载，一定要安装最新的版本 pip install -U –force-reinstall huggingface-hub 老版本命令不一样\n用 hf –version检查\n检查登陆了吗？ hf auth whoami 如果没有，就登录 hf auth login\n",
+  "wordCount" : "51",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
   "dateModified": "0001-01-01T00:00:00Z",
@@ -210,6 +210,10 @@ ModuleNotFoundError: No module named &lsquo;huggingface_hub&rsquo;</p>
 pip install -U &ndash;force-reinstall huggingface-hub
 老版本命令不一样</p>
 <p>用 hf &ndash;version检查</p>
+<p>检查登陆了吗？
+hf auth whoami
+如果没有，就登录
+hf auth login</p>
 
   </div>
 
