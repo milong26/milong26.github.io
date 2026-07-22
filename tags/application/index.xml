@@ -106,7 +106,9 @@ NewVersion=
 3、重启vscode，就可以正常使用了。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;修改文件显示顺序
-在setting里面搜索sort order,explore对应的就是vs工作区的文件显示，写blog最好还是把文件按修改时间排序比较好。&lt;/p&gt;</description>
+在setting里面搜索sort order,explore对应的就是vs工作区的文件显示，写blog最好还是把文件按修改时间排序比较好。&lt;/p&gt;
+&lt;p&gt;为什么我的vscode不能点单词跳转到函数定义？
+要安装python插件，然后ctrl shift p输入 Python: Select Interpreter&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
