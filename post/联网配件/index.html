@@ -108,8 +108,8 @@
   "keywords": [
     "app"
   ],
-  "articleBody": "clash的\nlinux ubuntu 版本:22.04\n直接gui界面 ubuntu受不了这个破网了，改成用clash-verge，搜到 github.com/clash-verge-rev/clash-verge-rev/releases 下载 我是linux ubuntu，所以选择debian系，选择64位 下载 得到xxx.deb文件以后，需要用apt的方式安装\nsudo apt install ./clash-verge_amd64.deb 直接导入clash链接爽用\nsing-box https://sing-box.sagernet.org/installation/package-manager/\nWindows 10/11 一般自带 winget。\n打开 PowerShell（管理员权限不一定需要） 执行： winget install sing-box 安装完成后检查：(记得打开一个新的窗口) sing-box version 如果显示版本号，例如：\nsing-box version 1.x.x 说明安装成功。 但是它还得命令行，所以我选择安装Hiddify 下载安装包https://github.com/hiddify/hiddify-app/releases\n",
-  "wordCount" : "39",
+  "articleBody": "clash的\nlinux ubuntu 版本:22.04\n直接gui界面 ubuntu受不了这个破网了，改成用clash-verge，搜到 github.com/clash-verge-rev/clash-verge-rev/releases 下载 我是linux ubuntu，所以选择debian系，选择64位 下载 得到xxx.deb文件以后，需要用apt的方式安装\nsudo apt install ./clash-verge_amd64.deb 直接导入clash链接爽用 怎么卸载？\n彻底卸载 sudo apt purge clash-verge 并且清理没用的依赖 sudo apt autoremove\nsing-box https://sing-box.sagernet.org/installation/package-manager/\nWindows 10/11 一般自带 winget。\n打开 PowerShell（管理员权限不一定需要） 执行： winget install sing-box 安装完成后检查：(记得打开一个新的窗口) sing-box version 如果显示版本号，例如：\nsing-box version 1.x.x 说明安装成功。 但是它还得命令行，所以我选择安装Hiddify 下载安装包https://github.com/hiddify/hiddify-app/releases\nlinux使用fclash\n下载deb的 然后sudo apt install ./FlClash-0.8.94-linux-amd64.deb uname -a 输出 x86_64 ✅ 下载 linux-amd64.deb\n",
+  "wordCount" : "62",
   "inLanguage": "en",
   "datePublished": "2025-01-03T17:15:36Z",
   "dateModified": "2025-01-03T17:15:36Z",
@@ -210,7 +210,12 @@ github.com/clash-verge-rev/clash-verge-rev/releases
 下载
 得到xxx.deb文件以后，需要用apt的方式安装</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo apt install ./clash-verge_amd64.deb
-</span></span></code></pre></div><p>直接导入clash链接爽用</p>
+</span></span></code></pre></div><p>直接导入clash链接爽用
+怎么卸载？</p>
+<p>彻底卸载
+sudo apt purge clash-verge
+并且清理没用的依赖
+sudo apt autoremove</p>
 <p>sing-box
 <a href="https://sing-box.sagernet.org/installation/package-manager/">https://sing-box.sagernet.org/installation/package-manager/</a></p>
 <p>Windows 10/11 一般自带 <code>winget</code>。</p>
@@ -228,6 +233,10 @@ github.com/clash-verge-rev/clash-verge-rev/releases
 </code></pre><p>说明安装成功。
 但是它还得命令行，所以我选择安装Hiddify
 下载安装包https://github.com/hiddify/hiddify-app/releases</p>
+<p>linux使用fclash</p>
+<p>下载deb的
+然后sudo apt install ./FlClash-0.8.94-linux-amd64.deb
+uname -a 输出 <code>x86_64</code> ✅ 下载 <strong>linux-amd64.deb</strong></p>
 
   </div>
 
