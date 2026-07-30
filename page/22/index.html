@@ -145,20 +145,6 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">Java
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p></p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2020-03-07 16:01:19 +0000 UTC'>March 7, 2020</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to Java" href="https://milong26.github.io/post/java/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
     <h2 class="entry-hint-parent">数据库系统原理
     </h2>
   </header>
@@ -409,6 +395,27 @@ template&lt;class T&gt; class Queue {// FIFO objects public: Queue(int MaxQueueS
 
 <span title='2019-12-07 10:38:34 +0000 UTC'>December 7, 2019</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
   <a class="entry-link" aria-label="post link to 队列" href="https://milong26.github.io/post/%E9%98%9F%E5%88%97/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">栈
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 后入先出
+ADT:
+抽象数据类型Stack{ 实例 线性表，栈底，栈顶 操作 create()：创建一个空的堆栈 empty()：如果堆栈为空，则返回true，否则返回false top()：返回栈顶元素 push(x)：向堆栈中添加元素x pop()：删除栈顶元素 } 由左至右扫描表达式串，遇左括号，push
+遇右括号，与栈顶左括号匹配，pop
+右括号都处理完时，还有未匹配的左括号——表达式串处理完时，栈不空
+举例
+#include&lt;iostream&gt; #include&lt;string&gt; #include&lt;stack&gt; const int max = 100; using namespace std; int main() { char s[max]; stack&lt;char&gt; st; while (cin &gt;&gt; s)//能多次输入，就跟之前那个扫雷似的 { while (!st.empty()) st.pop();//清空栈 int len = strlen(s),flag=1; for (int i = 0; i &lt; len; i&#43;&#43;) { if (s[i] == &#39;(&#39;||s[i]==&#39;[&#39;) st.push(s[i]); else { if (st.empty()) { flag = 0; break; } char t = st.top(); st.pop(); if (s[i] == &#39;)&#39; &amp;&amp; t == &#39;[&#39;) { flag = 0; break; } else if (s[i] == &#39;]&#39;&amp;&amp; t == &#39;(&#39;) { flag = 0; break; } } } if (!st.empty()) flag = 0; if (flag == 1) cout &lt;&lt; &#34;yes&#34; &lt;&lt; endl; else cout &lt;&lt; &#34;no&#34; &lt;&lt; endl; } return 0; } 缓冲轨后进先出，用堆栈保存车厢号
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2019-12-07 10:36:14 +0000 UTC'>December 7, 2019</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 栈" href="https://milong26.github.io/post/%E6%A0%88/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

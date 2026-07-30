@@ -145,27 +145,6 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">栈
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 后入先出
-ADT:
-抽象数据类型Stack{ 实例 线性表，栈底，栈顶 操作 create()：创建一个空的堆栈 empty()：如果堆栈为空，则返回true，否则返回false top()：返回栈顶元素 push(x)：向堆栈中添加元素x pop()：删除栈顶元素 } 由左至右扫描表达式串，遇左括号，push
-遇右括号，与栈顶左括号匹配，pop
-右括号都处理完时，还有未匹配的左括号——表达式串处理完时，栈不空
-举例
-#include&lt;iostream&gt; #include&lt;string&gt; #include&lt;stack&gt; const int max = 100; using namespace std; int main() { char s[max]; stack&lt;char&gt; st; while (cin &gt;&gt; s)//能多次输入，就跟之前那个扫雷似的 { while (!st.empty()) st.pop();//清空栈 int len = strlen(s),flag=1; for (int i = 0; i &lt; len; i&#43;&#43;) { if (s[i] == &#39;(&#39;||s[i]==&#39;[&#39;) st.push(s[i]); else { if (st.empty()) { flag = 0; break; } char t = st.top(); st.pop(); if (s[i] == &#39;)&#39; &amp;&amp; t == &#39;[&#39;) { flag = 0; break; } else if (s[i] == &#39;]&#39;&amp;&amp; t == &#39;(&#39;) { flag = 0; break; } } } if (!st.empty()) flag = 0; if (flag == 1) cout &lt;&lt; &#34;yes&#34; &lt;&lt; endl; else cout &lt;&lt; &#34;no&#34; &lt;&lt; endl; } return 0; } 缓冲轨后进先出，用堆栈保存车厢号
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2019-12-07 10:36:14 +0000 UTC'>December 7, 2019</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 栈" href="https://milong26.github.io/post/%E6%A0%88/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
     <h2 class="entry-hint-parent">排序
     </h2>
   </header>
@@ -280,40 +259,6 @@ BinaryTreeNode类 template &lt;class T&gt; class BinaryTreeNode{ public: BinaryT
     </h2>
   </header>
   <div class="entry-content">
-    <p>git合并分支
-我从master搞下来的分支
-现在要写到zly分支里
-然后再merge到master
-先做好备份
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to " href="https://milong26.github.io/post/git%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>git clone git@github.com:RLinf/RLinf.git 文档里面只写了venv安装，那conda环境怎么搞？ conda create -n rlinf python=3.11 conda activate rlinf
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to " href="https://milong26.github.io/post/rlinf/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-    </h2>
-  </header>
-  <div class="entry-content">
     <p>https://wcn5nr4htkrb.feishu.cn/wiki/PL60wO9poi6Q8KkImZacgCBanrf?from=from_copylink 这个是那个“张工的车库”，线下的培训课程，学完这个能找到工作吗？ 想玩mc模拟大都市这个模组了
 宝能城西区有个游泳馆，大概30一次
 https://m.weibo.cn/detail/5272104221021545
@@ -343,6 +288,57 @@ vibe coding是什么？
 
 <span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
   <a class="entry-link" aria-label="post link to " href="https://milong26.github.io/post/%E5%BF%83%E7%90%86/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p></p>
+  </div>
+  <footer class="entry-footer">
+
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to " href="https://milong26.github.io/post/%E6%9C%AA%E5%91%BD%E5%90%8D/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>2026年6月7日大清理：
+BIlibili历史记录：网页版关闭保存历史记录的功能。 app端历史记录已清除。 还留下若干收藏夹，稍后再看。这一波清理干净之前不再增加 一周内清理干净 手机端缓存视频若干 ipad端缓存视频活干 长毛象上面的收藏稍微清理了一些，还是有很多。 难受啊，怎么会有这么多马了的。 看看能不能把“马了就是忘了”那里做一个单独的工具箱页面
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to " href="https://milong26.github.io/post/%E6%B8%85%E7%90%86/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>ZLY@3090# 查看磁盘占用情况
+主要的home du -sh ~/* /.??* 2&gt;/dev/null | sort -hr 主要是/.cache这个文件夹，可以过段时间再删
+然后是主要的工作文件夹 /data/zhonglinye du -sh /data/zhonglinye 2&gt;/dev/null 查看总占用，但是没啥用 du -sh /data/zhonglinye/* 2&gt;/dev/null 查看一级子目录，有用 du -ah /data/zhonglinye 2&gt;/dev/null | sort -rh | head -20 查看前20个最大文件和目录
+好像差不多了，以后再看lerobot的还有hfdata，太乱了看不懂
+cd ~ du -sh ~/* ~/.??* 2&gt;/dev/null | sort -hr 感觉.cache文件夹过大了，删掉 然后是/data/zhonglinye
+du -sh /data/zhonglinye/* 2&gt;/dev/null wandb文件夹可以清空 然后hfdata 和code太大了 cache里面主要是pip的，等我安装完再删除 code和hfdata比较大 du -sh /data/zhonglinye/hfdata/* 2&gt;/dev/null 主要是datasets文件夹很大，但我又不知道哪些数据重要orz 还有hub，huggingface，lerobot这几个文件夹比较大。 那把自己采集的数据集做一个存档吧 之前的数据都上传到哪里了？ /data/zhonglinye/hfdata/huggingface/lerobot 其他的都是后来下载的，不用管
+…/hfdata/huggingface$ tar -czvf lerobot.tar.gz lerobot 打包需要一点时间，压缩以后还15.72G，等下载到windows以后就把hfdata里面的内容清理掉
+</p>
+  </div>
+  <footer class="entry-footer">
+
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to " href="https://milong26.github.io/post/%E6%B8%85%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

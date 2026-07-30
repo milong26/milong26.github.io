@@ -345,13 +345,6 @@
       <description></description>
     </item>
     <item>
-      <title>Application</title>
-      <link>https://milong26.github.io/tags/application/</link>
-      <pubDate>Thu, 19 Dec 2024 18:42:06 +0000</pubDate>
-      <guid>https://milong26.github.io/tags/application/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Conda</title>
       <link>https://milong26.github.io/tags/conda/</link>
       <pubDate>Thu, 19 Dec 2024 18:40:56 +0000</pubDate>
@@ -555,6 +548,13 @@
       <description></description>
     </item>
     <item>
+      <title>Application</title>
+      <link>https://milong26.github.io/tags/application/</link>
+      <pubDate>Sat, 06 Jan 2024 16:24:20 +0000</pubDate>
+      <guid>https://milong26.github.io/tags/application/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Batch</title>
       <link>https://milong26.github.io/tags/batch/</link>
       <pubDate>Tue, 26 Dec 2023 20:23:43 +0000</pubDate>
@@ -730,7 +730,7 @@
       <description></description>
     </item>
     <item>
-      <title>LSTM</title>
+      <title>Lstm</title>
       <link>https://milong26.github.io/tags/lstm/</link>
       <pubDate>Thu, 26 Oct 2023 18:36:13 +0000</pubDate>
       <guid>https://milong26.github.io/tags/lstm/</guid>
@@ -765,7 +765,7 @@
       <description></description>
     </item>
     <item>
-      <title>RNN</title>
+      <title>Rnn</title>
       <link>https://milong26.github.io/tags/rnn/</link>
       <pubDate>Tue, 24 Oct 2023 19:34:14 +0000</pubDate>
       <guid>https://milong26.github.io/tags/rnn/</guid>
@@ -1371,6 +1371,13 @@
       <link>https://milong26.github.io/tags/pip/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://milong26.github.io/tags/pip/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Rentment</title>
+      <link>https://milong26.github.io/tags/rentment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/tags/rentment/</guid>
       <description></description>
     </item>
     <item>

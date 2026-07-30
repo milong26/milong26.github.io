@@ -224,10 +224,10 @@ extrapolation，相比interpolation
       <description>&lt;p&gt;画图用的&lt;/p&gt;</description>
     </item>
     <item>
-      <title>模型训练黑话</title>
-      <link>https://milong26.github.io/post/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%BB%91%E8%AF%9D/</link>
+      <title>模型训练</title>
+      <link>https://milong26.github.io/post/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/</link>
       <pubDate>Wed, 20 Aug 2025 21:30:13 +0000</pubDate>
-      <guid>https://milong26.github.io/post/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%BB%91%E8%AF%9D/</guid>
+      <guid>https://milong26.github.io/post/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/</guid>
       <description>&lt;p&gt;先写着，以后有空再整理&lt;/p&gt;</description>
     </item>
     <item>
@@ -481,13 +481,6 @@ extrapolation，相比interpolation
       <pubDate>Fri, 03 Jan 2025 17:15:36 +0000</pubDate>
       <guid>https://milong26.github.io/post/%E8%81%94%E7%BD%91%E9%85%8D%E4%BB%B6/</guid>
       <description></description>
-    </item>
-    <item>
-      <title>VS code</title>
-      <link>https://milong26.github.io/post/vs-code/</link>
-      <pubDate>Thu, 19 Dec 2024 18:42:06 +0000</pubDate>
-      <guid>https://milong26.github.io/post/vs-code/</guid>
-      <description>&lt;p&gt;Visual studio Code&lt;/p&gt;</description>
     </item>
     <item>
       <title>conda</title>
@@ -2592,7 +2585,8 @@ $$&lt;/li&gt;
       <guid>https://milong26.github.io/post/vscode/</guid>
       <description>&lt;p&gt;Visual Studio Code永远的神！&lt;/p&gt;
 &lt;h1 id=&#34;安装&#34;&gt;安装&lt;/h1&gt;
-&lt;h1 id=&#34;售后问题&#34;&gt;售后问题&lt;/h1&gt;
+&lt;h1 id=&#34;windows&#34;&gt;windows&lt;/h1&gt;
+&lt;h3 id=&#34;报错&#34;&gt;报错&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;Error loading webview: Error: Could not register service worker: InvalidStateError: Failed to register a ServiceWorker: The document is in an invalid state..
 1、关闭vscode
@@ -2605,7 +2599,8 @@ $$&lt;/li&gt;
 &lt;p&gt;为什么我的vscode不能点单词跳转到函数定义？
 要安装python插件，然后ctrl shift p输入 Python: Select Interpreter&lt;/p&gt;
 &lt;p&gt;标签页指定不同颜色marketplace.visualstudio.com/items?itemName=mondersky.tabscolor
-这个插件好用，&lt;/p&gt;</description>
+这个插件好用，&lt;/p&gt;
+&lt;p&gt;Visual studio Code&lt;/p&gt;</description>
     </item>
     <item>
       <title>阅读-安全高效的非政策强化学习</title>
@@ -5442,27 +5437,6 @@ u = 邻接于w 的下一个顶点；
     </item>
     <item>
       <title></title>
-      <link>https://milong26.github.io/post/git%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://milong26.github.io/post/git%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF/</guid>
-      <description>&lt;p&gt;git合并分支&lt;/p&gt;
-&lt;p&gt;我从master搞下来的分支&lt;/p&gt;
-&lt;p&gt;现在要写到zly分支里&lt;/p&gt;
-&lt;p&gt;然后再merge到master&lt;/p&gt;
-&lt;p&gt;先做好备份&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title></title>
-      <link>https://milong26.github.io/post/rlinf/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://milong26.github.io/post/rlinf/</guid>
-      <description>&lt;p&gt;git clone &lt;a href=&#34;mailto:git@github.com&#34;&gt;git@github.com&lt;/a&gt;:RLinf/RLinf.git
-文档里面只写了venv安装，那conda环境怎么搞？
-conda create -n rlinf python=3.11
-conda activate rlinf&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title></title>
       <link>https://milong26.github.io/post/untitled/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://milong26.github.io/post/untitled/</guid>
@@ -5490,6 +5464,13 @@ conda activate rlinf&lt;/p&gt;</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://milong26.github.io/post/%E5%BF%83%E7%90%86/</guid>
       <description>&lt;p&gt;做一件事时要完全专注于当下，不同时想着其他任务，切换到下一件事时也尽量让情绪和思维归零，不带着上一件事的干扰。为了帮助实现这种切换，可以利用物理环境或工具的变化，比如换地点、换设备、换软件，甚至用不同空间来区分不同任务，从而给大脑明确的“结束与开始”的信号。同时，建议将脑力和体力任务交替安排，避免连续高消耗，从而减少疲劳感。整体想表达的是，通过人为设计“切换机制”，让注意力更集中、内耗更少，使多任务生活变得更可持续，而不是同时分心处理多件事。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://milong26.github.io/post/%E6%9C%AA%E5%91%BD%E5%90%8D/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://milong26.github.io/post/%E6%9C%AA%E5%91%BD%E5%90%8D/</guid>
+      <description></description>
     </item>
     <item>
       <title></title>
@@ -5549,10 +5530,26 @@ du -sh /data/zhonglinye/hfdata/* 2&amp;gt;/dev/null
       <link>https://milong26.github.io/post/%E7%89%A9%E6%96%BD%E4%BA%8E%E4%BA%BA/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://milong26.github.io/post/%E7%89%A9%E6%96%BD%E4%BA%8E%E4%BA%BA/</guid>
-      <description>&lt;h1 id=&#34;电子产品&#34;&gt;电子产品&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;使用周期&#34;&gt;使用周期&lt;/h1&gt;
+&lt;p&gt;2026年7月30日15:32:11 airpods4耳机盒充满电&lt;/p&gt;
+&lt;h1 id=&#34;电子产品&#34;&gt;电子产品&lt;/h1&gt;
 &lt;p&gt;2026年6月24日20元购入小米无线键鼠套装3，蓝牙，需要5号电池，鼠标和键盘都需要。usb-A连接器不能乱丢。
 2026年6月28日 5元购入电子秤。
 2026年7月12日 购入二手kindle，型号是kindler paperwhite 3（第七代）黑色 以及数据线。&lt;/p&gt;
+&lt;p&gt;购入airpods4
+使用教程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;移除设备：iPhone 或 iPad：前往“设置” App ，在屏幕顶部附近轻点 AirPods 的名称，然后轻点“忽略此设备”。这将从登录相同 Apple 账户的所有设备上移除 AirPods。&lt;/li&gt;
+&lt;li&gt;然后最好还原一下&lt;/li&gt;
+&lt;li&gt;添加设备
+开始前，请先确保你的设备已安装最新版本的 iOS 或 iPadOS。配对时，你的设备还必须接入无线局域网或蜂窝网络，否则你可能无法访问“查找”功能。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在 iPhone 或 iPad 上，前往“设置” App 。&lt;/p&gt;
+&lt;p&gt;轻点“蓝牙”，打开蓝牙，然后执行以下一项操作：&lt;/p&gt;
+&lt;p&gt;AirPods 或 AirPods Pro：打开内含 AirPods 的充电盒，然后将其靠近待配对设备，直至设置动画出现。
+你也可以使用音频线将 AirPods Max 与设备连接。&lt;/p&gt;
+&lt;p&gt;按照屏幕指示操作，然后轻点“完成”。&lt;/p&gt;
+&lt;p&gt;如果未看到设置动画，你可以手动将 AirPods 与设备配对。&lt;/p&gt;
 &lt;p&gt;可能是2018年7月，iphonex手机&lt;/p&gt;
 &lt;p&gt;u盘&lt;/p&gt;
 &lt;ul&gt;

@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>模型训练 | 我的博客</title>
+<meta name="keywords" content="model">
+<meta name="description" content="先写着，以后有空再整理">
+<meta name="author" content="map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]">
+<link rel="canonical" href="https://milong26.github.io/post/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1d4346839295915e219dee6c6b7d8512a8a4a8e692c435a57effb2398a6e371e.css" integrity="sha256-HUNGg5KVkV4hne5sa32FEqikqOaSxDWlfv&#43;yOYpuNx4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://milong26.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://milong26.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://milong26.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://milong26.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://milong26.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://milong26.github.io/post/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://milong26.github.io/post/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="模型训练">
+  <meta property="og:description" content="先写着，以后有空再整理">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-08-20T21:30:13+00:00">
+    <meta property="article:modified_time" content="2025-08-20T21:30:13+00:00">
+    <meta property="article:tag" content="Model">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="模型训练">
+  <meta name="twitter:description" content="先写着，以后有空再整理">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://milong26.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "模型训练",
+      "item": "https://milong26.github.io/post/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "模型训练",
+  "name": "模型训练",
+  "description": "先写着，以后有空再整理\n",
+  "keywords": [
+    "model"
+  ],
+  "articleBody": "先写着，以后有空再整理\n“冻结”的模型在训练时是只做 forward，不做 backward。= 只做推理，不参与训练\n对齐？\ncheckpoint：保存模型\nembedding层是干啥的？干了一些得到task的工作？把 图像嵌入、语言嵌入、状态嵌入 拼接成一整段前缀序列，并且同时构造：\npad_masks：标记哪些 token 是“真实的” (1) 哪些是 padding (0)；\natt_masks：标记这个 token 属于哪一类域（0=图像/语言，1=状态/动作），以便后面 make_att_2d_masks 限制注意力连接。\n概括之后，构造条件输入序列\n设备 TOPS (Tera Operations Per Second) = 每秒可执行的万亿次整数运算数量。\nTensor Core 是 NVIDIA 从 Volta 架构开始引入的 专门加速矩阵运算的单元，对深度学习的训练和推理特别重要。\n它们可以一次性处理 矩阵乘法 + 累加 (MAC) 运算，这是神经网络计算的核心操作。\n对 AI 推理和训练，Tensor Core 的作用比普通 CUDA 核心更大。\n目标 拟合和泛化这两个概念有什么联系吗？\nfitting and generalization\n1. 拟合（fitting） 指模型在训练数据上的表现。\n如果模型能很好地“拟合”训练集，说明它学到了训练数据中的规律。\n拟合的程度常用训练误差来衡量。\n- 欠拟合（underfitting）：模型太简单，训练集都学不好。\n- 过拟合（overfitting）：模型太复杂，把训练集里的噪声或偶然性也“背”下来。\n2. 泛化（generalization） 指模型在未见过的新数据上的表现。\n泛化能力强的模型，不仅训练集学得好，在测试集或现实数据上也能保持较低误差。\n3. 两者的关系 拟合是前提，泛化是目标。 - 如果模型连训练集都拟合不好（欠拟合），就更不可能泛化好。\n- 但模型拟合得“过头”（过拟合），就会牺牲泛化能力。\n所以两者之间存在一个平衡点： - 适度拟合 → 泛化效果最佳。\n- 欠拟合/过拟合都会导致泛化能力下降。\nvla其实不太好有拟合的表现吧，真的会有吗\n方法/框架/模型这些看起来比较相似的词： 模型和框架：不一定是一个东西，虽然很多的名字一样，模型更倾向于训练出来的off-the-shelf的东西？（不确定）\nMethod（方法） 定义：指的是解决问题的策略、算法或训练方法，是抽象的“做事方式”。 重点：强调“怎么做”。\n示例：\n优化方法：SGD（随机梯度下降）、Adam\n训练技巧：数据增强、迁移学习\n模型类型的方法论：监督学习、无监督学习、强化学习\n理解：方法是理论和流程上的指导，不必具体到某个模型的参数或网络结构。\nModel（模型） 定义：是对某类问题的具体实现，是方法的具体化。 重点：强调“做什么”，即模型学到的函数或映射关系。\n示例：\n线性回归模型\nResNet50\nGPT-4\n理解：模型是一个具体的函数或程序，它有明确的输入和输出，也有可训练的参数。模型通常是在某个方法下被训练出来的。\nArchitecture（架构/结构） 定义：指模型内部的设计或组织方式，即神经网络各个部分如何连接、如何组织。 重点：强调“内部结构怎么设计”。\n示例：\nCNN（卷积神经网络）架构\nTransformer 架构\nLSTM 架构\n理解：架构描述模型“长什么样”，但不涉及训练细节。一个架构可以用不同方法训练得到不同模型。\n架构不是“更高级的概念”，而是比方法更具体一些，但比模型抽象，因为模型还包含训练后的参数。\n非结构化环境unstructured settings\n环境不固定：物体位置、场景布局随时变化。 规则不明确：没有严格的操作流程或约束。 任务多样：机器人可能需要完成不同类型的任务，不是单一重复动作。 Prefix token 和 Context token没懂，也没有搜到什么详细解释的 搜到prefix tuning，找不到，发邮件问一下，希望能有结果\n在语言模型或 Transformer 系统里，“token” 是模型处理信息的基本单位（可以是单词、子词，甚至是向量化的状态表示）。\nPrefix token 作用：作为固定的“引导信息”或“任务提示”，模型在生成动作前就已经看到。\n特点：\n通常是静态的，在生成序列过程中不会变化。\n类似于给模型预设一个任务或背景。例如：\n指定“请把物体抓起来”的指令向量。\n编码机器人任务参数或初始状态。 在 Transformer 中，这些 token 会在输入序列开头，帮助模型理解整个任务。\n因为 Transformer 的自注意力机制允许每个生成位置访问序列中之前的所有 token，包括 prefix。\n所以即便你在时间步 t 生成第 5 个动作，prefix token 仍然在输入序列开头，模型可以参考。\nContext token 作用：提供模型需要随时参考的可变信息，通常是场景、历史动作或图像特征。\n特点：\n可以是动态变化的，随着时间步更新。\n让模型感知当前状态或环境信息。 模型每一步生成动作时都会看到这些 token。\n换句话说，它们的本质区别是信息类型和功能：\nprefix = “我要做什么”（任务目标） context = “我现在在哪/看到了什么”（状态信息） 没有严格区分固定/动态\n那为什么要分两种token？？？\n怎样写综述：在一个大领域（如 autoregression-based 模型）里，怎么设计一套合理的分类框架，让各种方法都有逻辑地被归纳进去\n从研究的核心动机、目标、方法路径、约束条件出发，提炼出“几条研究主线”。一般来说，分类维度可从以下四个层次抽象出来：\n层次 问的问题 典型分类维度 1️⃣ 目标导向 (What for) 研究的终极目标是什么？ 泛化、推理、效率、鲁棒性、安全性等 2️⃣ 方法机制 (How) 技术路线怎么实现目标？ 自回归 / Diffusion / 强化学习 / 模块化 等 3️⃣ 数据与输入 (On what) 模型依赖什么输入或数据结构？ 视觉语言融合、模态对齐、轨迹标注、模拟器数据 等 4️⃣ 结构与推理层次 (At what level) 作用于哪个智能层次？ 感知层、语义规划层、控制层、元学习层 等 自回归需要做到tokenize inputs tmux 比较好用的工具 Tmux 是一个终端复用器（terminal multiplexer），非常有用，属于常用的开发工具。\n命令行的典型使用方式是，打开一个终端窗口（terminal window，以下简称\"窗口\"），在里面输入命令。用户与计算机的这种临时的交互，称为一次\"会话\"（session） 。\n会话的一个重要特点是，窗口与其中启动的进程是连在一起的。打开窗口，会话开始；关闭窗口，会话结束，会话内部的进程也会随之终止，不管有没有运行完。\n一个典型的例子就是，SSH 登录远程计算机，打开一个远程窗口执行命令。这时，网络突然断线，再次登录的时候，是找不回上一次执行的命令的。因为上一次 SSH 会话已经终止了，里面的进程也随之消失了。\n为了解决这个问题，会话与窗口可以\"解绑\"：窗口关闭时，会话并不终止，而是继续运行，等到以后需要的时候，再让会话\"绑定\"其他窗口。\n二、基本用法 2.1 安装 Tmux 一般需要自己安装。\n# Ubuntu 或 Debian $ sudo apt-get install tmux # CentOS 或 Fedora $ sudo yum install tmux # Mac $ brew install tmux 2.2 启动与退出 安装完成后，键入tmux命令，就进入了 Tmux 窗口。\n$ tmux 上面命令会启动 Tmux 窗口，底部有一个状态栏。状态栏的左侧是窗口信息（编号和名称），右侧是系统信息。\n按下Ctrl+d或者显式输入exit命令，就可以退出 Tmux 窗口。\n$ exit 2.3 前缀键 Tmux 窗口有大量的快捷键。所有快捷键都要通过前缀键唤起。默认的前缀键是Ctrl+b，即先按下Ctrl+b，快捷键才会生效。\n举例来说，帮助命令的快捷键是Ctrl+b ?。它的用法是，在 Tmux 窗口中，先按下Ctrl+b，再按下?，就会显示帮助信息。\n然后，按下 ESC 键或q键，就可以退出帮助。\n三、会话管理 3.1 新建会话 第一个启动的 Tmux 窗口，编号是0，第二个窗口的编号是1，以此类推。这些窗口对应的会话，就是 0 号会话、1 号会话。\n使用编号区分会话，不太直观，更好的方法是为会话起名。\n$ tmux new -s 上面命令新建一个指定名称的会话。\n3.2 分离会话 在 Tmux 窗口中，按下Ctrl+b d或者输入tmux detach命令，就会将当前会话与窗口分离。\n$ tmux detach 上面命令执行后，就会退出当前 Tmux 窗口，但是会话和里面的进程仍然在后台运行。\ntmux ls命令可以查看当前所有的 Tmux 会话。\n$ tmux ls # or $ tmux list-session 3.3 接入会话 tmux attach命令用于重新接入某个已存在的会话。\n# 使用会话编号 $ tmux attach -t 0 # 使用会话名称 $ tmux attach -t 3.4 杀死会话 tmux kill-session命令用于杀死某个会话。\n# 使用会话编号 $ tmux kill-session -t 0 # 使用会话名称 $ tmux kill-session -t 3.5 切换会话 tmux switch命令用于切换会话。\n# 使用会话编号 $ tmux switch -t 0 # 使用会话名称 $ tmux switch -t 3.6 重命名会话 tmux rename-session命令用于重命名会话。\n$ tmux rename-session -t 0 上面命令将0号会话重命名。\n3.7 会话快捷键 下面是一些会话相关的快捷键。\nCtrl+b d：分离当前会话。 Ctrl+b s：列出所有会话。 Ctrl+b $：重命名当前会话。 四、最简操作流程 综上所述，以下是 Tmux 的最简操作流程。\n新建会话tmux new -s my_session。 在 Tmux 窗口运行所需的程序。 按下快捷键Ctrl+b d将会话分离。 下次使用时，重新连接到会话tmux attach-session -t my_session。 五、窗格操作 Tmux 可以将窗口分成多个窗格（pane），每个窗格运行不同的命令。以下命令都是在 Tmux 窗口中执行。\n5.1 划分窗格 tmux split-window命令用来划分窗格。\n# 划分上下两个窗格 $ tmux split-window # 划分左右两个窗格 $ tmux split-window -h 5.2 移动光标 tmux select-pane命令用来移动光标位置。\n# 光标切换到上方窗格 $ tmux select-pane -U # 光标切换到下方窗格 $ tmux select-pane -D # 光标切换到左边窗格 $ tmux select-pane -L # 光标切换到右边窗格 $ tmux select-pane -R 5.3 交换窗格位置 tmux swap-pane命令用来交换窗格位置。\n# 当前窗格上移 $ tmux swap-pane -U # 当前窗格下移 $ tmux swap-pane -D 5.4 窗格快捷键 下面是一些窗格操作的快捷键。\nCtrl+b %：划分左右两个窗格。 Ctrl+b \"：划分上下两个窗格。 Ctrl+b ：光标切换到其他窗格。是指向要切换到的窗格的方向键，比如切换到下方窗格，就按方向键↓。 Ctrl+b ;：光标切换到上一个窗格。 Ctrl+b o：光标切换到下一个窗格。 Ctrl+b {：当前窗格与上一个窗格交换位置。 Ctrl+b }：当前窗格与下一个窗格交换位置。 Ctrl+b Ctrl+o：所有窗格向前移动一个位置，第一个窗格变成最后一个窗格。 Ctrl+b Alt+o：所有窗格向后移动一个位置，最后一个窗格变成第一个窗格。 Ctrl+b x：关闭当前窗格。 Ctrl+b !：将当前窗格拆分为一个独立窗口。 Ctrl+b z：当前窗格全屏显示，再使用一次会变回原来大小。 Ctrl+b Ctrl+：按箭头方向调整窗格大小。 Ctrl+b q：显示窗格编号。 六、窗口管理 除了将一个窗口划分成多个窗格，Tmux 也允许新建多个窗口。\n6.1 新建窗口 tmux new-window命令用来创建新窗口。\n$ tmux new-window # 新建一个指定名称的窗口 $ tmux new-window -n 6.2 切换窗口 tmux select-window命令用来切换窗口。\n# 切换到指定编号的窗口 $ tmux select-window -t # 切换到指定名称的窗口 $ tmux select-window -t 6.3 重命名窗口 tmux rename-window命令用于为当前窗口起名（或重命名）。\n$ tmux rename-window 6.4 窗口快捷键 下面是一些窗口操作的快捷键。\nCtrl+b c：创建一个新窗口，状态栏会显示多个窗口的信息。 Ctrl+b p：切换到上一个窗口（按照状态栏上的顺序）。 Ctrl+b n：切换到下一个窗口。 Ctrl+b ：切换到指定编号的窗口，其中的是状态栏上的窗口编号。 Ctrl+b w：从列表中选择窗口。 Ctrl+b ,：窗口重命名。 七、其他命令 下面是一些其他命令。\n# 列出所有快捷键，及其对应的 Tmux 命令 $ tmux list-keys # 列出所有 Tmux 命令及其参数 $ tmux list-commands # 列出当前所有 Tmux 会话的信息 $ tmux info # 重新加载当前的 Tmux 配置 $ tmux source-file ~/.tmux.conf ",
+  "wordCount" : "602",
+  "inLanguage": "en",
+  "datePublished": "2025-08-20T21:30:13Z",
+  "dateModified": "2025-08-20T21:30:13Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"images/avatar.jpg","bio":"Make milong famous again","links":[{"name":"GitHub","url":"https://github.com/milong26"}],"name":"Milong"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://milong26.github.io/post/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "我的博客",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://milong26.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://milong26.github.io/" accesskey="h" title="我的博客 (Alt + H)">我的博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://milong26.github.io/" title="首页">
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/about/" title="关于我">
+                    <span>关于我</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://milong26.github.io/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      模型训练
+    </h1>
+    <div class="post-meta">
+
+<span title='2025-08-20 21:30:13 +0000 UTC'>August 20, 2025</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>先写着，以后有空再整理</p>
+<p>“冻结”的模型在训练时是只做 forward，不做 backward。= 只做推理，不参与训练</p>
+<p>对齐？</p>
+<p>checkpoint：保存模型</p>
+<p>embedding层是干啥的？干了一些得到task的工作？把 图像嵌入、语言嵌入、状态嵌入 拼接成一整段前缀序列，并且同时构造：</p>
+<p>pad_masks：标记哪些 token 是“真实的” (1) 哪些是 padding (0)；</p>
+<p>att_masks：标记这个 token 属于哪一类域（0=图像/语言，1=状态/动作），以便后面 make_att_2d_masks 限制注意力连接。</p>
+<p>概括之后，构造条件输入序列</p>
+<h1 id="设备">设备<a hidden class="anchor" aria-hidden="true" href="#设备">#</a></h1>
+<p>TOPS (Tera Operations Per Second) = 每秒可执行的万亿次整数运算数量。</p>
+<p>Tensor Core 是 NVIDIA 从 Volta 架构开始引入的 专门加速矩阵运算的单元，对深度学习的训练和推理特别重要。</p>
+<p>它们可以一次性处理 矩阵乘法 + 累加 (MAC) 运算，这是神经网络计算的核心操作。</p>
+<p>对 AI 推理和训练，Tensor Core 的作用比普通 CUDA 核心更大。</p>
+<h1 id="目标">目标<a hidden class="anchor" aria-hidden="true" href="#目标">#</a></h1>
+<p>拟合和泛化这两个概念有什么联系吗？</p>
+<p>fitting and generalization</p>
+<h3 id="1-拟合fitting">1. <strong>拟合（fitting）</strong><a hidden class="anchor" aria-hidden="true" href="#1-拟合fitting">#</a></h3>
+<ul>
+<li>
+<p>指模型在训练数据上的表现。</p>
+</li>
+<li>
+<p>如果模型能很好地“拟合”训练集，说明它学到了训练数据中的规律。</p>
+</li>
+<li>
+<p>拟合的程度常用训练误差来衡量。</p>
+</li>
+</ul>
+<p>    - <strong>欠拟合（underfitting）</strong>：模型太简单，训练集都学不好。</p>
+<p>    - <strong>过拟合（overfitting）</strong>：模型太复杂，把训练集里的噪声或偶然性也“背”下来。</p>
+<h3 id="2-泛化generalization">2. <strong>泛化（generalization）</strong><a hidden class="anchor" aria-hidden="true" href="#2-泛化generalization">#</a></h3>
+<ul>
+<li>
+<p>指模型在<strong>未见过的新数据</strong>上的表现。</p>
+</li>
+<li>
+<p>泛化能力强的模型，不仅训练集学得好，在测试集或现实数据上也能保持较低误差。</p>
+</li>
+</ul>
+<h3 id="3-两者的关系">3. <strong>两者的关系</strong><a hidden class="anchor" aria-hidden="true" href="#3-两者的关系">#</a></h3>
+<ul>
+<li><strong>拟合是前提，泛化是目标</strong>。</li>
+</ul>
+<p>    - 如果模型连训练集都拟合不好（欠拟合），就更不可能泛化好。</p>
+<p>    - 但模型拟合得“过头”（过拟合），就会牺牲泛化能力。</p>
+<ul>
+<li>所以两者之间存在一个平衡点：</li>
+</ul>
+<p>    - 适度拟合 → 泛化效果最佳。</p>
+<p>    - 欠拟合/过拟合都会导致泛化能力下降。</p>
+<p>vla其实不太好有拟合的表现吧，真的会有吗</p>
+<p>方法/框架/模型这些看起来比较相似的词：
+模型和框架：不一定是一个东西，虽然很多的名字一样，模型更倾向于训练出来的off-the-shelf的东西？（不确定）</p>
+<ol>
+<li>Method（方法）
+定义：指的是解决问题的策略、算法或训练方法，是抽象的“做事方式”。</li>
+</ol>
+<p>重点：强调“怎么做”。</p>
+<p>示例：</p>
+<p>优化方法：SGD（随机梯度下降）、Adam</p>
+<p>训练技巧：数据增强、迁移学习</p>
+<p>模型类型的方法论：监督学习、无监督学习、强化学习</p>
+<p>理解：方法是理论和流程上的指导，不必具体到某个模型的参数或网络结构。</p>
+<ol start="2">
+<li>Model（模型）
+定义：是对某类问题的具体实现，是方法的具体化。</li>
+</ol>
+<p>重点：强调“做什么”，即模型学到的函数或映射关系。</p>
+<p>示例：</p>
+<p>线性回归模型</p>
+<p>ResNet50</p>
+<p>GPT-4</p>
+<p>理解：模型是一个具体的函数或程序，它有明确的输入和输出，也有可训练的参数。模型通常是在某个方法下被训练出来的。</p>
+<ol start="3">
+<li>Architecture（架构/结构）
+定义：指模型内部的设计或组织方式，即神经网络各个部分如何连接、如何组织。</li>
+</ol>
+<p>重点：强调“内部结构怎么设计”。</p>
+<p>示例：</p>
+<p>CNN（卷积神经网络）架构</p>
+<p>Transformer 架构</p>
+<p>LSTM 架构</p>
+<p>理解：架构描述模型“长什么样”，但不涉及训练细节。一个架构可以用不同方法训练得到不同模型。</p>
+<p>架构不是“更高级的概念”，而是比方法更具体一些，但比模型抽象，因为模型还包含训练后的参数。</p>
+<p>非结构化环境unstructured settings</p>
+<ul>
+<li><strong>环境不固定</strong>：物体位置、场景布局随时变化。</li>
+<li><strong>规则不明确</strong>：没有严格的操作流程或约束。</li>
+<li><strong>任务多样</strong>：机器人可能需要完成不同类型的任务，不是单一重复动作。</li>
+</ul>
+<h3 id="prefix-token-和-context-token没懂也没有搜到什么详细解释的">Prefix token 和 Context token没懂，也没有搜到什么详细解释的<a hidden class="anchor" aria-hidden="true" href="#prefix-token-和-context-token没懂也没有搜到什么详细解释的">#</a></h3>
+<p>搜到prefix tuning，找不到，发邮件问一下，希望能有结果</p>
+<p>在语言模型或 Transformer 系统里，“token” 是模型处理信息的基本单位（可以是单词、子词，甚至是向量化的状态表示）。</p>
+<h4 id="prefix-token"><strong>Prefix token</strong><a hidden class="anchor" aria-hidden="true" href="#prefix-token">#</a></h4>
+<ul>
+<li>
+<p><strong>作用</strong>：作为固定的“引导信息”或“任务提示”，模型在生成动作前就已经看到。</p>
+</li>
+<li>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>
+<p>通常是<strong>静态的</strong>，在生成序列过程中不会变化。</p>
+</li>
+<li>
+<p>类似于给模型预设一个任务或背景。例如：</p>
+<ul>
+<li>
+<p>指定“请把物体抓起来”的指令向量。</p>
+</li>
+<li>
+<p>编码机器人任务参数或初始状态。
+在 Transformer 中，这些 token 会在输入序列开头，帮助模型理解整个任务。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>因为 Transformer 的自注意力机制允许每个生成位置访问序列中之前的所有 token，包括 prefix。</p>
+</li>
+<li>
+<p>所以即便你在时间步 t 生成第 5 个动作，prefix token 仍然在输入序列开头，模型可以参考。</p>
+</li>
+</ul>
+<h4 id="context-token"><strong>Context token</strong><a hidden class="anchor" aria-hidden="true" href="#context-token">#</a></h4>
+<ul>
+<li>
+<p><strong>作用</strong>：提供模型需要<strong>随时参考的可变信息</strong>，通常是场景、历史动作或图像特征。</p>
+</li>
+<li>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>
+<p>可以是<strong>动态变化的</strong>，随着时间步更新。</p>
+</li>
+<li>
+<p>让模型感知当前状态或环境信息。
+模型每一步生成动作时都会看到这些 token。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>换句话说，<strong>它们的本质区别是信息类型和功能</strong>：</p>
+<ul>
+<li>prefix = “我要做什么”（任务目标）</li>
+<li>context = “我现在在哪/看到了什么”（状态信息）</li>
+</ul>
+<p>没有严格区分固定/动态</p>
+<p>那为什么要分两种token？？？</p>
+<p>怎样写综述：<strong>在一个大领域（如 autoregression-based 模型）里，怎么设计一套合理的分类框架，让各种方法都有逻辑地被归纳进去</strong></p>
+<p>从研究的<strong>核心动机、目标、方法路径、约束条件</strong>出发，提炼出“几条研究主线”。一般来说，分类维度可从以下四个层次抽象出来：</p>
+<table>
+  <thead>
+      <tr>
+          <th>层次</th>
+          <th>问的问题</th>
+          <th>典型分类维度</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>1️⃣ 目标导向 (What for)</strong></td>
+          <td>研究的终极目标是什么？</td>
+          <td>泛化、推理、效率、鲁棒性、安全性等</td>
+      </tr>
+      <tr>
+          <td><strong>2️⃣ 方法机制 (How)</strong></td>
+          <td>技术路线怎么实现目标？</td>
+          <td>自回归 / Diffusion / 强化学习 / 模块化 等</td>
+      </tr>
+      <tr>
+          <td><strong>3️⃣ 数据与输入 (On what)</strong></td>
+          <td>模型依赖什么输入或数据结构？</td>
+          <td>视觉语言融合、模态对齐、轨迹标注、模拟器数据 等</td>
+      </tr>
+      <tr>
+          <td><strong>4️⃣ 结构与推理层次 (At what level)</strong></td>
+          <td>作用于哪个智能层次？</td>
+          <td>感知层、语义规划层、控制层、元学习层 等</td>
+      </tr>
+      <tr>
+          <td>自回归需要做到tokenize inputs</td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<h1 id="tmux">tmux<a hidden class="anchor" aria-hidden="true" href="#tmux">#</a></h1>
+<p>比较好用的工具
+Tmux 是一个终端复用器（terminal multiplexer），非常有用，属于常用的开发工具。</p>
+<p>命令行的典型使用方式是，打开一个终端窗口（terminal window，以下简称&quot;窗口&quot;），在里面输入命令。<strong>用户与计算机的这种临时的交互，称为一次&quot;会话&quot;（session）</strong> 。</p>
+<p>会话的一个重要特点是，窗口与其中启动的进程是<a href="https://www.ruanyifeng.com/blog/2016/02/linux-daemon.html">连在一起</a>的。打开窗口，会话开始；关闭窗口，会话结束，会话内部的进程也会随之终止，不管有没有运行完。</p>
+<p>一个典型的例子就是，<a href="https://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html">SSH 登录</a>远程计算机，打开一个远程窗口执行命令。这时，网络突然断线，再次登录的时候，是找不回上一次执行的命令的。因为上一次 SSH 会话已经终止了，里面的进程也随之消失了。</p>
+<p>为了解决这个问题，会话与窗口可以&quot;解绑&quot;：窗口关闭时，会话并不终止，而是继续运行，等到以后需要的时候，再让会话&quot;绑定&quot;其他窗口。</p>
+<h2 id="二基本用法">二、基本用法<a hidden class="anchor" aria-hidden="true" href="#二基本用法">#</a></h2>
+<h3 id="21-安装">2.1 安装<a hidden class="anchor" aria-hidden="true" href="#21-安装">#</a></h3>
+<p>Tmux 一般需要自己安装。</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Ubuntu 或 Debian</span>
+</span></span><span style="display:flex;"><span>$ sudo apt-get install tmux
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># CentOS 或 Fedora</span>
+</span></span><span style="display:flex;"><span>$ sudo yum install tmux
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Mac</span>
+</span></span><span style="display:flex;"><span>$ brew install tmux
+</span></span></code></pre></div></blockquote>
+<h3 id="22-启动与退出">2.2 启动与退出<a hidden class="anchor" aria-hidden="true" href="#22-启动与退出">#</a></h3>
+<p>安装完成后，键入<code>tmux</code>命令，就进入了 Tmux 窗口。</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ tmux
+</span></span></code></pre></div></blockquote>
+<p>上面命令会启动 Tmux 窗口，底部有一个状态栏。状态栏的左侧是窗口信息（编号和名称），右侧是系统信息。</p>
+<p><img loading="lazy" src="https://cdn.beekka.com/blogimg/asset/201910/bg2019102006.png"></p>
+<p>按下<code>Ctrl+d</code>或者显式输入<code>exit</code>命令，就可以退出 Tmux 窗口。</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ exit
+</span></span></code></pre></div></blockquote>
+<h3 id="23-前缀键">2.3 前缀键<a hidden class="anchor" aria-hidden="true" href="#23-前缀键">#</a></h3>
+<p>Tmux 窗口有大量的快捷键。所有快捷键都要通过前缀键唤起。默认的前缀键是<code>Ctrl+b</code>，即先按下<code>Ctrl+b</code>，快捷键才会生效。</p>
+<p>举例来说，帮助命令的快捷键是<code>Ctrl+b ?</code>。它的用法是，在 Tmux 窗口中，先按下<code>Ctrl+b</code>，再按下<code>?</code>，就会显示帮助信息。</p>
+<p>然后，按下 ESC 键或<code>q</code>键，就可以退出帮助。</p>
+<h2 id="三会话管理">三、会话管理<a hidden class="anchor" aria-hidden="true" href="#三会话管理">#</a></h2>
+<h3 id="31-新建会话">3.1 新建会话<a hidden class="anchor" aria-hidden="true" href="#31-新建会话">#</a></h3>
+<p>第一个启动的 Tmux 窗口，编号是<code>0</code>，第二个窗口的编号是<code>1</code>，以此类推。这些窗口对应的会话，就是 0 号会话、1 号会话。</p>
+<p>使用编号区分会话，不太直观，更好的方法是为会话起名。</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ tmux new -s &lt;session-name&gt;
+</span></span></code></pre></div></blockquote>
+<p>上面命令新建一个指定名称的会话。</p>
+<h3 id="32-分离会话">3.2 分离会话<a hidden class="anchor" aria-hidden="true" href="#32-分离会话">#</a></h3>
+<p>在 Tmux 窗口中，按下<code>Ctrl+b d</code>或者输入<code>tmux detach</code>命令，就会将当前会话与窗口分离。</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ tmux detach
+</span></span></code></pre></div></blockquote>
+<p>上面命令执行后，就会退出当前 Tmux 窗口，但是会话和里面的进程仍然在后台运行。</p>
+<p><code>tmux ls</code>命令可以查看当前所有的 Tmux 会话。</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ tmux ls
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># or</span>
+</span></span><span style="display:flex;"><span>$ tmux list-session
+</span></span></code></pre></div></blockquote>
+<h3 id="33-接入会话">3.3 接入会话<a hidden class="anchor" aria-hidden="true" href="#33-接入会话">#</a></h3>
+<p><code>tmux attach</code>命令用于重新接入某个已存在的会话。</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用会话编号</span>
+</span></span><span style="display:flex;"><span>$ tmux attach -t <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用会话名称</span>
+</span></span><span style="display:flex;"><span>$ tmux attach -t &lt;session-name&gt;
+</span></span></code></pre></div></blockquote>
+<h3 id="34-杀死会话">3.4 杀死会话<a hidden class="anchor" aria-hidden="true" href="#34-杀死会话">#</a></h3>
+<p><code>tmux kill-session</code>命令用于杀死某个会话。</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用会话编号</span>
+</span></span><span style="display:flex;"><span>$ tmux kill-session -t <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用会话名称</span>
+</span></span><span style="display:flex;"><span>$ tmux kill-session -t &lt;session-name&gt;
+</span></span></code></pre></div></blockquote>
+<h3 id="35-切换会话">3.5 切换会话<a hidden class="anchor" aria-hidden="true" href="#35-切换会话">#</a></h3>
+<p><code>tmux switch</code>命令用于切换会话。</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用会话编号</span>
+</span></span><span style="display:flex;"><span>$ tmux switch -t <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用会话名称</span>
+</span></span><span style="display:flex;"><span>$ tmux switch -t &lt;session-name&gt;
+</span></span></code></pre></div></blockquote>
+<h3 id="36-重命名会话">3.6 重命名会话<a hidden class="anchor" aria-hidden="true" href="#36-重命名会话">#</a></h3>
+<p><code>tmux rename-session</code>命令用于重命名会话。</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ tmux rename-session -t <span style="color:#ae81ff">0</span> &lt;new-name&gt;
+</span></span></code></pre></div></blockquote>
+<p>上面命令将0号会话重命名。</p>
+<h3 id="37-会话快捷键">3.7 会话快捷键<a hidden class="anchor" aria-hidden="true" href="#37-会话快捷键">#</a></h3>
+<p>下面是一些会话相关的快捷键。</p>
+<blockquote>
+<ul>
+<li><code>Ctrl+b d</code>：分离当前会话。</li>
+<li><code>Ctrl+b s</code>：列出所有会话。</li>
+<li><code>Ctrl+b $</code>：重命名当前会话。</li>
+</ul>
+</blockquote>
+<h2 id="四最简操作流程">四、最简操作流程<a hidden class="anchor" aria-hidden="true" href="#四最简操作流程">#</a></h2>
+<p>综上所述，以下是 Tmux 的最简操作流程。</p>
+<blockquote>
+<ol>
+<li>新建会话<code>tmux new -s my_session</code>。</li>
+<li>在 Tmux 窗口运行所需的程序。</li>
+<li>按下快捷键<code>Ctrl+b d</code>将会话分离。</li>
+<li>下次使用时，重新连接到会话<code>tmux attach-session -t my_session</code>。</li>
+</ol>
+</blockquote>
+<h2 id="五窗格操作">五、窗格操作<a hidden class="anchor" aria-hidden="true" href="#五窗格操作">#</a></h2>
+<p>Tmux 可以将窗口分成多个窗格（pane），每个窗格运行不同的命令。以下命令都是在 Tmux 窗口中执行。</p>
+<h3 id="51-划分窗格">5.1 划分窗格<a hidden class="anchor" aria-hidden="true" href="#51-划分窗格">#</a></h3>
+<p><code>tmux split-window</code>命令用来划分窗格。</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 划分上下两个窗格</span>
+</span></span><span style="display:flex;"><span>$ tmux split-window
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 划分左右两个窗格</span>
+</span></span><span style="display:flex;"><span>$ tmux split-window -h
+</span></span></code></pre></div></blockquote>
+<p><img loading="lazy" src="https://cdn.beekka.com/blogimg/asset/201910/bg2019102007.jpg"></p>
+<h3 id="52-移动光标">5.2 移动光标<a hidden class="anchor" aria-hidden="true" href="#52-移动光标">#</a></h3>
+<p><code>tmux select-pane</code>命令用来移动光标位置。</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 光标切换到上方窗格</span>
+</span></span><span style="display:flex;"><span>$ tmux <span style="color:#66d9ef">select</span>-pane -U
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 光标切换到下方窗格</span>
+</span></span><span style="display:flex;"><span>$ tmux <span style="color:#66d9ef">select</span>-pane -D
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 光标切换到左边窗格</span>
+</span></span><span style="display:flex;"><span>$ tmux <span style="color:#66d9ef">select</span>-pane -L
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 光标切换到右边窗格</span>
+</span></span><span style="display:flex;"><span>$ tmux <span style="color:#66d9ef">select</span>-pane -R
+</span></span></code></pre></div></blockquote>
+<h3 id="53-交换窗格位置">5.3 交换窗格位置<a hidden class="anchor" aria-hidden="true" href="#53-交换窗格位置">#</a></h3>
+<p><code>tmux swap-pane</code>命令用来交换窗格位置。</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 当前窗格上移</span>
+</span></span><span style="display:flex;"><span>$ tmux swap-pane -U
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 当前窗格下移</span>
+</span></span><span style="display:flex;"><span>$ tmux swap-pane -D
+</span></span></code></pre></div></blockquote>
+<h3 id="54-窗格快捷键">5.4 窗格快捷键<a hidden class="anchor" aria-hidden="true" href="#54-窗格快捷键">#</a></h3>
+<p>下面是一些窗格操作的快捷键。</p>
+<blockquote>
+<ul>
+<li><code>Ctrl+b %</code>：划分左右两个窗格。</li>
+<li><code>Ctrl+b &quot;</code>：划分上下两个窗格。</li>
+<li><code>Ctrl+b &lt;arrow key&gt;</code>：光标切换到其他窗格。<code>&lt;arrow key&gt;</code>是指向要切换到的窗格的方向键，比如切换到下方窗格，就按方向键<code>↓</code>。</li>
+<li><code>Ctrl+b ;</code>：光标切换到上一个窗格。</li>
+<li><code>Ctrl+b o</code>：光标切换到下一个窗格。</li>
+<li><code>Ctrl+b {</code>：当前窗格与上一个窗格交换位置。</li>
+<li><code>Ctrl+b }</code>：当前窗格与下一个窗格交换位置。</li>
+<li><code>Ctrl+b Ctrl+o</code>：所有窗格向前移动一个位置，第一个窗格变成最后一个窗格。</li>
+<li><code>Ctrl+b Alt+o</code>：所有窗格向后移动一个位置，最后一个窗格变成第一个窗格。</li>
+<li><code>Ctrl+b x</code>：关闭当前窗格。</li>
+<li><code>Ctrl+b !</code>：将当前窗格拆分为一个独立窗口。</li>
+<li><code>Ctrl+b z</code>：当前窗格全屏显示，再使用一次会变回原来大小。</li>
+<li><code>Ctrl+b Ctrl+&lt;arrow key&gt;</code>：按箭头方向调整窗格大小。</li>
+<li><code>Ctrl+b q</code>：显示窗格编号。</li>
+</ul>
+</blockquote>
+<h2 id="六窗口管理">六、窗口管理<a hidden class="anchor" aria-hidden="true" href="#六窗口管理">#</a></h2>
+<p>除了将一个窗口划分成多个窗格，Tmux 也允许新建多个窗口。</p>
+<h3 id="61-新建窗口">6.1 新建窗口<a hidden class="anchor" aria-hidden="true" href="#61-新建窗口">#</a></h3>
+<p><code>tmux new-window</code>命令用来创建新窗口。</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ tmux new-window
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 新建一个指定名称的窗口</span>
+</span></span><span style="display:flex;"><span>$ tmux new-window -n &lt;window-name&gt;
+</span></span></code></pre></div></blockquote>
+<h3 id="62-切换窗口">6.2 切换窗口<a hidden class="anchor" aria-hidden="true" href="#62-切换窗口">#</a></h3>
+<p><code>tmux select-window</code>命令用来切换窗口。</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 切换到指定编号的窗口</span>
+</span></span><span style="display:flex;"><span>$ tmux <span style="color:#66d9ef">select</span>-window -t &lt;window-number&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 切换到指定名称的窗口</span>
+</span></span><span style="display:flex;"><span>$ tmux <span style="color:#66d9ef">select</span>-window -t &lt;window-name&gt;
+</span></span></code></pre></div></blockquote>
+<h3 id="63-重命名窗口">6.3 重命名窗口<a hidden class="anchor" aria-hidden="true" href="#63-重命名窗口">#</a></h3>
+<p><code>tmux rename-window</code>命令用于为当前窗口起名（或重命名）。</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ tmux rename-window &lt;new-name&gt;
+</span></span></code></pre></div></blockquote>
+<h3 id="64-窗口快捷键">6.4 窗口快捷键<a hidden class="anchor" aria-hidden="true" href="#64-窗口快捷键">#</a></h3>
+<p>下面是一些窗口操作的快捷键。</p>
+<blockquote>
+<ul>
+<li><code>Ctrl+b c</code>：创建一个新窗口，状态栏会显示多个窗口的信息。</li>
+<li><code>Ctrl+b p</code>：切换到上一个窗口（按照状态栏上的顺序）。</li>
+<li><code>Ctrl+b n</code>：切换到下一个窗口。</li>
+<li><code>Ctrl+b &lt;number&gt;</code>：切换到指定编号的窗口，其中的<code>&lt;number&gt;</code>是状态栏上的窗口编号。</li>
+<li><code>Ctrl+b w</code>：从列表中选择窗口。</li>
+<li><code>Ctrl+b ,</code>：窗口重命名。</li>
+</ul>
+</blockquote>
+<h2 id="七其他命令">七、其他命令<a hidden class="anchor" aria-hidden="true" href="#七其他命令">#</a></h2>
+<p>下面是一些其他命令。</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 列出所有快捷键，及其对应的 Tmux 命令</span>
+</span></span><span style="display:flex;"><span>$ tmux list-keys
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 列出所有 Tmux 命令及其参数</span>
+</span></span><span style="display:flex;"><span>$ tmux list-commands
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 列出当前所有 Tmux 会话的信息</span>
+</span></span><span style="display:flex;"><span>$ tmux info
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 重新加载当前的 Tmux 配置</span>
+</span></span><span style="display:flex;"><span>$ tmux source-file ~/.tmux.conf
+</span></span></code></pre></div></blockquote>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://milong26.github.io/tags/model/">Model</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://milong26.github.io/">我的博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
