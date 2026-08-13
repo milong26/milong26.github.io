@@ -295,7 +295,7 @@
 </span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>resid_dropout <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Dropout(config<span style="color:#f92672">.</span>dropout)
 </span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>n_head <span style="color:#f92672">=</span> config<span style="color:#f92672">.</span>n_head
 </span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>n_embd <span style="color:#f92672">=</span> config<span style="color:#f92672">.</span>n_embd
-</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>dropout <span style="color:#f92672">=</span> config<span style="color:#960050;background-color:#1e0010">.</span>dropout
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>dropout <span style="color:#f92672">=</span> config<span style="color:#f92672">.</span>dropout
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e"># flash attention make GPU go brrrrr but support is only in PyTorch &gt;= 2.0</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 加速的一个方法，居然不设置没有加速的嘛</span>
 </span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>flash <span style="color:#f92672">=</span> hasattr(torch<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>functional, <span style="color:#e6db74">&#39;scaled_dot_product_attention&#39;</span>)
