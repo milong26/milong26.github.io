@@ -71,7 +71,7 @@
   <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:tag" content="Os">
+    <meta property="article:tag" content="OS">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="安卓">
@@ -108,8 +108,8 @@
   "keywords": [
     "OS"
   ],
-  "articleBody": "纠结了一下还是分类到it了，但可能以后还是放到life里面？\n得到新手机以后adb卸载一堆\n安装\n输入法，用的雨燕但是切换很难受，有没有符号切换比较自然不搞九宫格的？ xapk installer 照片：感觉不是很好用 日历：一般，希望不联网，能添加日程比较好，还没找到合适的 我之前没有安装过adb嘛？ https://developer.android.google.cn/tools/releases/platform-tools?hl=zh-cn 点击下载适用于 Windows 的 SDK Platform-Tools 提取到application/adb这个文件夹里面 为了以后方便，配置个环境变量 选择Path，将ADB的安装路径（即安装目录D:\\application\\adb\\platform-tools）添加至path中即可。 cmd中 adb version有结果就行\n然后尝试关闭振动，嫌烦 adb shell settings put system haptic_feedback_enabled 0 没用，→ 关闭的是 Android 系统级“触摸触感反馈”开关，其实我系统里面已经关掉了 然后看是不是obsidian的问题 adb shell pm list packages | findstr obsidian 检查包名得到package:md.obsidian adb shell appops set md.obsidian VIBRATE ignore 终于关掉了，是调用马达的\n",
-  "wordCount" : "51",
+  "articleBody": "纠结了一下还是分类到it了，但可能以后还是放到life里面？\n得到新手机以后adb卸载一堆\n安装\n输入法，用的雨燕但是切换很难受，有没有符号切换比较自然不搞九宫格的？ xapk installer 照片：感觉不是很好用 日历：一般，希望不联网，能添加日程比较好，还没找到合适的 我之前没有安装过adb嘛？ https://developer.android.google.cn/tools/releases/platform-tools?hl=zh-cn 点击下载适用于 Windows 的 SDK Platform-Tools 提取到application/adb这个文件夹里面 为了以后方便，配置个环境变量 选择Path，将ADB的安装路径（即安装目录D:\\application\\adb\\platform-tools）添加至path中即可。 cmd中 adb version有结果就行\n然后尝试关闭振动，嫌烦 adb shell settings put system haptic_feedback_enabled 0 没用，→ 关闭的是 Android 系统级“触摸触感反馈”开关，其实我系统里面已经关掉了 然后看是不是obsidian的问题 adb shell pm list packages | findstr obsidian 检查包名得到package:md.obsidian adb shell appops set md.obsidian VIBRATE ignore 终于关掉了，是调用马达的\n安装app的时候，在系统里面找到允许调试安装，就能越过安装非要联网\n",
+  "wordCount" : "52",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
   "dateModified": "0001-01-01T00:00:00Z",
@@ -221,12 +221,13 @@ adb shell settings put system haptic_feedback_enabled 0
 adb shell pm list packages | findstr obsidian 检查包名得到package:md.obsidian
 adb shell appops set md.obsidian VIBRATE ignore
 终于关掉了，是调用马达的</p>
+<p>安装app的时候，在系统里面找到允许调试安装，就能越过安装非要联网</p>
 
   </div>
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://milong26.github.io/tags/os/">Os</a></li>
+      <li><a href="https://milong26.github.io/tags/os/">OS</a></li>
     </ul>
   </footer>
 </article>
