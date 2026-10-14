@@ -203,7 +203,7 @@
       <link>https://milong26.github.io/post/latexocr/</link>
       <pubDate>Mon, 28 Oct 2024 22:07:18 +0000</pubDate>
       <guid>https://milong26.github.io/post/latexocr/</guid>
-      <description>&lt;p&gt;图片转latex，本地版。需要梯子，也可以搞镜像&lt;/p&gt;</description>
+      <description>&lt;p&gt;图片转latex，本地版。安装过程需要梯子，也可以搞镜像&lt;/p&gt;</description>
     </item>
     <item>
       <title>AMD修复</title>
@@ -2067,7 +2067,8 @@ npm install webpack -g
       <link>https://milong26.github.io/post/hexo%E6%90%AD%E5%BB%BA/</link>
       <pubDate>Mon, 12 Apr 2021 20:47:54 +0000</pubDate>
       <guid>https://milong26.github.io/post/hexo%E6%90%AD%E5%BB%BA/</guid>
-      <description>&lt;p&gt;hexo搭建个人blog，相关配置信息&lt;/p&gt;</description>
+      <description>&lt;p&gt;hexo搭建个人blog，相关配置信息&lt;/p&gt;
+&lt;p&gt;hexo我现在都不用了哎，算了留档留档&lt;/p&gt;</description>
     </item>
     <item>
       <title>数据库系统原理</title>
