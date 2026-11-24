@@ -145,77 +145,6 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">排序
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>排序分类 按照排序时排序对象存放的设备
-内部排序:排序过程中数据对象全部在内存中的排序。 外部排序:排序过程数据对象并非完全在内存中的排序 按照排序是的基本操作是否基于关键字的比较
-基于比较：基本操作——关键字的比较和记录的移动，其最差时间下限已经被证明为Ω（nlogn）。 交换排序（气泡、快速排序）；选择排序（直接选择排序、堆排序）；插入排序（直接插入、折半插入、希尔排序）、归并排序（二路归并排序）。
-不基于比较：根据根据组成关键字的的分量及其分布特征，如基数排序(箱子排序)。 后将元素调整至相应位置
-若出现重复数据：当前&#43;1
-排序的稳定性：相同元素的相对位置不发生变化
-template&lt;class T&gt; void Rank(T a[], int n,int r[]){ for(int i=1; i&lt;n; i&#43;&#43;) r[i]=0; for (int i = 1; i &lt; n; i&#43;&#43;) for(int j=0; j&lt;i; j&#43;&#43;) if (a[j] &lt;= a[i]) r[i]&#43;&#43;; else r[j]&#43;&#43;; }//循环n(n-1)/2 void Rearrange(T a[], int n, int r[]){ T *u=new T[n&#43;1];//保存原有数据的副本，即根据名次将元素放至对应位置 for(int i=0; i&lt;n; i&#43;&#43;) u[r[i]]=a[i]; for(int i=0; i&lt;n; i&#43;&#43;) a[i]=u[i]; delete []u; }//移动2n次 //辅助存储空间：2n 最多n-1次交换、n次比较
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2019-12-04 09:00:36 +0000 UTC'>December 4, 2019</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 排序" href="https://milong26.github.io/post/%E6%8E%92%E5%BA%8F/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">图
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 关联于/至：&lt;2,3&gt;&lt;4,3&gt;关联至3，&lt;3,5&gt;&lt;3,4&gt;关联于3
-邻接于/至: &lt;1,2&gt;&lt;2,3&gt; 顶点2邻接于1，邻接至3
-无/有向图；完全图：全连上；稀疏/稠密图；加权有/无向图–网络
-顶点v的度：与v关联的边的数目
-有向图中顶点v的入度：关联至v的边的数目
-有向图中顶点v的出度：关联于v的边的数目
-路径：当且仅当对于每一个j（1≤j≤k）边(ij, ij&#43;1)都在E中时， 顶点序列P=i1, i2, …, ik是图或有向图G=(V, E)中一条从i1到ik的路径
-路径长度：路径上所有边的长度之和
-简单路径：序列中顶点不重复出现的路径
-回路：第一个顶点和最后一个顶点相同的路径
-无环图 ：不存在回路的图。
-有向无环图：不存在回路的有向图
-连通图：如果图中任意两个顶点vi和vj都是连通的，则图G是连通图
-连通分量：无向图中的极大连通子图
-强连通图：对于有向图中任意两个顶点vi和vj，如果从vi到vj和从vj到vi都有路径，则图G是强连通图
-强连通分量 ：有向图中的极大连通子图称为强连通分量
-生成树：一个连通图的生成树含有图中全部顶点，但只有足以构成一棵树的n-1条边（包含G中所有顶点且是G的子图的树），树：无环的无向连通图
-对有向图：入度和=出度和=边数
-DiGraph{有向图 Create(n)：创建一个具有n个顶点、没有边的有向图 Exist(i,j)：如果存在边（i,j）则返回true，否则返回false Edges()：返回图中边的数目 Vertices()：返回图中顶点的数目 Add(i,j)：向图中添加边（i,j） Delete(i,j)：删除边（i,j） InDegree(i)：返回顶点i的入度 OutDegree(i)：返回顶点i的出度 }
-对非强连通的有向图和非连通的无向图遍历将得到生成森林 ---- &lt;h3&gt;图的存储&lt;/h3&gt; &lt;h4&gt;邻接矩阵&lt;/h4&gt;(顺序存储) 二维数组A i-&gt;j有边，A~i~ ~j~ =1 A行、列的和=顶点的度 有向图：行和=出度，列和=出度 优化：位操作（取值只有0/1） 时间复杂度： - 给定节点的邻接节点集合，Θ(n) - 求图中总的边数，Θ(n^2^) 遍历整个矩阵 &lt;h4&gt;邻接压缩表&lt;/h4&gt; (顺序存储) 一维数组h，l[0~x] 有向图x=e-1.无向图x=2e-1 h[i]：顶点i邻接顶点集合再l中的起始位置 l：保存邻接顶点集合 例：A=[0 1 1 1;1 0 1 0;1 1 0 1;1 0 1 0] l=[ ^h1^ 4 2 3 ^h2^1 3 ^h3^ 2 1 4 ^h4^ 1 3 ^h5^] h=[0,3,5,8,10] 优化：h取值范围0~2e，⌈log ~2~ (2e&#43;1)⌉ ​ l取值范围1~n，⌈log ~2~ n⌉ ​ 总空间：O((n&#43;e)logn)？为啥啊 时间复杂度：增、删边：O(n&#43;e) &lt;h4&gt;邻接链表&lt;/h4&gt; (链表存储) 邻接表用链表保存 chain&lt;int&gt; h h[i]:顶点i的邻接表 例：A=[0 1 1 1;1 0 1 0;1 1 0 1;1 0 1 0] ​ h data link [1] -&gt;4 #-&gt; 2 #-&gt; 3 0 [2] -&gt;3 #-&gt; 1 0 [3] -&gt;2 #-&gt; 4 #-&gt; 1 0 [4] -&gt;1 #-&gt; 3 0 空间复杂度：2(n&#43;m&#43;1),有向图m=e，无向图m=2e 时间复杂度： - 增、删边块 - 求邻接顶点集合：Q(n) - 求边的总数：Q(e) &lt;h4&gt;十字链表&lt;/h4&gt; (链表存储) ![](C:\Users\zhon\Desktop\myBlog\picture\图片2.png) 邻接矩阵适用于稠密图、邻接表适用于稀疏图 &lt;h4&gt;网络&lt;/h4&gt; 邻接矩阵：不存在边：∞ ------ &lt;h3&gt;图的遍历&lt;/h3&gt; 从一个给定节点开始，访问所有可达节点，且每个顶点仅访问一次 &lt;h4&gt;宽度优先&lt;/h4&gt; 1开始，1能到{2,3,4}，{2,3,4}能到{5,6,7}... 从顶点v 开始的宽度优先搜索 把顶点v标记为已到达顶点； 初始化队列Q，其中仅包含一个元素v; while (Q不空) { 从队列中删除顶点w; 令u 为邻接于w 的顶点; while (u) { if (u 尚未被标记) { 把u 加入队列； 把u 标记为已到达顶点； } u = 邻接于w 的下一个顶点； } }
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2019-11-20 09:29:57 +0000 UTC'>November 20, 2019</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 图" href="https://milong26.github.io/post/%E5%9B%BE/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">gcc中new/delete和malloc/free的区别
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> delete new malloc free C&#43;&#43;的操作符 C&#43;&#43;的操作符 C中的函数 C中的函数 调用类的析构函数和释放内存 分配内存\调用类的构造函数 仅分配内存 仅释放内存 建立一个对象 分配一块内存 建立的对象可以用成员函数访问，不要直接访问它的地址空间 分配的是一块内存区域，用指针访问，可以在里面移动指针 指针带有类型信息 返回void指针 保留字，不需要头文件支持 保留字，不需要头文件支持 需要头文件库函数支持 需要头文件库函数支持 example：
-class Obj { public: Obj() { cout &lt;&lt; &#34;Initialization&#34; &lt;&lt; endl; } ~Obj() { cout &lt;&lt; &#34;Destroy&#34; &lt;&lt; endl; } void Initialize() { cout &lt;&lt; &#34;Initialization&#34; &lt;&lt; endl; } void Destroy() { cout &lt;&lt; &#34;Destroy&#34; &lt;&lt; endl; } }; void UseMallocFree() { Obj *a = (Obj*)malloc(sizeof(obj)); a-&gt;Intialize(); // ... a-&gt;Destroy(); free(a); } void UseNewDelete() { Obj *a = new Obj; //... delete a; } 函数UseMallocFree中，由于malloc/free不能执行构造函数与析构函数，必须调用成员函数Initialize和Destroy来完成初始化与清除工作。函数UseNewDelete则简单得多。
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2019-11-08 14:36:50 +0000 UTC'>November 8, 2019</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to gcc中new/delete和malloc/free的区别" href="https://milong26.github.io/post/gcc%E4%B8%ADnewdelete%E5%92%8Cmallocfree%E7%9A%84%E5%8C%BA%E5%88%AB/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
     <h2 class="entry-hint-parent">gcc之map
     </h2>
   </header>
@@ -281,12 +210,13 @@ vibe coding是什么？
     </h2>
   </header>
   <div class="entry-content">
-    <p></p>
+    <p>做一件事时要完全专注于当下，不同时想着其他任务，切换到下一件事时也尽量让情绪和思维归零，不带着上一件事的干扰。为了帮助实现这种切换，可以利用物理环境或工具的变化，比如换地点、换设备、换软件，甚至用不同空间来区分不同任务，从而给大脑明确的“结束与开始”的信号。同时，建议将脑力和体力任务交替安排，避免连续高消耗，从而减少疲劳感。整体想表达的是，通过人为设计“切换机制”，让注意力更集中、内耗更少，使多任务生活变得更可持续，而不是同时分心处理多件事。
+</p>
   </div>
   <footer class="entry-footer">
 
 <span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to " href="https://milong26.github.io/post/%E5%85%A8%E6%96%87%E5%A4%8D%E5%88%B6%E7%B2%98%E8%B4%B4/"></a>
+  <a class="entry-link" aria-label="post link to " href="https://milong26.github.io/post/%E5%BF%83%E7%90%86/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -295,13 +225,41 @@ vibe coding是什么？
     </h2>
   </header>
   <div class="entry-content">
-    <p>做一件事时要完全专注于当下，不同时想着其他任务，切换到下一件事时也尽量让情绪和思维归零，不带着上一件事的干扰。为了帮助实现这种切换，可以利用物理环境或工具的变化，比如换地点、换设备、换软件，甚至用不同空间来区分不同任务，从而给大脑明确的“结束与开始”的信号。同时，建议将脑力和体力任务交替安排，避免连续高消耗，从而减少疲劳感。整体想表达的是，通过人为设计“切换机制”，让注意力更集中、内耗更少，使多任务生活变得更可持续，而不是同时分心处理多件事。
-</p>
+    <p> 如果是环境缺少什么，先给出下载或者检查的命令行 重复运行的如果之前旧的结果会影响新结果生成，需要先给出rm命令。 重复运行的，不要修改结果路径或者日志路径，如果没有必要rm，那就覆盖写。 不要让正在运行的重复运行，只有明确报错了的可以 在gpu2执行 按照需要运行较长时间、回答问题比较重要程度这两种因素考虑。给出综合最优先的。 禁止3个命令需要按顺序执行的，如果有命令是A.1,执行之后才A.2，执行之后才A.3，以及B……。那也要给出A.1,B.1,C的命令。等待下一次回答才评估A.1运行结束了可以给出A.2等等。 命令行，如果是下载、安装、或者检查等快速且不需要日志作为结果的，直接执行。如果是运行较长时间、且需要记录结果的，用nohup&#43;log的形式。 如果需要上传结果到github，需要修改gitignore来放行 只需要用简短的文字解释为什么运行这些命令行，除非安装配置需要说明成功的结果，不需要解释命令行得到的结果。 用代码块表示，一个代码块里面是一个任务的（如果需要提前安装配置，也放在一个代码块里面） 不要用python路径 都用相对路径 如果代码中需要下载什么权重或者，必须提前说明，且指定下载路径，命令行中也要对应。 </p>
   </div>
   <footer class="entry-footer">
 
 <span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to " href="https://milong26.github.io/post/%E5%BF%83%E7%90%86/"></a>
+  <a class="entry-link" aria-label="post link to " href="https://milong26.github.io/post/%E6%8F%90%E7%A4%BA%E8%AF%8D/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>这个应该算特殊文件？
+2026年10月14日：改完[[hexo]] 2026年10月16日：写完[[Data Scaling Laws in Imitation Learning for Robotic Manipulation]] 2026年10月16日：改完[[git]] </p>
+  </div>
+  <footer class="entry-footer">
+
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to " href="https://milong26.github.io/post/%E6%97%B6%E9%97%B4%E8%BD%B4/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p></p>
+  </div>
+  <footer class="entry-footer">
+
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to " href="https://milong26.github.io/post/%E6%9C%AA%E5%91%BD%E5%90%8D-1/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -341,6 +299,20 @@ du -sh /data/zhonglinye/* 2&gt;/dev/null wandb文件夹可以清空 然后hfdata
 
 <span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
   <a class="entry-link" aria-label="post link to " href="https://milong26.github.io/post/%E6%B8%85%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 2026年8月17日早上咽痛，喝止咳糖浆没有明显作用，18日晚上吹空调打喷嚏，19日早上流鼻涕，19日晚上购入999感冒灵冲剂。20日早上情况好转，不再流鼻涕但鼻息较热，喉咙沙哑。21日早上说话困难，但上午明显好转，中午鼻息温度正常，喉咙偶尔发痒。感冒：维生素有用。 </p>
+  </div>
+  <footer class="entry-footer">
+
+<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to " href="https://milong26.github.io/post/%E7%97%85%E6%A0%91%E5%89%8D%E5%A4%B4%E4%B8%87%E6%9C%A8%E6%98%A5/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

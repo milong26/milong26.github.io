@@ -247,15 +247,8 @@
       <link>https://milong26.github.io/post/hexo/</link>
       <pubDate>Mon, 04 Mar 2024 15:26:28 +0000</pubDate>
       <guid>https://milong26.github.io/post/hexo/</guid>
-      <description>&lt;p&gt;hexo+github pages 生成个人网站。不知道hexo我还愿意用几年。&lt;/p&gt;
-&lt;p&gt;估计下次更新就变成使用hugo了，尽管我还没写几篇，等写到100篇的时候换hugo吧&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>hexo建站</title>
-      <link>https://milong26.github.io/post/hexo%E5%BB%BA%E7%AB%99/</link>
-      <pubDate>Mon, 04 Mar 2024 15:26:28 +0000</pubDate>
-      <guid>https://milong26.github.io/post/hexo%E5%BB%BA%E7%AB%99/</guid>
-      <description>&lt;p&gt;个人blog生成日志，防备以后需要&lt;/p&gt;</description>
+      <description>&lt;p&gt;hexo搭建个人blog，相关配置信息&lt;/p&gt;
+&lt;p&gt;hexo我现在都不用了哎，算了留档留档&lt;/p&gt;</description>
     </item>
     <item>
       <title>batch</title>
@@ -1627,43 +1620,7 @@ jdk和jre都是啥&lt;/p&gt;
       <link>https://milong26.github.io/post/%E9%85%8D%E7%BD%AEpython/</link>
       <pubDate>Sat, 20 May 2023 14:15:39 +0000</pubDate>
       <guid>https://milong26.github.io/post/%E9%85%8D%E7%BD%AEpython/</guid>
-      <description>&lt;p&gt;重装系统之后很多配置也没了，python反正也要用，安装过程也记录一下&lt;/p&gt;
-&lt;h1 id=&#34;环境配置&#34;&gt;环境配置&lt;/h1&gt;
-&lt;h2 id=&#34;下载&#34;&gt;下载&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.python.org/&#34;&gt;官网&lt;/a&gt;
-找windows的就行
-速度比较快可以不用镜像&lt;/p&gt;
-&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
-&lt;p&gt;点costume的，然后改地址
-点配置环境变量可以免得自己再搞&lt;/p&gt;
-&lt;h2 id=&#34;执行&#34;&gt;执行&lt;/h2&gt;
-&lt;p&gt;cmd可以直接跑&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; sys
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(sys&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;version)
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可以查看版本&lt;/p&gt;
-&lt;h2 id=&#34;项目&#34;&gt;项目&lt;/h2&gt;
-&lt;p&gt;现在不着急，ide以后再装&lt;/p&gt;
-&lt;h1 id=&#34;问题&#34;&gt;问题&lt;/h1&gt;
-&lt;p&gt;在配置好了python环境变量之后在cmd命令行下输入python但是打开的是windows 10的应用商店，但是我们希望显示的是python的安装版本，可以使用以下的方法解决：首先打开计算机的环境变量，找到path，将python的环境变量移动到WindowsApps环境变量前面&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Fatal error in launcher: Unable to create process using &amp;lsquo;&amp;ldquo;D:\conf\python\python.exe&amp;rdquo;  &amp;ldquo;D:\conf\python\Scripts\pip.exe&amp;rdquo; install -i &lt;a href=&#34;https://pypi.tuna.tsinghua.edu.cn/simple/&#34;&gt;https://pypi.tuna.tsinghua.edu.cn/simple/&lt;/a&gt; jupyter&amp;rsquo;: ???????????
-步骤1：到python\scripts\目录，将原来的pip.exe文件删掉
-步骤2：cmd窗口执行：python -m pip install -U pip
-步骤3：验证&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Traceback (most recent call last):
-File &amp;ldquo;D:\conf\python\lib\runpy.py&amp;rdquo;, line 196, in _run_module_as_main
-return &lt;em&gt;run_code(code, main_globals, None,
-File &amp;ldquo;D:\conf\python\lib\runpy.py&amp;rdquo;, line 86, in &lt;em&gt;run_code
-exec(code, run_globals)
-File &amp;ldquo;D:\conf\python\scripts\pip.exe_&lt;em&gt;main&lt;/em&gt;&lt;/em&gt;.py&amp;rdquo;, line 2, in &lt;!-- raw HTML omitted --&gt;
-File &amp;ldquo;D:\conf\python\lib\re_&lt;em&gt;init&lt;/em&gt;&lt;/em&gt;.py&amp;rdquo;, line 125, in &lt;!-- raw HTML omitted --&gt;
-from . import _compiler, _parser
-File &amp;ldquo;D:\conf\python\lib\re_compiler.py&amp;rdquo;, line 18, in &lt;!-- raw HTML omitted --&gt;
-assert _sre.MAGIC == MAGIC, &amp;ldquo;SRE module mismatch&amp;rdquo;
-AssertionError: SRE module mismatch
-说是版本不一致，我的话就是之前的没删干净，删了重装就行&lt;/p&gt;</description>
+      <description></description>
     </item>
     <item>
       <title>部署jupyternotebook</title>
@@ -1926,13 +1883,6 @@ npm install webpack -g
       <description>&lt;p&gt;二叉树&lt;/p&gt;</description>
     </item>
     <item>
-      <title>github版本回退</title>
-      <link>https://milong26.github.io/post/github%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/</link>
-      <pubDate>Mon, 10 May 2021 10:16:52 +0000</pubDate>
-      <guid>https://milong26.github.io/post/github%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/</guid>
-      <description>&lt;p&gt;代码传错了，覆盖了之前的正确版本咋搞&lt;/p&gt;</description>
-    </item>
-    <item>
       <title>阻塞系统调用</title>
       <link>https://milong26.github.io/post/%E9%98%BB%E5%A1%9E%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/</link>
       <pubDate>Tue, 04 May 2021 08:08:14 +0000</pubDate>
@@ -2061,14 +2011,6 @@ npm install webpack -g
       <pubDate>Mon, 12 Apr 2021 23:51:21 +0000</pubDate>
       <guid>https://milong26.github.io/post/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE/</guid>
       <description>&lt;p&gt;编写微信小程序应用，本地存储数据避免重复加载&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>hexo搭建</title>
-      <link>https://milong26.github.io/post/hexo%E6%90%AD%E5%BB%BA/</link>
-      <pubDate>Mon, 12 Apr 2021 20:47:54 +0000</pubDate>
-      <guid>https://milong26.github.io/post/hexo%E6%90%AD%E5%BB%BA/</guid>
-      <description>&lt;p&gt;hexo搭建个人blog，相关配置信息&lt;/p&gt;
-&lt;p&gt;hexo我现在都不用了哎，算了留档留档&lt;/p&gt;</description>
     </item>
     <item>
       <title>数据库系统原理</title>

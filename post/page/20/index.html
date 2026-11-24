@@ -151,20 +151,6 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">马拉车算法
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2021-05-20 16:51:02 +0000 UTC'>May 20, 2021</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to 马拉车算法" href="https://milong26.github.io/post/%E9%A9%AC%E6%8B%89%E8%BD%A6%E7%AE%97%E6%B3%95/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
     <h2 class="entry-hint-parent">二叉树
     </h2>
   </header>
@@ -176,21 +162,6 @@
 
 <span title='2021-05-17 20:40:53 +0000 UTC'>May 17, 2021</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
   <a class="entry-link" aria-label="post link to 二叉树" href="https://milong26.github.io/post/%E4%BA%8C%E5%8F%89%E6%A0%91/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">github版本回退
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>代码传错了，覆盖了之前的正确版本咋搞
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2021-05-10 10:16:52 +0000 UTC'>May 10, 2021</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to github版本回退" href="https://milong26.github.io/post/github%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -294,6 +265,43 @@
 
 <span title='2021-04-17 15:16:50 +0000 UTC'>April 17, 2021</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
   <a class="entry-link" aria-label="post link to maven爬虫" href="https://milong26.github.io/post/maven%E7%88%AC%E8%99%AB/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">maven连接jdbc
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>前提：配置好mysql、maven
+加依赖并下载完
+pom.xml
+&lt;!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java --&gt; &lt;dependency&gt; &lt;groupId&gt;mysql&lt;/groupId&gt; &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt; &lt;version&gt;8.0.16&lt;/version&gt; &lt;/dependency&gt; 配置数据库连接
+resources/dbinfo.properties
+# 描述DB常用配置信息 driver=com.mysql.cj.jdbc.Driver url= jdbc:mysql://127.0.0.1:3306/db_user?serverTimezone=UTC&amp;useSSL=false # 用户名和密码 usn=root pwd=root java类
+utils/DBConfig.java
+package com.test.utils; import java.io.IOException; import java.util.Properties; //获取数据库配置信息 public class DBConfig { // static properties对象实例 private static Properties prop=new Properties(); static { try { prop.load(DBConfig.class.getClassLoader().getResourceAsStream(&#34;dbinfo.properties&#34;)); } catch (IOException e) { e.printStackTrace(); } } public static String driver= prop.getProperty(&#34;driver&#34;); public static String url=prop.getProperty(&#34;url&#34;); public static String usn=prop.getProperty(&#34;usn&#34;); public static String pwd=prop.getProperty(&#34;pwd&#34;); } dao/testJDBC.java中可以测试
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2021-04-17 15:02:36 +0000 UTC'>April 17, 2021</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to maven连接jdbc" href="https://milong26.github.io/post/maven%E8%BF%9E%E6%8E%A5jdbc/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">maven
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Maven安装配置以及 构建工具对比
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2021-04-16 23:00:58 +0000 UTC'>April 16, 2021</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to maven" href="https://milong26.github.io/post/maven/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

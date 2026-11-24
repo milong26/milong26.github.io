@@ -174,43 +174,7 @@
       <link>https://milong26.github.io/post/%E9%85%8D%E7%BD%AEpython/</link>
       <pubDate>Sat, 20 May 2023 14:15:39 +0000</pubDate>
       <guid>https://milong26.github.io/post/%E9%85%8D%E7%BD%AEpython/</guid>
-      <description>&lt;p&gt;重装系统之后很多配置也没了，python反正也要用，安装过程也记录一下&lt;/p&gt;
-&lt;h1 id=&#34;环境配置&#34;&gt;环境配置&lt;/h1&gt;
-&lt;h2 id=&#34;下载&#34;&gt;下载&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.python.org/&#34;&gt;官网&lt;/a&gt;
-找windows的就行
-速度比较快可以不用镜像&lt;/p&gt;
-&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
-&lt;p&gt;点costume的，然后改地址
-点配置环境变量可以免得自己再搞&lt;/p&gt;
-&lt;h2 id=&#34;执行&#34;&gt;执行&lt;/h2&gt;
-&lt;p&gt;cmd可以直接跑&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; sys
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(sys&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;version)
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可以查看版本&lt;/p&gt;
-&lt;h2 id=&#34;项目&#34;&gt;项目&lt;/h2&gt;
-&lt;p&gt;现在不着急，ide以后再装&lt;/p&gt;
-&lt;h1 id=&#34;问题&#34;&gt;问题&lt;/h1&gt;
-&lt;p&gt;在配置好了python环境变量之后在cmd命令行下输入python但是打开的是windows 10的应用商店，但是我们希望显示的是python的安装版本，可以使用以下的方法解决：首先打开计算机的环境变量，找到path，将python的环境变量移动到WindowsApps环境变量前面&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Fatal error in launcher: Unable to create process using &amp;lsquo;&amp;ldquo;D:\conf\python\python.exe&amp;rdquo;  &amp;ldquo;D:\conf\python\Scripts\pip.exe&amp;rdquo; install -i &lt;a href=&#34;https://pypi.tuna.tsinghua.edu.cn/simple/&#34;&gt;https://pypi.tuna.tsinghua.edu.cn/simple/&lt;/a&gt; jupyter&amp;rsquo;: ???????????
-步骤1：到python\scripts\目录，将原来的pip.exe文件删掉
-步骤2：cmd窗口执行：python -m pip install -U pip
-步骤3：验证&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Traceback (most recent call last):
-File &amp;ldquo;D:\conf\python\lib\runpy.py&amp;rdquo;, line 196, in _run_module_as_main
-return &lt;em&gt;run_code(code, main_globals, None,
-File &amp;ldquo;D:\conf\python\lib\runpy.py&amp;rdquo;, line 86, in &lt;em&gt;run_code
-exec(code, run_globals)
-File &amp;ldquo;D:\conf\python\scripts\pip.exe_&lt;em&gt;main&lt;/em&gt;&lt;/em&gt;.py&amp;rdquo;, line 2, in &lt;!-- raw HTML omitted --&gt;
-File &amp;ldquo;D:\conf\python\lib\re_&lt;em&gt;init&lt;/em&gt;&lt;/em&gt;.py&amp;rdquo;, line 125, in &lt;!-- raw HTML omitted --&gt;
-from . import _compiler, _parser
-File &amp;ldquo;D:\conf\python\lib\re_compiler.py&amp;rdquo;, line 18, in &lt;!-- raw HTML omitted --&gt;
-assert _sre.MAGIC == MAGIC, &amp;ldquo;SRE module mismatch&amp;rdquo;
-AssertionError: SRE module mismatch
-说是版本不一致，我的话就是之前的没删干净，删了重装就行&lt;/p&gt;</description>
+      <description></description>
     </item>
   </channel>
 </rss>

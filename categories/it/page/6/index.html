@@ -136,23 +136,6 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">LFQA的问题
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>论文标题：Hurdles to Progress in Long-form Question Answering 地址： 阅读参考：https://blog.csdn.net/c9Yv2cf9I06K2A9E/article/details/115387895
-显而易见这篇还没来得及写
-LFQA现有的工作倾向于集中在任务的两个核心部分，信息检索和综合合成information retrieval and synthesis。（from WebGPT: Browser-assisted question-answering with human feedback）
-</p>
-  </div>
-  <footer class="entry-footer">
-
-<span title='2023-09-19 17:08:20 +0000 UTC'>September 19, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
-  <a class="entry-link" aria-label="post link to LFQA的问题" href="https://milong26.github.io/post/%E9%98%85%E8%AF%BB-lfqa%E7%9A%84%E9%97%AE%E9%A2%98/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
     <h2 class="entry-hint-parent">阅读-webgpt:借助浏览器和人工反馈实现的问答
     </h2>
   </header>
@@ -341,6 +324,29 @@ int findSet(int x){ if(Parent[x] == -1){ return x; // x is root } return findSet
 
 <span title='2023-09-15 18:06:50 +0000 UTC'>September 15, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
   <a class="entry-link" aria-label="post link to 图中判断成环" href="https://milong26.github.io/post/%E5%9B%BE%E4%B8%AD%E5%88%A4%E6%96%AD%E6%88%90%E7%8E%AF/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">最小生成树
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>满足两点之间有且仅有一条简单路径的结构只有树 且这棵树包含 n 个节点。我们称这棵树为给定的图的生成树，其中总权值最小的生成树，我们称其为最小生成树。 最小生成树关键在避免环
+生成树 定义 一个连通图的生成树是一个极小的连通子图，它包含图中全部的n个顶点，但只有构成一棵树的n-1条边。
+性质 生成树的属性 一个连通图可以有多个生成树； 一个连通图的所有生成树都包含相同的顶点个数和边数； 生成树当中不存在环； 移除生成树中的任意一条边都会导致图的不连通， 生成树的边最少特性； 在生成树中添加一条边会构成环。 对于包含n个顶点的连通图，生成树包含n个顶点和n-1条边； 对于包含n个顶点的无向完全图最多包含$n^{n-2}$颗生成树。 证明$n^{n-2}$： 为什么是n^n-2），一篇里面塞不下:D
+最小生成树 定义 所谓一个带权图的最小生成树，就是原图中边的权值最小的生成树 ，所谓最小是指边的权值之和小于或者等于其它生成树的边的权值之和。
+求解 Kruskal 贪心找边，从小到大加入边
+按边长度排序 从小到大，if加入e之后没有形成环，e加入G&#39; 最后得到G‘ 问题是判断成环，见其它post Prim 加点，把点分成两坨A,B集合，A表示已经成了，B是待选的，要做的事从B里面挑一个点，满足它到A的点里面，有个边距离是最短的 （理解成长三角经济圈画好了，接下来先从周边里挑一个离长三角圈里面的城市最近的，这么想有点奇怪） 关键在怎么从待选里找距离最短的点 思路是用一个点个数大小的数组，没有直接连用∞，否则记录最小值 注意区分已访问过的点 这个为什么不会成环？把点分成两坨了，找的都是新点
+示例与代码 测试数据
+1 6 10 1 2 28 6 5 25 5 7 24 2 7 14 2 3 16 3 4 12 4 7 18 4 5 22 代码
+使用Kruskal算法
+#include&lt;iostream&gt; #include&lt;algorithm&gt; using namespace std; const int maxe = 100; int fa[maxe], n, m, ans = 0; struct edge { int u, v, w; }e[maxe]; bool cmp(edge a, edge b) { return a.w&lt;b.w; } int get(int x)//用处是看它是否成环的，nb { if (fa[x] == x) return x;//x的根为它本身，x就是该集的根 return fa[x] = get(fa[x]);//路径压缩 } int main() { cin &gt;&gt; n &gt;&gt; m; for (int i = 1; i &lt;= n; i&#43;&#43;) fa[i] = i;//初始化 for (int i = 1; i &lt;= m; i&#43;&#43;) { cin &gt;&gt; e[i].u &gt;&gt; e[i].v &gt;&gt; e[i].w; } sort(e &#43; 1, e &#43; 1 &#43; m, cmp);//升序排序 for (int i = 1; i &lt;= m; i&#43;&#43;) { int u = get(e[i].u);//找根 int v = get(e[i].v); if (u == v) continue;//continue 表示终止本次（本轮）循环，进入下一轮循环。判断它是否成环 fa[u] = v; cout &lt;&lt; e[i].u &lt;&lt; &#34; &#34; &lt;&lt; e[i].v &lt;&lt; endl; ans &#43;= e[i].w; } cout &lt;&lt; ans &lt;&lt; endl; return 0; } </p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2023-09-15 15:40:34 +0000 UTC'>September 15, 2023</span>&nbsp;·&nbsp;<span>map[avatar:images/avatar.jpg bio:Make milong famous again links:[map[name:GitHub url:https://github.com/milong26]] name:Milong]</span></footer>
+  <a class="entry-link" aria-label="post link to 最小生成树" href="https://milong26.github.io/post/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
